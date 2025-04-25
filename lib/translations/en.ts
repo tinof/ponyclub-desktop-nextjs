@@ -11,6 +11,7 @@ export const en = {
     swimming: "Swimming in Acheron River",
     horseRiding: "Horse riding near Acheron River",
     kayaking: "Kayaking in Acheron River",
+    kayakRafting: "Kayak & Rafting in Acheron River",
     exploreNature: "SUMMER 2025 OFFERS",
   },
   programs: {
@@ -59,4 +60,60 @@ export const en = {
     en: "English",
     el: "Greek",
   },
+  // Riding Page Content
+  riding: {
+    pageTitle: "Horse Riding",
+    pageSubtitle: "Experience",
+    heroAlt: "Horse Riding near Acheron River",
+    descriptionTitle: "",
+    descriptionContent: `
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-center text-[#6b8362] mb-4">Horse-back riding</h2>
+        <p>Horse riding at the river area is for everybody! We have big horses and small ponies, and they are all well behaved and calm.</p>
+        <p>During summer season you'll find most of our horses at the river's spring area where all of our activities take place.</p>
+        <p>We provide you with helmets!</p>
+      </div>
+    `,
+    detailsTitle: "Details & Requirements",
+    detailsContent: `
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold text-[#6b8362] mb-2">Start from the spring area</h3>
+        <p class="font-medium">(from April to September):</p>
+        <ul class="space-y-2 text-gray-700">
+          <li class="font-medium">15 minutes guided riding at the springs – 10 €</li>
+          <li class="font-medium">30 minutes guided riding at the springs – 20 €</li>
+        </ul>
+        
+        <h3 class="text-xl font-bold text-[#6b8362] mt-6 mb-2">Start from our farm</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="font-medium">15 minutes riding at the farm – 10 €</li>
+          <li class="font-medium">30 minutes riding – 20 €</li>
+          <li class="font-medium">1 h – 35 €</li>
+        </ul>
+
+        <p class="mt-4 text-gray-600 italic">Want to go more? Send us email!</p>
+      </div>
+    `,
+    detailsIncludedTitle: "What's Included",
+    detailsIncludedItems: [
+      "Expert riding instructors",
+      "Well-trained horses",
+      "Safety equipment",
+      "Trail access"
+    ],
+    detailsBringTitle: "What to Bring",
+    detailsBringItems: [
+      "Long pants",
+      "Closed-toe shoes",
+      "Weather-appropriate clothing",
+      "Camera"
+    ],
+    pricingTitle: "Pricing",
+    pricingStandardTitle: "Standard Ride",
+    pricingStandardPrice: "€35 per person",
+    pricingStandardDuration: "1-hour experience",
+    pricingExtendedTitle: "Extended Trail",
+    pricingExtendedPrice: "€50 per person",
+    pricingExtendedDuration: "2-hour experience",
+  }
 }

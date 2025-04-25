@@ -90,30 +90,31 @@ export default function Home() {
 
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 px-4 md:px-8 mt-8 md:mt-12">
         {/* Program 1 */}
-        <div className="bg-[#c27a5f] text-white p-6 md:p-8 rounded-lg md:w-1/2 relative transform rotate-1 shadow-md">
-          <h2 className="text-center text-3xl mb-4 font-bold">{t.programs.program1.title}</h2>
-          <div className="space-y-1 text-center">
+        {/* Changed text color from text-white to text-stone-800 for better contrast, kept title white */}
+        <div className="program-card bg-[#c27a5f] text-stone-800 p-8 md:p-10 rounded-2xl md:w-1/2 relative shadow-lg flex flex-col items-center hover:scale-[1.025] transition-transform duration-200">
+          <h2 className="text-center text-3xl mb-6 font-bold tracking-wide drop-shadow-lg text-white">{t.programs.program1.title}</h2> {/* Title remains white */}
+          <div className="space-y-2 text-center text-lg font-medium">
             <p>{t.programs.program1.rafting}</p>
             <p>{t.programs.program1.riding}</p>
             <p>{t.programs.program1.hiking}</p>
           </div>
-          <div className="my-4 text-center font-bold">
-            <p>{t.programs.program1.priceAdults}</p>
-            <p>{t.programs.program1.priceChildren}</p>
+          <div className="mt-8 mb-2 text-center font-bold text-xl">
+            <p>{t.programs.program1.priceAdults}</p> {/* Price uses text-stone-800 */}
+            <p>{t.programs.program1.priceChildren}</p> {/* Price uses text-stone-800 */}
           </div>
         </div>
 
         {/* Program 2 */}
-        <div className="bg-[#6b8362] text-white p-6 md:p-8 rounded-lg md:w-1/2 relative transform -rotate-1 shadow-md">
-          <h2 className="text-center text-3xl mb-4 font-bold">{t.programs.program2.title}</h2>
-          <div className="space-y-1 text-center">
+        <div className="program-card bg-[#6b8362] text-white p-8 md:p-10 rounded-2xl md:w-1/2 relative shadow-lg flex flex-col items-center hover:scale-[1.025] transition-transform duration-200">
+          <h2 className="text-center text-3xl mb-6 font-bold tracking-wide drop-shadow-lg">{t.programs.program2.title}</h2>
+          <div className="space-y-2 text-center text-lg font-medium">
             <p>{t.programs.program2.kayak}</p>
             <p>{t.programs.program2.riding}</p>
             <p>{t.programs.program2.hiking}</p>
           </div>
-          <div className="my-4 text-center font-bold">
-            <p>{t.programs.program2.price}</p>
-            <p>{t.programs.program2.separator}</p>
+          <div className="mt-8 mb-2 text-center font-bold text-xl">
+            <p className="text-white">{t.programs.program2.price}</p>
+            <p className="text-white">{t.programs.program2.separator}</p>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ export const el = {
     swimming: "Κολύμπι στον ποταμό Αχέροντα",
     horseRiding: "Ιππασία κοντά στον ποταμό Αχέροντα",
     kayaking: "Καγιάκ στον ποταμό Αχέροντα",
+    kayakRafting: "Καγιάκ & Ράφτινγκ στον ποταμό Αχέροντα",
     exploreNature: "ΠΡΟΣΦΟΡΕΣ ΚΑΛΟΚΑΙΡΙ 2025",
   },
   programs: {
@@ -59,4 +60,52 @@ export const el = {
     en: "Αγγλικά",
     el: "Ελληνικά",
   },
+  // Riding Page Content
+  riding: {
+    pageTitle: "Ιππασία",
+    pageSubtitle: "Εμπειρία",
+    heroAlt: "Ιππασία κοντά στον ποταμό Αχέροντα",
+    descriptionTitle: "",
+    descriptionContent: `
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-center text-[#6b8362] mb-4">ΙΠΠΑΣΙΑ</h2>
+        <p>Γίνεται στις όχθες του ποταμού σε μοναδική φύση με πολλά περάσματα στο ποτάμι.</p>
+        <p>Η διάρκεια ξεκινάει απο 10 λεπτά ως μια ωρα, και όσοι την έχουν δοκιμάσει στην κυριολεξία την λατρεύουν.</p>
+        <p>Μπορούν να συμμετάσχουν και καθαρά αρχάριοι, αφου έμπειροι οδηγοί μας θα σας συνοδεύουν καθόλη την διάρκεια της εκδρομής.</p>
+      </div>
+    `,
+    detailsTitle: "Λεπτομέρειες & Απαιτήσεις",
+    detailsContent: `
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold text-[#6b8362] mb-2">Ξεκινήστε από την περιοχή της πηγής</h3>
+        <p class="font-medium">(από τον Απρίλιο έως τον Σεπτέμβριο):</p>
+        <ul class="space-y-2 text-gray-700">
+          <li class="font-medium">15 λεπτά καθοδηγούμενη ιππασία στις πηγές – 10 €</li>
+          <li class="font-medium">30 λεπτά καθοδηγούμενη ιππασία στις πηγές – 20 €</li>
+        </ul>
+        <p class="mt-4 text-gray-600 italic">Θέλετε να πάτε περισσότερο; Στείλτε μας email!</p>
+      </div>
+    `,
+    detailsIncludedTitle: "Τι περιλαμβάνεται",
+    detailsIncludedItems: [
+      "Έμπειροι εκπαιδευτές ιππασίας",
+      "Καλά εκπαιδευμένα άλογα",
+      "Εξοπλισμός ασφαλείας",
+      "Πρόσβαση στα μονοπάτια"
+    ],
+    detailsBringTitle: "Τι να φέρετε",
+    detailsBringItems: [
+      "Μακρύ παντελόνι",
+      "Κλειστά παπούτσια",
+      "Ρούχα κατάλληλα για τον καιρό",
+      "Κάμερα"
+    ],
+    pricingTitle: "Τιμοκατάλογος",
+    pricingStandardTitle: "Κανονική βόλτα",
+    pricingStandardPrice: "€35 ανά άτομο",
+    pricingStandardDuration: "1 ώρα εμπειρία",
+    pricingExtendedTitle: "Εκτεταμένη διαδρομή",
+    pricingExtendedPrice: "€50 ανά άτομο",
+    pricingExtendedDuration: "2 ώρες εμπειρία",
+  }
 }

@@ -1,112 +1,111 @@
 "use client"
 
-import Image from "next/image"
-import { Roboto_Slab } from "next/font/google"
-import BookingButton from "@/components/booking-button"
-import LanguageSelector from "@/components/language-selector"
-import ActivitiesMenu from "@/components/activities-menu"
-import { useLanguage } from "@/contexts/language-context"
-
-const robotoSlab = Roboto_Slab({
-  subsets: ["latin", "greek"],
-  weight: ["400", "700"],
-  variable: "--font-roboto-slab",
-})
+import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the layout
+import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
+import Image from "next/image"; // Import Image component
+import { useState } from "react"; // Import useState for modal state
 
 export default function TrekkingPage() {
-  const { t } = useLanguage()
+  const { t } = useLanguage(); // Get translations object (though not used for titles yet)
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
+
+  // Define content sections using JSX with the updated content
+  const descriptionContent = (
+    <div className="space-y-4">
+      <p>Simple tour of the sources. It takes place throughout the year and is preferred by almost all visitors.</p>
+      <p>Glyki, Springs of Acheron river.</p>
+      <p>Duration 15 min – 1 h. Easy path to walk with children and to see the river area and the springs.</p>
+      <p>Glyki, Tzavelaina staircase, Dala bridge return through the river gorge. Duration 2 hours, takes place from May to early October.</p>
+      <p>Souli, Dala bridge, Glyki. Duration 3-4 hours, moderate, and it is usually preferred by mountaineering and nature clubs.</p>
+      <p>Mills of Souli – Acheron sources. Experts consider it one of the most beautiful and exciting routes in Greece. Duration 3-4 hours, and it is moderate to difficult. It takes place from May to early October, because for most of the route we walk in the water.</p>
+      <p>Our company is the only one in the field that provides guides and organizes these routes.</p>
+    </div>
+  );
+
+  const detailsContent = (
+    <div className="grid md:grid-cols-2 gap-6">
+      <div>
+        <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What's Included</h3>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Professional guide</li>
+          <li>Trail maps</li>
+          <li>Walking sticks (if needed)</li>
+          <li>Light refreshments</li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What to Bring</h3>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Comfortable hiking shoes</li>
+          <li>Weather-appropriate clothing</li>
+          <li>Water bottle</li>
+          <li>Camera</li>
+        </ul>
+      </div>
+    </div>
+  );
+
+  // Replace pricing content with map image
+  const mapContent = (
+    <div className="mt-4">
+      <div 
+        className="relative w-full h-[400px] cursor-pointer"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <Image 
+          src="/images/ponyClub_map.jpg" 
+          alt="Trekking Routes Map" 
+          fill 
+          className="object-contain"
+        />
+      </div>
+      <p className="text-center text-sm mt-2 text-gray-500 italic">Click on map to enlarge</p>
+      
+      {/* Fullscreen Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div className="relative w-full max-w-7xl h-[90vh]">
+            <Image 
+              src="/images/ponyClub_map.jpg" 
+              alt="Trekking Routes Map" 
+              fill 
+              className="object-contain"
+              priority
+            />
+            <button 
+              className="absolute top-4 right-4 bg-white rounded-full p-2 text-black"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(false);
+              }}
+              aria-label="Close map"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
-    <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
-      {/* Language and Activities Menu - Fixed Position */}
-      <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
-        <ActivitiesMenu />
-        <LanguageSelector />
-      </div>
-
-      {/* Hero Section */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]">
-        <Image 
-          src="/images/round1.jpg" 
-          alt="Trekking near Acheron River" 
-          fill 
-          className="object-cover rounded-lg" 
-          priority 
-        />
-        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
-          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-lg border-2 border-amber-200/50">
-            <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
-            >
-              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Trekking</span>
-              <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">through Nature</span>
-            </h1>
-            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Content Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Trekking Adventure
-          </h2>
-          <div className="space-y-4">
-            <p>Placeholder text for trekking description. This section will be updated with actual content later.</p>
-            <p>Placeholder text describing the trekking trails, difficulty levels, and the natural beauty you'll discover.</p>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Details & Requirements
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What's Included</h3>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Professional guide</li>
-                <li>Trail maps</li>
-                <li>Walking sticks (if needed)</li>
-                <li>Light refreshments</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What to Bring</h3>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Comfortable hiking shoes</li>
-                <li>Weather-appropriate clothing</li>
-                <li>Water bottle</li>
-                <li>Camera</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Pricing
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#c27a5f]/10 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">Easy Trail</h3>
-              <p className="text-2xl font-bold">€25 per person</p>
-              <p className="text-sm text-gray-600 mt-2">2-hour trek</p>
-            </div>
-            <div className="bg-[#6b8362]/10 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-[#6b8362] mb-2">Advanced Trail</h3>
-              <p className="text-2xl font-bold">€40 per person</p>
-              <p className="text-sm text-gray-600 mt-2">4-hour trek</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Book Now Button */}
-      <div className="flex justify-center mt-8 mb-12">
-        <BookingButton />
-      </div>
-    </main>
-  )
-} 
+    <ActivityPageLayout
+      title="Trekking" // TODO: Replace with t.trekking.title or similar once added
+      subtitle="through Nature" // TODO: Replace with t.trekking.subtitle or similar once added
+      heroImageSrc="/images/round1.jpg" // Specific image for trekking
+      heroImageAlt="Trekking near Acheron River" // TODO: Replace with t.trekking.heroAlt or similar once added
+      // Using hardcoded titles for now as keys are missing in translations
+      descriptionTitle="Trekking Adventure"
+      descriptionContent={descriptionContent}
+      detailsTitle="Details & Requirements"
+      detailsContent={detailsContent}
+      pricingTitle="Trekking Routes Map"
+      pricingContent={mapContent}
+    />
+  );
+}

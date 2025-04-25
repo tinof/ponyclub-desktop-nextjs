@@ -1,112 +1,66 @@
 "use client"
 
-import Image from "next/image"
-import { Roboto_Slab } from "next/font/google"
-import BookingButton from "@/components/booking-button"
-import LanguageSelector from "@/components/language-selector"
-import ActivitiesMenu from "@/components/activities-menu"
-import { useLanguage } from "@/contexts/language-context"
-
-const robotoSlab = Roboto_Slab({
-  subsets: ["latin", "greek"],
-  weight: ["400", "700"],
-  variable: "--font-roboto-slab",
-})
+import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the layout
+import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
 
 export default function RidingPage() {
-  const { t } = useLanguage()
+  const { t } = useLanguage(); // Get translations object
+
+  // Use translations for content sections
+  const descriptionContent = (
+    // Use dangerouslySetInnerHTML to render the HTML string from translation
+    <div dangerouslySetInnerHTML={{ __html: t.riding.descriptionContent }} />
+  );
+
+  // Use the provided detailsContent 
+  const detailsContent = (
+    <div dangerouslySetInnerHTML={{ __html: t.riding.detailsContent }} />
+  );
+
+  // Define pricing content using Program translations - now in a single column
+  const pricingContent = (
+    <div className="flex flex-col gap-6">
+      {/* Program 1 */}
+      <div className="bg-[#c27a5f]/10 p-6 rounded-lg shadow-md">
+        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 border-b border-[#c27a5f]/30 pb-2">{t.programs.program1.title}</h3>
+        <ul className="space-y-2 text-gray-700">
+          <li>{t.programs.program1.rafting}</li>
+          <li>{t.programs.program1.riding}</li>
+          <li>{t.programs.program1.hiking}</li>
+          <li className="font-semibold pt-2">{t.programs.program1.priceAdults}</li>
+          <li className="font-semibold">{t.programs.program1.priceChildren}</li>
+        </ul>
+      </div>
+
+      {/* Program 2 */}
+      <div className="bg-[#6b8362]/10 p-6 rounded-lg shadow-md">
+        <h3 className="text-xl font-bold text-[#6b8362] mb-3 border-b border-[#6b8362]/30 pb-2">{t.programs.program2.title}</h3>
+        <ul className="space-y-2 text-gray-700">
+          <li>{t.programs.program2.kayak}</li>
+          <li>{t.programs.program2.riding}</li>
+          <li>{t.programs.program2.hiking}</li>
+          <li className="font-semibold pt-2">{t.programs.program2.price}</li>
+        </ul>
+      </div>
+    </div>
+  );
 
   return (
-    <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
-      {/* Language and Activities Menu - Fixed Position */}
-      <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
-        <ActivitiesMenu />
-        <LanguageSelector />
-      </div>
-
-      {/* Hero Section */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]">
-        <Image 
-          src="/images/round2.jpg" 
-          alt="Horse Riding near Acheron River" 
-          fill 
-          className="object-cover rounded-lg object-[center_20%]" 
-          priority 
-        />
-        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
-          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-lg border-2 border-amber-200/50">
-            <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
-            >
-              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Horse Riding</span>
-              <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Experience</span>
-            </h1>
-            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Content Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Riding Adventure
-          </h2>
-          <div className="space-y-4">
-            <p>Placeholder text for riding description. This section will be updated with actual content later.</p>
-            <p>Placeholder text describing the horse riding experience, suitable for all levels, and the beautiful scenery.</p>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Details & Requirements
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What's Included</h3>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Expert riding instructors</li>
-                <li>Well-trained horses</li>
-                <li>Safety equipment</li>
-                <li>Trail access</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What to Bring</h3>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Long pants</li>
-                <li>Closed-toe shoes</li>
-                <li>Weather-appropriate clothing</li>
-                <li>Camera</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl text-[#6b8362] mb-6`}>
-            Pricing
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-[#c27a5f]/10 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-[#c27a5f] mb-2">Standard Ride</h3>
-              <p className="text-2xl font-bold">€35 per person</p>
-              <p className="text-sm text-gray-600 mt-2">1-hour experience</p>
-            </div>
-            <div className="bg-[#6b8362]/10 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-[#6b8362] mb-2">Extended Trail</h3>
-              <p className="text-2xl font-bold">€50 per person</p>
-              <p className="text-sm text-gray-600 mt-2">2-hour experience</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Book Now Button */}
-      <div className="flex justify-center mt-8 mb-12">
-        <BookingButton />
-      </div>
-    </main>
-  )
-} 
+    <ActivityPageLayout
+      // Use translated titles and alt text
+      title={t.riding.pageTitle}
+      subtitle={t.riding.pageSubtitle}
+      heroImageSrc="/images/round2.jpg" // Keep specific image for riding
+      heroImageAlt={t.riding.heroAlt}
+      // Use translated section titles
+      descriptionTitle={t.riding.descriptionTitle}
+      descriptionContent={descriptionContent}
+      detailsTitle={t.riding.detailsTitle}
+      detailsContent={detailsContent}
+      // No separate pricing title needed as titles are in the programs
+      // pricingTitle={t.riding.pricingTitle} // REMOVED
+      pricingContent={pricingContent}
+      useSingleColumn={true} // Add a flag to use single column layout
+    />
+  );
+}

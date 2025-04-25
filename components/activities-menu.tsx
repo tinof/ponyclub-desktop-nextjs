@@ -16,9 +16,8 @@ export default function ActivitiesMenu() {
   const closeDropdown = () => setIsOpen(false)
 
   const activities = [
-    { id: "rafting", label: "Rafting", href: "/rafting" },
+    { id: "kayak-rafting", label: "Kayak & Rafting", href: "/kayak-rafting" },
     { id: "riding", label: "Riding", href: "/riding" },
-    { id: "kayaking", label: "Kayaking", href: "/kayaking" },
     { id: "trekking", label: "Trekking", href: "/trekking" },
   ]
 
