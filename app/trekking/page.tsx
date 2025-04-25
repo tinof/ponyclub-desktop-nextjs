@@ -24,23 +24,31 @@ export default function TrekkingPage() {
 
   const detailsContent = (
     <div className="grid md:grid-cols-2 gap-6">
-      <div>
-        <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What's Included</h3>
+      <div className="relative bg-white/90 backdrop-blur-sm p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
+          What's Included
+          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
+        </h3>
         <ul className="list-disc list-inside space-y-2">
           <li>Professional guide</li>
           <li>Trail maps</li>
           <li>Walking sticks (if needed)</li>
           <li>Light refreshments</li>
         </ul>
+        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-sm"></div>
       </div>
-      <div>
-        <h3 className="text-xl font-bold text-[#c27a5f] mb-2">What to Bring</h3>
+      <div className="relative bg-white/90 backdrop-blur-sm p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
+          What to Bring
+          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
+        </h3>
         <ul className="list-disc list-inside space-y-2">
           <li>Comfortable hiking shoes</li>
           <li>Weather-appropriate clothing</li>
           <li>Water bottle</li>
           <li>Camera</li>
         </ul>
+        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-sm"></div>
       </div>
     </div>
   );
@@ -49,7 +57,7 @@ export default function TrekkingPage() {
   const mapContent = (
     <div className="mt-4">
       <div 
-        className="relative w-full h-[400px] cursor-pointer"
+        className="relative w-full h-[400px] cursor-pointer rounded-xl overflow-hidden shadow-xl border border-amber-100/70 hover:shadow-2xl transition-all duration-300"
         onClick={() => setIsModalOpen(true)}
       >
         <Image 
@@ -58,8 +66,9 @@ export default function TrekkingPage() {
           fill 
           className="object-contain"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
       </div>
-      <p className="text-center text-sm mt-2 text-gray-500 italic">Click on map to enlarge</p>
+      <p className="text-center text-sm mt-3 text-gray-600 italic">Click on map to enlarge</p>
       
       {/* Fullscreen Modal */}
       {isModalOpen && (
@@ -67,7 +76,7 @@ export default function TrekkingPage() {
           className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
           onClick={() => setIsModalOpen(false)}
         >
-          <div className="relative w-full max-w-7xl h-[90vh]">
+          <div className="relative w-full max-w-7xl h-[90vh] rounded-xl overflow-hidden shadow-2xl">
             <Image 
               src="/images/ponyClub_map.jpg" 
               alt="Trekking Routes Map" 
@@ -76,7 +85,7 @@ export default function TrekkingPage() {
               priority
             />
             <button 
-              className="absolute top-4 right-4 bg-white rounded-full p-2 text-black"
+              className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 text-black shadow-lg border border-white/30 hover:bg-white transition-colors"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsModalOpen(false);

@@ -4,7 +4,8 @@ export const en = {
     subtitle: "Acheron River",
   },
   introduction: {
-    mainText: "Natural beauty and adventure on the banks of the mythical Acheron River.",
+    mainTitle: "Welcome to Pony Club, where adventure meets the tranquility of nature at the magical Acheron River.",
+    mainText: "Since 1998, we've offered unforgettable experiences with our horse riding and rafting activities, suitable for families and adventurers alike. Join us at our privately-owned farm with 8 horses and rafting base to explore this mythically charged landscape with expert guides who prioritize safety and environmental respect.",
     seoDescription: "We offer rafting, riding, kayaking and trekking on Acheron River, Glyki, Greece."
   },
   activities: {
@@ -12,6 +13,7 @@ export const en = {
     horseRiding: "Horse riding near Acheron River",
     kayaking: "Kayaking in Acheron River",
     kayakRafting: "Kayak & Rafting in Acheron River",
+    riverVillage: "River & Village",
     exploreNature: "SUMMER 2025 OFFERS",
   },
   programs: {
@@ -115,5 +117,35 @@ export const en = {
     pricingExtendedTitle: "Extended Trail",
     pricingExtendedPrice: "€50 per person",
     pricingExtendedDuration: "2-hour experience",
+  },
+  // River & Village Page Content
+  riverVillage: {
+    pageTitle: "River & Village",
+    pageSubtitle: "History & Mythology",
+    heroAlt: "Acheron River and Glyki Village",
+    descriptionTitle: "The Mythical Acheron River",
+    descriptionContent: `
+      <div class="space-y-4">
+        <p>Acheron (gre. Ἀχέρων/ lat. Styx) is a 58 km long river starting near Ioannina, Epirus region. It flows into the Ionian Sea in Ammoudia, near Parga.</p>
+        
+        <p>In Greek mythology Acheron was known as the river of Underworld.
+        The souls of the newly dead were carried to the Underworld by Hades' ferryman Charon. Of course you had to pay Charos two coins to get there and if you couldn't afford it, your soul was left to the banks of the river.</p>
+        
+        <p>Acheron also flows through the Necromantion, where the very famous and popular oracle of Necromantion could talk to the dead. The ruins of Necromantion still exists.</p>
+        
+        <p>A village called Glyki lies at the bottom of the valley, where part of the river comes down from the mountains through a canyon. This is the place where the most Springs of Acheron are.
+        Above the canyon is Souli's Castle where a war between Greeks and Turks were taken place.</p>
+      </div>
+    `,
+    detailsTitle: "Legends & Natural Heritage",
+    detailsContent: `
+      <div class="space-y-4">
+        <p>Nowadays it is believed that in Christian Era there was a monstrous Draco who ruled the river and the once so clean water was turned poisonous by its venomous fangs. The villagers had to sacrifice one maiden girl every year in order to keep the Drago satisfied. Fortunately a fearess man called Donatos came to the rescue. He managed to kill the Drago with his sword and he saved the villagers by turning the water back to clear and drinkable. He was then declared Saint Donatos and he is still the Saint of Glyki. You can still find lot of small monastries dedicated to him.</p>
+        
+        <p>Acheron river has been acknowledged by its strange energy that attracts spiritual people of all kind. There are many stories of a strange healing power that lies beyond the surface of the clear water. It was believed that Acheron had miraculous powers and could make someone invulnerable. According to one tradition, Achilles was dipped in it in his childhood, acquiring invulnerability, with exception of his heel, by which his mother held him. This is the source of the expression Achilles' heel, a metaphor for a vulnerable spot.</p>
+        
+        <p>The nature around the river is very rich with flora and fauna and it is protected by EU's Natura 2000 program.</p>
+      </div>
+    `
   }
 }

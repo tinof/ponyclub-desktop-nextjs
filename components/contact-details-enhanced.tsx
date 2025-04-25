@@ -39,8 +39,11 @@ export default function ContactDetailsEnhanced() {
   const { t } = useLanguage()
 
   return (
-    <div className="bg-[#f5f0e8] p-6 md:p-8 rounded-lg shadow-md transform rotate-1 border-2 border-[#6b8362]/30">
-      <h2 className="text-center text-3xl mb-6 font-bold text-[#6b8362]">{t.contact.title}</h2>
+    <div className="relative bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-amber-100/70 transform rotate-1 hover:shadow-2xl transition-shadow duration-300">
+      <h2 className="text-center text-3xl mb-6 font-bold text-[#6b8362] relative inline-block w-full">
+        {t.contact.title}
+        <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
+      </h2>
 
       <div className="space-y-4">
         <div className="flex items-start gap-3">
@@ -86,19 +89,28 @@ export default function ContactDetailsEnhanced() {
           <div className="flex justify-center space-x-6">
             <SocialIconWithTooltip
               href="https://facebook.com"
-              icon={<Facebook className="h-5 w-5" />}
+              icon={<Facebook className="h-5 w-5 hover:scale-125 transition-transform duration-200" />}
               label="Facebook"
             />
             <SocialIconWithTooltip
               href="https://instagram.com"
-              icon={<Instagram className="h-5 w-5" />}
+              icon={<Instagram className="h-5 w-5 hover:scale-125 transition-transform duration-200" />}
               label="Instagram"
             />
-            <SocialIconWithTooltip href="https://twitter.com" icon={<Twitter className="h-5 w-5" />} label="Twitter" />
-            <SocialIconWithTooltip href="https://youtube.com" icon={<Youtube className="h-5 w-5" />} label="YouTube" />
+            <SocialIconWithTooltip 
+              href="https://twitter.com" 
+              icon={<Twitter className="h-5 w-5 hover:scale-125 transition-transform duration-200" />} 
+              label="Twitter" 
+            />
+            <SocialIconWithTooltip 
+              href="https://youtube.com" 
+              icon={<Youtube className="h-5 w-5 hover:scale-125 transition-transform duration-200" />} 
+              label="YouTube" 
+            />
           </div>
         </div>
       </div>
+      <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
     </div>
   )
 }

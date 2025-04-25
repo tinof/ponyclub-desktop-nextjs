@@ -21,26 +21,34 @@ export default function RidingPage() {
   const pricingContent = (
     <div className="flex flex-col gap-6">
       {/* Program 1 */}
-      <div className="bg-[#c27a5f]/10 p-6 rounded-lg shadow-md">
-        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 border-b border-[#c27a5f]/30 pb-2">{t.programs.program1.title}</h3>
-        <ul className="space-y-2 text-gray-700">
-          <li>{t.programs.program1.rafting}</li>
-          <li>{t.programs.program1.riding}</li>
-          <li>{t.programs.program1.hiking}</li>
-          <li className="font-semibold pt-2">{t.programs.program1.priceAdults}</li>
-          <li className="font-semibold">{t.programs.program1.priceChildren}</li>
-        </ul>
+      <div className="program-card frosted-card bg-[#c27a5f] relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300">
+        <div className="absolute inset-0 bg-pattern opacity-20 mix-blend-overlay"></div>
+        <div className="relative m-4 p-6 backdrop-blur-md bg-white/30 border border-white/25 rounded-xl shadow-xl flex flex-col items-center text-stone-800">
+          <div className="absolute -inset-[1px] -z-10 rounded-xl bg-gradient-to-tr from-[#c27a5f]/30 via-white/40 to-[#c27a5f]/30 blur-[2px]"></div>
+          <h3 className="gradient-text text-2xl mb-4 font-bold animate-text-shine">{t.programs.program1.title}</h3>
+          <ul className="space-y-2 text-center">
+            <li className="drop-shadow-sm">{t.programs.program1.rafting}</li>
+            <li className="drop-shadow-sm">{t.programs.program1.riding}</li>
+            <li className="drop-shadow-sm mb-4">{t.programs.program1.hiking}</li>
+            <li className="font-bold text-xl mb-1 text-shadow-sm">{t.programs.program1.priceAdults}</li>
+            <li className="font-medium">{t.programs.program1.priceChildren}</li>
+          </ul>
+        </div>
       </div>
 
       {/* Program 2 */}
-      <div className="bg-[#6b8362]/10 p-6 rounded-lg shadow-md">
-        <h3 className="text-xl font-bold text-[#6b8362] mb-3 border-b border-[#6b8362]/30 pb-2">{t.programs.program2.title}</h3>
-        <ul className="space-y-2 text-gray-700">
-          <li>{t.programs.program2.kayak}</li>
-          <li>{t.programs.program2.riding}</li>
-          <li>{t.programs.program2.hiking}</li>
-          <li className="font-semibold pt-2">{t.programs.program2.price}</li>
-        </ul>
+      <div className="program-card frosted-card bg-[#6b8362] relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300">
+        <div className="absolute inset-0 bg-pattern opacity-20 mix-blend-overlay"></div>
+        <div className="relative m-4 p-6 backdrop-blur-md bg-white/30 border border-white/25 rounded-xl shadow-xl flex flex-col items-center text-white">
+          <div className="absolute -inset-[1px] -z-10 rounded-xl bg-gradient-to-tr from-[#6b8362]/30 via-white/40 to-[#6b8362]/30 blur-[2px]"></div>
+          <h3 className="gradient-text text-2xl mb-4 font-bold animate-text-shine">{t.programs.program2.title}</h3>
+          <ul className="space-y-2 text-center">
+            <li className="drop-shadow-sm">{t.programs.program2.kayak}</li>
+            <li className="drop-shadow-sm">{t.programs.program2.riding}</li>
+            <li className="drop-shadow-sm mb-4">{t.programs.program2.hiking}</li>
+            <li className="font-bold text-xl mb-1 text-shadow-sm">{t.programs.program2.price}</li>
+          </ul>
+        </div>
       </div>
     </div>
   );

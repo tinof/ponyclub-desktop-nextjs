@@ -21,23 +21,23 @@ export default function LanguageSelector() {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="flex items-center gap-1 px-3 py-2 rounded-full bg-white/80 hover:bg-white transition-colors text-[#6b8362] font-medium"
-        aria-expanded={isOpen}
+        className="relative flex items-center gap-1 px-3 py-2 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg hover:scale-105 transition-all duration-200"
         aria-haspopup="true"
       >
         <Globe className="w-4 h-4" />
         <span>{language === "en" ? "EN" : "EL"}</span>
+        <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-10" onClick={closeDropdown} aria-hidden="true" />
-          <div className="absolute right-0 mt-1 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
+          <div className="absolute right-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-sm ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden">
             <div className="py-1" role="menu" aria-orientation="vertical">
               <button
                 className={`w-full text-left px-4 py-2 text-sm ${
-                  language === "en" ? "bg-[#6b8362]/10 font-medium text-[#6b8362]" : "text-gray-700"
-                }`}
+                  language === "en" ? "bg-[#6b8362]/10 font-medium text-[#6b8362]" : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"
+                } transition-colors`}
                 onClick={() => handleLanguageChange("en")}
                 role="menuitem"
               >
@@ -45,8 +45,8 @@ export default function LanguageSelector() {
               </button>
               <button
                 className={`w-full text-left px-4 py-2 text-sm ${
-                  language === "el" ? "bg-[#6b8362]/10 font-medium text-[#6b8362]" : "text-gray-700"
-                }`}
+                  language === "el" ? "bg-[#6b8362]/10 font-medium text-[#6b8362]" : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"
+                } transition-colors`}
                 onClick={() => handleLanguageChange("el")}
                 role="menuitem"
               >

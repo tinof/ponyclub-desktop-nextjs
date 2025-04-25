@@ -11,7 +11,7 @@ export default function GoogleMap() {
     console.error("Google Maps API Key is missing. Please set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY in your .env.local file.");
     // Optionally return a placeholder or error message
     return (
-      <div className="h-[400px] w-full rounded-lg shadow-md bg-gray-200 flex items-center justify-center text-center p-4">
+      <div className="h-[400px] w-full rounded-lg shadow-xl bg-gray-200 flex items-center justify-center text-center p-4 border border-amber-100/70">
         <p className="text-red-600 font-semibold">Map cannot be displayed. <br /> API Key configuration is missing.</p>
       </div>
     );
@@ -20,7 +20,7 @@ export default function GoogleMap() {
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&center=${coordinates}&q=${coordinates}&zoom=14&maptype=roadmap`;
 
   return (
-    <div className="h-[400px] w-full rounded-lg shadow-md overflow-hidden relative">
+    <div className="relative h-[400px] w-full rounded-lg shadow-xl overflow-hidden border border-amber-100/70 hover:shadow-2xl transition-shadow duration-300">
       <iframe
         src={mapUrl}
         width="100%"
@@ -31,6 +31,7 @@ export default function GoogleMap() {
         referrerPolicy="no-referrer-when-downgrade"
         title="Google Map of Acheron Adventures"
       ></iframe>
+      <div className="absolute inset-0 pointer-events-none border rounded-lg border-amber-200/30"></div>
     </div>
   )
 }

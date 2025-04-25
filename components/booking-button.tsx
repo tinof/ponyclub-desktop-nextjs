@@ -1,22 +1,21 @@
 "use client"
 
-import { useEffect } from "react"
+import Script from "next/script";
 
 export default function BookingButton() {
-  useEffect(() => {
-    // Check if the script is already present
-    if (!document.querySelector('script[src="https://integrations.beyonk.com/v1/sdk"]')) {
-      const script = document.createElement("script");
-      script.src = "https://integrations.beyonk.com/v1/sdk";
-      script.type = "module";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
-
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <portal-button organisation="pjpem0f0" color="#6B8262"></portal-button>
-    </div>
+    <>
+      <Script
+        src="https://integrations.beyonk.com/v1/sdk"
+        strategy="lazyOnload"
+        onLoad={() => {
+          // Optionally, you can add any initialization logic here if needed
+          // For most cases, the <portal-button> custom element will be available after script load
+        }}
+      />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <portal-button organisation="pjpem0f0" color="hsl(var(--river-accent))"></portal-button>
+      </div>
+    </>
   );
 }
