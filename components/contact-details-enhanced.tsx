@@ -88,24 +88,14 @@ export default function ContactDetailsEnhanced() {
           <h3 className="text-center font-bold mb-3 text-[#6b8362]">{t.contact.followUs}</h3>
           <div className="flex justify-center space-x-6">
             <SocialIconWithTooltip
-              href="https://facebook.com"
+              href="https://www.facebook.com/ponyclubgreece"
               icon={<Facebook className="h-5 w-5 hover:scale-125 transition-transform duration-200" />}
               label="Facebook"
             />
             <SocialIconWithTooltip
-              href="https://instagram.com"
+              href="https://www.instagram.com/ponyclub_greece/"
               icon={<Instagram className="h-5 w-5 hover:scale-125 transition-transform duration-200" />}
               label="Instagram"
-            />
-            <SocialIconWithTooltip 
-              href="https://twitter.com" 
-              icon={<Twitter className="h-5 w-5 hover:scale-125 transition-transform duration-200" />} 
-              label="Twitter" 
-            />
-            <SocialIconWithTooltip 
-              href="https://youtube.com" 
-              icon={<Youtube className="h-5 w-5 hover:scale-125 transition-transform duration-200" />} 
-              label="YouTube" 
             />
           </div>
         </div>

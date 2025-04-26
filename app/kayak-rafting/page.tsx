@@ -3,6 +3,8 @@
 import ActivityPageLayout from "@/components/ActivityPageLayout";
 import { useLanguage } from "@/contexts/language-context";
 import Image from "next/image";
+import { Gallery } from "@/components/ui/Gallery";
+import { kayakingGalleryImages, raftingGalleryImages } from "@/lib/gallery-data";
 
 export default function KayakRaftingPage() {
   const { t, language } = useLanguage();
@@ -64,6 +66,13 @@ export default function KayakRaftingPage() {
           </div>
         </div>
       </div>
+      
+      {/* Kayaking Gallery */}
+      <Gallery 
+        images={kayakingGalleryImages} 
+        title="Kayaking Photo Gallery" 
+        ariaLabel="Kayaking photo gallery - Acheron River" 
+      />
     </div>
   );
 
@@ -125,6 +134,13 @@ export default function KayakRaftingPage() {
           </div>
         </div>
       </div>
+      
+      {/* Kayaking Gallery */}
+      <Gallery 
+        images={kayakingGalleryImages} 
+        title="Φωτογραφική Γκαλερί Καγιάκ" 
+        ariaLabel="Φωτογραφική γκαλερί καγιάκ στον ποταμό Αχέροντα" 
+      />
     </div>
   );
 
@@ -190,6 +206,13 @@ export default function KayakRaftingPage() {
           </div>
         </div>
       </div>
+      
+      {/* Rafting Gallery */}
+      <Gallery 
+        images={raftingGalleryImages} 
+        title="Rafting Photo Gallery" 
+        ariaLabel="Rafting photo gallery - Acheron River" 
+      />
     </div>
   );
 
@@ -250,14 +273,21 @@ export default function KayakRaftingPage() {
               <li>Ιππασία: 10-15 λεπτά</li>
               <li>Πεζοπορία διάσχιση φαραγγιού</li>
             </ul>
-            <p className="text-2xl font-bold">20 € οι μεγάλοι</p>
-            <p className="text-sm text-gray-600 mt-2">10 € τα παιδιά κάτω τον 12 ετω</p>
+            <p className="text-2xl font-bold">20 € ενήλικες</p>
+            <p className="text-sm text-gray-600 mt-2">10 € παιδιά κάτω των 12 ετών</p>
           </div>
         </div>
       </div>
+      
+      {/* Rafting Gallery */}
+      <Gallery 
+        images={raftingGalleryImages} 
+        title="Φωτογραφική Γκαλερί Ράφτινγκ" 
+        ariaLabel="Φωτογραφική γκαλερί ράφτινγκ στον ποταμό Αχέροντα" 
+      />
     </div>
   );
-
+  
   // Select content based on current language
   const kayakingSection = language === 'el' ? kayakingSection_EL : kayakingSection_EN;
   const raftingSection = language === 'el' ? raftingSection_EL : raftingSection_EN;

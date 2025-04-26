@@ -35,6 +35,7 @@ export default function Home() {
               src="/images/ponyclub_logo.png"
               alt="Acheron River Excursion"
               fill
+              sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
               className="object-contain p-1"
             />
             <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/20 via-[#6b8362]/30 to-transparent blur-sm"></div>
@@ -78,21 +79,21 @@ export default function Home() {
         {/* Swimming */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-2">
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round1.jpg" alt="Swimming in Acheron River" fill className="object-cover" />
+            <Image src="/images/round1.jpg" alt="Swimming in Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
           </div>
         </div>
 
         {/* Horse Riding */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform -rotate-2">
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round2.jpg" alt="Horse riding near Acheron River" fill className="object-cover object-[center_20%]" />
+            <Image src="/images/round2.jpg" alt="Horse riding near Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover object-[center_20%]" />
           </div>
         </div>
 
         {/* Kayaking */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-3">
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round3.jpg" alt="Kayaking in Acheron River" fill className="object-cover" />
+            <Image src="/images/round3.jpg" alt="Kayaking in Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
           </div>
         </div>
       </div>

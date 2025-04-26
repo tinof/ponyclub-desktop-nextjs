@@ -4,6 +4,8 @@ import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the 
 import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
 import Image from "next/image"; // Import Image component
 import { useState } from "react"; // Import useState for modal state
+import { Gallery } from "@/components/ui/Gallery"; // Import Gallery component
+import { trekkingGalleryImages } from "@/lib/gallery-data"; // Import trekking gallery images
 
 export default function TrekkingPage() {
   const { t } = useLanguage(); // Get translations object (though not used for titles yet)
@@ -55,20 +57,29 @@ export default function TrekkingPage() {
 
   // Replace pricing content with map image
   const mapContent = (
-    <div className="mt-4">
-      <div 
-        className="relative w-full h-[400px] cursor-pointer rounded-xl overflow-hidden shadow-xl border border-amber-100/70 hover:shadow-2xl transition-all duration-300"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <Image 
-          src="/images/ponyClub_map.jpg" 
-          alt="Trekking Routes Map" 
-          fill 
-          className="object-contain"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
+    <div className="mt-4 space-y-8">
+      <div>
+        <div 
+          className="relative w-full h-[400px] cursor-pointer rounded-xl overflow-hidden shadow-xl border border-amber-100/70 hover:shadow-2xl transition-all duration-300"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <Image 
+            src="/images/ponyClub_map.jpg" 
+            alt="Trekking Routes Map" 
+            fill 
+            className="object-contain"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
+        </div>
+        <p className="text-center text-sm mt-3 text-gray-600 italic">Click on map to enlarge</p>
       </div>
-      <p className="text-center text-sm mt-3 text-gray-600 italic">Click on map to enlarge</p>
+      
+      {/* Trekking Gallery */}
+      <Gallery 
+        images={trekkingGalleryImages} 
+        title="Trekking Photo Gallery" 
+        ariaLabel="Trekking and hiking photo gallery - Acheron River canyon" 
+      />
       
       {/* Fullscreen Modal */}
       {isModalOpen && (
@@ -113,7 +124,7 @@ export default function TrekkingPage() {
       descriptionContent={descriptionContent}
       detailsTitle="Details & Requirements"
       detailsContent={detailsContent}
-      pricingTitle="Trekking Routes Map"
+      pricingTitle="Trekking Routes Map & Gallery"
       pricingContent={mapContent}
     />
   );

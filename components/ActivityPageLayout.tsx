@@ -58,6 +58,7 @@ export default function ActivityPageLayout({
               src="/images/ponyclub_logo.png"
               alt="Acheron River Excursion"
               fill
+              sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
               className="object-contain p-1"
             />
             <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/20 via-[#6b8362]/30 to-transparent blur-sm"></div>

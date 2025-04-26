@@ -147,5 +147,24 @@ export const en = {
         <p>The nature around the river is very rich with flora and fauna and it is protected by EU's Natura 2000 program.</p>
       </div>
     `
-  }
+  },
+  footer: {
+    contactUs: "Contact Us",
+    address: {
+      line1: "Springs of Acheron River",
+      line2: "Glyki, Thesprotias",
+      line3: "46200, Greece"
+    },
+    phone: "+ 30 698 661 7090",
+    phoneLang: "We speak Greek, English and Finnish.",
+    email: "info@ponyclub.gr",
+    emailNote: "During summer season we kindly ask you to call us, as it gets busy and we can be a bit slow to answer to email (1-2 days)",
+    openHours: {
+      title: "Opening Hours:",
+      schedule: "10.00 to 18.00 every day",
+      season: "During season, otherwise we are open on request"
+    },
+    findUs: "Find Us",
+    copyright: "© {year} Pony Club Ecotourism. All rights reserved."
+  },
 }

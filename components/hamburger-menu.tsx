@@ -29,9 +29,9 @@ export default function HamburgerMenu() {
 
   // Activities menu items
   const activities = [
-    { id: "kayak-rafting", label: "Kayak & Rafting", href: "/kayak-rafting" },
-    { id: "riding", label: "Riding", href: "/riding" },
-    { id: "trekking", label: "Trekking", href: "/trekking" },
+    { id: "kayak-rafting", label: language === "el" ? "Καγιάκ & Ράφτινγκ" : "Kayak & Rafting", href: "/kayak-rafting" },
+    { id: "riding", label: language === "el" ? "Ιππασία" : "Riding", href: "/riding" },
+    { id: "trekking", label: language === "el" ? "Πεζοπορία" : "Trekking", href: "/trekking" },
   ]
 
   // Handle language change
@@ -84,10 +84,10 @@ export default function HamburgerMenu() {
               </Link>
             )}
             
-            {/* Activities section */}
+            {/* Activities section - already grouped correctly */}
             <div className="mt-1 pt-1 border-t border-amber-100/50">
               <div className="px-4 py-1.5 text-xs font-semibold text-[#6b8362]/70 uppercase tracking-wider">
-                Activities
+                {language === "el" ? "Δραστηριότητες" : "Activities"}
               </div>
               {activities.map((activity) => (
                 <Link

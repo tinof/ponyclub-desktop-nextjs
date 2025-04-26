@@ -2,6 +2,8 @@
 
 import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the layout
 import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
+import { Gallery } from "@/components/ui/Gallery"; // Import Gallery component
+import { ridingGalleryImages } from "@/lib/gallery-data"; // Import riding gallery images
 
 export default function RidingPage() {
   const { t } = useLanguage(); // Get translations object
@@ -49,6 +51,15 @@ export default function RidingPage() {
             <li className="font-bold text-xl mb-1 text-shadow-sm">{t.programs.program2.price}</li>
           </ul>
         </div>
+      </div>
+      
+      {/* Riding Gallery */}
+      <div className="mt-8">
+        <Gallery 
+          images={ridingGalleryImages} 
+          title={t.gallery?.ridingTitle || "Horse Riding Gallery"} 
+          ariaLabel={t.gallery?.ridingAriaLabel || "Horse riding photo gallery at Acheron River"}
+        />
       </div>
     </div>
   );

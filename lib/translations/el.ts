@@ -1,7 +1,7 @@
 export const el = {
   hero: {
     title: "Μονοήμερη εκδρομή στον",
-    subtitle: "Ποταμό Αχέροντα",
+    subtitle: "Ποταμό Αχέροντα"
   },
   introduction: {
     mainTitle: "Φυσική ομορφιά και περιπέτεια στις όχθες του μυθικού Αχέροντα.",
@@ -14,7 +14,7 @@ export const el = {
     kayaking: "Καγιάκ στον ποταμό Αχέροντα",
     kayakRafting: "Καγιάκ & Ράφτινγκ στον ποταμό Αχέροντα",
     riverVillage: "Ποτάμι & Χωριό",
-    exploreNature: "ΠΡΟΣΦΟΡΕΣ ΚΑΛΟΚΑΙΡΙ 2025",
+    exploreNature: "ΠΡΟΣΦΟΡΕΣ ΚΑΛΟΚΑΙΡΙ 2025"
   },
   programs: {
     program1: {
@@ -23,7 +23,7 @@ export const el = {
       riding: "Ιππασία: 10-15 λεπτά",
       hiking: "Πεζοπορία διάσχιση φαραγγιού",
       priceAdults: "20 € οι μεγάλοι",
-      priceChildren: "10 € τα παιδιά κάτω τον 12 ετω",
+      priceChildren: "10 € τα παιδιά κάτω τον 12 ετω"
     },
     program2: {
       title: "ΠΡΟΓΡΑΜΜΑ 2",
@@ -31,18 +31,18 @@ export const el = {
       riding: "Ιππασία: 10-15 λεπτά",
       hiking: "Πεζοπορία διάσχιση φαραγγιού",
       price: "25 € το άτομο",
-      separator: "----",
-    },
+      separator: "----"
+    }
   },
   booking: {
-    bookNow: "ΚΑΝΤΕ ΚΡΑΤΗΣΗ ΤΩΡΑ",
+    bookNow: "ΚΑΝΤΕ ΚΡΑΤΗΣΗ ΤΩΡΑ"
   },
   reviews: {
-    title: "Τι Λένε οι Πελάτες Μας",
+    title: "Τι Λένε οι Πελάτες Μας"
   },
   location: {
     findUs: "Βρείτε μας",
-    viewOnGoogleMaps: "Προβολή στο Google Maps",
+    viewOnGoogleMaps: "Προβολή στο Google Maps"
   },
   contact: {
     title: "ΕΠΙΚΟΙΝΩΝΙΑ",
@@ -56,11 +56,11 @@ export const el = {
     openingHours: "Ώρες Λειτουργίας:",
     openingHoursDetails: "10.00 έως 18.00 καθημερινά",
     openingHoursSeason: "Κατά τη διάρκεια της σεζόν, διαφορετικά λειτουργούμε κατόπιν ζήτησης",
-    followUs: "ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ",
+    followUs: "ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ"
   },
   language: {
     en: "Αγγλικά",
-    el: "Ελληνικά",
+    el: "Ελληνικά"
   },
   // Riding Page Content
   riding: {
@@ -108,7 +108,7 @@ export const el = {
     pricingStandardDuration: "1 ώρα εμπειρία",
     pricingExtendedTitle: "Εκτεταμένη διαδρομή",
     pricingExtendedPrice: "€50 ανά άτομο",
-    pricingExtendedDuration: "2 ώρες εμπειρία",
+    pricingExtendedDuration: "2 ώρες εμπειρία"
   },
   // River & Village Page Content
   riverVillage: {
@@ -139,5 +139,24 @@ export const el = {
         <p>Η φύση γύρω από τον ποταμό είναι πολύ πλούσια σε χλωρίδα και πανίδα και προστατεύεται από το πρόγραμμα Natura 2000 της ΕΕ.</p>
       </div>
     `
+  },
+  footer: {
+    contactUs: "Επικοινωνία",
+    address: {
+      line1: "Πηγές του Ποταμού Αχέροντα",
+      line2: "Γλυκή, Θεσπρωτίας",
+      line3: "46200, Ελλάδα"
+    },
+    phone: "+ 30 698 661 7090",
+    phoneLang: "Μιλάμε Ελληνικά, Αγγλικά και Φινλανδικά.",
+    email: "info@ponyclub.gr",
+    emailNote: "Κατά τη διάρκεια της καλοκαιρινής περιόδου σας παρακαλούμε να μας καλέσετε, καθώς έχουμε αυξημένη κίνηση και μπορεί να αργήσουμε να απαντήσουμε στο email (1-2 ημέρες)",
+    openHours: {
+      title: "Ώρες Λειτουργίας:",
+      schedule: "10.00 έως 18.00 καθημερινά",
+      season: "Κατά τη διάρκεια της σεζόν, διαφορετικά λειτουργούμε κατόπιν ζήτησης"
+    },
+    findUs: "Βρείτε μας",
+    copyright: "© {year} Pony Club Ecotourism. Με επιφύλαξη παντός δικαιώματος."
   }
 }
