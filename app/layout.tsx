@@ -57,6 +57,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" /> */}
+        {/* Canonical link for homepage */}
+        <link rel="canonical" href="https://ponyclub.gr/" />
         {/* JSON-LD structured data */}
         <Script
           id="structured-data"
