@@ -15,10 +15,16 @@ export default function DesktopMenu() {
   const languageMenuRef = useRef<HTMLDivElement>(null)
   
   // Activities menu items
-  const activities = [
-    { id: "kayak-rafting", label: language === "el" ? "Καγιάκ & Ράφτινγκ" : "Kayak & Rafting", href: "/kayak-rafting" },
-    { id: "riding", label: language === "el" ? "Ιππασία" : "Riding", href: "/riding" },
-    { id: "trekking", label: language === "el" ? "Πεζοπορία" : "Trekking", href: "/trekking" },
+  const activities = language === "el" ? [
+    { id: "kayaking", label: "Καγιάκ", href: "/kayaking" },
+    { id: "rafting", label: "Ράφτινγκ", href: "/rafting" },
+    { id: "riding", label: "Ιππασία", href: "/riding" },
+    { id: "trekking", label: "Πεζοπορία", href: "/trekking" },
+  ] : [
+    { id: "kayaking", label: "Kayaking", href: "/kayaking" },
+    { id: "rafting", label: "Rafting", href: "/rafting" },
+    { id: "riding", label: "Riding", href: "/riding" },
+    { id: "trekking", label: "Trekking", href: "/trekking" },
   ]
 
   // Handle clicks outside the menu to close them
@@ -102,6 +108,21 @@ export default function DesktopMenu() {
         </Link>
       )}
       
+      {/* For Schools (Για τα σχολεία) - Greek only */}
+      {language === "el" && (
+        <Link
+          href="/for-schools"
+          className={`relative px-5 py-3 rounded-full ${
+            pathname === "/for-schools" 
+              ? "bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30" 
+              : "bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50"
+          } border shadow-md hover:shadow-lg transition-all text-base`}
+        >
+          Για τα σχολεία
+          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+        </Link>
+      )}
+      
       {/* Language selector */}
       <div className="relative ml-2" ref={languageMenuRef}>
         <button
@@ -140,4 +161,4 @@ export default function DesktopMenu() {
       </div>
     </nav>
   )
-} 
+}

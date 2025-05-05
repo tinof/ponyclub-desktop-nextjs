@@ -1,5 +1,26 @@
-import { redirect } from 'next/navigation';
+import React from 'react';
+import ActivityPageLayout from '@/components/ActivityPageLayout';
+import BokunWidget from '@/components/BokunWidget';
 
-export default function KayakingPage() {
-  redirect('/kayak-rafting');
-}
+const KayakingPage = () => {
+  return (
+    <ActivityPageLayout
+      title="Kayaking" // Provide a title
+      subtitle="" // Empty subtitle
+      heroImageSrc="/images/Rafting_Group_Blue_Adventure_River.jpg" // Use a relevant hero image
+      heroImageAlt="Kayaking Adventure"
+      descriptionTitle="" // Let Bokun handle content titles
+      descriptionContent={<BokunWidget experienceId="1020669" />} // Use BokunWidget component
+      detailsTitle=""
+      detailsContent={<></>} // Empty content
+      pricingTitle=""
+      pricingContent={<></>} // Empty content
+      showBookingButton={false} // Hide default button
+      fullWidthContent={true} // Enable full width for Bokun widget
+    >
+      {/* Children are no longer directly placed here */}
+    </ActivityPageLayout>
+  );
+};
+
+export default KayakingPage;

@@ -95,7 +95,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${robotoSlab.variable} font-sans`}>
+      <body className={`${inter.variable} ${robotoSlab.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             <PageLayout>

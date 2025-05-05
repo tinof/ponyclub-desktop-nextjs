@@ -372,13 +372,258 @@ Common responsive patterns:
 
 ## Adding New Pages
 
-When creating new pages:
+When creating new pages, follow these guidelines to maintain consistency:
 
-1. Use the `ActivityPageLayout` component for consistent layout structure
-2. Follow the examples in existing pages like `kayak-rafting`, `riding`, and `trekking`
-3. Maintain the same design language with semi-transparent cards, gradients, and subtle animations
-4. Use the color palette consistently (green, terracotta, sand/cream)
-5. Structure content with appropriate spacing and hierarchy
+### Standard Page Structure
+
+1. **Base Page Layout**
+   
+   All new pages should include these essential elements in this order:
+   
+   ```jsx
+   export default function NewPage() {
+     return (
+       <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
+         {/* Logo - Fixed Position with responsive size */}
+         <div className="absolute top-4 left-4 z-50">
+           <Link href="/" className="flex items-center">
+             <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-md border border-amber-100 hover:bg-white transition-colors">
+               <Image
+                 src="/images/ponyclub_logo.png"
+                 alt="Pony Club Logo"
+                 fill
+                 sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                 className="object-contain p-1"
+               />
+               <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/20 via-[#6b8362]/30 to-transparent blur-sm"></div>
+             </div>
+           </Link>
+         </div>
+
+         {/* Responsive Navigation */}
+         <div className="absolute top-4 right-4 z-50">
+           <ResponsiveNavigation />
+         </div>
+
+         {/* Hero Section - with rounded corners and proper structure */}
+         <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
+           {/* Content goes here */}
+         </div>
+         
+         {/* Content sections */}
+       </main>
+     )
+   }
+   ```
+
+2. **Required Imports**
+   
+   Include these imports at the top of your page file:
+   
+   ```jsx
+   import { Metadata } from 'next'
+   import Link from 'next/link'
+   import Image from 'next/image'
+   import ResponsiveNavigation from '@/components/responsive-navigation'
+   import { Roboto_Slab } from 'next/font/google'
+   
+   // Define Roboto Slab font instance
+   const robotoSlab = Roboto_Slab({
+     subsets: ['latin', 'greek'],
+     variable: '--font-roboto-slab',
+     weight: ['400', '700', '900'],
+   })
+   ```
+
+3. **Metadata Configuration**
+   
+   Define metadata for SEO:
+   
+   ```jsx
+   export const metadata: Metadata = {
+     title: 'Page Title | Pony Club',
+     description: 'Page description with relevant keywords',
+   }
+   ```
+
+### Page Types and Patterns
+
+Choose the appropriate page pattern based on your content:
+
+1. **For activity pages (rafting, riding, etc.)**, use the `ActivityPageLayout` component:
+   ```jsx
+   import ActivityPageLayout from "@/components/ActivityPageLayout";
+   
+   export default function ActivityPage() {
+     const { t, language } = useLanguage();
+     
+     return (
+       <ActivityPageLayout
+         title={language === "el" ? "Greek Title" : "English Title"}
+         subtitle={language === "el" ? "Greek Subtitle" : "English Subtitle"}
+         heroImageSrc="/images/hero-image.jpg"
+         heroImageAlt="Alt text"
+         descriptionTitle={language === "el" ? "Greek Description" : "English Description"}
+         descriptionContent={/* Content JSX */}
+         detailsTitle={language === "el" ? "Greek Details" : "English Details"}
+         detailsContent={/* Details JSX */}
+         pricingTitle={language === "el" ? "Greek Pricing" : "English Pricing"}
+         pricingContent={/* Pricing JSX */}
+       />
+     );
+   }
+   ```
+
+2. **For informational pages (about, contact, for-schools, etc.)**, use this structure with custom content sections:
+
+   ```jsx
+   <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
+     {/* Logo and Navigation (as shown above) */}
+     
+     {/* Hero Section with Rounded Corners */}
+     <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
+       <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
+         <Image 
+           src="/images/hero-image.jpg" 
+           alt="Hero image alt" 
+           fill 
+           className="object-cover object-[center_20%]"
+           priority
+         />
+         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+       </div>
+       
+       {/* Hero Title Box */}
+       <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
+         <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
+           <h1 className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}>
+             <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Primary Title</span>
+             <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Secondary Title</span>
+           </h1>
+           <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
+         </div>
+       </div>
+     </div>
+     
+     {/* Hero Bottom Text Banner */}
+     <div className="relative mx-4 -mt-8 z-20">
+       <div className="bg-white/90 backdrop-blur-sm py-4 px-6 rounded-lg shadow-lg border border-amber-100 max-w-3xl mx-auto">
+         <p className={`${robotoSlab.variable} font-roboto-slab text-lg md:text-xl text-center text-amber-800`}>
+           Descriptive subtitle or tagline goes here
+         </p>
+         <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/30 via-[#6b8362]/20 to-amber-200/30 blur-sm"></div>
+       </div>
+     </div>
+     
+     {/* Content Sections - properly contained */}
+     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl flex flex-col gap-8">
+       {/* Main Content Card */}
+       <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+         {/* Content goes here */}
+         
+         {/* Gradient glow behind card */}
+         <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
+       </div>
+     </div>
+   </main>
+   ```
+
+### Hero Section Structure
+
+For all pages, the hero section should follow this structure for consistency:
+
+1. **Hero Image Container**:
+   ```jsx
+   <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
+     <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
+       <Image 
+         src="/images/hero-image.jpg" 
+         alt="Hero image alt" 
+         fill 
+         className="object-cover object-[center_20%]"
+         priority
+       />
+       <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+     </div>
+     
+     {/* Hero title content */}
+   </div>
+   ```
+
+2. **Hero Title Box**:
+   ```jsx
+   <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
+     <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
+       <h1 className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}>
+         <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Primary Title</span>
+         <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">Secondary Title</span>
+       </h1>
+       <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
+     </div>
+   </div>
+   ```
+
+3. **Hero Bottom Text Banner**:
+   ```jsx
+   <div className="relative mx-4 -mt-8 z-20">
+     <div className="bg-white/90 backdrop-blur-sm py-4 px-6 rounded-lg shadow-lg border border-amber-100 max-w-3xl mx-auto">
+       <p className={`${robotoSlab.variable} font-roboto-slab text-lg md:text-xl text-center text-amber-800`}>
+         Descriptive subtitle or tagline goes here
+       </p>
+       <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/30 via-[#6b8362]/20 to-amber-200/30 blur-sm"></div>
+     </div>
+   </div>
+   ```
+
+### Content Card Structure
+
+All content should be placed in cards with this styling:
+
+```jsx
+<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+  <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300 mb-8">
+    {/* Section heading */}
+    <h2 className="text-2xl font-bold text-[#6b8362] mb-6 relative inline-block">
+      Section Title
+      <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
+    </h2>
+    
+    {/* Content */}
+    <div className="prose max-w-none text-gray-700">
+      Content here
+    </div>
+    
+    {/* Gradient glow behind card */}
+    <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
+  </div>
+</div>
+```
+
+### Key Elements to Include
+
+For consistency across all pages, always include:
+
+1. Logo in top-left with the exact styling shown
+2. ResponsiveNavigation component in top-right
+3. Hero section with:
+   - Rounded corners (m-4 rounded-2xl)
+   - Subtle shadow and border
+   - Proper height (h-[60vh] md:h-[70vh] lg:h-[80vh])
+   - Top margin to accommodate the fixed navigation (mt-16)
+4. Hero title with:
+   - Two-line format (primary title and secondary title)
+   - Transparent amber background with backdrop blur
+   - Text shadows for readability
+   - Subtle hover effect
+5. Hero bottom text banner with:
+   - Semi-transparent background
+   - Negative top margin to overlay the hero
+   - Higher z-index (z-20) to ensure it's above the hero
+6. Content cards with:
+   - Consistent rounded corners, shadows, and borders
+   - Semi-transparent white background with backdrop blur
+   - Gradient glow effect behind each card
+   - Proper container width constraints at different breakpoints
 
 ## Best Practices
 

@@ -8,21 +8,130 @@ import { Gallery } from "@/components/ui/Gallery"; // Import Gallery component
 import { trekkingGalleryImages } from "@/lib/gallery-data"; // Import trekking gallery images
 
 export default function TrekkingPage() {
-  const { t } = useLanguage(); // Get translations object (though not used for titles yet)
+  const { t, language } = useLanguage(); // Get translations object and current language
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
 
   // Define content sections using JSX with the updated content
-  const descriptionContent = (
-    <div className="space-y-4">
-      <p>Simple tour of the sources. It takes place throughout the year and is preferred by almost all visitors.</p>
-      <p>Glyki, Springs of Acheron river.</p>
-      <p>Duration 15 min – 1 h. Easy path to walk with children and to see the river area and the springs.</p>
-      <p>Glyki, Tzavelaina staircase, Dala bridge return through the river gorge. Duration 2 hours, takes place from May to early October.</p>
-      <p>Souli, Dala bridge, Glyki. Duration 3-4 hours, moderate, and it is usually preferred by mountaineering and nature clubs.</p>
-      <p>Mills of Souli – Acheron sources. Experts consider it one of the most beautiful and exciting routes in Greece. Duration 3-4 hours, and it is moderate to difficult. It takes place from May to early October, because for most of the route we walk in the water.</p>
-      <p>Our company is the only one in the field that provides guides and organizes these routes.</p>
-    </div>
-  );
+  const descriptionContent =
+    language === "el" ? (
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold mb-2">Πεζοπορία στον Θρυλικό Αχέροντα</h2>
+        <p>
+          Οι μυθικές πηγές του ποταμού Αχέροντα, κοντά στο χωριό Γλυκή, προσκαλούν για εξερεύνηση όλο τον χρόνο. Βαθιά ριζωμένος στην αρχαιότητα ως ένας από τους ποταμούς που οδηγούσαν στον κάτω κόσμο, ο Αχέροντας σήμερα προσφέρει απαράμιλλη φυσική ομορφιά αντί για πέρασμα στον Άδη! Η πρόσβαση είναι εύκολη: μπορείτε να σταθμεύσετε το όχημά σας ακριβώς δίπλα στην είσοδο της περιοχής των πηγών στη Γλυκή. Το καλύτερο; Η στάθμευση και η είσοδος είναι εντελώς δωρεάν, προσκαλώντας σας να ανακαλύψετε τα θαύματά του.
+        </p>
+        <p>
+          Έτοιμοι για εξερεύνηση; Δείτε μερικές από τις καλύτερες διαδρομές πεζοπορίας για να ζήσετε τη μαγεία του Αχέροντα:
+        </p>
+        <ol className="list-decimal list-inside space-y-4 pl-4">
+          <li>
+            <strong>Βόλτα στις Πηγές της Γλυκής</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Διάρκεια:</strong> 15 λεπτά – 1 ώρα</li>
+              <li><strong>Δυσκολία:</strong> Εύκολη</li>
+              <li><strong>Εποχή:</strong> Κατάλληλη όλο τον χρόνο</li>
+              <li>
+                <strong>Περιγραφή:</strong> Ιδανική για οικογένειες ή όσους επιθυμούν μια ήπια γνωριμία με την ομορφιά του Αχέροντα. Το μονοπάτι ακολουθεί το ποτάμι κάτω από τη δροσερή σκιά των πλατανιών. Θαυμάστε τις εντυπωσιακές πηγές όπου το κρυστάλλινο, αλλά δροσερό νερό αναβλύζει απευθείας από τη γη. Ιδανικό σημείο για χαλάρωση και – γιατί όχι; – να βουτήξετε τα πόδια σας στα θρυλικά νερά!
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Κυκλική Διαδρομή Σκάλα Τζαβελαίνας (μέσω της Σκάλας Τζαβελαίνας)</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Διάρκεια:</strong> Περίπου 2 ώρες</li>
+              <li><strong>Δυσκολία:</strong> Εύκολη έως Μέτρια</li>
+              <li><strong>Εποχή:</strong> Καλύτερα από Μάιο έως αρχές Οκτωβρίου</li>
+              <li>
+                <strong>Περιγραφή:</strong> Δημοφιλής διαδρομή που ακολουθεί το ιστορικό μονοπάτι της «Σκάλας Τζαβελαίνας», μια πέτρινη σκάλα λαξευμένη στο βράχο, με εντυπωσιακή θέα στο φαράγγι. Η πραγματική περιπέτεια συχνά βρίσκεται στην επιστροφή: αντί να ακολουθήσετε το ίδιο μονοπάτι, πολλοί επιλέγουν να επιστρέψουν μέσα από το ποτάμι, περπατώντας στα δροσερά νερά κάτω από τους επιβλητικούς βράχους. Μια αξέχαστη καλοκαιρινή εμπειρία! (Το τμήμα μέσα στο ποτάμι εξαρτάται από τη στάθμη των νερών).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Κατάβαση από το Σούλι</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Διάρκεια:</strong> 3-4 ώρες</li>
+              <li><strong>Δυσκολία:</strong> Μέτρια</li>
+              <li><strong>Εποχή:</strong> Δυνατή όλο τον χρόνο, αλλά οι συνθήκες διαφέρουν (ρωτήστε τοπικά)</li>
+              <li>
+                <strong>Περιγραφή:</strong> Ξεκινώντας από την ιστορική περιοχή του Σουλίου, η διαδρομή προσφέρει πανοραμική θέα στα βουνά πριν κατηφορίσει προς τη γέφυρα Ντάλα και καταλήξει στο ποτάμι στη Γλυκή. Συχνά προτιμάται από ορειβατικούς συλλόγους και λάτρεις της φύσης, προσφέροντας βαθύτερη επαφή με την άγρια ομορφιά και το τοπίο της περιοχής.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Περιπέτεια στα Μύλους του Σουλίου</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Διάρκεια:</strong> 3-4 ώρες</li>
+              <li><strong>Δυσκολία:</strong> Μέτρια έως Δύσκολη</li>
+              <li><strong>Εποχή:</strong> Συνιστάται μόνο από Μάιο έως αρχές Οκτωβρίου</li>
+              <li>
+                <strong>Περιγραφή:</strong> Συχνά χαρακτηρίζεται από ειδικούς ως μία από τις ομορφότερες και πιο συναρπαστικές διαδρομές στην Ελλάδα. Η διαδρομή διασχίζει το εσωτερικό του φαραγγιού του Αχέροντα, με μεγάλα τμήματα μέσα στο ποτάμι, ανάμεσα σε εντυπωσιακούς κάθετους βράχους. Μια μοναδική εμπειρία, εφικτή μόνο από τα τέλη της άνοιξης έως τις αρχές του φθινοπώρου, όταν η στάθμη και η θερμοκρασία του νερού το επιτρέπουν.
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          Όποια διαδρομή κι αν επιλέξετε, ο μυθικός Αχέροντας υπόσχεται μια μοναδική και αξέχαστη εμπειρία πεζοπορίας σε τοπία βγαλμένα από θρύλους.
+        </p>
+      </div>
+    ) : (
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold mb-2">Trekking the Legendary Acheron River</h2>
+        <p>
+          The mythical springs of the Acheron River, near the village of Glyki, invite exploration all year round. Steeped in ancient legend as one of the rivers leading to the underworld, the Acheron today offers breathtaking natural beauty rather than a passage to Hades! Access is straightforward: you can park your vehicle conveniently right by the entrance to the springs area in Glyki. Best of all, both parking and entry are completely free of charge, welcoming you to discover its wonders.
+        </p>
+        <p>
+          Ready to explore? Here are some of the best trekking routes to immerse yourself in the magic of Acheron:
+        </p>
+        <ol className="list-decimal list-inside space-y-4 pl-4">
+          <li>
+            <strong>Glyki Springs Stroll</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Duration:</strong> 15 min – 1 hour</li>
+              <li><strong>Difficulty:</strong> Easy</li>
+              <li><strong>Season:</strong> Suitable all year round</li>
+              <li>
+                <strong>Description:</strong> Perfect for families or those seeking a gentle introduction to the Acheron's beauty. This easy path meanders alongside the river beneath the cool shade of lush plane trees. Witness the incredible springs where the crystal-clear, yet refreshingly cold, water bubbles up directly from the earth. It's an ideal spot to relax and even dare to dip your toes into the legendary stream!
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Skala Tzavelainas Circuit (Via the Tzavelena Staircase)</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Duration:</strong> Approx. 2 hours</li>
+              <li><strong>Difficulty:</strong> Easy to Moderate</li>
+              <li><strong>Season:</strong> Best from May to early October</li>
+              <li>
+                <strong>Description:</strong> This popular route takes you along a path featuring the historic "Skala Tzavelainas," a stone staircase etched into the cliffside, offering dramatic views down into the gorge. The real adventure often lies in the return: instead of just retracing your steps on the path, many choose to navigate back through the river itself, wading in the cool, invigorating waters beneath the towering gorge walls. An unforgettable summer experience! (River section dependent on water levels).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Souli Descent Trek</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Duration:</strong> 3-4 hours</li>
+              <li><strong>Difficulty:</strong> Moderate</li>
+              <li><strong>Season:</strong> Possible year-round, but conditions vary (check locally)</li>
+              <li>
+                <strong>Description:</strong> Starting higher up in the historically significant Souli region, this trek rewards hikers with expansive mountain vistas before descending via trails towards the Dala bridge and finally reaching the river level at Glyki. Often preferred by mountaineering clubs and dedicated nature lovers, this route offers a deeper immersion into the area's wild beauty and rugged landscape.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Mills of Souli River Adventure</strong>
+            <ul className="list-none pl-0">
+              <li><strong>Duration:</strong> 3-4 hours</li>
+              <li><strong>Difficulty:</strong> Moderate to Difficult</li>
+              <li><strong>Season:</strong> Recommended from May to early October only</li>
+              <li>
+                <strong>Description:</strong> Frequently hailed by hiking experts as one of the most beautiful and exhilarating routes in Greece. This immersive trek takes you deep into the heart of the Acheron gorge itself. Be prepared to walk directly in the river for significant portions of the journey, navigating the cool, flowing waters between stunning, sheer cliffs. It’s an intimate encounter with the wild spirit of the Acheron, only feasible from late spring to early autumn when water levels and temperatures are suitable for river trekking.
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          Whichever path you choose, the mythical Acheron River promises a unique and memorable hiking adventure amidst legendary landscapes.
+        </p>
+      </div>
+    );
 
   const detailsContent = (
     <div className="grid md:grid-cols-2 gap-6">

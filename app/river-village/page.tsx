@@ -3,8 +3,6 @@
 import ActivityPageLayout from "@/components/ActivityPageLayout";
 import { useLanguage } from "@/contexts/language-context";
 import Image from "next/image";
-import { Gallery } from "@/components/ui/Gallery";
-import { riverVillageGalleryImages } from "@/lib/gallery-data";
 
 export default function RiverVillagePage() {
   const { t, language } = useLanguage();
@@ -37,15 +35,6 @@ export default function RiverVillagePage() {
     </div>
   );
   
-  // Gallery content
-  const galleryContent = (
-    <Gallery 
-      images={riverVillageGalleryImages} 
-      title={language === "en" ? "River Village Photo Gallery" : "Φωτογραφική Γκαλερί του River Village"} 
-      ariaLabel={language === "en" ? "River Village accommodation and facilities photo gallery" : "Φωτογραφική γκαλερί καταλυμάτων και εγκαταστάσεων του River Village"}
-    />
-  );
-
   return (
     <ActivityPageLayout
       title={t.riverVillage.pageTitle}
@@ -56,8 +45,8 @@ export default function RiverVillagePage() {
       descriptionContent={descriptionContent}
       detailsTitle={t.riverVillage.detailsTitle}
       detailsContent={detailsContent}
-      pricingTitle={language === "en" ? "Accommodation Gallery" : "Γκαλερί Καταλυμάτων"}
-      pricingContent={galleryContent}
+      pricingTitle=""
+      pricingContent={null}
     />
   );
-} 
+}

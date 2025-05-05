@@ -86,13 +86,6 @@ export const en = {
           <li class="font-medium">30 minutes guided riding at the springs – 20 €</li>
         </ul>
         
-        <h3 class="text-xl font-bold text-[#6b8362] mt-6 mb-2">Start from our farm</h3>
-        <ul class="space-y-2 text-gray-700">
-          <li class="font-medium">15 minutes riding at the farm – 10 €</li>
-          <li class="font-medium">30 minutes riding – 20 €</li>
-          <li class="font-medium">1 h – 35 €</li>
-        </ul>
-
         <p class="mt-4 text-gray-600 italic">Want to go more? Send us email!</p>
       </div>
     `,

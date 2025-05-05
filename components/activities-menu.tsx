@@ -15,8 +15,14 @@ export default function ActivitiesMenu() {
   const toggleDropdown = () => setIsOpen(!isOpen)
   const closeDropdown = () => setIsOpen(false)
 
-  const activities = [
-    { id: "kayak-rafting", label: "Kayak & Rafting", href: "/kayak-rafting" },
+  const activities = language === "el" ? [
+    { id: "kayaking", label: "Καγιάκ", href: "/kayaking" },
+    { id: "rafting", label: "Ράφτινγκ", href: "/rafting" },
+    { id: "riding", label: "Ιππασία", href: "/riding" },
+    { id: "trekking", label: "Πεζοπορία", href: "/trekking" },
+  ] : [
+    { id: "kayaking", label: "Kayaking", href: "/kayaking" },
+    { id: "rafting", label: "Rafting", href: "/rafting" },
     { id: "riding", label: "Riding", href: "/riding" },
     { id: "trekking", label: "Trekking", href: "/trekking" },
   ]
@@ -69,4 +75,4 @@ export default function ActivitiesMenu() {
       </div>
     </div>
   )
-} 
+}

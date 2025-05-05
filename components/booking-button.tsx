@@ -1,8 +1,13 @@
 "use client"
 
 import Script from "next/script";
+import { useLanguage } from "@/contexts/language-context";
+import { bokunLangMap } from "@/lib/bokun-lang";
 
 export default function BookingButton() {
+  const { language } = useLanguage();
+  const bokunLang = bokunLangMap[language] || "en";
+
   return (
     <>
       <Script
@@ -13,8 +18,15 @@ export default function BookingButton() {
           // For most cases, the <portal-button> custom element will be available after script load
         }}
       />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <portal-button organisation="pjpem0f0" color="hsl(var(--river-accent))"></portal-button>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          is="portal-button"
+          {...{
+            organisation: "pjpem0f0",
+            color: "hsl(var(--river-accent))",
+            lang: bokunLang,
+          }}
+        ></div>
       </div>
     </>
   );

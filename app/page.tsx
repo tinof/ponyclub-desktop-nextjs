@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Roboto_Slab } from "next/font/google"
 import BookingButton from "@/components/booking-button"
+import Script from "next/script"
 import ContactDetailsEnhanced from "@/components/contact-details-enhanced"
 import ResponsiveNavigation from "@/components/responsive-navigation"
 import { useLanguage } from "@/contexts/language-context"
@@ -61,12 +62,12 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
         </div>
-        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
-          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative bg-amber-800/40 px-6 sm:px-8 py-5 sm:py-6 rounded-2xl max-w-[90%] sm:max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
             <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
+              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold`}
             >
-              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.title}</span>
+              <span className="block mb-1 sm:mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.title}</span>
               <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.subtitle}</span>
             </h1>
             <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
@@ -75,31 +76,31 @@ export default function Home() {
       </div>
 
       {/* Circular Images Section - positioned to overlap with hero */}
-      <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4 -mt-16 md:-mt-24 lg:-mt-32 relative z-10 mx-auto max-w-6xl">
+      <div className="flex flex-row justify-center items-center gap-2 xs:gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4 -mt-12 sm:-mt-16 md:-mt-24 lg:-mt-32 relative z-10 mx-auto max-w-6xl">
         {/* Swimming */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-2">
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round1.jpg" alt="Swimming in Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
+          <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
+            <Image src="/images/round1.jpg" alt="Swimming in Acheron River" fill sizes="(max-width: 480px) 80px, (max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
           </div>
         </div>
 
         {/* Horse Riding */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform -rotate-2">
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round2.jpg" alt="Horse riding near Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover object-[center_20%]" />
+          <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
+            <Image src="/images/round2.jpg" alt="Horse riding near Acheron River" fill sizes="(max-width: 480px) 80px, (max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover object-[center_20%]" />
           </div>
         </div>
 
         {/* Kayaking */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-3">
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <Image src="/images/round3.jpg" alt="Kayaking in Acheron River" fill sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
+          <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
+            <Image src="/images/round3.jpg" alt="Kayaking in Acheron River" fill sizes="(max-width: 480px) 80px, (max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px" className="object-cover" />
           </div>
         </div>
       </div>
 
       {/* Introduction Text Section - adjusted margin top */}
-      <div className="relative px-4 md:px-8 py-6 md:py-8 bg-white/80 backdrop-blur-sm rounded-lg max-w-4xl mx-auto text-center mt-32 md:mt-24 shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+      <div className="relative px-4 md:px-8 py-6 md:py-8 bg-white/80 backdrop-blur-sm rounded-lg max-w-4xl mx-auto text-center mt-20 sm:mt-24 md:mt-20 shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
         <h2 className={`${robotoSlab.variable} font-roboto-slab text-2xl md:text-3xl text-amber-800 mb-4 relative inline-block`}>
           {t.introduction.mainTitle}
           <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
@@ -118,6 +119,7 @@ export default function Home() {
       </div>
 
       {/* Program Cards */}
+      <Script src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a" strategy="afterInteractive" />
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 px-4 md:px-8 mt-12 md:mt-16">
         <div className="md:w-1/2">
           <div className="program-card frosted-card bg-[#c27a5f] relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300">
@@ -130,9 +132,39 @@ export default function Home() {
               <p className="mb-4 drop-shadow-sm">{t.programs.program1.hiking}</p>
               <div className="font-bold text-xl mb-1 text-shadow-sm">{t.programs.program1.priceAdults}</div>
               <div className="font-medium mb-4">{t.programs.program1.priceChildren}</div>
-              <div className="mt-auto">
-                <BookingButton />
-              </div>
+              {/* Bokun Button for Package 1 */}
+              <button
+                className="bokunButton"
+                disabled
+                id="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
+                data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
+                data-testid="widget-book-button"
+              >
+                Book now
+              </button>
+              <style jsx global>{`
+                #bokun_5b20d531_ca57_4550_94c0_0511c35077a0 { 
+                  display: inline-block; 
+                  padding: 10px 20px; 
+                  background: #408C3D; 
+                  border-radius: 5px; 
+                  box-shadow: none; 
+                  font-weight: 600; 
+                  font-size: 16px; 
+                  text-decoration: none; 
+                  text-align: center; 
+                  color: #FFFFFF; 
+                  border:none; 
+                  cursor: pointer; 
+                  transition: background .2s ease; 
+                }
+                #bokun_5b20d531_ca57_4550_94c0_0511c35077a0:hover{ 
+                  background: #285726; 
+                } 
+                #bokun_5b20d531_ca57_4550_94c0_0511c35077a0:active{ 
+                  background: #30682e; 
+                }
+              `}</style>
             </div>
           </div>
         </div>
@@ -147,9 +179,39 @@ export default function Home() {
               <p className="mb-4 drop-shadow-sm">{t.programs.program2.hiking}</p>
               <div className="font-bold text-xl mb-1 text-shadow-sm">{t.programs.program2.price}</div>
               <div className="font-medium mb-4">{t.programs.program2.separator}</div>
-              <div className="mt-auto">
-                <BookingButton />
-              </div>
+              {/* Bokun Button for Package 2 */}
+              <button
+                className="bokunButton"
+                disabled
+                id="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
+                data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
+                data-testid="widget-book-button"
+              >
+                 Book now
+              </button>
+              <style jsx global>{`
+                #bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53 { 
+                  display: inline-block; 
+                  padding: 10px 20px; 
+                  background: #408C3D; 
+                  border-radius: 5px; 
+                  box-shadow: 0 8px 12px rgba(0,0,0,0.19); 
+                  font-weight: 600; 
+                  font-size: 16px; 
+                  text-decoration: none; 
+                  text-align: center; 
+                  color: #FFFFFF; 
+                  border:none; 
+                  cursor: pointer; 
+                  transition: background .2s ease; 
+                } 
+                #bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53:hover{ 
+                  background: #285726; 
+                } 
+                #bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53:active{ 
+                  background: #30682e; 
+                }
+              `}</style>
             </div>
           </div>
         </div>
@@ -164,10 +226,8 @@ export default function Home() {
       </div>
 
       {/* Customer Reviews Section */}
+      <Script src="https://static.elfsight.com/platform/platform.js" async strategy="afterInteractive" />
       <div className="px-4 md:px-8 my-20">
-        <h2 className={`${robotoSlab.variable} font-roboto-slab text-center text-3xl md:text-4xl mb-10 text-[#6b8362]`}>
-          {t.reviews?.title || "What Our Customers Say"}
-        </h2>
         <div className="max-w-6xl mx-auto">
           <div className="elfsight-app-5d3672ca-b26e-43cf-b887-e87f811a1622" data-elfsight-app-lazy></div>
         </div>

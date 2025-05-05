@@ -4,7 +4,8 @@
 
 export default function GoogleMap() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const coordinates = "39.32581744774602,20.606971798121965";
+  // Use your business name and location so Google shows the place info card
+  const placeQuery = "Pony Club Ecotourism, Glyki, Greece";
 
   // Handle case where API key might not be set
   if (!apiKey) {
@@ -17,7 +18,7 @@ export default function GoogleMap() {
     );
   }
 
-  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&center=${coordinates}&q=${coordinates}&zoom=14&maptype=roadmap`;
+  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(placeQuery)}&zoom=14&maptype=roadmap`;
 
   return (
     <div className="relative h-[400px] w-full rounded-lg shadow-xl overflow-hidden border border-amber-100/70 hover:shadow-2xl transition-shadow duration-300">

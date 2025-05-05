@@ -10,9 +10,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="relative mt-12 py-8 px-4 bg-[#f5f0e8] border-t-2 border-amber-200">
+      <footer className="relative mt-24 pb-12 bg-[#f5f0e8]">
++        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-300/60 to-transparent"></div>
       <div className="container mx-auto max-w-5xl">
-        <div className="relative bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-amber-100/70 hover:shadow-2xl transition-shadow duration-300">
+          <div className="relative mx-4 md:mx-auto max-w-5xl -mt-8 bg-white/85 backdrop-blur-md border border-amber-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
           <h2 className="text-center text-3xl mb-6 font-bold text-[#6b8362] relative inline-block w-full">
             {t.footer.contactUs}
             <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
@@ -76,10 +77,10 @@ export default function Footer() {
           <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
         </div>
         
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-8 text-center text-xs text-[#6b8362]/80 tracking-wide">
           <p>{t.footer.copyright.replace("{year}", currentYear.toString())}</p>
         </div>
       </div>
     </footer>
   );
-} 
+}

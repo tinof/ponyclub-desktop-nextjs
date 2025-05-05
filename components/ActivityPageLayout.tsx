@@ -25,6 +25,7 @@ interface ActivityPageLayoutProps {
   pricingContent: React.ReactNode;
   showBookingButton?: boolean; // Optional prop to show/hide booking button
   useSingleColumn?: boolean; // Optional prop to use single column layout
+  fullWidthContent?: boolean; // Optional prop for full width content area
 }
 
 export default function ActivityPageLayout({
@@ -39,14 +40,25 @@ export default function ActivityPageLayout({
   pricingTitle,
   pricingContent,
   showBookingButton = true, // Default to true for backward compatibility
-  useSingleColumn = false // Default to false for backward compatibility
+  useSingleColumn = false, // Default to false for backward compatibility
+  fullWidthContent = false // Default to false
 }: ActivityPageLayoutProps) {
   // Removed useLanguage hook call
 
-  // Determine container width based on layout preference
-  const containerClasses = useSingleColumn 
-    ? "container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl flex flex-col gap-8" 
-    : "container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl flex flex-col gap-8";
+  // Determine container classes based on layout preference
+  let containerClasses = "py-12 flex flex-col gap-8"; // Base classes for vertical padding and flex layout
+  if (fullWidthContent) {
+    // For full width, remove horizontal padding, centering, and max-width
+    containerClasses += " w-full"; 
+  } else {
+    // Apply standard container styles (padding, centering, max-width)
+    containerClasses += " container mx-auto px-4 sm:px-6 lg:px-8";
+    if (useSingleColumn) {
+      containerClasses += " max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl";
+    } else {
+      containerClasses += " max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl";
+    }
+  }
 
   return (
     <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
@@ -108,17 +120,25 @@ export default function ActivityPageLayout({
         </div>
       </div>
 
-      {/* Content Section - With enhanced styling */}
+      {/* Content Section - Now always uses the calculated containerClasses */}
       <div className={containerClasses}>
-        {/* Description Section */}
-        <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
-          <div className="prose max-w-none text-gray-700">
-            {descriptionContent}
-          </div>
-          <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
-        </div>
-        
-        {/* Details Section */}
+        {/* Description Section - Conditionally render wrapper */}
+        {fullWidthContent ? (
+          // Render content directly for full width (no extra wrapper/prose)
+          descriptionContent
+        ) : (
+          // Render with default styling wrapper if not full width
+          descriptionContent && (
+            <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+              <div className="prose max-w-none text-gray-700">
+                {descriptionContent}
+              </div>
+              <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
+            </div>
+          )
+        )}
+
+        {/* Details Section - Always inside container */}
         {detailsTitle && detailsContent && (
           <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
             <h2 className={`${robotoSlab.variable} font-roboto-slab text-2xl font-bold text-amber-800 mb-4 relative inline-block`}>

@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Map of routes to their last modified Unix timestamps
   const routeData = [
     { route: '', fileMtime: 1745668341 }, // /
-    { route: '/kayak-rafting', fileMtime: 1745665794 },
     { route: '/kayaking', fileMtime: 1745659457 },
     { route: '/rafting', fileMtime: 1745659457 },
     { route: '/riding', fileMtime: 1745665844 },

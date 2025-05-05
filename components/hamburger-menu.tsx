@@ -84,6 +84,21 @@ export default function HamburgerMenu() {
               </Link>
             )}
             
+            {/* For Schools (Για τα σχολεία) - Greek only */}
+            {language === "el" && (
+              <Link
+                href="/for-schools"
+                className={`block px-4 py-2.5 text-sm rounded-md ${
+                  pathname === "/for-schools" 
+                    ? "bg-[#6b8362]/10 text-[#6b8362] font-semibold" 
+                    : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"
+                } transition-colors`}
+                onClick={closeMenu}
+              >
+                Για τα σχολεία
+              </Link>
+            )}
+            
             {/* Activities section - already grouped correctly */}
             <div className="mt-1 pt-1 border-t border-amber-100/50">
               <div className="px-4 py-1.5 text-xs font-semibold text-[#6b8362]/70 uppercase tracking-wider">

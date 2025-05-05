@@ -3,6 +3,8 @@
 import type React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 import { type Language, translations, type TranslationKeys } from "@/lib/translations"
+import { bokunLangMap } from "@/lib/bokun-lang"
+import { useBokunLanguage } from "@/lib/use-bokun-language"
 
 type LanguageContextType = {
   language: Language
@@ -47,6 +49,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Get translations for current language
   const t = translations[language]
+
+  // Hook to update Bokun widgets language on change
+  useBokunLanguage(bokunLangMap[language])
 
   // Only render children when mounted to avoid hydration issues
   if (!mounted) {
