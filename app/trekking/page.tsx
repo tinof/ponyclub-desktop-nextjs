@@ -2,10 +2,10 @@
 
 import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the layout
 import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
-import Image from "next/image"; // Import Image component
 import { useState } from "react"; // Import useState for modal state
-import { Gallery } from "@/components/ui/Gallery"; // Import Gallery component
 import { trekkingGalleryImages } from "@/lib/gallery-data"; // Import trekking gallery images
+import DynamicGallery from "@/components/DynamicGallery";
+import { OptimizedImage } from "@/components/ui/OptimizedImage"; // Import OptimizedImage
 
 export default function TrekkingPage() {
   const { t, language } = useLanguage(); // Get translations object and current language
@@ -122,7 +122,7 @@ export default function TrekkingPage() {
               <li><strong>Difficulty:</strong> Moderate to Difficult</li>
               <li><strong>Season:</strong> Recommended from May to early October only</li>
               <li>
-                <strong>Description:</strong> Frequently hailed by hiking experts as one of the most beautiful and exhilarating routes in Greece. This immersive trek takes you deep into the heart of the Acheron gorge itself. Be prepared to walk directly in the river for significant portions of the journey, navigating the cool, flowing waters between stunning, sheer cliffs. It’s an intimate encounter with the wild spirit of the Acheron, only feasible from late spring to early autumn when water levels and temperatures are suitable for river trekking.
+                <strong>Description:</strong> Frequently hailed by hiking experts as one of the most beautiful and exhilarating routes in Greece. This immersive trek takes you deep into the heart of the Acheron gorge itself. Be prepared to walk directly in the river for significant portions of the journey, navigating the cool, flowing waters between stunning, sheer cliffs. It's an intimate encounter with the wild spirit of the Acheron, only feasible from late spring to early autumn when water levels and temperatures are suitable for river trekking.
               </li>
             </ul>
           </li>
@@ -172,11 +172,12 @@ export default function TrekkingPage() {
           className="relative w-full h-[400px] cursor-pointer rounded-xl overflow-hidden shadow-xl border border-amber-100/70 hover:shadow-2xl transition-all duration-300"
           onClick={() => setIsModalOpen(true)}
         >
-          <Image 
+          <OptimizedImage 
             src="/images/ponyClub_map.jpg" 
             alt="Trekking Routes Map" 
             fill 
             className="object-contain"
+            // Consider adding sizes if appropriate, though object-contain with fill might be fine
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
         </div>
@@ -184,7 +185,7 @@ export default function TrekkingPage() {
       </div>
       
       {/* Trekking Gallery */}
-      <Gallery 
+      <DynamicGallery 
         images={trekkingGalleryImages} 
         title="Trekking Photo Gallery" 
         ariaLabel="Trekking and hiking photo gallery - Acheron River canyon" 
@@ -197,12 +198,12 @@ export default function TrekkingPage() {
           onClick={() => setIsModalOpen(false)}
         >
           <div className="relative w-full max-w-7xl h-[90vh] rounded-xl overflow-hidden shadow-2xl">
-            <Image 
+            <OptimizedImage 
               src="/images/ponyClub_map.jpg" 
               alt="Trekking Routes Map" 
               fill 
               className="object-contain"
-              priority
+              priority // Keep priority for LCP candidate in modal
             />
             <button 
               className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 text-black shadow-lg border border-white/30 hover:bg-white transition-colors"

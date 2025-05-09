@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
+import { OptimizedImage } from '@/components/ui/OptimizedImage' // Import OptimizedImage
 import ResponsiveNavigation from '@/components/responsive-navigation'
 import { Roboto_Slab } from 'next/font/google'
 
@@ -18,37 +18,43 @@ export const metadata: Metadata = {
 
 export default function ForSchoolsPage() {
   return (
-    <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
-      {/* Logo - Fixed Position with responsive size */}
-      <div className="absolute top-4 left-4 z-50">
-        <Link href="/" className="flex items-center">
-          <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-md border border-amber-100 hover:bg-white transition-colors">
-            <Image
-              src="/images/ponyclub_logo.png"
-              alt="Pony Club Logo"
-              fill
-              sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
-              className="object-contain p-1"
-            />
-            <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/20 via-[#6b8362]/30 to-transparent blur-sm"></div>
-          </div>
-        </Link>
-      </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#FAF7F2] border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <div> {/* Removed absolute positioning and elaborate styling from this div */}
+          <Link href="/" className="flex items-center">
+            <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16"> {/* Simplified styling */}
+              <OptimizedImage
+                src="/images/ponyclub_logo.png"
+                alt="Pony Club Logo"
+                fill
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-contain p-1"
+                imageType="logo"
+              />
+              {/* Removed decorative inset div */}
+            </div>
+          </Link>
+        </div>
 
-      {/* Responsive Navigation */}
-      <div className="absolute top-4 right-4 z-50">
-        <ResponsiveNavigation />
-      </div>
+        {/* Responsive Navigation */}
+        <div> {/* Removed absolute positioning from this div */}
+          <ResponsiveNavigation />
+        </div>
+      </header>
 
-      {/* Hero Section */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
+      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden pt-20"> {/* Added pt-20 for fixed header */}
+        {/* Hero Section */}
+        {/* mt-16 was removed from here as main now has pt-20 */}
+        <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]">
         <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
-          <Image 
+          <OptimizedImage 
             src="/images/Campus_Kids_New_Jersey_Archery_03.JPG" 
             alt="Παιδιά σε σχολική εκδρομή" 
             fill 
             className="object-cover object-[center_20%]"
             priority
+            imageType="hero"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
         </div>
@@ -128,8 +134,8 @@ export default function ForSchoolsPage() {
               
               <div className="mt-12">
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg border border-amber-100/50">
-                  <Image 
-src="/images/children_rafting_activity_bright_outdoors.jpg"
+                  <OptimizedImage 
+                    src="/images/children_rafting_activity_bright_outdoors.jpg"
                     alt="Σχολική εκδρομή στον Αχέροντα" 
                     fill 
                     className="object-cover hover:scale-105 transition-transform duration-500"
@@ -140,7 +146,7 @@ src="/images/children_rafting_activity_bright_outdoors.jpg"
             
             <div>
               <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg border border-amber-100/50 mb-10">
-                <Image 
+                <OptimizedImage 
                   src="/images/Rafting_Group_YellowHelmets_OutdoorRiver.jpg" 
                   alt="Παιδιά σε δραστηριότητες" 
                   fill 
@@ -201,7 +207,7 @@ src="/images/children_rafting_activity_bright_outdoors.jpg"
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg border border-amber-100/50 hover:shadow-xl transition-all duration-300">
-              <Image 
+              <OptimizedImage 
                 src="/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg" 
                 alt="Παιδιά σε δραστηριότητες ράφτινγκ" 
                 fill 
@@ -210,7 +216,7 @@ src="/images/children_rafting_activity_bright_outdoors.jpg"
             </div>
             
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg border border-amber-100/50 hover:shadow-xl transition-all duration-300">
-              <Image 
+              <OptimizedImage 
                 src="/images/ChildrenRafting_GreenOutdoor_Adventurous_RiverScene.jpg" 
                 alt="Παιδιά σε περιπέτεια ράφτινγκ" 
                 fill 
@@ -219,7 +225,7 @@ src="/images/children_rafting_activity_bright_outdoors.jpg"
             </div>
             
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg border border-amber-100/50 hover:shadow-xl transition-all duration-300">
-              <Image 
+              <OptimizedImage 
                 src="/images/Hiking_Group_Green_Nature_Stream.jpg" 
                 alt="Ομάδα σε πεζοπορία στη φύση" 
                 fill 
@@ -251,5 +257,6 @@ src="/images/children_rafting_activity_bright_outdoors.jpg"
         </div>
       </div>
     </main>
+    </>
   )
 }

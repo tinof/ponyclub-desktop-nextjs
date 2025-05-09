@@ -1,12 +1,20 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import HamburgerMenu from "./hamburger-menu"
-import DesktopMenu from "./desktop-menu"
+import dynamic from "next/dynamic"
+
+// Dynamically import menu components
+const HamburgerMenu = dynamic(() => import("./hamburger-menu"), { ssr: false })
+const DesktopMenu = dynamic(() => import("./desktop-menu"), { ssr: false })
 
 export default function ResponsiveNavigation() {
-  // Initialize with desktop to avoid hydration mismatch (server renders with desktop)
-  const [isMobile, setIsMobile] = useState(false)
+  // Initialize with a value that matches server render, then update on client
+  // Setting initial to false (desktop) is fine if server always renders desktop first.
+  // Or, consider initializing to null/undefined and showing a loader/placeholder
+  // to avoid rendering anything until client-side check is done,
+  // but this might cause layout shift or flicker.
+  // Current approach of useState(false) and then client-side update is common.
+  const [isMobile, setIsMobile] = useState(false) // Default to desktop for SSR consistency
   
   // Track window size and update viewport state
   useEffect(() => {
@@ -34,4 +42,4 @@ export default function ResponsiveNavigation() {
       )}
     </>
   )
-} 
+}

@@ -2,6 +2,8 @@
 
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
+// Import the specialized AvatarImage variant from OptimizedImage.tsx
+import { AvatarImage as OptimizedAvatarImageVariant } from "./OptimizedImage"; 
 
 import { cn } from "@/lib/utils"
 
@@ -20,17 +22,24 @@ const Avatar = React.forwardRef<
 ))
 Avatar.displayName = AvatarPrimitive.Root.displayName
 
-const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
-    ref={ref}
+// Redefine AvatarImage as a simple functional component using the OptimizedAvatarImageVariant
+// This removes ref forwarding capability from this specific AvatarImage component.
+// Props are derived from OptimizedAvatarImageVariant's expected props.
+// OptimizedAvatarImageVariant expects Omit<OptimizedImageProps, 'imageType'>
+// OptimizedImageProps is Omit<ImageProps, 'src' | 'alt'> & { src: string; alt: string; ... }
+// So, props will be Omit<ImageProps, 'src' | 'alt' | 'imageType'> & { src: string; alt: string; ... other OptimizedImageProps without imageType }
+// For simplicity, let's use ComponentPropsWithoutRef from the imported variant.
+type AvatarImageProps = React.ComponentPropsWithoutRef<typeof OptimizedAvatarImageVariant> & {
+  className?: string;
+};
+
+const AvatarImage = ({ className, ...props }: AvatarImageProps) => (
+  <OptimizedAvatarImageVariant
     className={cn("aspect-square h-full w-full", className)}
-    {...props}
+    {...props} // Spread remaining props, src and alt must be provided by the user
   />
-))
-AvatarImage.displayName = AvatarPrimitive.Image.displayName
+);
+AvatarImage.displayName = AvatarPrimitive.Image.displayName; // Or a new name like "PonyClubOptimizedAvatarImage"
 
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,

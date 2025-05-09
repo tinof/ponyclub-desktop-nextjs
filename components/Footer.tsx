@@ -10,49 +10,46 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-      <footer className="relative mt-24 pb-12 bg-[#f5f0e8]">
-+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-300/60 to-transparent"></div>
-      <div className="container mx-auto max-w-5xl">
-          <div className="relative mx-4 md:mx-auto max-w-5xl -mt-8 bg-white/85 backdrop-blur-md border border-amber-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
-          <h2 className="text-center text-3xl mb-6 font-bold text-[#6b8362] relative inline-block w-full">
+      <footer className="relative bg-[#f5f0e8] border-t border-gray-200"> {/* Removed mt-16 pt-12 pb-12 to eliminate spacing */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12"> {/* Added padding to the container instead */}
+          <h2 className="text-center text-3xl mb-8 font-bold text-[#3E5A35]">
             {t.footer.contactUs}
-            <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 mt-1 text-[#c27a5f]" />
+                <MapPin className="h-5 w-5 mt-1 text-[#3E5A35]" />
                 <div>
-                  <p className="font-medium">{t.footer.address.line1}</p>
-                  <p>{t.footer.address.line2}</p>
-                  <p>{t.footer.address.line3}</p>
+                  <p className="font-semibold text-gray-800">{t.footer.address.line1}</p>
+                  <p className="text-gray-700">{t.footer.address.line2}</p>
+                  <p className="text-gray-700">{t.footer.address.line3}</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-3">
-                <Phone className="h-5 w-5 mt-1 text-[#c27a5f]" />
+                <Phone className="h-5 w-5 mt-1 text-[#3E5A35]" />
                 <div>
-                  <p>{t.footer.phone}</p>
-                  <p className="text-sm mt-1">{t.footer.phoneLang}</p>
+                  <p className="text-gray-700">{t.footer.phone}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.footer.phoneLang}</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-3">
-                <Mail className="h-5 w-5 mt-1 text-[#c27a5f]" />
+                <Mail className="h-5 w-5 mt-1 text-[#3E5A35]" />
                 <div>
-                  <p>{t.footer.email}</p>
-                  <p className="text-sm mt-1 text-gray-600">{t.footer.emailNote}</p>
+                  <p className="text-gray-700">{t.footer.email}</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.footer.emailNote}</p>
                 </div>
               </div>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div className="flex items-start gap-3">
-                <Clock className="h-5 w-5 mt-1 text-[#c27a5f]" />
+                <Clock className="h-5 w-5 mt-1 text-[#3E5A35]" />
                 <div>
-                  <p className="font-medium">{t.footer.openHours.title}</p>
-                  <p>{t.footer.openHours.schedule}</p>
+                  <p className="font-semibold text-gray-800">{t.footer.openHours.title}</p>
+                  <p className="text-gray-700">{t.footer.openHours.schedule}</p>
                   <p className="text-sm text-gray-600">{t.footer.openHours.season}</p>
                 </div>
               </div>
@@ -62,22 +59,16 @@ export default function Footer() {
                   href={mapsUrl}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium transition-all bg-[#6b8362] rounded-md hover:bg-[#5a7053] group"
+                  className="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-[#3E5A35] rounded-lg hover:bg-[#2d422a] transition-colors gap-2"
                 >
-                  <span className="w-full h-full bg-gradient-to-br from-[#6b8362] via-[#7b9372] to-[#6b8362] absolute"></span>
-                  <span className="relative flex items-center gap-2 text-white group-hover:scale-105 transition-transform duration-300">
-                    <MapPin className="h-5 w-5" />
-                    <span>Find Us / {t.footer.findUs}</span>
-                  </span>
+                  <MapPin className="h-5 w-5" />
+                  <span>Find Us / {t.footer.findUs}</span>
                 </a>
               </div>
             </div>
           </div>
-          
-          <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
-        </div>
         
-        <div className="mt-8 text-center text-xs text-[#6b8362]/80 tracking-wide">
+        <div className="mt-12 text-center text-xs text-gray-500 tracking-wide">
           <p>{t.footer.copyright.replace("{year}", currentYear.toString())}</p>
         </div>
       </div>

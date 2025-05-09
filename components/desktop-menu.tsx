@@ -43,46 +43,46 @@ export default function DesktopMenu() {
   }, [])
 
   return (
-    <nav className="flex items-center gap-3">
+    <nav className="flex items-center gap-4"> {/* Increased gap */}
       {/* Home link */}
       <Link
         href="/"
-        className={`relative px-5 py-3 rounded-full ${
+        className={`px-3 py-2 transition-all text-base border-b-2 ${ /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
           pathname === "/" 
-            ? "bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30" 
-            : "bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50"
-        } border shadow-md hover:shadow-lg transition-all text-base`}
+            ? "text-[#3E5A35] font-semibold border-[#3E5A35]" /* Darker green active text, active border */
+            : "text-gray-700 hover:text-gray-900 font-medium border-transparent" /* Standard text, hover, transparent border */
+        }`}
       >
         Home
-        <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+        {/* Removed inset div */}
       </Link>
       
       {/* Activities dropdown */}
       <div className="relative" ref={activitiesMenuRef}>
         <button
           onClick={() => setActivitiesMenuOpen(!activitiesMenuOpen)}
-          className={`relative flex items-center gap-1 px-5 py-3 rounded-full ${
-            activities.some(activity => pathname === activity.href)
-              ? "bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30" 
-              : "bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50"
-          } border shadow-md hover:shadow-lg transition-all text-base`}
+          className={`flex items-center gap-1 px-3 py-2 transition-all text-base border-b-2 ${ /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+            activities.some(activity => pathname === activity.href) || activitiesMenuOpen
+              ? "text-[#3E5A35] font-semibold border-[#3E5A35]" /* Darker green active text, active border */
+              : "text-gray-700 hover:text-gray-900 font-medium border-transparent" /* Standard text, hover, transparent border */
+          }`}
         >
           {language === "el" ? "Δραστηριότητες" : "Activities"}
           <ChevronDown className="w-5 h-5 ml-1" />
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          {/* Removed inset div */}
         </button>
         
         {activitiesMenuOpen && (
-          <div className="absolute left-0 mt-2 w-52 rounded-lg shadow-xl bg-white/95 backdrop-blur-sm ring-1 ring-amber-100 z-50 border border-amber-100/50 overflow-hidden">
+          <div className="absolute left-0 mt-2 w-52 rounded-lg shadow-xl bg-white z-50 border border-gray-200 overflow-hidden"> {/* Cleaner dropdown style */}
             <div className="py-1">
               {activities.map((activity) => (
                 <Link
                   key={activity.id}
                   href={activity.href}
-                  className={`block w-full text-left px-4 py-3 text-base ${
+                  className={`block w-full text-left px-4 py-2 text-base ${ /* Adjusted padding */
                     pathname === activity.href 
-                      ? "bg-[#6b8362]/10 text-[#6b8362] font-semibold" 
-                      : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"
+                      ? "text-[#3E5A35] font-semibold" /* Active item: darker green text, no bg */
+                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900" /* Standard item: hover bg and text */
                   }`}
                 >
                   {activity.label}
@@ -97,14 +97,14 @@ export default function DesktopMenu() {
       {language === "en" && (
         <Link
           href="/river-village"
-          className={`relative px-5 py-3 rounded-full ${
+          className={`px-3 py-2 transition-all text-base border-b-2 ${ /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
             pathname === "/river-village" 
-              ? "bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30" 
-              : "bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50"
-          } border shadow-md hover:shadow-lg transition-all text-base`}
+              ? "text-[#3E5A35] font-semibold border-[#3E5A35]" /* Darker green active text, active border */
+              : "text-gray-700 hover:text-gray-900 font-medium border-transparent" /* Standard text, hover, transparent border */
+          }`}
         >
           River & Village
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          {/* Removed inset div */}
         </Link>
       )}
       
@@ -112,14 +112,14 @@ export default function DesktopMenu() {
       {language === "el" && (
         <Link
           href="/for-schools"
-          className={`relative px-5 py-3 rounded-full ${
+          className={`px-3 py-2 transition-all text-base border-b-2 ${ /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
             pathname === "/for-schools" 
-              ? "bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30" 
-              : "bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50"
-          } border shadow-md hover:shadow-lg transition-all text-base`}
+              ? "text-[#3E5A35] font-semibold border-[#3E5A35]" /* Darker green active text, active border */
+              : "text-gray-700 hover:text-gray-900 font-medium border-transparent" /* Standard text, hover, transparent border */
+          }`}
         >
           Για τα σχολεία
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          {/* Removed inset div */}
         </Link>
       )}
       
@@ -127,22 +127,26 @@ export default function DesktopMenu() {
       <div className="relative ml-2" ref={languageMenuRef}>
         <button
           onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-          className="relative flex items-center gap-1 px-4 py-3 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg text-base"
+          className={`flex items-center gap-1 px-3 py-2 transition-all text-base border-b-2 ${ /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+            languageMenuOpen 
+              ? "text-[#3E5A35] font-semibold border-[#3E5A35]" /* Darker green active text, active border */
+              : "text-gray-700 hover:text-gray-900 font-medium border-transparent" /* Standard text, hover, transparent border */
+          }`}
         >
           <Globe className="w-5 h-5" />
           <span>{language === "en" ? "EN" : "EL"}</span>
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          {/* Removed inset div */}
         </button>
         
         {languageMenuOpen && (
-          <div className="absolute right-0 mt-2 w-32 rounded-lg shadow-xl bg-white/95 backdrop-blur-sm ring-1 ring-amber-100 z-50 border border-amber-100/50 overflow-hidden">
+          <div className="absolute right-0 mt-2 w-32 rounded-lg shadow-xl bg-white z-50 border border-gray-200 overflow-hidden"> {/* Cleaner dropdown style */}
             <div className="py-1">
               <button
                 onClick={() => {
                   setLanguage("en")
                   setLanguageMenuOpen(false)
                 }}
-                className={`block w-full text-left px-4 py-3 text-base ${language === "en" ? "bg-[#6b8362]/10 text-[#6b8362] font-semibold" : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"}`}
+                className={`block w-full text-left px-4 py-2 text-base ${language === "en" ? "text-[#3E5A35] font-semibold" : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"}`} /* Adjusted padding, active/hover style */
               >
                 English
               </button>
@@ -151,7 +155,7 @@ export default function DesktopMenu() {
                   setLanguage("el")
                   setLanguageMenuOpen(false)
                 }}
-                className={`block w-full text-left px-4 py-3 text-base ${language === "el" ? "bg-[#6b8362]/10 text-[#6b8362] font-semibold" : "text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362]"}`}
+                className={`block w-full text-left px-4 py-2 text-base ${language === "el" ? "text-[#3E5A35] font-semibold" : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"}`} /* Adjusted padding, active/hover style */
               >
                 Ελληνικά
               </button>

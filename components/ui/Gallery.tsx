@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Dialog, DialogContent } from './dialog';
+import { GalleryImage, OptimizedImage } from './OptimizedImage';
 
 interface GalleryProps {
   images: {
@@ -36,13 +36,12 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
             className="relative h-64 cursor-pointer rounded-xl overflow-hidden shadow-md border border-amber-100/70 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
             onClick={() => setSelectedImage(index)}
           >
-            <Image 
-              src={image.src} 
-              alt={image.alt} 
-              fill 
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            <GalleryImage
+              src={image.src}
+              alt={image.alt}
+              fill
+              index={index}
               className="object-cover"
-              loading={index < 6 ? "eager" : "lazy"}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
           </div>
@@ -55,13 +54,14 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
         <DialogContent className="max-w-5xl bg-white/90 backdrop-blur-md p-0 rounded-xl overflow-hidden">
           {selectedImage !== null && (
             <div className="relative h-[80vh]">
-              <Image
+              <OptimizedImage // Use OptimizedImage here
                 src={images[selectedImage].src}
                 alt={images[selectedImage].alt}
                 fill
-                sizes="100vw"
+                sizes="100vw" // Keep sizes for fill images
                 className="object-contain"
-                priority
+                priority // Keep priority for LCP candidate
+                // imageType="default" // Or let OptimizedImage decide based on props
               />
               <button
                 onClick={() => setSelectedImage(null)}
@@ -79,4 +79,4 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
       </Dialog>
     </div>
   );
-} 
+}

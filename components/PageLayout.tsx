@@ -20,13 +20,14 @@ export default function PageLayout({ children }: PageLayoutProps) {
     }
   }, [pathname]);
   
-  // Debug message in JSX
   return (
-    <>
-      {children}
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
+        {children}
+      </div>
       {/* Hidden debug message */}
       <div className="hidden">Current path: {pathname || 'undefined'}, Is homepage: {isHomePage ? 'yes' : 'no'}</div>
       {!isHomePage && <Footer />}
-    </>
+    </div>
   );
 } 

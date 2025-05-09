@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react";
+import Script from "next/script"; // Import next/script
 import { useLanguage } from "@/contexts/language-context";
 import { bokunLangMap } from "@/lib/bokun-lang";
 
@@ -18,11 +19,14 @@ export default function BokunWidget({ experienceId, partialView = 1 }: BokunWidg
 
   return (
     <>
-      <script
-        type="text/javascript"
+      <Script
+        id="bokun-widget-loader"
         src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        async
-      ></script>
+        strategy="lazyOnload"
+        // Explicitly set type="module"
+        // Cast to `any` to bypass TypeScript error if `type` is not in `next/script`'s props
+        {...{ type: "module" } as any} 
+      />
       <div className="bokunWidget" data-src={url} data-lang={bokunLang}></div>
       <noscript>Please enable javascript in your browser to book</noscript>
     </>

@@ -1,31 +1,30 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Roboto_Slab } from 'next/font/google'; // Assuming font is defined similarly to layout
+import { Roboto_Slab } from 'next/font/google';
 import BookingButton from "./booking-button";
 import ResponsiveNavigation from "./responsive-navigation";
-// Remove imports for the components we no longer use
+import { HeroImage, OptimizedImage } from "./ui/OptimizedImage";
 
-// Define Roboto Slab font instance (adjust weights/subsets as needed, mirroring layout.tsx)
+// Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
   subsets: ['latin', 'greek'],
   variable: '--font-roboto-slab',
-  weight: ['400', '700', '900'], // Match weights used in the project
+  weight: ['400', '700', '900'],
 });
 
 interface ActivityPageLayoutProps {
-  title: string; // Now expects the translated string
-  subtitle: string; // Now expects the translated string
+  title: string;
+  subtitle: string;
   heroImageSrc: string;
   heroImageAlt: string;
-  descriptionTitle: string; // Title for the description section
+  descriptionTitle: string;
   descriptionContent: React.ReactNode;
-  detailsTitle: string; // Title for the details section
+  detailsTitle: string;
   detailsContent: React.ReactNode;
-  pricingTitle: string; // Title for the pricing section
+  pricingTitle: string;
   pricingContent: React.ReactNode;
-  showBookingButton?: boolean; // Optional prop to show/hide booking button
-  useSingleColumn?: boolean; // Optional prop to use single column layout
-  fullWidthContent?: boolean; // Optional prop for full width content area
+  showBookingButton?: boolean;
+  useSingleColumn?: boolean;
+  fullWidthContent?: boolean;
 }
 
 export default function ActivityPageLayout({
@@ -39,19 +38,15 @@ export default function ActivityPageLayout({
   detailsContent,
   pricingTitle,
   pricingContent,
-  showBookingButton = true, // Default to true for backward compatibility
-  useSingleColumn = false, // Default to false for backward compatibility
-  fullWidthContent = false // Default to false
+  showBookingButton = true,
+  useSingleColumn = false,
+  fullWidthContent = false
 }: ActivityPageLayoutProps) {
-  // Removed useLanguage hook call
-
   // Determine container classes based on layout preference
-  let containerClasses = "py-12 flex flex-col gap-8"; // Base classes for vertical padding and flex layout
+  let containerClasses = "py-12 flex flex-col gap-8"; // Base classes
   if (fullWidthContent) {
-    // For full width, remove horizontal padding, centering, and max-width
     containerClasses += " w-full"; 
   } else {
-    // Apply standard container styles (padding, centering, max-width)
     containerClasses += " container mx-auto px-4 sm:px-6 lg:px-8";
     if (useSingleColumn) {
       containerClasses += " max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl";
@@ -61,67 +56,32 @@ export default function ActivityPageLayout({
   }
 
   return (
-    <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
-      {/* Logo - Fixed Position with responsive size */}
-      <div className="absolute top-4 left-4 z-50">
-        <Link href="/" className="flex items-center">
-          <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-md border border-amber-100 hover:bg-white transition-colors">
-            <Image
-              src="/images/ponyclub_logo.png"
-              alt="Acheron River Excursion"
-              fill
-              sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
-              className="object-contain p-1"
-            />
-            <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/20 via-[#6b8362]/30 to-transparent blur-sm"></div>
-          </div>
-        </Link>
-      </div>
-
-      {/* Responsive Navigation */}
-      <div className="absolute top-4 right-4 z-50">
-        <ResponsiveNavigation />
-      </div>
-
-      {/* Hero Section */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
-        <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
-          <Image
-            src={heroImageSrc}
-            alt={heroImageAlt}
-            fill
-            className="object-cover object-[center_20%]"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#FAF7F2] border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <div>
+          <Link href="/" className="flex items-center">
+            <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16">
+              <OptimizedImage
+                src="/images/ponyclub_logo.png"
+                alt="Acheron River Excursion"
+                fill
+                imageType="logo"
+                className="object-contain p-1"
+              />
+            </div>
+          </Link>
         </div>
-        
-        {/* Hero Title Box */}
-        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
-          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
-            <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
-            >
-              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{title}</span>
-              <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{subtitle}</span>
-            </h1>
-            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
-          </div>
-        </div>
-      </div>
 
-      {/* Hero Bottom Text Banner */}
-      <div className="relative mx-4 -mt-8 z-20">
-        <div className="bg-white/90 backdrop-blur-sm py-4 px-6 rounded-lg shadow-lg border border-amber-100 max-w-3xl mx-auto">
-          <p className={`${robotoSlab.variable} font-roboto-slab text-lg md:text-xl text-center text-amber-800`}>
-            {descriptionTitle}
-          </p>
-          <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/30 via-[#6b8362]/20 to-amber-200/30 blur-sm"></div>
+        {/* Responsive Navigation */}
+        <div>
+          <ResponsiveNavigation />
         </div>
-      </div>
+      </header>
 
-      {/* Content Section - Now always uses the calculated containerClasses */}
-      <div className={containerClasses}>
+      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden pt-20 pb-0">
+        {/* Content Section - Now always uses the calculated containerClasses */}
+        <div className={containerClasses}>
         {/* Description Section - Conditionally render wrapper */}
         {fullWidthContent ? (
           // Render content directly for full width (no extra wrapper/prose)
@@ -179,7 +139,7 @@ export default function ActivityPageLayout({
 
       {/* Book Now Button */}
       {showBookingButton && (
-        <div className="flex justify-center mt-8 mb-12">
+        <div className="flex justify-center mt-8 mb-0">
           <div className="relative">
             <BookingButton />
             <div className="absolute -inset-[2px] -z-10 rounded-full bg-gradient-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-sm"></div>
@@ -187,5 +147,6 @@ export default function ActivityPageLayout({
         </div>
       )}
     </main>
+    </>
   );
 }

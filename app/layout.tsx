@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/contexts/language-context"
 import PageLayout from "@/components/PageLayout"
 import Script from "next/script"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const robotoSlab = Roboto_Slab({
@@ -56,7 +57,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" /> */}
+        {/* Resource Hints */}
+        <link rel="preconnect" href="https://static.bokun.io" />
+        <link rel="preconnect" href="https://widgets.bokun.io" />
+        <link rel="preconnect" href="https://universe-static.elfsightcdn.com" />
+        <link rel="preconnect" href="https://static.elfsight.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        
         {/* Canonical link for homepage */}
         <link rel="canonical" href="https://ponyclub.gr/" />
         {/* JSON-LD structured data */}
@@ -94,6 +101,7 @@ export default function RootLayout({
             })
           }}
         />
+        <Script id="vercel-analytics" strategy="afterInteractive" src="https://vercel.live/analytics" />
       </head>
       <body className={`${inter.variable} ${robotoSlab.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
@@ -103,6 +111,8 @@ export default function RootLayout({
             </PageLayout>
           </LanguageProvider>
         </ThemeProvider>
+        {/* Vercel Web Analytics is typically handled by the script with src="https://vercel.live/analytics" or by project settings.
+            The SpeedInsights component is available via: import { SpeedInsights } from '@vercel/speed-insights/next'; */}
       </body>
     </html>
   )

@@ -2,8 +2,8 @@
 
 import ActivityPageLayout from "@/components/ActivityPageLayout";
 import { useLanguage } from "@/contexts/language-context";
-import { Gallery } from "@/components/ui/Gallery";
 import { zipliningGalleryImages } from "@/lib/gallery-data";
+import DynamicGallery from "@/components/DynamicGallery";
 
 export default function ZipliningPage() {
   const { t, language } = useLanguage();
@@ -65,7 +65,7 @@ export default function ZipliningPage() {
       </div>
       
       {/* Ziplining Gallery */}
-      <Gallery 
+      <DynamicGallery 
         images={zipliningGalleryImages} 
         title="Ziplining Photo Gallery" 
         ariaLabel="Ziplining adventure photo gallery at Acheron River" 
@@ -87,4 +87,4 @@ export default function ZipliningPage() {
       pricingContent={pricingContent}
     />
   );
-} 
+}
