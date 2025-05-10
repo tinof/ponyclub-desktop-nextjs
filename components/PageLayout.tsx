@@ -1,8 +1,9 @@
 "use client";
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Footer from './Footer';
+import SiteHeader from "./site-header"; // Added SiteHeader import
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -10,19 +11,22 @@ interface PageLayoutProps {
 
 export default function PageLayout({ children }: PageLayoutProps) {
   const pathname = usePathname();
-  // Determine if it's the homepage directly from the pathname
-  const isHomePage = pathname === '/' || pathname === '';
+  const [isHomePage, setIsHomePage] = useState(true);
   
-  // Debug log, can be removed in production
-  console.log("Current pathname:", pathname, "Is homepage:", isHomePage);
+  useEffect(() => {
+    // More defensive check for homepage
+    if (pathname) {
+      setIsHomePage(pathname === '/' || pathname === '');
+    }
+  }, [pathname]);
   
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="grow">
+      <SiteHeader />
+      {/* Apply pt-20 to main to account for fixed SiteHeader */}
+      <main className="grow pt-20 bg-[#f5f0e8]"> 
         {children}
-      </div>
-      {/* Hidden debug message */}
-      <div className="hidden">Current path: {pathname || 'undefined'}, Is homepage: {isHomePage ? 'yes' : 'no'}</div>
+      </main>
       {!isHomePage && <Footer />}
     </div>
   );

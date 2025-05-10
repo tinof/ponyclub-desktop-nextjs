@@ -24,10 +24,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 codebase.md
 public/images/.DS_Store
 public/.DS_Store
 .DS_Store
 fixing-process.md
-.cursorrules

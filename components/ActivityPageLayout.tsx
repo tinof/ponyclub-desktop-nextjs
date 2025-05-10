@@ -1,10 +1,9 @@
 import { Roboto_Slab } from 'next/font/google';
 import BookingButton from "./booking-button";
-// ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly
-// as SiteHeader will handle them.
-import SiteHeader from "./site-header"; // Added SiteHeader import
-// HeroImage might still be used if the hero section is uncommented, OptimizedImage might be used elsewhere.
-import { HeroImage, OptimizedImage } from "./ui/OptimizedImage";
+// ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly.
+// SiteHeader is now part of PageLayout.
+// OptimizedImage might be used elsewhere if other image components are part of the content.
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
@@ -16,8 +15,6 @@ const robotoSlab = Roboto_Slab({
 interface ActivityPageLayoutProps {
   title: string;
   subtitle: string;
-  heroImageSrc?: string;
-  heroImageAlt?: string;
   descriptionTitle: string;
   descriptionContent: React.ReactNode;
   detailsTitle: string;
@@ -32,8 +29,6 @@ interface ActivityPageLayoutProps {
 export default function ActivityPageLayout({
   title,
   subtitle,
-  heroImageSrc,
-  heroImageAlt,
   descriptionTitle,
   descriptionContent,
   detailsTitle,
@@ -59,48 +54,15 @@ export default function ActivityPageLayout({
 
   return (
     <>
-      <SiteHeader />
-      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
-      {/* The existing pt-24 on containerClasses should provide space for the fixed SiteHeader */}
-      {/* Hero Section -- COMMENTED OUT
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
-        <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
-          <HeroImage
-            src={heroImageSrc}
-            alt={heroImageAlt}
-            fill
-            className="object-cover object-[center_20%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
-        </div>
-        
-        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
-          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
-            <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
-            >
-              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{title}</span>
-              <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{subtitle}</span>
-            </h1>
-            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
-          </div>
-        </div>
-      </div>
+      {/* 
+        SiteHeader is now rendered by PageLayout.
+        The main PageLayout's <main> tag has pt-20 and the background color.
+        This component's content will be rendered inside that <main> tag.
+        The containerClasses will define the layout for the content of this specific activity page.
+        Adjusting pt-24 to pt-4 in containerClasses to provide a small top padding for the content block itself,
+        relative to the PageLayout's main content area.
       */}
-
-      {/* Hero Bottom Text Banner -- COMMENTED OUT
-      <div className="relative mx-4 -mt-8 z-20">
-        <div className="bg-white/90 backdrop-blur-sm py-4 px-6 rounded-lg shadow-lg border border-amber-100 max-w-3xl mx-auto">
-          <p className={`${robotoSlab.variable} font-roboto-slab text-lg md:text-xl text-center text-amber-800`}>
-            {descriptionTitle}
-          </p>
-          <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/30 via-[#6b8362]/20 to-amber-200/30 blur-sm"></div>
-        </div>
-      </div>
-      */}
-
-      {/* Content Section - Now always uses the calculated containerClasses */}
-      <div className={containerClasses}> {/* This already has pt-24 */}
+      <div className={containerClasses.replace('pt-24', 'pt-4')}>
         {/* Description Section - Conditionally render wrapper */}
         {fullWidthContent ? (
           // Render content directly for full width (no extra wrapper/prose)
@@ -165,7 +127,6 @@ export default function ActivityPageLayout({
           </div>
         </div>
       )}
-    </main>
     </>
   );
 }

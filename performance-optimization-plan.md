@@ -11,7 +11,7 @@ Based on Lighthouse audits (Mobile Score: 55, LCP: 15.3s, FCP: 5.7s, CLS: 0):
   - Time to Interactive: (Previous: 19.2s, needs re-evaluation after LCP fixes)
   - Cumulative Layout Shift: 0 (Excellent!)
 
-## Implementation Progress
+## Implementation Progress (Previous Sessions)
 
 ### Completed Optimizations:
 
@@ -29,84 +29,131 @@ Based on Lighthouse audits (Mobile Score: 55, LCP: 15.3s, FCP: 5.7s, CLS: 0):
     *   [x] Applied to Bokun booking scripts and Elfsight reviews widget
     *   [x] Dynamically imported GoogleMap, Gallery, BokunWidget, ContactDetailsEnhanced components.
 
-3.  **Next.js Configuration Enhancements**
+3.  **Next.js Configuration Enhancements (Previous)**
     *   [x] Configured modern image formats (WebP, AVIF) in next.config.mjs (Note: LCP image still needs conversion)
     *   [x] Refined caching headers for static assets in next.config.mjs
     *   [x] Added appropriate content security policy headers
     *   [x] Activated SWC minification for better performance
 
-## Optimization Plan (Remaining Tasks & Priorities)
+## IV. General Refactoring & Production Readiness (Summary of Nov 5, 2025 Session)
 
-**Immediate Priority: LCP & Critical Path**
+This session focused on broader refactoring, configuration cleanup, and preparing for dependency migrations, rather than direct performance optimizations.
 
-1.  **Verify Text Compression (Server/Hosting Level)**
-    *   [!] **Status:** Checked main HTML (`https://www.ponyclub.gr/`). **No `content-encoding` header found (Gzip/Brotli not applied).**
-    *   [ ] **Action:** Investigate Vercel settings or contact Vercel support to ensure Brotli or Gzip compression is enabled for HTML, CSS, and JS assets. Vercel should do this by default.
-    *   *Corresponds to "Enable Gzip/Brotli compression" in original plan.*
+*   **Configuration Updates:**
+    *   **`tsconfig.json`**:
+        *   `compilerOptions.target` updated from `"ES6"` to `"ES2022"`.
+        *   `compilerOptions.skipLibCheck` set to `false` (was `true`).
+        *   Added path mapping for `lucide-react` in an attempt to resolve a type error.
+    *   **`next.config.js`**:
+        *   Removed placeholder domain from `images.remotePatterns`.
+        *   Changed `images.contentDispositionType` from `'attachment'` to `'inline'`.
+        *   Added `experimental.staleTimes` configuration for client-side router cache.
+    *   **`.gitignore`**:
+        *   Removed `next-env.d.ts` to include it in version control.
+*   **Code Cleanup:**
+    *   Removed `console.log` statements and hidden debug HTML from `components/PageLayout.tsx` and `app/page.tsx`.
+    *   Removed commented-out Hero section and related unused props from `components/ActivityPageLayout.tsx`.
+*   **Layout Centralization & Adjustments:**
+    *   Moved `SiteHeader` component into `components/PageLayout.tsx` for global consistency.
+    *   `components/PageLayout.tsx` now manages the main top padding (`pt-20`) and background color (`bg-[#f5f0e8]`) for page content.
+    *   Removed `SiteHeader` and associated padding/background styles from `app/page.tsx` and `components/ActivityPageLayout.tsx`.
+*   **Root Layout (`app/layout.tsx`) Enhancements:**
+    *   Converted `RootLayout` to a client component (`"use client";`).
+    *   Introduced an `HtmlWrapper` sub-component to use `useLanguage` hook for setting the `<html>` tag's `lang` attribute dynamically.
+    *   Moved static `<link rel="canonical">` and JSON-LD `<Script>` content into the `metadata` object.
+    *   Refactored `app/layout.tsx` to be a Server Component, moving client-side logic (including `useLanguage` for `<html>` tag, `ThemeProvider`, Vercel Analytics/Speed Insights) into a new `components/ClientLayout.tsx` component. This resolved build errors related to `"use client"` and `metadata` export, and missing `<html>`/`<body>` tags.
+    *   Removed manual Vercel Preview Comments script (`vercel.live/analytics`).
+    *   Vercel Analytics (`<Analytics />`) and Speed Insights (`<SpeedInsights />`) are now in the server-side `app/layout.tsx`.
+    *   Exported `fetchCache = 'default-cache';` for Next.js 15 data fetching strategy.
+*   **SEO - Sitemap (`app/sitemap.ts`):**
+    *   Updated `routeData` to include `/for-schools` and `/kayak-rafting`.
+    *   Removed `/test-footer` from `routeData`.
+*   **Bokun Widget Standardization:**
+    *   Refactored `app/rafting/page.tsx` to use `DynamicBokunWidget` instead of direct script embedding.
+    *   Removed `type="module"` and `as any` cast from the `<Script>` tag in `components/BokunWidget.tsx`.
+    *   Refactored `BookingScripts` component in `components/ui/script-loader.tsx` to use `OptimizedScript` (which wraps `next/script`) instead of manual DOM script injection.
+*   **Dependency & Type Resolution (Nov 5, 2025):**
+    *   **`lucide-react` TypeScript Issue:** Resolved. The issue "Cannot find module 'lucide-react'" and subsequent type errors (like missing `ReactSVG`) were due to incompatibility between `lucide-react`'s types and React 19 RC. Downgrading React to `18.3.1` and removing an incorrect `tsconfig.json` path alias for `lucide-react` fixed this.
+    *   **`recharts` Lodash Types:** Resolved by installing `@types/lodash` as `recharts` required it when `skipLibCheck: false`.
+    *   **`react-day-picker` Type Issue in `components/ui/calendar.tsx`:** A persistent type error ("'IconLeft' does not exist in type 'Partial<CustomComponents>'") for `react-day-picker@9.6.7` was encountered. A temporary workaround using `as any` on the `components` prop definition in `components/ui/calendar.tsx` was applied to allow the build to pass. This needs a proper fix.
 
-2.  **Optimize LCP Image (`/images/hero-image.jpeg`)**
-    *   [ ] **Action:** Convert `public/images/hero-image.jpeg` to WebP and AVIF using an external tool (e.g., Squoosh) and place them in `public/images`.
-    *   [x] **Status:** The `<OptimizedImage>` component in `app/page.tsx` rendering this image already uses the `priority` prop.
-    *   [x] **Status:** The `sizes` attribute is automatically set to `(max-width: 640px) 100vw, 100vw` by the `OptimizedImage` component logic, which is appropriate for a full-width hero.
-    *   [x] **Status:** The `src` will use the optimized format automatically if `next.config.js` is configured correctly (already done). No need to update component `src` or video `poster`.
-    *   *Corresponds to "Compress all remaining images..." & "Preload hero images" in original plan.*
+## V. Consolidated Future Plan: Refactoring, Migrations, and Optimizations
 
-3.  **Critical CSS & Render-Blocking Resources**
-    *   [!] **Status:** PageSpeed report identifies `_next/static/css/0c1ea75452fb9929.css` (5KB) and `_next/static/css/843da414c5629568.css` (77KB) as render-blocking.
-    *   [x] **Status:** Tailwind CSS purging (`tailwind.config.ts`) is configured correctly.
-    *   [x] **Status:** `app/globals.css` contains minimal custom styles.
-    *   [x] **Status:** Font loading uses `next/font` in `app/layout.tsx`, which is optimal.
-    *   [ ] **Action:** Further investigation into the large CSS bundle requires build analysis (e.g., analyzing which components contribute most CSS) or implementing advanced critical CSS extraction techniques (potentially complex).
-    *   [ ] **Action:** Extract and inline truly critical CSS for above-the-fold content (Advanced).
-    *   [ ] **Action:** Defer loading of non-critical CSS (Advanced).
-    *   *Corresponds to "Critical CSS Extraction" in original plan.*
+This plan integrates previous performance goals with broader refactoring tasks and upcoming dependency migrations.
 
-**Phase 2: Reduce JavaScript Impact**
+**Phase 0: Pre-Migration Cleanup & Preparation (Completed & Ongoing)**
 
-4.  **Further Defer/Lazy-Load Third-Party Scripts (Elfsight, Bokun)**
-    *   [x] **Action:** Implemented Intersection Observer lazy-loading for `DynamicBokunWidget` to load only when near viewport. (Elfsight script already uses `inViewport` loading via `OptimizedScript`).
-    *   [ ] **Action:** Evaluate if lighter alternatives or direct integrations are possible (Requires external research/knowledge).
-    *   *Corresponds to "Additional JavaScript Optimization" & "Minimize main thread work" in original plan.*
+1.  **[x] Resolve `lucide-react` TypeScript Issue & Related Type Errors:**
+    *   **Status:** Completed. Downgraded React from RC to `18.3.1`, removed incorrect tsconfig path, and installed `@types/lodash` for `recharts`. Build is now successful.
+    *   **Note:** A temporary `as any` workaround was used for a `react-day-picker` type issue in `components/ui/calendar.tsx`. This should be properly investigated and fixed later.
+2.  **Audit and Remove Unused Code:**
+    *   **Action:** Manually audit components and utility functions for any unused JavaScript.
+    *   **Action:** Review CSS for any non-Tailwind styles that could be unused.
+3.  **Configuration Cleanup (CSP):**
+    *   **`next.config.js`**: Investigate and attempt to tighten the Content Security Policy (CSP), particularly `'unsafe-inline'` and `'unsafe-eval'` in `script-src`, after Bokun/Elfsight integrations are stable.
+4.  **SEO Content Placeholders:**
+    *   **`app/rafting/page.tsx` (and similar activity pages):** Add placeholder sections or TODO comments for where unique, crawlable textual SEO content should be added to complement third-party widgets.
 
-5.  **Analyze and Code-Split First-Party JS Chunks**
-    *   [-] **Status:** Skipped as per user request. Bundle analysis with `@next/bundle-analyzer` was not performed.
-    *   *Corresponds to "Analyze and reduce JS bundle size further" & "Implement code splitting for additional components" in original plan.*
+**Phase 1: Strategic Refactoring (Pre-Migration)**
 
-**Phase 3: General Optimizations (from original plan)**
+5.  **Embrace Server Components (RSC):**
+    *   **Targets:** `app/page.tsx` (Homepage), `components/Footer.tsx` (if `useLanguage` can be handled via props or server context), parts of `components/site-header.tsx` (if `ResponsiveNavigation` can be further split).
+    *   **Action:** Incrementally refactor. This is a key step for improving initial load performance.
+6.  **Bokun Integration Refinement (Homepage):**
+    *   **Target:** `app/page.tsx`.
+    *   **Action:** After standardizing script loading, evaluate if the complex Bokun initialization logic (`ensureBokunIsReadyAndOpen`, etc.) can be simplified or removed. Test thoroughly.
 
-6.  **Font Optimization**
-    *   [x] **Status:** `next/font` is used in `app/layout.tsx`, which automatically applies `font-display: swap`.
-    *   [x] **Status:** `next/font` automatically handles font preloading.
-    *   [ ] **Action:** Consider using system fonts where appropriate (Design/Performance decision).
+**Phase 2: Dependency Migrations**
 
-7.  **Resource Hints**
-    *   [x] **Action:** Added `<link rel="preconnect">` for `static.bokun.io`, `widgets.bokun.io`, `universe-static.elfsightcdn.com`, `static.elfsight.com`, and `maps.googleapis.com` in `app/layout.tsx`.
-    *   *Corresponds to "Implement resource hints" in original plan.*
+7.  **Next.js Upgrade:**
+    *   **Action:** Upgrade Next.js from `15.2.4` to the latest stable `15.3.x` version.
+    *   **Action:** Review Next.js release notes for breaking changes. Update `next.config.js` if `staleTimes` or other experimental features have changed status or behavior.
+    *   **Action:** Run `pnpm install` and test thoroughly.
+8.  **React Upgrade Path (from 18.2):**
+    *   **Action (Step 1 - Set to Stable React 18.3.1):** [COMPLETED] Updated `package.json` to use `react@^18.3.1`, `react-dom@^18.3.1`, and corresponding `@types/react@^18.3.0`, `@types/react-dom@^18.3.0`. This resolved type incompatibilities with `lucide-react`.
+    *   **Action (Step 2 - Address React 18.3 Deprecation Warnings):** [NEXT STEP] Run the application with React 18.3.1, identify any deprecation warnings in the console, and refactor code accordingly to prepare for React 19.
+    *   **Action (Step 3 - Upgrade to React 19):** Upgrade React from `18.3.1` to the latest stable React `19.x.x`. Update `package.json` for `react`, `react-dom`, and their types.
+    *   **Action:** Run `pnpm install` and test thoroughly, paying close attention to React 19 features (`useActionState`, `useFormStatus`), hooks, and component behavior.
 
-8.  **Audit and Remove Unused Code**
-    *   [ ] **Action:** Manually audit components and utility functions for unused JS (Requires manual review or tooling).
-    *   [ ] **Action:** Review CSS for any non-Tailwind styles that could be unused (Requires manual review; Tailwind purging handles utility classes).
+**Phase 3: Post-Migration Refinements & Polish**
 
-**Phase 4: Advanced & Ongoing (from original plan)**
+9.  **Component-Level Improvements & Accessibility:**
+    *   **Investigate `react-day-picker` Type Issue:** Properly fix the type error in `components/ui/calendar.tsx` for the `DayPicker` component's `components` prop, removing the temporary `as any` workaround.
+    *   **Navigation Menus (`DesktopMenu`, `HamburgerMenu`):**
+        *   Add ARIA attributes (`aria-expanded`, `aria-haspopup`, `aria-controls`).
+        *   Ensure full keyboard navigation.
+        *   Resolve "Activities" link inconsistency between desktop and mobile.
+    *   **Review `OptimizedImage` Component:** (Requires seeing the code if not standard `next/image`) Ensure best practices.
+    *   **Form Handling (if applicable):** Ensure new React 19 form APIs (`useActionState`, `useFormStatus`) are used as per `.cursorrules`.
+10. **Final SEO Enhancements:**
+    *   **Sitemap `lastModified` Automation:** Implement a robust solution (e.g., from file system mtimes or CMS).
+    *   **Activity Page SEO Content:** Flesh out the unique textual content.
+11. **Styling Review:**
+    *   Attempt to make Bokun button styling more robust (if possible, less reliant on `!important` and IDs).
+    *   Ensure overall visual consistency.
+12. **Asset Optimization:**
+    *   **LCP Image (`hero-image.jpeg`):** Convert to WebP/AVIF and ensure optimal delivery.
+13. **Advanced Optimizations (If time/need permits):**
+    *   **Critical CSS:** Investigate and potentially implement critical CSS extraction.
+    *   **Next.js Specific Optimizations:** Consider Incremental Static Regeneration (ISR) for relevant pages.
 
-9.  **Next.js Specific Optimizations**
-    *   [ ] Implement Incremental Static Regeneration where appropriate.
-    *   [ ] Optimize `getStaticProps`/`getServerSideProps` if used.
+**Phase 4: Testing & Final Review for Production**
 
-10. **Lighthouse-specific Optimizations**
-    *   [ ] Address any remaining issues from Lighthouse reports post major fixes.
-    *   [ ] Fix console errors and warnings.
+14. **Thorough Testing:**
+    *   Functional testing of all user flows.
+    *   Responsive design testing across devices.
+    *   Cross-browser compatibility checks.
+15. **Performance Audit:**
+    *   Use Lighthouse and Vercel Speed Insights to measure and iterate.
+    *   Verify text compression (Gzip/Brotli) is active on Vercel.
+16. **Accessibility Audit:**
+    *   Use automated tools (Axe, WAVE) and manual checks (keyboard, screen reader).
 
-11. **Progressive Web App Features**
-    *   [ ] Add service worker for offline capabilities and caching.
-    *   [ ] Implement app shell architecture.
-    *   [ ] Add web app manifest.
+**Future/Ongoing Considerations:**
 
-12. **Performance Monitoring**
-    *   [ ] Set up Real User Monitoring (RUM).
-    *   [ ] Implement performance budgets.
-    *   [ ] Set up alerts for performance regressions.
-    *   [ ] Regularly audit with Lighthouse and WebPageTest.
+*   **PWA Features:** Service worker, app manifest.
+*   **Performance Monitoring:** Real User Monitoring (RUM), performance budgets.
+*   **JavaScript Analysis:** Deeper bundle analysis (`@next/bundle-analyzer`) for first-party JS if TTI remains high.
 
 ## Success Metrics
 
@@ -124,3 +171,4 @@ Based on Lighthouse audits (Mobile Score: 55, LCP: 15.3s, FCP: 5.7s, CLS: 0):
 - Chrome DevTools Performance panel
 - `@next/bundle-analyzer`
 - Image editing tools for WebP/AVIF conversion (e.g., Squoosh, online converters)
+- Accessibility testing tools (Axe, WAVE)

@@ -5,7 +5,7 @@ import { Roboto_Slab } from "next/font/google"
 import { useState, useRef, useCallback } from "react" // Added useRef, useCallback
 import BookingButton from "@/components/booking-button"
 // ResponsiveNavigation import removed as it's now part of SiteHeader
-import SiteHeader from "@/components/site-header"; // Added SiteHeader import
+// SiteHeader import removed as it's now part of PageLayout
 import { useLanguage } from "@/contexts/language-context"
 // Carousel imports removed as they are not used in this file
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
@@ -28,15 +28,12 @@ export default function Home() {
 
   const ensureBokunIsReadyAndOpen = useCallback(() => {
     if (window.BokunWidgets && (typeof window.BokunWidgets.init === 'function' || typeof window.BokunWidgets.reinit === 'function')) {
-      // console.log('BokunWidgets API is ready.');
       // Check if a modal is already open (very basic check, might need refinement)
       if (document.querySelector('.bokunModalContainer') || document.querySelector('.bokun-modal-open')) {
-         // console.log('Bokun modal seems to be already open or opening.');
         return;
       }
       
       if (clickedButtonRef.current) {
-        // console.log('Attempting to programmatically click the stored button again.');
         // It's possible Bokun's scripts have now attached proper listeners.
         // A direct click might be better than trying to call their internal modal functions.
         clickedButtonRef.current.click(); 
@@ -45,10 +42,8 @@ export default function Home() {
       bokunReadyAttempts.current = 0; // Reset attempts
     } else if (bokunReadyAttempts.current < 30) { // Try for ~3 seconds
       bokunReadyAttempts.current++;
-      // console.log(`Bokun API not ready, attempt ${bokunReadyAttempts.current}. Retrying...`);
       setTimeout(ensureBokunIsReadyAndOpen, 100);
     } else {
-      // console.error('Bokun API did not become ready after multiple attempts.');
       bokunReadyAttempts.current = 0; // Reset attempts
     }
   }, []);
@@ -66,7 +61,6 @@ export default function Home() {
   };
 
   const handleBokunLoaderLoaded = useCallback(() => {
-    // console.log('BokunWidgetsLoader.js has loaded via BookingScripts callback.');
     // Now that the loader is loaded, wait a bit for the main Bokun script to load and initialize
     // then try to ensure the widget for the clicked button is open.
     setTimeout(ensureBokunIsReadyAndOpen, 500); // Wait 500ms before first check
@@ -74,11 +68,9 @@ export default function Home() {
 
   return (
     <>
-      <SiteHeader />
-
-      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden pt-20"> {/* Added pt-20 for fixed header */}
+      {/* SiteHeader is now rendered by PageLayout in app/layout.tsx */}
+      <main className="relative min-h-screen overflow-hidden"> {/* Removed pt-20 and bg-[#f5f0e8] */}
         {/* Hero Section */}
-        {/* mt-16 was removed from here as main now has pt-20 */}
         <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]"> 
         <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
           {/* OptimizedImage for the poster */}

@@ -1,19 +1,20 @@
-import type React from "react"
-import "./globals.css"
-import type { Metadata } from "next"
-import { Inter, Roboto_Slab } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import { LanguageProvider } from "@/contexts/language-context"
-import PageLayout from "@/components/PageLayout"
-import Script from "next/script"
-import { SpeedInsights } from '@vercel/speed-insights/next'
+// app/layout.tsx is a Server Component
+import type React from "react";
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter, Roboto_Slab } from "next/font/google";
+import ClientLayout from "@/components/ClientLayout"; // Wraps client-side providers and PageLayout
+import { SpeedInsights } from '@vercel/speed-insights/next'; // Moved here
+import { Analytics } from "@vercel/analytics/react"; // Moved here
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+export const fetchCache = 'default-cache'; // Next.js 15 fetch caching strategy
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const robotoSlab = Roboto_Slab({
   subsets: ["latin", "greek"],
   weight: ["400", "700"],
   variable: "--font-roboto-slab",
-})
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ponyclub.gr'),
@@ -22,6 +23,38 @@ export const metadata: Metadata = {
   keywords: "Pony Club, Acheron River, rafting, horse riding, kayaking, trekking, Glyki, Greece, outdoor activities",
   generator: 'v0.dev',
   authors: [{ name: 'Pony Club' }],
+  alternates: { // Added for canonical URL
+    canonical: '/',
+  },
+  other: { // For JSON-LD and other arbitrary tags
+    "structured-data": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      "name": "Pony Club",
+      "description": "Outdoor adventure activities including rafting, horse riding, kayaking and trekking in Acheron River, Greece",
+      "url": "https://ponyclub.gr",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Glyki, Thesprotias",
+        "addressRegion": "Epirus",
+        "postalCode": "46200",
+        "addressCountry": "GR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "39.32581744774602",
+        "longitude": "20.606971798121965"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "10:00",
+        "closes": "18:00"
+      }
+    }),
+  },
   openGraph: {
     title: 'Pony Club | Adventure Activities in Acheron River',
     description: 'Join Pony Club for unforgettable rafting, horse riding, kayaking and trekking experiences in Acheron River, Greece.',
@@ -52,68 +85,29 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  // This Server Component now renders the main HTML structure.
+  // The lang attribute is set to a default; dynamic lang from useLanguage is complex here.
+  // Metadata object handles locale for SEO.
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Resource Hints */}
+        {/* Resource Hints moved from ClientLayout's HtmlWrapper */}
         <link rel="preconnect" href="https://static.bokun.io" />
         <link rel="preconnect" href="https://widgets.bokun.io" />
         <link rel="preconnect" href="https://universe-static.elfsightcdn.com" />
         <link rel="preconnect" href="https://static.elfsight.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
-        
-        {/* <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" /> */}
-        {/* Canonical link for homepage */}
-        <link rel="canonical" href="https://ponyclub.gr/" />
-        {/* JSON-LD structured data */}
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TouristAttraction",
-              "name": "Pony Club",
-              "description": "Outdoor adventure activities including rafting, horse riding, kayaking and trekking in Acheron River, Greece",
-              "url": "https://ponyclub.gr",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Glyki, Thesprotias",
-                "addressRegion": "Epirus",
-                "postalCode": "46200",
-                "addressCountry": "GR"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "39.32581744774602",
-                "longitude": "20.606971798121965"
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-                ],
-                "opens": "10:00",
-                "closes": "18:00"
-              }
-            })
-          }}
-        />
-        <Script id="vercel-analytics" strategy="afterInteractive" src="https://vercel.live/analytics" />
+        {/* Next.js will automatically inject other head elements from `metadata` */}
       </head>
       <body className={`${inter.variable} ${robotoSlab.variable} font-sans`} suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <LanguageProvider>
-            <PageLayout>
-              {children}
-            </PageLayout>
-          </LanguageProvider>
-        </ThemeProvider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
-  )
+  );
 }

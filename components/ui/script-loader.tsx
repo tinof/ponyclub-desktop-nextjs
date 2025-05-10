@@ -93,40 +93,23 @@ interface BookingScriptsProps {
 }
 
 export function BookingScripts({ loadTrigger, onLoaderLoaded }: BookingScriptsProps) {
-  const [bokunLoaderAdded, setBokunLoaderAdded] = useState(false);
+  // If loadTrigger is false, don't render the script.
+  // When loadTrigger becomes true, OptimizedScript will be rendered and will load the script.
+  if (!loadTrigger) {
+    return null;
+  }
 
-  useEffect(() => {
-    if (loadTrigger && !bokunLoaderAdded) {
-      // console.log('Triggering manual load of BokunWidgetsLoader.js');
-      const script = document.createElement('script');
-      script.id = 'bokun-widgets-loader-manual';
-      script.src = "https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a";
-      script.async = true;
-      script.type = 'text/javascript';
-      
-      script.onload = () => {
-        // console.log('Manually appended BokunWidgetsLoader.js has loaded.');
-        if (onLoaderLoaded) {
-          onLoaderLoaded();
-        }
-      };
-      script.onerror = () => {
-        console.error('Failed to load BokunWidgetsLoader.js manually.');
-      };
-      
-      document.body.appendChild(script);
-      setBokunLoaderAdded(true); // Ensure we only add it once
-
-      return () => {
-        const existingScript = document.getElementById('bokun-widgets-loader-manual');
-        if (existingScript && existingScript.parentNode) {
-          // existingScript.parentNode.removeChild(existingScript);
-        }
-      };
-    }
-  }, [loadTrigger, bokunLoaderAdded, onLoaderLoaded]);
-
-  return null; 
+  return (
+    <OptimizedScript
+      id="bokun-widgets-loader-homepage" // Unique ID for this instance
+      src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
+      strategy="afterInteractive" // Or 'lazyOnload', 'afterInteractive' might be better if triggered by click
+      onLoad={onLoaderLoaded}
+      onError={() => {
+        console.error('Failed to load BokunWidgetsLoader.js via OptimizedScript.');
+      }}
+    />
+  );
 }
 
 /**

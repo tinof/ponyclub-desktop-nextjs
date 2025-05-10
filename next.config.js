@@ -4,6 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
+  turbopack: {}, // Add top-level turbopack key
   eslint: {
     ignoreDuringBuilds: false,
   },
@@ -17,15 +18,11 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
+    contentDispositionType: 'inline',
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'your-trusted-domain.com',
       },
     ],
   },
@@ -33,14 +30,10 @@ const nextConfig = {
     optimizeCss: false,
     scrollRestoration: true,
     staleTimes: {
-      dynamic: 30,
-      static: 180,
+      dynamic: 30, // seconds
+      static: 180, // seconds
     },
   },
-  // Stable features (formerly experimental)
-  bundlePagesRouterDependencies: true,
-  serverExternalPackages: [], // Add any packages here that need to be explicitly externalized
-
   async redirects() {
     return [
       // Example 301 redirects from old WordPress URLs to new Next.js routes
@@ -91,4 +84,5 @@ const nextConfig = {
   poweredByHeader: false,
 }
 
-module.exports = withBundleAnalyzer(nextConfig);
+// module.exports = withBundleAnalyzer(nextConfig);
+module.exports = nextConfig; // Temporarily disable withBundleAnalyzer

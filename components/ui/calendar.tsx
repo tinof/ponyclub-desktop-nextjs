@@ -1,8 +1,9 @@
 "use client"
 
 import * as React from "react"
+import type { SVGProps } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import { DayPicker, type CustomComponents } from "react-day-picker" // Import CustomComponents
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -15,6 +16,17 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  interface ChevronComponentProps extends SVGProps<SVGSVGElement> {
+    orientation?: 'left' | 'right' | 'up' | 'down'; // Updated to match DayPicker's expected type
+  }
+
+  const ChevronComponent = ({ orientation, ...restProps }: ChevronComponentProps) => {
+    if (orientation === 'left') {
+      return <ChevronLeft className="h-4 w-4" {...restProps} />;
+    }
+    return <ChevronRight className="h-4 w-4" {...restProps} />;
+  };
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -54,12 +66,7 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        Chevron: ({ orientation, ...props }) => {
-          if (orientation === "left") {
-            return <ChevronLeft className="h-4 w-4" {...props} />;
-          }
-          return <ChevronRight className="h-4 w-4" {...props} />;
-        },
+        Chevron: ChevronComponent,
       }}
       {...props}
     />
