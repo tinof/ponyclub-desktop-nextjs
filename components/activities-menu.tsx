@@ -40,7 +40,7 @@ export default function ActivitiesMenu() {
         >
           <Home className="w-4 h-4" />
           <span className="hidden sm:inline">Home</span>
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
         </Link>
       )}
       <div className="relative">
@@ -50,13 +50,13 @@ export default function ActivitiesMenu() {
         >
           <span>Activities</span>
           <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+          <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
         </button>
 
         {isOpen && (
           <>
             <div className="fixed inset-0 z-10" onClick={closeDropdown} />
-            <div className="absolute left-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-sm ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden">
+            <div className="absolute left-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-xs ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden">
               <div className="py-1">
                 {activities.map((activity) => (
                   <Link

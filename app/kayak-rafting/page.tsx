@@ -21,8 +21,6 @@ const KayakRaftingPage = () => {
     <ActivityPageLayout
       title="Kayak & Rafting" // Provide a title
       subtitle="" // Empty subtitle
-      heroImageSrc="/images/Rafting_Group_Blue_Adventure_River.jpg" // Use a relevant hero image
-      heroImageAlt="Kayaking and Rafting Adventure"
       descriptionTitle="" // Let Bokun handle content titles
       descriptionContent={bokunWidget} // Pass the widget here
       detailsTitle="" 

@@ -1,16 +1,28 @@
 import React from 'react';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 
 const KayakingPage = () => {
+  const bokunWidget = (
+    <>
+      <script
+        type="text/javascript"
+        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
+        async
+      />
+      <div
+        className="bokunWidget"
+        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020669"
+      ></div>
+      <noscript>Please enable javascript in your browser to book</noscript>
+    </>
+  );
+
   return (
     <ActivityPageLayout
       title="Kayaking" // Provide a title
       subtitle="" // Empty subtitle
-      heroImageSrc="/images/Rafting_Group_Blue_Adventure_River.jpg" // Use a relevant hero image
-      heroImageAlt="Kayaking Adventure"
       descriptionTitle="" // Let Bokun handle content titles
-      descriptionContent={<DynamicBokunWidget experienceId="1020669" />} // Use DynamicBokunWidget component
+      descriptionContent={bokunWidget} // Pass the widget here
       detailsTitle=""
       detailsContent={<></>} // Empty content
       pricingTitle=""

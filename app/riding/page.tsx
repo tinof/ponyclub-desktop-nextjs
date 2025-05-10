@@ -21,8 +21,6 @@ const RidingPage = () => {
     <ActivityPageLayout
       title="Riding"
       subtitle=""
-      heroImageSrc="/images/round2.jpg"
-      heroImageAlt="Horse Riding Adventure"
       descriptionTitle=""
       descriptionContent={bokunWidget}
       detailsTitle=""

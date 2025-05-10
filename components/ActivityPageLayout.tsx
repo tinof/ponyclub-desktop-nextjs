@@ -1,7 +1,9 @@
-import Link from "next/link";
 import { Roboto_Slab } from 'next/font/google';
 import BookingButton from "./booking-button";
-import ResponsiveNavigation from "./responsive-navigation";
+// ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly
+// as SiteHeader will handle them.
+import SiteHeader from "./site-header"; // Added SiteHeader import
+// HeroImage might still be used if the hero section is uncommented, OptimizedImage might be used elsewhere.
 import { HeroImage, OptimizedImage } from "./ui/OptimizedImage";
 
 // Define Roboto Slab font instance
@@ -14,8 +16,8 @@ const robotoSlab = Roboto_Slab({
 interface ActivityPageLayoutProps {
   title: string;
   subtitle: string;
-  heroImageSrc: string;
-  heroImageAlt: string;
+  heroImageSrc?: string;
+  heroImageAlt?: string;
   descriptionTitle: string;
   descriptionContent: React.ReactNode;
   detailsTitle: string;
@@ -43,7 +45,7 @@ export default function ActivityPageLayout({
   fullWidthContent = false
 }: ActivityPageLayoutProps) {
   // Determine container classes based on layout preference
-  let containerClasses = "py-12 flex flex-col gap-8"; // Base classes
+  let containerClasses = "pt-24 pb-12 flex flex-col gap-8"; // Base classes
   if (fullWidthContent) {
     containerClasses += " w-full"; 
   } else {
@@ -57,31 +59,48 @@ export default function ActivityPageLayout({
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#FAF7F2] border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <div>
-          <Link href="/" className="flex items-center">
-            <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16">
-              <OptimizedImage
-                src="/images/ponyclub_logo.png"
-                alt="Acheron River Excursion"
-                fill
-                imageType="logo"
-                className="object-contain p-1"
-              />
-            </div>
-          </Link>
+      <SiteHeader />
+      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden">
+      {/* The existing pt-24 on containerClasses should provide space for the fixed SiteHeader */}
+      {/* Hero Section -- COMMENTED OUT
+      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] mt-16">
+        <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
+          <HeroImage
+            src={heroImageSrc}
+            alt={heroImageAlt}
+            fill
+            className="object-cover object-[center_20%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
         </div>
-
-        {/* Responsive Navigation */}
-        <div>
-          <ResponsiveNavigation />
+        
+        <div className="absolute inset-0 flex items-start justify-center pt-10 md:pt-16">
+          <div className="relative bg-amber-800/40 px-8 py-6 rounded-2xl max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
+            <h1
+              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold px-4`}
+            >
+              <span className="block mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{title}</span>
+              <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{subtitle}</span>
+            </h1>
+            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
+          </div>
         </div>
-      </header>
+      </div>
+      */}
 
-      <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden pt-20 pb-0">
-        {/* Content Section - Now always uses the calculated containerClasses */}
-        <div className={containerClasses}>
+      {/* Hero Bottom Text Banner -- COMMENTED OUT
+      <div className="relative mx-4 -mt-8 z-20">
+        <div className="bg-white/90 backdrop-blur-sm py-4 px-6 rounded-lg shadow-lg border border-amber-100 max-w-3xl mx-auto">
+          <p className={`${robotoSlab.variable} font-roboto-slab text-lg md:text-xl text-center text-amber-800`}>
+            {descriptionTitle}
+          </p>
+          <div className="absolute -inset-[0.5px] -z-10 rounded-lg bg-gradient-to-r from-amber-200/30 via-[#6b8362]/20 to-amber-200/30 blur-sm"></div>
+        </div>
+      </div>
+      */}
+
+      {/* Content Section - Now always uses the calculated containerClasses */}
+      <div className={containerClasses}> {/* This already has pt-24 */}
         {/* Description Section - Conditionally render wrapper */}
         {fullWidthContent ? (
           // Render content directly for full width (no extra wrapper/prose)
@@ -139,7 +158,7 @@ export default function ActivityPageLayout({
 
       {/* Book Now Button */}
       {showBookingButton && (
-        <div className="flex justify-center mt-8 mb-0">
+        <div className="flex justify-center mt-8 mb-12">
           <div className="relative">
             <BookingButton />
             <div className="absolute -inset-[2px] -z-10 rounded-full bg-gradient-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-sm"></div>

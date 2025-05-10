@@ -44,39 +44,66 @@ export function OptimizedImage({
       ? `aspect-${aspectRatio}` 
       : '';
       
+    // For hero images, make sure we don't have both priority and loading
+    const imageProps = imageType === 'hero' 
+      ? { 
+          src: props.src,
+          alt: props.alt,
+          fill: true,
+          sizes: optimizedProps.sizes || "100vw",
+          quality: optimizedProps.quality,
+          priority: true,
+          className: `object-cover ${className || ''}`
+        }
+      : {
+          src: props.src,
+          alt: props.alt,
+          fill: true,
+          sizes: optimizedProps.sizes || "100vw",
+          quality: optimizedProps.quality,
+          priority: optimizedProps.priority,
+          loading: !optimizedProps.priority ? (optimizedProps.loading || 'lazy') : undefined,
+          className: `object-cover ${className || ''}`
+        };
+      
     return (
       <div 
         className={`relative overflow-hidden ${aspectRatioClass} ${containerClassName || ''}`}
         style={!aspectRatioClass ? { height: '100%' } : undefined}
       >
         <Image
-          src={props.src}
-          alt={props.alt}
-          fill={true}
-          sizes={optimizedProps.sizes || "100vw"}
-          quality={optimizedProps.quality}
-          priority={optimizedProps.priority}
-          loading={optimizedProps.loading}
-          className={`object-cover ${className || ''}`}
+          {...imageProps}
         />
       </div>
     );
   }
   
   // For non-fill images, just render the optimized Image component
-  return (
-    <Image
-      src={props.src}
-      alt={props.alt}
-      width={optimizedProps.width}
-      height={optimizedProps.height}
-      quality={optimizedProps.quality}
-      priority={optimizedProps.priority}
-      loading={optimizedProps.loading}
-      sizes={optimizedProps.sizes}
-      className={className}
-    />
-  );
+  // Make sure hero images don't have both priority and loading
+  const imageProps = imageType === 'hero'
+    ? {
+        src: props.src,
+        alt: props.alt,
+        width: optimizedProps.width,
+        height: optimizedProps.height,
+        quality: optimizedProps.quality,
+        priority: true,
+        sizes: optimizedProps.sizes,
+        className
+      }
+    : {
+        src: props.src,
+        alt: props.alt,
+        width: optimizedProps.width,
+        height: optimizedProps.height,
+        quality: optimizedProps.quality,
+        priority: optimizedProps.priority,
+        loading: !optimizedProps.priority ? (optimizedProps.loading || 'lazy') : undefined,
+        sizes: optimizedProps.sizes,
+        className
+      };
+      
+  return <Image {...imageProps} />;
 }
 
 /**

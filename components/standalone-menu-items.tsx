@@ -25,7 +25,7 @@ export default function StandaloneMenuItems() {
       } transition-colors shadow-md border hover:shadow-lg hover:scale-105 transition-all duration-200`}
     >
       <span>River & Village</span>
-      <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+      <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
     </Link>
   )
 } 

@@ -135,10 +135,10 @@ export default function TrekkingPage() {
 
   const detailsContent = (
     <div className="grid md:grid-cols-2 gap-6">
-      <div className="relative bg-white/90 backdrop-blur-sm p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+      <div className="relative bg-white/90 backdrop-blur-xs p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
         <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
           What's Included
-          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
+          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
         </h3>
         <ul className="list-disc list-inside space-y-2">
           <li>Professional guide</li>
@@ -146,12 +146,12 @@ export default function TrekkingPage() {
           <li>Walking sticks (if needed)</li>
           <li>Light refreshments</li>
         </ul>
-        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-sm"></div>
+        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-xs"></div>
       </div>
-      <div className="relative bg-white/90 backdrop-blur-sm p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
+      <div className="relative bg-white/90 backdrop-blur-xs p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
         <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
           What to Bring
-          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
+          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
         </h3>
         <ul className="list-disc list-inside space-y-2">
           <li>Comfortable hiking shoes</li>
@@ -159,7 +159,7 @@ export default function TrekkingPage() {
           <li>Water bottle</li>
           <li>Camera</li>
         </ul>
-        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-sm"></div>
+        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-xs"></div>
       </div>
     </div>
   );
@@ -179,7 +179,7 @@ export default function TrekkingPage() {
             className="object-contain"
             // Consider adding sizes if appropriate, though object-contain with fill might be fine
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-black/5 to-transparent"></div>
         </div>
         <p className="text-center text-sm mt-3 text-gray-600 italic">Click on map to enlarge</p>
       </div>
@@ -206,7 +206,7 @@ export default function TrekkingPage() {
               priority // Keep priority for LCP candidate in modal
             />
             <button 
-              className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 text-black shadow-lg border border-white/30 hover:bg-white transition-colors"
+              className="absolute top-4 right-4 bg-white/90 backdrop-blur-xs rounded-full p-2 text-black shadow-lg border border-white/30 hover:bg-white transition-colors"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsModalOpen(false);
@@ -227,8 +227,6 @@ export default function TrekkingPage() {
     <ActivityPageLayout
       title="Trekking" // TODO: Replace with t.trekking.title or similar once added
       subtitle="through Nature" // TODO: Replace with t.trekking.subtitle or similar once added
-      heroImageSrc="/images/round1.jpg" // Specific image for trekking
-      heroImageAlt="Trekking near Acheron River" // TODO: Replace with t.trekking.heroAlt or similar once added
       // Using hardcoded titles for now as keys are missing in translations
       descriptionTitle="Trekking Adventure"
       descriptionContent={descriptionContent}

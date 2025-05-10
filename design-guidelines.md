@@ -95,19 +95,19 @@
 - **Style**: rounded-full px-4 py-1.5
 - **Border**: border border-white/20
 - **Text**: text-sm font-semibold
-- **Background**: Colored with 90% opacity and backdrop-blur-sm
+- **Background**: Colored with 90% opacity and backdrop-blur-xs
 
 ## Effect Patterns
 
 ### Gradient Overlays
 - **Top-to-Bottom Fade**: 
   ```css
-  bg-gradient-to-b from-[#colorHex]/80 via-[#colorHex]/60 to-transparent
+  bg-linear-to-b from-[#colorHex]/80 via-[#colorHex]/60 to-transparent
   ```
 
 - **Corner Highlight**: 
   ```css
-  bg-gradient-to-tr from-[#colorHex]/40 via-transparent to-[#colorHex]/30
+  bg-linear-to-tr from-[#colorHex]/40 via-transparent to-[#colorHex]/30
   ```
 
 ### Border Effects

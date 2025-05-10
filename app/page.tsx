@@ -2,8 +2,10 @@
 
 import Link from "next/link"
 import { Roboto_Slab } from "next/font/google"
+import { useState, useRef, useCallback } from "react" // Added useRef, useCallback
 import BookingButton from "@/components/booking-button"
-import ResponsiveNavigation from "@/components/responsive-navigation"
+// ResponsiveNavigation import removed as it's now part of SiteHeader
+import SiteHeader from "@/components/site-header"; // Added SiteHeader import
 import { useLanguage } from "@/contexts/language-context"
 // Carousel imports removed as they are not used in this file
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
@@ -20,31 +22,59 @@ const robotoSlab = Roboto_Slab({
 
 export default function Home() {
   const { t } = useLanguage()
+  const [loadBokunScripts, setLoadBokunScripts] = useState(false);
+  const clickedButtonRef = useRef<HTMLButtonElement | null>(null);
+  const bokunReadyAttempts = useRef(0);
+
+  const ensureBokunIsReadyAndOpen = useCallback(() => {
+    if (window.BokunWidgets && (typeof window.BokunWidgets.init === 'function' || typeof window.BokunWidgets.reinit === 'function')) {
+      // console.log('BokunWidgets API is ready.');
+      // Check if a modal is already open (very basic check, might need refinement)
+      if (document.querySelector('.bokunModalContainer') || document.querySelector('.bokun-modal-open')) {
+         // console.log('Bokun modal seems to be already open or opening.');
+        return;
+      }
+      
+      if (clickedButtonRef.current) {
+        // console.log('Attempting to programmatically click the stored button again.');
+        // It's possible Bokun's scripts have now attached proper listeners.
+        // A direct click might be better than trying to call their internal modal functions.
+        clickedButtonRef.current.click(); 
+        clickedButtonRef.current = null; // Clear after attempting
+      }
+      bokunReadyAttempts.current = 0; // Reset attempts
+    } else if (bokunReadyAttempts.current < 30) { // Try for ~3 seconds
+      bokunReadyAttempts.current++;
+      // console.log(`Bokun API not ready, attempt ${bokunReadyAttempts.current}. Retrying...`);
+      setTimeout(ensureBokunIsReadyAndOpen, 100);
+    } else {
+      // console.error('Bokun API did not become ready after multiple attempts.');
+      bokunReadyAttempts.current = 0; // Reset attempts
+    }
+  }, []);
+
+  const handleBookNowClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    clickedButtonRef.current = event.currentTarget; // Store the clicked button
+    if (!loadBokunScripts) {
+      setLoadBokunScripts(true);
+      // The onLoaderLoaded callback will handle the next steps
+    } else {
+      // If scripts are already triggered to load, try to ensure widget opens
+      // This handles subsequent clicks if the first one didn't immediately open the modal
+      ensureBokunIsReadyAndOpen();
+    }
+  };
+
+  const handleBokunLoaderLoaded = useCallback(() => {
+    // console.log('BokunWidgetsLoader.js has loaded via BookingScripts callback.');
+    // Now that the loader is loaded, wait a bit for the main Bokun script to load and initialize
+    // then try to ensure the widget for the clicked button is open.
+    setTimeout(ensureBokunIsReadyAndOpen, 500); // Wait 500ms before first check
+  }, [ensureBokunIsReadyAndOpen]);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#FAF7F2] border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <div> {/* Removed absolute positioning and elaborate styling from this div */}
-          <Link href="/" className="flex items-center">
-            <div className="relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16"> {/* Simplified styling */}
-              <OptimizedImage
-                src="/images/ponyclub_logo.png"
-                alt="Acheron River Excursion"
-                fill
-                imageType="logo"
-                className="object-contain p-1"
-              />
-              {/* Removed decorative inset div */}
-            </div>
-          </Link>
-        </div>
-
-        {/* Responsive Navigation */}
-        <div> {/* Removed absolute positioning from this div */}
-          <ResponsiveNavigation />
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="relative min-h-screen bg-[#f5f0e8] overflow-hidden pt-20"> {/* Added pt-20 for fixed header */}
         {/* Hero Section */}
@@ -71,19 +101,20 @@ export default function Home() {
             muted 
             loop 
             playsInline
+            preload="metadata" // Added preload="metadata"
             className="absolute inset-0 w-full h-full object-cover z-10" // Ensure video is on top of the image
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent z-20"></div> {/* Gradient on top of video */}
+          <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent z-20"></div> {/* Gradient on top of video */}
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative bg-amber-800/40 px-6 sm:px-8 py-5 sm:py-6 rounded-2xl max-w-[90%] sm:max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-300">
+          <div className="relative bg-amber-800/40 px-6 sm:px-8 py-5 sm:py-6 rounded-2xl max-w-[90%] sm:max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-xs transform hover:scale-[1.02] transition-transform duration-300">
             <h1
               className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold`}
             >
               <span className="block mb-1 sm:mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.title}</span>
               <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.subtitle}</span>
             </h1>
-            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-gradient-to-b from-amber-200/20 to-transparent blur-sm"></div>
+            <div className="absolute -inset-[1px] -z-10 rounded-2xl bg-linear-to-b from-amber-200/20 to-transparent blur-xs"></div>
           </div>
         </div>
       </div>
@@ -136,19 +167,19 @@ export default function Home() {
       {/* Introduction Text Section - adjusted margin top */}
       <div className="relative px-6 md:px-10 py-8 md:py-10 rounded-2xl max-w-4xl mx-auto text-center mt-20 sm:mt-24 md:mt-20 overflow-hidden group transform hover:scale-[1.01] transition-all duration-500">
         {/* Background layers */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md rounded-2xl"></div>
+        <div className="absolute inset-0 -z-10 bg-linear-to-br from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md rounded-2xl"></div>
         <div className="absolute inset-0 -z-20 bg-[#6b8362]/5 rounded-2xl"></div>
         
         {/* Decorative effects */}
         <div className="absolute -inset-[3px] -z-10 rounded-2xl pointer-events-none opacity-70">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-amber-200/30 via-transparent to-[#6b8362]/20"></div>
+          <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30 via-transparent to-[#6b8362]/20"></div>
         </div>
         <div className="absolute inset-0 rounded-2xl border border-amber-200/30 pointer-events-none"></div>
         
         {/* Main content */}
         <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6 relative inline-block`}>
           {t.introduction.mainTitle}
-          <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
+          <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
         </h2>
         
         <div className="relative">
@@ -168,12 +199,12 @@ export default function Home() {
       <div className="text-center mt-16 md:mt-20">
         <h2 className={`${robotoSlab.variable} font-roboto-slab text-4xl md:text-5xl font-bold text-[#3E5A35] mb-12 md:mb-16 relative inline-block`}>
           SUMMER 2025 OFFERS {/* TODO: Translate this */}
-          <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#6b8362] to-transparent"></div>
+          <div className="absolute -bottom-2 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#6b8362] to-transparent"></div>
         </h2>
       </div>
 
       {/* Program Cards */}
-      <BookingScripts />
+      <BookingScripts loadTrigger={loadBokunScripts} onLoaderLoaded={handleBokunLoaderLoaded} />
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 px-4 md:px-8 mt-12 md:mt-16">
         {/* Program 1 Card */}
         <div className="w-full md:w-1/2 group relative">
@@ -194,8 +225,8 @@ export default function Home() {
             {/* Card Content Layer */}
             <div className="absolute inset-0 flex flex-col h-full">
               {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-              <div className="bg-gradient-to-b from-[#3E5A35]/80 via-[#3E5A35]/60 to-transparent pt-8 px-6 pb-4">
-                <div className="inline-block rounded-full bg-[#6b8362]/90 backdrop-blur-sm px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
+              <div className="bg-linear-to-b from-[#3E5A35]/80 via-[#3E5A35]/60 to-transparent pt-8 px-6 pb-4">
+                <div className="inline-block rounded-full bg-[#6b8362]/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
                   Most Popular
                 </div>
                 <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
@@ -204,7 +235,7 @@ export default function Home() {
               </div>
               
               {/* Center Section - Activity List */}
-              <div className="flex-grow px-6 py-4">
+              <div className="grow px-6 py-4">
                 <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
                   <ul className="space-y-3 text-gray-800">
                     <li className="flex items-center gap-3">
@@ -242,10 +273,11 @@ export default function Home() {
                     <div className="relative w-full overflow-hidden">
                       <button
                         className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-[#6b8362] hover:bg-[#3E5A35] text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
-                        disabled
+                        // disabled // Keep it enabled to trigger script load
                         id="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
                         data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
                         data-testid="widget-book-button"
+                        onClick={handleBookNowClick}
                       >
                         Book Now
                       </button>
@@ -258,7 +290,7 @@ export default function Home() {
             {/* Layered Border Effects */}
             <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
             <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#f5f0e8]/40 via-transparent to-[#6b8362]/30"></div>
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-[#6b8362]/30"></div>
             </div>
           </div>
         </div>
@@ -282,8 +314,8 @@ export default function Home() {
             {/* Card Content Layer */}
             <div className="absolute inset-0 flex flex-col h-full">
               {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-              <div className="bg-gradient-to-b from-amber-800/80 via-amber-800/60 to-transparent pt-8 px-6 pb-4">
-                <div className="inline-block rounded-full bg-amber-700/90 backdrop-blur-sm px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
+              <div className="bg-linear-to-b from-amber-800/80 via-amber-800/60 to-transparent pt-8 px-6 pb-4">
+                <div className="inline-block rounded-full bg-amber-700/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
                   New Experience
                 </div>
                 <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
@@ -292,7 +324,7 @@ export default function Home() {
               </div>
               
               {/* Center Section - Activity List */}
-              <div className="flex-grow px-6 py-4">
+              <div className="grow px-6 py-4">
                 <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
                   <ul className="space-y-3 text-gray-800">
                     <li className="flex items-center gap-3">
@@ -330,10 +362,11 @@ export default function Home() {
                     <div className="relative w-full overflow-hidden">
                       <button
                         className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-amber-700 hover:bg-amber-800 text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
-                        disabled
+                        // disabled // Keep it enabled to trigger script load
                         id="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
                         data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
                         data-testid="widget-book-button"
+                        onClick={handleBookNowClick}
                       >
                         Book Now
                       </button>
@@ -346,17 +379,18 @@ export default function Home() {
             {/* Layered Border Effects */}
             <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
             <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#f5f0e8]/40 via-transparent to-amber-500/30"></div>
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-amber-500/30"></div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Book Now Button (This is a general one, distinct from program cards) */}
+      {/* This BookingButton uses Beyonk, not Bokun. We'll leave its default lazyOnload behavior for now. */}
       <div className="flex justify-center mt-12 mb-16">
         <div className="relative">
-          <BookingButton />
-          <div className="absolute -inset-[2px] -z-10 rounded-full bg-gradient-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-sm"></div>
+          <BookingButton /> 
+          <div className="absolute -inset-[2px] -z-10 rounded-full bg-linear-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-xs"></div>
         </div>
       </div>
 

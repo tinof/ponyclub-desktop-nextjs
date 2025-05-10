@@ -64,6 +64,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://static.elfsight.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
         
+        {/* <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" /> */}
         {/* Canonical link for homepage */}
         <link rel="canonical" href="https://ponyclub.gr/" />
         {/* JSON-LD structured data */}
@@ -111,8 +112,7 @@ export default function RootLayout({
             </PageLayout>
           </LanguageProvider>
         </ThemeProvider>
-        {/* Vercel Web Analytics is typically handled by the script with src="https://vercel.live/analytics" or by project settings.
-            The SpeedInsights component is available via: import { SpeedInsights } from '@vercel/speed-insights/next'; */}
+        <SpeedInsights />
       </body>
     </html>
   )

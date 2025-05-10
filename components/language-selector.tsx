@@ -26,13 +26,13 @@ export default function LanguageSelector() {
       >
         <Globe className="w-4 h-4" />
         <span>{language === "en" ? "EN" : "EL"}</span>
-        <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-gradient-to-r from-amber-200/30 to-transparent blur-sm"></div>
+        <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-10" onClick={closeDropdown} aria-hidden="true" />
-          <div className="absolute right-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-sm ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden">
+          <div className="absolute right-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-xs ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden">
             <div className="py-1" role="menu" aria-orientation="vertical">
               <button
                 className={`w-full text-left px-4 py-2 text-sm ${

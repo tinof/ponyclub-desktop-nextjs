@@ -39,15 +39,15 @@ export default function ContactDetailsEnhanced() {
   const { t } = useLanguage()
 
   return (
-    <div className="relative bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-amber-100/70 transform rotate-1 hover:shadow-2xl transition-shadow duration-300">
+    <div className="relative bg-white/80 backdrop-blur-xs p-6 md:p-8 rounded-lg shadow-xl border border-amber-100/70 transform rotate-1 hover:shadow-2xl transition-shadow duration-300">
       <h2 className="text-center text-3xl mb-6 font-bold text-[#6b8362] relative inline-block w-full">
         {t.contact.title}
-        <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
+        <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
       </h2>
 
       <div className="space-y-4">
         <div className="flex items-start gap-3">
-          <MapPin className="text-[#c27a5f] h-6 w-6 mt-1 flex-shrink-0" />
+          <MapPin className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
             <h3 className="font-bold text-[#6b8362] uppercase">LOCATION</h3>
             <p className="font-medium">{t.contact.businessName}</p>
@@ -57,7 +57,7 @@ export default function ContactDetailsEnhanced() {
         </div>
 
         <div className="flex items-start gap-3 mt-4 pt-4 border-t border-[#6b8362]/30">
-          <Phone className="text-[#c27a5f] h-6 w-6 mt-1 flex-shrink-0" />
+          <Phone className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
             <h3 className="font-bold text-[#6b8362] uppercase">Phone</h3>
             <p>{t.contact.phone1}</p>
@@ -66,7 +66,7 @@ export default function ContactDetailsEnhanced() {
         </div>
 
         <div className="flex items-start gap-3">
-          <Mail className="text-[#c27a5f] h-6 w-6 mt-1 flex-shrink-0" />
+          <Mail className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
             <h3 className="font-bold text-[#6b8362] uppercase">E-mail</h3>
             <p>{t.contact.email}</p>
@@ -75,7 +75,7 @@ export default function ContactDetailsEnhanced() {
         </div>
         
         <div className="flex items-start gap-3 mt-4 pt-4 border-t border-[#6b8362]/30">
-          <Clock className="text-[#c27a5f] h-6 w-6 mt-1 flex-shrink-0" />
+          <Clock className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
             <h3 className="font-bold text-[#6b8362] uppercase mb-2">{t.contact.openingHours}</h3>
             <p className="text-sm whitespace-pre-line">{t.contact.openingHoursDetails}</p>
@@ -100,7 +100,7 @@ export default function ContactDetailsEnhanced() {
           </div>
         </div>
       </div>
-      <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
+      <div className="absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-xs"></div>
     </div>
   )
 }

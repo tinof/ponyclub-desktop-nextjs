@@ -53,8 +53,7 @@ export function optimizeImageProps(props: Partial<ImageProps> & { src: string, a
  */
 export function optimizeHeroImage(props: Partial<ImageProps> & { src: string, alt: string }): Partial<ImageProps> {
   return {
-    ...optimizeImageProps({ ...props, type: 'hero' }),
-    priority: true, // Always prioritize hero images
+    ...optimizeImageProps({ ...props, type: 'hero', priority: true }),
     quality: IMAGE_QUALITY.high,
   };
 }

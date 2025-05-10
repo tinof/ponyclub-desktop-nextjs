@@ -85,14 +85,48 @@ export function OptimizedScript({
 
 /**
  * BookingScripts component - Specialized for booking scripts
+ * Now loads script on demand and calls a callback when the loader script is loaded.
  */
-export function BookingScripts() {
-  return (
-    <OptimizedScript
-      src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-      strategy="afterInteractive"
-    />
-  );
+interface BookingScriptsProps {
+  loadTrigger?: boolean;
+  onLoaderLoaded?: () => void; // Callback when BokunWidgetsLoader.js itself has loaded
+}
+
+export function BookingScripts({ loadTrigger, onLoaderLoaded }: BookingScriptsProps) {
+  const [bokunLoaderAdded, setBokunLoaderAdded] = useState(false);
+
+  useEffect(() => {
+    if (loadTrigger && !bokunLoaderAdded) {
+      // console.log('Triggering manual load of BokunWidgetsLoader.js');
+      const script = document.createElement('script');
+      script.id = 'bokun-widgets-loader-manual';
+      script.src = "https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a";
+      script.async = true;
+      script.type = 'text/javascript';
+      
+      script.onload = () => {
+        // console.log('Manually appended BokunWidgetsLoader.js has loaded.');
+        if (onLoaderLoaded) {
+          onLoaderLoaded();
+        }
+      };
+      script.onerror = () => {
+        console.error('Failed to load BokunWidgetsLoader.js manually.');
+      };
+      
+      document.body.appendChild(script);
+      setBokunLoaderAdded(true); // Ensure we only add it once
+
+      return () => {
+        const existingScript = document.getElementById('bokun-widgets-loader-manual');
+        if (existingScript && existingScript.parentNode) {
+          // existingScript.parentNode.removeChild(existingScript);
+        }
+      };
+    }
+  }, [loadTrigger, bokunLoaderAdded, onLoaderLoaded]);
+
+  return null; 
 }
 
 /**
@@ -108,4 +142,4 @@ export function ReviewsScript() {
   );
 }
 
-export default OptimizedScript; 
+export default OptimizedScript;

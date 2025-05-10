@@ -20,7 +20,7 @@ export default function ApiKeyInput() {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm">
+    <div className="bg-white p-4 rounded-lg shadow-xs">
       {apiKey ? (
         <div className="flex flex-col sm:flex-row gap-2 items-center justify-between">
           <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ export default function ApiKeyInput() {
             value={inputKey}
             onChange={(e) => setInputKey(e.target.value)}
             placeholder="Enter Google Maps API Key"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6b8362]"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-hidden focus:ring-2 focus:ring-[#6b8362]"
             required
           />
           <button

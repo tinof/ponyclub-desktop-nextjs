@@ -22,7 +22,7 @@ export default function PageLayout({ children }: PageLayoutProps) {
   
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow">
+      <div className="grow">
         {children}
       </div>
       {/* Hidden debug message */}

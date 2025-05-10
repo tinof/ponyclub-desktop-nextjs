@@ -1,6 +1,181 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../*.{js,ts,jsx,tsx,mdx}';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-inter);
+  --font-roboto-slab: var(--font-roboto-slab);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-text-shine: text-shine 4s ease-in-out infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes text-shine {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-xs)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility program-card {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/pattern.svg');
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}
+@utility text-shadow-lg {
+  /* Text shadow utilities */
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+@utility text-shadow-xl {
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.4);
+}
+@utility animate-text-shine {
+  /* Text shine animation */
+  background-size: 200% auto;
+  animation: textShine 4s ease-in-out infinite;
+}
+@utility gradient-text {
+  /* Gradient text for headings */
+  background: linear-gradient(90deg, hsl(var(--river-accent)), #6b8362);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+@utility frosted-card {
+  /* Frosted glass card accent frame */
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(45deg, hsl(var(--river-accent)), #6b8362);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
+}
 
 @layer base {
   :root {
@@ -79,38 +254,6 @@
 
 /* Custom styles for the program cards */
 @layer components {
-  .program-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .program-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("/pattern.svg");
-    opacity: 0.18;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-  
-  /* Text shadow utilities */
-  .text-shadow-lg {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.6), 
-                 0 2px 4px rgba(0,0,0,0.4), 
-                 0 4px 8px rgba(0,0,0,0.2);
-  }
-  
-  .text-shadow-xl {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8), 
-                 0 4px 8px rgba(0,0,0,0.6), 
-                 0 8px 16px rgba(0,0,0,0.4);
-  }
-  
-  /* Text shine animation */
   @keyframes textShine {
     0% {
       background-position: 0% 50%;
@@ -121,37 +264,5 @@
     100% {
       background-position: 0% 50%;
     }
-  }
-  
-  .animate-text-shine {
-    background-size: 200% auto;
-    animation: textShine 4s ease-in-out infinite;
-  }
-
-  /* Gradient text for headings */
-  .gradient-text {
-    background: linear-gradient(90deg, hsl(var(--river-accent)), #6b8362);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  /* Frosted glass card accent frame */
-  .frosted-card {
-    position: relative;
-  }
-
-  .frosted-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(45deg, hsl(var(--river-accent)), #6b8362);
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
   }
 }
