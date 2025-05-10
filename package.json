@@ -52,16 +52,16 @@
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "next-themes": "^0.4.4",
-    "react": "18.2.0",
-    "react-day-picker": "8.10.1",
-    "react-dom": "18.2.0",
+    "react": "rc",
+    "react-day-picker": "^9.6.7",
+    "react-dom": "rc",
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.3",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.9.6",
+    "vaul": "^1.1.2",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -69,8 +69,8 @@
     "@tailwindcss/postcss": "^4.1.5",
     "@types/leaflet": "^1.9.17",
     "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "cross-env": "^7.0.3",
     "postcss": "^8",
     "tailwindcss": "^4.1.5",
@@ -80,5 +80,9 @@
     "rollup": "^2.79.1",
     "rollup-plugin-terser": "^7.0.2",
     "d3-path": "^3.1.0"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }

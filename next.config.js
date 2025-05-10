@@ -32,7 +32,15 @@ const nextConfig = {
   experimental: {
     optimizeCss: false,
     scrollRestoration: true,
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
+  // Stable features (formerly experimental)
+  bundlePagesRouterDependencies: true,
+  serverExternalPackages: [], // Add any packages here that need to be explicitly externalized
+
   async redirects() {
     return [
       // Example 301 redirects from old WordPress URLs to new Next.js routes

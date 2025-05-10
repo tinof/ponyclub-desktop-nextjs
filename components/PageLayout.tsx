@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Footer from './Footer';
 
@@ -10,15 +10,11 @@ interface PageLayoutProps {
 
 export default function PageLayout({ children }: PageLayoutProps) {
   const pathname = usePathname();
-  const [isHomePage, setIsHomePage] = useState(true);
+  // Determine if it's the homepage directly from the pathname
+  const isHomePage = pathname === '/' || pathname === '';
   
-  useEffect(() => {
-    // More defensive check for homepage
-    console.log("Current pathname:", pathname);
-    if (pathname) {
-      setIsHomePage(pathname === '/' || pathname === '');
-    }
-  }, [pathname]);
+  // Debug log, can be removed in production
+  console.log("Current pathname:", pathname, "Is homepage:", isHomePage);
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -30,4 +26,4 @@ export default function PageLayout({ children }: PageLayoutProps) {
       {!isHomePage && <Footer />}
     </div>
   );
-} 
+}
