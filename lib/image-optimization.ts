@@ -5,7 +5,7 @@ import { ImageProps } from 'next/image';
  * These help prevent layout shifts (CLS) by reserving space before image loads
  */
 export const DEFAULT_IMAGE_SIZES = {
-  hero: '(max-width: 640px) 100vw, 100vw',
+  hero: 'calc(100vw - 2rem)', // Adjusted for 1rem margin on each side
   gallery: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
   card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
   avatar: '96px',
@@ -86,4 +86,4 @@ export function getOptimalImageFormat(): 'webp' | 'jpg' {
     }
   }
   return 'jpg';
-} 
+}

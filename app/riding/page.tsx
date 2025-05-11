@@ -1,28 +1,16 @@
 import React from 'react';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
+import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 
 const RidingPage = () => {
-  const bokunWidget = (
-    <>
-      <script
-        type="text/javascript"
-        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        async
-      />
-      <div
-        className="bokunWidget"
-        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020659"
-      ></div>
-      <noscript>Please enable javascript in your browser to book</noscript>
-    </>
-  );
+  const bokunExperienceId = "1020659"; // Riding experience ID
 
   return (
     <ActivityPageLayout
       title="Riding"
       subtitle=""
       descriptionTitle=""
-      descriptionContent={bokunWidget}
+      descriptionContent={<DynamicBokunWidget experienceId={bokunExperienceId} />}
       detailsTitle=""
       detailsContent={<></>}
       pricingTitle=""
