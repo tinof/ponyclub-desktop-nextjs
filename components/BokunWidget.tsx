@@ -28,54 +28,90 @@ export default function BokunWidget({ experienceId, partialView = 1 }: BokunWidg
 
     console.log("[Bokun Widget Parent] useEffect triggered. Container element:", containerElement);
 
-    const observer = new MutationObserver((mutationsList, observerInstance) => {
-      const iframe = containerElement.querySelector("iframe");
-      if (iframe) {
-        console.log("[Bokun Widget Parent] Found iframe:", iframe);
+    const options: IFrameOptions = {
+      log: process.env.NODE_ENV === 'development', // Enable logs only in dev
+      checkOrigin: false, // Be cautious in production
+      // Relying on messageCallback. Removed onMessage due to TS type error.
+      // Initializing the cart iframe with these options should hopefully prevent the warning.
+      messageCallback: (messageData: { iframe: HTMLIFrameElement; message: any; }) => {
+        console.log(
+          "[Bokun Widget Parent] Received message from iframe (messageCallback):",
+          messageData.message
+        );
+        // Potentially handle specific messages if needed in the future
+      },
+      resizedCallback: (sizeData: { iframe: HTMLIFrameElement; height: number; width: number; type: string; }) => {
+        console.log(
+          "[Bokun Widget Parent] iframeResizer resizedCallback:",
+          sizeData
+        );
+      },
+      initCallback: (iFrameEl: HTMLIFrameElement) => {
+           console.log(
+          "[Bokun Widget Parent] iframeResizer initCallback: iframe is ready.",
+          iFrameEl
+        );
+      }
+    };
+
+    // 1. Initialize iframeResizer for the iframe embedded within this component (catalogue view)
+    const catalogueObserver = new MutationObserver((mutationsList, observerInstance) => {
+      const catalogueIframe = containerElement.querySelector("iframe");
+      if (catalogueIframe && !catalogueIframe.dataset.resizerAttached) {
+        console.log("[Bokun Widget Parent] Found catalogue iframe, initializing iframeResizer:", catalogueIframe);
         try {
-          const options: IFrameOptions = {
-            log: true,
-            checkOrigin: false, // Be cautious in production
-            messageCallback: (messageData: { iframe: HTMLIFrameElement; message: any; }) => {
-              console.log(
-                "[Bokun Widget Parent] Received message from iframe (messageCallback):",
-                messageData.message
-              );
-            },
-            resizedCallback: (sizeData: { iframe: HTMLIFrameElement; height: number; width: number; type: string; }) => {
-              console.log(
-                "[Bokun Widget Parent] iframeResizer resizedCallback:",
-                sizeData
-              );
-            },
-            initCallback: (iFrameEl: HTMLIFrameElement) => {
-                 console.log(
-                "[Bokun Widget Parent] iframeResizer initCallback: iframe is ready.",
-                iFrameEl
-              );
-            }
-          };
-          // In v4, iframeResizer() returns an array of the iFrame HTML elements it's acting on.
-          const iFrameElements = iframeResizer(options, iframe);
-          console.log("[Bokun Widget Parent] iframeResizer initialized. Result (iFrame elements):", iFrameElements);
+          iframeResizer(options, catalogueIframe);
+          catalogueIframe.dataset.resizerAttached = 'true'; // Mark as initialized
+          console.log("[Bokun Widget Parent] iframeResizer initialized for catalogue iframe.");
         } catch (error) {
-          console.error("[Bokun Widget Parent] Error initializing iframeResizer:", error);
+          console.error("[Bokun Widget Parent] Error initializing iframeResizer for catalogue iframe:", error);
         }
-        observerInstance.disconnect();
+        observerInstance.disconnect(); // Stop observing once the catalogue iframe is found and initialized
+      } else if (catalogueIframe?.dataset.resizerAttached) {
+         console.log("[Bokun Widget Parent] Catalogue iframe already has resizer attached.");
+         observerInstance.disconnect();
       } else {
-        console.log("[Bokun Widget Parent] iframe not found in MutationObserver callback.");
+        console.log("[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback.");
       }
     });
 
-    console.log("[Bokun Widget Parent] Starting MutationObserver on container.");
-    observer.observe(containerElement, { childList: true, subtree: true });
+    console.log("[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe.");
+    catalogueObserver.observe(containerElement, { childList: true, subtree: true });
 
+
+    // 2. Initialize iframeResizer for the cart iframe injected into the body by Bokun
+    const bodyObserver = new MutationObserver((mutationsList, observerInstance) => {
+        const cartIframe = document.getElementById('bokun-widgets-cart') as HTMLIFrameElement | null;
+        // Check if the cart iframe exists and hasn't been initialized yet
+        if (cartIframe && !cartIframe.dataset.resizerAttached) {
+            console.log("[Bokun Widget Parent] Found cart iframe in body, initializing iframeResizer:", cartIframe);
+            try {
+                iframeResizer(options, cartIframe);
+                cartIframe.dataset.resizerAttached = 'true'; // Mark as initialized
+                console.log("[Bokun Widget Parent] iframeResizer initialized for cart iframe.");
+                // Optional: Disconnect if you only expect one cart iframe instance
+                // observerInstance.disconnect();
+            } catch (error) {
+                console.error("[Bokun Widget Parent] Error initializing iframeResizer for cart iframe:", error);
+            }
+        } else if (cartIframe?.dataset.resizerAttached) {
+             // console.log("[Bokun Widget Parent] Cart iframe already has resizer attached.");
+        }
+    });
+
+    console.log("[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe.");
+    // Observe the body for additions/removals, including the cart iframe
+    bodyObserver.observe(document.body, { childList: true, subtree: false }); // Observe direct children of body
+
+
+    // Cleanup function
     return () => {
-      console.log("[Bokun Widget Parent] useEffect cleanup: Disconnecting MutationObserver.");
-      observer.disconnect();
-      // iframe-resizer v4 might require manual cleanup if the iframe is removed.
-      // Accessing iframeResizer.iframeResizer.close(iframeId) if an ID was set.
-      // For now, we rely on the component unmounting.
+      console.log("[Bokun Widget Parent] useEffect cleanup: Disconnecting observers.");
+      catalogueObserver.disconnect();
+      bodyObserver.disconnect();
+      // Note: iframe-resizer v4 might need manual cleanup if iframes are removed dynamically.
+      // e.g., iframeResizer.iframeResizer.close(iframeElement)
+      // For now, relying on component unmount and observer disconnect.
     };
   }, [bokunWidgetSrcUrl]); // Re-run if the URL changes
 

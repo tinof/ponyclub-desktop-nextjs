@@ -2,16 +2,14 @@
 
 import Link from "next/link"
 import { Roboto_Slab } from "next/font/google"
-// import { useState, useRef, useCallback } from "react" // Removed unused imports
+import { useState, useRef, useCallback } from "react" // Added useRef, useCallback
 import BookingButton from "@/components/booking-button"
 // ResponsiveNavigation import removed as it's now part of SiteHeader
 // SiteHeader import removed as it's now part of PageLayout
 import { useLanguage } from "@/contexts/language-context"
 // Carousel imports removed as they are not used in this file
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
-// import { BookingScripts, ReviewsScript } from '@/components/ui/script-loader' // BookingScripts removed
-import { ReviewsScript } from '@/components/ui/script-loader' // Keep ReviewsScript
-import Script from "next/script" // Import next/script
+import { BookingScripts, ReviewsScript } from '@/components/ui/script-loader'
 import { Waves, MountainSnow, Sailboat } from 'lucide-react'; // Added icons
 import DynamicGoogleMap from "@/components/DynamicGoogleMap"
 import DynamicContactDetails from "@/components/DynamicContactDetails"
@@ -24,23 +22,52 @@ const robotoSlab = Roboto_Slab({
 
 export default function Home() {
   const { t } = useLanguage()
-  // Removed Bokun related states and refs: loadBokunScripts, clickedButtonRef, bokunReadyAttempts
-  // Removed Bokun related callbacks: ensureBokunIsReadyAndOpen, handleBookNowClick, handleBokunLoaderLoaded
+  const [loadBokunScripts, setLoadBokunScripts] = useState(false);
+  const clickedButtonRef = useRef<HTMLButtonElement | null>(null);
+  const bokunReadyAttempts = useRef(0);
+
+  const ensureBokunIsReadyAndOpen = useCallback(() => {
+    if (window.BokunWidgets && (typeof window.BokunWidgets.init === 'function' || typeof window.BokunWidgets.reinit === 'function')) {
+      // Check if a modal is already open (very basic check, might need refinement)
+      if (document.querySelector('.bokunModalContainer') || document.querySelector('.bokun-modal-open')) {
+        return;
+      }
+      
+      if (clickedButtonRef.current) {
+        // It's possible Bokun's scripts have now attached proper listeners.
+        // A direct click might be better than trying to call their internal modal functions.
+        clickedButtonRef.current.click(); 
+        clickedButtonRef.current = null; // Clear after attempting
+      }
+      bokunReadyAttempts.current = 0; // Reset attempts
+    } else if (bokunReadyAttempts.current < 30) { // Try for ~3 seconds
+      bokunReadyAttempts.current++;
+      setTimeout(ensureBokunIsReadyAndOpen, 100);
+    } else {
+      bokunReadyAttempts.current = 0; // Reset attempts
+    }
+  }, []);
+
+  const handleBookNowClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    clickedButtonRef.current = event.currentTarget; // Store the clicked button
+    if (!loadBokunScripts) {
+      setLoadBokunScripts(true);
+      // The onLoaderLoaded callback will handle the next steps
+    } else {
+      // If scripts are already triggered to load, try to ensure widget opens
+      // This handles subsequent clicks if the first one didn't immediately open the modal
+      ensureBokunIsReadyAndOpen();
+    }
+  };
+
+  const handleBokunLoaderLoaded = useCallback(() => {
+    // Now that the loader is loaded, wait a bit for the main Bokun script to load and initialize
+    // then try to ensure the widget for the clicked button is open.
+    setTimeout(ensureBokunIsReadyAndOpen, 500); // Wait 500ms before first check
+  }, [ensureBokunIsReadyAndOpen]);
 
   return (
     <>
-      <Script
-        id="bokun-widgets-loader-homepage"
-        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        strategy="lazyOnload" // Or "afterInteractive"
-        onLoad={() => {
-          console.log("BokunWidgetsLoader.js loaded on homepage for button initialization.");
-          // Bokun's loader should now find and initialize .bokunButton elements
-        }}
-        onError={() => {
-          console.error('Failed to load BokunWidgetsLoader.js on homepage.');
-        }}
-      />
       {/* SiteHeader is now rendered by PageLayout in app/layout.tsx */}
       <main className="relative min-h-screen overflow-hidden"> {/* Removed pt-20 and bg-[#f5f0e8] */}
         {/* Hero Section */}
@@ -169,182 +196,182 @@ export default function Home() {
       </div>
 
       {/* Program Cards */}
-      {/* <BookingScripts loadTrigger={loadBokunScripts} onLoaderLoaded={handleBokunLoaderLoaded} /> Removed */}
+      <BookingScripts loadTrigger={loadBokunScripts} onLoaderLoaded={handleBokunLoaderLoaded} />
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 px-4 md:px-8 mt-12 md:mt-16">
         {/* Program 1 Card */}
         <div className="w-full md:w-1/2 group relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
-              {/* Background Image */}
-              <OptimizedImage
-                src="/images/Rafting_Group_Blue_Adventure_River.jpg"
-                alt={t.programs.program1.title || "Rafting Adventure"}
-                fill
-                sizes="(max-width: 767px) 100vw, 50vw"
-                className="object-cover"
-                imageType="default"
-              />
+          <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
+            {/* Background Image */}
+            <OptimizedImage
+              src="/images/Rafting_Group_Blue_Adventure_River.jpg"
+              alt={t.programs.program1.title || "Rafting Adventure"}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover"
+              imageType="default"
+            />
             
-              {/* Glass Overlay */}
-              <div className="absolute inset-0 bg-[#6b8362]/10 backdrop-blur-[2px]"></div>
+            {/* Glass Overlay */}
+            <div className="absolute inset-0 bg-[#6b8362]/10 backdrop-blur-[2px]"></div>
             
-              {/* Card Content Layer */}
-              <div className="absolute inset-0 flex flex-col h-full">
-                {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-                <div className="bg-linear-to-b from-[#3E5A35]/80 via-[#3E5A35]/60 to-transparent pt-8 px-6 pb-4">
-                  <div className="inline-block rounded-full bg-[#6b8362]/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
-                    Most Popular
-                  </div>
-                  <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
-                    {t.programs.program1.title || "ΠΡΟΓΡΑΜΜΑ 1"}
-                  </h3>
+            {/* Card Content Layer */}
+            <div className="absolute inset-0 flex flex-col h-full">
+              {/* Top Section - Semi-transparent Overlay with Title and Badge */}
+              <div className="bg-linear-to-b from-[#3E5A35]/80 via-[#3E5A35]/60 to-transparent pt-8 px-6 pb-4">
+                <div className="inline-block rounded-full bg-[#6b8362]/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
+                  Most Popular
                 </div>
+                <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
+                  {t.programs.program1.title || "ΠΡΟΓΡΑΜΜΑ 1"}
+                </h3>
+              </div>
               
-                {/* Center Section - Activity List */}
-                <div className="grow px-6 py-4">
-                  <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
-                    <ul className="space-y-3 text-gray-800">
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
-                          <Waves className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program1.rafting || "Rafting: 30 minutes"}</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
-                          <MountainSnow className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program1.riding || "Riding: 10-15 minutes"}</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
-                          <MountainSnow className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program1.hiking || "Hiking canyon crossing"}</span>
-                      </li>
-                    </ul>
-                  </div>
+              {/* Center Section - Activity List */}
+              <div className="grow px-6 py-4">
+                <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
+                  <ul className="space-y-3 text-gray-800">
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
+                        <Waves className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program1.rafting || "Rafting: 30 minutes"}</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
+                        <MountainSnow className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program1.riding || "Riding: 10-15 minutes"}</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-[#6b8362] rounded-full p-1.5 shadow-md">
+                        <MountainSnow className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program1.hiking || "Hiking canyon crossing"}</span>
+                    </li>
+                  </ul>
                 </div>
+              </div>
               
-                {/* Bottom Section - Price and Button */}
-                <div className="mt-auto">
-                  <div className="bg-[#3E5A35]/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
-                    <div className="flex flex-col items-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                        {t.programs.program1.priceAdults || "20 € Adults"}
-                      </div>
-                      <p className="text-sm text-white/90 mb-4">
-                        {t.programs.program1.priceChildren || "10 € children under 12 years old"}
-                      </p>
-                      <div className="relative w-full overflow-hidden">
-                        <button
-                          className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-[#6b8362] hover:bg-[#3E5A35] text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
-                          // disabled // Keep it enabled to trigger script load
-                          id="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
-                          data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
-                          data-testid="widget-book-button"
-                          // onClick={handleBookNowClick} // Removed onClick
-                        >
-                          Book Now
-                        </button>
-                      </div>
+              {/* Bottom Section - Price and Button */}
+              <div className="mt-auto">
+                <div className="bg-[#3E5A35]/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
+                  <div className="flex flex-col items-center">
+                    <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
+                      {t.programs.program1.priceAdults || "20 € Adults"}
+                    </div>
+                    <p className="text-sm text-white/90 mb-4">
+                      {t.programs.program1.priceChildren || "10 € children under 12 years old"}
+                    </p>
+                    <div className="relative w-full overflow-hidden">
+                      <button
+                        className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-[#6b8362] hover:bg-[#3E5A35] text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
+                        // disabled // Keep it enabled to trigger script load
+                        id="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
+                        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
+                        data-testid="widget-book-button"
+                        onClick={handleBookNowClick}
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            
-              {/* Layered Border Effects */}
-              <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
-              <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
-                <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-[#6b8362]/30"></div>
               </div>
             </div>
+            
+            {/* Layered Border Effects */}
+            <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
+            <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-[#6b8362]/30"></div>
+            </div>
           </div>
+        </div>
 
-          {/* Program 2 Card */}
-          <div className="w-full md:w-1/2 group relative mt-6 md:mt-0">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
-              {/* Background Image */}
-              <OptimizedImage
-                src="/images/Kayaker_Red_Adventurous_River.jpg"
-                alt={t.programs.program2.title || "Kayaking Adventure"}
-                fill
-                sizes="(max-width: 767px) 100vw, 50vw"
-                className="object-cover"
-                imageType="default"
-              />
+        {/* Program 2 Card */}
+        <div className="w-full md:w-1/2 group relative mt-6 md:mt-0">
+          <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
+            {/* Background Image */}
+            <OptimizedImage
+              src="/images/Kayaker_Red_Adventurous_River.jpg"
+              alt={t.programs.program2.title || "Kayaking Adventure"}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover"
+              imageType="default"
+            />
             
-              {/* Glass Overlay */}
-              <div className="absolute inset-0 bg-amber-800/10 backdrop-blur-[2px]"></div>
+            {/* Glass Overlay */}
+            <div className="absolute inset-0 bg-amber-800/10 backdrop-blur-[2px]"></div>
             
-              {/* Card Content Layer */}
-              <div className="absolute inset-0 flex flex-col h-full">
-                {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-                <div className="bg-linear-to-b from-amber-800/80 via-amber-800/60 to-transparent pt-8 px-6 pb-4">
-                  <div className="inline-block rounded-full bg-amber-700/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
-                    New Experience
-                  </div>
-                  <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
-                    {t.programs.program2.title || "ΠΡΟΓΡΑΜΜΑ 2"}
-                  </h3>
+            {/* Card Content Layer */}
+            <div className="absolute inset-0 flex flex-col h-full">
+              {/* Top Section - Semi-transparent Overlay with Title and Badge */}
+              <div className="bg-linear-to-b from-amber-800/80 via-amber-800/60 to-transparent pt-8 px-6 pb-4">
+                <div className="inline-block rounded-full bg-amber-700/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
+                  New Experience
                 </div>
+                <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
+                  {t.programs.program2.title || "ΠΡΟΓΡΑΜΜΑ 2"}
+                </h3>
+              </div>
               
-                {/* Center Section - Activity List */}
-                <div className="grow px-6 py-4">
-                  <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
-                    <ul className="space-y-3 text-gray-800">
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
-                          <Sailboat className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program2.kayak || "Kayak: 30 minutes"}</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
-                          <MountainSnow className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program2.riding || "Riding: 10-15 minutes"}</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
-                          <MountainSnow className="w-4 h-4 text-white" />
-                        </div>
-                        <span className="font-medium">{t.programs.program2.hiking || "Hiking canyon crossing"}</span>
-                      </li>
-                    </ul>
-                  </div>
+              {/* Center Section - Activity List */}
+              <div className="grow px-6 py-4">
+                <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
+                  <ul className="space-y-3 text-gray-800">
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
+                        <Sailboat className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program2.kayak || "Kayak: 30 minutes"}</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
+                        <MountainSnow className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program2.riding || "Riding: 10-15 minutes"}</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <div className="flex items-center justify-center bg-amber-700 rounded-full p-1.5 shadow-md">
+                        <MountainSnow className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">{t.programs.program2.hiking || "Hiking canyon crossing"}</span>
+                    </li>
+                  </ul>
                 </div>
+              </div>
               
-                {/* Bottom Section - Price and Button */}
-                <div className="mt-auto">
-                  <div className="bg-amber-800/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
-                    <div className="flex flex-col items-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                        {t.programs.program2.price || "25 € per person"}
-                      </div>
-                      <p className="text-sm text-white/90 mb-4">
-                        {t.programs.program2.separator || "----"}
-                      </p>
-                      <div className="relative w-full overflow-hidden">
-                        <button
-                          className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-amber-700 hover:bg-amber-800 text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
-                          // disabled // Keep it enabled to trigger script load
-                          id="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
-                          data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
-                          data-testid="widget-book-button"
-                          // onClick={handleBookNowClick} // Removed onClick
-                        >
-                          Book Now
-                        </button>
-                      </div>
+              {/* Bottom Section - Price and Button */}
+              <div className="mt-auto">
+                <div className="bg-amber-800/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
+                  <div className="flex flex-col items-center">
+                    <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
+                      {t.programs.program2.price || "25 € per person"}
+                    </div>
+                    <p className="text-sm text-white/90 mb-4">
+                      {t.programs.program2.separator || "----"}
+                    </p>
+                    <div className="relative w-full overflow-hidden">
+                      <button
+                        className="bokunButton w-full text-lg font-semibold py-3 rounded-lg bg-amber-700 hover:bg-amber-800 text-white transition-all duration-300 relative z-10 overflow-hidden shadow-lg"
+                        // disabled // Keep it enabled to trigger script load
+                        id="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
+                        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
+                        data-testid="widget-book-button"
+                        onClick={handleBookNowClick}
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
             
-              {/* Layered Border Effects */}
-              <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
-              <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
-                <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-amber-500/30"></div>
+            {/* Layered Border Effects */}
+            <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
+            <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-[#f5f0e8]/40 via-transparent to-amber-500/30"></div>
             </div>
           </div>
         </div>
