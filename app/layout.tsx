@@ -6,6 +6,7 @@ import { Inter, Roboto_Slab } from "next/font/google";
 import ClientLayout from "@/components/ClientLayout"; // Wraps client-side providers and PageLayout
 import { SpeedInsights } from '@vercel/speed-insights/next'; // Moved here
 import { Analytics } from "@vercel/analytics/react"; // Moved here
+import { GoogleAnalytics } from '@next/third-parties/google' // Added Google Analytics
 
 export const fetchCache = 'default-cache'; // Next.js 15 fetch caching strategy
 
@@ -107,6 +108,7 @@ export default function RootLayout({
         </ClientLayout>
         <SpeedInsights />
         <Analytics />
+        <GoogleAnalytics gaId="G-6J3ELVNTQE" />
       </body>
     </html>
   );
