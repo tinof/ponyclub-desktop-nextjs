@@ -118,9 +118,10 @@ export function BookingScripts({ loadTrigger, onLoaderLoaded }: BookingScriptsPr
 export function ReviewsScript() {
   return (
     <OptimizedScript
+      id="elfsight-reviews-script"
       src="https://static.elfsight.com/platform/platform.js"
-      strategy="lazyOnload"
-      inViewport={true}
+      strategy="beforeInteractive"
+      inViewport={false}
     />
   );
 }

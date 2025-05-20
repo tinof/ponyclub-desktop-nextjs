@@ -24,5 +24,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8,
   }));
 
-  return routes;
+  // New logic for i18n sitemap
+  const locales = ['en', 'el'];
+  const localizedRoutes: MetadataRoute.Sitemap = [];
+
+  routeData.forEach(({ route, fileMtime }) => {
+    locales.forEach(locale => {
+      // Ensure the path starts with a slash if it's not empty
+      const pathSegment = route.startsWith('/') ? route : `/${route}`;
+      // Handle the root path correctly for locales
+      const finalPath = route === '' ? `/${locale}` : `/${locale}${pathSegment}`;
+
+      localizedRoutes.push({
+        url: `${baseUrl}${finalPath}`,
+        lastModified: new Date(fileMtime * 1000).toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: route === '' ? 1 : 0.8, // Priority might be the same for localized versions
+        // It's good practice to include <xhtml:link rel="alternate" hreflang="x"/> in sitemaps
+        // but MetadataRoute.Sitemap type doesn't directly support it.
+        // Next.js might handle this if `alternates` is set in page metadata.
+        // For now, just generating the localized URLs.
+      });
+    });
+  });
+
+  return localizedRoutes;
 }

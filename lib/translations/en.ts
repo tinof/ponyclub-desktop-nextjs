@@ -18,7 +18,8 @@ export const en = {
   },
   programs: {
     program1: {
-      title: "PROGRAM 1",
+      title: "PACKAGE 1",
+      badge: "Most Popular",
       rafting: "Rafting: 30 minutes",
       riding: "Riding: 10-15 minutes",
       hiking: "Hiking canyon crossing",
@@ -26,7 +27,8 @@ export const en = {
       priceChildren: "10 € children under 12 years old",
     },
     program2: {
-      title: "PROGRAM 2",
+      title: "PACKAGE 2",
+      badge: "New Experience",
       kayak: "Kayak: 30 minutes",
       riding: "Riding: 10-15 minutes",
       hiking: "Hiking canyon crossing",

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Roboto_Slab } from "next/font/google"
-import { useState, useRef, useCallback } from "react" // Added useRef, useCallback
+import { useState, useRef, useCallback, useEffect } from "react" // Added useEffect
 import BookingButton from "@/components/booking-button"
 // ResponsiveNavigation import removed as it's now part of SiteHeader
 // SiteHeader import removed as it's now part of PageLayout
@@ -13,6 +13,15 @@ import { BookingScripts, ReviewsScript } from '@/components/ui/script-loader'
 import { Waves, MountainSnow, Sailboat } from 'lucide-react'; // Added icons
 import DynamicGoogleMap from "@/components/DynamicGoogleMap"
 import DynamicContactDetails from "@/components/DynamicContactDetails"
+
+// Declare Elfsight type for TypeScript
+declare global {
+  interface Window {
+    elfsight?: {
+      reload: () => void;
+    };
+  }
+}
 
 const robotoSlab = Roboto_Slab({
   subsets: ["latin", "greek"],
@@ -26,17 +35,67 @@ export default function Home() {
   const clickedButtonRef = useRef<HTMLButtonElement | null>(null);
   const bokunReadyAttempts = useRef(0);
 
+  // Improved Elfsight widget initialization
+  useEffect(() => {
+    // Try to initialize Elfsight at different intervals to ensure it loads
+    const attempts = [500, 1000, 2000, 3000];
+    
+    const initializeElfsight = () => {
+      // Check if window.elfsight exists and has a reload method
+      if (window.elfsight && typeof window.elfsight.reload === 'function') {
+        console.log('Reloading Elfsight widgets...');
+        window.elfsight.reload();
+        return true;
+      }
+      
+      // Check if the widget element exists but is empty
+      const widgetElement = document.querySelector('.elfsight-app-5d3672ca-b26e-43cf-b887-e87f811a1622');
+      if (widgetElement && widgetElement.children.length === 0) {
+        console.log('Elfsight widget element found but empty, reinitializing...');
+        
+        // Try to manually append the script
+        const existingScript = document.getElementById('elfsight-reviews-script');
+        
+        if (!existingScript) {
+          console.log('Adding Elfsight script manually...');
+          const script = document.createElement('script');
+          script.id = 'elfsight-manual-script';
+          script.src = 'https://static.elfsight.com/platform/platform.js';
+          script.async = true;
+          document.body.appendChild(script);
+        }
+        
+        return false;
+      }
+      
+      return widgetElement && widgetElement.children.length > 0;
+    };
+    
+    // Try multiple times with increasing delays
+    attempts.forEach((delay) => {
+      setTimeout(() => {
+        if (!initializeElfsight()) {
+          console.log(`Elfsight initialization attempt at ${delay}ms`);
+        }
+      }, delay);
+    });
+    
+    return () => {
+      // Cleanup if needed
+    };
+  }, []);
+
   const ensureBokunIsReadyAndOpen = useCallback(() => {
     if (window.BokunWidgets && (typeof window.BokunWidgets.init === 'function' || typeof window.BokunWidgets.reinit === 'function')) {
       // Check if a modal is already open (very basic check, might need refinement)
       if (document.querySelector('.bokunModalContainer') || document.querySelector('.bokun-modal-open')) {
         return;
       }
-      
+
       if (clickedButtonRef.current) {
         // It's possible Bokun's scripts have now attached proper listeners.
         // A direct click might be better than trying to call their internal modal functions.
-        clickedButtonRef.current.click(); 
+        clickedButtonRef.current.click();
         clickedButtonRef.current = null; // Clear after attempting
       }
       bokunReadyAttempts.current = 0; // Reset attempts
@@ -71,7 +130,7 @@ export default function Home() {
       {/* SiteHeader is now rendered by PageLayout in app/layout.tsx */}
       <main className="relative min-h-screen overflow-hidden"> {/* Removed pt-20 and bg-[#f5f0e8] */}
         {/* Hero Section */}
-        <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]"> 
+        <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh]">
         <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden shadow-xl border border-amber-200/30">
           {/* OptimizedImage for the poster */}
           <OptimizedImage
@@ -86,22 +145,22 @@ export default function Home() {
             // The video will play over it. If video has transparency, this works.
             // If video is opaque, this image might be hidden once video loads.
           />
-          <video 
-            src="/images/hero-video.mp4" 
+          <video
+            src="/images/hero-video.mp4"
             // poster attribute can be kept as a fallback or removed if OptimizedImage handles it fully
-            autoPlay 
-            muted 
-            loop 
+            autoPlay
+            muted
+            loop
             playsInline
             preload="metadata" // Added preload="metadata"
             className="absolute inset-0 w-full h-full object-cover z-10" // Ensure video is on top of the image
           />
           <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent z-20"></div> {/* Gradient on top of video */}
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative bg-amber-800/40 px-6 sm:px-8 py-5 sm:py-6 rounded-2xl max-w-[90%] sm:max-w-3xl shadow-xl border-2 border-amber-200/50 backdrop-blur-xs transform hover:scale-[1.02] transition-transform duration-300">
+        <div className="absolute inset-0 flex items-center justify-center z-30"> {/* Added z-30 here */}
+          <div className="relative bg-amber-800/40 px-4 py-3 sm:px-6 sm:py-4 rounded-2xl max-w-sm sm:max-w-md md:max-w-lg shadow-xl border-2 border-amber-200/50 backdrop-blur-xs transform hover:scale-[1.02] transition-transform duration-300">
             <h1
-              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center leading-tight font-bold`}
+              className={`${robotoSlab.variable} font-roboto-slab text-amber-50 text-2xl sm:text-3xl md:text-4xl text-center leading-tight font-bold`}
             >
               <span className="block mb-1 sm:mb-2 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.title}</span>
               <span className="block font-extrabold tracking-wide text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]">{t.hero.subtitle}</span>
@@ -116,13 +175,13 @@ export default function Home() {
         {/* Swimming */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-2">
           <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <OptimizedImage 
-              src="/images/round1.jpg" 
-              alt="Swimming in Acheron River" 
-              fill 
+            <OptimizedImage
+              src="/images/round1.jpg"
+              alt="Swimming in Acheron River"
+              fill
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
-              className="object-cover" 
+              className="object-cover"
             />
           </div>
         </div>
@@ -130,13 +189,13 @@ export default function Home() {
         {/* Horse Riding */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform -rotate-2">
           <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <OptimizedImage 
-              src="/images/round2.jpg" 
-              alt="Horse riding near Acheron River" 
-              fill 
+            <OptimizedImage
+              src="/images/round2.jpg"
+              alt="Horse riding near Acheron River"
+              fill
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
-              className="object-cover object-[center_20%]" 
+              className="object-cover object-[center_20%]"
             />
           </div>
         </div>
@@ -144,13 +203,13 @@ export default function Home() {
         {/* Kayaking */}
         <div className="bg-white rounded-full p-1 sm:p-2 shadow-lg transform rotate-3">
           <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full">
-            <OptimizedImage 
-              src="/images/round3.jpg" 
-              alt="Kayaking in Acheron River" 
-              fill 
+            <OptimizedImage
+              src="/images/round3.jpg"
+              alt="Kayaking in Acheron River"
+              fill
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
-              className="object-cover" 
+              className="object-cover"
             />
           </div>
         </div>
@@ -161,28 +220,28 @@ export default function Home() {
         {/* Background layers */}
         <div className="absolute inset-0 -z-10 bg-linear-to-br from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md rounded-2xl"></div>
         <div className="absolute inset-0 -z-20 bg-[#6b8362]/5 rounded-2xl"></div>
-        
+
         {/* Decorative effects */}
         <div className="absolute -inset-[3px] -z-10 rounded-2xl pointer-events-none opacity-70">
           <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30 via-transparent to-[#6b8362]/20"></div>
         </div>
         <div className="absolute inset-0 rounded-2xl border border-amber-200/30 pointer-events-none"></div>
-        
+
         {/* Main content */}
         <h2 className={`${robotoSlab.variable} font-roboto-slab text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6 relative inline-block`}>
           {t.introduction.mainTitle}
           <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-[#6b8362]/70 to-transparent"></div>
         </h2>
-        
+
         <div className="relative">
           <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">{t.introduction.mainText}</p>
           <p className="text-gray-600 md:text-lg mt-2">{t.introduction.seoDescription}</p>
-          
+
           {/* Subtle decorative corners */}
           <div className="absolute -top-1 -left-1 w-10 h-10 border-t-2 border-l-2 border-[#6b8362]/30 rounded-tl-lg"></div>
           <div className="absolute -bottom-1 -right-1 w-10 h-10 border-b-2 border-r-2 border-[#6b8362]/30 rounded-br-lg"></div>
         </div>
-        
+
         {/* Shadow effect */}
         <div className="absolute -inset-[1px] -z-30 rounded-2xl shadow-xl"></div>
       </div>
@@ -198,7 +257,7 @@ export default function Home() {
       {/* Program Cards */}
       <BookingScripts loadTrigger={loadBokunScripts} onLoaderLoaded={handleBokunLoaderLoaded} />
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 px-4 md:px-8 mt-12 md:mt-16">
-        {/* Program 1 Card */}
+        {/* Package 1 Card */}
         <div className="w-full md:w-1/2 group relative">
           <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
             {/* Background Image */}
@@ -210,23 +269,25 @@ export default function Home() {
               className="object-cover"
               imageType="default"
             />
-            
+
             {/* Glass Overlay */}
             <div className="absolute inset-0 bg-[#6b8362]/10 backdrop-blur-[2px]"></div>
-            
+
             {/* Card Content Layer */}
             <div className="absolute inset-0 flex flex-col h-full">
               {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-              <div className="bg-linear-to-b from-[#3E5A35]/80 via-[#3E5A35]/60 to-transparent pt-8 px-6 pb-4">
-                <div className="inline-block rounded-full bg-[#6b8362]/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
-                  Most Popular
+              <div className="relative p-6 bg-gradient-to-b from-black/50 via-black/30 to-transparent">
+                <div className="flex justify-between items-start">
+                  <h3 className={`${robotoSlab.variable} font-roboto-slab text-4xl font-bold text-white uppercase tracking-wider shadow-lg`}>
+                    {t.programs.program1.title || "PACKAGE 1"}
+                  </h3>
+                  <span className="bg-green-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                    {t.programs.program1.badge || "Most Popular"}
+                  </span>
                 </div>
-                <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
-                  {t.programs.program1.title || "ΠΡΟΓΡΑΜΜΑ 1"}
-                </h3>
               </div>
-              
-              {/* Center Section - Activity List */}
+
+              {/* Middle Section - Activities List */}
               <div className="grow px-6 py-4">
                 <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
                   <ul className="space-y-3 text-gray-800">
@@ -251,13 +312,13 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-              
+
               {/* Bottom Section - Price and Button */}
               <div className="mt-auto">
-                <div className="bg-[#3E5A35]/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
+                <div className="bg-green-700/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
                   <div className="flex flex-col items-center">
                     <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                      {t.programs.program1.priceAdults || "20 € Adults"}
+                      {t.programs.program1.priceAdults || "20 € adults"}
                     </div>
                     <p className="text-sm text-white/90 mb-4">
                       {t.programs.program1.priceChildren || "10 € children under 12 years old"}
@@ -278,7 +339,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             {/* Layered Border Effects */}
             <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
             <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
@@ -287,7 +348,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Program 2 Card */}
+        {/* Package 2 Card */}
         <div className="w-full md:w-1/2 group relative mt-6 md:mt-0">
           <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-500 h-[550px]">
             {/* Background Image */}
@@ -299,23 +360,25 @@ export default function Home() {
               className="object-cover"
               imageType="default"
             />
-            
+
             {/* Glass Overlay */}
             <div className="absolute inset-0 bg-amber-800/10 backdrop-blur-[2px]"></div>
-            
+
             {/* Card Content Layer */}
             <div className="absolute inset-0 flex flex-col h-full">
               {/* Top Section - Semi-transparent Overlay with Title and Badge */}
-              <div className="bg-linear-to-b from-amber-800/80 via-amber-800/60 to-transparent pt-8 px-6 pb-4">
-                <div className="inline-block rounded-full bg-amber-700/90 backdrop-blur-xs px-4 py-1.5 text-white text-sm font-semibold mb-4 shadow-lg border border-white/20">
-                  New Experience
+              <div className="relative p-6 bg-gradient-to-b from-black/50 via-black/30 to-transparent">
+                <div className="flex justify-between items-start">
+                  <h3 className={`${robotoSlab.variable} font-roboto-slab text-4xl font-bold text-white uppercase tracking-wider shadow-lg`}>
+                    {t.programs.program2.title || "PACKAGE 2"}
+                  </h3>
+                  <span className="bg-amber-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                    {t.programs.program2.badge || "New Experience"}
+                  </span>
                 </div>
-                <h3 className={`${robotoSlab.variable} font-roboto-slab text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg`}>
-                  {t.programs.program2.title || "ΠΡΟΓΡΑΜΜΑ 2"}
-                </h3>
               </div>
-              
-              {/* Center Section - Activity List */}
+
+              {/* Middle Section - Activities List */}
               <div className="grow px-6 py-4">
                 <div className="bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg border border-white/30 max-w-sm">
                   <ul className="space-y-3 text-gray-800">
@@ -340,7 +403,7 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-              
+
               {/* Bottom Section - Price and Button */}
               <div className="mt-auto">
                 <div className="bg-amber-800/70 backdrop-blur-md p-6 rounded-t-2xl border-t border-white/20">
@@ -367,7 +430,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             {/* Layered Border Effects */}
             <div className="absolute inset-0 rounded-2xl border border-white/40 pointer-events-none"></div>
             <div className="absolute -inset-[3px] rounded-2xl pointer-events-none z-30">
@@ -381,16 +444,38 @@ export default function Home() {
       {/* This BookingButton uses Beyonk, not Bokun. We'll leave its default lazyOnload behavior for now. */}
       <div className="flex justify-center mt-12 mb-16">
         <div className="relative">
-          <BookingButton /> 
+          <BookingButton />
           <div className="absolute -inset-[2px] -z-10 rounded-full bg-linear-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-xs"></div>
         </div>
       </div>
 
       {/* Customer Reviews Section */}
+      <div className="text-center mt-16 md:mt-20">
+        <h2 className={`${robotoSlab.variable} font-roboto-slab text-4xl md:text-5xl font-bold text-[#3E5A35] mb-12 md:mb-16 relative inline-block`}>
+          OUR REVIEWS {/* TODO: Translate this */}
+          <div className="absolute -bottom-2 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#6b8362] to-transparent"></div>
+        </h2>
+      </div>
       <ReviewsScript />
-      <div className="px-4 md:px-8 my-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="elfsight-app-5d3672ca-b26e-43cf-b887-e87f811a1622" data-elfsight-app-lazy></div>
+      <div className="px-4 md:px-8 mt-6 mb-20">
+        <div className="max-w-6xl mx-auto bg-white/90 p-4 rounded-2xl shadow-md">
+          <div className="elfsight-app-5d3672ca-b26e-43cf-b887-e87f811a1622"></div>
+          
+          {/* Inline script for direct Elfsight initialization */}
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function loadElfsight() {
+                  if (window.elfsight && window.elfsight.reload) {
+                    window.elfsight.reload();
+                  } else {
+                    setTimeout(loadElfsight, 500);
+                  }
+                }
+                loadElfsight();
+              })();
+            `
+          }} />
         </div>
       </div>
 

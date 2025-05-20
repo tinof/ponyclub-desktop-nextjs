@@ -10,15 +10,19 @@ import PageLayout from "@/components/PageLayout";
 // The HtmlWrapper component is removed as app/layout.tsx now handles <html>, <head>, and <body>.
 // Font class variables are applied to the <body> tag in app/layout.tsx.
 
+interface ClientLayoutProps {
+  children: React.ReactNode;
+  initialLocale?: string; // Make it optional for now, though app/[locale]/layout.tsx will always pass it
+}
+
 export default function ClientLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  initialLocale,
+}: ClientLayoutProps) {
   // ClientLayout now only wraps the core client-side providers and the PageLayout.
   // It will be rendered inside the <body> tag defined in app/layout.tsx.
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLang={initialLocale}>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
         <PageLayout>
           {children}

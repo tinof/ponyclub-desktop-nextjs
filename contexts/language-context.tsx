@@ -12,36 +12,56 @@ type LanguageContextType = {
   setLanguage: (lang: Language) => void
 }
 
-const defaultLanguage: Language = "en"
+const defaultLanguage: Language = "en";
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+interface LanguageProviderProps {
+  children: React.ReactNode;
+  initialLang?: string; // From URL via app/[locale]/layout.tsx
+}
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(defaultLanguage)
-  const [mounted, setMounted] = useState(false)
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-  // Set language based on localStorage or browser preference
+export function LanguageProvider({ children, initialLang }: LanguageProviderProps) {
+  // Initialize state: prioritize initialLang from URL, then localStorage, then browser, then default
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (initialLang && (initialLang === "en" || initialLang === "el")) {
+      return initialLang as Language;
+    }
+    // This part runs only on the client after hydration, if initialLang wasn't set server-side
+    if (typeof window !== "undefined") {
+      const savedLanguage = localStorage.getItem("language") as Language;
+      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "el")) {
+        return savedLanguage;
+      }
+      const browserLanguage = navigator.language.split("-")[0];
+      if (browserLanguage === "el") {
+        return "el";
+      }
+    }
+    return defaultLanguage;
+  });
+
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
+    // If initialLang was provided (from URL), it's already set.
+    // If not, this effect ensures client-side preferences (localStorage, browser) are applied.
+    // This effect also handles cases where initialLang might not be 'en' or 'el' (though unlikely with current setup).
+    if (!initialLang || (initialLang !== "en" && initialLang !== "el")) {
+      const savedLanguage = localStorage.getItem("language") as Language;
+      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "el")) {
+        if (language !== savedLanguage) setLanguageState(savedLanguage);
+        return;
+      }
 
-    // Check localStorage first
-    const savedLanguage = localStorage.getItem("language") as Language
-
-    if (savedLanguage && (savedLanguage === "en" || savedLanguage === "el")) {
-      setLanguageState(savedLanguage)
-      return
+      const browserLanguage = navigator.language.split("-")[0];
+      const currentBrowserLang = browserLanguage === "el" ? "el" : "en";
+      if (language !== currentBrowserLang) setLanguageState(currentBrowserLang);
     }
+  }, [initialLang, language]); // Rerun if initialLang changes (e.g. route change) or if language state is updated externally
 
-    // Check browser language
-    const browserLanguage = navigator.language.split("-")[0]
-    if (browserLanguage === "el") {
-      setLanguageState("el")
-    } else {
-      setLanguageState("en") // Default to English for all other languages
-    }
-  }, [])
-
-  // Save language preference to localStorage
+  // Save language preference to localStorage when it changes
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
     localStorage.setItem("language", lang)
