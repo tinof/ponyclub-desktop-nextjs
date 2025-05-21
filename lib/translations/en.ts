@@ -38,6 +38,24 @@ export const en = {
   },
   booking: {
     bookNow: "BOOK NOW",
+    ourPriceList: "Our Price List"
+  },
+  priceListPopup: {
+    title: "Our Price List",
+    ridingTitle: "RIDING",
+    riding_10_15_min: "10-15 MINUTES: €10",
+    riding_30_min: "30 MINUTES: €25",
+    raftingTitle: "RAFTING (25-30 MINUTES)",
+    raftingIncludes: "*Includes ride back to starting point*",
+    raftingAdults: "ADULTS: €10",
+    raftingChildren: "CHILDREN: €5",
+    kayakTitle: "KAYAK (25-30 MINUTES)",
+    kayakIncludes: "*Includes ride back to starting point*",
+    kayakSingle: "SINGLE KAYAK: €15",
+    kayakDual: "DUAL KAYAK: €25",
+    extrasTitle: "EXTRAS",
+    extrasShoes: "100% WATERPROOF SHOES: €10",
+    extrasPhoneCase: "WATERPROOF PHONE CASE: €5"
   },
   reviews: {
     title: "What Our Customers Say",

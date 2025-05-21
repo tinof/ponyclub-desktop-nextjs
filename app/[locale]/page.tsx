@@ -13,6 +13,7 @@ import { BookingScripts, ReviewsScript } from '@/components/ui/script-loader'
 import { Waves, MountainSnow, Sailboat } from 'lucide-react'; // Added icons
 import DynamicGoogleMap from "@/components/DynamicGoogleMap"
 import DynamicContactDetails from "@/components/DynamicContactDetails"
+import { PriceListPopup } from '@/components/ui/PriceListPopup';
 
 // Declare Elfsight type for TypeScript
 declare global {
@@ -31,6 +32,7 @@ const robotoSlab = Roboto_Slab({
 
 export default function Home() {
   const { t } = useLanguage()
+  const [isPriceListOpen, setIsPriceListOpen] = useState(false);
   const [loadBokunScripts, setLoadBokunScripts] = useState(false);
   const clickedButtonRef = useRef<HTMLButtonElement | null>(null);
   const bokunReadyAttempts = useRef(0);
@@ -247,11 +249,17 @@ export default function Home() {
       </div>
 
       {/* SUMMER 2025 OFFERS Title */}
-      <div className="text-center mt-16 md:mt-20">
-        <h2 className={`${robotoSlab.variable} font-roboto-slab text-4xl md:text-5xl font-bold text-[#3E5A35] mb-12 md:mb-16 relative inline-block`}>
-          SUMMER 2025 OFFERS {/* TODO: Translate this */}
+      <div className="text-center mt-16 md:mt-20 flex flex-col items-center">
+        <h2 className={`${robotoSlab.variable} font-roboto-slab text-4xl md:text-5xl font-bold text-[#3E5A35] mb-6 relative inline-block`}>
+          {t.activities.exploreNature}
           <div className="absolute -bottom-2 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#6b8362] to-transparent"></div>
         </h2>
+        <button
+          onClick={() => setIsPriceListOpen(true)}
+          className="mt-4 mb-8 md:mb-12 bg-[#6b8362] hover:bg-[#3E5A35] text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg text-lg"
+        >
+          {t.booking.ourPriceList}
+        </button>
       </div>
 
       {/* Program Cards */}
@@ -541,6 +549,10 @@ export default function Home() {
           cursor: pointer !important;
         }
       `}</style>
+      <PriceListPopup 
+        isOpen={isPriceListOpen} 
+        onClose={() => setIsPriceListOpen(false)} 
+      />
     </main>
     </>
   )

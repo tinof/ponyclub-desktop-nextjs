@@ -37,7 +37,25 @@ export const el = {
     }
   },
   booking: {
-    bookNow: "ΚΑΝΤΕ ΚΡΑΤΗΣΗ ΤΩΡΑ"
+    bookNow: "ΚΑΝΤΕ ΚΡΑΤΗΣΗ ΤΩΡΑ",
+    ourPriceList: "Ο Τιμοκατάλογός μας" // Added this line
+  },
+  priceListPopup: {
+    title: "Τιμοκατάλογος",
+    ridingTitle: "ΙΠΠΑΣΙΑ",
+    riding_10_15_min: "10-15 ΛΕΠΤΑ: €10",
+    riding_30_min: "30 ΛΕΠΤΑ: €25",
+    raftingTitle: "RAFTING (25-30 ΛΕΠΤΑ)",
+    raftingIncludes: "*Περιλαμβάνει μεταφορά πίσω στο σημείο εκκίνησης*",
+    raftingAdults: "ΕΝΗΛΙΚΕΣ: €10",
+    raftingChildren: "ΠΑΙΔΙΑ: €5",
+    kayakTitle: "ΚΑΓΙΑΚ (25-30 ΛΕΠΤΑ)",
+    kayakIncludes: "*Περιλαμβάνει μεταφορά πίσω στο σημείο εκκίνησης*",
+    kayakSingle: "ΜΟΝΟ ΚΑΓΙΑΚ: €15",
+    kayakDual: "ΔΙΠΛΟ ΚΑΓΙΑΚ: €25",
+    extrasTitle: "ΕΠΙΠΛΕΟΝ",
+    extrasShoes: "100% ΑΔΙΑΒΡΟΧΑ ΠΑΠΟΥΤΣΙΑ: €10",
+    extrasPhoneCase: "ΑΔΙΑΒΡΟΧΗ ΘΗΚΗ ΚΙΝΗΤΟΥ: €5"
   },
   reviews: {
     title: "Τι Λένε οι Πελάτες Μας"
