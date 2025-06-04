@@ -1,34 +1,22 @@
 import React from 'react';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
+import DynamicBokunWidget from '@/components/DynamicBokunWidget'; // Import this
 
 const KayakRaftingPage = () => {
-  const bokunWidget = (
-    <>
-      <script
-        type="text/javascript"
-        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        async
-      />
-      <div
-        className="bokunWidget"
-        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020611"
-      ></div>
-      <noscript>Please enable javascript in your browser to book</noscript>
-    </>
-  );
+  const bokunExperienceId = "1020611"; // Assuming this is the correct ID for Kayak & Rafting
 
   return (
     <ActivityPageLayout
-      title="Kayak & Rafting" // Provide a title
-      subtitle="" // Empty subtitle
-      descriptionTitle="" // Let Bokun handle content titles
-      descriptionContent={bokunWidget} // Pass the widget here
-      detailsTitle="" 
-      detailsContent={<></>} // Empty content
+      title="Kayak & Rafting"
+      subtitle=""
+      descriptionTitle=""
+      descriptionContent={<DynamicBokunWidget experienceId={bokunExperienceId} />} // Use DynamicBokunWidget
+      detailsTitle=""
+      detailsContent={<></>}
       pricingTitle=""
-      pricingContent={<></>} // Empty content
-      showBookingButton={false} // Hide default button
-      fullWidthContent={true} // Enable full width for Bokun widget
+      pricingContent={<></>}
+      showBookingButton={false}
+      fullWidthContent={true}
     >
       {/* Children are no longer directly placed here */}
     </ActivityPageLayout>

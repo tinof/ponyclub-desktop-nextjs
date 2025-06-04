@@ -3,7 +3,9 @@
 import type React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/contexts/language-context"; // useLanguage is not directly used here anymore for <html>
+import { GDPRProvider } from "@/contexts/gdpr-context";
 import PageLayout from "@/components/PageLayout";
+import GDPRBanner from "@/components/client/GDPRBanner";
 // SpeedInsights, Analytics, Inter, Roboto_Slab, and useLanguage (for HtmlWrapper) are removed
 // as their responsibilities are now handled by app/layout.tsx or are no longer needed here.
 
@@ -23,11 +25,14 @@ export default function ClientLayout({
   // It will be rendered inside the <body> tag defined in app/layout.tsx.
   return (
     <LanguageProvider initialLang={initialLocale}>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-        <PageLayout>
-          {children}
-        </PageLayout>
-      </ThemeProvider>
+      <GDPRProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <PageLayout>
+            {children}
+          </PageLayout>
+          <GDPRBanner />
+        </ThemeProvider>
+      </GDPRProvider>
     </LanguageProvider>
   );
 }

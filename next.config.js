@@ -4,7 +4,18 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  turbopack: {}, // Add top-level turbopack key
+  // Optimized Turbopack configuration for Next.js 15
+  turbopack: {
+    // Configure path aliases for better module resolution
+    resolveAlias: {
+      '@': './',
+      '@/components': './components',
+      '@/lib': './lib',
+      '@/contexts': './contexts',
+      '@/hooks': './hooks',
+      '@/types': './types',
+    },
+  },
   eslint: {
     ignoreDuringBuilds: false,
   },
@@ -27,7 +38,7 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizeCss: false,
+    optimizeCss: { target: 'critical', minify: true },
     scrollRestoration: true,
     staleTimes: {
       dynamic: 30, // seconds
@@ -48,17 +59,8 @@ const nextConfig = {
 
   async headers() {
     return [
-      {
-        // General headers for all paths. Next.js/Vercel will set appropriate Cache-Control for pages.
-        source: '/(.*)',
-        headers: [
-          { key: 'Content-Security-Policy', value: "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: *.bokun.io *.elfsight.com vercel.live *.vercel.live; style-src 'self' 'unsafe-inline' https: *.bokun.io *.elfsight.com; img-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https: *.bokun.io *.elfsight.com vercel.live *.vercel.live;" },
-          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          // Removed aggressive Cache-Control from here.
-        ],
-      },
+      // Note: Security headers (CSP, HSTS, etc.) are now handled in middleware.ts
+      // This provides better performance and dynamic nonce generation
       {
         // Cache-Control for static assets with specific extensions
         source: '/:path(.+)\\.(js|css|xml|json|txt|map|ico|svg|png|jpg|jpeg|gif|webp|avif|woff|woff2|ttf|otf|eot|mp4|webm|pdf)',
@@ -84,5 +86,8 @@ const nextConfig = {
   poweredByHeader: false,
 }
 
-// module.exports = withBundleAnalyzer(nextConfig);
-module.exports = nextConfig; // Temporarily disable withBundleAnalyzer
+// Conditionally apply bundle analyzer only for production builds (webpack)
+// Since Turbopack only supports dev, bundle analyzer should only run on builds
+module.exports = process.env.ANALYZE === 'true' 
+  ? withBundleAnalyzer(nextConfig) 
+  : nextConfig;

@@ -1,28 +1,39 @@
-import React from 'react';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
+import DynamicBokunWidget from '@/components/DynamicBokunWidget';
+import type { Metadata } from 'next';
 
-const RidingPage = () => {
-  const bokunWidget = (
-    <>
-      <script
-        type="text/javascript"
-        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        async
-      />
-      <div
-        className="bokunWidget"
-        data-src="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020659"
-      ></div>
-      <noscript>Please enable javascript in your browser to book</noscript>
-    </>
-  );
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  
+  const isGreek = locale === 'el';
+  
+  return {
+    title: isGreek 
+      ? "Ιππασία στον Αχέροντα - Pony Club | Βόλτες με Άλογα Γλυκή Θεσπρωτίας"
+      : "Horse Riding in Acheron - Pony Club | Horseback Adventures Glyki Thesprotia",
+    description: isGreek
+      ? "Απολαύστε μαγικές βόλτες με άλογα στις όχθες του Αχέροντα. Ασφαλείς ιππικές εμπειρίες για όλες τις ηλικίες με εκπαιδευμένα άλογα στη Γλυκή Θεσπρωτίας."
+      : "Enjoy magical horseback rides along the banks of Acheron River. Safe equestrian experiences for all ages with trained horses in Glyki, Thesprotia.",
+    keywords: isGreek
+      ? "ιππασία Αχέροντας, ιππασία Γλυκή, άλογα Θεσπρωτία, ιππασία Ήπειρος, βόλτες με άλογα, ποταμός Αχέροντας"
+      : "horse riding Acheron, horseback riding Glyki, horses Thesprotia, riding Epirus, Acheron river horseback, Greece horse riding",
+  };
+}
+
+const RidingPage = async ({ params }: PageProps) => {
+  const { locale } = await params;
+  const bokunExperienceId = "1020659"; // Riding experience ID
 
   return (
     <ActivityPageLayout
       title="Riding"
       subtitle=""
       descriptionTitle=""
-      descriptionContent={bokunWidget}
+      descriptionContent={<DynamicBokunWidget experienceId={bokunExperienceId} />} // Use DynamicBokunWidget
       detailsTitle=""
       detailsContent={<></>}
       pricingTitle=""

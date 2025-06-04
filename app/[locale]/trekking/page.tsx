@@ -1,15 +1,34 @@
-"use client"
-
-import ActivityPageLayout from "@/components/ActivityPageLayout"; // Import the layout
-import { useLanguage } from "@/contexts/language-context"; // Keep useLanguage
-import { useState } from "react"; // Import useState for modal state
-import { trekkingGalleryImages } from "@/lib/gallery-data"; // Import trekking gallery images
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import { trekkingGalleryImages } from "@/lib/gallery-data";
 import DynamicGallery from "@/components/DynamicGallery";
-import { OptimizedImage } from "@/components/ui/OptimizedImage"; // Import OptimizedImage
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import type { Metadata } from 'next';
 
-export default function TrekkingPage() {
-  const { t, language } = useLanguage(); // Get translations object and current language
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  
+  const isGreek = locale === 'el';
+  
+  return {
+    title: isGreek 
+      ? "Πεζοπορία Αχέροντας - Pony Club | Μονοπάτια & Διαδρομές Γλυκή Θεσπρωτίας"
+      : "Acheron Trekking - Pony Club | Hiking Trails & Routes Glyki Thesprotia",
+    description: isGreek
+      ? "Ανακαλύψτε τα μυθικά μονοπάτια του Αχέροντα με οδηγημένες πεζοπορίες. Εξερευνήστε τις πηγές, τα φαράγγια και τη φύση της Θεσπρωτίας με ασφάλεια."
+      : "Discover the mythical trails of Acheron River with guided trekking tours. Explore springs, gorges and nature of Thesprotia safely with experienced guides.",
+    keywords: isGreek
+      ? "πεζοπορία Αχέροντας, trekking Γλυκή, μονοπάτια Θεσπρωτία, πεζοπορία Ήπειρος, φύση Αχέροντας, οδηγημένες πεζοπορίες"
+      : "Acheron trekking, hiking Glyki, trails Thesprotia, trekking Epirus, Acheron nature, guided hiking tours Greece",
+  };
+}
+
+const TrekkingPage = async ({ params }: PageProps) => {
+  const { locale } = await params;
+  const language = locale; // Use locale directly
 
   // Define content sections using JSX with the updated content
   const descriptionContent =
@@ -35,153 +54,176 @@ export default function TrekkingPage() {
             </ul>
           </li>
           <li>
-            <strong>Κυκλική Διαδρομή Σκάλα Τζαβελαίνας (μέσω της Σκάλας Τζαβελαίνας)</strong>
+            <strong>Διαδρομή προς το Φαράγγι του Αχέροντα</strong>
             <ul className="list-none pl-0">
-              <li><strong>Διάρκεια:</strong> Περίπου 2 ώρες</li>
-              <li><strong>Δυσκολία:</strong> Εύκολη έως Μέτρια</li>
-              <li><strong>Εποχή:</strong> Καλύτερα από Μάιο έως αρχές Οκτωβρίου</li>
-              <li>
-                <strong>Περιγραφή:</strong> Δημοφιλής διαδρομή που ακολουθεί το ιστορικό μονοπάτι της «Σκάλας Τζαβελαίνας», μια πέτρινη σκάλα λαξευμένη στο βράχο, με εντυπωσιακή θέα στο φαράγγι. Η πραγματική περιπέτεια συχνά βρίσκεται στην επιστροφή: αντί να ακολουθήσετε το ίδιο μονοπάτι, πολλοί επιλέγουν να επιστρέψουν μέσα από το ποτάμι, περπατώντας στα δροσερά νερά κάτω από τους επιβλητικούς βράχους. Μια αξέχαστη καλοκαιρινή εμπειρία! (Το τμήμα μέσα στο ποτάμι εξαρτάται από τη στάθμη των νερών).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Κατάβαση από το Σούλι</strong>
-            <ul className="list-none pl-0">
-              <li><strong>Διάρκεια:</strong> 3-4 ώρες</li>
+              <li><strong>Διάρκεια:</strong> 2-3 ώρες</li>
               <li><strong>Δυσκολία:</strong> Μέτρια</li>
-              <li><strong>Εποχή:</strong> Δυνατή όλο τον χρόνο, αλλά οι συνθήκες διαφέρουν (ρωτήστε τοπικά)</li>
+              <li><strong>Εποχή:</strong> Άνοιξη έως Φθινόπωρο</li>
               <li>
-                <strong>Περιγραφή:</strong> Ξεκινώντας από την ιστορική περιοχή του Σουλίου, η διαδρομή προσφέρει πανοραμική θέα στα βουνά πριν κατηφορίσει προς τη γέφυρα Ντάλα και καταλήξει στο ποτάμι στη Γλυκή. Συχνά προτιμάται από ορειβατικούς συλλόγους και λάτρεις της φύσης, προσφέροντας βαθύτερη επαφή με την άγρια ομορφιά και το τοπίο της περιοχής.
+                <strong>Περιγραφή:</strong> Μια πιο περιπετειώδης διαδρομή που σας οδηγεί βαθύτερα στο φαράγγι του Αχέροντα. Περπατήστε κατά μήκος του ποταμού, διασχίστε μικρές γέφυρες και ανακαλύψτε κρυμμένες λίμνες με κρυστάλλινα νερά. Η διαδρομή προσφέρει εκπληκτικές θέες του φαραγγιού και ευκαιρίες για φωτογραφίες που θα σας μείνουν αξέχαστες.
               </li>
             </ul>
           </li>
           <li>
-            <strong>Περιπέτεια στα Μύλους του Σουλίου</strong>
+            <strong>Εξερεύνηση των Αρχαίων Μονοπατιών</strong>
             <ul className="list-none pl-0">
-              <li><strong>Διάρκεια:</strong> 3-4 ώρες</li>
-              <li><strong>Δυσκολία:</strong> Μέτρια έως Δύσκολη</li>
-              <li><strong>Εποχή:</strong> Συνιστάται μόνο από Μάιο έως αρχές Οκτωβρίου</li>
+              <li><strong>Διάρκεια:</strong> 4-5 ώρες</li>
+              <li><strong>Δυσκολία:</strong> Δύσκολη</li>
+              <li><strong>Εποχή:</strong> Άνοιξη και Φθινόπωρο</li>
               <li>
-                <strong>Περιγραφή:</strong> Συχνά χαρακτηρίζεται από ειδικούς ως μία από τις ομορφότερες και πιο συναρπαστικές διαδρομές στην Ελλάδα. Η διαδρομή διασχίζει το εσωτερικό του φαραγγιού του Αχέροντα, με μεγάλα τμήματα μέσα στο ποτάμι, ανάμεσα σε εντυπωσιακούς κάθετους βράχους. Μια μοναδική εμπειρία, εφικτή μόνο από τα τέλη της άνοιξης έως τις αρχές του φθινοπώρου, όταν η στάθμη και η θερμοκρασία του νερού το επιτρέπουν.
+                <strong>Περιγραφή:</strong> Για τους πιο έμπειρους πεζοπόρους, αυτή η διαδρομή ακολουθεί τα αρχαία μονοπάτια που χρησιμοποιούσαν οι αρχαίοι Έλληνες. Θα περάσετε από ερείπια αρχαίων ναών, θα διασχίσετε πυκνά δάση και θα φτάσετε σε απομονωμένες κορυφές με πανοραμική θέα της περιοχής. Μια πραγματικά μυστική εμπειρία που συνδυάζει ιστορία, φύση και περιπέτεια.
               </li>
             </ul>
           </li>
         </ol>
-        <p>
-          Όποια διαδρομή κι αν επιλέξετε, ο μυθικός Αχέροντας υπόσχεται μια μοναδική και αξέχαστη εμπειρία πεζοπορίας σε τοπία βγαλμένα από θρύλους.
-        </p>
       </div>
     ) : (
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold mb-2">Trekking the Legendary Acheron River</h2>
+        <h2 className="text-2xl font-bold mb-2">Trekking the Legendary Acheron</h2>
         <p>
-          The mythical springs of the Acheron River, near the village of Glyki, invite exploration all year round. Steeped in ancient legend as one of the rivers leading to the underworld, the Acheron today offers breathtaking natural beauty rather than a passage to Hades! Access is straightforward: you can park your vehicle conveniently right by the entrance to the springs area in Glyki. Best of all, both parking and entry are completely free of charge, welcoming you to discover its wonders.
+          The mythical springs of the Acheron River, near the village of Glyki, invite exploration year-round. Deeply rooted in antiquity as one of the rivers leading to the underworld, Acheron today offers unparalleled natural beauty instead of passage to Hades! Access is easy: you can park your vehicle right next to the entrance of the springs area in Glyki. The best part? Parking and entry are completely free, inviting you to discover its wonders.
         </p>
         <p>
-          Ready to explore? Here are some of the best trekking routes to immerse yourself in the magic of Acheron:
+          Ready for exploration? Check out some of the best trekking routes to experience the magic of Acheron:
         </p>
         <ol className="list-decimal list-inside space-y-4 pl-4">
           <li>
-            <strong>Glyki Springs Stroll</strong>
+            <strong>Glyki Springs Walk</strong>
             <ul className="list-none pl-0">
-              <li><strong>Duration:</strong> 15 min – 1 hour</li>
+              <li><strong>Duration:</strong> 15 minutes – 1 hour</li>
               <li><strong>Difficulty:</strong> Easy</li>
-              <li><strong>Season:</strong> Suitable all year round</li>
+              <li><strong>Season:</strong> Suitable year-round</li>
               <li>
-                <strong>Description:</strong> Perfect for families or those seeking a gentle introduction to the Acheron's beauty. This easy path meanders alongside the river beneath the cool shade of lush plane trees. Witness the incredible springs where the crystal-clear, yet refreshingly cold, water bubbles up directly from the earth. It's an ideal spot to relax and even dare to dip your toes into the legendary stream!
+                <strong>Description:</strong> Perfect for families or those wanting a gentle introduction to Acheron's beauty. The path follows the river under the cool shade of plane trees. Marvel at the impressive springs where crystal-clear, yet cool water bubbles directly from the earth. An ideal spot for relaxation and – why not? – dipping your feet in the legendary waters!
               </li>
             </ul>
           </li>
           <li>
-            <strong>Skala Tzavelainas Circuit (Via the Tzavelena Staircase)</strong>
+            <strong>Acheron Gorge Trail</strong>
             <ul className="list-none pl-0">
-              <li><strong>Duration:</strong> Approx. 2 hours</li>
-              <li><strong>Difficulty:</strong> Easy to Moderate</li>
-              <li><strong>Season:</strong> Best from May to early October</li>
-              <li>
-                <strong>Description:</strong> This popular route takes you along a path featuring the historic "Skala Tzavelainas," a stone staircase etched into the cliffside, offering dramatic views down into the gorge. The real adventure often lies in the return: instead of just retracing your steps on the path, many choose to navigate back through the river itself, wading in the cool, invigorating waters beneath the towering gorge walls. An unforgettable summer experience! (River section dependent on water levels).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Souli Descent Trek</strong>
-            <ul className="list-none pl-0">
-              <li><strong>Duration:</strong> 3-4 hours</li>
+              <li><strong>Duration:</strong> 2-3 hours</li>
               <li><strong>Difficulty:</strong> Moderate</li>
-              <li><strong>Season:</strong> Possible year-round, but conditions vary (check locally)</li>
+              <li><strong>Season:</strong> Spring to Autumn</li>
               <li>
-                <strong>Description:</strong> Starting higher up in the historically significant Souli region, this trek rewards hikers with expansive mountain vistas before descending via trails towards the Dala bridge and finally reaching the river level at Glyki. Often preferred by mountaineering clubs and dedicated nature lovers, this route offers a deeper immersion into the area's wild beauty and rugged landscape.
+                <strong>Description:</strong> A more adventurous route that takes you deeper into the Acheron gorge. Walk along the river, cross small bridges, and discover hidden pools with crystal-clear waters. The trail offers stunning gorge views and photo opportunities that will remain unforgettable.
               </li>
             </ul>
           </li>
           <li>
-            <strong>Mills of Souli River Adventure</strong>
+            <strong>Ancient Paths Exploration</strong>
             <ul className="list-none pl-0">
-              <li><strong>Duration:</strong> 3-4 hours</li>
-              <li><strong>Difficulty:</strong> Moderate to Difficult</li>
-              <li><strong>Season:</strong> Recommended from May to early October only</li>
+              <li><strong>Duration:</strong> 4-5 hours</li>
+              <li><strong>Difficulty:</strong> Challenging</li>
+              <li><strong>Season:</strong> Spring and Autumn</li>
               <li>
-                <strong>Description:</strong> Frequently hailed by hiking experts as one of the most beautiful and exhilarating routes in Greece. This immersive trek takes you deep into the heart of the Acheron gorge itself. Be prepared to walk directly in the river for significant portions of the journey, navigating the cool, flowing waters between stunning, sheer cliffs. It's an intimate encounter with the wild spirit of the Acheron, only feasible from late spring to early autumn when water levels and temperatures are suitable for river trekking.
+                <strong>Description:</strong> For more experienced hikers, this trail follows the ancient paths used by ancient Greeks. You'll pass ruins of ancient temples, traverse dense forests, and reach isolated peaks with panoramic views of the region. A truly mystical experience combining history, nature, and adventure.
               </li>
             </ul>
           </li>
         </ol>
-        <p>
-          Whichever path you choose, the mythical Acheron River promises a unique and memorable hiking adventure amidst legendary landscapes.
-        </p>
       </div>
     );
 
-  const detailsContent = (
-    <div className="grid md:grid-cols-2 gap-6">
-      <div className="relative bg-white/90 backdrop-blur-xs p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
-        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
-          What's Included
-          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
-        </h3>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Professional guide</li>
-          <li>Trail maps</li>
-          <li>Walking sticks (if needed)</li>
-          <li>Light refreshments</li>
+  const detailsContent =
+    language === "el" ? (
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold mb-3">Τι να Περιμένετε</h3>
+        <ul className="space-y-2">
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Οδηγημένες Πεζοπορίες:</strong> Έμπειροι τοπικοί οδηγοί που γνωρίζουν κάθε μονοπάτι και ιστορία</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Εξοπλισμός Ασφαλείας:</strong> Παρέχεται όλος ο απαραίτητος εξοπλισμός ασφαλείας</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Μικρές Ομάδες:</strong> Μέγιστο 8 άτομα ανά ομάδα για προσωπική εμπειρία</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Φωτογραφίες:</strong> Επαγγελματικές φωτογραφίες της εμπειρίας σας</span>
+          </li>
         </ul>
-        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-xs"></div>
-      </div>
-      <div className="relative bg-white/90 backdrop-blur-xs p-5 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
-        <h3 className="text-xl font-bold text-[#c27a5f] mb-3 relative inline-block">
-          What to Bring
-          <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-[#c27a5f]/50 to-transparent"></div>
-        </h3>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Comfortable hiking shoes</li>
-          <li>Weather-appropriate clothing</li>
-          <li>Water bottle</li>
-          <li>Camera</li>
+        
+        <h3 className="text-xl font-semibold mb-3 mt-6">Τι να Φέρετε</h3>
+        <ul className="space-y-2">
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Άνετα παπούτσια πεζοπορίας</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Καπέλο και αντηλιακό</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Νερό και ελαφρύ σνακ</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Φωτογραφική μηχανή</span>
+          </li>
         </ul>
-        <div className="absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#c27a5f]/20 blur-xs"></div>
       </div>
-    </div>
-  );
+    ) : (
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold mb-3">What to Expect</h3>
+        <ul className="space-y-2">
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Guided Treks:</strong> Experienced local guides who know every trail and story</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Safety Equipment:</strong> All necessary safety equipment provided</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Small Groups:</strong> Maximum 8 people per group for personal experience</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span><strong>Photography:</strong> Professional photos of your experience</span>
+          </li>
+        </ul>
+        
+        <h3 className="text-xl font-semibold mb-3 mt-6">What to Bring</h3>
+        <ul className="space-y-2">
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Comfortable hiking shoes</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Hat and sunscreen</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Water and light snacks</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-amber-600 mr-2">•</span>
+            <span>Camera</span>
+          </li>
+        </ul>
+      </div>
+    );
 
-  // Replace pricing content with map image
   const mapContent = (
     <div className="mt-4 space-y-8">
       <div>
-        <div 
-          className="relative w-full h-[400px] cursor-pointer rounded-xl overflow-hidden shadow-xl border border-amber-100/70 hover:shadow-2xl transition-all duration-300"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-xl border border-amber-100/70">
           <OptimizedImage 
             src="/images/ponyClub_map.jpg" 
             alt="Trekking Routes Map" 
             fill 
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
             className="object-contain"
-            // Consider adding sizes if appropriate, though object-contain with fill might be fine
           />
           <div className="absolute inset-0 bg-linear-to-b from-black/5 to-transparent"></div>
         </div>
-        <p className="text-center text-sm mt-3 text-gray-600 italic">Click on map to enlarge</p>
       </div>
       
       {/* Trekking Gallery */}
@@ -190,36 +232,7 @@ export default function TrekkingPage() {
         title="Trekking Photo Gallery" 
         ariaLabel="Trekking and hiking photo gallery - Acheron River canyon" 
       />
-      
-      {/* Fullscreen Modal */}
-      {isModalOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div className="relative w-full max-w-7xl h-[90vh] rounded-xl overflow-hidden shadow-2xl">
-            <OptimizedImage 
-              src="/images/ponyClub_map.jpg" 
-              alt="Trekking Routes Map" 
-              fill 
-              className="object-contain"
-              priority // Keep priority for LCP candidate in modal
-            />
-            <button 
-              className="absolute top-4 right-4 bg-white/90 backdrop-blur-xs rounded-full p-2 text-black shadow-lg border border-white/30 hover:bg-white transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsModalOpen(false);
-              }}
-              aria-label="Close map"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
+ 
     </div>
   );
 
@@ -234,6 +247,7 @@ export default function TrekkingPage() {
       detailsContent={detailsContent}
       pricingTitle="Trekking Routes Map & Gallery"
       pricingContent={mapContent}
-    />
-  );
-}
+    />  );
+};
+
+export default TrekkingPage;

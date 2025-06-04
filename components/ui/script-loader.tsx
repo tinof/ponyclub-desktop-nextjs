@@ -84,35 +84,6 @@ export function OptimizedScript({
 }
 
 /**
- * BookingScripts component - Specialized for booking scripts
- * Now loads script on demand and calls a callback when the loader script is loaded.
- */
-interface BookingScriptsProps {
-  loadTrigger?: boolean;
-  onLoaderLoaded?: () => void; // Callback when BokunWidgetsLoader.js itself has loaded
-}
-
-export function BookingScripts({ loadTrigger, onLoaderLoaded }: BookingScriptsProps) {
-  // If loadTrigger is false, don't render the script.
-  // When loadTrigger becomes true, OptimizedScript will be rendered and will load the script.
-  if (!loadTrigger) {
-    return null;
-  }
-
-  return (
-    <OptimizedScript
-      id="bokun-widgets-loader-homepage" // Unique ID for this instance
-      src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-      strategy="afterInteractive" // Or 'lazyOnload', 'afterInteractive' might be better if triggered by click
-      onLoad={onLoaderLoaded}
-      onError={() => {
-        console.error('Failed to load BokunWidgetsLoader.js via OptimizedScript.');
-      }}
-    />
-  );
-}
-
-/**
  * ReviewsScript component - Specialized for reviews script
  */
 export function ReviewsScript() {

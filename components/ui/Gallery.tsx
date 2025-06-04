@@ -58,7 +58,7 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
                 src={images[selectedImage].src}
                 alt={images[selectedImage].alt}
                 fill
-                sizes="100vw" // Keep sizes for fill images
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 90vw, 1024px"
                 className="object-contain"
                 priority // Keep priority for LCP candidate
                 // imageType="default" // Or let OptimizedImage decide based on props

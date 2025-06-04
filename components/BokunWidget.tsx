@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Script from "next/script";
 import { iframeResizer, IFrameOptions, IFramePage } from "iframe-resizer"; // Types for v3/v4
 import { useLanguage } from "@/contexts/language-context";
 import { bokunLangMap } from "@/lib/bokun-lang";
@@ -28,31 +27,55 @@ export default function BokunWidget({ experienceId, partialView = 1 }: BokunWidg
 
     console.log("[Bokun Widget Parent] useEffect triggered. Container element:", containerElement);
 
-    const options: IFrameOptions = {
+    const options: IFrameOptions & {
+      onMessage?: (messageData: { iframe: HTMLIFrameElement; message: any; }) => void;
+      onResized?: (sizeData: { iframe: HTMLIFrameElement; height: number; width: number; type: string; }) => void;
+      onInit?: (iFrameEl: HTMLIFrameElement) => void;
+    } = {
       log: process.env.NODE_ENV === 'development', // Enable logs only in dev
       checkOrigin: false, // Be cautious in production
-      // Relying on messageCallback. Removed onMessage due to TS type error.
-      // Initializing the cart iframe with these options should hopefully prevent the warning.
-      messageCallback: (messageData: { iframe: HTMLIFrameElement; message: any; }) => {
+      // Updated to use current callback names
+      onMessage: (messageData: { iframe: HTMLIFrameElement; message: any; }) => {
         console.log(
-          "[Bokun Widget Parent] Received message from iframe (messageCallback):",
+          "[Bokun Widget Parent] Received message from iframe (onMessage):",
           messageData.message
         );
         // Potentially handle specific messages if needed in the future
       },
-      resizedCallback: (sizeData: { iframe: HTMLIFrameElement; height: number; width: number; type: string; }) => {
+      onResized: (sizeData: { iframe: HTMLIFrameElement; height: number; width: number; type: string; }) => {
         console.log(
-          "[Bokun Widget Parent] iframeResizer resizedCallback:",
+          "[Bokun Widget Parent] iframeResizer onResized:",
           sizeData
         );
       },
-      initCallback: (iFrameEl: HTMLIFrameElement) => {
+      onInit: (iFrameEl: HTMLIFrameElement) => {
            console.log(
-          "[Bokun Widget Parent] iframeResizer initCallback: iframe is ready.",
+          "[Bokun Widget Parent] iframeResizer onInit: iframe is ready.",
           iFrameEl
         );
       }
     };
+
+    // Ensure window.iFrameResizer exists and has onMessage, onResized, onInit
+    // This is a workaround for the "onMessage function not defined" warning
+    // if the Bokun widget's internal iframe-resizer script is looking for a global function.
+    if (!(window as any).iFrameResizer) {
+      (window as any).iFrameResizer = {};
+    }
+    (window as any).iFrameResizer.onMessage = (messageData: { iframe: HTMLIFrameElement; message: any; }) => {
+      console.log(
+        "[Bokun Widget Parent] window.iFrameResizer.onMessage received:",
+        messageData.message,
+        "from iframe:",
+        messageData.iframe.id
+      );
+      // Call the options.onMessage handler as well
+      if (options.onMessage) {
+        options.onMessage(messageData);
+      }
+    };
+    (window as any).iFrameResizer.onResized = options.onResized;
+    (window as any).iFrameResizer.onInit = options.onInit;
 
     // 1. Initialize iframeResizer for the iframe embedded within this component (catalogue view)
     const catalogueObserver = new MutationObserver((mutationsList, observerInstance) => {
@@ -117,14 +140,6 @@ export default function BokunWidget({ experienceId, partialView = 1 }: BokunWidg
 
   return (
     <>
-      <Script
-        id="bokun-widget-loader"
-        src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-        strategy="lazyOnload"
-        onLoad={() => {
-          console.log("[Bokun Widget Parent] BokunWidgetsLoader.js script loaded via next/script.");
-        }}
-      />
       <div
         ref={widgetContainerRef}
         className="bokunWidget"

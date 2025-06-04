@@ -1,5 +1,4 @@
 import { Roboto_Slab } from 'next/font/google';
-import BookingButton from "./booking-button";
 // ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly.
 // SiteHeader is now part of PageLayout.
 // OptimizedImage might be used elsewhere if other image components are part of the content.
@@ -41,13 +40,13 @@ export default function ActivityPageLayout({
   fullWidthContent = false
 }: ActivityPageLayoutProps) {
   // Determine content max-width class based on column preference
-  let contentMaxWidthClass = useSingleColumn 
-    ? "max-w-none" 
+  let contentMaxWidthClass = useSingleColumn
+    ? "max-w-none"
     : "max-w-none";
 
   return (
     <>
-      {/* 
+      {/*
         SiteHeader is now rendered by PageLayout.
         The main PageLayout's <main> tag has pt-20 and the background color.
         This component's content will be rendered inside that <main> tag.
@@ -80,7 +79,7 @@ export default function ActivityPageLayout({
               <div className="absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm"></div>
             </div>
           )}
-          
+
           {/* Pricing Section */}
           {pricingTitle && pricingContent && (
             <div className="relative bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300">
@@ -106,16 +105,6 @@ export default function ActivityPageLayout({
           )}
         </div>
       </Container>
-
-      {/* Book Now Button */}
-      {showBookingButton && (
-        <Container className="flex justify-center py-8">
-          <div className="relative">
-            <BookingButton />
-            <div className="absolute -inset-[2px] -z-10 rounded-full bg-gradient-to-r from-amber-200/50 via-[#6b8362]/40 to-amber-200/50 blur-sm"></div>
-          </div>
-        </Container>
-      )}
     </>
   );
 }
