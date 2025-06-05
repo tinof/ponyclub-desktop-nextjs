@@ -1,194 +1,252 @@
 # Production Security Hardening for Pony Club Website
 
-Based on my analysis of your Next.js 15 application, here's a comprehensive security plan to make it production-ready with best-practice CSP configuration:
+## Introduction
 
-## 🚨 Critical Security Issues to Address
+This document outlines a robust and automated Content Security Policy (CSP) strategy for the Pony Club Next.js 15 application. The goal is to move away from manual CSP error fixing and hashing, towards a maintainable, secure, and automated CSP management workflow.
 
-### 1. **Exposed API Key**
-✅ **COMPLETED** - API key security addressed
+## Current CSP Challenges & Goals
 
-### 2. **CSP Security Improvements** 
-✅ **IMPLEMENTED** - Enhanced middleware-based CSP with dynamic nonce generation
+The existing CSP implementation relies on manually maintaining a long list of script hashes and nonces, which is error-prone and difficult to maintain. This plan introduces an automated approach using the `@nosecone/next` library to simplify nonce management, improve security, and streamline deployments.
 
-**Current Implementation:** We've implemented a superior middleware-based approach that provides:
-- **Dynamic nonce generation** for each request (more secure than static CSP)
-- **Environment-aware policies** (different rules for dev vs production)
-- **Edge-level security** (headers set at middleware level for better performance)
-- **Integrated with existing i18n routing**
+## Recommended CSP Automation Strategy: Using `@nosecone/next`
 
-The implementation includes:
-- Enhanced `middleware.ts` with CSP and security headers
-- Utility functions in `lib/nonce.ts` for components
-- Cleaned `next.config.js` (security headers moved to middleware)
+### Why Nosecone?
 
-**Key Security Features:**
-- Production removes `unsafe-eval` and uses `strict-dynamic`
-- Development allows necessary unsafe directives for hot reloading
-- Unique nonce per request prevents CSP bypass attacks
-- Comprehensive security headers (HSTS, X-Frame-Options, etc.)
+- Designed specifically for Next.js and other modern JavaScript frameworks.
+- Automatically generates and injects nonces for inline scripts, eliminating manual nonce management.
+- Provides a type-safe API with pragmatic defaults for security headers.
+- Supports environment-aware policies (development vs. production).
+- Compatible with Vercel deployments and handles Vercel-specific tooling.
+- Manages other critical security headers like HSTS, X-Frame-Options, and more.
 
-## 🔒 Additional Security Measures
+### Implementation Steps
 
-### 3. **Environment Variables Security**
+#### 1. Installation
 
-Create `.env.example`:
+Install the Nosecone package:
+
 ```bash
-# Google Maps API Key (restrict to your domain in Google Cloud Console)
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
-
-# Optional: Analytics IDs
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+pnpm add @nosecone/next
 ```
 
-### 4. **CSP Nonce System**
-✅ **IMPLEMENTED** - Dynamic nonce generation and utility functions
+#### 2. Middleware Configuration (`middleware.ts`)
 
-**Usage in Components:**
+Replace or augment your existing middleware with the following pattern:
+
 ```typescript
-// lib/nonce.ts - Already implemented
-import { getNonce } from '@/lib/nonce';
+import { NextRequest, NextResponse } from 'next/server';
+import { createMiddleware as createNoseconeMiddleware } from '@nosecone/next';
 
-// In Server Components with inline scripts
-export default async function MyComponent() {
-  const nonce = await getNonce();
-  
-  return (
-    <>
-      <script nonce={nonce}>
-        {/* Your inline script */}
-        console.log('This script uses CSP nonce');
-      </script>
-      <style nonce={nonce}>
-        {/* Critical CSS that needs nonce */}
-      </style>
-    </>
+const locales = ['en', 'el'];
+const defaultLocale = 'en';
+
+const noseconeMiddleware = createNoseconeMiddleware({
+  contentSecurityPolicy: {
+    directives: {
+      'default-src': ["'self'"],
+      'script-src': [
+        "'self'",
+        "'nonce-{NONCE}'",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://cdn.bokun.io",
+        "https://assets.bokun.io",
+        "https://www.googletagmanager.com",
+        "https://www.google-analytics.com",
+        "https://maps.googleapis.com",
+        "https://static.elfsight.com",
+        "https://universe-static.elfsightcdn.com",
+        "https://js-agent.newrelic.com",
+        ...(process.env.NODE_ENV === 'development' ? [
+          "'unsafe-eval'",
+          "https://vercel.live",
+          "https://va.vercel-scripts.com"
+        ] : [])
+      ],
+      'style-src': [
+        "'self'",
+        "'unsafe-inline'",
+        "https://fonts.googleapis.com",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://cdn.bokun.io",
+      ],
+      'img-src': [
+        "'self'",
+        "https://images.unsplash.com",
+        "https://maps.googleapis.com",
+        "https://maps.gstatic.com",
+        "https://www.google-analytics.com",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://cdn.bokun.io",
+        "https://assets.bokun.io",
+        "https://ponyclub.gr",
+        "https://www.ponyclub.gr",
+        "https://www.googletagmanager.com",
+        "https://pagead2.googlesyndication.com",
+        "https://phosphor.utils.elfsightcdn.com",
+        "https://media-cdn.tripadvisor.com",
+        "https://lh3.googleusercontent.com",
+        "https://www.google.com",
+        "https://googleads.g.doubleclick.net",
+        "data:",
+        "blob:",
+      ],
+      'font-src': [
+        "'self'",
+        "https://fonts.gstatic.com",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "data:",
+      ],
+      'connect-src': [
+        "'self'",
+        "https://analytics.google.com",
+        "https://region1.google-analytics.com",
+        "https://region1.analytics.google.com",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://cdn.bokun.io",
+        "https://api.bokun.io",
+        "https://maps.googleapis.com",
+        "https://core.service.elfsight.com",
+        "https://pagead2.googlesyndication.com",
+        "https://static.elfsight.com",
+        "https://service-reviews-ultimate.elfsight.com",
+        "https://www.google.com",
+        "https://googleads.g.doubleclick.net",
+        ...(process.env.NODE_ENV === 'development' ? [
+          "ws://localhost:3000",
+          "https://vercel.live",
+          "https://va.vercel-scripts.com"
+        ] : [])
+      ],
+      'frame-src': [
+        "'self'",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://www.google.com",
+        "https://www.googletagmanager.com",
+      ],
+      'object-src': ["'none'"],
+      'base-uri': ["'self'"],
+      'form-action': ["'self'"],
+      'frame-ancestors': ["'none'"],
+      'upgrade-insecure-requests': [],
+    },
+    reportOnly: false,
+    // Uncomment and configure the following to enable CSP violation reporting:
+    // reportUri: '/api/csp-violations',
+  },
+  httpStrictTransportSecurity: 'max-age=63072000; includeSubDomains; preload',
+  xContentTypeOptions: 'nosniff',
+  xFrameOptions: 'DENY',
+  xXssProtection: '1; mode=block',
+  referrerPolicy: 'strict-origin-when-cross-origin',
+  permissionsPolicy: {
+    camera: [],
+    microphone: [],
+    geolocation: ['self'],
+    payment: [],
+  },
+});
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
+
+  let response: NextResponse;
+
+  if (pathnameHasLocale) {
+    response = NextResponse.next({ request });
+  } else {
+    const newPathname = pathname === '/' ? `/${defaultLocale}` : `/${defaultLocale}${pathname}`;
+    const url = request.nextUrl.clone();
+    url.pathname = newPathname;
+    response = NextResponse.redirect(url);
+  }
+
+  await noseconeMiddleware(request, response);
+
+  return response;
 }
 
-// For Client Components that need nonce
-'use client';
-import { useEffect, useState } from 'react';
-
-export function ClientComponentWithScript() {
-  const [nonce, setNonce] = useState('');
-  
-  useEffect(() => {
-    // Get nonce from meta tag or header
-    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content');
-    if (metaNonce) setNonce(metaNonce);
-  }, []);
-  
-  return (
-    <script nonce={nonce}>
-      {/* Client-side script */}
-    </script>
-  );
-}
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)',
+  ],
+};
 ```
 
-### 5. **Security Dependencies**
+#### 3. Nonce Usage in Components
 
-Add these security-focused packages:
+With Nosecone, nonce generation and injection are automatic. You should minimize inline scripts and styles, but if you have custom inline scripts, use the nonce provided by Nosecone via headers or meta tags.
+
+#### 4. Removing Manual Hashes
+
+The manual maintenance of script hashes in CSP can be removed. Nonce-based CSP is more flexible and secure.
+
+## Automated CSP Scanning & Validation Workflow
+
+### Local Development
+
+- Configure Nosecone with `reportOnly: true` to monitor CSP violations without blocking.
+- Use browser developer tools to inspect CSP reports.
+
+### Preview Deployments (Vercel)
+
+- Deploy feature branches to Vercel preview URLs.
+- Use tools like [Google CSP Evaluator](https://csp-evaluator.withgoogle.com/) and [Mozilla Observatory](https://observatory.mozilla.org/) to scan preview URLs.
+- Check browser console for CSP errors.
+- Adjust CSP configuration as needed and redeploy.
+
+### Production Deployments
+
+- Enforce full CSP with Nosecone.
+- Set up a CSP violation reporting endpoint (e.g., `/api/csp-violations`) to collect violation reports.
+- Use services like Sentry or Report URI for monitoring.
+
+## Refined Vercel Deployment Workflow
+
+1. Develop locally with `pnpm dev` using Nosecone in `reportOnly` mode.
+2. Push feature branches; Vercel creates preview deployments.
+3. Test preview URLs thoroughly, scan with CSP tools, and fix issues.
+4. Merge to main branch to trigger production deployment.
+5. Monitor production CSP reports and browser console for violations.
+
+## Updating Existing Security Plan Sections
+
+- Mark the old hash-based CSP system as superseded by the automated nonce-based approach with Nosecone.
+- Update nonce system documentation to reflect Nosecone's automatic handling.
+- Add CSP scanning and reporting steps to the security audit checklist.
+- Note that the May 2025 patch log CSP script hashes fix is resolved by this new approach.
+
+## Considerations & Best Practices
+
+- Follow the principle of least privilege for allowed domains.
+- Avoid `'unsafe-inline'` and `'unsafe-eval'` in production.
+- Regularly review and update CSP directives.
+- Keep `@nosecone/next` updated to benefit from improvements.
+
+## Deployment Security
+
+1. Pre-deployment:
+
 ```bash
-pnpm add helmet @next/env
-pnpm add -D @types/node
+pnpm audit --audit-level moderate
+pnpm build
 ```
 
-### 6. **Production Environment Setup**
+2. Post-deployment:
 
-**Vercel Deployment:**
-- Set environment variables in Vercel dashboard
-- Enable "Automatically expose System Environment Variables"
-- Configure custom domains with SSL
+- Test all functionality with new CSP.
+- Monitor browser console and CSP reporting endpoint.
+- Use CSP scanning tools on preview and production URLs.
 
-**Environment Variables to Set:**
-```bash
-NODE_ENV=production
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_restricted_key
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-```
+---
 
-### 7. **API Key Security Best Practices**
-
-**Google Maps API Key Restrictions:**
-1. Go to Google Cloud Console → APIs & Services → Credentials
-2. Edit your API key
-3. Add HTTP referrers restrictions:
-   - `https://yourdomain.com/*`
-   - `https://www.yourdomain.com/*`
-4. Restrict to only needed APIs (Maps JavaScript API, Places API, etc.)
-
-### 8. **Additional Security Headers**
-
-Consider adding these headers for enhanced security:
-```javascript
-// In your headers configuration
-{ key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
-{ key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-{ key: 'Cross-Origin-Resource-Policy', value: 'same-origin' }
-```
-
-## 🔍 Security Audit Checklist
-
-### ✅ Completed
-- [x] **Enhanced CSP with middleware** - Dynamic nonce generation implemented
-- [x] **Security headers** - HSTS, X-Frame-Options, etc. configured
-- [x] **Environment-aware policies** - Different CSP for dev/production
-- [x] **Nonce utility system** - Helper functions for components
-- [x] **Clean separation** - Security headers moved from next.config.js to middleware
-
-### 🔄 Next Steps
-- [ ] **Regenerate and restrict Google Maps API key** (if not done)
-- [ ] **Test CSP in production** - Deploy and verify no console errors
-- [ ] **Audit external domains** - Review all allowed CSP domains
-- [ ] **Environment variable security** - Ensure proper .env setup
-- [ ] **Run security audit:** `npm audit`
-- [ ] **CSP violation monitoring** - Set up reporting endpoint
-- [ ] **Rate limiting** - Consider for API routes
-- [ ] **Security testing** - Browser dev tools CSP validation
-
-### 🧪 Testing Commands
-```bash
-# Test the middleware implementation
-npm run dev
-# Check browser console for CSP violations
-# Verify nonce generation in Network tab
-
-# Production build test
-npm run build
-npm start
-# Verify production CSP policies
-```
-
-## Edge Runtime Compatibility ✅ COMPLETED
-
-**Issue Fixed**: The middleware was using Node.js `crypto` module which isn't supported in Edge Runtime.
-
-**Solution Applied**:
-- Removed Node.js `crypto` import from middleware.ts
-- Used Web Crypto API (`crypto.randomUUID()`) which is natively available in Edge Runtime
-- Maintained the same nonce generation functionality
-
-**Result**: Middleware now compiles and runs successfully without Edge Runtime errors.
-
-## 🚀 Deployment Security
-
-1. **Pre-deployment:**
-   ```bash
-   # Security audit
-   npm audit --audit-level moderate
-   
-   # Build test
-   npm run build
-   
-   # CSP test in browser dev tools
-   ```
-
-2. **Post-deployment:**
-   - Test all functionality with new CSP
-   - Monitor browser console for CSP violations
-   - Set up CSP reporting endpoint if needed
-
-This configuration will significantly improve your security posture while maintaining functionality for your tourism business website.
-        
+This automated CSP workflow will reduce manual errors, improve security, and streamline your deployment process for the Pony Club website.

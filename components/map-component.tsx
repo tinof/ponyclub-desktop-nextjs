@@ -17,5 +17,22 @@ const MapWithNoSSR = dynamic(() => import("./map-with-no-ssr"), {
 })
 
 export default function MapComponent() {
-  return <MapWithNoSSR />
+  // Acheron River coordinates in Greece
+  const acheronRiverCoordinates: [number, number] = [39.2369, 20.5247]
+  
+  const markers = [
+    {
+      position: acheronRiverCoordinates,
+      popup: "<b>Acheron River</b><br>1-day excursion starting point"
+    }
+  ]
+
+  return (
+    <MapWithNoSSR 
+      center={acheronRiverCoordinates}
+      zoom={13}
+      markers={markers}
+      className="h-[400px] w-full rounded-lg shadow-md z-10"
+    />
+  )
 }

@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import { ScriptProps } from 'next/script';
+import { useEffect, useState } from 'react';
 
-interface DeferredScriptProps {
+interface ScriptLoaderProps {
   src: string;
   id?: string;
   strategy?: 'beforeInteractive' | 'afterInteractive' | 'lazyOnload';
@@ -13,24 +14,36 @@ interface DeferredScriptProps {
   inViewport?: boolean; // Only load when in viewport
   dataSrc?: string;
   dataTestId?: string;
+  nonce?: string; // Allow passing nonce as a prop
 }
 
 /**
  * OptimizedScript component - A wrapper for Next.js Script component
  * with improved loading strategies and performance optimizations
  */
-export function OptimizedScript({
+export function ScriptLoader({
   src,
   id,
-  strategy = 'lazyOnload',
+  strategy = 'afterInteractive',
   onLoad,
   onError,
   dangerouslySetInnerHTML,
   inViewport = false,
   dataSrc,
   dataTestId,
-}: DeferredScriptProps) {
+  nonce: propNonce, // Use the prop name
+  ...props
+}: ScriptLoaderProps) {
   const [shouldLoad, setShouldLoad] = useState(!inViewport);
+  const [effectiveNonce, setEffectiveNonce] = useState(propNonce || '');
+
+  useEffect(() => {
+    if (!propNonce) {
+      // If nonce is not passed as a prop, try to get it from the meta tag
+      const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || '';
+      setEffectiveNonce(metaNonce);
+    }
+  }, [propNonce]); // Re-run if propNonce changes (though unlikely for this use case)
 
   useEffect(() => {
     if (inViewport) {
@@ -79,6 +92,7 @@ export function OptimizedScript({
       dangerouslySetInnerHTML={dangerouslySetInnerHTML}
       data-src={dataSrc}
       data-testid={dataTestId}
+      nonce={dangerouslySetInnerHTML ? effectiveNonce : undefined} // Use effectiveNonce
     />
   );
 }
@@ -88,13 +102,13 @@ export function OptimizedScript({
  */
 export function ReviewsScript() {
   return (
-    <OptimizedScript
+    <ScriptLoader
       id="elfsight-reviews-script"
       src="https://static.elfsight.com/platform/platform.js"
-      strategy="beforeInteractive"
-      inViewport={false}
+      strategy="afterInteractive"
+      inViewport={true}
     />
   );
 }
 
-export default OptimizedScript;
+export default ScriptLoader;

@@ -1,8 +1,19 @@
 "use client"
 
+import { useEffect, useState } from 'react';
+
 export default function BokunStyles() {
+  const [nonce, setNonce] = useState('');
+  
+  useEffect(() => {
+    // Get nonce from meta tag or existing script nonce
+    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || 
+                     document.querySelector('script[nonce]')?.getAttribute('nonce') || '';
+    setNonce(metaNonce);
+  }, []);
+  
   return (
-    <style jsx global>{`
+    <style jsx global nonce={nonce}>{`
       #bokun_5b20d531_ca57_4550_94c0_0511c35077a0 {
         background-color: #6b8362 !important; /* theme green */
         color: white !important;
@@ -49,4 +60,4 @@ export default function BokunStyles() {
       }
     `}</style>
   );
-} 
+}

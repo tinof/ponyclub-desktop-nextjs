@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/language-context';
 import { Waves, MountainSnow, Sailboat, User } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import BookingButton from '@/components/client/BookingButton';
@@ -45,6 +47,13 @@ export default function EnhancedPackageCard({
   trackingLabel,
   variant
 }: PackageCardProps) {
+  const [nonce, setNonce] = useState('');
+
+  useEffect(() => {
+    // Get nonce from meta tag
+    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || '';
+    setNonce(metaNonce);
+  }, []);
   const colorTheme = {
     green: {
       gradient: 'from-emerald-400 via-teal-500 to-cyan-600',
@@ -194,7 +203,7 @@ export default function EnhancedPackageCard({
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx nonce={nonce}>{`
         .mosaic-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);

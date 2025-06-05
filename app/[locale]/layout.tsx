@@ -1,15 +1,17 @@
 // app/[locale]/layout.tsx is a Server Component
 import type React from "react";
-import "../globals.css"; // Adjusted path
+import "../globals.css";
 import type { Metadata, ResolvingMetadata } from "next";
 import { Inter, Roboto_Slab } from "next/font/google";
+import Script from "next/script";
 import ClientLayout from "@/components/ClientLayout";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/react";
 import GDPRGoogleAnalytics from '@/components/client/GDPRGoogleAnalytics';
-// import Script from 'next/script'; // Import next/script - No longer needed for Bokun here
+import { connection } from "next/server";
 
-export const fetchCache = 'default-cache';
+// Remove the fetchCache export as we need dynamic rendering
+// export const fetchCache = 'default-cache';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: 'swap' });
 const robotoSlab = Roboto_Slab({
@@ -19,25 +21,20 @@ const robotoSlab = Roboto_Slab({
   display: 'swap',
 });
 
-// Define a type for the props including locale
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; // Params is a Promise
+  params: Promise<{ locale: string }>;
 }
 
-// Function to generate static paths for locales
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'el' }];
 }
 
-// Dynamic metadata generation
 export async function generateMetadata(
-  // Updated to treat params as a Promise, matching the error behavior
   { params: paramsPromise }: { params: Promise<{ locale: string }> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { locale } = await paramsPromise; // Await params here
-  // const resolvedLocale = locale || 'en'; // Use the awaited locale
+  const { locale } = await paramsPromise;
   const baseUrl = (await parent).metadataBase || new URL('https://ponyclub.gr');
 
   // Common metadata, can be extended or overridden
@@ -48,7 +45,6 @@ export async function generateMetadata(
     keywords: "Pony Club, Acheron River, rafting, horse riding, kayaking, trekking, Glyki, Greece, outdoor activities",
     generator: 'v0.dev',
     authors: [{ name: 'Pony Club' }],
-    // Alternates will now correctly resolve to /en or /el
     alternates: {
       canonical: '/',
       languages: {
@@ -59,9 +55,9 @@ export async function generateMetadata(
     openGraph: {
       title: 'Pony Club | Adventure Activities in Acheron River',
       description: 'Join Pony Club for unforgettable rafting, horse riding, kayaking and trekking experiences in Acheron River, Greece.',
-      url: new URL(locale, baseUrl).toString(), // URL will be locale-specific
+      url: new URL(locale, baseUrl).toString(),
       siteName: 'Pony Club',
-      locale: locale === 'el' ? 'el_GR' : 'en_US', // Dynamic locale
+      locale: locale === 'el' ? 'el_GR' : 'en_US',
       type: 'website',
       images: [
         {
@@ -81,7 +77,6 @@ export async function generateMetadata(
         url: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
       },
     },
-    // other: { ... } // JSON-LD might need locale-specific descriptions if they differ
   };
 
   // Example for locale-specific JSON-LD (if needed)
@@ -161,11 +156,15 @@ export async function generateMetadata(
   return commonMetadata;
 }
 
-export default async function LocaleLayout({ // Added async
+export default async function LocaleLayout({
   children,
-  params: paramsPromise, // Renamed: this is the Promise
+  params: paramsPromise,
 }: LocaleLayoutProps) {
-  const { locale } = await paramsPromise; // Await to get the actual locale
+  // Opt-out of static generation for CSP nonce support
+  await connection();
+  
+  const { locale } = await paramsPromise;
+  
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
@@ -175,30 +174,26 @@ export default async function LocaleLayout({ // Added async
         <link rel="preconnect" href="https://static.elfsight.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
 
-        {/* Web App Manifest */}
         <link rel="manifest" href="/manifest.json" />
 
-        {/* Favicons */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_io/favicon-16x16.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_io/favicon-32x32.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_io/apple-touch-icon.png" />
 
-        {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#6b8362" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pony Club" />
 
-        {/* CRITICAL FIX: BokunWidgetsLoader.js loaded once in head - using direct script tag */}
-        <script
+        {/* Nosecone automatically handles nonces, so we can remove manual nonce handling */}
+        <Script
           id="bokun-widgets-loader-global"
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-          async
-        ></script>
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${inter.variable} ${robotoSlab.variable} font-sans`} suppressHydrationWarning>
-        {/* Pass locale to ClientLayout, which will then pass it to LanguageProvider */}
         <ClientLayout initialLocale={locale}>
           {children}
           <SpeedInsights />

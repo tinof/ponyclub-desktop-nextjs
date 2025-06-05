@@ -1,5 +1,5 @@
 // Auto-generated sitemap data - Do not edit manually
-// Generated on: 2025-06-03T17:23:02.487Z
+// Generated on: 2025-06-04T22:02:11.238Z
 
 export interface RouteData {
   route: string;
@@ -9,27 +9,27 @@ export interface RouteData {
 export const routeData: RouteData[] = [
   {
     "route": "",
-    "fileMtime": 1747838883
+    "fileMtime": 1749025478
   },
   {
     "route": "/kayaking",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   },
   {
     "route": "/rafting",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   },
   {
     "route": "/riding",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   },
   {
     "route": "/river-village",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   },
   {
     "route": "/trekking",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   },
   {
     "route": "/for-schools",
@@ -37,6 +37,6 @@ export const routeData: RouteData[] = [
   },
   {
     "route": "/kayak-rafting",
-    "fileMtime": 1747750068
+    "fileMtime": 1749025478
   }
 ];

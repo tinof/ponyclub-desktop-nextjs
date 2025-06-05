@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { OptimizedScript } from "./ui/script-loader";
+import { ScriptLoader } from "./ui/script-loader";
 import { useGDPR } from "@/contexts/gdpr-context";
 
 export default function GoogleMap() {
@@ -106,7 +106,7 @@ export default function GoogleMap() {
 
   return (
     <div className="relative h-[400px] w-full rounded-lg shadow-xl overflow-hidden border border-amber-100/70 hover:shadow-2xl transition-shadow duration-300">
-      <OptimizedScript
+      <ScriptLoader
         src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMaps`}
         strategy="afterInteractive"
       />
