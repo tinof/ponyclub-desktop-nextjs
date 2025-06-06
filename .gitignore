@@ -30,3 +30,6 @@ public/.DS_Store
 .DS_Store
 fixing-process.md
 magicui-mcp-learnings.md
+
+# Sentry Config File
+.env.sentry-build-plugin
