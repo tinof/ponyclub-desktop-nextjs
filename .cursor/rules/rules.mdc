@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 # Modern Web Development Expert Rules
 ## Next.js 15 | React 19 | Tailwind CSS 4.0
 
@@ -358,7 +363,7 @@ const nextConfig: NextConfig = {
   // Stable features
   bundlePagesRouterDependencies: true,
   serverExternalPackages: ['package-name'],
-  
+
   // Experimental features
   experimental: {
     staleTimes: {
@@ -367,7 +372,7 @@ const nextConfig: NextConfig = {
     },
     // React 19 features are enabled by default
   },
-  
+
   // Compiler options
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
@@ -410,10 +415,10 @@ export default nextConfig
   /* Colors using modern color spaces */
   --color-primary: oklch(59.44% 0.202 271.09);
   --color-secondary: oklch(69.71% 0.149 211.73);
-  
+
   /* Spacing */
   --spacing-gutter: clamp(1rem, 4vw, 2rem);
-  
+
   /* Typography */
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-mono: "Fira Code", monospace;
@@ -455,25 +460,5 @@ export default nextConfig
 6. **Forgetting mobile-first**: Always start with mobile design
 7. **Skipping accessibility**: It's not optional
 8. **Not leveraging Server Actions**: They simplify data mutations
-
-## Migration Tips
-
-### From Next.js 14 to 15
-- Run the codemod: `npx @next/codemod@latest upgrade`
-- Update all dynamic API calls to use await
-- Review data fetching strategies (caching changes)
-- Update route handlers for async params
-
-### From React 18 to 19
-- Replace useFormState with useActionState
-- Implement useOptimistic for better UX
-- Use the new use() hook for promises
-- Review and update Suspense boundaries
-
-### From Tailwind 3 to 4
-- Migrate config to CSS-based approach
-- Update color definitions to use CSS variables
-- Replace @layer utilities with @utility
-- Review and update custom utilities
 
 Remember: These are living frameworks. Stay updated with the latest changes, but always prioritize shipping working, accessible, and performant code over using the newest features.

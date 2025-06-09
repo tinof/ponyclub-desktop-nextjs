@@ -63,7 +63,7 @@ export default function HamburgerMenu() {
               onClick={closeMenu}
             >
               <Phone className="w-5 h-5 text-primary-foreground/90" />
-              <span className="font-medium tracking-wide">{language === "el" ? "Καλέστε μας" : "Call Us"}</span>
+              <span className="font-medium tracking-wide">{t.navigation.callUs}</span>
             </a>
 
             {/* Home link */}
@@ -76,7 +76,7 @@ export default function HamburgerMenu() {
               } transition-colors`}
               onClick={closeMenu}
             >
-              Home
+              {t.navigation.home}
             </Link>
 
             {/* River & Village - English only */}
@@ -112,7 +112,7 @@ export default function HamburgerMenu() {
             {/* Activities section */}
             <div className="mt-1 pt-1 border-t border-border"> {/* Cleaner border */}
               <div className="px-4 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider"> {/* Standard header text */}
-                {language === "el" ? "Δραστηριότητες" : "Activities"}
+                {t.navigation.activities}
               </div>
               {activities.map((activity) => (
                 <Link
@@ -133,7 +133,7 @@ export default function HamburgerMenu() {
             {/* Language selector in menu */}
             <div className="mt-1 pt-1 border-t border-border"> {/* Cleaner border */}
               <div className="px-4 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider"> {/* Standard header text */}
-                Language
+                {t.navigation.language}
               </div>
               {/* Simplified language buttons to look like text options */}
               <button

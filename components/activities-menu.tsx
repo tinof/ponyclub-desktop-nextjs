@@ -39,7 +39,7 @@ export default function ActivitiesMenu() {
           className="relative flex items-center gap-1 px-3 py-2 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg hover:scale-105 transition-all duration-200"
         >
           <Home className="w-4 h-4" />
-          <span className="hidden sm:inline">Home</span>
+          <span className="hidden sm:inline">{t.navigation.home}</span>
           <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
         </Link>
       )}
@@ -48,7 +48,7 @@ export default function ActivitiesMenu() {
           onClick={toggleDropdown}
           className="relative flex items-center gap-1 px-3 py-2 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg hover:scale-105 transition-all duration-200"
         >
-          <span>Activities</span>
+          <span>{t.navigation.activities}</span>
           <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
           <div className="absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs"></div>
         </button>

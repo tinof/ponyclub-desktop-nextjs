@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link"; // Added Link for logo
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import ResponsiveNavigation from '@/components/responsive-navigation';
+import { useLanguage } from '@/contexts/language-context';
 
 interface ErrorProps {
   error: Error;
@@ -11,6 +12,8 @@ interface ErrorProps {
 }
 
 export default function Error({ error, reset }: ErrorProps) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -41,15 +44,15 @@ export default function Error({ error, reset }: ErrorProps) {
       </header>
 
       <main className="flex flex-col items-center justify-center min-h-screen p-4 text-center pt-20 bg-[#f5f0e8]"> {/* Added bg color and pt-20 */}
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-amber-800">Something went wrong</h1> {/* Styled heading */}
+        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-amber-800">{t.error.title}</h1> {/* Styled heading */}
         <p className="mb-6 text-lg text-gray-700">
-          An unexpected error has occurred. Please try again.
+          {t.error.message}
         </p>
         <button
           onClick={() => reset()}
           className="px-6 py-3 font-semibold text-white bg-[#c27a5f] rounded-lg hover:bg-[#b06c50] transition-colors" /* Styled button (using a site color) */
         >
-          Try again
+          {t.error.tryAgain}
         </button>
       </main>
     </>

@@ -163,15 +163,22 @@ export async function middleware(request: NextRequest) {
   );
 
   if (!pathnameHasLocale) {
-    const newPathname = pathname === '/' ? `/${defaultLocale}` : `/${defaultLocale}${pathname}`;
+    // Check for a saved locale preference in the cookie
+    const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
+    const chosenLocale = locales.includes(localeCookie as string) ? localeCookie : defaultLocale;
+
+    const newPathname = pathname === '/' ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
     const url = request.nextUrl.clone();
     url.pathname = newPathname;
     
     const i18nRedirectResponse = NextResponse.redirect(url);
+    // Copy headers from the security middleware response to the redirect response
     response.headers.forEach((value, key) => {
-      i18nRedirectResponse.headers.set(key, value);
+      if (!i18nRedirectResponse.headers.has(key)) {
+        i18nRedirectResponse.headers.set(key, value);
+      }
     });
-    response = i18nRedirectResponse;
+    return i18nRedirectResponse;
   }
 
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self), payment=()');

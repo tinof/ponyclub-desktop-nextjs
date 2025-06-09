@@ -14,7 +14,7 @@ import GDPRBanner from "@/components/client/GDPRBanner";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
-  initialLocale?: string; // Make it optional for now, though app/[locale]/layout.tsx will always pass it
+  initialLocale: string; // Required since app/[locale]/layout.tsx will always pass it
 }
 
 export default function ClientLayout({

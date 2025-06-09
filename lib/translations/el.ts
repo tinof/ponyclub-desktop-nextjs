@@ -57,9 +57,6 @@ export const el = {
     extrasShoes: "100% ΑΔΙΑΒΡΟΧΑ ΠΑΠΟΥΤΣΙΑ: €10",
     extrasPhoneCase: "ΑΔΙΑΒΡΟΧΗ ΘΗΚΗ ΚΙΝΗΤΟΥ: €5"
   },
-  reviews: {
-    title: "Τι Λένε οι Πελάτες Μας"
-  },
   location: {
     findUs: "Βρείτε μας",
     viewOnGoogleMaps: "Προβολή στο Google Maps"
@@ -76,7 +73,10 @@ export const el = {
     openingHours: "Ώρες Λειτουργίας:",
     openingHoursDetails: "10.00 έως 18.00 καθημερινά",
     openingHoursSeason: "Κατά τη διάρκεια της σεζόν, διαφορετικά λειτουργούμε κατόπιν ζήτησης",
-    followUs: "ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ"
+    followUs: "ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ",
+    location: "ΤΟΠΟΘΕΣΙΑ",
+    phone: "Τηλέφωνο",
+    emailLabel: "E-mail"
   },
   language: {
     en: "Αγγλικά",
@@ -175,6 +175,28 @@ export const el = {
         <p>Η φύση γύρω από τον ποταμό είναι πολύ πλούσια σε χλωρίδα και πανίδα και προστατεύεται από το πρόγραμμα Natura 2000 της ΕΕ.</p>
       </div>
     `
+  },
+  // Navigation translations
+  navigation: {
+    home: "Αρχική",
+    activities: "Δραστηριότητες",
+    language: "Γλώσσα",
+    callUs: "Καλέστε μας"
+  },
+  // Reviews section
+  reviews: {
+    title: "ΟΙ ΚΡΙΤΙΚΕΣ ΜΑΣ"
+  },
+  // Error pages
+  error: {
+    title: "Κάτι πήγε στραβά",
+    message: "Παρουσιάστηκε ένα απροσδόκητο σφάλμα. Παρακαλώ δοκιμάστε ξανά.",
+    tryAgain: "Δοκιμάστε ξανά"
+  },
+  notFound: {
+    title: "404 - Η σελίδα δεν βρέθηκε",
+    message: "Λυπούμαστε, η σελίδα που ψάχνετε δεν υπάρχει.",
+    goHome: "Επιστροφή στην αρχική"
   },
   footer: {
     contactUs: "Επικοινωνία",

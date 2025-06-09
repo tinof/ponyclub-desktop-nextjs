@@ -62,7 +62,7 @@ export default function Footer() {
                   className="inline-flex items-center justify-center px-6 py-3 font-semibold text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors gap-2"
                 >
                   <MapPin className="h-5 w-5" />
-                  <span>Find Us / {t.footer.findUs}</span>
+                  <span>{t.footer.findUs}</span>
                 </a>
               </div>
             </div>

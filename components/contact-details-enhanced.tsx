@@ -49,7 +49,7 @@ export default function ContactDetailsEnhanced() {
         <div className="flex items-start gap-3">
           <MapPin className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
-            <h3 className="font-bold text-[#6b8362] uppercase">LOCATION</h3>
+            <h3 className="font-bold text-[#6b8362] uppercase">{t.contact.location}</h3>
             <p className="font-medium">{t.contact.businessName}</p>
             <p>{t.contact.address1}</p>
             <p>{t.contact.address2}</p>
@@ -59,7 +59,7 @@ export default function ContactDetailsEnhanced() {
         <div className="flex items-start gap-3 mt-4 pt-4 border-t border-[#6b8362]/30">
           <Phone className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
-            <h3 className="font-bold text-[#6b8362] uppercase">Phone</h3>
+            <h3 className="font-bold text-[#6b8362] uppercase">{t.contact.phone}</h3>
             <p>{t.contact.phone1}</p>
             <p className="text-sm italic">{t.contact.phone2}</p>
           </div>
@@ -68,7 +68,7 @@ export default function ContactDetailsEnhanced() {
         <div className="flex items-start gap-3">
           <Mail className="text-[#c27a5f] h-6 w-6 mt-1 shrink-0" />
           <div>
-            <h3 className="font-bold text-[#6b8362] uppercase">E-mail</h3>
+            <h3 className="font-bold text-[#6b8362] uppercase">{t.contact.emailLabel}</h3>
             <p>{t.contact.email}</p>
             <p className="text-sm italic mt-1">{t.contact.emailNote}</p>
           </div>

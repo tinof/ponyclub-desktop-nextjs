@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { type Language, translations, type TranslationKeys } from "@/lib/translations"
 import { bokunLangMap } from "@/lib/bokun-lang"
 import { useBokunLanguage } from "@/lib/use-bokun-language"
@@ -16,67 +17,48 @@ const defaultLanguage: Language = "en";
 
 interface LanguageProviderProps {
   children: React.ReactNode;
-  initialLang?: string; // From URL via app/[locale]/layout.tsx
+  initialLang: string; // From URL via app/[locale]/layout.tsx
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children, initialLang }: LanguageProviderProps) {
-  // Initialize state: prioritize initialLang from URL, then localStorage, then browser, then default
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (initialLang && (initialLang === "en" || initialLang === "el")) {
-      return initialLang as Language;
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  // The language is now directly determined by the `initialLang` prop from the URL.
+  // This ensures the URL is the single source of truth.
+  const language = (initialLang === "en" || initialLang === "el") ? initialLang : defaultLanguage;
+
+  // This function will be called by the language selector.
+  // It sets a cookie with the new language preference and then navigates
+  // to the new URL, causing the app to re-render with the correct locale.
+  const setLanguage = (newLocale: Language) => {
+    // Set cookie to remember the user's choice
+    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
+
+    // Determine the new path
+    const currentLocale = language;
+    let newPath;
+    if (pathname.startsWith(`/${currentLocale}/`)) {
+        newPath = pathname.replace(`/${currentLocale}/`, `/${newLocale}/`);
+    } else if (pathname === `/${currentLocale}`) {
+        newPath = `/${newLocale}`;
+    } else {
+        // Fallback for unexpected path structures
+        newPath = `/${newLocale}${pathname === '/' ? '' : pathname}`;
     }
-    // This part runs only on the client after hydration, if initialLang wasn't set server-side
-    if (typeof window !== "undefined") {
-      const savedLanguage = localStorage.getItem("language") as Language;
-      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "el")) {
-        return savedLanguage;
-      }
-      const browserLanguage = navigator.language.split("-")[0];
-      if (browserLanguage === "el") {
-        return "el";
-      }
-    }
-    return defaultLanguage;
-  });
 
-  const [mounted, setMounted] = useState(false);
+    // Navigate to the new path, preserving query parameters
+    const search = window.location.search;
+    router.push(newPath + search);
+  };
 
-  useEffect(() => {
-    setMounted(true);
-    // If initialLang was provided (from URL), it's already set.
-    // If not, this effect ensures client-side preferences (localStorage, browser) are applied.
-    // This effect also handles cases where initialLang might not be 'en' or 'el' (though unlikely with current setup).
-    if (!initialLang || (initialLang !== "en" && initialLang !== "el")) {
-      const savedLanguage = localStorage.getItem("language") as Language;
-      if (savedLanguage && (savedLanguage === "en" || savedLanguage === "el")) {
-        if (language !== savedLanguage) setLanguageState(savedLanguage);
-        return;
-      }
-
-      const browserLanguage = navigator.language.split("-")[0];
-      const currentBrowserLang = browserLanguage === "el" ? "el" : "en";
-      if (language !== currentBrowserLang) setLanguageState(currentBrowserLang);
-    }
-  }, [initialLang, language]); // Rerun if initialLang changes (e.g. route change) or if language state is updated externally
-
-  // Save language preference to localStorage when it changes
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang)
-    localStorage.setItem("language", lang)
-  }
-
-  // Get translations for current language
-  const t = translations[language]
+  // Get translations for the current language
+  const t = translations[language];
 
   // Hook to update Bokun widgets language on change
-  useBokunLanguage(bokunLangMap[language])
-
-  // Only render children when mounted to avoid hydration issues
-  if (!mounted) {
-    return null
-  }
+  useBokunLanguage(bokunLangMap[language]);
 
   return <LanguageContext.Provider value={{ language, t, setLanguage }}>{children}</LanguageContext.Provider>
 }

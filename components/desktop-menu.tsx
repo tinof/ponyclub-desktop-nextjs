@@ -53,7 +53,7 @@ export default function DesktopMenu() {
             : "text-foreground hover:text-primary font-medium border-transparent" /* Standard text, hover, transparent border */
         }`}
       >
-        Home
+        {t.navigation.home}
         {/* Removed inset div */}
       </Link>
 
@@ -67,7 +67,7 @@ export default function DesktopMenu() {
               : "text-foreground hover:text-primary font-medium border-transparent" /* Standard text, hover, transparent border */
           }`}
         >
-          {language === "el" ? "Δραστηριότητες" : "Activities"}
+          {t.navigation.activities}
           <ChevronDown className="w-5 h-5 ml-1" />
           {/* Removed inset div */}
         </button>

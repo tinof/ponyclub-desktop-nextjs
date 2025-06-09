@@ -57,9 +57,6 @@ export const en = {
     extrasShoes: "100% WATERPROOF SHOES: €10",
     extrasPhoneCase: "WATERPROOF PHONE CASE: €5"
   },
-  reviews: {
-    title: "What Our Customers Say",
-  },
   location: {
     findUs: "Find Us",
     viewOnGoogleMaps: "View on Google Maps",
@@ -77,6 +74,9 @@ export const en = {
     openingHoursDetails: "10.00 to 18.00 every day",
     openingHoursSeason: "During season, otherwise we are open on request",
     followUs: "FOLLOW US",
+    location: "LOCATION",
+    phone: "Phone",
+    emailLabel: "E-mail"
   },
   language: {
     en: "English",
@@ -176,6 +176,28 @@ export const en = {
         <p>The nature around the river is very rich with flora and fauna and it is protected by EU's Natura 2000 program.</p>
       </div>
     `
+  },
+  // Navigation translations
+  navigation: {
+    home: "Home",
+    activities: "Activities",
+    language: "Language",
+    callUs: "Call Us"
+  },
+  // Reviews section
+  reviews: {
+    title: "OUR REVIEWS"
+  },
+  // Error pages
+  error: {
+    title: "Something went wrong",
+    message: "An unexpected error has occurred. Please try again.",
+    tryAgain: "Try again"
+  },
+  notFound: {
+    title: "404 - Page Not Found",
+    message: "Sorry, the page you are looking for does not exist.",
+    goHome: "Go back home"
   },
   footer: {
     contactUs: "Contact Us",
