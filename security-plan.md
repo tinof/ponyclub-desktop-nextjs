@@ -54,6 +54,7 @@ const noseconeMiddleware = createNoseconeMiddleware({
       'script-src': [
         "'self'",
         "'nonce-{NONCE}'",
+        "'strict-dynamic'",
         'https://widgets.bokun.io',
         'https://static.bokun.io',
         'https://cdn.bokun.io',
@@ -74,7 +75,6 @@ const noseconeMiddleware = createNoseconeMiddleware({
       ],
       'style-src': [
         "'self'",
-        "'unsafe-inline'",
         'https://fonts.googleapis.com',
         'https://widgets.bokun.io',
         'https://static.bokun.io',
@@ -154,7 +154,7 @@ const noseconeMiddleware = createNoseconeMiddleware({
   xContentTypeOptions: 'nosniff',
   xFrameOptions: 'DENY',
   xXssProtection: '1; mode=block',
-  referrerPolicy: 'strict-origin-when-cross-origin',
+  referrerPolicy: 'no-referrer',
   permissionsPolicy: {
     camera: [],
     microphone: [],

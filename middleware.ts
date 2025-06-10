@@ -29,7 +29,6 @@ const noseconeOptions: NoseconeOptions = {
       scriptSrc: [
         ...noseconeDefaults.contentSecurityPolicy.directives.scriptSrc,
         "'strict-dynamic'",
-        "'unsafe-inline'", // Fallback for older browsers that don't support strict-dynamic
         'https://widgets.bokun.io',
         'https://static.bokun.io',
         'https://cdn.bokun.io',
@@ -54,7 +53,6 @@ const noseconeOptions: NoseconeOptions = {
       ],
       styleSrc: [
         ...noseconeDefaults.contentSecurityPolicy.directives.styleSrc,
-        "'unsafe-inline'",
         'https://fonts.googleapis.com',
         'https://widgets.bokun.io',
         'https://static.bokun.io',
@@ -141,6 +139,7 @@ const noseconeOptions: NoseconeOptions = {
         'https://www.googletagmanager.com',
       ],
       upgradeInsecureRequests: process.env.NODE_ENV === 'production',
+      reportUri: ['/api/csp-violations'], // Add CSP violation reporting endpoint
     },
   },
   // Vercel toolbar helper for previews
