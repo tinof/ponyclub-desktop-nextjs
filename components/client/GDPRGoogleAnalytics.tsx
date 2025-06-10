@@ -1,8 +1,10 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useGDPR, CookieConsent } from '@/contexts/gdpr-context'; // Import CookieConsent
+
+
 
 interface GDPRGoogleAnalyticsProps {
   gaId: string;
@@ -10,14 +12,6 @@ interface GDPRGoogleAnalyticsProps {
 
 export default function GDPRGoogleAnalytics({ gaId }: GDPRGoogleAnalyticsProps) {
   const { consent } = useGDPR(); // Get the consent object
-  const [nonce, setNonce] = useState('');
-
-  useEffect(() => {
-    // Get nonce from meta tag or header
-    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || 
-                     document.querySelector('script[nonce]')?.getAttribute('nonce') || '';
-    setNonce(metaNonce);
-  }, []); // Run once to get nonce
 
   useEffect(() => {
     // This effect handles applying consent changes to gtag
@@ -32,13 +26,38 @@ export default function GDPRGoogleAnalytics({ gaId }: GDPRGoogleAnalyticsProps) 
     }
   }, [consent]); // Re-run when consent object changes
 
-  // Determine if the scripts should be rendered based on analytics consent
-  // The gtag setup script should always load to set default consent states.
-  // The actual tracking will be controlled by the consent state.
+  // Initialize gtag in a CSP-compliant way
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Initialize dataLayer and gtag function
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: unknown[]) {
+        window.dataLayer?.push(args);
+      }
+      window.gtag = gtag;
+
+      // Set default consent to denied
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
+
+      gtag('js', new Date());
+      gtag('config', gaId, {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+
+      console.log('[GDPR GA] gtag initialized with default denied consent');
+    }
+  }, [gaId]);
 
   return (
     <>
-      {/* External gtag script - does not need nonce itself as it's an external URL allowed by script-src 'self' and domains */}
+      {/* External gtag script - CSP compliant */}
       <Script
         id="ga-gtag-script"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
@@ -50,28 +69,6 @@ export default function GDPRGoogleAnalytics({ gaId }: GDPRGoogleAnalyticsProps) 
           console.error('[GDPR GA] Failed to load gtag.js.');
         }}
       />
-      {/* Inline script for gtag configuration - this needs a nonce */}
-      <Script id="google-analytics-config" strategy="afterInteractive" nonce={nonce}>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          
-          // Set default consent to denied
-          gtag('consent', 'default', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            wait_for_update: 500
-          });
-          
-          gtag('config', '${gaId}', {
-            page_title: document.title,
-            page_location: window.location.href
-          });
-        `}
-      </Script>
     </>
   )
 }

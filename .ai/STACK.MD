@@ -30,11 +30,19 @@ This document lists the key technologies, libraries, and integrations used in th
 -   **@vercel/analytics:** 1.5.0
 -   **@vercel/speed-insights:** 1.2.0
 
+## Maps & Location Services
+-   **Google Maps API:** Integrated for interactive maps with custom controls
+-   **@types/google.maps:** 3.58.1 (TypeScript definitions for Google Maps)
+-   **leaflet:** 1.9.4 (alternative mapping library, with `@types/leaflet`)
+
+## Security & Compliance
+-   **@nosecone/next:** CSP (Content Security Policy) automation and security headers
+-   **GDPR Compliance:** Custom implementation for cookie consent and privacy compliance
+
 ## Other Notable Libraries
 -   **date-fns:** 4.1.0 (for date utilities)
 -   **embla-carousel-react:** 8.6.0 (for carousels)
 -   **framer-motion:** 12.12.1 (for animations)
--   **leaflet:** 1.9.4 (for maps, with `@types/leaflet`)
 -   **recharts:** 2.15.3 (for charts)
 -   **sonner:** 2.0.3 (for toast notifications)
 -   **vaul:** 1.1.2 (for drawers)

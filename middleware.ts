@@ -39,7 +39,18 @@ const noseconeOptions: NoseconeOptions = {
         "https://static.elfsight.com",
         "https://universe-static.elfsightcdn.com",
         "https://js-agent.newrelic.com",
+        // Additional domains for third-party scripts that might create inline scripts
+        "https://www.gstatic.com",
+        "https://apis.google.com",
         ...devScriptSources
+      ],
+      // Add worker-src directive to allow blob workers
+      workerSrc: [
+        "'self'",
+        "blob:",
+        "https://widgets.bokun.io",
+        "https://static.bokun.io",
+        "https://maps.googleapis.com",
       ],
       styleSrc: [
         ...noseconeDefaults.contentSecurityPolicy.directives.styleSrc,

@@ -11,7 +11,7 @@ You are an expert senior developer specializing in modern web development, with 
 ## IMPORTANT: Use MCP Tools for Accuracy
 Before providing code examples or package recommendations:
 1. **ALWAYS** check package versions using available MCP tools
-2. **ALWAYS** use docstring for framework documentation when available
+2. **ALWAYS** use docfork for framework documentation when available
 3. **NEVER** assume package versions or API signatures from training data
 
 When these tools are available, actively use them to ensure accuracy.
@@ -44,11 +44,11 @@ Before responding to any request, follow these steps:
 
 When working with this stack, leverage these Model Context Protocol (MCP) tools for accurate, up-to-date information:
 
-### docstring (Required)
+### docfork (Required)
 For current documentation and code examples:
-- Add `use docstring` to prompts when you need framework-specific documentation
+- Add `use docfork` to prompts when you need framework-specific documentation
 - Essential for Next.js 15, React 19, and Tailwind 4.0 updates
-- Example: "Create a Next.js 15 app with server actions. use docstring"
+- Example: "Create a Next.js 15 app with server actions. use docfork"
 
 **When to use:**
 - Creating new projects with latest patterns
@@ -82,13 +82,13 @@ For complex dependency management:
 
 ### Usage Pattern
 1. **Always** check package versions before recommending dependencies
-2. **Always** use docstring for framework-specific patterns and APIs
+2. **Always** use docfork for framework-specific patterns and APIs
 3. **Consider** NPM Helper for complex dependency scenarios
 
 Example workflow:
 ```
 1. Check current versions with Package Version MCP
-2. Get latest patterns with docstring
+2. Get latest patterns with docfork
 3. Resolve conflicts with NPM Helper if needed
 ```
 
@@ -100,7 +100,7 @@ When asked to "Create a form with validation in Next.js":
 // Args: { "dependencies": { "react-hook-form": "*", "zod": "*", "@hookform/resolvers": "*" } }
 
 // 2. Get latest Next.js patterns
-// Add to prompt: "use docstring"
+// Add to prompt: "use docfork"
 
 // 3. Then implement with current best practices
 import { useActionState } from 'react' // React 19 pattern
@@ -108,7 +108,7 @@ import { z } from 'zod' // Current version from check
 ```
 
 ### Tools NOT Needed for This Stack
-- **Package Documentation MCP**: Redundant with docstring, which provides better curated docs
+- **Package Documentation MCP**: Redundant with docfork, which provides better curated docs
 - Language-specific doc tools are less useful for web development workflows
 
 ## Code Style and Structure

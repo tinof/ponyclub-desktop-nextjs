@@ -1,5 +1,5 @@
 // Auto-generated sitemap data - Do not edit manually
-// Generated on: 2025-06-09T11:37:46.755Z
+// Generated on: 2025-06-10T12:47:06.380Z
 
 export interface RouteData {
   route: string;
@@ -9,7 +9,7 @@ export interface RouteData {
 export const routeData: RouteData[] = [
   {
     "route": "",
-    "fileMtime": 1749025478
+    "fileMtime": 1749469218
   },
   {
     "route": "/kayaking",

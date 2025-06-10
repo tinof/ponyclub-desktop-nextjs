@@ -1,7 +1,9 @@
 // Global type declarations for tracking and analytics
 
+
 declare global {
   interface Window {
+    dataLayer?: unknown[];
     gtag?: (
       command: 'config' | 'event' | 'js' | 'set' | 'consent',
       targetId: string | Date | 'update',
