@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
+import { useEffect, useRef, useState } from 'react'
 import 'leaflet/dist/leaflet.css'
 
 // Fix for default markers in Leaflet
@@ -34,7 +34,7 @@ export default function MapWithNoSSR({ center, zoom, markers = [], className = '
         const map = L.map(mapRef.current!).setView(center, zoom)
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap contributors'
+          attribution: '© OpenStreetMap contributors',
         }).addTo(map)
 
         // Add markers
@@ -49,7 +49,7 @@ export default function MapWithNoSSR({ center, zoom, markers = [], className = '
           map.remove()
         }
       } catch (error) {
-        console.error("Error loading map:", error)
+        console.error('Error loading map:', error)
         setMapError(true)
       }
     }
@@ -60,16 +60,16 @@ export default function MapWithNoSSR({ center, zoom, markers = [], className = '
   if (mapError) {
     return (
       <div className={`h-96 w-full ${className}`}>
-        <div className="h-full w-full flex items-center justify-center bg-gray-100 rounded-lg">
-          <div className="text-center p-4">
-            <p className="text-gray-700 mb-2">Map could not be loaded</p>
-            <p className="text-sm text-gray-500">
+        <div className='h-full w-full flex items-center justify-center bg-gray-100 rounded-lg'>
+          <div className='text-center p-4'>
+            <p className='text-gray-700 mb-2'>Map could not be loaded</p>
+            <p className='text-sm text-gray-500'>
               Please visit{' '}
-              <a 
-                href="https://www.google.com/maps/search/Acheron+River,+Greece" 
-                className="text-blue-500 underline" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <a
+                href='https://www.google.com/maps/search/Acheron+River,+Greece'
+                className='text-blue-500 underline'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 Google Maps
               </a>{' '}

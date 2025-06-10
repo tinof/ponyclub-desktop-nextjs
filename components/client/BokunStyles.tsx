@@ -1,17 +1,19 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 export default function BokunStyles() {
-  const [nonce, setNonce] = useState('');
-  
+  const [nonce, setNonce] = useState('')
+
   useEffect(() => {
     // Get nonce from meta tag or existing script nonce
-    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || 
-                     document.querySelector('script[nonce]')?.getAttribute('nonce') || '';
-    setNonce(metaNonce);
-  }, []);
-  
+    const metaNonce =
+      document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') ||
+      document.querySelector('script[nonce]')?.getAttribute('nonce') ||
+      ''
+    setNonce(metaNonce)
+  }, [])
+
   return (
     <style jsx global nonce={nonce}>{`
       #bokun_5b20d531_ca57_4550_94c0_0511c35077a0 {
@@ -23,13 +25,15 @@ export default function BokunStyles() {
         border-radius: 0.5rem !important; /* rounded-lg */
         width: 100% !important;
         border: none !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
         position: relative !important;
         overflow: hidden !important;
         transition: all 0.3s ease !important;
       }
       #bokun_5b20d531_ca57_4550_94c0_0511c35077a0:hover {
-        background-color: #3E5A35 !important; /* darker green */
+        background-color: #3e5a35 !important; /* darker green */
         transform: translateY(-2px) !important;
       }
       #bokun_5b20d531_ca57_4550_94c0_0511c35077a0:disabled {
@@ -45,7 +49,9 @@ export default function BokunStyles() {
         border-radius: 0.5rem !important; /* rounded-lg */
         width: 100% !important;
         border: none !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
         position: relative !important;
         overflow: hidden !important;
         transition: all 0.3s ease !important;
@@ -59,5 +65,5 @@ export default function BokunStyles() {
         cursor: pointer !important;
       }
     `}</style>
-  );
+  )
 }

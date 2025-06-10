@@ -1,8 +1,6 @@
-"use client"
+'use client'
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
-
-
 
 export interface CookieConsent {
   necessary: boolean
@@ -61,17 +59,17 @@ export function GDPRProvider({ children }: { children: React.ReactNode }) {
     const consentData = {
       consent: newConsent,
       version: CONSENT_VERSION,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
-    
+
     localStorage.setItem(CONSENT_COOKIE_NAME, JSON.stringify(consentData))
     setConsent(newConsent)
     setShowBanner(false)
     setShowCustomize(false)
-    
+
     // Apply consent to tracking scripts
     applyConsent(newConsent)
-    
+
     // Track consent choice
     trackConsentChoice(newConsent)
   }
@@ -80,7 +78,7 @@ export function GDPRProvider({ children }: { children: React.ReactNode }) {
     saveConsent({
       necessary: true,
       analytics: true,
-      marketing: true
+      marketing: true,
     })
   }
 
@@ -88,14 +86,14 @@ export function GDPRProvider({ children }: { children: React.ReactNode }) {
     saveConsent({
       necessary: true, // Always true - required for site functionality
       analytics: false,
-      marketing: false
+      marketing: false,
     })
   }
 
   const saveCustom = (customConsent: CookieConsent) => {
     saveConsent({
       ...customConsent,
-      necessary: true // Always true - required for site functionality
+      necessary: true, // Always true - required for site functionality
     })
   }
 
@@ -118,7 +116,7 @@ export function GDPRProvider({ children }: { children: React.ReactNode }) {
         rejectAll,
         saveCustom,
         openCustomize,
-        closeBanner
+        closeBanner,
       }}
     >
       {children}
@@ -144,7 +142,7 @@ function applyConsent(consent: CookieConsent) {
       analytics_storage: consent.analytics ? 'granted' : 'denied',
       ad_storage: consent.marketing ? 'granted' : 'denied',
       ad_user_data: consent.marketing ? 'granted' : 'denied',
-      ad_personalization: consent.marketing ? 'granted' : 'denied'
+      ad_personalization: consent.marketing ? 'granted' : 'denied',
     })
   }
 
@@ -169,7 +167,7 @@ function trackConsentChoice(consent: CookieConsent) {
       event_category: 'GDPR',
       analytics_consent: consent.analytics,
       marketing_consent: consent.marketing,
-      consent_method: 'banner'
+      consent_method: 'banner',
     })
   }
 }

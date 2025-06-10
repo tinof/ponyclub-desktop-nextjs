@@ -1,0 +1,46 @@
+{
+  "recommendations": [
+    // Essential for ESLint and Prettier
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+
+    // TypeScript and Next.js support
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+
+    // React and JSX support
+    "ms-vscode.vscode-react-extension",
+    "rodrigovallades.es7-react-js-snippets",
+
+    // Git and version control
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+
+    // File management and productivity
+    "ms-vscode.vscode-json",
+    "yzhang.markdown-all-in-one",
+    "streetsidesoftware.code-spell-checker",
+
+    // AI assistance
+    "github.copilot",
+    "github.copilot-chat",
+
+    // Code quality and debugging
+    "ms-vscode.vscode-js-debug",
+    "orta.vscode-jest",
+    "humao.rest-client",
+
+    // Theme and UI (optional but helpful)
+    "pkief.material-icon-theme",
+    "zhuangtongfa.material-theme",
+
+    // Additional helpful extensions
+    "formulahendry.auto-close-tag",
+    "alefragnani.bookmarks",
+    "aaron-bond.better-comments",
+    "ms-vscode.vscode-todo-highlight"
+  ],
+  "unwantedRecommendations": ["ms-vscode.vscode-typescript", "hookyqr.beautify", "ms-vscode.sublime-keybindings"]
+}

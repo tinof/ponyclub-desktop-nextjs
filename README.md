@@ -9,7 +9,8 @@ A web application built with Next.js and React.
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) (v3.4)
 - **UI Components**: [Radix UI](https://www.radix-ui.com/)
 - **Package Manager**: [pnpm](https://pnpm.io/)
-- **Form Management**: [React Hook Form](https://react-hook-form.com/) with Zod validation
+- **Form Management**: [React Hook Form](https://react-hook-form.com/) with Zod
+  validation
 - **Typescript**: For type safety and developer experience
 - **Visualization**: Recharts for data visualization
 - **Icons**: Lucide React
@@ -25,22 +26,26 @@ A web application built with Next.js and React.
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone [repository-url]
    cd ponyclub-v0
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Start the development server:
+
    ```bash
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see
+   the application.
 
 ## Production Build
 
@@ -69,16 +74,19 @@ pnpm start
 ### Option 2: Deploy using Vercel CLI
 
 1. Install Vercel CLI:
+
    ```bash
    pnpm install -g vercel
    ```
 
 2. Log in to Vercel:
+
    ```bash
    vercel login
    ```
 
 3. Deploy from your project directory:
+
    ```bash
    vercel
    ```
@@ -88,4 +96,5 @@ pnpm start
    vercel --prod
    ```
 
-For more deployment options and configuration, refer to the [Vercel documentation](https://vercel.com/docs). 
+For more deployment options and configuration, refer to the
+[Vercel documentation](https://vercel.com/docs).

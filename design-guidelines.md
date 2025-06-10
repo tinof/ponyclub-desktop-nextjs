@@ -3,17 +3,20 @@
 ## Color Palette
 
 ### Primary Colors
+
 - **Green Shades**:
   - Dark Green: `#3E5A35` - Used for headings, primary backgrounds, hover states
   - Medium Green: `#6b8362` - Used for buttons, accents, icons
 - **Amber/Earth Tones**:
-  - Amber Dark: `#b45309` (amber-700) - Used for secondary elements, complementary to green
+  - Amber Dark: `#b45309` (amber-700) - Used for secondary elements,
+    complementary to green
   - Amber Medium: `#92400e` (amber-800) - Used for hover states
 - **Neutrals**:
   - Background: `#f5f0e8` - Main page background
   - White: `#FAF7F2` - Header background, light elements
 
 ### Opacity Guidelines
+
 - Text overlays: 80% opacity for primary, 60% for secondary
 - Glass effects: 10-30% opacity depending on importance
 - Border highlights: 20-40% opacity
@@ -36,6 +39,7 @@
 ## Glass Morphism
 
 ### Implementation Technique
+
 1. **Base layer**: Content on image background
 2. **Glassmorphism overlay**: Semi-transparent color with blur effect
    ```css
@@ -46,6 +50,7 @@
 3. **Content layer**: Elements on top of glass effect
 
 ### Common Glass Effects
+
 - **Light Glass**: `bg-white/80 backdrop-blur-md`
 - **Dark Glass**: `bg-[#colorHex]/70 backdrop-blur-md`
 - **Subtle Glass**: `bg-[#colorHex]/10 backdrop-blur-[2px]`
@@ -53,6 +58,7 @@
 ## Layering System
 
 ### Z-Index Structure
+
 - Background elements: z-0
 - Glass/blur effects: z-10
 - Content elements: z-20
@@ -60,7 +66,9 @@
 - Hover/focus effects: z-40
 
 ### Layering Techniques
+
 1. **Card Construction**:
+
    - Base image layer
    - Glass overlay layer
    - Content section layers (header, body, footer)
@@ -74,24 +82,27 @@
 ## Component Styles
 
 ### Cards
+
 - **Dimensions**: Full content cards typically use h-[550px]
 - **Border Radius**: rounded-2xl (1rem) for cards
 - **Shadow**: shadow-xl for cards, shadow-lg for internal elements
-- **Transitions**: 
+- **Transitions**:
   - transform hover:scale-[1.02]
   - transition-all duration-500
 
 ### Buttons
+
 - **Border Radius**: rounded-lg (0.5rem)
 - **Padding**: py-3 px-6
 - **Text**: text-lg font-semibold text-white
 - **Shadow**: shadow-lg
-- **Hover Effect**: 
+- **Hover Effect**:
   - Darker background color
   - transform translateY(-2px)
 - **Border**: None, or subtle white/20 border
 
 ### Badges
+
 - **Style**: rounded-full px-4 py-1.5
 - **Border**: border border-white/20
 - **Text**: text-sm font-semibold
@@ -100,29 +111,33 @@
 ## Effect Patterns
 
 ### Gradient Overlays
-- **Top-to-Bottom Fade**: 
+
+- **Top-to-Bottom Fade**:
+
   ```css
   bg-linear-to-b from-[#colorHex]/80 via-[#colorHex]/60 to-transparent
   ```
 
-- **Corner Highlight**: 
+- **Corner Highlight**:
   ```css
   bg-linear-to-tr from-[#colorHex]/40 via-transparent to-[#colorHex]/30
   ```
 
 ### Border Effects
-- **Glass Border**: 
+
+- **Glass Border**:
   ```css
   border border-white/40
   ```
-  
-- **Highlight Border**: 
+- **Highlight Border**:
   ```css
   border-t border-white/20
   ```
 
 ### Shadow Patterns
-- **Card Shadow**: 
+
+- **Card Shadow**:
+
   ```css
   shadow-xl hover:shadow-2xl transition-shadow duration-300
   ```
@@ -134,17 +149,19 @@
 
 ## Animation Guidelines
 
-- **Hover Scale**: 
+- **Hover Scale**:
+
   ```css
   transform hover:scale-[1.02] transition-all duration-500
   ```
 
-- **Button Press**: 
+- **Button Press**:
+
   ```css
-  hover:transform translateY(-2px) transition-all duration-300
+  hover: transform translateY(-2px) transition-all duration-300;
   ```
 
-- **Subtle Animations**: 
+- **Subtle Animations**:
   ```css
   animate-pulse
   ```
@@ -152,15 +169,18 @@
 ## Responsive Design
 
 ### Breakpoints
+
 - **Mobile**: Default styling
 - **Tablet**: md (768px) and up
 - **Desktop**: lg (1024px) and up
 
 ### Card Layout
+
 - **Mobile**: Full width, stacked vertically
 - **Tablet+**: 50% width, side by side
 
 ### Text Sizing
+
 - **Mobile**: Base sizes (reduce by 1 step)
 - **Tablet+**: Full sizes
 

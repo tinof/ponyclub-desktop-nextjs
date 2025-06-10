@@ -4,3 +4,4 @@ ignoredBuiltDependencies:
   - '@vercel/speed-insights'
   - iframe-resizer
   - sharp
+  - unrs-resolver

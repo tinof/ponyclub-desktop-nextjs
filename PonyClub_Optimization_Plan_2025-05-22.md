@@ -6,35 +6,47 @@
 **Live Site:** https://www.ponyclub.gr
 
 ## Overview
-Comprehensive optimization plan based on codebase analysis and live site assessment. The codebase shows excellent optimization work has already been done (image optimization framework, script loading, Next.js configuration), but these remaining items will significantly improve performance, SEO, and user experience.
+
+Comprehensive optimization plan based on codebase analysis and live site
+assessment. The codebase shows excellent optimization work has already been done
+(image optimization framework, script loading, Next.js configuration), but these
+remaining items will significantly improve performance, SEO, and user
+experience.
 
 ---
 
 ## 🔥 HIGH PRIORITY TASKS (Critical - Fix Immediately)
 
 ### TASK-001: Web App Manifest
+
 - **Status:** ✅ COMPLETED
 - **Priority:** HIGH
 - **Impact:** HIGH
 - **Category:** PWA/Mobile
-- **Issue:** No manifest.json file for PWA capabilities and mobile app-like experience
-- **Impact Details:** Poor mobile user experience, no "Add to Home Screen" functionality
+- **Issue:** No manifest.json file for PWA capabilities and mobile app-like
+  experience
+- **Impact Details:** Poor mobile user experience, no "Add to Home Screen"
+  functionality
 - **Files to Create/Modify:**
   - `public/manifest.json` ✅
   - Update `app/layout.tsx` to reference manifest ✅
 - **Acceptance Criteria:**
-  - [x] Create manifest.json with proper icons, theme colors, and display settings ✅
+  - [x] Create manifest.json with proper icons, theme colors, and display
+        settings ✅
   - [x] Add manifest link to HTML head ✅
   - [x] Test "Add to Home Screen" functionality ✅
-- **Completion Notes:** Already implemented with comprehensive manifest.json and proper HTML head links
+- **Completion Notes:** Already implemented with comprehensive manifest.json and
+  proper HTML head links
 - **Estimated Time:** 2-3 hours
 
 ### TASK-002: Favicon and Apple Touch Icons
+
 - **Status:** ✅ COMPLETED
 - **Priority:** HIGH
 - **Impact:** HIGH
 - **Category:** Branding/UX
-- **Issue:** Only using logo.png as favicon, missing proper favicon.ico and Apple touch icons
+- **Issue:** Only using logo.png as favicon, missing proper favicon.ico and
+  Apple touch icons
 - **Impact Details:** Poor branding in browser tabs and mobile bookmarks
 - **Files to Create/Modify:**
   - `public/favicon.ico` ✅
@@ -47,16 +59,19 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
   - [x] Create Apple touch icons (180px) ✅
   - [x] Update metadata in layout ✅
   - [x] Test across different browsers and devices ✅
-- **Completion Notes:** Complete favicon set already implemented in /public/images/favicon_io/ with proper HTML head links
+- **Completion Notes:** Complete favicon set already implemented in
+  /public/images/favicon_io/ with proper HTML head links
 - **Estimated Time:** 1-2 hours
 
 ### TASK-003: Bundle Analyzer Re-enablement
+
 - **Status:** ✅ COMPLETED
 - **Priority:** HIGH
 - **Impact:** MEDIUM
 - **Category:** Performance Monitoring
 - **Issue:** withBundleAnalyzer is commented out in next.config.js
-- **Impact Details:** Cannot monitor bundle size and identify performance bottlenecks
+- **Impact Details:** Cannot monitor bundle size and identify performance
+  bottlenecks
 - **Files to Modify:**
   - `next.config.js` ✅
 - **Acceptance Criteria:**
@@ -67,6 +82,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 30 minutes
 
 ### TASK-004: CSP Headers Security
+
 - **Status:** 🔄 PARTIALLY COMPLETED
 - **Priority:** HIGH
 - **Impact:** SECURITY RISK
@@ -80,7 +96,10 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
   - [x] Tighten CSP policies - Removed 'unsafe-eval' ✅
   - [ ] Test all functionality with stricter CSP
   - [ ] Document any necessary exceptions
-- **Completion Notes:** Removed 'unsafe-eval' from CSP as no eval usage found. 'unsafe-inline' still needed for styled-jsx components and Google Analytics inline scripts. Further optimization would require refactoring styled-jsx to CSS modules.
+- **Completion Notes:** Removed 'unsafe-eval' from CSP as no eval usage found.
+  'unsafe-inline' still needed for styled-jsx components and Google Analytics
+  inline scripts. Further optimization would require refactoring styled-jsx to
+  CSS modules.
 - **Estimated Time:** 3-4 hours
 
 ---
@@ -88,6 +107,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 ## 📊 MEDIUM PRIORITY TASKS (Performance & SEO)
 
 ### TASK-005: Image Optimization
+
 - **Status:** ✅ COMPLETED
 - **Priority:** MEDIUM
 - **Impact:** HIGH
@@ -103,15 +123,21 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
   - [x] Add descriptive alt texts for all images ✅
   - [x] Implement proper image sizing for better Core Web Vitals ✅
   - [x] Audit and optimize image loading performance ✅
-- **Completion Notes:** Removed unused placeholder images (placeholder.svg, placeholder-logo.svg, placeholder-user.jpg, placeholder.jpg). Added missing `sizes` attributes to OptimizedImage components in trekking page, site header, and river village page for better performance. All images now have descriptive alt attributes and proper responsive sizing.
+- **Completion Notes:** Removed unused placeholder images (placeholder.svg,
+  placeholder-logo.svg, placeholder-user.jpg, placeholder.jpg). Added missing
+  `sizes` attributes to OptimizedImage components in trekking page, site header,
+  and river village page for better performance. All images now have descriptive
+  alt attributes and proper responsive sizing.
 - **Estimated Time:** 4-6 hours
 
 ### TASK-006: Structured Data Implementation
+
 - **Status:** ❌ Not Started
 - **Priority:** MEDIUM
 - **Impact:** HIGH (SEO)
 - **Category:** SEO
-- **Issue:** Limited JSON-LD structured data, missing business hours, reviews schema
+- **Issue:** Limited JSON-LD structured data, missing business hours, reviews
+  schema
 - **Impact Details:** Poor search engine visibility, missing rich snippets
 - **Files to Create/Modify:**
   - Create `lib/structured-data.ts`
@@ -126,6 +152,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 3-4 hours
 
 ### TASK-007: Sitemap Automation
+
 - **Status:** ❌ Not Started
 - **Priority:** MEDIUM
 - **Impact:** MEDIUM (SEO)
@@ -142,11 +169,13 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 2-3 hours
 
 ### TASK-008: Meta Descriptions for Activity Pages
+
 - **Status:** ✅ COMPLETED
 - **Priority:** MEDIUM
 - **Impact:** MEDIUM (SEO)
 - **Category:** SEO
-- **Issue:** Activity pages (rafting, kayaking, etc.) lack unique meta descriptions
+- **Issue:** Activity pages (rafting, kayaking, etc.) lack unique meta
+  descriptions
 - **Impact Details:** Poor SERP appearance, reduced click-through rates
 - **Files to Modify:**
   - Activity page components in `app/[locale]/` ✅
@@ -156,7 +185,10 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
   - [x] Implement in both English and Greek ✅
   - [x] Keep descriptions between 150-160 characters ✅
   - [x] Include relevant keywords naturally ✅
-- **Completion Notes:** Added generateMetadata functions to riding and trekking pages with locale-specific titles, descriptions, and keywords. Kayaking and rafting already had proper metadata. Ziplining page was removed as this activity is no longer offered.
+- **Completion Notes:** Added generateMetadata functions to riding and trekking
+  pages with locale-specific titles, descriptions, and keywords. Kayaking and
+  rafting already had proper metadata. Ziplining page was removed as this
+  activity is no longer offered.
 - **Estimated Time:** 2-3 hours
 
 ---
@@ -164,6 +196,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 ## ⚙️ MEDIUM-LOW PRIORITY TASKS (Code Quality & Maintenance)
 
 ### TASK-009: Server Components Migration
+
 - **Status:** ❌ Not Started
 - **Priority:** MEDIUM-LOW
 - **Impact:** PERFORMANCE
@@ -182,6 +215,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 4-5 hours
 
 ### TASK-010: Third-Party Script Optimization
+
 - **Status:** ❌ Not Started
 - **Priority:** MEDIUM-LOW
 - **Impact:** PERFORMANCE
@@ -200,6 +234,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 3-4 hours
 
 ### TASK-011: Error Boundaries Implementation
+
 - **Status:** ❌ Not Started
 - **Priority:** MEDIUM-LOW
 - **Impact:** RELIABILITY
@@ -223,6 +258,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 ## 🌟 LOW PRIORITY TASKS (Nice-to-Have Improvements)
 
 ### TASK-012: PWA Features
+
 - **Status:** ❌ Not Started
 - **Priority:** LOW
 - **Impact:** USER EXPERIENCE
@@ -240,6 +276,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 6-8 hours
 
 ### TASK-013: Performance Monitoring
+
 - **Status:** ❌ Not Started
 - **Priority:** LOW
 - **Impact:** MONITORING
@@ -253,6 +290,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 4-5 hours
 
 ### TASK-014: Accessibility Improvements
+
 - **Status:** ❌ Not Started
 - **Priority:** LOW
 - **Impact:** ACCESSIBILITY
@@ -266,6 +304,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - **Estimated Time:** 3-4 hours
 
 ### TASK-015: SEO Content Enhancement
+
 - **Status:** ❌ Not Started
 - **Priority:** LOW
 - **Impact:** SEO
@@ -283,6 +322,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 ## 📋 IMPLEMENTATION ROADMAP
 
 ### Week 1-2 (Immediate Action Items)
+
 1. **TASK-001:** Web App Manifest
 2. **TASK-002:** Favicon and Apple Touch Icons
 3. **TASK-003:** Bundle Analyzer Re-enablement
@@ -291,6 +331,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 6. **TASK-011:** Error Boundaries Implementation
 
 ### Week 3-4 (Technical Debt)
+
 1. **TASK-004:** CSP Headers Security
 2. **TASK-006:** Structured Data Implementation
 3. **TASK-007:** Sitemap Automation
@@ -298,6 +339,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 5. **TASK-010:** Third-Party Script Optimization
 
 ### Month 2+ (Enhancements)
+
 1. **TASK-012:** PWA Features
 2. **TASK-013:** Performance Monitoring
 3. **TASK-014:** Accessibility Improvements
@@ -310,12 +352,14 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 **Overall Progress:** 0/15 tasks completed (0%)
 
 **By Priority:**
+
 - 🔥 High Priority: 0/4 completed (0%)
 - 📊 Medium Priority: 0/4 completed (0%)
 - ⚙️ Medium-Low Priority: 0/3 completed (0%)
 - 🌟 Low Priority: 0/4 completed (0%)
 
 **By Category:**
+
 - Performance: 0/4 tasks
 - SEO: 0/4 tasks
 - Security: 0/1 tasks
@@ -329,6 +373,7 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 ## 🔧 DEVELOPMENT NOTES
 
 ### Prerequisites
+
 - Next.js 15 with App Router
 - React 19
 - TypeScript
@@ -336,12 +381,14 @@ Comprehensive optimization plan based on codebase analysis and live site assessm
 - Current third-party integrations: Bokun, Elfsight
 
 ### Testing Strategy
+
 - Test each task in development environment
 - Use Lighthouse for performance audits
 - Test across different devices and browsers
 - Validate SEO improvements with Google Search Console
 
 ### Deployment Strategy
+
 - Deploy high-priority tasks first
 - Monitor performance after each deployment
 - Use feature flags for major changes
