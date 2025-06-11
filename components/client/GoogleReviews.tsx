@@ -8,8 +8,8 @@ export default function GoogleReviews() {
   const featurableWidgetId = 'e22fc7c6-97ba-49d1-8391-7b5f236ffb84'
 
   useEffect(() => {
-    // Add accessibility attributes to Google Reviews elements after component mounts
-    const addAccessibilityAttributes = () => {
+    // Add accessibility attributes and performance optimizations to Google Reviews elements
+    const addAccessibilityAndPerformanceAttributes = () => {
       // Add aria-labels to navigation buttons
       const prevButton = document.querySelector('.css-1en7e4i')
       const nextButton = document.querySelector('.css-hzpebr')
@@ -21,18 +21,26 @@ export default function GoogleReviews() {
         nextButton.setAttribute('aria-label', 'Next review')
       }
 
-      // Add alt text to profile images
+      // Add alt text and lazy loading to profile images
       const profileImages = document.querySelectorAll('.css-1pelb8y')
       profileImages.forEach((img, index) => {
         if (!img.getAttribute('alt')) {
           img.setAttribute('alt', `Google reviewer profile picture ${index + 1}`)
         }
+        // Add lazy loading to profile images for better performance
+        if (!img.getAttribute('loading')) {
+          img.setAttribute('loading', 'lazy')
+        }
+        // Add decoding attribute for better performance
+        if (!img.getAttribute('decoding')) {
+          img.setAttribute('decoding', 'async')
+        }
       })
     }
 
     // Run immediately and also after a delay to catch dynamically loaded content
-    addAccessibilityAttributes()
-    const timer = setTimeout(addAccessibilityAttributes, 1000)
+    addAccessibilityAndPerformanceAttributes()
+    const timer = setTimeout(addAccessibilityAndPerformanceAttributes, 1000)
 
     return () => clearTimeout(timer)
   }, [])

@@ -26,6 +26,8 @@
     "build:fast": "pnpm run prebuild && pnpm run build",
     "analyze": "ANALYZE=true next build",
     "security:audit": "pnpm audit --audit-level moderate",
+    "performance:check": "node scripts/performance-check.js",
+    "performance:compress-video": "./scripts/compress-hero-video.sh",
     "lint:tailwind": "eslint . --ext .ts,.tsx --config eslint.config.mjs | grep better-tailwindcss",
     "lint:no-tailwind": "eslint . --ext .ts,.tsx --config eslint.config.mjs | grep -v better-tailwindcss"
   },

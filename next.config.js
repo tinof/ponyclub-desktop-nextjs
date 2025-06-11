@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: false, // Don't auto-open browser
 });
 
 const nextConfig = {
@@ -15,6 +16,18 @@ const nextConfig = {
       '@/hooks': './hooks',
       '@/types': './types',
     },
+  },
+  // Modern JavaScript compilation for better performance
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Experimental features for performance
+  experimental: {
+    // Use modern JavaScript features
+    esmExternals: true,
+    // Optimize CSS
+    optimizeCss: true,
   },
   eslint: {
     ignoreDuringBuilds: false,

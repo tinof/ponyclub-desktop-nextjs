@@ -3,23 +3,25 @@ import type { ImageProps } from 'next/image'
 /**
  * Default size attribute values to use when rendering images
  * These help prevent layout shifts (CLS) by reserving space before image loads
+ * Optimized based on PageSpeed insights for better responsive image delivery
  */
 export const DEFAULT_IMAGE_SIZES = {
-  hero: 'calc(100vw - 2rem)', // Adjusted for 1rem margin on each side
+  hero: '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px', // More specific breakpoints
   gallery: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
-  card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
-  avatar: '96px',
-  logo: '(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px',
+  card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px', // Fixed size for larger screens
+  avatar: '(max-width: 640px) 40px, 96px', // Smaller on mobile as per PageSpeed report
+  logo: '(max-width: 768px) 184px, (max-width: 1024px) 224px, 256px', // Matches actual display dimensions
   thumbnail: '(max-width: 640px) 80px, (max-width: 768px) 128px, 192px',
 }
 
 /**
  * Image quality settings for different types of images
+ * Optimized based on PageSpeed insights - reduced quality for better compression
  */
 export const IMAGE_QUALITY = {
-  high: 85,
-  medium: 75,
-  low: 60,
+  high: 75, // Reduced from 85 for better compression
+  medium: 65, // Reduced from 75 for better compression
+  low: 50, // Reduced from 60 for better compression
 }
 
 /**

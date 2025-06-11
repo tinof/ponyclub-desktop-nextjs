@@ -2,9 +2,8 @@
 
 import type { ImageProps } from 'next/image'
 import Image from 'next/image'
-import React from 'react'
 
-import { optimizeImageProps, optimizeHeroImage, optimizeGalleryImage } from '@/lib/image-optimization'
+import { optimizeGalleryImage, optimizeHeroImage, optimizeImageProps } from '@/lib/image-optimization'
 
 export type OptimizedImageProps = Omit<ImageProps, 'src' | 'alt'> & {
   src: string
@@ -13,6 +12,7 @@ export type OptimizedImageProps = Omit<ImageProps, 'src' | 'alt'> & {
   index?: number // For gallery images
   aspectRatio?: string // For setting specific aspect ratios
   containerClassName?: string // For styling the container
+  fetchPriority?: 'high' | 'low' | 'auto' // For LCP optimization
 }
 
 /**
@@ -25,6 +25,7 @@ export function OptimizedImage({
   aspectRatio,
   containerClassName,
   className,
+  fetchPriority,
   ...props
 }: OptimizedImageProps) {
   // Apply image-type specific optimizations
@@ -54,6 +55,7 @@ export function OptimizedImage({
             sizes: optimizedProps.sizes || '100vw',
             quality: optimizedProps.quality,
             priority: true,
+            fetchPriority: fetchPriority as any, // Next.js Image supports this
             className: `object-cover ${className || ''}`,
           }
         : {
@@ -64,6 +66,7 @@ export function OptimizedImage({
             quality: optimizedProps.quality,
             priority: optimizedProps.priority,
             loading: !optimizedProps.priority ? optimizedProps.loading || 'lazy' : undefined,
+            fetchPriority: fetchPriority as any,
             className: `object-cover ${className || ''}`,
           }
 
@@ -92,6 +95,7 @@ export function OptimizedImage({
           height: optimizedProps.height,
           quality: optimizedProps.quality,
           priority: true,
+          fetchPriority: fetchPriority as any,
           sizes: optimizedProps.sizes,
           className,
         }
@@ -103,6 +107,7 @@ export function OptimizedImage({
           quality: optimizedProps.quality,
           priority: optimizedProps.priority,
           loading: !optimizedProps.priority ? optimizedProps.loading || 'lazy' : undefined,
+          fetchPriority: fetchPriority as any,
           sizes: optimizedProps.sizes,
           className,
         }

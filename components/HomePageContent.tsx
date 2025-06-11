@@ -43,19 +43,21 @@ export default function HomePageContent() {
               alt='Hero background'
               fill
               priority
+              fetchPriority='high'
               imageType='hero'
               className='absolute inset-0 h-full w-full object-cover'
             />
             <video
-              src='/images/hero-video.mp4'
-              poster='/images/hero-image.webp'
               autoPlay
               muted
               loop
               playsInline
               preload='metadata'
               className='absolute inset-0 z-10 h-full w-full object-cover'
-            />
+            >
+              <source src='/images/hero-video.webm' type='video/webm' />
+              <source src='/images/hero-video.mp4' type='video/mp4' />
+            </video>
             <div
               className={`
                 absolute inset-0 z-20 bg-linear-to-b from-black/10
