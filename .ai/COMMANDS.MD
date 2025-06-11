@@ -22,12 +22,12 @@ This document lists common CLI commands for the Pony Club project, derived from 
 
 - **`pnpm build`**
 
-  - Command: `pnpm audit --audit-level moderate && node scripts/generate-sitemap-data.js && next build`
-  - Description: Builds the application for production. Includes security audit, sitemap generation, and Next.js build with TypeScript checking.
+  - Command: `pnpm audit --audit-level moderate && node scripts/generate-sitemap-data.js && next build && cp -r public .next/standalone/`
+  - Description: Builds the application for production. Includes a security audit, sitemap generation, the Next.js build, and copies the `public` directory into the `.next/standalone` output for the self-contained server.
 
 - **`pnpm start`**
-  - Command: `next start`
-  - Description: Starts the Next.js production server after a successful build.
+  - Command: `node .next/standalone/server.js`
+  - Description: Starts the application from the standalone production build. This is the command to run on the production server.
 
 ## Linting & Analysis
 
@@ -35,6 +35,26 @@ This document lists common CLI commands for the Pony Club project, derived from 
 
   - Command: `next lint`
   - Description: Runs ESLint to check for code quality and style issues.
+
+- **`pnpm lint:fix`**
+
+  - Command: `next lint --fix`
+  - Description: Automatically fixes fixable ESLint issues.
+
+- **`pnpm format`**
+
+  - Command: `prettier --write .`
+  - Description: Formats all project files with Prettier.
+
+- **`pnpm code-quality`**
+
+  - Command: `pnpm run type-check && pnpm run lint:report && pnpm run format:check`
+  - Description: A comprehensive check that runs TypeScript validation, generates an ESLint report, and verifies Prettier formatting without making changes.
+
+- **`pnpm fix-all`**
+
+  - Command: `pnpm run lint:fix && pnpm run format`
+  - Description: A convenient script to automatically fix both ESLint and Prettier issues.
 
 - **`pnpm analyze`**
   - Command: `ANALYZE=true next build`
@@ -50,9 +70,9 @@ This document lists common CLI commands for the Pony Club project, derived from 
 
   - Description: Continuous type checking in watch mode for development.
 
-- **`pnpm audit`**
+- **`pnpm security:audit`**
   - Command: `pnpm audit --audit-level moderate`
-  - Description: Check for security vulnerabilities in dependencies. Included in build process.
+  - Description: Checks for security vulnerabilities in dependencies with a moderate or higher severity.
 
 ## Testing & Debugging
 

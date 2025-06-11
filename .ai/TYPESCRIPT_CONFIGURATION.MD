@@ -71,14 +71,14 @@ declare global {
 
 ## Third-Party Type Dependencies
 
-### Google Maps Types
+### Third-Party Components
 
-**Package:** `@types/google.maps@3.58.1`
+**Package:** `@next/third-parties@15.3.2`
 
 ```json
 {
-  "devDependencies": {
-    "@types/google.maps": "^3.58.1"
+  "dependencies": {
+    "@next/third-parties": "^15.3.2"
   }
 }
 ```
@@ -86,17 +86,18 @@ declare global {
 **Usage in Components:**
 
 ```typescript
-import { useRef, useState } from 'react'
+import { GoogleMapsEmbed } from '@next/third-parties/google'
 
-const mapRef = useRef<HTMLDivElement>(null)
-const [map, setMap] = useState<google.maps.Map | null>(null)
-
-// Full TypeScript support for Google Maps API
-const mapInstance = new google.maps.Map(mapRef.current, {
-  center: { lat: 39.3257662, lng: 20.6069899 },
-  zoom: 16,
-  mapTypeId: 'roadmap',
-})
+// Simple, type-safe Google Maps integration
+<GoogleMapsEmbed
+  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+  height={400}
+  width="100%"
+  mode="place"
+  q="Pony+Club+Acheron"
+  loading="lazy"
+  allowfullscreen
+/>
 ```
 
 ### Benefits of Official Types
@@ -132,18 +133,20 @@ interface GDPRContextType {
 ### Usage in Components
 
 ```typescript
-import { useGDPR } from '@/contexts/gdpr-context'
+import { GoogleMapsEmbed } from '@next/third-parties/google'
 
-export default function GoogleMap() {
-  const { consent } = useGDPR()
-
-  // TypeScript ensures consent is properly typed
-  if (!consent?.analytics) {
-    // Handle consent requirement
-    return
-  }
-
-  // Map initialization with type safety
+export default function MapComponent() {
+  // Simple, type-safe implementation
+  return (
+    <GoogleMapsEmbed
+      apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+      height={400}
+      width="100%"
+      mode="place"
+      q="Business+Name"
+      loading="lazy"
+    />
+  )
 }
 ```
 
@@ -152,10 +155,10 @@ export default function GoogleMap() {
 ### Props Interface Definitions
 
 ```typescript
-interface GoogleMapProps {
-  apiKey?: string
-  center?: google.maps.LatLngLiteral
-  zoom?: number
+interface MapComponentProps {
+  businessName: string
+  height?: number
+  width?: string
   className?: string
 }
 
@@ -251,10 +254,10 @@ declare global {
 
 **Error:** `Cannot find namespace 'google'`
 
-**Solution:** Install official types
+**Solution:** Use Next.js third-party components
 
 ```bash
-pnpm add -D @types/google.maps
+pnpm add @next/third-parties
 ```
 
 #### 3. Conflicting Type Declarations
@@ -406,18 +409,13 @@ pnpm build
 
 ```typescript
 import { render, screen } from '@testing-library/react';
-import { GoogleMap } from '@/components/google-map';
+import DynamicGoogleMap from '@/components/DynamicGoogleMap';
 
-// Type-safe test props
-const mockProps: GoogleMapProps = {
-  apiKey: 'test-key',
-  center: { lat: 0, lng: 0 },
-  zoom: 10
-};
-
+// Simple component testing
 test('renders map component', () => {
-  render(<GoogleMap {...mockProps} />);
+  render(<DynamicGoogleMap />);
   // Type-safe assertions
+  expect(screen.getByRole('application')).toBeInTheDocument();
 });
 ```
 

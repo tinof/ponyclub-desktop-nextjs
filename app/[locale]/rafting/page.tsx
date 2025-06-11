@@ -35,7 +35,14 @@ const RaftingPage = async ({ params }: PageProps) => {
 
   const seoContent = isGreek ? (
     <div className='mb-8'>
-      <h1 className='text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6'>Ράφτινγκ στον Ποταμό Αχέροντα</h1>
+      <h1
+        className={`
+          mb-6 text-3xl font-bold text-[#3E5A35]
+          md:text-4xl
+        `}
+      >
+        Ράφτινγκ στον Ποταμό Αχέροντα
+      </h1>
       <div className='prose prose-lg max-w-none text-gray-700'>
         <p className='lead mb-4'>
           Ζήστε την απόλυτη περιπέτεια με ράφτινγκ στον μυθικό ποταμό Αχέροντα! Το Pony Club σας προσφέρει μια ασφαλή
@@ -56,7 +63,14 @@ const RaftingPage = async ({ params }: PageProps) => {
     </div>
   ) : (
     <div className='mb-8'>
-      <h1 className='text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6'>Rafting in Acheron River</h1>
+      <h1
+        className={`
+          mb-6 text-3xl font-bold text-[#3E5A35]
+          md:text-4xl
+        `}
+      >
+        Rafting in Acheron River
+      </h1>
       <div className='prose prose-lg max-w-none text-gray-700'>
         <p className='lead mb-4'>
           Experience the ultimate adventure with rafting in the mythical Acheron River! Pony Club offers you a safe and

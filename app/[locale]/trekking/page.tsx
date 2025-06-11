@@ -35,7 +35,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
   const descriptionContent =
     language === 'el' ? (
       <div className='space-y-4'>
-        <h2 className='text-2xl font-bold mb-2'>Πεζοπορία στον Θρυλικό Αχέροντα</h2>
+        <h2 className='mb-2 text-2xl font-bold'>Πεζοπορία στον Θρυλικό Αχέροντα</h2>
         <p>
           Οι μυθικές πηγές του ποταμού Αχέροντα, κοντά στο χωριό Γλυκή, προσκαλούν για εξερεύνηση όλο τον χρόνο. Βαθιά
           ριζωμένος στην αρχαιότητα ως ένας από τους ποταμούς που οδηγούσαν στον κάτω κόσμο, ο Αχέροντας σήμερα
@@ -47,7 +47,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
           Έτοιμοι για εξερεύνηση; Δείτε μερικές από τις καλύτερες διαδρομές πεζοπορίας για να ζήσετε τη μαγεία του
           Αχέροντα:
         </p>
-        <ol className='list-decimal list-inside space-y-4 pl-4'>
+        <ol className='list-inside list-decimal space-y-4 pl-4'>
           <li>
             <strong>Βόλτα στις Πηγές της Γλυκής</strong>
             <ul className='list-none pl-0'>
@@ -112,7 +112,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
       </div>
     ) : (
       <div className='space-y-4'>
-        <h2 className='text-2xl font-bold mb-2'>Trekking the Legendary Acheron</h2>
+        <h2 className='mb-2 text-2xl font-bold'>Trekking the Legendary Acheron</h2>
         <p>
           The mythical springs of the Acheron River, near the village of Glyki, invite exploration year-round. Deeply
           rooted in antiquity as one of the rivers leading to the underworld, Acheron today offers unparalleled natural
@@ -121,7 +121,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
           wonders.
         </p>
         <p>Ready for exploration? Check out some of the best trekking routes to experience the magic of Acheron:</p>
-        <ol className='list-decimal list-inside space-y-4 pl-4'>
+        <ol className='list-inside list-decimal space-y-4 pl-4'>
           <li>
             <strong>Glyki Springs Walk</strong>
             <ul className='list-none pl-0'>
@@ -188,100 +188,100 @@ const TrekkingPage = async ({ params }: PageProps) => {
   const detailsContent =
     language === 'el' ? (
       <div className='space-y-4'>
-        <h3 className='text-xl font-semibold mb-3'>Τι να Περιμένετε</h3>
+        <h3 className='mb-3 text-xl font-semibold'>Τι να Περιμένετε</h3>
         <ul className='space-y-2'>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Οδηγημένες Πεζοπορίες:</strong> Έμπειροι τοπικοί οδηγοί που γνωρίζουν κάθε μονοπάτι και ιστορία
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Εξοπλισμός Ασφαλείας:</strong> Παρέχεται όλος ο απαραίτητος εξοπλισμός ασφαλείας
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Μικρές Ομάδες:</strong> Μέγιστο 8 άτομα ανά ομάδα για προσωπική εμπειρία
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Φωτογραφίες:</strong> Επαγγελματικές φωτογραφίες της εμπειρίας σας
             </span>
           </li>
         </ul>
 
-        <h3 className='text-xl font-semibold mb-3 mt-6'>Τι να Φέρετε</h3>
+        <h3 className='mt-6 mb-3 text-xl font-semibold'>Τι να Φέρετε</h3>
         <ul className='space-y-2'>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Άνετα παπούτσια πεζοπορίας</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Καπέλο και αντηλιακό</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Νερό και ελαφρύ σνακ</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Φωτογραφική μηχανή</span>
           </li>
         </ul>
       </div>
     ) : (
       <div className='space-y-4'>
-        <h3 className='text-xl font-semibold mb-3'>What to Expect</h3>
+        <h3 className='mb-3 text-xl font-semibold'>What to Expect</h3>
         <ul className='space-y-2'>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Guided Treks:</strong> Experienced local guides who know every trail and story
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Safety Equipment:</strong> All necessary safety equipment provided
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Small Groups:</strong> Maximum 8 people per group for personal experience
             </span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>
               <strong>Photography:</strong> Professional photos of your experience
             </span>
           </li>
         </ul>
 
-        <h3 className='text-xl font-semibold mb-3 mt-6'>What to Bring</h3>
+        <h3 className='mt-6 mb-3 text-xl font-semibold'>What to Bring</h3>
         <ul className='space-y-2'>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Comfortable hiking shoes</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Hat and sunscreen</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Water and light snacks</span>
           </li>
           <li className='flex items-start'>
-            <span className='text-amber-600 mr-2'>•</span>
+            <span className='mr-2 text-amber-600'>•</span>
             <span>Camera</span>
           </li>
         </ul>
@@ -291,7 +291,12 @@ const TrekkingPage = async ({ params }: PageProps) => {
   const mapContent = (
     <div className='mt-4 space-y-8'>
       <div>
-        <div className='relative w-full h-[400px] rounded-xl overflow-hidden shadow-xl border border-amber-100/70'>
+        <div
+          className={`
+            relative h-[400px] w-full overflow-hidden rounded-xl border
+            border-amber-100/70 shadow-xl
+          `}
+        >
           <OptimizedImage
             src='/images/ponyClub_map.jpg'
             alt='Trekking Routes Map'
@@ -299,7 +304,11 @@ const TrekkingPage = async ({ params }: PageProps) => {
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
             className='object-contain'
           />
-          <div className='absolute inset-0 bg-linear-to-b from-black/5 to-transparent'></div>
+          <div
+            className={`
+              absolute inset-0 bg-linear-to-b from-black/5 to-transparent
+            `}
+          ></div>
         </div>
       </div>
 

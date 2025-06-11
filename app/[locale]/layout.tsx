@@ -191,7 +191,14 @@ export default async function LocaleLayout({ children, params: paramsPromise }: 
           strategy='afterInteractive'
         />
       </head>
-      <body className={`${inter.variable} ${robotoSlab.variable} font-sans`} suppressHydrationWarning>
+      <body
+        className={`
+          ${inter.variable}
+          ${robotoSlab.variable}
+          font-sans
+        `}
+        suppressHydrationWarning
+      >
         <ClientLayout initialLocale={locale}>
           {children}
           <SpeedInsights />

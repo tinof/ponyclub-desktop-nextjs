@@ -35,7 +35,14 @@ const KayakingPage = async ({ params }: PageProps) => {
 
   const seoContent = isGreek ? (
     <div className='mb-8'>
-      <h1 className='text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6'>Καγιάκ στον Ποταμό Αχέροντα</h1>
+      <h1
+        className={`
+          mb-6 text-3xl font-bold text-[#3E5A35]
+          md:text-4xl
+        `}
+      >
+        Καγιάκ στον Ποταμό Αχέροντα
+      </h1>
       <div className='prose prose-lg max-w-none text-gray-700'>
         <p className='lead mb-4'>
           Ανακαλύψτε τη μαγεία του ποταμού Αχέροντα με μια συναρπαστική εμπειρία καγιάκ στα κρυστάλλινα νερά της Γλυκής,
@@ -58,7 +65,14 @@ const KayakingPage = async ({ params }: PageProps) => {
     </div>
   ) : (
     <div className='mb-8'>
-      <h1 className='text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6'>Kayaking in Acheron River</h1>
+      <h1
+        className={`
+          mb-6 text-3xl font-bold text-[#3E5A35]
+          md:text-4xl
+        `}
+      >
+        Kayaking in Acheron River
+      </h1>
       <div className='prose prose-lg max-w-none text-gray-700'>
         <p className='lead mb-4'>
           Discover the magic of Acheron River with an exciting kayaking experience in the crystal-clear waters of Glyki,

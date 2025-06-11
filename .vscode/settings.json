@@ -47,18 +47,32 @@
 
   // TypeScript Configuration
   "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.suggest.autoImports": true,
   "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.includeCompletionsForModuleExports": true,
+  "typescript.suggest.includeCompletionsWithSnippetText": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+
+  // Enhanced TypeScript IntelliSense for third-party components
+  // These settings help prevent invalid prop suggestions (like aria-label on GoogleMapsEmbed)
+  "typescript.preferences.strictFunctionTypes": true,
+  "typescript.preferences.noImplicitReturns": true,
+  "typescript.preferences.strictNullChecks": true,
 
   // Next.js specific settings
   "emmet.includeLanguages": {
     "typescript": "html",
     "typescriptreact": "html"
   },
+
+  // React/JSX IntelliSense improvements
+  "typescript.suggest.objectLiteralMethodSnippets.enabled": false,
+  "typescript.suggest.jsdoc.generateReturns": false,
+  "html.suggest.html5": false, // Prevent HTML attribute suggestions in JSX components
 
   // File Explorer and Editor
   "explorer.fileNesting.enabled": true,

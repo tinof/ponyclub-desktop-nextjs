@@ -32,14 +32,14 @@ This document lists the key technologies, libraries, and integrations used in th
 
 ## Analytics & Monitoring
 
+- **@sentry/nextjs:** ^9.27.0 (for error and performance monitoring)
 - **@vercel/analytics:** 1.5.0
 - **@vercel/speed-insights:** 1.2.0
 
 ## Maps & Location Services
 
-- **Google Maps API:** Integrated for interactive maps with custom controls
-- **@types/google.maps:** 3.58.1 (TypeScript definitions for Google Maps)
-- **leaflet:** 1.9.4 (alternative mapping library, with `@types/leaflet`)
+- **@next/third-parties:** 15.3.2 (GoogleMapsEmbed component for simplified map integration)
+- **Google Maps Embed API:** Used via Next.js third-party integration for performance and simplicity
 
 ## Security & Compliance
 
@@ -54,12 +54,19 @@ This document lists the key technologies, libraries, and integrations used in th
 - **recharts:** 2.15.3 (for charts)
 - **sonner:** 2.0.3 (for toast notifications)
 - **vaul:** 1.1.2 (for drawers)
+- **cmdk:** 1.1.1 (for command menus)
+- **react-resizable-panels:** 3.0.1
+
+## Performance & Optimization
+
+- **critters:** ^0.0.25 (for inlining critical CSS)
 
 ## Development Tools
 
 - **PostCSS:** 8.5.3
 - **Autoprefixer:** 10.4.21
-- **ESLint:** (via `next lint`)
-- **Prettier:** (Assumed, standard for most projects, though not explicitly in `package.json` scripts/deps)
+- **ESLint:** ^9.28.0 (with a comprehensive plugin set for React, Next.js, and TypeScript)
+- **Prettier:** ^3.5.3 (for automated code formatting)
+- **@next/bundle-analyzer:** 15.3.2 (for inspecting bundle sizes)
 
 This list is not exhaustive but covers the primary components of the project's technology stack. Refer to `package.json` for a complete list of dependencies.

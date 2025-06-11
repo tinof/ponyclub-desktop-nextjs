@@ -1,12 +1,18 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import React, { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Dynamically import BokunWidget with ssr: false and a loading placeholder
 const BokunWidget = dynamic(() => import('@/components/BokunWidget'), {
   ssr: false,
-  loading: () => <div className='h-96 w-full bg-gray-200 animate-pulse rounded-lg' />,
+  loading: () => (
+    <div
+      className={`
+    h-96 w-full animate-pulse rounded-lg bg-gray-200
+  `}
+    />
+  ),
 })
 
 type DynamicBokunWidgetProps = {
@@ -19,7 +25,8 @@ export default function DynamicBokunWidget({ experienceId, partialView }: Dynami
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!ref.current) return
+    const currentRef = ref.current
+    if (!currentRef) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,12 +42,12 @@ export default function DynamicBokunWidget({ experienceId, partialView }: Dynami
       }
     )
 
-    observer.observe(ref.current)
+    observer.observe(currentRef)
 
     // Cleanup observer on component unmount
     return () => {
-      if (observer && ref.current) {
-        observer.unobserve(ref.current)
+      if (observer && currentRef) {
+        observer.unobserve(currentRef)
       }
       observer.disconnect()
     }
@@ -54,7 +61,7 @@ export default function DynamicBokunWidget({ experienceId, partialView }: Dynami
         <BokunWidget experienceId={experienceId} partialView={partialView} />
       ) : (
         // Render the loading placeholder defined in dynamic import
-        <div className='h-96 w-full bg-gray-200 animate-pulse rounded-lg' />
+        <div className='h-96 w-full animate-pulse rounded-lg bg-gray-200' />
       )}
     </div>
   )

@@ -3,7 +3,7 @@
 import { Menu, Phone } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useLanguage } from '@/contexts/language-context'
 
@@ -46,38 +46,64 @@ export default function HamburgerMenu() {
       {/* Hamburger button */}
       <button
         onClick={toggleMenu}
-        className='flex items-center justify-center p-2 w-10 h-10 rounded-full hover:bg-secondary transition-colors' /* Simplified style */
+        className={`
+          flex h-10 w-10 items-center justify-center rounded-full p-2
+          transition-colors
+          hover:bg-secondary
+        `} /* Simplified style */
         aria-label='Menu'
       >
-        <Menu className='w-5 h-5 text-foreground hover:text-primary' /> {/* Standard icon color */}
+        <Menu
+          className={`
+            h-5 w-5 text-foreground
+            hover:text-primary
+          `}
+        />{' '}
+        {/* Standard icon color */}
         {/* Removed inset div */}
       </button>
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className='absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-card z-50 border border-border overflow-hidden'>
+        <div
+          className={`
+            absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-lg border
+            border-border bg-card shadow-lg
+          `}
+        >
           {' '}
           {/* Cleaner dropdown style */}
-          <div className='py-2 px-1'>
+          <div className='px-1 py-2'>
             {/* Call us button - prominently displayed at top */}
             <a
               href={`tel:${t.contact.phone1.replace(/\s+/g, '')}`}
-              className='flex items-center justify-center gap-3 mx-3 mb-3 px-4 py-3 text-primary-foreground bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 rounded-xl shadow-md border border-primary-foreground/10 backdrop-blur-sm transition-all duration-200 hover:shadow-lg hover:scale-[1.02]'
+              className={`
+                mx-3 mb-3 flex items-center justify-center gap-3 rounded-xl
+                border border-primary-foreground/10 bg-gradient-to-r
+                from-primary to-primary/80 px-4 py-3 text-primary-foreground
+                shadow-md backdrop-blur-sm transition-all duration-200
+                hover:scale-[1.02] hover:from-primary/90 hover:to-primary/70
+                hover:shadow-lg
+              `}
               onClick={closeMenu}
             >
-              <Phone className='w-5 h-5 text-primary-foreground/90' />
+              <Phone className='h-5 w-5 text-primary-foreground/90' />
               <span className='font-medium tracking-wide'>{t.navigation.callUs}</span>
             </a>
 
             {/* Home link */}
             <Link
               href='/'
-              className={`block px-4 py-2.5 text-sm ${
-                /* Removed rounded-md */
-                pathname === '/'
-                  ? 'text-primary font-semibold' /* Active: darker green text, no bg */
-                  : 'text-foreground hover:bg-secondary hover:text-primary' /* Inactive: hover bg and text */
-              } transition-colors`}
+              className={`
+                block px-4 py-2.5 text-sm
+                ${
+                  /* Removed rounded-md */
+                  pathname === '/'
+                    ? 'font-semibold text-primary' /* Active: darker green text, no bg */
+                    : 'text-foreground hover:bg-secondary hover:text-primary' /* Inactive: hover bg and text */
+                }
+                transition-colors
+              `}
               onClick={closeMenu}
             >
               {t.navigation.home}
@@ -87,12 +113,16 @@ export default function HamburgerMenu() {
             {language === 'en' && (
               <Link
                 href='/river-village'
-                className={`block px-4 py-2.5 text-sm ${
-                  /* Removed rounded-md */
-                  pathname === '/river-village'
-                    ? 'text-primary font-semibold'
-                    : 'text-foreground hover:bg-secondary hover:text-primary'
-                } transition-colors`}
+                className={`
+                  block px-4 py-2.5 text-sm
+                  ${
+                    /* Removed rounded-md */
+                    pathname === '/river-village'
+                      ? 'font-semibold text-primary'
+                      : 'text-foreground hover:bg-secondary hover:text-primary'
+                  }
+                  transition-colors
+                `}
                 onClick={closeMenu}
               >
                 River & Village
@@ -103,12 +133,16 @@ export default function HamburgerMenu() {
             {language === 'el' && (
               <Link
                 href='/for-schools'
-                className={`block px-4 py-2.5 text-sm ${
-                  /* Removed rounded-md */
-                  pathname === '/for-schools'
-                    ? 'text-primary font-semibold'
-                    : 'text-foreground hover:bg-secondary hover:text-primary'
-                } transition-colors`}
+                className={`
+                  block px-4 py-2.5 text-sm
+                  ${
+                    /* Removed rounded-md */
+                    pathname === '/for-schools'
+                      ? 'font-semibold text-primary'
+                      : 'text-foreground hover:bg-secondary hover:text-primary'
+                  }
+                  transition-colors
+                `}
                 onClick={closeMenu}
               >
                 Για τα σχολεία
@@ -116,10 +150,15 @@ export default function HamburgerMenu() {
             )}
 
             {/* Activities section */}
-            <div className='mt-1 pt-1 border-t border-border'>
+            <div className='mt-1 border-t border-border pt-1'>
               {' '}
               {/* Cleaner border */}
-              <div className='px-4 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider'>
+              <div
+                className={`
+                  px-4 py-1.5 text-xs font-semibold tracking-wider
+                  text-muted-foreground uppercase
+                `}
+              >
                 {' '}
                 {/* Standard header text */}
                 {t.navigation.activities}
@@ -128,12 +167,16 @@ export default function HamburgerMenu() {
                 <Link
                   key={activity.id}
                   href={activity.href}
-                  className={`block px-4 py-2.5 text-sm ${
-                    /* Removed rounded-md */
-                    pathname === activity.href
-                      ? 'text-primary font-semibold'
-                      : 'text-foreground hover:bg-secondary hover:text-primary'
-                  } transition-colors`}
+                  className={`
+                    block px-4 py-2.5 text-sm
+                    ${
+                      /* Removed rounded-md */
+                      pathname === activity.href
+                        ? 'font-semibold text-primary'
+                        : 'text-foreground hover:bg-secondary hover:text-primary'
+                    }
+                    transition-colors
+                  `}
                   onClick={closeMenu}
                 >
                   {activity.label}
@@ -142,24 +185,39 @@ export default function HamburgerMenu() {
             </div>
 
             {/* Language selector in menu */}
-            <div className='mt-1 pt-1 border-t border-border'>
+            <div className='mt-1 border-t border-border pt-1'>
               {' '}
               {/* Cleaner border */}
-              <div className='px-4 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider'>
+              <div
+                className={`
+                  px-4 py-1.5 text-xs font-semibold tracking-wider
+                  text-muted-foreground uppercase
+                `}
+              >
                 {' '}
                 {/* Standard header text */}
                 {t.navigation.language}
               </div>
               {/* Simplified language buttons to look like text options */}
               <button
-                className={`block w-full text-left px-4 py-2.5 text-sm ${language === 'en' ? 'text-primary font-semibold' : 'text-foreground hover:bg-secondary hover:text-primary'} transition-colors`}
+                className={`
+                  block w-full px-4 py-2.5 text-left text-sm
+                  ${language === 'en' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  transition-colors
+                `}
                 onClick={() => handleLanguageChange('en')}
+                aria-label='Switch to English'
               >
                 English
               </button>
               <button
-                className={`block w-full text-left px-4 py-2.5 text-sm ${language === 'el' ? 'text-primary font-semibold' : 'text-foreground hover:bg-secondary hover:text-primary'} transition-colors`}
+                className={`
+                  block w-full px-4 py-2.5 text-left text-sm
+                  ${language === 'el' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  transition-colors
+                `}
                 onClick={() => handleLanguageChange('el')}
+                aria-label='Switch to Greek'
               >
                 Ελληνικά
               </button>

@@ -8,11 +8,24 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage'
 export default function TestFooterPage() {
   return (
     <>
-      <header className='fixed top-0 left-0 right-0 z-40 bg-[#FAF7F2] border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center'>
+      <header
+        className={`
+          fixed top-0 right-0 left-0 z-40 flex items-center justify-between
+          border-b border-gray-200 bg-[#FAF7F2] px-4 py-3
+          sm:px-6
+          lg:px-8
+        `}
+      >
         {/* Logo */}
         <div>
           <Link href='/' className='flex items-center'>
-            <div className='relative w-48 h-12 md:w-56 md:h-14 lg:w-64 lg:h-16'>
+            <div
+              className={`
+                relative h-12 w-48
+                md:h-14 md:w-56
+                lg:h-16 lg:w-64
+              `}
+            >
               <OptimizedImage
                 src='/images/ponyclub_logo.png'
                 alt='Pony Club Logo'

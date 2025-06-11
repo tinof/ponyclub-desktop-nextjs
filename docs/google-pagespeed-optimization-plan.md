@@ -199,15 +199,14 @@ This is the area with the largest immediate potential savings (Est. 358 KiB).
           written).
       - **Files to check:** `components/client/GDPRGoogleAnalytics.tsx` or
         wherever GTM is initialized.
-  4.  **Google Maps API:**
-      - **Instruction:**
-        - Load the Maps API script asynchronously and defer its execution.
-        - Only load it on pages/components that actually display a map.
-        - Consider a static image placeholder for the map, loading the
-          interactive map on user click/interaction.
-      - **Files to check:** `components/google-map.tsx`,
-        `components/map-component.tsx`, `components/map-with-no-ssr.tsx`,
-        `contexts/maps-api-context.tsx`.
+  4.  **Google Maps Embed (✅ OPTIMIZED):**
+      - **Status:** Already optimized using @next/third-parties GoogleMapsEmbed
+      - **Implementation:**
+        - Uses lightweight iframe embed (40KB vs 250+ KB JavaScript bundle)
+        - Built-in lazy loading with `loading="lazy"`
+        - No custom JavaScript or complex state management needed
+        - GDPR compliant by default (no tracking cookies)
+      - **File:** `components/DynamicGoogleMap.tsx` (simplified to 20 lines)
 
 - **C. Address Legacy JavaScript (Polyfills -
   `chunks/951-1643eeba56b2ddc8.js`)**

@@ -1,9 +1,9 @@
 'use client'
 
-import { Globe, ChevronDown, Phone } from 'lucide-react'
+import { ChevronDown, Globe, Phone } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useLanguage } from '@/contexts/language-context'
 
@@ -53,12 +53,15 @@ export default function DesktopMenu() {
       {/* Home link */}
       <Link
         href='/'
-        className={`px-3 py-2 transition-all text-base border-b-2 ${
-          /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-          pathname === '/'
-            ? 'text-primary font-semibold border-primary' /* Darker green active text, active border */
-            : 'text-foreground hover:text-primary font-medium border-transparent' /* Standard text, hover, transparent border */
-        }`}
+        className={`
+          border-b-2 px-3 py-2 text-base transition-all
+          ${
+            /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+            pathname === '/'
+              ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
+              : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+          }
+        `}
       >
         {t.navigation.home}
         {/* Removed inset div */}
@@ -67,20 +70,31 @@ export default function DesktopMenu() {
       <div className='relative' ref={activitiesMenuRef}>
         <button
           onClick={() => setActivitiesMenuOpen(!activitiesMenuOpen)}
-          className={`flex items-center gap-1 px-3 py-2 transition-all text-base border-b-2 ${
-            /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-            activities.some(activity => pathname === activity.href) || activitiesMenuOpen
-              ? 'text-primary font-semibold border-primary' /* Darker green active text, active border */
-              : 'text-foreground hover:text-primary font-medium border-transparent' /* Standard text, hover, transparent border */
-          }`}
+          className={`
+            flex items-center gap-1 border-b-2 px-3 py-2 text-base
+            transition-all
+            ${
+              /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+              activities.some(activity => pathname === activity.href) || activitiesMenuOpen
+                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
+                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+            }
+          `}
+          aria-label='Activities menu'
+          aria-expanded={activitiesMenuOpen}
         >
           {t.navigation.activities}
-          <ChevronDown className='w-5 h-5 ml-1' />
+          <ChevronDown className='ml-1 h-5 w-5' />
           {/* Removed inset div */}
         </button>
 
         {activitiesMenuOpen && (
-          <div className='absolute left-0 mt-2 w-52 rounded-lg shadow-lg bg-card z-50 border border-border overflow-hidden'>
+          <div
+            className={`
+              absolute left-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border
+              border-border bg-card shadow-lg
+            `}
+          >
             {' '}
             {/* Cleaner dropdown style */}
             <div className='py-1'>
@@ -88,12 +102,15 @@ export default function DesktopMenu() {
                 <Link
                   key={activity.id}
                   href={activity.href}
-                  className={`block w-full text-left px-4 py-2 text-base ${
-                    /* Adjusted padding */
-                    pathname === activity.href
-                      ? 'text-primary font-semibold' /* Active item: darker green text, no bg */
-                      : 'text-foreground hover:bg-secondary hover:text-primary' /* Standard item: hover bg and text */
-                  }`}
+                  className={`
+                    block w-full px-4 py-2 text-left text-base
+                    ${
+                      /* Adjusted padding */
+                      pathname === activity.href
+                        ? 'font-semibold text-primary' /* Active item: darker green text, no bg */
+                        : 'text-foreground hover:bg-secondary hover:text-primary' /* Standard item: hover bg and text */
+                    }
+                  `}
                 >
                   {activity.label}
                 </Link>
@@ -106,12 +123,15 @@ export default function DesktopMenu() {
       {language === 'en' && (
         <Link
           href='/river-village'
-          className={`px-3 py-2 transition-all text-base border-b-2 ${
-            /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-            pathname === '/river-village'
-              ? 'text-primary font-semibold border-primary' /* Darker green active text, active border */
-              : 'text-foreground hover:text-primary font-medium border-transparent' /* Standard text, hover, transparent border */
-          }`}
+          className={`
+            border-b-2 px-3 py-2 text-base transition-all
+            ${
+              /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+              pathname === '/river-village'
+                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
+                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+            }
+          `}
         >
           River & Village
           {/* Removed inset div */}
@@ -121,12 +141,15 @@ export default function DesktopMenu() {
       {language === 'el' && (
         <Link
           href='/for-schools'
-          className={`px-3 py-2 transition-all text-base border-b-2 ${
-            /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-            pathname === '/for-schools'
-              ? 'text-primary font-semibold border-primary' /* Darker green active text, active border */
-              : 'text-foreground hover:text-primary font-medium border-transparent' /* Standard text, hover, transparent border */
-          }`}
+          className={`
+            border-b-2 px-3 py-2 text-base transition-all
+            ${
+              /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+              pathname === '/for-schools'
+                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
+                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+            }
+          `}
         >
           Για τα σχολεία
           {/* Removed inset div */}
@@ -144,29 +167,41 @@ export default function DesktopMenu() {
             })
           }
         }}
-        className='flex items-center gap-1 px-3 py-2 ml-2 text-accent font-medium cursor-pointer select-text'
+        className={`
+          ml-2 flex cursor-pointer items-center gap-1 px-3 py-2 font-medium
+          text-accent select-text
+        `}
       >
-        <Phone className='w-4 h-4' />
+        <Phone className='h-4 w-4' />
         <span>{t.contact.phone1}</span>
       </a>
       {/* Language selector */}
       <div className='relative ml-2' ref={languageMenuRef}>
         <button
           onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-          className={`flex items-center gap-1 px-3 py-2 transition-all text-base border-b-2 ${
-            /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-            languageMenuOpen
-              ? 'text-primary font-semibold border-primary' /* Darker green active text, active border */
-              : 'text-foreground hover:text-primary font-medium border-transparent' /* Standard text, hover, transparent border */
-          }`}
+          className={`
+            flex items-center gap-1 border-b-2 px-3 py-2 text-base
+            transition-all
+            ${
+              /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
+              languageMenuOpen
+                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
+                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+            }
+          `}
         >
-          <Globe className='w-5 h-5' />
+          <Globe className='h-5 w-5' />
           <span>{language === 'en' ? 'EN' : 'EL'}</span>
           {/* Removed inset div */}
         </button>
 
         {languageMenuOpen && (
-          <div className='absolute right-0 mt-2 w-32 rounded-lg shadow-lg bg-card z-50 border border-border overflow-hidden'>
+          <div
+            className={`
+              absolute right-0 z-50 mt-2 w-32 overflow-hidden rounded-lg border
+              border-border bg-card shadow-lg
+            `}
+          >
             {' '}
             {/* Cleaner dropdown style */}
             <div className='py-1'>
@@ -175,7 +210,10 @@ export default function DesktopMenu() {
                   setLanguage('en')
                   setLanguageMenuOpen(false)
                 }}
-                className={`block w-full text-left px-4 py-2 text-base ${language === 'en' ? 'text-primary font-semibold' : 'text-foreground hover:bg-secondary hover:text-primary'}`} /* Adjusted padding, active/hover style */
+                className={`
+                  block w-full px-4 py-2 text-left text-base
+                  ${language === 'en' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                `} /* Adjusted padding, active/hover style */
               >
                 English
               </button>
@@ -184,7 +222,10 @@ export default function DesktopMenu() {
                   setLanguage('el')
                   setLanguageMenuOpen(false)
                 }}
-                className={`block w-full text-left px-4 py-2 text-base ${language === 'el' ? 'text-primary font-semibold' : 'text-foreground hover:bg-secondary hover:text-primary'}`} /* Adjusted padding, active/hover style */
+                className={`
+                  block w-full px-4 py-2 text-left text-base
+                  ${language === 'el' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                `} /* Adjusted padding, active/hover style */
               >
                 Ελληνικά
               </button>

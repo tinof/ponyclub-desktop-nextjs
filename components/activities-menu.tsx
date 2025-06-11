@@ -40,33 +40,76 @@ export default function ActivitiesMenu() {
       {!isHomepage && (
         <Link
           href='/'
-          className='relative flex items-center gap-1 px-3 py-2 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg hover:scale-105 transition-all duration-200'
+          className={`
+            relative flex items-center gap-1 rounded-full border
+            border-amber-100/50 bg-white/90 px-3 py-2 font-medium text-[#6b8362]
+            shadow-md transition-all transition-colors duration-200
+            hover:scale-105 hover:bg-white hover:shadow-lg
+          `}
         >
-          <Home className='w-4 h-4' />
-          <span className='hidden sm:inline'>{t.navigation.home}</span>
-          <div className='absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs'></div>
+          <Home className='h-4 w-4' />
+          <span
+            className={`
+              hidden
+              sm:inline
+            `}
+          >
+            {t.navigation.home}
+          </span>
+          <div
+            className={`
+              absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r
+              from-amber-200/30 to-transparent blur-xs
+            `}
+          ></div>
         </Link>
       )}
       <div className='relative'>
         <button
           onClick={toggleDropdown}
-          className='relative flex items-center gap-1 px-3 py-2 rounded-full bg-white/90 hover:bg-white transition-colors text-[#6b8362] font-medium shadow-md border border-amber-100/50 hover:shadow-lg hover:scale-105 transition-all duration-200'
+          className={`
+            relative flex items-center gap-1 rounded-full border
+            border-amber-100/50 bg-white/90 px-3 py-2 font-medium text-[#6b8362]
+            shadow-md transition-all transition-colors duration-200
+            hover:scale-105 hover:bg-white hover:shadow-lg
+          `}
+          aria-label='Activities menu'
+          aria-expanded={isOpen}
         >
           <span>{t.navigation.activities}</span>
-          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-          <div className='absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs'></div>
+          <ChevronDown
+            className={`
+              h-4 w-4 transition-transform duration-200
+              ${isOpen ? 'rotate-180' : ''}
+            `}
+          />
+          <div
+            className={`
+              absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r
+              from-amber-200/30 to-transparent blur-xs
+            `}
+          ></div>
         </button>
 
         {isOpen && (
           <>
             <div className='fixed inset-0 z-10' onClick={closeDropdown} />
-            <div className='absolute left-0 mt-1 w-36 rounded-lg shadow-xl bg-white/95 backdrop-blur-xs ring-1 ring-amber-100 z-20 border border-amber-100/50 overflow-hidden'>
+            <div
+              className={`
+                absolute left-0 z-20 mt-1 w-36 overflow-hidden rounded-lg border
+                border-amber-100/50 bg-white/95 shadow-xl ring-1 ring-amber-100
+                backdrop-blur-xs
+              `}
+            >
               <div className='py-1'>
                 {activities.map(activity => (
                   <Link
                     key={activity.id}
                     href={activity.href}
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#6b8362]/10 hover:text-[#6b8362] transition-colors'
+                    className={`
+                      block px-4 py-2 text-sm text-gray-700 transition-colors
+                      hover:bg-[#6b8362]/10 hover:text-[#6b8362]
+                    `}
                     onClick={closeDropdown}
                   >
                     {activity.label}

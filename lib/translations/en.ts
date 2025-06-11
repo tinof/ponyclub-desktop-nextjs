@@ -57,6 +57,7 @@ export const en = {
     extrasTitle: 'EXTRAS',
     extrasShoes: '100% WATERPROOF SHOES: €10',
     extrasPhoneCase: 'WATERPROOF PHONE CASE: €5',
+    close: 'Close',
   },
   location: {
     findUs: 'Find Us',

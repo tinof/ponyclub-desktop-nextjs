@@ -6,7 +6,13 @@ import React from 'react'
 // Dynamically import Gallery with ssr: false
 const Gallery = dynamic(() => import('@/components/ui/Gallery').then(mod => mod.Gallery), {
   ssr: false,
-  loading: () => <div className='h-96 w-full bg-gray-200 animate-pulse rounded-lg' />,
+  loading: () => (
+    <div
+      className={`
+    h-96 w-full animate-pulse rounded-lg bg-gray-200
+  `}
+    />
+  ),
 })
 
 type GalleryImage = {

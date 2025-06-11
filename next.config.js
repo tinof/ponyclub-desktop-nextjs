@@ -38,7 +38,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    // optimizeCss: { target: 'critical', minify: true },
+    // Next.js 15 built-in critical CSS inlining (replaces deprecated critters)
+    inlineCss: true,
     scrollRestoration: true,
     staleTimes: {
       dynamic: 30, // seconds

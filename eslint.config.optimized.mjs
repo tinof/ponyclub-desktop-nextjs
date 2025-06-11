@@ -2,10 +2,10 @@ import { FlatCompat } from '@eslint/eslintrc'
 import nextPlugin from '@next/eslint-plugin-next'
 import ts from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
-import prettierConfig from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+import prettierConfig from 'eslint-config-prettier'
 import globals from 'globals'
 
 const compat = new FlatCompat()

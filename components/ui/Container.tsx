@@ -25,5 +25,14 @@ export function Container({ children, className = '', as: Component = 'div', flu
     containerClasses += ' max-w-screen-xl' // 1280px max width for desktop
   }
 
-  return <Component className={`${containerClasses} ${className}`}>{children}</Component>
+  return (
+    <Component
+      className={`
+        ${containerClasses}
+        ${className}
+      `}
+    >
+      {children}
+    </Component>
+  )
 }

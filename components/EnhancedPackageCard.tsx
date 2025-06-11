@@ -1,11 +1,10 @@
 'use client'
 
-import { Waves, MountainSnow, Sailboat, User } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { MountainSnow, Sailboat, User, Waves } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import BookingButton from '@/components/client/BookingButton'
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { useLanguage } from '@/contexts/language-context'
 
 interface PackageCardProps {
   title: string
@@ -83,70 +82,145 @@ export default function EnhancedPackageCard({
   const renderActivityIcon = (index: number) => {
     if (index === 0) {
       return variant === 'green' ? (
-        <Waves className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
+        <Waves
+          className={`
+            h-3 w-3 text-white
+            sm:h-4 sm:w-4
+            md:h-5 md:w-5
+          `}
+        />
       ) : (
-        <Sailboat className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
+        <Sailboat
+          className={`
+            h-3 w-3 text-white
+            sm:h-4 sm:w-4
+            md:h-5 md:w-5
+          `}
+        />
       )
     }
-    return <MountainSnow className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
+    return (
+      <MountainSnow
+        className={`
+          h-3 w-3 text-white
+          sm:h-4 sm:w-4
+          md:h-5 md:w-5
+        `}
+      />
+    )
   }
 
   return (
-    <div className={`bg-gradient-to-tr ${theme.gradient} p-1 rounded-3xl shadow-2xl w-full max-w-md mx-auto`}>
+    <div
+      className={`
+        bg-gradient-to-tr
+        ${theme.gradient}
+        mx-auto w-full max-w-md rounded-3xl p-1 shadow-2xl
+      `}
+    >
       <div
-        className={`${theme.glass} backdrop-blur-xl border ${theme.border} shadow-2xl rounded-3xl overflow-hidden w-full h-full flex flex-col`}
+        className={`
+          ${theme.glass}
+          border backdrop-blur-xl
+          ${theme.border}
+          flex h-full w-full flex-col overflow-hidden rounded-3xl shadow-2xl
+        `}
       >
-        <div className='p-4 sm:p-6 md:p-8 flex flex-col h-full min-h-[580px] sm:min-h-[620px]'>
+        <div
+          className={`
+            flex h-full min-h-[580px] flex-col p-4
+            sm:min-h-[620px] sm:p-6
+            md:p-8
+          `}
+        >
           {/* Header */}
-          <div className='flex justify-between items-start mb-4 flex-shrink-0'>
-            <h2 className='text-2xl sm:text-3xl font-bold text-white'>{title}</h2>
+          <div className='mb-4 flex flex-shrink-0 items-start justify-between'>
+            <h2
+              className={`
+                text-2xl font-bold text-white
+                sm:text-3xl
+              `}
+            >
+              {title}
+            </h2>
             <span
-              className={`${theme.badge} text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full shadow-md whitespace-nowrap`}
+              className={`
+                ${theme.badge}
+                rounded-full px-3 py-1.5 text-xs font-semibold whitespace-nowrap
+                shadow-md
+                sm:text-sm
+              `}
             >
               {badge}
             </span>
           </div>
 
           {/* Image Mosaic */}
-          <div className='mosaic-grid h-44 sm:h-52 mb-4 sm:mb-6 rounded-xl overflow-hidden border border-white/20 flex-shrink-0'>
-            <div className='relative mosaic-main'>
+          <div
+            className={`
+              mosaic-grid mb-4 h-44 flex-shrink-0 overflow-hidden rounded-xl
+              border border-white/20
+              sm:mb-6 sm:h-52
+            `}
+          >
+            <div className='mosaic-main relative'>
               <OptimizedImage
                 src={images.main}
                 alt={`${title} main activity`}
                 fill
                 sizes='(max-width: 512px) 45vw, 240px'
-                className='w-full h-full object-cover'
+                className='h-full w-full object-cover'
                 imageType='default'
               />
             </div>
-            <div className='relative mosaic-top'>
+            <div className='mosaic-top relative'>
               <OptimizedImage
                 src={images.top}
                 alt={`${title} activity 2`}
                 fill
                 sizes='(max-width: 512px) 45vw, 240px'
-                className='w-full h-full object-cover'
+                className='h-full w-full object-cover'
                 imageType='default'
               />
             </div>
-            <div className='relative mosaic-bottom'>
+            <div className='mosaic-bottom relative'>
               <OptimizedImage
                 src={images.bottom}
                 alt={`${title} activity 3`}
                 fill
                 sizes='(max-width: 512px) 45vw, 240px'
-                className='w-full h-full object-cover'
+                className='h-full w-full object-cover'
                 imageType='default'
               />
             </div>
           </div>
 
           {/* Activities List */}
-          <ul className={`space-y-2 sm:space-y-3 ${theme.text} mb-6 sm:mb-8 flex-grow`}>
+          <ul
+            className={`
+              space-y-2
+              sm:space-y-3
+              ${theme.text}
+              mb-6 flex-grow
+              sm:mb-8
+            `}
+          >
             {[activities.primary, activities.riding, activities.hiking].map((activity, index) => (
-              <li key={index} className='flex items-center text-sm sm:text-base'>
+              <li
+                key={index}
+                className={`
+                  flex items-center text-sm
+                  sm:text-base
+                `}
+              >
                 <span
-                  className={`inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 ${theme.icon} mr-2 sm:mr-3 bg-white/20 rounded-full flex-shrink-0`}
+                  className={`
+                    inline-flex h-6 w-6 items-center justify-center
+                    sm:h-8 sm:w-8
+                    ${theme.icon}
+                    mr-2 flex-shrink-0 rounded-full bg-white/20
+                    sm:mr-3
+                  `}
                 >
                   {renderActivityIcon(index)}
                 </span>
@@ -156,43 +230,134 @@ export default function EnhancedPackageCard({
           </ul>
 
           {/* Pricing */}
-          <div className='mb-6 sm:mb-8 space-y-3 sm:space-y-4 flex-shrink-0'>
+          <div
+            className={`
+              mb-6 flex-shrink-0 space-y-3
+              sm:mb-8 sm:space-y-4
+            `}
+          >
             {pricing.adults && (
               <div
-                className={`flex justify-between items-center ${theme.priceBox} backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-white/10 shadow-inner`}
+                className={`
+                  flex items-center justify-between
+                  ${theme.priceBox}
+                  rounded-xl border border-white/10 p-3 shadow-inner
+                  backdrop-blur-sm
+                  sm:p-4
+                `}
               >
-                <p className='text-base sm:text-lg font-semibold text-white'>Adults</p>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{pricing.adults}</p>
+                <p
+                  className={`
+                    text-base font-semibold text-white
+                    sm:text-lg
+                  `}
+                >
+                  Adults
+                </p>
+                <p
+                  className={`
+                    text-xl font-bold text-white
+                    sm:text-2xl
+                  `}
+                >
+                  {pricing.adults}
+                </p>
               </div>
             )}
 
             {pricing.children && (
               <div
-                className={`flex justify-between items-center ${theme.priceBox} backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-white/10 shadow-inner`}
+                className={`
+                  flex items-center justify-between
+                  ${theme.priceBox}
+                  rounded-xl border border-white/10 p-3 shadow-inner
+                  backdrop-blur-sm
+                  sm:p-4
+                `}
               >
                 <div>
-                  <p className='text-base sm:text-lg font-semibold text-white'>Children</p>
-                  <p className='text-xs sm:text-sm text-white/80'>under 12 years old</p>
+                  <p
+                    className={`
+                      text-base font-semibold text-white
+                      sm:text-lg
+                    `}
+                  >
+                    Children
+                  </p>
+                  <p
+                    className={`
+                      text-xs text-white/80
+                      sm:text-sm
+                    `}
+                  >
+                    under 12 years old
+                  </p>
                 </div>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{pricing.children}</p>
+                <p
+                  className={`
+                    text-xl font-bold text-white
+                    sm:text-2xl
+                  `}
+                >
+                  {pricing.children}
+                </p>
               </div>
             )}
 
             {pricing.perPerson && (
               <div
-                className={`flex justify-between items-center ${theme.priceBox} backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-white/10 shadow-inner`}
+                className={`
+                  flex items-center justify-between
+                  ${theme.priceBox}
+                  rounded-xl border border-white/10 p-3 shadow-inner
+                  backdrop-blur-sm
+                  sm:p-4
+                `}
               >
                 <div className='flex items-center'>
-                  <User className='w-4 h-4 sm:w-5 sm:h-5 text-white mr-2' />
-                  <p className='text-base sm:text-lg font-semibold text-white'>Per Person</p>
+                  <User
+                    className={`
+                      mr-2 h-4 w-4 text-white
+                      sm:h-5 sm:w-5
+                    `}
+                  />
+                  <p
+                    className={`
+                      text-base font-semibold text-white
+                      sm:text-lg
+                    `}
+                  >
+                    Per Person
+                  </p>
                 </div>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{pricing.perPerson}</p>
+                <p
+                  className={`
+                    text-xl font-bold text-white
+                    sm:text-2xl
+                  `}
+                >
+                  {pricing.perPerson}
+                </p>
               </div>
             )}
 
             {/* Add empty space for cards with less pricing info to maintain height */}
-            {!pricing.children && !pricing.perPerson && <div className='h-16 sm:h-20'></div>}
-            {!pricing.adults && !pricing.children && !pricing.perPerson && <div className='h-32 sm:h-40'></div>}
+            {!pricing.children && !pricing.perPerson && (
+              <div
+                className={`
+                  h-16
+                  sm:h-20
+                `}
+              ></div>
+            )}
+            {!pricing.adults && !pricing.children && !pricing.perPerson && (
+              <div
+                className={`
+                  h-32
+                  sm:h-40
+                `}
+              ></div>
+            )}
           </div>
 
           {/* Book Now Button */}
@@ -200,13 +365,29 @@ export default function EnhancedPackageCard({
             <BookingButton
               id={bookingId}
               dataSrc={dataSrc}
-              className={`w-full bg-gradient-to-r ${theme.button} text-white font-semibold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center text-base sm:text-lg shadow-lg hover:shadow-xl`}
+              className={`
+                w-full bg-gradient-to-r
+                ${theme.button}
+                flex transform items-center justify-center rounded-xl px-4 py-3
+                text-base font-semibold text-white shadow-lg transition
+                duration-300 ease-in-out
+                hover:scale-105 hover:shadow-xl
+                sm:px-6 sm:py-3.5 sm:text-lg
+              `}
               trackingLabel={trackingLabel}
               packageName={packageName}
               packagePrice={packagePrice}
             >
               {bookNowText}
-              <svg className='w-4 h-4 sm:w-5 sm:h-5 ml-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg
+                className={`
+                  ml-2 h-4 w-4
+                  sm:h-5 sm:w-5
+                `}
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 7l5 5m0 0l-5 5m5-5H6' />
               </svg>
             </BookingButton>

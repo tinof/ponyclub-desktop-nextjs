@@ -120,6 +120,10 @@ package-lock.json
 *.min.js
 *.min.css
 
+# ESLint and other tool reports
+eslint-report.json
+*.report.json
+
 # Public assets (usually shouldn't be formatted)
 public/**/*.svg
 public/**/*.jpg

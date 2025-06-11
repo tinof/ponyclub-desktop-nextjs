@@ -15,7 +15,13 @@ export default function PriceListButton({ text }: PriceListButtonProps) {
     <>
       <button
         onClick={() => setIsPriceListOpen(true)}
-        className='mt-4 mb-8 md:mb-12 bg-[#6b8362] hover:bg-[#3E5A35] text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg text-lg'
+        className={`
+          mt-4 mb-8 rounded-lg bg-[#6b8362] px-8 py-3 text-lg font-semibold
+          text-white shadow-md transition-colors duration-300
+          hover:bg-[#3E5A35] hover:shadow-lg
+          md:mb-12
+        `}
+        aria-label='Open price list'
       >
         {text}
       </button>

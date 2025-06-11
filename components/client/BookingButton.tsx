@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 
 import { useGDPR } from '@/contexts/gdpr-context'
 
@@ -100,7 +100,7 @@ export default function BookingButton({
           currency: 'EUR',
           transaction_id: `booking_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         })
-      } else {
+      } else if (process.env.NODE_ENV === 'development') {
         console.warn(
           '[Booking Tracking] Google Ads conversion tracking not configured. Please set NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID and NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL environment variables.'
         )
@@ -109,7 +109,10 @@ export default function BookingButton({
 
     // Vercel Analytics (if available and analytics consent given)
     if (window.va && consent.analytics) {
-      ;(window.va as any)('event', {
+      interface VercelAnalytics {
+        (event: string, data: { name: string; data: Record<string, unknown> }): void
+      }
+      ;(window.va as VercelAnalytics)('event', {
         name: 'Book Now Click',
         data: {
           package: packageName,
@@ -130,11 +133,13 @@ export default function BookingButton({
       })
     }
 
-    console.log(
-      `[Booking Tracking] ${trackingLabel} clicked - Package: ${packageName}, Price: €${numericPrice}`,
-      'Consent:',
-      consent
-    )
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `[Booking Tracking] ${trackingLabel} clicked - Package: ${packageName}, Price: €${numericPrice}`,
+        'Consent:',
+        consent
+      )
+    }
   }, [trackingLabel, packageName, packagePrice, id, consent])
 
   const handleBookNowClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -147,7 +152,10 @@ export default function BookingButton({
 
   return (
     <button
-      className={`bokunButton ${className}`}
+      className={`
+        bokunButton
+        ${className}
+      `}
       id={id}
       data-src={dataSrc}
       data-testid='widget-book-button'

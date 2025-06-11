@@ -69,7 +69,11 @@ export function OptimizedImage({
 
     return (
       <div
-        className={`relative overflow-hidden ${aspectRatioClass} ${containerClassName || ''}`}
+        className={`
+          relative overflow-hidden
+          ${aspectRatioClass}
+          ${containerClassName || ''}
+        `}
         style={!aspectRatioClass ? { height: '100%' } : undefined}
       >
         <Image {...imageProps} />

@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const RidingPage = async ({ params }: PageProps) => {
-  const { locale } = await params
+  const { locale: _locale } = await params
   const bokunExperienceId = '1020659' // Riding experience ID
 
   return (

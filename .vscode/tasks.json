@@ -4,8 +4,8 @@
     {
       "label": "ESLint: Scan Workspace",
       "type": "shell",
-      "command": "npx eslint . --format=stylish || true",
-      "problemMatcher": "$eslint-stylish",
+      "command": "npx eslint . --format=compact",
+      "problemMatcher": "$eslint-compact",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -21,7 +21,16 @@
         "showReuseMessage": false,
         "clear": true
       },
-      "isBackground": true
+      "isBackground": false
+    },
+    {
+      "label": "ESLint: Watch",
+      "type": "shell",
+      "command": "npx eslint . --format=compact --watch",
+      "problemMatcher": "$eslint-compact",
+      "group": "test",
+      "isBackground": true,
+      "presentation": { "reveal": "always" }
     }
   ]
 }

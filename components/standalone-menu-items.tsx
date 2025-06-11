@@ -19,14 +19,24 @@ export default function StandaloneMenuItems() {
   return (
     <Link
       href='/river-village'
-      className={`relative flex items-center gap-1 px-3 py-2 rounded-full ${
-        isActive
-          ? 'bg-[#6b8362]/20 text-[#6b8362] font-semibold border-[#6b8362]/30'
-          : 'bg-white/90 hover:bg-white text-[#6b8362] font-medium border-amber-100/50'
-      } transition-colors shadow-md border hover:shadow-lg hover:scale-105 transition-all duration-200`}
+      className={`
+        relative flex items-center gap-1 rounded-full px-3 py-2
+        ${
+          isActive
+            ? 'border-[#6b8362]/30 bg-[#6b8362]/20 font-semibold text-[#6b8362]'
+            : 'border-amber-100/50 bg-white/90 font-medium text-[#6b8362] hover:bg-white'
+        }
+        border shadow-md transition-all transition-colors duration-200
+        hover:scale-105 hover:shadow-lg
+      `}
     >
       <span>River & Village</span>
-      <div className='absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r from-amber-200/30 to-transparent blur-xs'></div>
+      <div
+        className={`
+          absolute -inset-[0.5px] -z-10 rounded-full bg-linear-to-r
+          from-amber-200/30 to-transparent blur-xs
+        `}
+      ></div>
     </Link>
   )
 }

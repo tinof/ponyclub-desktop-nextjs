@@ -1,10 +1,11 @@
 'use client'
 
+import { usePathname, useRouter } from 'next/navigation'
 import type React from 'react'
 import { createContext, useContext } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { type Language, translations, type TranslationKeys } from '@/lib/translations'
+
 import { bokunLangMap } from '@/lib/bokun-lang'
+import { type Language, translations, type TranslationKeys } from '@/lib/translations'
 import { useBokunLanguage } from '@/lib/use-bokun-language'
 
 type LanguageContextType = {

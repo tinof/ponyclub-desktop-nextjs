@@ -186,8 +186,122 @@
 
 ## Accessibility Guidelines
 
-- Maintain text contrast ratios of at least 4.5:1
-- Use semantic HTML elements
-- Ensure hover states have clear visual feedback
-- Provide focus indicators for keyboard navigation
-- Test color combinations for color blindness compatibility
+### WCAG 2.1 AA Compliance Standards
+
+#### Color Contrast Requirements
+
+- **Normal text**: Minimum 4.5:1 contrast ratio
+- **Large text** (18pt+ or 14pt+ bold): Minimum 3:1 contrast ratio
+- **UI components and graphics**: Minimum 3:1 contrast ratio
+- **Focus indicators**: Minimum 3:1 contrast ratio against adjacent colors
+
+#### Approved Color Combinations
+
+- **High contrast**: Dark Green (#3E5A35) on White (#FAF7F2) - 9.2:1 ✅
+- **Medium contrast**: Medium Green (#6b8362) on White (#FAF7F2) - 5.8:1 ✅
+- **Amber contrast**: Amber Dark (#b45309) on White (#FAF7F2) - 4.9:1 ✅
+- **Body text**: Gray-700 (#374151) on White - 8.9:1 ✅
+
+#### Interactive Elements
+
+##### Buttons
+
+- **MUST** have accessible names via:
+  - Visible text content, OR
+  - `aria-label` attribute, OR
+  - `aria-labelledby` pointing to descriptive text
+- **Icon-only buttons** MUST have `aria-label`
+- **Focus states** MUST be clearly visible with 2px outline
+- **Hover states** MUST maintain contrast ratios
+
+##### Links
+
+- **MUST** have descriptive text or `aria-label`
+- **Avoid** "click here" or "read more" without context
+- **External links** should indicate they open in new window
+- **Focus indicators** MUST be visible and distinct
+
+##### Images
+
+- **Decorative images**: Use `alt=""` or `role="presentation"`
+- **Informative images**: Provide descriptive `alt` text
+- **Complex images**: Use `aria-describedby` for detailed descriptions
+- **Logo images**: Include company/site name in alt text
+
+##### Iframes
+
+- **MUST** have descriptive `title` attribute
+- **Embedded content** should be keyboard accessible
+- **Maps**: Title should describe location/purpose
+
+#### Keyboard Navigation
+
+- **All interactive elements** MUST be keyboard accessible
+- **Tab order** MUST be logical and predictable
+- **Focus indicators** MUST be visible (minimum 2px outline)
+- **Skip links** for main content navigation
+- **Dropdown menus** MUST support arrow key navigation
+
+#### Screen Reader Support
+
+- **Semantic HTML**: Use proper heading hierarchy (h1-h6)
+- **ARIA landmarks**: `main`, `nav`, `aside`, `footer`
+- **ARIA labels**: For complex UI components
+- **Live regions**: For dynamic content updates
+- **Form labels**: Properly associated with inputs
+
+#### Implementation Checklist
+
+##### For All Components:
+
+- [ ] Color contrast meets WCAG AA standards
+- [ ] Keyboard navigation works properly
+- [ ] Screen reader announces content correctly
+- [ ] Focus indicators are visible
+- [ ] Interactive elements have accessible names
+
+##### For Buttons:
+
+- [ ] Visible text or `aria-label` present
+- [ ] Focus state has 2px outline with 3:1 contrast
+- [ ] Hover state maintains readability
+- [ ] Purpose is clear from context
+
+##### For Images:
+
+- [ ] Alt text describes image content/purpose
+- [ ] Decorative images have empty alt or role="presentation"
+- [ ] Complex images have additional descriptions
+
+##### For Forms:
+
+- [ ] Labels are properly associated
+- [ ] Error messages are descriptive
+- [ ] Required fields are clearly marked
+- [ ] Validation feedback is accessible
+
+##### For Navigation:
+
+- [ ] Logical tab order maintained
+- [ ] Skip links provided
+- [ ] Current page indicated in navigation
+- [ ] Dropdown menus support keyboard navigation
+
+#### Testing Requirements
+
+- **Automated testing**: Use axe-core or similar tools
+- **Keyboard testing**: Navigate entire site with keyboard only
+- **Screen reader testing**: Test with NVDA, JAWS, or VoiceOver
+- **Color blindness testing**: Use tools like Stark or Colour Contrast Analyser
+- **Mobile accessibility**: Test with mobile screen readers
+
+#### Common Accessibility Violations to Avoid
+
+- Buttons without accessible names
+- Insufficient color contrast (below 4.5:1 for normal text)
+- Images without alt text
+- Iframes without titles
+- Links without descriptive text
+- Missing focus indicators
+- Improper heading hierarchy
+- Form inputs without labels

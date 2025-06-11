@@ -57,6 +57,7 @@ export const el = {
     extrasTitle: 'ΕΠΙΠΛΕΟΝ',
     extrasShoes: '100% ΑΔΙΑΒΡΟΧΑ ΠΑΠΟΥΤΣΙΑ: €10',
     extrasPhoneCase: 'ΑΔΙΑΒΡΟΧΗ ΘΗΚΗ ΚΙΝΗΤΟΥ: €5',
+    close: 'Κλείσιμο',
   },
   location: {
     findUs: 'Βρείτε μας',

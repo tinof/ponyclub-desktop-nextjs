@@ -114,6 +114,7 @@ Custom renderer: Render reviews using a custom function Custom renderer layout
 <ReactGoogleReviews layout="custom" featurableId={featurableWidgetId}
 renderer={(reviews) => { return ( <div> {reviews.map(({ reviewId, reviewer,
 comment }) => ( <div key={reviewId}> <h3>{reviewer.displayName}</h3>
+
 <p>{comment}</p> </div> ))} </div> ); }} />
 
 Copy Copied! CSS Classes The <ReactGoogleReviews /> component uses the Block

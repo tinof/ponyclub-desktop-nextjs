@@ -74,7 +74,7 @@ function RippleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className='absolute inset-0 pointer-events-none mix-blend-soft-light'
+      className='pointer-events-none absolute inset-0 mix-blend-soft-light'
       style={{ zIndex: 25 }}
     />
   )
@@ -87,7 +87,7 @@ export default function HeroSection() {
   const opacity = useTransform(scrollY, [0, 300], [0, 1])
 
   return (
-    <section className='relative w-full h-[80vh] overflow-hidden'>
+    <section className='relative h-[80vh] w-full overflow-hidden'>
       {/* Video Background */}
       <video
         src='/videos/hero-loop.mp4'
@@ -96,17 +96,32 @@ export default function HeroSection() {
         loop
         playsInline
         preload='auto'
-        className='absolute inset-0 w-full h-full object-cover'
+        className='absolute inset-0 h-full w-full object-cover'
       />
       {/* Ripple effect canvas */}
       <RippleCanvas />
 
       {/* Overlay gradient */}
-      <div className='absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40 z-10' />
+      <div
+        className={`
+          absolute inset-0 z-10 bg-gradient-to-b from-black/30 via-transparent
+          to-black/40
+        `}
+      />
 
       {/* Parallax Title */}
-      <motion.div style={{ y, opacity }} className='absolute bottom-20 w-full flex justify-center z-20'>
-        <h1 className='text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg select-none'>
+      <motion.div
+        style={{ y, opacity }}
+        className={`
+        absolute bottom-20 z-20 flex w-full justify-center
+      `}
+      >
+        <h1
+          className={`
+            text-5xl font-extrabold text-white drop-shadow-lg select-none
+            md:text-7xl
+          `}
+        >
           The Full Pony Club Experience
         </h1>
       </motion.div>
@@ -115,11 +130,14 @@ export default function HeroSection() {
       <motion.div
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className='absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center text-white select-none'
+        className={`
+          absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 flex-col
+          items-center text-white select-none
+        `}
       >
         <span className='mb-2 text-lg font-semibold'>Adventure begins here</span>
         <svg
-          className='w-8 h-8 animate-bounce'
+          className='h-8 w-8 animate-bounce'
           fill='none'
           stroke='currentColor'
           strokeWidth='2'

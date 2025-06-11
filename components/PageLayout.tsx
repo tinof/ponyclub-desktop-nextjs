@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 
 import Footer from './Footer'
 import SiteHeader from './site-header' // Added SiteHeader import
-import { Container } from './ui/Container' // Import the Container component
 
 interface PageLayoutProps {
   children: ReactNode
@@ -24,10 +23,10 @@ export default function PageLayout({ children }: PageLayoutProps) {
   }, [pathname])
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex min-h-screen flex-col'>
       <SiteHeader />
       {/* Apply pt-20 to main to account for fixed SiteHeader */}
-      <main className='grow pt-20 bg-[#f9f7f2]'>
+      <main className='grow bg-[#f9f7f2] pt-20'>
         {/* Page content */}
         {children}
       </main>

@@ -4,7 +4,7 @@
 
 This directory contains comprehensive documentation for the Pony Club website project, covering all major integrations, security implementations, and development workflows.
 
-**Last Updated:** January 2025  
+**Last Updated:** June 2025
 **Project Status:** ✅ Production Ready  
 **Documentation Coverage:** Complete
 
@@ -97,6 +97,7 @@ This directory contains comprehensive documentation for the Pony Club website pr
 #### Performance & Security
 
 - [`/docs/google-pagespeed-optimization-plan.md`](../docs/google-pagespeed-optimization-plan.md)
+- [`/google-pagespeed-notes.md`](../google-pagespeed-notes.md) - Developer notes on PageSpeed implementation.
 - [`/security-plan.md`](../security-plan.md) - Production security hardening
 
 ## Quick Reference
@@ -133,6 +134,7 @@ This directory contains comprehensive documentation for the Pony Club website pr
 | ---------------- | -------- | -------------- | ------------- | --------------- |
 | Google Maps      | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |
 | Google Analytics | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |
+| Sentry           | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |
 | Bokun Widgets    | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |
 | Elfsight Reviews | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |
 | Facebook Pixel   | ✅ Ready | ✅ Yes         | ✅ Yes        | ✅ Yes          |

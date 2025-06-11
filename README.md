@@ -14,7 +14,7 @@ A web application built with Next.js and React.
 - **Typescript**: For type safety and developer experience
 - **Visualization**: Recharts for data visualization
 - **Icons**: Lucide React
-- **Maps**: Leaflet
+- **Maps**: Google Maps Embed (via @next/third-parties)
 
 ## Local Development
 

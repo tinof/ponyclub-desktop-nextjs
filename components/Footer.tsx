@@ -1,7 +1,6 @@
 'use client'
 
-import { MapPin, Phone, Mail, Clock } from 'lucide-react'
-import Link from 'next/link'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 
 import { useLanguage } from '@/contexts/language-context'
 
@@ -11,17 +10,28 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className='relative bg-secondary border-t border-border'>
+    <footer className='relative border-t border-border bg-secondary'>
       {' '}
       {/* Removed mt-16 pt-12 pb-12 to eliminate spacing */}
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12'>
+      <div
+        className={`
+          container mx-auto max-w-5xl px-4 py-12
+          sm:px-6
+          lg:px-8
+        `}
+      >
         {' '}
         {/* Added padding to the container instead */}
-        <h2 className='text-center text-3xl mb-8 font-bold text-primary'>{t.footer.contactUs}</h2>
-        <div className='grid md:grid-cols-2 gap-8'>
+        <h2 className='mb-8 text-center text-3xl font-bold text-primary'>{t.footer.contactUs}</h2>
+        <div
+          className={`
+            grid gap-8
+            md:grid-cols-2
+          `}
+        >
           <div className='space-y-6'>
             <div className='flex items-start gap-3'>
-              <MapPin className='h-5 w-5 mt-1 text-primary' />
+              <MapPin className='mt-1 h-5 w-5 text-primary' />
               <div>
                 <p className='font-semibold text-foreground'>{t.footer.address.line1}</p>
                 <p className='text-foreground/90'>{t.footer.address.line2}</p>
@@ -30,25 +40,25 @@ export default function Footer() {
             </div>
 
             <div className='flex items-start gap-3'>
-              <Phone className='h-5 w-5 mt-1 text-primary' />
+              <Phone className='mt-1 h-5 w-5 text-primary' />
               <div>
                 <p className='text-foreground/90'>{t.footer.phone}</p>
-                <p className='text-sm text-muted-foreground mt-1'>{t.footer.phoneLang}</p>
+                <p className='mt-1 text-sm text-muted-foreground'>{t.footer.phoneLang}</p>
               </div>
             </div>
 
             <div className='flex items-start gap-3'>
-              <Mail className='h-5 w-5 mt-1 text-primary' />
+              <Mail className='mt-1 h-5 w-5 text-primary' />
               <div>
                 <p className='text-foreground/90'>{t.footer.email}</p>
-                <p className='text-sm text-muted-foreground mt-1'>{t.footer.emailNote}</p>
+                <p className='mt-1 text-sm text-muted-foreground'>{t.footer.emailNote}</p>
               </div>
             </div>
           </div>
 
           <div className='space-y-6'>
             <div className='flex items-start gap-3'>
-              <Clock className='h-5 w-5 mt-1 text-primary' />
+              <Clock className='mt-1 h-5 w-5 text-primary' />
               <div>
                 <p className='font-semibold text-foreground'>{t.footer.openHours.title}</p>
                 <p className='text-foreground/90'>{t.footer.openHours.schedule}</p>
@@ -61,7 +71,12 @@ export default function Footer() {
                 href={mapsUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center justify-center px-6 py-3 font-semibold text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors gap-2'
+                className={`
+                  inline-flex items-center justify-center gap-2 rounded-lg
+                  bg-primary px-6 py-3 font-semibold text-primary-foreground
+                  transition-colors
+                  hover:bg-primary/90
+                `}
               >
                 <MapPin className='h-5 w-5' />
                 <span>{t.footer.findUs}</span>
@@ -69,7 +84,11 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className='mt-12 text-center text-xs text-muted-foreground tracking-wide'>
+        <div
+          className={`
+            mt-12 text-center text-xs tracking-wide text-muted-foreground
+          `}
+        >
           <p>{t.footer.copyright.replace('{year}', currentYear.toString())}</p>
         </div>
       </div>

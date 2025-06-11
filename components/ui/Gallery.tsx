@@ -20,29 +20,78 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
   return (
-    <div className='relative bg-white/80 backdrop-blur-xs p-6 rounded-lg shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300'>
-      <h2 className='text-2xl font-bold text-amber-800 mb-4 relative inline-block'>
+    <div
+      className={`
+        relative rounded-lg border border-amber-100/70 bg-white/80 p-6 shadow-lg
+        backdrop-blur-xs transition-shadow duration-300
+        hover:shadow-xl
+      `}
+    >
+      <h2
+        className={`
+          relative mb-4 inline-block text-2xl font-bold text-amber-800
+        `}
+      >
         {title}
-        <div className='absolute -bottom-1 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-amber-500/50 to-transparent'></div>
+        <div
+          className={`
+            absolute -bottom-1 left-0 h-[2px] w-full bg-linear-to-r
+            from-transparent via-amber-500/50 to-transparent
+          `}
+        ></div>
       </h2>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4' role='region' aria-label={ariaLabel}>
+      <div
+        className={`
+          grid grid-cols-1 gap-4
+          sm:grid-cols-2
+          lg:grid-cols-3
+        `}
+        role='region'
+        aria-label={ariaLabel}
+      >
         {images.map((image, index) => (
           <div
             key={index}
-            className='relative h-64 cursor-pointer rounded-xl overflow-hidden shadow-md border border-amber-100/70 hover:shadow-xl hover:scale-[1.02] transition-all duration-300'
+            className={`
+              relative h-64 cursor-pointer overflow-hidden rounded-xl border
+              border-amber-100/70 shadow-md transition-all duration-300
+              hover:scale-[1.02] hover:shadow-xl
+            `}
             onClick={() => setSelectedImage(index)}
           >
-            <GalleryImage src={image.src} alt={image.alt} fill index={index} className='object-cover' />
-            <div className='absolute inset-0 bg-linear-to-b from-black/5 to-transparent'></div>
+            <GalleryImage
+              src={image.src}
+              alt={image.alt}
+              fill
+              index={index}
+              className={`
+              object-cover
+            `}
+            />
+            <div
+              className={`
+                absolute inset-0 bg-linear-to-b from-black/5 to-transparent
+              `}
+            ></div>
           </div>
         ))}
       </div>
 
-      <div className='absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-xs'></div>
+      <div
+        className={`
+          absolute -inset-[1px] -z-10 rounded-lg bg-linear-to-tr
+          from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-xs
+        `}
+      ></div>
 
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className='max-w-5xl bg-white/90 backdrop-blur-md p-0 rounded-xl overflow-hidden'>
+        <DialogContent
+          className={`
+            max-w-5xl overflow-hidden rounded-xl bg-white/90 p-0
+            backdrop-blur-md
+          `}
+        >
           {selectedImage !== null && (
             <div className='relative h-[80vh]'>
               <OptimizedImage // Use OptimizedImage here
@@ -56,7 +105,11 @@ export function Gallery({ images, title, ariaLabel = 'Photo gallery' }: GalleryP
               />
               <button
                 onClick={() => setSelectedImage(null)}
-                className='absolute top-4 right-4 bg-white/80 hover:bg-white backdrop-blur-xs p-2 rounded-full z-10'
+                className={`
+                  absolute top-4 right-4 z-10 rounded-full bg-white/80 p-2
+                  backdrop-blur-xs
+                  hover:bg-white
+                `}
                 aria-label='Close image'
               >
                 <svg

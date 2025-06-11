@@ -18,23 +18,58 @@ export default function RiverVillagePage() {
 
   // Enhanced description content with glassmorphism effect
   const descriptionContent = (
-    <div className='relative p-6 rounded-2xl overflow-hidden group transform hover:scale-[1.01] transition-all duration-500 shadow-xl'>
+    <div
+      className={`
+        group relative transform overflow-hidden rounded-2xl p-6 shadow-xl
+        transition-all duration-500
+        hover:scale-[1.01]
+      `}
+    >
       {/* Background layers */}
-      <div className='absolute inset-0 -z-10 bg-linear-to-br from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md rounded-2xl'></div>
-      <div className='absolute inset-0 -z-20 bg-[#6b8362]/5 rounded-2xl'></div>
+      <div
+        className={`
+          absolute inset-0 -z-10 rounded-2xl bg-linear-to-br from-[#f5f0e8]/95
+          via-white/90 to-[#f5f0e8]/95 backdrop-blur-md
+        `}
+      ></div>
+      <div className='absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5'></div>
 
       {/* Decorative effects */}
-      <div className='absolute -inset-[3px] -z-10 rounded-2xl pointer-events-none opacity-70'>
-        <div className='absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30 via-transparent to-[#6b8362]/20'></div>
+      <div
+        className={`
+          pointer-events-none absolute -inset-[3px] -z-10 rounded-2xl opacity-70
+        `}
+      >
+        <div
+          className={`
+            absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30
+            via-transparent to-[#6b8362]/20
+          `}
+        ></div>
       </div>
-      <div className='absolute inset-0 rounded-2xl border border-amber-200/30 pointer-events-none'></div>
+      <div
+        className={`
+          pointer-events-none absolute inset-0 rounded-2xl border
+          border-amber-200/30
+        `}
+      ></div>
 
       {/* Title with underline effect */}
       <h2
-        className={`${robotoSlab.variable} font-roboto-slab text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6 relative inline-block`}
+        className={`
+          ${robotoSlab.variable}
+          relative mb-6 inline-block font-roboto-slab text-3xl font-bold
+          text-[#3E5A35]
+          md:text-4xl
+        `}
       >
         {t.riverVillage.descriptionTitle}
-        <div className='absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-[#6b8362]/70 to-transparent'></div>
+        <div
+          className={`
+            absolute -bottom-2 left-0 h-[2px] w-full bg-linear-to-r
+            from-transparent via-[#6b8362]/70 to-transparent
+          `}
+        ></div>
       </h2>
 
       {/* Content */}
@@ -47,23 +82,58 @@ export default function RiverVillagePage() {
 
   // Enhanced details content with Natura 2000 logo
   const detailsContent = (
-    <div className='relative p-6 rounded-2xl overflow-hidden group transform hover:scale-[1.01] transition-all duration-500 shadow-xl'>
+    <div
+      className={`
+        group relative transform overflow-hidden rounded-2xl p-6 shadow-xl
+        transition-all duration-500
+        hover:scale-[1.01]
+      `}
+    >
       {/* Background layers */}
-      <div className='absolute inset-0 -z-10 bg-linear-to-br from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md rounded-2xl'></div>
-      <div className='absolute inset-0 -z-20 bg-[#6b8362]/5 rounded-2xl'></div>
+      <div
+        className={`
+          absolute inset-0 -z-10 rounded-2xl bg-linear-to-br from-[#f5f0e8]/95
+          via-white/90 to-[#f5f0e8]/95 backdrop-blur-md
+        `}
+      ></div>
+      <div className='absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5'></div>
 
       {/* Decorative effects */}
-      <div className='absolute -inset-[3px] -z-10 rounded-2xl pointer-events-none opacity-70'>
-        <div className='absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30 via-transparent to-[#6b8362]/20'></div>
+      <div
+        className={`
+          pointer-events-none absolute -inset-[3px] -z-10 rounded-2xl opacity-70
+        `}
+      >
+        <div
+          className={`
+            absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30
+            via-transparent to-[#6b8362]/20
+          `}
+        ></div>
       </div>
-      <div className='absolute inset-0 rounded-2xl border border-amber-200/30 pointer-events-none'></div>
+      <div
+        className={`
+          pointer-events-none absolute inset-0 rounded-2xl border
+          border-amber-200/30
+        `}
+      ></div>
 
       {/* Title with underline effect */}
       <h2
-        className={`${robotoSlab.variable} font-roboto-slab text-3xl md:text-4xl font-bold text-[#3E5A35] mb-6 relative inline-block`}
+        className={`
+          ${robotoSlab.variable}
+          relative mb-6 inline-block font-roboto-slab text-3xl font-bold
+          text-[#3E5A35]
+          md:text-4xl
+        `}
       >
         {t.riverVillage.detailsTitle}
-        <div className='absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-[#6b8362]/70 to-transparent'></div>
+        <div
+          className={`
+            absolute -bottom-2 left-0 h-[2px] w-full bg-linear-to-r
+            from-transparent via-[#6b8362]/70 to-transparent
+          `}
+        ></div>
       </h2>
 
       {/* Content */}
@@ -72,12 +142,18 @@ export default function RiverVillagePage() {
 
         {/* Natura 2000 logo with enhanced styling */}
         <div className='mt-8 flex flex-col items-center'>
-          <p className='text-center text-sm text-gray-600 italic mb-3'>
+          <p className='mb-3 text-center text-sm text-gray-600 italic'>
             {language === 'en'
               ? "Protected by EU's Natura 2000 program"
               : 'Προστατεύεται από το πρόγραμμα Natura 2000 της ΕΕ'}
           </p>
-          <div className='relative w-48 h-32 bg-white/80 p-3 rounded-xl shadow-lg border border-amber-100/70 hover:shadow-xl transition-shadow duration-300'>
+          <div
+            className={`
+              relative h-32 w-48 rounded-xl border border-amber-100/70
+              bg-white/80 p-3 shadow-lg transition-shadow duration-300
+              hover:shadow-xl
+            `}
+          >
             <OptimizedImage
               src='/images/natura_2000.png'
               alt='Natura 2000 Logo'
@@ -86,7 +162,12 @@ export default function RiverVillagePage() {
               className='object-contain'
               imageType='logo'
             />
-            <div className='absolute -inset-[1px] -z-10 rounded-xl bg-linear-to-tr from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-xs'></div>
+            <div
+              className={`
+                absolute -inset-[1px] -z-10 rounded-xl bg-linear-to-tr
+                from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-xs
+              `}
+            ></div>
           </div>
         </div>
       </div>

@@ -17,9 +17,10 @@ A website for a family-run business in Greece, offering Riding, Rafting, Kayakin
 
 ### Maps & Location Services
 
-- **Google Maps API**: Interactive maps with custom zoom controls and directions
+- **Google Maps Embed**: Simplified integration using @next/third-parties GoogleMapsEmbed
 - **Business Location**: Pony Club Acheron (39.3257662, 20.6069899)
-- **CSP-Compliant Implementation**: No inline scripts, proper nonce handling
+- **Performance Optimized**: 40KB iframe vs 250+ KB JavaScript bundle
+- **GDPR Compliant**: No tracking cookies, privacy-friendly by default
 
 ### Security & Compliance
 
@@ -41,8 +42,8 @@ A website for a family-run business in Greece, offering Riding, Rafting, Kayakin
 
 ## Recent Major Updates
 
-- ✅ **Google Maps Integration** (January 2025): CSP-compliant maps with custom controls
-- ✅ **CSP Violations Resolution**: Comprehensive security header implementation
-- ✅ **GDPR Compliance**: Full privacy compliance with consent management
-- ✅ **TypeScript Improvements**: Enhanced type safety across all integrations
-- ✅ **Build System Optimization**: Resolved all compilation errors for production deployment
+- ✅ **Performance Optimization** (June 2025): Implemented Google PageSpeed recommendations, including critical CSS inlining and resource optimization.
+- ✅ **Sentry Integration** (May 2025): Added comprehensive error monitoring and performance tracing with Sentry.
+- ✅ **Standalone Production Build** (April 2025): The build script now produces a self-contained `.next/standalone` output for optimized deployment.
+- ✅ **New Content Pages** (March 2025): Added several new activity pages, including `/for-schools` and `/river-village`.
+- ✅ **Google Maps & CSP Hardening** (January 2025): Initial secure integration of Google Maps and a robust Content Security Policy.

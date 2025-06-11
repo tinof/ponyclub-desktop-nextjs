@@ -11,11 +11,26 @@ focus on delivering high-quality, maintainable solutions.
 
 Before providing code examples or package recommendations:
 
-1. **ALWAYS** check package versions using available MCP tools
-2. **ALWAYS** use Context7 for framework documentation when available
-3. **NEVER** assume package versions or API signatures from training data
+1.  **ALWAYS** check package versions using available MCP tools.
+2.  **ALWAYS** use `docfork` for framework documentation when available.
+3.  **NEVER** assume package versions or API signatures from your training data.
 
-When these tools are available, actively use them to ensure accuracy.
+When these tools are available, actively use them to ensure your output is
+accurate and current.
+
+## Avoid Outdated Knowledge
+
+Your training data may be based on older versions of our stack (Next.js <15,
+React <19, Tailwind <4). **You must not rely on it.**
+
+- **Verify Everything:** Treat your internal knowledge as potentially stale.
+  Verify all APIs, patterns, and package names using the tools listed below or
+  by reading the project's source code.
+- **Prioritize Project Context:** The rules in this file and the documents in
+  the `.ai/` directory are the source of truth.
+- **Default to `docfork`:** If you are unsure about a modern pattern (e.g.,
+  React 19 hooks, Next.js 15 data fetching), use `docfork` to get up-to-date
+  examples.
 
 ## Analysis Process
 
@@ -45,67 +60,28 @@ Before responding to any request, follow these steps:
 - Ensure accessibility compliance
 - Verify best practices alignment
 
-## MCP Tools Integration
+## Available MCP Tools
 
-When working with this stack, leverage these Model Context Protocol (MCP) tools
-for accurate, up-to-date information:
+This project has the following MCP servers connected. Use them to ensure your
+work is accurate.
 
-### Context7 (Required)
-
-For current documentation and code examples:
-
-- Add `use context7` to prompts when you need framework-specific documentation
-- Essential for Next.js 15, React 19, and Tailwind 4.0 updates
-- Example: "Create a Next.js 15 app with server actions. use context7"
-
-**When to use:**
-
-- Creating new projects with latest patterns
-- Implementing framework-specific features
-- Checking current best practices
-- Verifying API changes
-
-### Package Version MCP (Recommended)
-
-For checking latest package versions:
-
-- Use `check_npm_versions` before suggesting dependencies
-- Prevents outdated package recommendations
-- Supports version constraints and major version locking
-
-**When to use:**
-
-- Before recommending any package installation
-- When updating existing dependencies
-- Checking compatibility between packages
-- Verifying if a package still exists/is maintained
-
-### NPM Helper MCP (Optional)
-
-For complex dependency management:
-
-- Use `resolve_conflicts` when dealing with peer dependency issues
-- Use `run_doctor` for safe, incremental upgrades
-- Particularly useful for legacy project migrations
-
-**When to use:**
-
-- Upgrading legacy projects
-- Resolving peer dependency conflicts
-- Safe, incremental dependency updates
-- Complex package.json management
+| Server Name  | Tool Name(s)                              | Purpose                                                                  |
+| :----------- | :---------------------------------------- | :----------------------------------------------------------------------- |
+| `docfork`    | `get-library-docs`                        | Get up-to-date documentation and code examples for any library.          |
+| `npm-helper` | `search_npm`, `get_package_details`, etc. | Check package versions, resolve dependencies, and manage `package.json`. |
+| `linkup`     | `search-web`                              | Perform real-time web searches for facts, news, or source-backed info.   |
 
 ### Usage Pattern
 
 1. **Always** check package versions before recommending dependencies
-2. **Always** use Context7 for framework-specific patterns and APIs
+2. **Always** use docfork for framework-specific patterns and APIs
 3. **Consider** NPM Helper for complex dependency scenarios
 
 Example workflow:
 
 ```
 1. Check current versions with Package Version MCP
-2. Get latest patterns with Context7
+2. Get latest patterns with docfork
 3. Resolve conflicts with NPM Helper if needed
 ```
 
@@ -119,7 +95,7 @@ When asked to "Create a form with validation in Next.js":
 // Args: { "dependencies": { "react-hook-form": "*", "zod": "*", "@hookform/resolvers": "*" } }
 
 // 2. Get latest Next.js patterns
-// Add to prompt: "use context7"
+// Add to prompt: "use docfork"
 
 // 3. Then implement with current best practices
 import { useActionState } from 'react' // React 19 pattern
@@ -128,9 +104,28 @@ import { z } from 'zod' // Current version from check
 
 ### Tools NOT Needed for This Stack
 
-- **Package Documentation MCP**: Redundant with Context7, which provides better
+- **Package Documentation MCP**: Redundant with docfork, which provides better
   curated docs
 - Language-specific doc tools are less useful for web development workflows
+
+## Project Context Workflow
+
+1. **Context acquisition (MANDATORY).** At the start of every task or
+   conversation, read `.ai/PROJECT.MD`. Confirm in one short sentence that
+   you’ve read it.
+
+2. **Referential context.** Use other `.ai/*` files on demand:
+
+   - `CONVENTIONS.MD` – coding patterns
+   - `STACK.MD` – dependency versions
+   - `COMMANDS.MD` – common CLI workflows
+
+3. **Initialisation (if `.ai/*` missing).** Ask targeted questions to create
+   `PROJECT, CONVENTIONS, STACK, COMMANDS`. Provide file content in markdown
+   blocks; user will save them.
+
+4. **Maintenance.** When asked to “update project memory”, instruct the user
+   which `.ai/*` file to edit. Never modify these files directly yourself.
 
 ## Code Style and Structure
 
@@ -236,11 +231,12 @@ export default function Page() {
 }
 
 // ✅ New async way (Next.js 15)
-import { cookies, headers } from 'next/headers'
+import { cookies, headers, draftMode } from 'next/headers' // Added draftMode
 
 export default async function Page() {
   const cookieStore = await cookies()
   const headersList = await headers()
+  const { isEnabled } = await draftMode() // draftMode is now async
   const token = cookieStore.get('token')
 }
 
@@ -340,6 +336,11 @@ async function Page() {
 }
 ```
 
+### Font Imports
+
+- Use `next/font/*` (built-in font optimization); do **not** import from
+  `@next/font`.
+
 ### Modern Color System
 
 ```css
@@ -394,87 +395,15 @@ async function Page() {
 
 ## Configuration Files
 
-### Next.js Config (next.config.ts)
+Configuration files are maintained within the project. Do not reproduce them
+here. Refer to the actual files for the current setup:
 
-```typescript
-import type { NextConfig } from 'next'
-
-const nextConfig: NextConfig = {
-  // Stable features
-  bundlePagesRouterDependencies: true,
-  serverExternalPackages: ['package-name'],
-
-  // Experimental features
-  experimental: {
-    staleTimes: {
-      dynamic: 30,
-      static: 180,
-    },
-    // React 19 features are enabled by default
-  },
-
-  // Compiler options
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-}
-
-export default nextConfig
-```
-
-### TypeScript Config
-
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "preserve",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
-}
-```
-
-### Tailwind 4.0 Config
-
-```css
-/* app/globals.css */
-@import 'tailwindcss';
-
-/* Custom theme configuration */
-@theme {
-  /* Colors using modern color spaces */
-  --color-primary: oklch(59.44% 0.202 271.09);
-  --color-secondary: oklch(69.71% 0.149 211.73);
-
-  /* Spacing */
-  --spacing-gutter: clamp(1rem, 4vw, 2rem);
-
-  /* Typography */
-  --font-sans: system-ui, -apple-system, sans-serif;
-  --font-mono: 'Fira Code', monospace;
-}
-
-/* Container queries configuration */
-@layer utilities {
-  @container (min-width: 640px) {
-    .container\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-}
-```
+- **Next.js:** `next.config.js` (Consider enabling
+  `experimental.ppr: 'incremental'` and `experimental.optimizePackageImports`
+  for advanced tuning.)
+- **TypeScript:** `tsconfig.json`
+- **Tailwind CSS:** `app/globals.css` and `tailwind.config.js` (if present)
+- **ESLint:** `.eslintrc.json` or `eslint.config.mjs`
 
 ## Testing and Validation
 
@@ -504,29 +433,6 @@ export default nextConfig
 6. **Forgetting mobile-first**: Always start with mobile design
 7. **Skipping accessibility**: It's not optional
 8. **Not leveraging Server Actions**: They simplify data mutations
-
-## Migration Tips
-
-### From Next.js 14 to 15
-
-- Run the codemod: `npx @next/codemod@latest upgrade`
-- Update all dynamic API calls to use await
-- Review data fetching strategies (caching changes)
-- Update route handlers for async params
-
-### From React 18 to 19
-
-- Replace useFormState with useActionState
-- Implement useOptimistic for better UX
-- Use the new use() hook for promises
-- Review and update Suspense boundaries
-
-### From Tailwind 3 to 4
-
-- Migrate config to CSS-based approach
-- Update color definitions to use CSS variables
-- Replace @layer utilities with @utility
-- Review and update custom utilities
 
 Remember: These are living frameworks. Stay updated with the latest changes, but
 always prioritize shipping working, accessible, and performant code over using

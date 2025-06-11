@@ -8,16 +8,19 @@ rules that help maintain clean, readable, and analyzable code.
 
 ## Configuration Files
 
-### 📄 `.eslintrc.json`
+### 📄 `eslint.config.mjs`
 
-The main ESLint configuration file with rules optimized for:
+The main ESLint configuration file using the new flat config format, with rules
+optimized for:
 
 - Next.js 15 best practices
 - React 19 patterns
-- TypeScript strict mode
+- TypeScript strict mode (including type-aware rules)
 - Import organization
 - Code complexity management
 - AI-friendly code structure
+- Tailwind CSS class ordering and best practices (via
+  `eslint-plugin-better-tailwindcss` for v4 compatibility)
 
 ### 📄 `.prettierrc.json`
 
@@ -60,6 +63,7 @@ pnpm run format:check
 
 # Type checking with TypeScript
 pnpm run type-check
+pnpm run lint:check --max-warnings 300
 
 # Run all quality checks
 pnpm run code-quality
@@ -67,6 +71,22 @@ pnpm run code-quality
 # Auto-fix linting and formatting issues
 pnpm run fix-all
 ```
+
+# Only show errors
+
+pnpm run lint:check --quiet
+
+# Generate a detailed JSON report
+
+pnpm run lint:report
+
+# Then share the eslint-report.json file content with me
+
+# Quick check
+
+pnpm run fix-all pnpm run lint:check 2>&1 | tail -10
+
+# Share the summary
 
 ## Key Features for AI-Assisted Development
 
@@ -102,6 +122,25 @@ Automatically organizes imports in a logical order:
 - Accessibility checks
 - Next.js specific optimizations
 
+### 5. **Tailwind CSS v4 Linting**
+
+This project uses `eslint-plugin-better-tailwindcss` to enforce best practices
+and a consistent style for Tailwind CSS. The configuration is optimized for
+Tailwind v4.
+
+- **Automatic Class Sorting**: Classes are sorted logically based on the
+  official Tailwind CSS order.
+- **Multiline Formatting**: Long class strings are automatically wrapped for
+  better readability.
+- **Correctness Rules**: The plugin detects unregistered, conflicting, or
+  duplicate classes.
+- **Auto-fix on Save**: Most issues are fixed automatically when you save a file
+  in VS Code.
+
+The configuration is handled by the `recommended-warn` preset in
+`eslint.config.mjs`, which enables all stylistic rules as warnings and all
+correctness rules as errors.
+
 ## VS Code Integration
 
 ### Required Extensions
@@ -115,13 +154,26 @@ The setup includes recommendations for essential extensions:
 
 ### Auto-Fix on Save
 
-The configuration automatically:
+To ensure that ESLint and Prettier work together seamlessly, your
+`.vscode/settings.json` should be configured to format and fix on save. The
+following configuration is recommended:
 
-- Fixes ESLint errors
-- Organizes imports
-- Removes unused imports
-- Formats code with Prettier
-- Shows inline error indicators
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
+```
+
+This setup ensures that:
+
+- Prettier formats the code first.
+- ESLint then runs and fixes any remaining issues, including Tailwind CSS
+  classes.
+- Imports are organized and unused ones are removed.
 
 ## AI-Friendly Code Rules
 
@@ -176,6 +228,46 @@ Run the fix command to automatically organize imports:
 pnpm run lint:fix
 ```
 
+#### Module Not Found Errors
+
+If you see `ERR_MODULE_NOT_FOUND` errors when ESLint runs, it means a plugin
+required by `eslint.config.mjs` is not installed. We've encountered this for:
+
+- `@next/eslint-plugin-next`
+- `eslint-plugin-better-tailwindcss`
+- `globals`
+
+The fix is to install the missing dependency:
+
+```bash
+# Example for the globals package
+pnpm add -D globals
+```
+
+#### Tailwind CSS v4 Unregistered Classes
+
+If you see many "Unregistered class detected" warnings from
+`better-tailwindcss`, this is expected behavior with Tailwind v4's new CSS-first
+approach. These warnings help identify:
+
+- Custom classes that might not be in your CSS file
+- Typos in class names
+- Classes that need to be added to your Tailwind configuration
+
+To reduce noise, you can:
+
+1. Add custom classes to your `app/globals.css` file
+2. Configure the plugin to ignore specific patterns
+3. Use `// eslint-disable-next-line better-tailwindcss/no-unregistered-classes`
+   for intentional custom classes
+
+#### Regex Deprecation Warnings
+
+The "Regex matching is deprecated" warnings from
+`eslint-plugin-better-tailwindcss` are known issues with the current version.
+These are warnings only and don't affect functionality. The plugin maintainers
+are working on updates for ESLint v9 compatibility.
+
 ### Performance Tips
 
 1. **File Watching**: Large projects may need adjusted file watcher limits
@@ -216,14 +308,18 @@ The ESLint configuration encourages:
 
 ### Adding New Rules
 
-Edit `.eslintrc.json` to add custom rules:
+Edit `eslint.config.mjs` to add custom rules:
 
-```json
-{
-  "rules": {
-    "your-custom-rule": "error"
-  }
-}
+```javascript
+// eslint.config.mjs
+export default [
+  // ... other configs
+  {
+    rules: {
+      'your-custom-rule': 'error',
+    },
+  },
+]
 ```
 
 ### Disabling Rules for Specific Files
@@ -273,6 +369,38 @@ pnpm add --save-dev husky lint-staged
 
 ---
 
+## Build Integration
+
+### Available Build Commands
+
+```bash
+# Fast development build (no quality checks)
+pnpm build
+
+# Production build with full quality checks
+pnpm run build:production
+
+# Manual quality checks
+pnpm run code-quality
+pnpm run fix-all
+```
+
+### Build Process
+
+- **`pnpm build`**: Runs `prebuild` → `code-quality` → actual build
+- **`pnpm run build:production`**: Runs `fix-all` → `prebuild` → `build`
+- **Quality gates**: TypeScript checking, ESLint analysis, and Prettier
+  formatting
+
+### Vercel Deployment
+
+To use quality checks in production, update your Vercel build command:
+
+```bash
+# In Vercel dashboard or vercel.json
+"buildCommand": "pnpm run build:production"
+```
+
 ## Next Steps
 
 1. **Run the initial cleanup**:
@@ -281,16 +409,22 @@ pnpm add --save-dev husky lint-staged
    pnpm run fix-all
    ```
 
-2. **Review remaining warnings** and fix manually as needed
-
-3. **Commit the ESLint setup**:
+2. **Test the build process**:
 
    ```bash
-   git add .eslintrc.json .prettierrc.json .vscode/
-   git commit -m "setup: configure ESLint for AI-assisted development"
+   pnpm run build:production
    ```
 
-4. **Start developing** with enhanced code quality and AI assistance!
+3. **Review remaining warnings** and fix manually as needed
+
+4. **Commit the ESLint setup**:
+
+   ```bash
+   git add eslint.config.mjs .prettierrc.json .vscode/ package.json .prettierignore
+   git commit -m "setup: configure ESLint for AI-assisted development with build integration"
+   ```
+
+5. **Start developing** with enhanced code quality and AI assistance!
 
 The setup is now complete and optimized for both human developers and AI
 assistants. The linting rules will help maintain clean, analyzable code
