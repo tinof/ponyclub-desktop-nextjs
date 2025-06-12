@@ -6,12 +6,12 @@ import type { ImageProps } from 'next/image'
  * Optimized based on PageSpeed insights for better responsive image delivery
  */
 export const DEFAULT_IMAGE_SIZES = {
-  hero: '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px', // More specific breakpoints
-  gallery: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
-  card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px', // Fixed size for larger screens
-  avatar: '(max-width: 640px) 40px, 96px', // Smaller on mobile as per PageSpeed report
-  logo: '(max-width: 768px) 184px, (max-width: 1024px) 224px, 256px', // Matches actual display dimensions
-  thumbnail: '(max-width: 640px) 80px, (max-width: 768px) 128px, 192px',
+  hero: '(max-width:640px)100vw,(max-width:1024px)100vw,1920px',
+  gallery: '(max-width:640px)165px,(max-width:1024px)248px,248px',
+  card: '(max-width:640px)100vw,(max-width:1024px)50vw,400px',
+  avatar: '(max-width:480px)40px,60px',
+  logo: '(max-width:768px)184px,224px,256px',
+  thumbnail: '(max-width:640px)80px,(max-width:768px)128px,192px',
 }
 
 /**
@@ -19,9 +19,9 @@ export const DEFAULT_IMAGE_SIZES = {
  * Optimized based on PageSpeed insights - reduced quality for better compression
  */
 export const IMAGE_QUALITY = {
-  high: 75, // Reduced from 85 for better compression
-  medium: 65, // Reduced from 75 for better compression
-  low: 50, // Reduced from 60 for better compression
+  high: 65, // Reduced from 75 for better compression
+  medium: 55, // Reduced from 65 for better compression
+  low: 45, // Reduced from 50 for better compression
 }
 
 /**

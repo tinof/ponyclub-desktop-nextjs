@@ -169,6 +169,7 @@ export default function HomePageContent() {
               <OptimizedImage
                 src='/images/round2.jpg'
                 alt={t.activities.horseRiding}
+                quality={55}
                 fill
                 imageType='thumbnail'
                 sizes='(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px'
