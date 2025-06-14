@@ -4,10 +4,12 @@ export const en = {
     subtitle: 'Acheron River',
   },
   introduction: {
-    mainTitle: 'Welcome to Pony Club, where adventure meets the tranquility of nature at the magical Acheron River.',
+    mainTitle:
+      'Welcome to Pony Club, where adventure meets the tranquility of nature at the magical Acheron River.',
     mainText:
       "Since 1998, we've offered unforgettable experiences with our horse riding and rafting activities, suitable for families and adventurers alike. Join us at our privately-owned farm with 8 horses and rafting base to explore this mythically charged landscape with expert guides who prioritize safety and environmental respect.",
-    seoDescription: 'We offer rafting, riding, kayaking and trekking on Acheron River, Glyki, Greece.',
+    seoDescription:
+      'We offer rafting, riding, kayaking and trekking on Acheron River, Glyki, Greece.',
   },
   activities: {
     swimming: 'Swimming in Acheron River',
@@ -93,11 +95,14 @@ export const en = {
     rejectAll: 'Reject All',
     customize: 'Customize',
     necessary: 'Necessary',
-    necessaryDescription: 'These cookies are essential for the website to function and cannot be switched off.',
+    necessaryDescription:
+      'These cookies are essential for the website to function and cannot be switched off.',
     analytics: 'Analytics',
-    analyticsDescription: 'These cookies help us understand how visitors interact with our website.',
+    analyticsDescription:
+      'These cookies help us understand how visitors interact with our website.',
     marketing: 'Marketing',
-    marketingDescription: 'These cookies are used to deliver personalized advertisements.',
+    marketingDescription:
+      'These cookies are used to deliver personalized advertisements.',
     save: 'Save Preferences',
     privacyPolicy: 'Privacy Policy',
     cookiePolicy: 'Cookie Policy',
@@ -130,9 +135,19 @@ export const en = {
       </div>
     `,
     detailsIncludedTitle: "What's Included",
-    detailsIncludedItems: ['Expert riding instructors', 'Well-trained horses', 'Safety equipment', 'Trail access'],
+    detailsIncludedItems: [
+      'Expert riding instructors',
+      'Well-trained horses',
+      'Safety equipment',
+      'Trail access',
+    ],
     detailsBringTitle: 'What to Bring',
-    detailsBringItems: ['Long pants', 'Closed-toe shoes', 'Weather-appropriate clothing', 'Camera'],
+    detailsBringItems: [
+      'Long pants',
+      'Closed-toe shoes',
+      'Weather-appropriate clothing',
+      'Camera',
+    ],
     pricingTitle: 'Pricing',
     pricingStandardTitle: 'Standard Ride',
     pricingStandardPrice: '€35 per person',
@@ -213,4 +228,4 @@ export const en = {
     findUs: 'Find Us',
     copyright: '© {year} Pony Club Ecotourism. All rights reserved.',
   },
-}
+};

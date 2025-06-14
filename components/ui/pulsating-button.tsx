@@ -1,14 +1,27 @@
-import React from 'react'
+import React from 'react';
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
-interface PulsatingButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  pulseColor?: string
-  duration?: string
+interface PulsatingButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  pulseColor?: string;
+  duration?: string;
 }
 
-export const PulsatingButton = React.forwardRef<HTMLButtonElement, PulsatingButtonProps>(
-  ({ className, children, pulseColor = '#808080', duration = '1.5s', ...props }, ref) => {
+export const PulsatingButton = React.forwardRef<
+  HTMLButtonElement,
+  PulsatingButtonProps
+>(
+  (
+    {
+      className,
+      children,
+      pulseColor = '#808080',
+      duration = '1.5s',
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <button
         ref={ref}
@@ -17,7 +30,7 @@ export const PulsatingButton = React.forwardRef<HTMLButtonElement, PulsatingButt
             relative flex cursor-pointer items-center justify-center rounded-lg
             bg-primary px-4 py-2 text-center text-primary-foreground
           `,
-          className
+          className,
         )}
         style={
           {
@@ -27,7 +40,7 @@ export const PulsatingButton = React.forwardRef<HTMLButtonElement, PulsatingButt
         }
         {...props}
       >
-        <div className='relative z-10'>{children}</div>
+        <div className="relative z-10">{children}</div>
         <div
           className={`
             absolute top-1/2 left-1/2 size-full -translate-x-1/2
@@ -35,8 +48,8 @@ export const PulsatingButton = React.forwardRef<HTMLButtonElement, PulsatingButt
           `}
         />
       </button>
-    )
-  }
-)
+    );
+  },
+);
 
-PulsatingButton.displayName = 'PulsatingButton'
+PulsatingButton.displayName = 'PulsatingButton';

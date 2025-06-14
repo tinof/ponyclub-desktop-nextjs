@@ -31,4 +31,4 @@ export const kayakingGalleryImages = [
     src: '/images/RidersInCanyon_Turquoise_Natural_RiverTrail.jpg',
     alt: 'Turquoise canyon waters along the natural river trail for kayaking',
   },
-]
+];

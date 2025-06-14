@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-import ResponsiveNavigation from '@/components/responsive-navigation'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import ResponsiveNavigation from '@/components/responsive-navigation';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 export default function TestFooterPage() {
   return (
@@ -18,7 +18,7 @@ export default function TestFooterPage() {
       >
         {/* Logo */}
         <div>
-          <Link href='/' className='flex items-center'>
+          <Link href="/" className="flex items-center">
             <div
               className={`
                 relative h-12 w-48
@@ -27,12 +27,12 @@ export default function TestFooterPage() {
               `}
             >
               <OptimizedImage
-                src='/images/ponyclub_logo.png'
-                alt='Pony Club Logo'
+                src="/images/ponyclub_logo.png"
+                alt="Pony Club Logo"
                 fill
-                sizes='(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px'
-                className='object-contain p-1'
-                imageType='logo'
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-contain p-1"
+                imageType="logo"
               />
             </div>
           </Link>
@@ -44,15 +44,17 @@ export default function TestFooterPage() {
         </div>
       </header>
 
-      <main className='pt-20'>
+      <main className="pt-20">
         {' '}
         {/* Added main wrapper and padding-top */}
-        <div className='container mx-auto px-4 py-12'>
-          <h1 className='text-3xl font-bold'>Test Footer Page</h1>
-          <p className='mt-4'>This is a test page to verify that the footer is working correctly.</p>
-          <p className='mt-2'>You should see the footer below this content.</p>
+        <div className="container mx-auto px-4 py-12">
+          <h1 className="text-3xl font-bold">Test Footer Page</h1>
+          <p className="mt-4">
+            This is a test page to verify that the footer is working correctly.
+          </p>
+          <p className="mt-2">You should see the footer below this content.</p>
         </div>
       </main>
     </>
-  )
+  );
 }

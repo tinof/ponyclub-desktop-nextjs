@@ -1,28 +1,28 @@
-import { Roboto_Slab } from 'next/font/google'
+import { Roboto_Slab } from 'next/font/google';
 
 // ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly.
 // SiteHeader is now part of PageLayout.
-import { Container } from './ui/Container' // Import the Container component
+import { Container } from './ui/Container'; // Import the Container component
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
   subsets: ['latin', 'greek'],
   variable: '--font-roboto-slab',
   weight: ['400', '700', '900'],
-})
+});
 
 interface ActivityPageLayoutProps {
-  title: string
-  subtitle: string
-  descriptionTitle: string
-  descriptionContent: React.ReactNode
-  detailsTitle: string
-  detailsContent: React.ReactNode
-  pricingTitle: string
-  pricingContent: React.ReactNode
-  showBookingButton?: boolean
-  useSingleColumn?: boolean
-  fullWidthContent?: boolean
+  title: string;
+  subtitle: string;
+  descriptionTitle: string;
+  descriptionContent: React.ReactNode;
+  detailsTitle: string;
+  detailsContent: React.ReactNode;
+  pricingTitle: string;
+  pricingContent: React.ReactNode;
+  showBookingButton?: boolean;
+  useSingleColumn?: boolean;
+  fullWidthContent?: boolean;
 }
 
 export default function ActivityPageLayout({
@@ -39,7 +39,7 @@ export default function ActivityPageLayout({
   fullWidthContent: _fullWidthContent = false,
 }: ActivityPageLayoutProps) {
   // Determine content max-width class based on column preference
-  const contentMaxWidthClass = useSingleColumn ? 'max-w-none' : 'max-w-none'
+  const contentMaxWidthClass = useSingleColumn ? 'max-w-none' : 'max-w-none';
 
   return (
     <>
@@ -51,8 +51,8 @@ export default function ActivityPageLayout({
         Adjusting pt-24 to pt-4 in containerClasses to provide a small top padding for the content block itself,
         relative to the PageLayout's main content area.
       */}
-      <Container className='py-6'>
-        <div className='flex flex-col gap-8'>
+      <Container className="py-6">
+        <div className="flex flex-col gap-8">
           {/* Description Section */}
           {descriptionContent && (
             <div
@@ -76,7 +76,7 @@ export default function ActivityPageLayout({
                   absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
                   from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
                 `}
-              ></div>
+              />
             </div>
           )}
 
@@ -102,7 +102,7 @@ export default function ActivityPageLayout({
                     absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r
                     from-transparent via-amber-500/50 to-transparent
                   `}
-                ></div>
+                />
               </h2>
               <div
                 className={`
@@ -118,7 +118,7 @@ export default function ActivityPageLayout({
                   absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
                   from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
                 `}
-              ></div>
+              />
             </div>
           )}
 
@@ -144,7 +144,7 @@ export default function ActivityPageLayout({
                     absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r
                     from-transparent via-amber-500/50 to-transparent
                   `}
-                ></div>
+                />
               </h2>
               <div
                 className={`
@@ -160,7 +160,7 @@ export default function ActivityPageLayout({
                   absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
                   from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
                 `}
-              ></div>
+              />
             </div>
           )}
 
@@ -187,11 +187,11 @@ export default function ActivityPageLayout({
                   absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
                   from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
                 `}
-              ></div>
+              />
             </div>
           )}
         </div>
       </Container>
     </>
-  )
+  );
 }

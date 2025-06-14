@@ -1,20 +1,25 @@
-'use client'
+'use client';
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
-import React from 'react'
+import { AnimatePresence, motion } from 'framer-motion';
+import { X } from 'lucide-react';
+import type React from 'react';
 
-import { useLanguage } from '@/contexts/language-context'
+import { useLanguage } from '@/contexts/language-context';
 
 interface PriceListPopupProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose }) => {
-  const { t } = useLanguage()
+export const PriceListPopup: React.FC<PriceListPopupProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const { t } = useLanguage();
 
-  if (!isOpen) return null
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
@@ -39,7 +44,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
               border border-amber-100/70 bg-white p-6 shadow-2xl
               md:p-8
             `}
-            onClick={e => e.stopPropagation()} // Prevent closing when clicking inside the modal
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
           >
             <button
               onClick={onClose}
@@ -48,7 +53,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 transition-colors
                 hover:bg-gray-100 hover:text-gray-800
               `}
-              aria-label='Close'
+              aria-label="Close"
             >
               <X size={24} />
             </button>
@@ -62,7 +67,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
               {t.priceListPopup.title}
             </h2>
 
-            <div className='space-y-6 text-gray-700'>
+            <div className="space-y-6 text-gray-700">
               <div>
                 <h3
                   className={`
@@ -72,7 +77,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 >
                   {t.priceListPopup.ridingTitle}
                 </h3>
-                <ul className='list-inside list-disc space-y-1 pl-2'>
+                <ul className="list-inside list-disc space-y-1 pl-2">
                   <li>{t.priceListPopup.riding_10_15_min}</li>
                   <li>{t.priceListPopup.riding_30_min}</li>
                 </ul>
@@ -87,8 +92,10 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 >
                   {t.priceListPopup.raftingTitle}
                 </h3>
-                <p className='mb-1 ml-2 text-sm text-gray-600 italic'>{t.priceListPopup.raftingIncludes}</p>
-                <ul className='list-inside list-disc space-y-1 pl-2'>
+                <p className="mb-1 ml-2 text-sm text-gray-600 italic">
+                  {t.priceListPopup.raftingIncludes}
+                </p>
+                <ul className="list-inside list-disc space-y-1 pl-2">
                   <li>{t.priceListPopup.raftingAdults}</li>
                   <li>{t.priceListPopup.raftingChildren}</li>
                 </ul>
@@ -103,8 +110,10 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 >
                   {t.priceListPopup.kayakTitle}
                 </h3>
-                <p className='mb-1 ml-2 text-sm text-gray-600 italic'>{t.priceListPopup.kayakIncludes}</p>
-                <ul className='list-inside list-disc space-y-1 pl-2'>
+                <p className="mb-1 ml-2 text-sm text-gray-600 italic">
+                  {t.priceListPopup.kayakIncludes}
+                </p>
+                <ul className="list-inside list-disc space-y-1 pl-2">
                   <li>{t.priceListPopup.kayakSingle}</li>
                   <li>{t.priceListPopup.kayakDual}</li>
                 </ul>
@@ -119,7 +128,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 >
                   {t.priceListPopup.extrasTitle}
                 </h3>
-                <ul className='list-inside list-disc space-y-1 pl-2'>
+                <ul className="list-inside list-disc space-y-1 pl-2">
                   <li>{t.priceListPopup.extrasShoes}</li>
                   <li>{t.priceListPopup.extrasPhoneCase}</li>
                 </ul>
@@ -135,7 +144,7 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
                 hover:scale-[1.02] hover:from-[#5a6f54] hover:to-[#144a37]
                 hover:shadow-xl
               `}
-              aria-label='Close price list'
+              aria-label="Close price list"
             >
               {t.priceListPopup.close}
             </button>
@@ -143,5 +152,5 @@ export const PriceListPopup: React.FC<PriceListPopupProps> = ({ isOpen, onClose 
         </motion.div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};

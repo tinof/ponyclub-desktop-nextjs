@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { PriceListPopup } from '@/components/ui/PriceListPopup'
+import { PriceListPopup } from '@/components/ui/PriceListPopup';
 
 interface PriceListButtonProps {
-  text: string
+  text: string;
 }
 
 export default function PriceListButton({ text }: PriceListButtonProps) {
-  const [isPriceListOpen, setIsPriceListOpen] = useState(false)
+  const [isPriceListOpen, setIsPriceListOpen] = useState(false);
 
   return (
     <>
@@ -21,12 +21,15 @@ export default function PriceListButton({ text }: PriceListButtonProps) {
           hover:bg-[#3E5A35] hover:shadow-lg
           md:mb-12
         `}
-        aria-label='Open price list'
+        aria-label="Open price list"
       >
         {text}
       </button>
 
-      <PriceListPopup isOpen={isPriceListOpen} onClose={() => setIsPriceListOpen(false)} />
+      <PriceListPopup
+        isOpen={isPriceListOpen}
+        onClose={() => setIsPriceListOpen(false)}
+      />
     </>
-  )
+  );
 }

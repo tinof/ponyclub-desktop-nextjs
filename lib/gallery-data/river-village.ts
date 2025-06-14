@@ -35,4 +35,4 @@ export const riverVillageGalleryImages = [
     src: '/images/Patio_View_Green_Mountains_Flowers.jpg',
     alt: 'Patio with beautiful view of green mountains and flowers at River Village',
   },
-]
+];

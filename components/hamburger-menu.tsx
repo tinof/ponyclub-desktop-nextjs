@@ -1,48 +1,60 @@
-'use client'
+'use client';
 
-import { Menu, Phone } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { Menu, Phone } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-import { useLanguage } from '@/contexts/language-context'
+import { useLanguage } from '@/contexts/language-context';
 
 export default function HamburgerMenu() {
-  const { t, language, setLanguage } = useLanguage()
-  const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const pathname = usePathname()
+  const { t, language, setLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
-  const toggleMenu = () => setIsOpen(!isOpen)
-  const closeMenu = () => setIsOpen(false)
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Activities menu items
   const activities = [
-    { id: 'kayak-rafting', label: language === 'el' ? 'Καγιάκ & Ράφτινγκ' : 'Kayak & Rafting', href: '/kayak-rafting' },
-    { id: 'riding', label: language === 'el' ? 'Ιππασία' : 'Riding', href: '/riding' },
-    { id: 'trekking', label: language === 'el' ? 'Πεζοπορία' : 'Trekking', href: '/trekking' },
-  ]
+    {
+      id: 'kayak-rafting',
+      label: language === 'el' ? 'Καγιάκ & Ράφτινγκ' : 'Kayak & Rafting',
+      href: '/kayak-rafting',
+    },
+    {
+      id: 'riding',
+      label: language === 'el' ? 'Ιππασία' : 'Riding',
+      href: '/riding',
+    },
+    {
+      id: 'trekking',
+      label: language === 'el' ? 'Πεζοπορία' : 'Trekking',
+      href: '/trekking',
+    },
+  ];
 
   // Handle language change
   const handleLanguageChange = (lang: 'en' | 'el') => {
-    setLanguage(lang)
-    closeMenu()
-  }
+    setLanguage(lang);
+    closeMenu();
+  };
 
   return (
-    <div className='relative' ref={menuRef}>
+    <div className="relative" ref={menuRef}>
       {/* Hamburger button */}
       <button
         onClick={toggleMenu}
@@ -51,7 +63,7 @@ export default function HamburgerMenu() {
           transition-colors
           hover:bg-secondary
         `} /* Simplified style */
-        aria-label='Menu'
+        aria-label="Menu"
       >
         <Menu
           className={`
@@ -73,7 +85,7 @@ export default function HamburgerMenu() {
         >
           {' '}
           {/* Cleaner dropdown style */}
-          <div className='px-1 py-2'>
+          <div className="px-1 py-2">
             {/* Call us button - prominently displayed at top */}
             <a
               href={`tel:${t.contact.phone1.replace(/\s+/g, '')}`}
@@ -87,13 +99,15 @@ export default function HamburgerMenu() {
               `}
               onClick={closeMenu}
             >
-              <Phone className='h-5 w-5 text-primary-foreground/90' />
-              <span className='font-medium tracking-wide'>{t.navigation.callUs}</span>
+              <Phone className="h-5 w-5 text-primary-foreground/90" />
+              <span className="font-medium tracking-wide">
+                {t.navigation.callUs}
+              </span>
             </a>
 
             {/* Home link */}
             <Link
-              href='/'
+              href="/"
               className={`
                 block px-4 py-2.5 text-sm
                 ${
@@ -112,7 +126,7 @@ export default function HamburgerMenu() {
             {/* River & Village - English only */}
             {language === 'en' && (
               <Link
-                href='/river-village'
+                href="/river-village"
                 className={`
                   block px-4 py-2.5 text-sm
                   ${
@@ -132,7 +146,7 @@ export default function HamburgerMenu() {
             {/* For Schools (Για τα σχολεία) - Greek only */}
             {language === 'el' && (
               <Link
-                href='/for-schools'
+                href="/for-schools"
                 className={`
                   block px-4 py-2.5 text-sm
                   ${
@@ -150,7 +164,7 @@ export default function HamburgerMenu() {
             )}
 
             {/* Activities section */}
-            <div className='mt-1 border-t border-border pt-1'>
+            <div className="mt-1 border-t border-border pt-1">
               {' '}
               {/* Cleaner border */}
               <div
@@ -163,7 +177,7 @@ export default function HamburgerMenu() {
                 {/* Standard header text */}
                 {t.navigation.activities}
               </div>
-              {activities.map(activity => (
+              {activities.map((activity) => (
                 <Link
                   key={activity.id}
                   href={activity.href}
@@ -185,7 +199,7 @@ export default function HamburgerMenu() {
             </div>
 
             {/* Language selector in menu */}
-            <div className='mt-1 border-t border-border pt-1'>
+            <div className="mt-1 border-t border-border pt-1">
               {' '}
               {/* Cleaner border */}
               <div
@@ -206,7 +220,7 @@ export default function HamburgerMenu() {
                   transition-colors
                 `}
                 onClick={() => handleLanguageChange('en')}
-                aria-label='Switch to English'
+                aria-label="Switch to English"
               >
                 English
               </button>
@@ -217,7 +231,7 @@ export default function HamburgerMenu() {
                   transition-colors
                 `}
                 onClick={() => handleLanguageChange('el')}
-                aria-label='Switch to Greek'
+                aria-label="Switch to Greek"
               >
                 Ελληνικά
               </button>
@@ -226,5 +240,5 @@ export default function HamburgerMenu() {
         </div>
       )}
     </div>
-  )
+  );
 }

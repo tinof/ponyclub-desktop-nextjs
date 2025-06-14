@@ -1,28 +1,28 @@
-'use client'
+'use client';
 
-import Link from 'next/link' // Added Link for logo
-import { useEffect } from 'react'
+import Link from 'next/link'; // Added Link for logo
+import { useEffect } from 'react';
 
-import ResponsiveNavigation from '@/components/responsive-navigation'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { useLanguage } from '@/contexts/language-context'
+import ResponsiveNavigation from '@/components/responsive-navigation';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import { useLanguage } from '@/contexts/language-context';
 
 interface ErrorProps {
-  error: Error
-  reset: () => void
+  error: Error;
+  reset: () => void;
 }
 
 export default function Error({ error, reset }: ErrorProps) {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Log error in development, send to monitoring service in production
     if (process.env.NODE_ENV === 'development') {
-      console.error(error)
+      console.error(error);
     }
     // In production, you might want to send this to a logging service
     // like Sentry, LogRocket, etc.
-  }, [error])
+  }, [error]);
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function Error({ error, reset }: ErrorProps) {
       >
         {/* Logo */}
         <div>
-          <Link href='/' className='flex items-center'>
+          <Link href="/" className="flex items-center">
             <div
               className={`
                 relative h-12 w-48
@@ -45,12 +45,12 @@ export default function Error({ error, reset }: ErrorProps) {
               `}
             >
               <OptimizedImage
-                src='/images/ponyclub_logo.png'
-                alt='Pony Club Logo'
+                src="/images/ponyclub_logo.png"
+                alt="Pony Club Logo"
                 fill
-                sizes='(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px'
-                className='object-contain p-1'
-                imageType='logo'
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-contain p-1"
+                imageType="logo"
               />
             </div>
           </Link>
@@ -79,7 +79,7 @@ export default function Error({ error, reset }: ErrorProps) {
           {t.error.title}
         </h1>{' '}
         {/* Styled heading */}
-        <p className='mb-6 text-lg text-gray-700'>{t.error.message}</p>
+        <p className="mb-6 text-lg text-gray-700">{t.error.message}</p>
         <button
           onClick={() => reset()}
           className={`
@@ -92,5 +92,5 @@ export default function Error({ error, reset }: ErrorProps) {
         </button>
       </main>
     </>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-import ResponsiveNavigation from '@/components/responsive-navigation'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { useLanguage } from '@/contexts/language-context'
+import ResponsiveNavigation from '@/components/responsive-navigation';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function NotFound() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function NotFound() {
       >
         {/* Logo */}
         <div>
-          <Link href='/' className='flex items-center'>
+          <Link href="/" className="flex items-center">
             <div
               className={`
                 relative h-12 w-48
@@ -30,12 +30,12 @@ export default function NotFound() {
               `}
             >
               <OptimizedImage
-                src='/images/ponyclub_logo.png'
-                alt='Pony Club Logo'
+                src="/images/ponyclub_logo.png"
+                alt="Pony Club Logo"
                 fill
-                sizes='(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px'
-                className='object-contain p-1'
-                imageType='logo'
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-contain p-1"
+                imageType="logo"
               />
             </div>
           </Link>
@@ -55,10 +55,13 @@ export default function NotFound() {
       >
         {' '}
         {/* Added bg color and pt-20 */}
-        <h1 className='mb-4 text-6xl font-bold text-amber-800'>{t.notFound.title}</h1> {/* Styled heading */}
-        <p className='mb-6 text-lg text-gray-700'>{t.notFound.message}</p>
+        <h1 className="mb-4 text-6xl font-bold text-amber-800">
+          {t.notFound.title}
+        </h1>{' '}
+        {/* Styled heading */}
+        <p className="mb-6 text-lg text-gray-700">{t.notFound.message}</p>
         <Link
-          href='/'
+          href="/"
           className={`
             rounded-lg bg-[#6b8362] px-6 py-3 font-semibold text-white
             transition-colors
@@ -69,5 +72,5 @@ export default function NotFound() {
         </Link>
       </main>
     </>
-  )
+  );
 }

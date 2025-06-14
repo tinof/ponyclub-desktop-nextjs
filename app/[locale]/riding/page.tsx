@@ -1,16 +1,18 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-import ActivityPageLayout from '@/components/ActivityPageLayout'
-import DynamicBokunWidget from '@/components/DynamicBokunWidget'
+import ActivityPageLayout from '@/components/ActivityPageLayout';
+import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 
 interface PageProps {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
 
-  const isGreek = locale === 'el'
+  const isGreek = locale === 'el';
 
   return {
     title: isGreek
@@ -22,27 +24,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: isGreek
       ? 'ιππασία Αχέροντας, ιππασία Γλυκή, άλογα Θεσπρωτία, ιππασία Ήπειρος, βόλτες με άλογα, ποταμός Αχέροντας'
       : 'horse riding Acheron, horseback riding Glyki, horses Thesprotia, riding Epirus, Acheron river horseback, Greece horse riding',
-  }
+  };
 }
 
 const RidingPage = async ({ params }: PageProps) => {
-  const { locale: _locale } = await params
-  const bokunExperienceId = '1020659' // Riding experience ID
+  const { locale: _locale } = await params;
+  const bokunExperienceId = '1020659'; // Riding experience ID
 
   return (
     <ActivityPageLayout
-      title='Riding'
-      subtitle=''
-      descriptionTitle=''
-      descriptionContent={<DynamicBokunWidget experienceId={bokunExperienceId} />} // Use DynamicBokunWidget
-      detailsTitle=''
+      title="Riding"
+      subtitle=""
+      descriptionTitle=""
+      descriptionContent={
+        <DynamicBokunWidget experienceId={bokunExperienceId} />
+      } // Use DynamicBokunWidget
+      detailsTitle=""
       detailsContent={<></>}
-      pricingTitle=''
+      pricingTitle=""
       pricingContent={<></>}
       showBookingButton={false}
       fullWidthContent={true}
     />
-  )
-}
+  );
+};
 
-export default RidingPage
+export default RidingPage;

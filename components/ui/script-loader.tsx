@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
 interface ScriptLoaderProps {
-  src: string
-  id?: string
-  strategy?: 'beforeInteractive' | 'afterInteractive' | 'lazyOnload'
-  onLoad?: () => void
-  onError?: () => void
-  dangerouslySetInnerHTML?: { __html: string }
-  inViewport?: boolean // Only load when in viewport
-  dataSrc?: string
-  dataTestId?: string
-  nonce?: string // Allow passing nonce as a prop
+  src: string;
+  id?: string;
+  strategy?: 'beforeInteractive' | 'afterInteractive' | 'lazyOnload';
+  onLoad?: () => void;
+  onError?: () => void;
+  dangerouslySetInnerHTML?: { __html: string };
+  inViewport?: boolean; // Only load when in viewport
+  dataSrc?: string;
+  dataTestId?: string;
+  nonce?: string; // Allow passing nonce as a prop
 }
 
 /**
@@ -33,52 +33,55 @@ export function ScriptLoader({
   nonce: propNonce, // Use the prop name
   ...props
 }: ScriptLoaderProps) {
-  const [shouldLoad, setShouldLoad] = useState(!inViewport)
-  const [effectiveNonce, setEffectiveNonce] = useState(propNonce || '')
+  const [shouldLoad, setShouldLoad] = useState(!inViewport);
+  const [effectiveNonce, setEffectiveNonce] = useState(propNonce || '');
 
   useEffect(() => {
     if (!propNonce) {
       // If nonce is not passed as a prop, try to get it from the meta tag
-      const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || ''
-      setEffectiveNonce(metaNonce)
+      const metaNonce =
+        document
+          .querySelector('meta[name="csp-nonce"]')
+          ?.getAttribute('content') || '';
+      setEffectiveNonce(metaNonce);
     }
-  }, [propNonce]) // Re-run if propNonce changes (though unlikely for this use case)
+  }, [propNonce]); // Re-run if propNonce changes (though unlikely for this use case)
 
   useEffect(() => {
     if (inViewport) {
       // Create intersection observer for viewport detection
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setShouldLoad(true)
-            observer.disconnect()
+            setShouldLoad(true);
+            observer.disconnect();
           }
-        })
-      })
+        });
+      });
 
       // Create a div element to observe
-      const element = document.createElement('div')
-      element.id = `script-observer-${id || Math.random().toString(36).substring(2)}`
-      element.style.height = '1px'
-      element.style.width = '1px'
-      element.style.position = 'absolute'
-      element.style.bottom = '200px' // Load slightly before scrolling to it
-      element.style.left = '0'
-      document.body.appendChild(element)
+      const element = document.createElement('div');
+      element.id = `script-observer-${id || Math.random().toString(36).substring(2)}`;
+      element.style.height = '1px';
+      element.style.width = '1px';
+      element.style.position = 'absolute';
+      element.style.bottom = '200px'; // Load slightly before scrolling to it
+      element.style.left = '0';
+      document.body.appendChild(element);
 
-      observer.observe(element)
+      observer.observe(element);
 
       return () => {
-        observer.disconnect()
+        observer.disconnect();
         if (document.body.contains(element)) {
-          document.body.removeChild(element)
+          document.body.removeChild(element);
         }
-      }
+      };
     }
-  }, [id, inViewport])
+  }, [id, inViewport]);
 
   if (!shouldLoad) {
-    return null
+    return null;
   }
 
   return (
@@ -93,7 +96,7 @@ export function ScriptLoader({
       data-testid={dataTestId}
       nonce={dangerouslySetInnerHTML ? effectiveNonce : undefined} // Use effectiveNonce
     />
-  )
+  );
 }
 
-export default ScriptLoader
+export default ScriptLoader;

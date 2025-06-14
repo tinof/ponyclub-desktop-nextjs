@@ -27,4 +27,4 @@ export const ridingGalleryImages = [
     src: '/images/NaturePath_GoldenSunset_Peaceful_WoodenFence.jpg',
     alt: 'Natural riding path at golden sunset with peaceful wooden fence scenery',
   },
-]
+];

@@ -1,36 +1,36 @@
-'use client'
+'use client';
 
-import { MountainSnow, Sailboat, User, Waves } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { MountainSnow, Sailboat, User, Waves } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-import BookingButton from '@/components/client/BookingButton'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import BookingButton from '@/components/client/BookingButton';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 interface PackageCardProps {
-  title: string
-  badge: string
+  title: string;
+  badge: string;
   activities: {
-    primary: string
-    riding: string
-    hiking: string
-  }
+    primary: string;
+    riding: string;
+    hiking: string;
+  };
   pricing: {
-    adults?: string
-    children?: string
-    perPerson?: string
-  }
+    adults?: string;
+    children?: string;
+    perPerson?: string;
+  };
   images: {
-    main: string
-    top: string
-    bottom: string
-  }
-  bookingId: string
-  dataSrc: string
-  bookNowText: string
-  packageName: string
-  packagePrice: string
-  trackingLabel: string
-  variant: 'green' | 'amber'
+    main: string;
+    top: string;
+    bottom: string;
+  };
+  bookingId: string;
+  dataSrc: string;
+  bookNowText: string;
+  packageName: string;
+  packagePrice: string;
+  trackingLabel: string;
+  variant: 'green' | 'amber';
 }
 
 export default function EnhancedPackageCard({
@@ -47,13 +47,16 @@ export default function EnhancedPackageCard({
   trackingLabel,
   variant,
 }: PackageCardProps) {
-  const [nonce, setNonce] = useState('')
+  const [nonce, setNonce] = useState('');
 
   useEffect(() => {
     // Get nonce from meta tag
-    const metaNonce = document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') || ''
-    setNonce(metaNonce)
-  }, [])
+    const metaNonce =
+      document
+        .querySelector('meta[name="csp-nonce"]')
+        ?.getAttribute('content') || '';
+    setNonce(metaNonce);
+  }, []);
   const colorTheme = {
     green: {
       gradient: 'from-emerald-400 via-teal-500 to-cyan-600',
@@ -62,7 +65,8 @@ export default function EnhancedPackageCard({
       border: 'border-white/15',
       icon: 'text-emerald-300',
       priceBox: 'bg-white/20',
-      button: 'from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600',
+      button:
+        'from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600',
       text: 'text-emerald-50',
     },
     amber: {
@@ -72,12 +76,13 @@ export default function EnhancedPackageCard({
       border: 'border-white/15',
       icon: 'text-amber-300',
       priceBox: 'bg-white/20',
-      button: 'from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600',
+      button:
+        'from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600',
       text: 'text-amber-50',
     },
-  }
+  };
 
-  const theme = colorTheme[variant]
+  const theme = colorTheme[variant];
 
   const renderActivityIcon = (index: number) => {
     if (index === 0) {
@@ -97,7 +102,7 @@ export default function EnhancedPackageCard({
             md:h-5 md:w-5
           `}
         />
-      )
+      );
     }
     return (
       <MountainSnow
@@ -107,8 +112,8 @@ export default function EnhancedPackageCard({
           md:h-5 md:w-5
         `}
       />
-    )
-  }
+    );
+  };
 
   return (
     <div
@@ -134,7 +139,7 @@ export default function EnhancedPackageCard({
           `}
         >
           {/* Header */}
-          <div className='mb-4 flex flex-shrink-0 items-start justify-between'>
+          <div className="mb-4 flex flex-shrink-0 items-start justify-between">
             <h2
               className={`
                 text-2xl font-bold text-white
@@ -163,34 +168,34 @@ export default function EnhancedPackageCard({
               sm:mb-6 sm:h-52
             `}
           >
-            <div className='mosaic-main relative'>
+            <div className="mosaic-main relative">
               <OptimizedImage
                 src={images.main}
                 alt={`${title} main activity`}
                 fill
-                sizes='(max-width: 512px) 45vw, 240px'
-                className='h-full w-full object-cover'
-                imageType='default'
+                sizes="(max-width: 512px) 45vw, 240px"
+                className="h-full w-full object-cover"
+                imageType="default"
               />
             </div>
-            <div className='mosaic-top relative'>
+            <div className="mosaic-top relative">
               <OptimizedImage
                 src={images.top}
                 alt={`${title} activity 2`}
                 fill
-                sizes='(max-width: 512px) 45vw, 240px'
-                className='h-full w-full object-cover'
-                imageType='default'
+                sizes="(max-width: 512px) 45vw, 240px"
+                className="h-full w-full object-cover"
+                imageType="default"
               />
             </div>
-            <div className='mosaic-bottom relative'>
+            <div className="mosaic-bottom relative">
               <OptimizedImage
                 src={images.bottom}
                 alt={`${title} activity 3`}
                 fill
-                sizes='(max-width: 512px) 45vw, 240px'
-                className='h-full w-full object-cover'
-                imageType='default'
+                sizes="(max-width: 512px) 45vw, 240px"
+                className="h-full w-full object-cover"
+                imageType="default"
               />
             </div>
           </div>
@@ -205,28 +210,30 @@ export default function EnhancedPackageCard({
               sm:mb-8
             `}
           >
-            {[activities.primary, activities.riding, activities.hiking].map((activity, index) => (
-              <li
-                key={index}
-                className={`
+            {[activities.primary, activities.riding, activities.hiking].map(
+              (activity, index) => (
+                <li
+                  key={index}
+                  className={`
                   flex items-center text-sm
                   sm:text-base
                 `}
-              >
-                <span
-                  className={`
+                >
+                  <span
+                    className={`
                     inline-flex h-6 w-6 items-center justify-center
                     sm:h-8 sm:w-8
                     ${theme.icon}
                     mr-2 flex-shrink-0 rounded-full bg-white/20
                     sm:mr-3
                   `}
-                >
-                  {renderActivityIcon(index)}
-                </span>
-                <span className='flex-1'>{activity}</span>
-              </li>
-            ))}
+                  >
+                    {renderActivityIcon(index)}
+                  </span>
+                  <span className="flex-1">{activity}</span>
+                </li>
+              ),
+            )}
           </ul>
 
           {/* Pricing */}
@@ -314,7 +321,7 @@ export default function EnhancedPackageCard({
                   sm:p-4
                 `}
               >
-                <div className='flex items-center'>
+                <div className="flex items-center">
                   <User
                     className={`
                       mr-2 h-4 w-4 text-white
@@ -348,7 +355,7 @@ export default function EnhancedPackageCard({
                   h-16
                   sm:h-20
                 `}
-              ></div>
+              />
             )}
             {!pricing.adults && !pricing.children && !pricing.perPerson && (
               <div
@@ -356,12 +363,12 @@ export default function EnhancedPackageCard({
                   h-32
                   sm:h-40
                 `}
-              ></div>
+              />
             )}
           </div>
 
           {/* Book Now Button */}
-          <div className='mt-auto flex-shrink-0'>
+          <div className="mt-auto flex-shrink-0">
             <BookingButton
               id={bookingId}
               dataSrc={dataSrc}
@@ -384,11 +391,16 @@ export default function EnhancedPackageCard({
                   ml-2 h-4 w-4
                   sm:h-5 sm:w-5
                 `}
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 7l5 5m0 0l-5 5m5-5H6' />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </BookingButton>
           </div>
@@ -416,5 +428,5 @@ export default function EnhancedPackageCard({
         }
       `}</style>
     </div>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-import ResponsiveNavigation from '@/components/responsive-navigation'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import ResponsiveNavigation from '@/components/responsive-navigation';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 export default function SiteHeader() {
   return (
@@ -17,7 +17,7 @@ export default function SiteHeader() {
     >
       {/* Logo */}
       <div>
-        <Link href='/' className='flex items-center'>
+        <Link href="/" className="flex items-center">
           <div
             className={`
               relative h-12 w-48
@@ -26,12 +26,12 @@ export default function SiteHeader() {
             `}
           >
             <OptimizedImage
-              src='/images/ponyclub_logo.png'
-              alt='Acheron River Excursion'
+              src="/images/ponyclub_logo.png"
+              alt="Acheron River Excursion"
               fill
-              sizes='(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px'
-              imageType='logo'
-              className='object-contain p-1'
+              sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+              imageType="logo"
+              className="object-contain p-1"
             />
           </div>
         </Link>
@@ -42,5 +42,5 @@ export default function SiteHeader() {
         <ResponsiveNavigation />
       </div>
     </header>
-  )
+  );
 }

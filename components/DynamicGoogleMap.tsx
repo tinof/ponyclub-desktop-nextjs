@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { GoogleMapsEmbed } from '@next/third-parties/google'
+import { GoogleMapsEmbed } from '@next/third-parties/google';
 
 export default function DynamicGoogleMap() {
   return (
@@ -14,13 +14,13 @@ export default function DynamicGoogleMap() {
       <GoogleMapsEmbed
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
         height={400}
-        width='100%'
-        mode='place'
-        q='Pony+Club+Acheron'
-        loading='lazy'
+        width="100%"
+        mode="place"
+        q="Pony+Club+Acheron"
+        loading="lazy"
         allowfullscreen
-        style='border: 0;'
+        style="border: 0;"
       />
     </div>
-  )
+  );
 }

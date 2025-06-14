@@ -31,4 +31,4 @@ export const trekkingGalleryImages = [
     src: '/images/RockyBridge_GreenNatural_Rustic_WaterStream.jpg',
     alt: 'Rustic rocky bridge over green natural water stream on trekking path',
   },
-]
+];

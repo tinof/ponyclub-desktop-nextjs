@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { ChevronDown, Globe, Phone } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { ChevronDown, Globe, Phone } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-import { useLanguage } from '@/contexts/language-context'
+import { useLanguage } from '@/contexts/language-context';
 
 export default function DesktopMenu() {
-  const { t, language, setLanguage } = useLanguage()
-  const pathname = usePathname()
-  const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
-  const [activitiesMenuOpen, setActivitiesMenuOpen] = useState(false)
-  const activitiesMenuRef = useRef<HTMLDivElement>(null)
-  const languageMenuRef = useRef<HTMLDivElement>(null)
+  const { t, language, setLanguage } = useLanguage();
+  const pathname = usePathname();
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [activitiesMenuOpen, setActivitiesMenuOpen] = useState(false);
+  const activitiesMenuRef = useRef<HTMLDivElement>(null);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
 
   // Activities menu items
   const activities =
@@ -29,30 +29,36 @@ export default function DesktopMenu() {
           { id: 'rafting', label: 'Rafting', href: '/rafting' },
           { id: 'riding', label: 'Riding', href: '/riding' },
           { id: 'trekking', label: 'Trekking', href: '/trekking' },
-        ]
+        ];
 
   // Handle clicks outside the menu to close them
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (activitiesMenuRef.current && !activitiesMenuRef.current.contains(event.target as Node)) {
-        setActivitiesMenuOpen(false)
+      if (
+        activitiesMenuRef.current &&
+        !activitiesMenuRef.current.contains(event.target as Node)
+      ) {
+        setActivitiesMenuOpen(false);
       }
-      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
-        setLanguageMenuOpen(false)
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target as Node)
+      ) {
+        setLanguageMenuOpen(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
-    <nav className='flex items-center gap-4'>
+    <nav className="flex items-center gap-4">
       {' '}
       {/* Increased gap */}
       {/* Home link */}
       <Link
-        href='/'
+        href="/"
         className={`
           border-b-2 px-3 py-2 text-base transition-all
           ${
@@ -67,7 +73,7 @@ export default function DesktopMenu() {
         {/* Removed inset div */}
       </Link>
       {/* Activities dropdown */}
-      <div className='relative' ref={activitiesMenuRef}>
+      <div className="relative" ref={activitiesMenuRef}>
         <button
           onClick={() => setActivitiesMenuOpen(!activitiesMenuOpen)}
           className={`
@@ -75,16 +81,17 @@ export default function DesktopMenu() {
             transition-all
             ${
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-              activities.some(activity => pathname === activity.href) || activitiesMenuOpen
+              activities.some((activity) => pathname === activity.href) ||
+              activitiesMenuOpen
                 ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
                 : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
             }
           `}
-          aria-label='Activities menu'
+          aria-label="Activities menu"
           aria-expanded={activitiesMenuOpen}
         >
           {t.navigation.activities}
-          <ChevronDown className='ml-1 h-5 w-5' />
+          <ChevronDown className="ml-1 h-5 w-5" />
           {/* Removed inset div */}
         </button>
 
@@ -97,8 +104,8 @@ export default function DesktopMenu() {
           >
             {' '}
             {/* Cleaner dropdown style */}
-            <div className='py-1'>
-              {activities.map(activity => (
+            <div className="py-1">
+              {activities.map((activity) => (
                 <Link
                   key={activity.id}
                   href={activity.href}
@@ -122,7 +129,7 @@ export default function DesktopMenu() {
       {/* River & Village - English only */}
       {language === 'en' && (
         <Link
-          href='/river-village'
+          href="/river-village"
           className={`
             border-b-2 px-3 py-2 text-base transition-all
             ${
@@ -140,7 +147,7 @@ export default function DesktopMenu() {
       {/* For Schools (Για τα σχολεία) - Greek only */}
       {language === 'el' && (
         <Link
-          href='/for-schools'
+          href="/for-schools"
           className={`
             border-b-2 px-3 py-2 text-base transition-all
             ${
@@ -164,7 +171,7 @@ export default function DesktopMenu() {
               send_to: 'AW-PLACEHOLDER-CONVERSION_ID/PLACEHOLDER_LABEL',
               value: 0,
               currency: 'EUR',
-            })
+            });
           }
         }}
         className={`
@@ -172,11 +179,11 @@ export default function DesktopMenu() {
           text-accent select-text
         `}
       >
-        <Phone className='h-4 w-4' />
+        <Phone className="h-4 w-4" />
         <span>{t.contact.phone1}</span>
       </a>
       {/* Language selector */}
-      <div className='relative ml-2' ref={languageMenuRef}>
+      <div className="relative ml-2" ref={languageMenuRef}>
         <button
           onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
           className={`
@@ -190,7 +197,7 @@ export default function DesktopMenu() {
             }
           `}
         >
-          <Globe className='h-5 w-5' />
+          <Globe className="h-5 w-5" />
           <span>{language === 'en' ? 'EN' : 'EL'}</span>
           {/* Removed inset div */}
         </button>
@@ -204,11 +211,11 @@ export default function DesktopMenu() {
           >
             {' '}
             {/* Cleaner dropdown style */}
-            <div className='py-1'>
+            <div className="py-1">
               <button
                 onClick={() => {
-                  setLanguage('en')
-                  setLanguageMenuOpen(false)
+                  setLanguage('en');
+                  setLanguageMenuOpen(false);
                 }}
                 className={`
                   block w-full px-4 py-2 text-left text-base
@@ -219,8 +226,8 @@ export default function DesktopMenu() {
               </button>
               <button
                 onClick={() => {
-                  setLanguage('el')
-                  setLanguageMenuOpen(false)
+                  setLanguage('el');
+                  setLanguageMenuOpen(false);
                 }}
                 className={`
                   block w-full px-4 py-2 text-left text-base
@@ -234,5 +241,5 @@ export default function DesktopMenu() {
         )}
       </div>
     </nav>
-  )
+  );
 }

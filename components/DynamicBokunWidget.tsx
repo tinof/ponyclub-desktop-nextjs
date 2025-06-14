@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import dynamic from 'next/dynamic'
-import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
 
 // Dynamically import BokunWidget with ssr: false and a loading placeholder
 const BokunWidget = dynamic(() => import('@/components/BokunWidget'), {
@@ -13,45 +13,50 @@ const BokunWidget = dynamic(() => import('@/components/BokunWidget'), {
   `}
     />
   ),
-})
+});
 
 type DynamicBokunWidgetProps = {
-  experienceId: string
-  partialView?: number
-}
+  experienceId: string;
+  partialView?: number;
+};
 
-export default function DynamicBokunWidget({ experienceId, partialView }: DynamicBokunWidgetProps) {
-  const [shouldLoad, setShouldLoad] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+export default function DynamicBokunWidget({
+  experienceId,
+  partialView,
+}: DynamicBokunWidgetProps) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentRef = ref.current
-    if (!currentRef) return
+    const currentRef = ref.current;
+    if (!currentRef) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Load when the placeholder is intersecting or nearly intersecting
         if (entry.isIntersecting) {
-          setShouldLoad(true)
-          observer.disconnect() // Stop observing once loaded
+          setShouldLoad(true);
+          observer.disconnect(); // Stop observing once loaded
         }
       },
       {
         rootMargin: '200px 0px', // Load when 200px away from viewport
         threshold: 0.01, // Trigger even if only 1% is visible
-      }
-    )
+      },
+    );
 
-    observer.observe(currentRef)
+    observer.observe(currentRef);
 
     // Cleanup observer on component unmount
     return () => {
       if (observer && currentRef) {
-        observer.unobserve(currentRef)
+        observer.unobserve(currentRef);
       }
-      observer.disconnect()
-    }
-  }, []) // Empty dependency array ensures this runs only once on mount
+      observer.disconnect();
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
     <div ref={ref} style={{ minHeight: '384px' }}>
@@ -61,8 +66,8 @@ export default function DynamicBokunWidget({ experienceId, partialView }: Dynami
         <BokunWidget experienceId={experienceId} partialView={partialView} />
       ) : (
         // Render the loading placeholder defined in dynamic import
-        <div className='h-96 w-full animate-pulse rounded-lg bg-gray-200' />
+        <div className="h-96 w-full animate-pulse rounded-lg bg-gray-200" />
       )}
     </div>
-  )
+  );
 }

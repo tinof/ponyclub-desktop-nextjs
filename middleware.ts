@@ -1,22 +1,34 @@
-import type { NoseconeOptions } from '@nosecone/next'
-import { createMiddleware as createNoseconeMiddleware, defaults as noseconeDefaults } from '@nosecone/next'
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import type { NoseconeOptions } from '@nosecone/next';
+import {
+  createMiddleware as createNoseconeMiddleware,
+  defaults as noseconeDefaults,
+} from '@nosecone/next';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-const locales = ['en', 'el']
-const defaultLocale = 'en'
+const locales = ['en', 'el'];
+const defaultLocale = 'en';
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 
 // Define additional script sources for development
 const devScriptSources = isDev
-  ? (["'unsafe-eval'", "'unsafe-inline'", 'https://vercel.live', 'https://va.vercel-scripts.com'] as const)
-  : ([] as const)
+  ? ([
+      "'unsafe-eval'",
+      "'unsafe-inline'",
+      'https://vercel.live',
+      'https://va.vercel-scripts.com',
+    ] as const)
+  : ([] as const);
 
 // Define additional connect sources for development
 const devConnectSources = isDev
-  ? (['ws://localhost:3000', 'https://vercel.live', 'https://va.vercel-scripts.com'] as const)
-  : ([] as const)
+  ? ([
+      'ws://localhost:3000',
+      'https://vercel.live',
+      'https://va.vercel-scripts.com',
+    ] as const)
+  : ([] as const);
 
 const noseconeOptions: NoseconeOptions = {
   ...noseconeDefaults,
@@ -163,46 +175,54 @@ const noseconeOptions: NoseconeOptions = {
   },
   xFrameOptions: { action: 'deny' },
   referrerPolicy: { policy: ['no-referrer'] },
-}
+};
 
-const configuredNoseconeMiddleware = createNoseconeMiddleware(noseconeOptions)
+const configuredNoseconeMiddleware = createNoseconeMiddleware(noseconeOptions);
 
 export async function middleware(request: NextRequest) {
-  let response = await configuredNoseconeMiddleware()
+  let response = await configuredNoseconeMiddleware();
 
   if (!response) {
-    response = NextResponse.next()
+    response = NextResponse.next();
   }
 
-  const { pathname } = request.nextUrl
-  const pathnameHasLocale = locales.some(locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
+  const { pathname } = request.nextUrl;
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+  );
 
   if (!pathnameHasLocale) {
     // Check for a saved locale preference in the cookie
-    const localeCookie = request.cookies.get('NEXT_LOCALE')?.value
-    const chosenLocale = locales.includes(localeCookie as string) ? localeCookie : defaultLocale
+    const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
+    const chosenLocale = locales.includes(localeCookie as string)
+      ? localeCookie
+      : defaultLocale;
 
-    const newPathname = pathname === '/' ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`
-    const url = request.nextUrl.clone()
-    url.pathname = newPathname
+    const newPathname =
+      pathname === '/' ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
+    const url = request.nextUrl.clone();
+    url.pathname = newPathname;
 
-    const i18nRedirectResponse = NextResponse.redirect(url)
+    const i18nRedirectResponse = NextResponse.redirect(url);
     // Copy headers from the security middleware response to the redirect response
     response.headers.forEach((value, key) => {
       if (!i18nRedirectResponse.headers.has(key)) {
-        i18nRedirectResponse.headers.set(key, value)
+        i18nRedirectResponse.headers.set(key, value);
       }
-    })
-    return i18nRedirectResponse
+    });
+    return i18nRedirectResponse;
   }
 
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self), payment=()')
+  response.headers.set(
+    'Permissions-Policy',
+    'camera=(), microphone=(), geolocation=(self), payment=()',
+  );
 
-  return response
+  return response;
 }
 
 export const config = {
   matcher: [
     '/((?!api|monitoring|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)',
   ],
-}
+};

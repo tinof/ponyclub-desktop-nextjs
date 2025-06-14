@@ -1,28 +1,27 @@
-'use client'
+'use client';
 
-import { Roboto_Slab } from 'next/font/google'
-
-import DynamicContactDetails from '@/components/DynamicContactDetails'
-import DynamicGoogleMap from '@/components/DynamicGoogleMap'
-import EnhancedPackageCard from '@/components/EnhancedPackageCard'
-import BokunStyles from '@/components/client/BokunStyles'
-import GoogleReviews from '@/components/client/GoogleReviews'
-import PriceListButton from '@/components/client/PriceListButton'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { useLanguage } from '@/contexts/language-context'
+import { Roboto_Slab } from 'next/font/google';
+import BokunStyles from '@/components/client/BokunStyles';
+import GoogleReviews from '@/components/client/GoogleReviews';
+import PriceListButton from '@/components/client/PriceListButton';
+import DynamicContactDetails from '@/components/DynamicContactDetails';
+import DynamicGoogleMap from '@/components/DynamicGoogleMap';
+import EnhancedPackageCard from '@/components/EnhancedPackageCard';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import { useLanguage } from '@/contexts/language-context';
 
 const robotoSlab = Roboto_Slab({
   subsets: ['latin', 'greek'],
   weight: ['400', '700'],
   variable: '--font-roboto-slab',
-})
+});
 
 export default function HomePageContent() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   return (
     <>
-      <main className='relative min-h-screen overflow-hidden'>
+      <main className="relative min-h-screen overflow-hidden">
         {/* Hero Section */}
         <div
           className={`
@@ -39,24 +38,24 @@ export default function HomePageContent() {
           >
             {/* OptimizedImage for the poster */}
             <OptimizedImage
-              src='/images/hero-image.webp'
-              alt='Hero background'
+              src="/images/hero-image.webp"
+              alt="Hero background"
               fill
               priority
-              fetchPriority='high'
-              imageType='hero'
-              className='absolute inset-0 h-full w-full object-cover'
+              fetchPriority="high"
+              imageType="hero"
+              className="absolute inset-0 h-full w-full object-cover"
             />
             <video
               autoPlay
               muted
               loop
               playsInline
-              preload='metadata'
-              className='absolute inset-0 z-10 h-full w-full object-cover'
+              preload="metadata"
+              className="absolute inset-0 z-10 h-full w-full object-cover"
             >
-              <source src='/images/hero-video.webm' type='video/webm' />
-              <source src='/images/hero-video.mp4' type='video/mp4' />
+              <source src="/images/hero-video.webm" type="video/webm" />
+              <source src="/images/hero-video.mp4" type="video/mp4" />
             </video>
             <div
               className={`
@@ -65,7 +64,7 @@ export default function HomePageContent() {
               `}
             />
           </div>
-          <div className='absolute inset-0 z-30 flex items-center justify-center'>
+          <div className="absolute inset-0 z-30 flex items-center justify-center">
             <div
               className={`
                 relative max-w-sm transform rounded-2xl border-2
@@ -102,12 +101,12 @@ export default function HomePageContent() {
                   {t.hero.subtitle}
                 </span>
               </h1>
-          <div
-            className={`
+              <div
+                className={`
               absolute -inset-[1px] -z-10 rounded-2xl bg-linear-to-b
               from-amber-200/20 to-transparent blur-xs
             `}
-          />
+              />
             </div>
           </div>
         </div>
@@ -140,12 +139,12 @@ export default function HomePageContent() {
               `}
             >
               <OptimizedImage
-                src='/images/round1.jpg'
+                src="/images/round1.jpg"
                 alt={t.activities.swimming}
                 fill
-                imageType='thumbnail'
-                sizes='(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px'
-                className='object-cover'
+                imageType="thumbnail"
+                sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
+                className="object-cover"
               />
             </div>
           </div>
@@ -167,13 +166,13 @@ export default function HomePageContent() {
               `}
             >
               <OptimizedImage
-                src='/images/round2.jpg'
+                src="/images/round2.jpg"
                 alt={t.activities.horseRiding}
                 quality={55}
                 fill
-                imageType='thumbnail'
-                sizes='(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px'
-                className='object-cover object-[center_20%]'
+                imageType="thumbnail"
+                sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
+                className="object-cover object-[center_20%]"
               />
             </div>
           </div>
@@ -195,12 +194,12 @@ export default function HomePageContent() {
               `}
             >
               <OptimizedImage
-                src='/images/round3.jpg'
+                src="/images/round3.jpg"
                 alt={t.activities.kayaking}
                 fill
-                imageType='thumbnail'
-                sizes='(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px'
-                className='object-cover'
+                imageType="thumbnail"
+                sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
+                className="object-cover"
               />
             </div>
           </div>
@@ -223,7 +222,7 @@ export default function HomePageContent() {
               from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md
             `}
           />
-          <div className='absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5' />
+          <div className="absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5" />
 
           {/* Decorative effects */}
           <div
@@ -264,7 +263,7 @@ export default function HomePageContent() {
             />
           </h2>
 
-          <div className='relative'>
+          <div className="relative">
             <p
               className={`
                 mb-4 text-lg leading-relaxed text-gray-700
@@ -298,7 +297,7 @@ export default function HomePageContent() {
           </div>
 
           {/* Shadow effect */}
-          <div className='absolute -inset-[1px] -z-30 rounded-2xl shadow-xl' />
+          <div className="absolute -inset-[1px] -z-30 rounded-2xl shadow-xl" />
         </div>
 
         {/* SUMMER 2025 OFFERS Title */}
@@ -362,13 +361,13 @@ export default function HomePageContent() {
                 top: '/images/round2.jpg',
                 bottom: '/images/round1.jpg',
               }}
-              bookingId='bokun_5b20d531_ca57_4550_94c0_0511c35077a0'
-              dataSrc='https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1'
+              bookingId="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
+              dataSrc="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
               bookNowText={t.booking.bookNow}
-              packageName='Package 1 - Rafting + Riding + Hiking'
-              packagePrice='20'
-              trackingLabel='Homepage Package 1'
-              variant='green'
+              packageName="Package 1 - Rafting + Riding + Hiking"
+              packagePrice="20"
+              trackingLabel="Homepage Package 1"
+              variant="green"
             />
           </div>
 
@@ -395,13 +394,13 @@ export default function HomePageContent() {
                 top: '/images/round3.jpg',
                 bottom: '/images/round2.jpg',
               }}
-              bookingId='bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53'
-              dataSrc='https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1'
+              bookingId="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
+              dataSrc="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
               bookNowText={t.booking.bookNow}
-              packageName='Package 2 - Kayak + Riding + Hiking'
-              packagePrice='25'
-              trackingLabel='Homepage Package 2'
-              variant='amber'
+              packageName="Package 2 - Kayak + Riding + Hiking"
+              packagePrice="25"
+              trackingLabel="Homepage Package 2"
+              variant="amber"
             />
           </div>
         </div>
@@ -457,10 +456,10 @@ export default function HomePageContent() {
               lg:flex-row
             `}
           >
-            <div className='lg:w-3/5'>
+            <div className="lg:w-3/5">
               <DynamicGoogleMap />
             </div>
-            <div className='lg:w-2/5'>
+            <div className="lg:w-2/5">
               <DynamicContactDetails />
             </div>
           </div>
@@ -470,5 +469,5 @@ export default function HomePageContent() {
         <BokunStyles />
       </main>
     </>
-  )
+  );
 }

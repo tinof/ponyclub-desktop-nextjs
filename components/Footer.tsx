@@ -1,16 +1,17 @@
-'use client'
+'use client';
 
-import { Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 
-import { useLanguage } from '@/contexts/language-context'
+import { useLanguage } from '@/contexts/language-context';
 
 export default function Footer() {
-  const { t } = useLanguage()
-  const mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Pony+Club+Ecotourism'
-  const currentYear = new Date().getFullYear()
+  const { t } = useLanguage();
+  const mapsUrl =
+    'https://www.google.com/maps/dir/?api=1&destination=Pony+Club+Ecotourism';
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='relative border-t border-border bg-secondary'>
+    <footer className="relative border-t border-border bg-secondary">
       {' '}
       {/* Removed mt-16 pt-12 pb-12 to eliminate spacing */}
       <div
@@ -22,55 +23,69 @@ export default function Footer() {
       >
         {' '}
         {/* Added padding to the container instead */}
-        <h2 className='mb-8 text-center text-3xl font-bold text-primary'>{t.footer.contactUs}</h2>
+        <h2 className="mb-8 text-center text-3xl font-bold text-primary">
+          {t.footer.contactUs}
+        </h2>
         <div
           className={`
             grid gap-8
             md:grid-cols-2
           `}
         >
-          <div className='space-y-6'>
-            <div className='flex items-start gap-3'>
-              <MapPin className='mt-1 h-5 w-5 text-primary' />
+          <div className="space-y-6">
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-1 h-5 w-5 text-primary" />
               <div>
-                <p className='font-semibold text-foreground'>{t.footer.address.line1}</p>
-                <p className='text-foreground/90'>{t.footer.address.line2}</p>
-                <p className='text-foreground/90'>{t.footer.address.line3}</p>
+                <p className="font-semibold text-foreground">
+                  {t.footer.address.line1}
+                </p>
+                <p className="text-foreground/90">{t.footer.address.line2}</p>
+                <p className="text-foreground/90">{t.footer.address.line3}</p>
               </div>
             </div>
 
-            <div className='flex items-start gap-3'>
-              <Phone className='mt-1 h-5 w-5 text-primary' />
+            <div className="flex items-start gap-3">
+              <Phone className="mt-1 h-5 w-5 text-primary" />
               <div>
-                <p className='text-foreground/90'>{t.footer.phone}</p>
-                <p className='mt-1 text-sm text-muted-foreground'>{t.footer.phoneLang}</p>
+                <p className="text-foreground/90">{t.footer.phone}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {t.footer.phoneLang}
+                </p>
               </div>
             </div>
 
-            <div className='flex items-start gap-3'>
-              <Mail className='mt-1 h-5 w-5 text-primary' />
+            <div className="flex items-start gap-3">
+              <Mail className="mt-1 h-5 w-5 text-primary" />
               <div>
-                <p className='text-foreground/90'>{t.footer.email}</p>
-                <p className='mt-1 text-sm text-muted-foreground'>{t.footer.emailNote}</p>
+                <p className="text-foreground/90">{t.footer.email}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {t.footer.emailNote}
+                </p>
               </div>
             </div>
           </div>
 
-          <div className='space-y-6'>
-            <div className='flex items-start gap-3'>
-              <Clock className='mt-1 h-5 w-5 text-primary' />
+          <div className="space-y-6">
+            <div className="flex items-start gap-3">
+              <Clock className="mt-1 h-5 w-5 text-primary" />
               <div>
-                <p className='font-semibold text-foreground'>{t.footer.openHours.title}</p>
-                <p className='text-foreground/90'>{t.footer.openHours.schedule}</p>
-                <p className='text-sm text-muted-foreground'>{t.footer.openHours.season}</p>
+                <p className="font-semibold text-foreground">
+                  {t.footer.openHours.title}
+                </p>
+                <p className="text-foreground/90">
+                  {t.footer.openHours.schedule}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t.footer.openHours.season}
+                </p>
               </div>
             </div>
 
-            <div className='pt-4'>
+            <div className="pt-4">
               <a
                 href={mapsUrl}
-                target='_blank'
-                rel='noopener noreferrer'
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`
                   inline-flex items-center justify-center gap-2 rounded-lg
                   bg-primary px-6 py-3 font-semibold text-primary-foreground
@@ -78,7 +93,7 @@ export default function Footer() {
                   hover:bg-primary/90
                 `}
               >
-                <MapPin className='h-5 w-5' />
+                <MapPin className="h-5 w-5" />
                 <span>{t.footer.findUs}</span>
               </a>
             </div>
@@ -93,5 +108,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

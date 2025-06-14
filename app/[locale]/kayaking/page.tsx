@@ -1,17 +1,18 @@
-import type { Metadata } from 'next'
-import React from 'react'
+import type { Metadata } from 'next';
 
-import ActivityPageLayout from '@/components/ActivityPageLayout'
-import DynamicBokunWidget from '@/components/DynamicBokunWidget'
+import ActivityPageLayout from '@/components/ActivityPageLayout';
+import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 
 interface PageProps {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
 
-  const isGreek = locale === 'el'
+  const isGreek = locale === 'el';
 
   return {
     title: isGreek
@@ -23,18 +24,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: isGreek
       ? 'καγιάκ Αχέροντας, καγιάκ Γλυκή, καγιάκ Θεσπρωτία, καγιάκ Ήπειρος, εκδρομή καγιάκ, ποταμός Αχέροντας'
       : 'kayaking Acheron, kayaking Glyki, kayaking Thesprotia, kayaking Epirus, Acheron river kayaking, Greece kayaking',
-  }
+  };
 }
 
 const KayakingPage = async ({ params }: PageProps) => {
-  const { locale } = await params
-  const isGreek = locale === 'el'
+  const { locale } = await params;
+  const isGreek = locale === 'el';
 
   // Define the experience ID
-  const bokunExperienceId = '1020669'
+  const bokunExperienceId = '1020669';
 
   const seoContent = isGreek ? (
-    <div className='mb-8'>
+    <div className="mb-8">
       <h1
         className={`
           mb-6 text-3xl font-bold text-[#3E5A35]
@@ -43,28 +44,32 @@ const KayakingPage = async ({ params }: PageProps) => {
       >
         Καγιάκ στον Ποταμό Αχέροντα
       </h1>
-      <div className='prose prose-lg max-w-none text-gray-700'>
-        <p className='lead mb-4'>
-          Ανακαλύψτε τη μαγεία του ποταμού Αχέροντα με μια συναρπαστική εμπειρία καγιάκ στα κρυστάλλινα νερά της Γλυκής,
-          Θεσπρωτίας. Το Pony Club προσφέρει ασφαλείς και οργανωμένες εκδρομές καγιάκ για όλες τις ηλικίες και επίπεδα
-          εμπειρίας.
+      <div className="prose prose-lg max-w-none text-gray-700">
+        <p className="lead mb-4">
+          Ανακαλύψτε τη μαγεία του ποταμού Αχέροντα με μια συναρπαστική εμπειρία
+          καγιάκ στα κρυστάλλινα νερά της Γλυκής, Θεσπρωτίας. Το Pony Club
+          προσφέρει ασφαλείς και οργανωμένες εκδρομές καγιάκ για όλες τις
+          ηλικίες και επίπεδα εμπειρίας.
         </p>
 
         <p>
-          Ο ποταμός Αχέροντας, γνωστός από την αρχαία ελληνική μυθολογία, είναι ένας από τους πιο εντυπωσιακούς
-          προορισμούς για καγιάκ στην Ελλάδα. Τα διαυγή νερά, η πλούσια βλάστηση και η μοναδική φυσική ομορφιά
-          δημιουργούν το ιδανικό περιβάλλον για μια αξέχαστη περιπέτεια στη φύση.
+          Ο ποταμός Αχέροντας, γνωστός από την αρχαία ελληνική μυθολογία, είναι
+          ένας από τους πιο εντυπωσιακούς προορισμούς για καγιάκ στην Ελλάδα. Τα
+          διαυγή νερά, η πλούσια βλάστηση και η μοναδική φυσική ομορφιά
+          δημιουργούν το ιδανικό περιβάλλον για μια αξέχαστη περιπέτεια στη
+          φύση.
         </p>
 
         <p>
-          Με τον έμπειρο εξοπλισμό και τους καταρτισμένους οδηγούς μας, θα απολαύσετε μια ασφαλή και διασκεδαστική
-          εμπειρία καγιάκ διάρκειας 30 λεπτών. Κατάλληλο για αρχάριους και παιδιά, με πλήρη εξοπλισμό ασφαλείας και
-          λεπτομερείς οδηγίες.
+          Με τον έμπειρο εξοπλισμό και τους καταρτισμένους οδηγούς μας, θα
+          απολαύσετε μια ασφαλή και διασκεδαστική εμπειρία καγιάκ διάρκειας 30
+          λεπτών. Κατάλληλο για αρχάριους και παιδιά, με πλήρη εξοπλισμό
+          ασφαλείας και λεπτομερείς οδηγίες.
         </p>
       </div>
     </div>
   ) : (
-    <div className='mb-8'>
+    <div className="mb-8">
       <h1
         className={`
           mb-6 text-3xl font-bold text-[#3E5A35]
@@ -73,45 +78,50 @@ const KayakingPage = async ({ params }: PageProps) => {
       >
         Kayaking in Acheron River
       </h1>
-      <div className='prose prose-lg max-w-none text-gray-700'>
-        <p className='lead mb-4'>
-          Discover the magic of Acheron River with an exciting kayaking experience in the crystal-clear waters of Glyki,
-          Thesprotia. Pony Club offers safe and organized kayaking excursions for all ages and experience levels.
+      <div className="prose prose-lg max-w-none text-gray-700">
+        <p className="lead mb-4">
+          Discover the magic of Acheron River with an exciting kayaking
+          experience in the crystal-clear waters of Glyki, Thesprotia. Pony Club
+          offers safe and organized kayaking excursions for all ages and
+          experience levels.
         </p>
 
         <p>
-          The Acheron River, known from ancient Greek mythology, is one of the most impressive kayaking destinations in
-          Greece. The crystal-clear waters, rich vegetation, and unique natural beauty create the perfect environment
-          for an unforgettable adventure in nature.
+          The Acheron River, known from ancient Greek mythology, is one of the
+          most impressive kayaking destinations in Greece. The crystal-clear
+          waters, rich vegetation, and unique natural beauty create the perfect
+          environment for an unforgettable adventure in nature.
         </p>
 
         <p>
-          With our professional equipment and trained guides, you'll enjoy a safe and fun 30-minute kayaking experience.
-          Suitable for beginners and children, with complete safety equipment and detailed instructions provided.
+          With our professional equipment and trained guides, you'll enjoy a
+          safe and fun 30-minute kayaking experience. Suitable for beginners and
+          children, with complete safety equipment and detailed instructions
+          provided.
         </p>
       </div>
     </div>
-  )
+  );
 
   return (
     <ActivityPageLayout
-      title='Kayaking'
-      subtitle=''
-      descriptionTitle=''
+      title="Kayaking"
+      subtitle=""
+      descriptionTitle=""
       descriptionContent={
         <>
           {seoContent}
           <DynamicBokunWidget experienceId={bokunExperienceId} />
         </>
       }
-      detailsTitle=''
+      detailsTitle=""
       detailsContent={<></>}
-      pricingTitle=''
+      pricingTitle=""
       pricingContent={<></>}
       showBookingButton={false}
       fullWidthContent={true}
     />
-  )
-}
+  );
+};
 
-export default KayakingPage
+export default KayakingPage;

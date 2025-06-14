@@ -1,18 +1,20 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export default function BokunStyles() {
-  const [nonce, setNonce] = useState('')
+  const [nonce, setNonce] = useState('');
 
   useEffect(() => {
     // Get nonce from meta tag or existing script nonce
     const metaNonce =
-      document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content') ||
+      document
+        .querySelector('meta[name="csp-nonce"]')
+        ?.getAttribute('content') ||
       document.querySelector('script[nonce]')?.getAttribute('nonce') ||
-      ''
-    setNonce(metaNonce)
-  }, [])
+      '';
+    setNonce(metaNonce);
+  }, []);
 
   return (
     <style jsx global nonce={nonce}>{`
@@ -65,5 +67,5 @@ export default function BokunStyles() {
         cursor: pointer !important;
       }
     `}</style>
-  )
+  );
 }

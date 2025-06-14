@@ -1,11 +1,11 @@
-import type { JSX } from 'react'
-import React, { ReactNode } from 'react' // Added JSX import
+import type React from 'react'; // Added JSX import
+import type { JSX } from 'react';
 
 interface ContainerProps {
-  children: React.ReactNode
-  className?: string
-  as?: keyof JSX.IntrinsicElements // This should now find the JSX namespace
-  fluid?: boolean
+  children: React.ReactNode;
+  className?: string;
+  as?: keyof JSX.IntrinsicElements; // This should now find the JSX namespace
+  fluid?: boolean;
 }
 
 /**
@@ -16,13 +16,18 @@ interface ContainerProps {
  * @param as - HTML element to render the container as (default: div)
  * @param fluid - Whether the container should have a fluid width on larger screens
  */
-export function Container({ children, className = '', as: Component = 'div', fluid = false }: ContainerProps) {
+export function Container({
+  children,
+  className = '',
+  as: Component = 'div',
+  fluid = false,
+}: ContainerProps) {
   // Base classes for all containers
-  let containerClasses = 'mx-auto px-4 sm:px-6 md:px-8 lg:px-10'
+  let containerClasses = 'mx-auto px-4 sm:px-6 md:px-8 lg:px-10';
 
   // Add max-width constraint if not fluid
   if (!fluid) {
-    containerClasses += ' max-w-screen-xl' // 1280px max width for desktop
+    containerClasses += ' max-w-screen-xl'; // 1280px max width for desktop
   }
 
   return (
@@ -34,5 +39,5 @@ export function Container({ children, className = '', as: Component = 'div', flu
     >
       {children}
     </Component>
-  )
+  );
 }

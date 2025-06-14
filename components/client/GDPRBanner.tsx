@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { BarChart3, Settings, Shield, Target, X } from 'lucide-react'
-import { useState } from 'react'
+import { BarChart3, Settings, Shield, Target, X } from 'lucide-react';
+import { useState } from 'react';
 
-import { useGDPR, type CookieConsent } from '@/contexts/gdpr-context'
-import { useLanguage } from '@/contexts/language-context'
+import { type CookieConsent, useGDPR } from '@/contexts/gdpr-context';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function GDPRBanner() {
   const {
@@ -16,22 +16,27 @@ export default function GDPRBanner() {
     saveCustom,
     openCustomize,
     closeBanner,
-  } = useGDPR()
-  const { t } = useLanguage()
+  } = useGDPR();
+  const { t } = useLanguage();
   const [customConsent, setCustomConsent] = useState<CookieConsent>({
     necessary: true,
     analytics: true,
     marketing: true,
-  })
+  });
 
-  if (!showBanner) return null
+  if (!showBanner) {
+    return null;
+  }
 
-  const handleCustomConsentChange = (type: keyof CookieConsent, value: boolean) => {
-    setCustomConsent(prev => ({
+  const handleCustomConsentChange = (
+    type: keyof CookieConsent,
+    value: boolean,
+  ) => {
+    setCustomConsent((prev) => ({
       ...prev,
       [type]: type === 'necessary' ? true : value, // Necessary cookies always enabled
-    }))
-  }
+    }));
+  };
 
   if (showCustomize) {
     return (
@@ -58,7 +63,7 @@ export default function GDPRBanner() {
                 flex items-center gap-2 text-2xl font-bold text-[#3E5A35]
               `}
             >
-              <Settings className='h-6 w-6' />
+              <Settings className="h-6 w-6" />
               {t.gdpr.customize}
             </h2>
             <button
@@ -67,24 +72,28 @@ export default function GDPRBanner() {
                 rounded-full p-2 transition-colors
                 hover:bg-gray-100
               `}
-              aria-label='Close cookie settings'
+              aria-label="Close cookie settings"
             >
-              <X className='h-5 w-5 text-gray-500' />
+              <X className="h-5 w-5 text-gray-500" />
             </button>
           </div>
 
           {/* Content */}
-          <div className='space-y-6 p-6'>
-            <p className='leading-relaxed text-gray-600'>{t.gdpr.description}</p>
+          <div className="space-y-6 p-6">
+            <p className="leading-relaxed text-gray-600">
+              {t.gdpr.description}
+            </p>
 
             {/* Cookie Categories */}
-            <div className='space-y-4'>
+            <div className="space-y-4">
               {/* Necessary Cookies */}
-              <div className='rounded-lg border border-gray-200 p-4'>
-                <div className='mb-2 flex items-center justify-between'>
-                  <div className='flex items-center gap-2'>
-                    <Shield className='h-5 w-5 text-green-600' />
-                    <h3 className='font-semibold text-gray-900'>{t.gdpr.necessary}</h3>
+              <div className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-green-600" />
+                    <h3 className="font-semibold text-gray-900">
+                      {t.gdpr.necessary}
+                    </h3>
                   </div>
                   <div
                     className={`
@@ -95,15 +104,19 @@ export default function GDPRBanner() {
                     Always Active
                   </div>
                 </div>
-                <p className='text-sm text-gray-600'>{t.gdpr.necessaryDescription}</p>
+                <p className="text-sm text-gray-600">
+                  {t.gdpr.necessaryDescription}
+                </p>
               </div>
 
               {/* Analytics Cookies */}
-              <div className='rounded-lg border border-gray-200 p-4'>
-                <div className='mb-2 flex items-center justify-between'>
-                  <div className='flex items-center gap-2'>
-                    <BarChart3 className='h-5 w-5 text-blue-600' />
-                    <h3 className='font-semibold text-gray-900'>{t.gdpr.analytics}</h3>
+              <div className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5 text-blue-600" />
+                    <h3 className="font-semibold text-gray-900">
+                      {t.gdpr.analytics}
+                    </h3>
                   </div>
                   <label
                     className={`
@@ -111,10 +124,12 @@ export default function GDPRBanner() {
                     `}
                   >
                     <input
-                      type='checkbox'
+                      type="checkbox"
                       checked={customConsent.analytics}
-                      onChange={e => handleCustomConsentChange('analytics', e.target.checked)}
-                      className='peer sr-only'
+                      onChange={(e) =>
+                        handleCustomConsentChange('analytics', e.target.checked)
+                      }
+                      className="peer sr-only"
                     />
                     <div
                       className={`
@@ -128,18 +143,22 @@ export default function GDPRBanner() {
                         after:h-5 after:w-5 after:rounded-full after:bg-white
                         after:transition-all after:content-['']
                       `}
-                    ></div>
+                    />
                   </label>
                 </div>
-                <p className='text-sm text-gray-600'>{t.gdpr.analyticsDescription}</p>
+                <p className="text-sm text-gray-600">
+                  {t.gdpr.analyticsDescription}
+                </p>
               </div>
 
               {/* Marketing Cookies */}
-              <div className='rounded-lg border border-gray-200 p-4'>
-                <div className='mb-2 flex items-center justify-between'>
-                  <div className='flex items-center gap-2'>
-                    <Target className='h-5 w-5 text-purple-600' />
-                    <h3 className='font-semibold text-gray-900'>{t.gdpr.marketing}</h3>
+              <div className="rounded-lg border border-gray-200 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Target className="h-5 w-5 text-purple-600" />
+                    <h3 className="font-semibold text-gray-900">
+                      {t.gdpr.marketing}
+                    </h3>
                   </div>
                   <label
                     className={`
@@ -147,10 +166,12 @@ export default function GDPRBanner() {
                     `}
                   >
                     <input
-                      type='checkbox'
+                      type="checkbox"
                       checked={customConsent.marketing}
-                      onChange={e => handleCustomConsentChange('marketing', e.target.checked)}
-                      className='peer sr-only'
+                      onChange={(e) =>
+                        handleCustomConsentChange('marketing', e.target.checked)
+                      }
+                      className="peer sr-only"
                     />
                     <div
                       className={`
@@ -164,10 +185,12 @@ export default function GDPRBanner() {
                         after:h-5 after:w-5 after:rounded-full after:bg-white
                         after:transition-all after:content-['']
                       `}
-                    ></div>
+                    />
                   </label>
                 </div>
-                <p className='text-sm text-gray-600'>{t.gdpr.marketingDescription}</p>
+                <p className="text-sm text-gray-600">
+                  {t.gdpr.marketingDescription}
+                </p>
               </div>
             </div>
 
@@ -185,7 +208,7 @@ export default function GDPRBanner() {
                   text-white shadow-md transition-colors duration-300
                   hover:bg-[#3E5A35] hover:shadow-lg
                 `}
-                aria-label='Save custom cookie preferences'
+                aria-label="Save custom cookie preferences"
               >
                 {t.gdpr.save}
               </button>
@@ -196,7 +219,7 @@ export default function GDPRBanner() {
                   text-gray-800 transition-colors duration-300
                   hover:bg-gray-200
                 `}
-                aria-label='Accept all cookies'
+                aria-label="Accept all cookies"
               >
                 {t.gdpr.acceptAll}
               </button>
@@ -204,7 +227,7 @@ export default function GDPRBanner() {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -228,18 +251,22 @@ export default function GDPRBanner() {
           `}
         >
           {/* Icon and Content */}
-          <div className='flex flex-1 items-start gap-3'>
+          <div className="flex flex-1 items-start gap-3">
             <div
               className={`
                 flex h-10 w-10 flex-shrink-0 items-center justify-center
                 rounded-full bg-[#6b8362]/10
               `}
             >
-              <Shield className='h-5 w-5 text-[#6b8362]' />
+              <Shield className="h-5 w-5 text-[#6b8362]" />
             </div>
-            <div className='flex-1'>
-              <h3 className='mb-1 font-semibold text-gray-900'>{t.gdpr.title}</h3>
-              <p className='text-sm leading-relaxed text-gray-600'>{t.gdpr.description}</p>
+            <div className="flex-1">
+              <h3 className="mb-1 font-semibold text-gray-900">
+                {t.gdpr.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {t.gdpr.description}
+              </p>
             </div>
           </div>
 
@@ -259,7 +286,7 @@ export default function GDPRBanner() {
                 hover:border-[#6b8362]/40 hover:bg-[#6b8362]/5
                 hover:text-[#3E5A35]
               `}
-              aria-label='Customize cookie settings'
+              aria-label="Customize cookie settings"
             >
               {t.gdpr.customize}
             </button>
@@ -270,7 +297,7 @@ export default function GDPRBanner() {
                 transition-colors duration-300
                 hover:bg-gray-100 hover:text-gray-800
               `}
-              aria-label='Reject all cookies'
+              aria-label="Reject all cookies"
             >
               {t.gdpr.rejectAll}
             </button>
@@ -281,7 +308,7 @@ export default function GDPRBanner() {
                 text-white shadow-md transition-colors duration-300
                 hover:bg-[#3E5A35] hover:shadow-lg
               `}
-              aria-label='Accept all cookies'
+              aria-label="Accept all cookies"
             >
               {t.gdpr.acceptAll}
             </button>
@@ -289,5 +316,5 @@ export default function GDPRBanner() {
         </div>
       </div>
     </div>
-  )
+  );
 }

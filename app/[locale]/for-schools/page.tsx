@@ -1,40 +1,40 @@
 import {
-  Clock,
-  Users,
-  Target,
-  Waves,
-  Mountain,
-  TreePine,
-  Camera,
-  MapPin,
-  Star,
   ArrowRight,
-  CheckCircle,
   Calendar,
+  Camera,
+  CheckCircle,
+  Clock,
   Euro,
-} from 'lucide-react'
-import type { Metadata } from 'next'
-import { Roboto_Slab } from 'next/font/google'
-import Link from 'next/link'
+  MapPin,
+  Mountain,
+  Star,
+  Target,
+  TreePine,
+  Users,
+  Waves,
+} from 'lucide-react';
+import type { Metadata } from 'next';
+import { Roboto_Slab } from 'next/font/google';
+import Link from 'next/link';
 
-import ResponsiveNavigation from '@/components/responsive-navigation'
-import { BorderBeam } from '@/components/ui/border-beam'
-import { GridPattern } from '@/components/ui/grid-pattern'
-import { NumberTicker } from '@/components/ui/number-ticker'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { PulsatingButton } from '@/components/ui/pulsating-button'
+import ResponsiveNavigation from '@/components/responsive-navigation';
+import { BorderBeam } from '@/components/ui/border-beam';
+import { GridPattern } from '@/components/ui/grid-pattern';
+import { NumberTicker } from '@/components/ui/number-ticker';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import { PulsatingButton } from '@/components/ui/pulsating-button';
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
   subsets: ['latin', 'greek'],
   variable: '--font-roboto-slab',
   weight: ['400', '700', '900'],
-})
+});
 
 export const metadata: Metadata = {
   title: 'Για τα σχολεία | Pony Club',
   description: 'Προγράμματα εκδρομών για σχολεία στις πηγές του Αχέροντα',
-}
+};
 
 export default function ForSchoolsPage() {
   return (
@@ -49,7 +49,7 @@ export default function ForSchoolsPage() {
       >
         {/* Logo */}
         <div>
-          <Link href='/' className='flex items-center'>
+          <Link href="/" className="flex items-center">
             <div
               className={`
                 relative h-12 w-48
@@ -58,12 +58,12 @@ export default function ForSchoolsPage() {
               `}
             >
               <OptimizedImage
-                src='/images/ponyclub_logo.png'
-                alt='Pony Club Logo'
+                src="/images/ponyclub_logo.png"
+                alt="Pony Club Logo"
                 fill
-                sizes='(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px'
-                className='object-contain p-1'
-                imageType='logo'
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-contain p-1"
+                imageType="logo"
               />
             </div>
           </Link>
@@ -108,22 +108,22 @@ export default function ForSchoolsPage() {
             `}
           >
             <OptimizedImage
-              src='/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg'
-              alt='Παιδιά σε σχολική εκδρομή στον Αχέροντα'
+              src="/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg"
+              alt="Παιδιά σε σχολική εκδρομή στον Αχέροντα"
               fill
               className={`
                 object-cover object-center transition-transform duration-700
                 hover:scale-105
               `}
               priority
-              imageType='hero'
+              imageType="hero"
             />
             <div
               className={`
                 absolute inset-0 bg-gradient-to-b from-black/20 via-transparent
                 to-black/40
               `}
-            ></div>
+            />
             <BorderBeam size={250} duration={12} delay={9} />
           </div>
 
@@ -134,14 +134,14 @@ export default function ForSchoolsPage() {
               md:pt-16
             `}
           >
-            <div className='group relative'>
+            <div className="group relative">
               <div
                 className={`
                   absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-600
                   to-orange-600 opacity-25 blur transition duration-1000
                   group-hover:opacity-40 group-hover:duration-200
                 `}
-              ></div>
+              />
               <div
                 className={`
                   relative max-w-4xl transform rounded-3xl border
@@ -177,20 +177,20 @@ export default function ForSchoolsPage() {
                     ΕΚΔΡΟΜΕΣ ΣΤΟΝ ΑΧΕΡΟΝΤΑ
                   </span>
                 </h1>
-                <div className='mt-4 flex justify-center space-x-2'>
+                <div className="mt-4 flex justify-center space-x-2">
                   <div
                     className={`
                       h-2 w-2 animate-bounce rounded-full bg-amber-300
                     `}
-                  ></div>
+                  />
                   <div
-                    className='h-2 w-2 animate-bounce rounded-full bg-amber-300'
+                    className="h-2 w-2 animate-bounce rounded-full bg-amber-300"
                     style={{ animationDelay: '0.1s' }}
-                  ></div>
+                  />
                   <div
-                    className='h-2 w-2 animate-bounce rounded-full bg-amber-300'
+                    className="h-2 w-2 animate-bounce rounded-full bg-amber-300"
                     style={{ animationDelay: '0.2s' }}
-                  ></div>
+                  />
                 </div>
               </div>
             </div>
@@ -198,15 +198,15 @@ export default function ForSchoolsPage() {
         </div>
 
         {/* Hero Bottom Text Banner */}
-        <div className='relative z-20 mx-4 -mt-8'>
-          <div className='group relative'>
+        <div className="relative z-20 mx-4 -mt-8">
+          <div className="group relative">
             <div
               className={`
                 absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#6b8362]
                 to-amber-600 opacity-20 blur transition duration-1000
                 group-hover:opacity-30
               `}
-            ></div>
+            />
             <div
               className={`
                 relative mx-auto max-w-4xl rounded-2xl border
@@ -219,8 +219,8 @@ export default function ForSchoolsPage() {
                   flex flex-wrap items-center justify-center space-x-4
                 `}
               >
-                <div className='flex items-center space-x-2'>
-                  <MapPin className='h-5 w-5 text-[#6b8362]' />
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-5 w-5 text-[#6b8362]" />
                   <span
                     className={`
                       ${robotoSlab.variable}
@@ -236,9 +236,9 @@ export default function ForSchoolsPage() {
                     hidden h-6 w-px bg-amber-300
                     md:block
                   `}
-                ></div>
-                <div className='flex items-center space-x-2'>
-                  <Euro className='h-5 w-5 text-amber-600' />
+                />
+                <div className="flex items-center space-x-2">
+                  <Euro className="h-5 w-5 text-amber-600" />
                   <span
                     className={`
                       ${robotoSlab.variable}
@@ -273,22 +273,22 @@ export default function ForSchoolsPage() {
           `}
         >
           {/* Program Schedule Section */}
-          <div className='relative'>
+          <div className="relative">
             <div
               className={`
                 absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#6b8362]/20
                 to-amber-600/20 opacity-30 blur
               `}
-            ></div>
+            />
             <div
               className={`
                 relative rounded-3xl border border-amber-100/50 bg-white/90 p-8
                 shadow-xl backdrop-blur-md
               `}
             >
-              <div className='mb-12 text-center'>
-                <div className='mb-4 inline-flex items-center space-x-3'>
-                  <Calendar className='h-8 w-8 text-[#6b8362]' />
+              <div className="mb-12 text-center">
+                <div className="mb-4 inline-flex items-center space-x-3">
+                  <Calendar className="h-8 w-8 text-[#6b8362]" />
                   <h2
                     className={`
                       ${robotoSlab.variable}
@@ -298,14 +298,14 @@ export default function ForSchoolsPage() {
                   >
                     ΠΕΡΙΠΕΤΕΙΑΤΙΚΟ ΠΡΟΓΡΑΜΜΑ
                   </h2>
-                  <Calendar className='h-8 w-8 text-[#6b8362]' />
+                  <Calendar className="h-8 w-8 text-[#6b8362]" />
                 </div>
                 <div
                   className={`
                     mx-auto h-1 w-24 rounded-full bg-gradient-to-r
                     from-[#6b8362] to-amber-600
                   `}
-                ></div>
+                />
               </div>
 
               <div
@@ -315,13 +315,14 @@ export default function ForSchoolsPage() {
                 `}
               >
                 {/* Timeline */}
-                <div className='space-y-8'>
+                <div className="space-y-8">
                   {[
                     {
                       time: '9:00-10:00',
                       icon: MapPin,
                       title: 'Άφιξη & Υποδοχή',
-                      description: 'Άφιξη στον μυστηριώδη χώρο της περιπέτειας και γνωριμία με το περιβάλλον.',
+                      description:
+                        'Άφιξη στον μυστηριώδη χώρο της περιπέτειας και γνωριμία με το περιβάλλον.',
                     },
                     {
                       time: '10:00-10:30',
@@ -334,18 +335,20 @@ export default function ForSchoolsPage() {
                       time: '10:30-13:00',
                       icon: Target,
                       title: 'Δραστηριότητες & Εξερεύνηση',
-                      description: 'Εξερευνούμε τα μυστικά μονοπάτια και πραγματοποιούμε διάφορες αποστολές σε ομάδες.',
+                      description:
+                        'Εξερευνούμε τα μυστικά μονοπάτια και πραγματοποιούμε διάφορες αποστολές σε ομάδες.',
                     },
                     {
                       time: '13:00-14:00',
                       icon: Star,
                       title: 'Γεύμα & Επιστροφή',
-                      description: 'Απολαμβάνουμε ένα θαυμάσιο γεύμα και επιστρέφουμε με νέες ιστορίες να μοιραστούμε.',
+                      description:
+                        'Απολαμβάνουμε ένα θαυμάσιο γεύμα και επιστρέφουμε με νέες ιστορίες να μοιραστούμε.',
                     },
                   ].map((item, index) => (
-                    <div key={index} className='group relative'>
-                      <div className='flex items-start space-x-6'>
-                        <div className='relative'>
+                    <div key={index} className="group relative">
+                      <div className="flex items-start space-x-6">
+                        <div className="relative">
                           <div
                             className={`
                               flex h-16 w-16 items-center justify-center
@@ -355,7 +358,7 @@ export default function ForSchoolsPage() {
                               group-hover:scale-110
                             `}
                           >
-                            <item.icon className='h-6 w-6' />
+                            <item.icon className="h-6 w-6" />
                           </div>
                           <div
                             className={`
@@ -364,11 +367,11 @@ export default function ForSchoolsPage() {
                               transition duration-300
                               group-hover:opacity-30
                             `}
-                          ></div>
+                          />
                         </div>
-                        <div className='min-w-0 flex-1'>
-                          <div className='mb-2 flex items-center space-x-3'>
-                            <Clock className='h-4 w-4 text-amber-600' />
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-2 flex items-center space-x-3">
+                            <Clock className="h-4 w-4 text-amber-600" />
                             <span
                               className={`
                                 rounded-full bg-amber-100 px-3 py-1 text-sm
@@ -378,8 +381,12 @@ export default function ForSchoolsPage() {
                               {item.time}
                             </span>
                           </div>
-                          <h3 className='mb-2 text-xl font-bold text-[#6b8362]'>{item.title}</h3>
-                          <p className='leading-relaxed text-gray-700'>{item.description}</p>
+                          <h3 className="mb-2 text-xl font-bold text-[#6b8362]">
+                            {item.title}
+                          </h3>
+                          <p className="leading-relaxed text-gray-700">
+                            {item.description}
+                          </p>
                         </div>
                       </div>
                       {index < 3 && (
@@ -388,14 +395,14 @@ export default function ForSchoolsPage() {
                             absolute top-16 left-8 h-8 w-px bg-gradient-to-b
                             from-[#6b8362]/50 to-transparent
                           `}
-                        ></div>
+                        />
                       )}
                     </div>
                   ))}
                 </div>
 
                 {/* Program Image */}
-                <div className='group relative'>
+                <div className="group relative">
                   <div
                     className={`
                       absolute -inset-1 rounded-3xl bg-gradient-to-r
@@ -403,7 +410,7 @@ export default function ForSchoolsPage() {
                       duration-1000
                       group-hover:opacity-30
                     `}
-                  ></div>
+                  />
                   <div
                     className={`
                       relative aspect-4/3 w-full overflow-hidden rounded-3xl
@@ -411,8 +418,8 @@ export default function ForSchoolsPage() {
                     `}
                   >
                     <OptimizedImage
-                      src='/images/children_rafting_activity_bright_outdoors.jpg'
-                      alt='Σχολική εκδρομή στον Αχέροντα'
+                      src="/images/children_rafting_activity_bright_outdoors.jpg"
+                      alt="Σχολική εκδρομή στον Αχέροντα"
                       fill
                       className={`
                         object-cover transition-transform duration-700
@@ -424,7 +431,7 @@ export default function ForSchoolsPage() {
                         absolute inset-0 bg-gradient-to-t from-black/20
                         via-transparent to-transparent
                       `}
-                    ></div>
+                    />
                     <BorderBeam size={250} duration={20} delay={10} />
                   </div>
                 </div>
@@ -434,22 +441,22 @@ export default function ForSchoolsPage() {
           </div>
 
           {/* Activities Section */}
-          <div className='relative'>
+          <div className="relative">
             <div
               className={`
                 absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-600/20
                 to-[#6b8362]/20 opacity-30 blur
               `}
-            ></div>
+            />
             <div
               className={`
                 relative rounded-3xl border border-amber-100/50 bg-white/90 p-8
                 shadow-xl backdrop-blur-md
               `}
             >
-              <div className='mb-12 text-center'>
-                <div className='mb-4 inline-flex items-center space-x-3'>
-                  <Target className='h-8 w-8 text-[#6b8362]' />
+              <div className="mb-12 text-center">
+                <div className="mb-4 inline-flex items-center space-x-3">
+                  <Target className="h-8 w-8 text-[#6b8362]" />
                   <h2
                     className={`
                       ${robotoSlab.variable}
@@ -459,14 +466,14 @@ export default function ForSchoolsPage() {
                   >
                     ΟΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ ΠΟΥ ΘΑ ΚΑΝΟΥΜΕ
                   </h2>
-                  <Target className='h-8 w-8 text-[#6b8362]' />
+                  <Target className="h-8 w-8 text-[#6b8362]" />
                 </div>
                 <div
                   className={`
                     mx-auto h-1 w-24 rounded-full bg-gradient-to-r
                     from-[#6b8362] to-amber-600
                   `}
-                ></div>
+                />
               </div>
 
               <div
@@ -489,7 +496,7 @@ export default function ForSchoolsPage() {
                       duration-1000
                       group-hover:opacity-30
                     `}
-                  ></div>
+                  />
                   <div
                     className={`
                       relative aspect-4/3 w-full overflow-hidden rounded-3xl
@@ -497,8 +504,8 @@ export default function ForSchoolsPage() {
                     `}
                   >
                     <OptimizedImage
-                      src='/images/Rafting_Group_YellowHelmets_OutdoorRiver.jpg'
-                      alt='Παιδιά σε δραστηριότητες'
+                      src="/images/Rafting_Group_YellowHelmets_OutdoorRiver.jpg"
+                      alt="Παιδιά σε δραστηριότητες"
                       fill
                       className={`
                         object-cover transition-transform duration-700
@@ -510,7 +517,7 @@ export default function ForSchoolsPage() {
                         absolute inset-0 bg-gradient-to-t from-black/20
                         via-transparent to-transparent
                       `}
-                    ></div>
+                    />
                     <BorderBeam size={250} duration={18} delay={7} />
                   </div>
                 </div>
@@ -543,7 +550,7 @@ export default function ForSchoolsPage() {
                         from-[#6b8362] to-amber-600
                         lg:mx-0
                       `}
-                    ></div>
+                    />
                   </div>
 
                   {[
@@ -569,7 +576,7 @@ export default function ForSchoolsPage() {
                       color: 'from-amber-500 to-orange-500',
                     },
                   ].map((activity, index) => (
-                    <div key={index} className='group relative'>
+                    <div key={index} className="group relative">
                       <div
                         className={`
                           absolute -inset-1 rounded-2xl bg-gradient-to-r
@@ -577,7 +584,7 @@ export default function ForSchoolsPage() {
                           transition duration-500
                           group-hover:opacity-100
                         `}
-                      ></div>
+                      />
                       <div
                         className={`
                           relative rounded-2xl border border-amber-100/50
@@ -586,7 +593,7 @@ export default function ForSchoolsPage() {
                           group-hover:shadow-xl
                         `}
                       >
-                        <div className='flex items-start space-x-4'>
+                        <div className="flex items-start space-x-4">
                           <div
                             className={`
                               flex h-14 w-14 items-center justify-center
@@ -597,9 +604,9 @@ export default function ForSchoolsPage() {
                               group-hover:scale-110
                             `}
                           >
-                            <activity.icon className='h-7 w-7' />
+                            <activity.icon className="h-7 w-7" />
                           </div>
-                          <div className='min-w-0 flex-1'>
+                          <div className="min-w-0 flex-1">
                             <h4
                               className={`
                                 mb-2 text-lg font-bold text-[#6b8362]
@@ -609,7 +616,9 @@ export default function ForSchoolsPage() {
                             >
                               {index + 1}. {activity.title}
                             </h4>
-                            <p className='leading-relaxed text-gray-700'>{activity.description}</p>
+                            <p className="leading-relaxed text-gray-700">
+                              {activity.description}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -617,8 +626,8 @@ export default function ForSchoolsPage() {
                   ))}
 
                   {/* Pricing Cards */}
-                  <div className='mt-8 space-y-4'>
-                    <div className='group relative'>
+                  <div className="mt-8 space-y-4">
+                    <div className="group relative">
                       <div
                         className={`
                           absolute -inset-1 rounded-2xl bg-gradient-to-r
@@ -626,7 +635,7 @@ export default function ForSchoolsPage() {
                           duration-500
                           group-hover:opacity-30
                         `}
-                      ></div>
+                      />
                       <div
                         className={`
                           relative rounded-2xl border border-amber-200/50
@@ -634,9 +643,9 @@ export default function ForSchoolsPage() {
                           shadow-lg
                         `}
                       >
-                        <div className='flex items-center justify-between'>
-                          <div className='flex items-center space-x-3'>
-                            <Euro className='h-6 w-6 text-[#6b8362]' />
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <Euro className="h-6 w-6 text-[#6b8362]" />
                             <span
                               className={`
                               text-lg font-semibold text-gray-800
@@ -645,15 +654,22 @@ export default function ForSchoolsPage() {
                               Βασικό Πρόγραμμα
                             </span>
                           </div>
-                          <div className='text-right'>
-                            <div className='text-2xl font-bold text-[#6b8362]'>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-[#6b8362]">
                               <NumberTicker value={7} /> ευρώ
                             </div>
-                            <div className='text-sm text-gray-600'>ανά άτομο</div>
+                            <div className="text-sm text-gray-600">
+                              ανά άτομο
+                            </div>
                           </div>
                         </div>
-                        <div className='mt-4 flex flex-wrap gap-2'>
-                          {['Ράφτινγκ', 'Τοξοβολία', 'Πεζοπορία', 'Εξοπλισμός'].map((item, idx) => (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {[
+                            'Ράφτινγκ',
+                            'Τοξοβολία',
+                            'Πεζοπορία',
+                            'Εξοπλισμός',
+                          ].map((item, idx) => (
                             <span
                               key={idx}
                               className={`
@@ -662,7 +678,7 @@ export default function ForSchoolsPage() {
                                 text-[#6b8362]
                               `}
                             >
-                              <CheckCircle className='mr-1 h-3 w-3' />
+                              <CheckCircle className="mr-1 h-3 w-3" />
                               {item}
                             </span>
                           ))}
@@ -670,7 +686,7 @@ export default function ForSchoolsPage() {
                       </div>
                     </div>
 
-                    <div className='group relative'>
+                    <div className="group relative">
                       <div
                         className={`
                           absolute -inset-1 rounded-2xl bg-gradient-to-r
@@ -678,7 +694,7 @@ export default function ForSchoolsPage() {
                           transition duration-500
                           group-hover:opacity-30
                         `}
-                      ></div>
+                      />
                       <div
                         className={`
                           relative rounded-2xl border border-orange-200/50
@@ -686,9 +702,9 @@ export default function ForSchoolsPage() {
                           shadow-lg
                         `}
                       >
-                        <div className='flex items-center justify-between'>
-                          <div className='flex items-center space-x-3'>
-                            <Mountain className='h-6 w-6 text-amber-600' />
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <Mountain className="h-6 w-6 text-amber-600" />
                             <span
                               className={`
                               text-lg font-semibold text-gray-800
@@ -697,45 +713,53 @@ export default function ForSchoolsPage() {
                               Με Ιππασία
                             </span>
                           </div>
-                          <div className='text-right'>
-                            <div className='text-2xl font-bold text-amber-600'>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-amber-600">
                               +<NumberTicker value={5} /> ευρώ
                             </div>
-                            <div className='text-sm text-gray-600'>προαιρετικά</div>
+                            <div className="text-sm text-gray-600">
+                              προαιρετικά
+                            </div>
                           </div>
                         </div>
-                        <p className='mt-3 text-sm text-gray-700'>Βόλτα με εκπαιδευμένα άλογα στη φύση</p>
+                        <p className="mt-3 text-sm text-gray-700">
+                          Βόλτα με εκπαιδευμένα άλογα στη φύση
+                        </p>
                       </div>
                     </div>
                   </div>
 
                   {/* Additional Info */}
-                  <div className='group relative mt-8'>
+                  <div className="group relative mt-8">
                     <div
                       className={`
                         absolute -inset-1 rounded-2xl bg-gradient-to-r
                         from-[#6b8362]/10 to-amber-600/10 opacity-50 blur
                       `}
-                    ></div>
+                    />
                     <div
                       className={`
                         relative rounded-2xl border border-[#6b8362]/20
                         bg-gradient-to-br from-[#6b8362]/5 to-amber-50/50 p-6
                       `}
                     >
-                      <div className='flex items-start space-x-3'>
+                      <div className="flex items-start space-x-3">
                         <Star
                           className={`
                           mt-1 h-6 w-6 flex-shrink-0 text-[#6b8362]
                         `}
                         />
                         <div>
-                          <h4 className='mb-2 font-bold text-[#6b8362]'>Γεύματα & Εστίαση</h4>
-                          <p className='leading-relaxed text-gray-700'>
-                            Στον χώρο της εκδρομής, θα βρείτε εστιατόρια με αυθεντική κουζίνα και άριστη υποδομή, όπου
-                            μπορείτε να απολαύσετε γεύματα με θέα στη φύση, με τιμές από{' '}
-                            <span className='font-bold text-[#6b8362]'>
-                              <NumberTicker value={7} /> έως <NumberTicker value={10} /> ευρώ
+                          <h4 className="mb-2 font-bold text-[#6b8362]">
+                            Γεύματα & Εστίαση
+                          </h4>
+                          <p className="leading-relaxed text-gray-700">
+                            Στον χώρο της εκδρομής, θα βρείτε εστιατόρια με
+                            αυθεντική κουζίνα και άριστη υποδομή, όπου μπορείτε
+                            να απολαύσετε γεύματα με θέα στη φύση, με τιμές από{' '}
+                            <span className="font-bold text-[#6b8362]">
+                              <NumberTicker value={7} /> έως{' '}
+                              <NumberTicker value={10} /> ευρώ
                             </span>{' '}
                             ανά άτομο.
                           </p>
@@ -750,22 +774,22 @@ export default function ForSchoolsPage() {
           </div>
 
           {/* Gallery Section */}
-          <div className='relative'>
+          <div className="relative">
             <div
               className={`
                 absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#6b8362]/20
                 to-amber-600/20 opacity-30 blur
               `}
-            ></div>
+            />
             <div
               className={`
                 relative rounded-3xl border border-amber-100/50 bg-white/90 p-8
                 shadow-xl backdrop-blur-md
               `}
             >
-              <div className='mb-12 text-center'>
-                <div className='mb-4 inline-flex items-center space-x-3'>
-                  <Camera className='h-8 w-8 text-[#6b8362]' />
+              <div className="mb-12 text-center">
+                <div className="mb-4 inline-flex items-center space-x-3">
+                  <Camera className="h-8 w-8 text-[#6b8362]" />
                   <h2
                     className={`
                       ${robotoSlab.variable}
@@ -775,14 +799,14 @@ export default function ForSchoolsPage() {
                   >
                     ΦΩΤΟΓΡΑΦΙΕΣ ΣΧΟΛΙΚΩΝ ΔΡΑΣΤΗΡΙΟΤΗΤΩΝ
                   </h2>
-                  <Camera className='h-8 w-8 text-[#6b8362]' />
+                  <Camera className="h-8 w-8 text-[#6b8362]" />
                 </div>
                 <div
                   className={`
                     mx-auto h-1 w-24 rounded-full bg-gradient-to-r
                     from-[#6b8362] to-amber-600
                   `}
-                ></div>
+                />
               </div>
 
               <div
@@ -809,7 +833,7 @@ export default function ForSchoolsPage() {
                     title: 'Εξερεύνηση Φύσης',
                   },
                 ].map((image, index) => (
-                  <div key={index} className='group relative'>
+                  <div key={index} className="group relative">
                     <div
                       className={`
                         absolute -inset-1 rounded-3xl bg-gradient-to-r
@@ -817,8 +841,8 @@ export default function ForSchoolsPage() {
                         duration-700
                         group-hover:opacity-30
                       `}
-                    ></div>
-                    <div className='relative'>
+                    />
+                    <div className="relative">
                       <div
                         className={`
                           relative aspect-4/3 overflow-hidden rounded-3xl border
@@ -841,7 +865,7 @@ export default function ForSchoolsPage() {
                             transition-opacity duration-500
                             group-hover:opacity-100
                           `}
-                        ></div>
+                        />
                         <div
                           className={`
                             absolute right-4 bottom-4 left-4 translate-y-4
@@ -858,7 +882,11 @@ export default function ForSchoolsPage() {
                           </h3>
                         </div>
                       </div>
-                      <BorderBeam size={200} duration={15 + index * 3} delay={index * 2} />
+                      <BorderBeam
+                        size={200}
+                        duration={15 + index * 3}
+                        delay={index * 2}
+                      />
                     </div>
                   </div>
                 ))}
@@ -868,13 +896,13 @@ export default function ForSchoolsPage() {
           </div>
 
           {/* CTA Section */}
-          <div className='relative'>
+          <div className="relative">
             <div
               className={`
                 absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#6b8362]
                 to-amber-600 opacity-20 blur
               `}
-            ></div>
+            />
             <div
               className={`
                 relative overflow-hidden rounded-3xl border border-amber-100/50
@@ -894,9 +922,9 @@ export default function ForSchoolsPage() {
                 `}
               />
 
-              <div className='relative z-10'>
-                <div className='mb-6 inline-flex items-center space-x-3'>
-                  <Star className='h-10 w-10 animate-pulse text-amber-500' />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center space-x-3">
+                  <Star className="h-10 w-10 animate-pulse text-amber-500" />
                   <h2
                     className={`
                       ${robotoSlab.variable}
@@ -907,7 +935,7 @@ export default function ForSchoolsPage() {
                   >
                     Κλείστε τώρα την εκδρομή του σχολείου σας!
                   </h2>
-                  <Star className='h-10 w-10 animate-pulse text-amber-500' />
+                  <Star className="h-10 w-10 animate-pulse text-amber-500" />
                 </div>
 
                 <div
@@ -915,7 +943,7 @@ export default function ForSchoolsPage() {
                     mx-auto mb-8 h-1 w-32 rounded-full bg-gradient-to-r
                     from-[#6b8362] to-amber-600
                   `}
-                ></div>
+                />
 
                 <p
                   className={`
@@ -924,8 +952,8 @@ export default function ForSchoolsPage() {
                     md:text-2xl
                   `}
                 >
-                  Επικοινωνήστε μαζί μας για περισσότερες πληροφορίες και για να οργανώσουμε μαζί την τέλεια εκδρομή για
-                  τους μαθητές σας.
+                  Επικοινωνήστε μαζί μας για περισσότερες πληροφορίες και για να
+                  οργανώσουμε μαζί την τέλεια εκδρομή για τους μαθητές σας.
                 </p>
 
                 <div
@@ -941,15 +969,15 @@ export default function ForSchoolsPage() {
                       shadow-xl transition-all duration-300
                       hover:scale-105 hover:from-[#5a7354] hover:to-[#4a6244]
                     `}
-                    pulseColor='#6b8362'
+                    pulseColor="#6b8362"
                   >
                     <Link
-                      href='mailto:info@ponyclub.gr'
+                      href="mailto:info@ponyclub.gr"
                       className={`
                       flex items-center space-x-3
                     `}
                     >
-                      <span className='text-lg'>Επικοινωνήστε μαζί μας</span>
+                      <span className="text-lg">Επικοινωνήστε μαζί μας</span>
                       <ArrowRight
                         className={`
                           h-5 w-5 transition-transform
@@ -959,9 +987,9 @@ export default function ForSchoolsPage() {
                     </Link>
                   </PulsatingButton>
 
-                  <div className='flex items-center space-x-4 text-gray-600'>
-                    <div className='flex items-center space-x-2'>
-                      <Clock className='h-5 w-5 text-[#6b8362]' />
+                  <div className="flex items-center space-x-4 text-gray-600">
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-5 w-5 text-[#6b8362]" />
                       <span>Άμεση απάντηση</span>
                     </div>
                     <div
@@ -969,9 +997,9 @@ export default function ForSchoolsPage() {
                         hidden h-6 w-px bg-gray-300
                         sm:block
                       `}
-                    ></div>
-                    <div className='flex items-center space-x-2'>
-                      <CheckCircle className='h-5 w-5 text-green-500' />
+                    />
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-5 w-5 text-green-500" />
                       <span>Δωρεάν προσφορά</span>
                     </div>
                   </div>
@@ -1002,11 +1030,13 @@ export default function ForSchoolsPage() {
                           rounded-full bg-[#6b8362]
                         `}
                       >
-                        <span className='font-bold text-white'>📧</span>
+                        <span className="font-bold text-white">📧</span>
                       </div>
                       <div>
-                        <div className='font-semibold text-[#6b8362]'>Email</div>
-                        <div className='text-gray-700'>info@ponyclub.gr</div>
+                        <div className="font-semibold text-[#6b8362]">
+                          Email
+                        </div>
+                        <div className="text-gray-700">info@ponyclub.gr</div>
                       </div>
                     </div>
                     <div
@@ -1021,11 +1051,13 @@ export default function ForSchoolsPage() {
                           rounded-full bg-amber-600
                         `}
                       >
-                        <span className='font-bold text-white'>📞</span>
+                        <span className="font-bold text-white">📞</span>
                       </div>
                       <div>
-                        <div className='font-semibold text-amber-700'>Τηλέφωνο</div>
-                        <div className='text-gray-700'>+30 698 661 7090</div>
+                        <div className="font-semibold text-amber-700">
+                          Τηλέφωνο
+                        </div>
+                        <div className="text-gray-700">+30 698 661 7090</div>
                       </div>
                     </div>
                   </div>
@@ -1038,5 +1070,5 @@ export default function ForSchoolsPage() {
         </div>
       </main>
     </>
-  )
+  );
 }

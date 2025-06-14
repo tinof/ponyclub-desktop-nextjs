@@ -1,13 +1,31 @@
 {
   "cline.modelSettings.o3Mini.reasoningEffort": "high",
 
-  // Editor Configuration for AI Assistance
-  "editor.formatOnSave": false,
-  "editor.formatOnPaste": false,
+  // Editor Configuration for AI Assistance with Biome
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "editor.formatOnType": false,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.removeUnusedImports": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
+  },
+
+  // Language-specific Biome settings
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
   },
 
   // TypeScript Configuration

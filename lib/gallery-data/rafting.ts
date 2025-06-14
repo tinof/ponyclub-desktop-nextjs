@@ -35,4 +35,4 @@ export const raftingGalleryImages = [
     src: '/images/ChildrenRafting_GreenOutdoor_Adventurous_RiverScene.jpg',
     alt: "Children's rafting adventure in the green outdoor setting of Acheron River",
   },
-]
+];

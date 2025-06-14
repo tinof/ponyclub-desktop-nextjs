@@ -1,5 +1,8 @@
 {
   "recommendations": [
+    // Code formatting and linting
+    "biomejs.biome",
+
     // TypeScript and Next.js support
     "ms-vscode.vscode-typescript-next",
     "bradlc.vscode-tailwindcss",
@@ -38,5 +41,9 @@
     "aaron-bond.better-comments",
     "ms-vscode.vscode-todo-highlight"
   ],
-  "unwantedRecommendations": ["ms-vscode.vscode-typescript", "hookyqr.beautify", "ms-vscode.sublime-keybindings"]
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify",
+    "ms-vscode.sublime-keybindings"
+  ]
 }
