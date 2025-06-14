@@ -1,0 +1,1936 @@
+{
+  "id": "06141925-9574-0139-0000-60346197e714",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "items": [
+    {
+      "type": "local_pack",
+      "rank_group": 1,
+      "rank_absolute": 1,
+      "title": "Acheron Rafting Club",
+      "description": "Glyki \nWebsite \n",
+      "domain": "www.acheron-rafting.gr",
+      "phone": "695 100 4747",
+      "url": "http://www.acheron-rafting.gr/",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.8,
+        "votes_count": 533,
+        "rating_max": 5
+      },
+      "cid": "10039044641835901461"
+    },
+    {
+      "type": "local_pack",
+      "rank_group": 2,
+      "rank_absolute": 2,
+      "title": "Acheron River Club",
+      "description": "Glyki \n",
+      "phone": "694 259 1307",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.9,
+        "votes_count": 185,
+        "rating_max": 5
+      },
+      "cid": "14428920459404880079"
+    },
+    {
+      "type": "local_pack",
+      "rank_group": 3,
+      "rank_absolute": 3,
+      "title": "Riverdream Club Αχέροντας",
+      "description": "Glyki \nCloses soon ⋅ 8 PM \nWebsite \n",
+      "domain": "riverdream.gr",
+      "phone": "694 575 7363",
+      "url": "http://riverdream.gr/",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.8,
+        "votes_count": 3000,
+        "rating_max": 5
+      },
+      "cid": "8042390904431272387"
+    },
+    {
+      "type": "compare_sites",
+      "rank_group": 1,
+      "rank_absolute": 4,
+      "title": "Places sites",
+      "items": [
+        {
+          "type": "compare_sites_element",
+          "title": "Rafting in Acheron River",
+          "url": "https://www.xtremegreece.gr/en/rafting/rafting-in-acheron-river.html",
+          "domain": "www.xtremegreece.gr",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:0",
+          "source": "Xtreme Greece"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acheron River (2025) - All You Need to Know BEFORE You Go ...",
+          "url": "https://www.tripadvisor.com/Attraction_Review-g189452-d2706042-Reviews-Acheron_River-Parga_Municipality_Preveza_Region_Epirus.html",
+          "domain": "www.tripadvisor.com",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:1",
+          "source": "Tripadvisor"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acheron Rafting Club",
+          "url": "https://www.facebook.com/acheronraftingclub/?locale=el_GR",
+          "domain": "www.facebook.com",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:2",
+          "source": "Facebook"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "The best adventure activities on the Acheron River in Epirus",
+          "url": "https://www.discovergreece.com/experiences/best-adventure-activities-acheron-river-epirus",
+          "domain": "www.discovergreece.com",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:3",
+          "source": "Discover Greece"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "The BEST Acheron River rafting 2025 - FREE Cancellation",
+          "url": "https://www.getyourguide.com/en-gb/acheron-l161331/river-rafting-tc66/",
+          "domain": "www.getyourguide.com",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNg8OWC6ljvsN8an5woqkATMqjxpr2rJA&s=0",
+          "source": "GetYourGuide"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acheron Rafting Club",
+          "url": "https://www.filoxeno.com/minipage/index/en/activity/filoxeno/106208",
+          "domain": "www.filoxeno.com",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWc6LdewXWzUmVh3ln-3lgWfdg4xpTqNo&s=0",
+          "source": "Filoxeno.com"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acheron River in Parga, Greece",
+          "url": "https://www.greeka.com/epirus/parga/sightseeing/parga-acheron-river/",
+          "domain": "www.greeka.com",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNdfYCpO-YRyh2v4-XcjSfs_OkDX0R9X0&s=0",
+          "source": "Greeka"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acherodas River",
+          "url": "https://www.visitgreece.gr/experiences/nature/rivers/acherodas-river/",
+          "domain": "www.visitgreece.gr",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0oPUkppiBjbHkSX1VU4G-B5Oxp3-MtJU&s=0",
+          "source": "Visit Greece"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Skala Tzavelaina: Natural Glory Above the Acheron River",
+          "url": "https://www.travel.gr/en/experiences-ee/skala-tzavelaina-natural-glory-above-the-acheron-river/",
+          "domain": "www.travel.gr",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQonIDpl_zZwCsKGRjNJfBw3ggZO0EwaL8&s=0",
+          "source": "travel.gr"
+        },
+        {
+          "type": "compare_sites_element",
+          "title": "Acheron river",
+          "url": "https://nikana.gr/en/tourist-guide/epirus/what-to-see/3259/acheron-river",
+          "domain": "nikana.gr",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRrIVXQFfbFKJ5JOEb0u-2IMRA6Hh6OAg&s=0",
+          "source": "Nikana.gr"
+        }
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 1,
+      "rank_absolute": 5,
+      "domain": "acheron-rafting.gr",
+      "title": "Acheron Rafting Club | Gliki Thesprotias",
+      "url": "https://acheron-rafting.gr/index_en1.php",
+      "breadcrumb": "https://acheron-rafting.gr › index_en1",
+      "website_name": "Acheron Rafting Club",
+      "is_image": true,
+      "description": "Acheron Rafting Club is headquartered in Glyki Thesprotia, at the springs of Acheron River. Our company has professional drivers with years of experience.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from acheron-rafting.gr",
+          "url": "https://acheron-rafting.gr/index_en1.php",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:4"
+        }
+      ],
+      "highlighted": [
+        "is headquartered in Glyki Thesprotia"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 2,
+      "rank_absolute": 6,
+      "domain": "www.xtremegreece.gr",
+      "title": "Rafting in Acheron River - Xtreme Greece",
+      "url": "https://www.xtremegreece.gr/en/rafting/rafting-in-acheron-river.html",
+      "breadcrumb": "https://www.xtremegreece.gr › rafting › rafting-in-ache...",
+      "website_name": "xtremegreece.gr",
+      "is_image": true,
+      "description": "Rafting on the Acheron River is an outdoor leisure activity that involves descending a river with an inflatable boat.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.xtremegreece.gr",
+          "url": "https://www.xtremegreece.gr/en/rafting/rafting-in-acheron-river.html",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:5"
+        }
+      ],
+      "highlighted": [
+        "Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 3,
+      "rank_absolute": 7,
+      "domain": "www.tripadvisor.com",
+      "title": "Acheron River (2025) - All You Need to Know BEFORE ...",
+      "url": "https://www.tripadvisor.com/Attraction_Review-g189452-d2706042-Reviews-Acheron_River-Parga_Municipality_Preveza_Region_Epirus.html",
+      "breadcrumb": "https://www.tripadvisor.com › Attraction_Review-g189...",
+      "website_name": "Tripadvisor",
+      "is_image": true,
+      "description": "Really lovely place with clear water and the possibility of a ride in a rubber boat down the river (with “captain”). 7 EUR per adult and 5 EUR per child + 6 EUR ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.tripadvisor.com",
+          "url": "https://www.tripadvisor.com/Attraction_Review-g189452-d2706042-Reviews-Acheron_River-Parga_Municipality_Preveza_Region_Epirus.html",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:6"
+        }
+      ],
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.7,
+        "votes_count": 1941,
+        "rating_max": 5
+      },
+      "highlighted": [
+        "Really lovely place with clear water"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 4,
+      "rank_absolute": 8,
+      "domain": "riverdream.gr",
+      "title": "Acheron Riverdream Club, Rafting, Canoe Kayak, Ιππασία ...",
+      "url": "https://riverdream.gr/?lang=en",
+      "breadcrumb": "https://riverdream.gr › ...",
+      "website_name": "riverdream.gr",
+      "is_image": true,
+      "description": "Για την καλύτερη εξυπηρέτησή σας επικοινωνήστε μέσω Viber ή WhatsApp στο τηλέφωνο 6945757363. Riverdream Club, Γλυκή Θεσπρωτίας, Αχέροντας Ποταμός.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from riverdream.gr",
+          "url": "https://riverdream.gr/?lang=en",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:7"
+        }
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 5,
+      "rank_absolute": 9,
+      "domain": "www.acheron-rafting.gr",
+      "title": "Acheron Rafting Club | Γλυκή Θεσπρωτίας",
+      "url": "http://www.acheron-rafting.gr/",
+      "breadcrumb": "http://www.acheron-rafting.gr",
+      "website_name": "Acheron Rafting Club",
+      "is_image": true,
+      "description": "Η εταιρεία Acheron Rafting Club έχει έδρα την Γλυκή Θεσπρωτίας, στις πηγές του Αχέροντα ποταμού. Η εταιρεία μας διαθέτει επαγγελματίες οδηγούς με πολυετή ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.acheron-rafting.gr",
+          "url": "http://www.acheron-rafting.gr/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFlV5_yqlhzJ4poKZCJUgf59kEuRIr4lqE58yDIBR6UdGzXLVQQnzA&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "έχει έδρα την Γλυκή Θεσπρωτίας"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 6,
+      "rank_absolute": 10,
+      "domain": "ponyclub.gr",
+      "title": "Pony Club | Adventure Activities in Acheron River",
+      "url": "https://ponyclub.gr/en",
+      "breadcrumb": "https://ponyclub.gr › ...",
+      "website_name": "ponyclub.gr",
+      "description": "Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor ...",
+      "highlighted": [
+        "Pony Club offers rafting, horse riding, kayaking and trekking experiences"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 7,
+      "rank_absolute": 11,
+      "domain": "riverdream.gr",
+      "title": "Acheron Riverdream Club, Rafting, Canoe Kayak, Ιππασία ...",
+      "url": "https://riverdream.gr/activities/raftingen/?lang=en",
+      "breadcrumb": "https://riverdream.gr › activities › raftingen",
+      "website_name": "riverdream.gr",
+      "is_image": true,
+      "description": "Rafting in the clear waters of the Acheron River, a thrill that you have to live! Rafting for groups Rafting for groups, teams, schools by appointment all year ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from riverdream.gr",
+          "url": "https://riverdream.gr/activities/raftingen/?lang=en",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS77lu5o6KTMmq8ib41DT6k2mJTXjiVQze8JouIjFgas_WbWGwztL0Y&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Rafting in the clear waters of the Acheron River"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 8,
+      "rank_absolute": 12,
+      "domain": "www.xtremegreece.gr",
+      "title": "Rafting στον Αχέροντα Ποταμό - Xtreme Greece",
+      "url": "https://www.xtremegreece.gr/el/rafting/rafting-in-acheron-river.html",
+      "breadcrumb": "https://www.xtremegreece.gr › raft...",
+      "website_name": "xtremegreece.gr",
+      "is_image": true,
+      "description": "Το Rafting στον ποταμό Αχέροντα, είναι μία υπαίθρια δραστηριότητα αναψυχής,η οποία περιλαμβάνει την κατάβαση ενός ποταμού με φουσκωτή βάρκα.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.xtremegreece.gr",
+          "url": "https://www.xtremegreece.gr/el/rafting/rafting-in-acheron-river.html",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgh9j67YMPtT9eYZ2u6Uj5fCtC21cfTuq6RGP6GjcYVe_zH07U1-aJ&usqp=CAE&s"
+        }
+      ],
+      "price": {
+        "current": 28,
+        "currency": "EUR",
+        "displayed_price": "€28.00"
+      },
+      "highlighted": [
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 9,
+      "rank_absolute": 13,
+      "domain": "www.unlimited-adrenaline.gr",
+      "title": "Acheron Rafting Club",
+      "url": "https://www.unlimited-adrenaline.gr/acheron-rafting-club/p/200",
+      "breadcrumb": "https://www.unlimited-adrenaline.gr › ...",
+      "website_name": "Unlimited Adrenaline",
+      "is_image": true,
+      "description": "Δραστηριότητες Acheron Rafting Club. Rafting · Rafting στον Αχέροντα ποταμό. Γλυκή. 30 λεπτά. από 7.00 € / άτομο. Acheron Rafting Club · Monoraft/Hot dogs.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.unlimited-adrenaline.gr",
+          "url": "https://www.unlimited-adrenaline.gr/acheron-rafting-club/p/200",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShxylzQjLPRlR_yRP-8TL4STyC9ilCsmoJJoYG7z5aU5kKV2GzFjz3&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Acheron Rafting Club"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 10,
+      "rank_absolute": 14,
+      "domain": "west-coast-travel.com",
+      "title": "Acheron Rafting - Activities Preveza Epirus - Ionian Islands",
+      "url": "https://west-coast-travel.com/package/acheron-rafting/",
+      "breadcrumb": "https://west-coast-travel.com › package › acheron-rafting",
+      "website_name": "west-coast-travel.com",
+      "is_image": true,
+      "description": "Acheron Rafting Club is headquartered in Glyki Thesprotia, at the springs of Acheron River. Our company has professional drivers with years of experience.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from west-coast-travel.com",
+          "url": "https://west-coast-travel.com/package/acheron-rafting/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl7tczmhR1UwelCNslSbLVR_mKk3hjgQTN7UBNWD1pFC4L_h1LY1eh&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Acheron Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 11,
+      "rank_absolute": 15,
+      "domain": "www.tripadvisor.com",
+      "title": "Area 19 - Acheron Rafting Canoe Kayak (2025)",
+      "url": "https://www.tripadvisor.com/Attraction_Review-g1188928-d27945992-Reviews-Area_19_Acheron_Rafting_Canoe_Kayak-Glyki_Thesprotia_Region_Epirus.html",
+      "breadcrumb": "https://www.tripadvisor.com › ... › Things to Do in Glyki",
+      "website_name": "Tripadvisor",
+      "is_image": true,
+      "description": "Nice raft trip, friendly people ! It is possible to have a private boat or with other people. The water is a beautiful colour. Read more. Written ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.tripadvisor.com",
+          "url": "https://www.tripadvisor.com/Attraction_Review-g1188928-d27945992-Reviews-Area_19_Acheron_Rafting_Canoe_Kayak-Glyki_Thesprotia_Region_Epirus.html",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ireWr_QYJ86h1xZF0nb2GjYtTW3dbMob02Ezn3D2mhIAlEHbkzzF&usqp=CAE&s"
+        }
+      ],
+      "rating": {
+        "rating_type": "Max5",
+        "value": 5,
+        "votes_count": 6,
+        "rating_max": 5
+      },
+      "highlighted": [
+        "Nice raft trip, friendly people"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 12,
+      "rank_absolute": 16,
+      "domain": "acheronkayak.gr",
+      "title": "Acheron Delta Kayaking Eco Tour: Home",
+      "url": "https://acheronkayak.gr/",
+      "breadcrumb": "https://acheronkayak.gr",
+      "website_name": "Acheron Delta Kayaking Eco Tour",
+      "is_image": true,
+      "description": "We established Acheron Delta Kayaking Eco Tour in 2010. Our commitment was to explore the river by providing fun, safe and ecologically sound kayaking ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from acheronkayak.gr",
+          "url": "https://acheronkayak.gr/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJfy7J2ucabS0HJX-E3208LJDlXzXkszKt45D7UsPFHjkNZ1YjKBUg&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Acheron Delta Kayaking Eco Tour"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 13,
+      "rank_absolute": 17,
+      "domain": "www.facebook.com",
+      "title": "Acheron Rafting Club",
+      "url": "https://www.facebook.com/acheronraftingclub/",
+      "breadcrumb": "1.6K+ followers",
+      "website_name": "Facebook · Acheron Rafting Club",
+      "is_image": true,
+      "description": "Acheron Rafting Club, Glikí. 1582 likes · 128 talking about this · 860 were here. Δραστηριότητες στον ποταμό Αχέροντα.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.facebook.com",
+          "url": "https://www.facebook.com/acheronraftingclub/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8UcYc7dTWxMKsygc-HSkrlm2rLmTwhjZsRwWB2S4EmihQFgcSWKc0&usqp=CAE&s"
+        }
+      ],
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.8,
+        "votes_count": 47,
+        "rating_max": 5
+      },
+      "highlighted": [
+        "Acheron Rafting Club, Glikí"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 14,
+      "rank_absolute": 18,
+      "domain": "www.discovergreece.com",
+      "title": "The best adventure activities on the Acheron River in Epirus",
+      "url": "https://www.discovergreece.com/experiences/best-adventure-activities-acheron-river-epirus",
+      "breadcrumb": "https://www.discovergreece.com › experiences › best-a...",
+      "website_name": "Discover Greece",
+      "is_image": true,
+      "description": "The best outdoor adventure activities on the Acheron River in Epirus (river trekking, rafting, cycling, zip wires and horse riding)",
+      "pre_snippet": "11/07/2023 00:00:00",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.discovergreece.com",
+          "url": "https://www.discovergreece.com/experiences/best-adventure-activities-acheron-river-epirus",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNq1kr8yOqWYMUlyVo_Ea6PhCGEYIXkG4_6WEarscn2SWTKAFPFsGR&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ],
+      "timestamp": "2023-11-07 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 15,
+      "rank_absolute": 19,
+      "domain": "www.instagram.com",
+      "title": "ACHERON RAFTING CLUB (@acheronraftingclub)",
+      "url": "https://www.instagram.com/acheronraftingclub/?hl=en",
+      "breadcrumb": "1.4K+ followers",
+      "website_name": "Instagram · acheronraftingclub",
+      "description": "Acheron rafting club, Glikí, Thesprotia, Greece 46200 · Photo by ACHERON RAFTING CLUB in Acheron Rafting Club. May be an image of kayak · Photo by ACHERON ...",
+      "highlighted": [
+        "Acheron rafting club, Glikí, Thesprotia, Greece 46200"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 16,
+      "rank_absolute": 20,
+      "domain": "www.unlimited-adrenaline.gr",
+      "title": "Rafting on the Acheron River",
+      "url": "https://www.unlimited-adrenaline.gr/rafting-on-the-acheron-river/a/en/1097",
+      "breadcrumb": "https://www.unlimited-adrenaline.gr › rafting-on-the-ac...",
+      "website_name": "Unlimited Adrenaline",
+      "is_image": true,
+      "description": "Our aim is through the activity of Canoe Kayak, visitors to the wider area of Thesprotia and Epirus to get to know and enjoy the beauty of our area and the ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.unlimited-adrenaline.gr",
+          "url": "https://www.unlimited-adrenaline.gr/rafting-on-the-acheron-river/a/en/1097",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIkgrNK3ssUcNFspepmpco0PcFLszA3XCVx6qmHDbf5ceAcnBg5K-E&usqp=CAE&s"
+        }
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 17,
+      "rank_absolute": 21,
+      "domain": "www.getyourguide.com",
+      "title": "The BEST Acheron River rafting 2025 - FREE Cancellation",
+      "url": "https://www.getyourguide.com/en-gb/acheron-l161331/river-rafting-tc66/",
+      "breadcrumb": "https://www.getyourguide.com › ... › Epirus › Acheron",
+      "website_name": "GetYourGuide",
+      "is_image": true,
+      "description": "Book the most popular River rafting in Acheron. Best price and money back guarantee! Read the reviews of your fellow travelers.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.getyourguide.com",
+          "url": "https://www.getyourguide.com/en-gb/acheron-l161331/river-rafting-tc66/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Vf5EkQcM85S4z5Fm9Bc_xWf4XhIqseIny3RzxhJiTSGh2Z1JtGPS&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "Book the most popular River rafting in Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 18,
+      "rank_absolute": 22,
+      "domain": "www.youtube.com",
+      "title": "Ράφτινγκ στον Αχέροντα - Rafting on the Acheron river",
+      "url": "https://www.youtube.com/watch?v=KA-YZGB-2N8",
+      "breadcrumb": "970+ views  ·  9 months ago",
+      "website_name": "YouTube · n.p. production",
+      "is_video": true,
+      "description": "Rafting on the Acheron river - Epirus (4K UHD) © Το Rafting στον ποταμό Αχέροντα, είναι μία υπαίθρια δραστηριότητα αναψυχής, ...",
+      "highlighted": [
+        "Rafting on the Acheron river"
+      ],
+      "timestamp": "2024-09-04 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 19,
+      "rank_absolute": 23,
+      "domain": "www.facebook.com",
+      "title": "Fantastic Tour in Acheron River for River Trekking & Rafting ...",
+      "url": "https://www.facebook.com/compassoutdooradventures/videos/fantastic-tour-in-acheron-river-for-river-trekking-raftingbook-your-touracheronr/829313882441065/",
+      "breadcrumb": "170+ reactions  ·  1 year ago",
+      "website_name": "Facebook · Compass Outdoor Adventures",
+      "is_video": true,
+      "description": "Fantastic Tour in Acheron River for River Trekking & Rafting. Book your Tour. #acheronriver #acheron #acherontour #tour #river #rivertrekking #rafting #gorge # ...",
+      "highlighted": [
+        "Fantastic Tour in Acheron River for River Trekking & Rafting"
+      ],
+      "timestamp": "2024-06-14 16:25:30 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 20,
+      "rank_absolute": 24,
+      "domain": "www.intothewildactivities.com",
+      "title": "Hiking - Kayaking at the Acheron Gorge",
+      "url": "https://www.intothewildactivities.com/tour/hiking-kayaking-at-the-acheron-gorge/",
+      "breadcrumb": "https://www.intothewildactivities.com › tour › hiking-k...",
+      "website_name": "Into the wild Preveza",
+      "is_image": true,
+      "description": "In the impressive gorge of Acheron, where the mythical river originates, creating in its course landscapes of immense tranquility and unique natural beauty.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.intothewildactivities.com",
+          "url": "https://www.intothewildactivities.com/tour/hiking-kayaking-at-the-acheron-gorge/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ad-L7PDy_lj-rnZMahvvwNxBts422RmA0d58ADwPDU5dC7-_9UU9&usqp=CAE&s"
+        }
+      ],
+      "price": {
+        "current": 40,
+        "currency": "EUR",
+        "displayed_price": "€40.00"
+      },
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 21,
+      "rank_absolute": 25,
+      "domain": "parga.net",
+      "title": "Acheron Adventure",
+      "url": "https://parga.net/tour/acheron-adventure/",
+      "breadcrumb": "https://parga.net › tour › acheron-adventure",
+      "website_name": "Parga Net",
+      "is_image": true,
+      "description": "Go on an adventure in the mythical Acheron River. Take a refreshing walk through the river with its stunning riverbanks and unspoiled nature.",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from parga.net",
+          "url": "https://parga.net/tour/acheron-adventure/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToIbZN36jVGzppIkFI8t807_sdkRTiEpDfOYx9tz1_Elt8LV4YWuHb&usqp=CAE&s"
+        }
+      ],
+      "price": {
+        "current": 30,
+        "currency": "EUR",
+        "displayed_price": "€30.00"
+      },
+      "highlighted": [
+        "the river"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 22,
+      "rank_absolute": 26,
+      "domain": "m.facebook.com",
+      "title": "Faraggi of Acheron Rafting",
+      "url": "https://m.facebook.com/100093994748826/",
+      "breadcrumb": "50+ followers",
+      "website_name": "Facebook · Faraggi of Acheron Rafting",
+      "is_image": true,
+      "description": "Faraggi of Acheron Rafting, Igoumenitsa. 49 likes · 1 talking about this · 2 were here. River Rafting at Acheron River in Greece a unique and exciting...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from m.facebook.com",
+          "url": "https://m.facebook.com/100093994748826/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF9Ko9p8uU9IwXOnjIp0sPnYGTbHjAB6BvWCqLJbxyJ-ON5IhDKlnO&usqp=CAE&s"
+        }
+      ],
+      "rating": {
+        "rating_type": "Max5",
+        "value": 5,
+        "votes_count": 3,
+        "rating_max": 5
+      },
+      "highlighted": [
+        "River Rafting at Acheron River in Greece"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 23,
+      "rank_absolute": 27,
+      "domain": "www.filoxeno.com",
+      "title": "Acheron Rafting Club - Glyki",
+      "url": "https://www.filoxeno.com/minipage/index/en/activity/filoxeno/106208",
+      "breadcrumb": "https://www.filoxeno.com › index › activity › filoxeno",
+      "website_name": "Filoxeno.com",
+      "is_image": true,
+      "description": "Acheron Rafting Club is based in Glyki, Thesprotia. The company provides services with professional guides who have extensive experience and guarantee ...",
+      "images": [
+        {
+          "type": "images_element",
+          "alt": "rafting acheron from www.filoxeno.com",
+          "url": "https://www.filoxeno.com/minipage/index/en/activity/filoxeno/106208",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrt0bWaLSHcr07N6TlwGMP2BxLpWHex71b85Q4L9e_o5ySnjYNBPO3&usqp=CAE&s"
+        }
+      ],
+      "highlighted": [
+        "is based in Glyki, Thesprotia"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 24,
+      "rank_absolute": 28,
+      "domain": "www.youtube.com",
+      "title": "Acheron Springs - River Rafting - Parga, Greece - 2021 - 4K",
+      "url": "https://www.youtube.com/watch?v=oxGGkKBzt0U",
+      "breadcrumb": "2.6K+ views  ·  3 years ago",
+      "website_name": "YouTube · Thomas Fihlman",
+      "is_video": true,
+      "description": "Acheron Springs - River Rafting - Parga, Greece - 2021 - 4K · Choices for families. Explore simpler, safer experiences for kids and families.",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ],
+      "timestamp": "2021-07-17 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 25,
+      "rank_absolute": 29,
+      "domain": "www.dragonfly-kayak.com",
+      "title": "Dragonfly Kayak: The Acheron Experience",
+      "url": "https://www.dragonfly-kayak.com/",
+      "breadcrumb": "https://www.dragonfly-kayak.com",
+      "website_name": "Dragonfly Kayak: The Acheron Experience",
+      "description": "Kayak adventures on the Acheron River near Parga.Explore the stunning scenery with our 3 unique tours. Perfect for famillies and Couples.",
+      "highlighted": [
+        "Kayak adventures on the Acheron River near Parga"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 26,
+      "rank_absolute": 30,
+      "domain": "www.youtube.com",
+      "title": "RAFTING ACHERON RIVER",
+      "url": "https://www.youtube.com/watch?v=1IfQ-xsrQf4",
+      "breadcrumb": "60+ views  ·  1 year ago",
+      "website_name": "YouTube · Compass OutdoorAdventures",
+      "is_video": true,
+      "description": "Rafting Acheron River - Acheron Tour Vafeiadis Anastasios COMPASS OUTDOOR ADVENTURES - Sivota Thesprotia website http://www.compassoutd...",
+      "highlighted": [
+        "Rafting Acheron River"
+      ],
+      "timestamp": "2024-06-11 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 27,
+      "rank_absolute": 31,
+      "domain": "heroesofadventure.com",
+      "title": "Rafting Acheron - Heroes Of Adventure",
+      "url": "https://heroesofadventure.com/listing/rafting-acheron-acheron-greece/",
+      "breadcrumb": "https://heroesofadventure.com › listing › rafting-achero...",
+      "website_name": "heroesofadventure.com",
+      "description": "The guides at Acheron rafting provide guests with all of the equipment they need as well as basic instruction while on course. The route spans 4 kilometres and ...",
+      "highlighted": [
+        "Acheron rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 28,
+      "rank_absolute": 32,
+      "domain": "corfudreamland.com",
+      "title": "Rafting and Horse riding in Acheron River",
+      "url": "https://corfudreamland.com/rafting-and-horse-riding-in-acheron-river/",
+      "breadcrumb": "https://corfudreamland.com › rafting-and-horse-riding-in...",
+      "website_name": "Corfu Dream Land",
+      "description": "Rafting is a very fun way to get closer to nature. By the inflatable boats with oars, accompanied by an experienced guide, we start our trip in the waters of ...",
+      "highlighted": [
+        "inflatable boats with oars, accompanied by an experienced guide"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 29,
+      "rank_absolute": 33,
+      "domain": "www.facebook.com",
+      "title": "Acheron River for Activities. Rafting & River Trekking in crystal ...",
+      "url": "https://www.facebook.com/compassoutdooradventures/videos/acheron-river-for-activitiesrafting-river-trekking-in-crystal-clear-cold-water-i/830458132267714/",
+      "breadcrumb": "20+ reactions  ·  1 year ago",
+      "website_name": "Facebook · Compass Outdoor Adventures",
+      "is_video": true,
+      "description": "Acheron River for Activities. Rafting & River Trekking in crystal clear cold water, in protected area, with a group from Denmark. Swimming, ...",
+      "highlighted": [
+        "Acheron River for Activities"
+      ],
+      "timestamp": "2024-06-14 16:25:30 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 30,
+      "rank_absolute": 34,
+      "domain": "evendo.com",
+      "title": "Thrills and Serenity at Acheron Rafting Club",
+      "url": "https://evendo.com/locations/greece/ioannina/attraction/acheron-rafting-club",
+      "breadcrumb": "https://evendo.com › Greece › Ioannina",
+      "website_name": "Evendo",
+      "description": "Nestled in the picturesque region of Glyki, the Acheron Rafting Club invites adventure enthusiasts and nature lovers to explore the stunning Acheron River.",
+      "highlighted": [
+        "Acheron Rafting Club"
+      ]
+    },
+    {
+      "type": "local_pack",
+      "rank_group": 4,
+      "rank_absolute": 35,
+      "title": "Rafting Faraggi of Acheron",
+      "description": "Souli \nClosed ⋅ Opens 10 AM Sun \nWebsite \n",
+      "domain": "www.facebook.com",
+      "phone": "697 586 3690",
+      "url": "https://www.facebook.com/profile.php?id=100093994748826",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 5,
+        "votes_count": 32,
+        "rating_max": 5
+      },
+      "cid": "8269884817423991778"
+    },
+    {
+      "type": "local_pack",
+      "rank_group": 5,
+      "rank_absolute": 36,
+      "title": "Αcheron Springs",
+      "description": "Βουβοποταμος \nOn-site services · Website \n",
+      "domain": "dimospargas.gr",
+      "url": "https://dimospargas.gr/",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 4.9,
+        "votes_count": 15000,
+        "rating_max": 5
+      },
+      "cid": "5414628645008154028"
+    },
+    {
+      "type": "local_pack",
+      "rank_group": 6,
+      "rank_absolute": 37,
+      "title": "AREA 19 - Acheron rafting canoe kayak",
+      "description": "Glyki \nTemporarily closed \nWebsite \n",
+      "domain": "www.instagram.com",
+      "phone": "694 589 5943",
+      "url": "https://www.instagram.com/area19_acheron_rafting?igsh=OHJ5N3F6ZDJiN3Jl",
+      "rating": {
+        "rating_type": "Max5",
+        "value": 5,
+        "votes_count": 120,
+        "rating_max": 5
+      },
+      "cid": "10684832464537480558"
+    },
+    {
+      "type": "organic",
+      "rank_group": 31,
+      "rank_absolute": 38,
+      "domain": "www.youtube.com",
+      "title": "Αχέρων ποταμός - Πηγές Αχέροντα | Acheron River - Acheron ...",
+      "url": "https://www.youtube.com/watch?v=WgBzSrNjh6E",
+      "breadcrumb": "330+ views  ·  1 year ago",
+      "website_name": "YouTube · Konstantinos Hat",
+      "is_video": true,
+      "description": "Αχέρων ποταμός - Πηγές Αχέροντα | Acheron River - Acheron Springs | Rafting ... Acheron Springs - River walk - Parga, Greece - 2021 - 4K.",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ],
+      "timestamp": "2023-09-04 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 32,
+      "rank_absolute": 39,
+      "domain": "acheron-outdoors.gr",
+      "title": "Outdoor Activities in Acheron River",
+      "url": "https://acheron-outdoors.gr/eng/pages/display/home",
+      "breadcrumb": "https://acheron-outdoors.gr › eng › pages › display",
+      "website_name": "Acheron Outdoors",
+      "description": "It is a picturesque village, full of attractions and plenty of alternative sports activities such as climbing, hiking, river trekking, zipline, rafting, ...",
+      "highlighted": [
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 33,
+      "rank_absolute": 40,
+      "domain": "thesprotia.topodigos.gr",
+      "title": "ACHERON RAFTING CLUB",
+      "url": "https://thesprotia.topodigos.gr/el/pelates/acheron-rafting-club",
+      "breadcrumb": "https://thesprotia.topodigos.gr › ac...",
+      "website_name": "Topodigos",
+      "description": "Στοιχεία επιχείρησης: Αθλητικές - Υπαίθριες Δραστηριοτητες, Θαλάσσιο Σκι - Θαλάσσια Σπορ (Water Sports), Υπηρεσίες, Τουρισμός ΘΕΣΠΡΩΤΙΑ, ΗΠΕΙΡΟΣ 6951004747, ..."
+    },
+    {
+      "type": "organic",
+      "rank_group": 34,
+      "rank_absolute": 41,
+      "domain": "pargagreece.com",
+      "title": "ACHERON RIVER SPRINGS(trekking & Activities & maybe ...",
+      "url": "https://pargagreece.com/all-aboard-the-rocky-mountaineer/",
+      "breadcrumb": "https://pargagreece.com › Activities & Excursions",
+      "website_name": "pargagreece.com",
+      "description": "Ephira Travel organize this half day trip (TO ACHERON RIVER SPRINGS) On Wednesdays and Saturdays from 09.30-15.30.",
+      "pre_snippet": "02/07/2025 00:00:00",
+      "highlighted": [
+        "half day trip"
+      ],
+      "timestamp": "2025-02-07 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 35,
+      "rank_absolute": 42,
+      "domain": "www.sivotatravel.gr",
+      "title": "Acheron River Activities - General Travel and Tourist ...",
+      "url": "https://www.sivotatravel.gr/cruises_acheron.php",
+      "breadcrumb": "https://www.sivotatravel.gr › cruises_acheron",
+      "website_name": "Sivota Travel",
+      "description": "Apart from hiking you can do canoe-kayak, go rafting , horse-riding, flying fox, ect. The mouth of the River Acheron is in the village of Ammoudia.",
+      "highlighted": [
+        "go rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 36,
+      "rank_absolute": 43,
+      "domain": "www.livetheworld.com",
+      "title": "Visit Acheron Rafting Club in Souli",
+      "url": "https://www.livetheworld.com/activities/greece/acheron-rafting-club",
+      "breadcrumb": "https://www.livetheworld.com › ... › Ioannina › Souli",
+      "website_name": "Live the World",
+      "description": "Acheron Rafting Club is headquartered in Glyki Thesprotia, at the springs of Acheron River. Our company has professional and experienced drivers with many ...",
+      "highlighted": [
+        "is headquartered in Glyki Thesprotia"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 37,
+      "rank_absolute": 44,
+      "domain": "epirus-daytours.gr",
+      "title": "ACHERON RIVER",
+      "url": "https://epirus-daytours.gr/en/15-sitemap-en/79-acheron-river",
+      "breadcrumb": "https://epirus-daytours.gr › 15-sitemap-en › 79-acheron...",
+      "website_name": "Epirus Day Tours",
+      "description": "The so-called river of “grief”, myths and legends, flows through the valley of Lakka Souli creating a natural environment of unparalleled natural beauty."
+    },
+    {
+      "type": "organic",
+      "rank_group": 38,
+      "rank_absolute": 45,
+      "domain": "discoverarta.gr",
+      "title": "Acheron River - Άρτα Γέφυρα Εποχών - Discover Arta",
+      "url": "https://discoverarta.gr/en/activities/potamos-acherontas/",
+      "breadcrumb": "https://discoverarta.gr › activities › potamos-acherontas",
+      "website_name": "discoverarta.gr",
+      "description": "Acheron hosts a lot of flora and fauna, which visitors can admire through plenty of activities such as horse riding, rafting, canoe-kayaking, nature watching ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 39,
+      "rank_absolute": 46,
+      "domain": "en.wikipedia.org",
+      "title": "Acheron",
+      "url": "https://en.wikipedia.org/wiki/Acheron",
+      "breadcrumb": "https://en.wikipedia.org › wiki › Acheron",
+      "website_name": "Wikipedia",
+      "description": "The Acheron is a river in the Epirus region of northwest Greece. It is 52 km (32 mi) long, and has a drainage area of 705 km 2 (272 sq mi).",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 40,
+      "rank_absolute": 47,
+      "domain": "www.instagram.com",
+      "title": "Acheron Rafting Club",
+      "url": "https://www.instagram.com/explore/locations/241353333032843/acheron-rafting-club/",
+      "breadcrumb": "https://www.instagram.com › explore › locations › ache...",
+      "website_name": "Instagram",
+      "description": "Gliki Thesprotia Greece, Glikí, Thesprotia, Greece 46031. Sports & recreation•149 posts. Open 24 hours. +306951004747 · TopRecentIn the area."
+    },
+    {
+      "type": "organic",
+      "rank_group": 41,
+      "rank_absolute": 48,
+      "domain": "olivista.gr",
+      "title": "Acheron - Olivista hotel Karavostasi Beach Perdika Sivota",
+      "url": "https://olivista.gr/en/acheron/",
+      "breadcrumb": "https://olivista.gr › acheron",
+      "website_name": "olivista.gr",
+      "description": "The Acheron River is a river that crosses three county and specifically the prefectures of Thesprotia, Ioannina and Preveza.",
+      "pre_snippet": "06/15/2018 00:00:00",
+      "highlighted": [
+        "Acheron",
+        "a river that crosses three county and specifically the prefectures of Thesprotia, Ioannina and Preveza"
+      ],
+      "timestamp": "2018-06-15 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 42,
+      "rank_absolute": 49,
+      "domain": "corfutriphub.gr",
+      "title": "Rafting Acherontas – Thrilling 1-Day River Adventure",
+      "url": "https://corfutriphub.gr/to_book/rafting-acherontas/",
+      "breadcrumb": "https://corfutriphub.gr › to_book › rafting-acherontas",
+      "website_name": "Corfu Trip Hub",
+      "description": "Rafting on the Acheron River is more than just an activity – it's a chance to reconnect with nature and create lifelong memories. The river's crystal-clear ...",
+      "highlighted": [
+        "Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 43,
+      "rank_absolute": 50,
+      "domain": "www.youtube.com",
+      "title": "Canyoning in Acheron River; the gate to the underworld ...",
+      "url": "https://www.youtube.com/watch?v=IXyuTGFEmWA",
+      "breadcrumb": "930+ views  ·  2 years ago",
+      "website_name": "YouTube · DutchTravellingCouple",
+      "is_video": true,
+      "description": "Acheron River is found near Parga on the mainland of Greece opposite Corfu. There are multiple things to do such as kayaking or horseback ...",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2022-09-16 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 44,
+      "rank_absolute": 51,
+      "domain": "greekdestinations.gr",
+      "title": "Acheron River | Greek Destinations",
+      "url": "https://greekdestinations.gr/rivers/acheron-river/",
+      "breadcrumb": "https://greekdestinations.gr › Rivers",
+      "website_name": "greekdestinations.gr",
+      "description": "Its crystal-clear waters and lush banks are perfect for activities such as river trekking, kayaking, and canoeing. The Acheron Springs, located near the village ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 45,
+      "rank_absolute": 52,
+      "domain": "www.concierge-ioannina.gr",
+      "title": "HIKING IN THE RIVER ACHERON",
+      "url": "https://www.concierge-ioannina.gr/our-services/daily-tours/hiking-at-the-acheron/",
+      "breadcrumb": "https://www.concierge-ioannina.gr › daily-tours › hiking...",
+      "website_name": "Concierge Ioannina",
+      "description": "At the mountains of Souli, at an altitude of 1600m, only 2km from the village of Glyki, the springs of Acheron are found. On its way to Ionian Sea where it ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 46,
+      "rank_absolute": 53,
+      "domain": "click4web.gr",
+      "title": "Acheron Rafting Club - Ιωάννινα - Κατασκευή Ιστοσελίδας, ...",
+      "url": "https://click4web.gr/projects/show/acheron-rafting-club-137",
+      "breadcrumb": "https://click4web.gr › show › ache...",
+      "website_name": "Click4web",
+      "description": "Το Acheron Rafting Club βρίσκεται στη Γλυκή Θεσπρωτίας, στις πηγές του Αχέροντα ποταμού. Διαθέτει επαγγελματίες οδηγούς με πολυετή εμπειρία, οι οποίοι σας ...",
+      "highlighted": [
+        "Acheron Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 47,
+      "rank_absolute": 54,
+      "domain": "pargagreece.com",
+      "title": "ACHERON RIVER SPRINGS FOR TREKKING,WALKING AND ...",
+      "url": "https://pargagreece.com/product/acheron-river-styx-with-activities-2/",
+      "breadcrumb": "https://pargagreece.com › Tour",
+      "website_name": "pargagreece.com",
+      "description": "Organized Unique half day trip for Acheron river springs for trekking & possibilities for Rafting, Horse riding, Canoe/Kayak .Every Wednesday & Saturday.",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 48,
+      "rank_absolute": 55,
+      "domain": "sivota-hotels.gr",
+      "title": "Activities in the Springs of Acheron",
+      "url": "https://sivota-hotels.gr/en/activities-in-the-springs-of-acheron/",
+      "breadcrumb": "https://sivota-hotels.gr › activities-in-the-springs-of-ach...",
+      "website_name": "sivota-hotels.gr",
+      "description": "Rafting & Canoeing: 20 minutes of exhilarating adventure. Horseback Riding: 15 minutes of relaxing horseback riding. Hiking: Explore the canyon with stunning ...",
+      "highlighted": [
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 49,
+      "rank_absolute": 56,
+      "domain": "www.alamy.com",
+      "title": "Tourists White water rafting on the River Acheron without ...",
+      "url": "https://www.alamy.com/tourists-white-water-rafting-on-the-river-acheron-without-life-jackets-preveza-regionepirus-zaloggogreece-image225715342.html",
+      "breadcrumb": "https://www.alamy.com › tourists-white-water-rafting-o...",
+      "website_name": "Alamy",
+      "description": "Download this stock image: Tourists White water rafting on the River Acheron without life jackets Preveza region,Epirus Zaloggo,Greece - R36666 from Alamy's ...",
+      "price": {
+        "current": 39,
+        "currency": "USD",
+        "displayed_price": "$39.00"
+      },
+      "highlighted": [
+        "rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 50,
+      "rank_absolute": 57,
+      "domain": "theabroadguide.com",
+      "title": "Parga and Acherontas River From Corfu, Private Tour",
+      "url": "https://theabroadguide.com/parga-and-acherontas-river-from-corfu-private-tour/",
+      "breadcrumb": "https://theabroadguide.com › parga-and-acherontas-rive...",
+      "website_name": "The Abroad Guide",
+      "description": "The Acheron Springs offer activities like walking, swimming, rafting, or horseback riding for an additional cost. The Acherontas River canyon, historically ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 51,
+      "rank_absolute": 58,
+      "domain": "www.dreamstime.com",
+      "title": "Greece, Epirus, Acheron River Rafting Editorial Photography",
+      "url": "https://www.dreamstime.com/glyki-greece-june-unknown-tourists-ride-dinghy-clear-cold-water-acheron-river-greek-mythology-acheron-was-image239817722",
+      "breadcrumb": "https://www.dreamstime.com › ... › Greek underworld",
+      "website_name": "Dreamstime.com",
+      "description": "Greece, Epirus, Acheron River Rafting. Photo about raft, rubber, people, unknown, tourists, outdoors, landscape, rafting, horizontal, underworld, river, ...",
+      "highlighted": [
+        "Acheron",
+        "Rafting",
+        "raft",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 52,
+      "rank_absolute": 59,
+      "domain": "wewandertheworld.com",
+      "title": "Perfect day in Acheron River",
+      "url": "https://wewandertheworld.com/perfect-day-in-acheron-river/",
+      "breadcrumb": "https://wewandertheworld.com › perfect-day-in-achero...",
+      "website_name": "We wander the world",
+      "description": "The Acheron River is located just 25 km from Parga and is a wonderful short trip through the crystal clear water surrounded by the high ...",
+      "pre_snippet": "08/01/2019 00:00:00",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2019-08-01 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 53,
+      "rank_absolute": 60,
+      "domain": "www.greeka.com",
+      "title": "Acheron River in Parga, Greece",
+      "url": "https://www.greeka.com/epirus/parga/sightseeing/parga-acheron-river/",
+      "breadcrumb": "https://www.greeka.com › ... › Parga › Sightseeing",
+      "website_name": "Greeka",
+      "description": "Acheron River is located 25km from Parga, in a beautiful surrounding with rich vegetation and crystalline waters which comprise a unique natural landscape.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 54,
+      "rank_absolute": 61,
+      "domain": "pigeshotel.gr",
+      "title": "Rafting - Ξενοδοχείο Πηγές στον Αχέροντα",
+      "url": "https://pigeshotel.gr/en/experiences/rafting/",
+      "breadcrumb": "https://pigeshotel.gr › Αρχική › EXPERIENCES",
+      "website_name": "Piges Hotel",
+      "description": "One of the most famous rivers in Europe for its historical and mythological content, and within a landscape of stunning natural beauty, the Acheron is the ideal ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 55,
+      "rank_absolute": 62,
+      "domain": "west-coast-travel.com",
+      "title": "Acheron Activities - West Coast Travel - Ionian Islands",
+      "url": "https://west-coast-travel.com/destination/acheron/",
+      "breadcrumb": "https://west-coast-travel.com › Epirus",
+      "website_name": "west-coast-travel.com",
+      "description": "1.5 hours €25. Acherondas- Eco Kayaking. 30 minutes €10. Acheron Rafting Canoe Kayak. 15 minutes €10. Acheron Horse Riding. 30 minutes €10. Acheron Rafting ...",
+      "highlighted": [
+        "Acheron Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 56,
+      "rank_absolute": 63,
+      "domain": "www.hotel-karavostasi.gr",
+      "title": "The Acheron River Springs",
+      "url": "https://www.hotel-karavostasi.gr/en/area/the-acheron-river-springs",
+      "breadcrumb": "https://www.hotel-karavostasi.gr › Home › The Area",
+      "website_name": "Karavostasi Beach Hotel",
+      "description": "The Acheron River springs are found in the village of Glyki and are a popular attraction. Crystal clear ice-cold water, surrounded by lots of greenery and a ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 57,
+      "rank_absolute": 64,
+      "domain": "epirusforallseasons.gr",
+      "title": "Rafting And Horse Riding in Glyki - Epirus for all seasons",
+      "url": "https://epirusforallseasons.gr/en/experiences/adventure/empeiries/rafting-and-horse-riding-in-glyki/",
+      "breadcrumb": "https://epirusforallseasons.gr › adventure › empeiries",
+      "website_name": "epirusforallseasons.gr",
+      "description": "The village of Glyki, a natural border of the prefectures of Thesprotia and Preveza, is located at the exit of the straits of the Acheron River, and it is ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 58,
+      "rank_absolute": 65,
+      "domain": "www.facebook.com",
+      "title": "Acheron Rafting Club",
+      "url": "https://www.facebook.com/acheronraftingclub/videos/564777528465731/",
+      "breadcrumb": "40+ reactions  ·  2 years ago",
+      "website_name": "Facebook · Acheron Rafting Club",
+      "is_video": true,
+      "description": "Video · More videos you may like. 00:21. Jul 13, 2022 · 1.9K views. 00:13. Jul 11, 2022 · 360 views. 00:52 ...",
+      "timestamp": "2023-06-14 16:25:30 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 59,
+      "rank_absolute": 66,
+      "domain": "www.allovergreece.com",
+      "title": "Acheron Springs | Thesprotia | Nature",
+      "url": "https://www.allovergreece.com/Region-Nature/Spring/2/en",
+      "breadcrumb": "https://www.allovergreece.com › Region-Nature › Spring",
+      "website_name": "ALLOVERGREECE",
+      "description": "It is also a destination with lots of organized activities for young and old such as rafting, kayaking, gorge crossing, boating, archery and horse riding.",
+      "highlighted": [
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 60,
+      "rank_absolute": 67,
+      "domain": "www.greeceadventuretrips.com",
+      "title": "Discover Acheron river with Greece Adventure Trips",
+      "url": "https://www.greeceadventuretrips.com/acheron.html?srsltid=AfmBOor67KvSHdGZermcxwevKT1T7CBNWjueLjVR4jysHgti3-mDQXX-",
+      "breadcrumb": "https://www.greeceadventuretrips.com › acheron",
+      "website_name": "GA TRIPS",
+      "description": "Acheron River is located 25km from Parga, in a beautiful surrounding with rich vegetation and crystalline waters which comprise a unique natural landscape. In ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 61,
+      "rank_absolute": 68,
+      "domain": "trekking.gr",
+      "title": "Rafting in Greece",
+      "url": "https://trekking.gr/en/activity-types/rafting",
+      "breadcrumb": "https://trekking.gr › activity-types › rafting",
+      "website_name": "Trekking Hellas",
+      "description": "Rafting at Vernezi - Peneus & Archery. 4 hrs. from €60. RAFTING. trekking ... RAFTING. trekking icon. Rafting in Acherontas. 6 hrs. from €100. LOAD MORE recaptcha ...",
+      "highlighted": [
+        "Rafting",
+        "RAFTING"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 62,
+      "rank_absolute": 69,
+      "domain": "beyondlimits.gr",
+      "title": "Acheron Sunset Hike & Riverside Dining Experience",
+      "url": "https://beyondlimits.gr/en/private-tours/private-sunset-hiking-tour-riverside-dining-experience-in-acheron-springs/",
+      "breadcrumb": "https://beyondlimits.gr › Αρχική › Private Tours",
+      "website_name": "beyondlimits.gr",
+      "description": "PRIVATE RAFTING & HIKING TOUR · PRIVATE MYTHOLOGICAL TOUR · PRIVATE HIKING TOUR ... acheron-river-9-1. Hiking. Sunset view: Admire the stunning sunset on our",
+      "highlighted": [
+        "RAFTING",
+        "acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 63,
+      "rank_absolute": 70,
+      "domain": "www.travelpostmonthly.com",
+      "title": "The Acheron River: Walking to the Gates of Hell",
+      "url": "https://www.travelpostmonthly.com/2021/01/the-acheron-river-walking-to-the-gates-of-hell/",
+      "breadcrumb": "https://www.travelpostmonthly.com › 2021/01 › the-ac...",
+      "website_name": "travelpostmonthly.com",
+      "description": "The Acheron River in northwest Greece is variously called the River of Souls or the River of Sorrows. Greek myths call it the gates to hell.",
+      "pre_snippet": "01/31/2021 00:00:00",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2021-01-31 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 64,
+      "rank_absolute": 71,
+      "domain": "seadream.com",
+      "title": "Amazing Acheron River Safari",
+      "url": "https://seadream.com/voyages/landadventure/98",
+      "breadcrumb": "https://seadream.com › voyages › landadventure",
+      "website_name": "SeaDream Yacht Club",
+      "description": "Enjoy a relaxing rafting descent in the sparkling waters of Acheron River, ideal even for beginners. As you glide through the tranquil waters, admire the ...",
+      "highlighted": [
+        "rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 65,
+      "rank_absolute": 72,
+      "domain": "www.dailymotion.com",
+      "title": "Ράφτινγκ στον Αχέροντα ποταμό Rafting on the Acheron river ...",
+      "url": "https://www.dailymotion.com/video/x9ekz9e",
+      "breadcrumb": "https://www.dailymotion.com · Feb 17, 2025",
+      "website_name": "Dailymotion · Bicyclecrazydreamer",
+      "is_video": true,
+      "description": "Ράφτινγκ στον Αχέροντα ποταμό Rafting on the Acheron river. Bicyclecrazydreamer. Follow. 2/17/2025. Category.. Travel. Show less ...",
+      "highlighted": [
+        "Rafting",
+        "Acheron"
+      ],
+      "timestamp": "2025-02-17 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 66,
+      "rank_absolute": 73,
+      "domain": "offbeat-travel.com",
+      "title": "Acheron River - Offbeat Travel",
+      "url": "https://offbeat-travel.com/greece/epirus/acheron-river/",
+      "breadcrumb": "https://offbeat-travel.com › greece › epirus › acheron-ri...",
+      "website_name": "offbeat-travel.com",
+      "description": "The Acheron River, steeped in Greek mythology as one of the rivers of the underworld, is now a popular destination for outdoor adventures and nature lovers.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 67,
+      "rank_absolute": 74,
+      "domain": "www.shutterstock.com",
+      "title": "Greece Acheron River royalty-free images",
+      "url": "https://www.shutterstock.com/search/greece-acheron-river?page=6",
+      "breadcrumb": "https://www.shutterstock.com › search › greece-acheron...",
+      "website_name": "Shutterstock",
+      "description": "Find Greece Acheron River stock images in HD and millions of other royalty-free stock photos, illustrations and vectors in the Shutterstock collection.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 68,
+      "rank_absolute": 75,
+      "domain": "acheron-outdoors.gr",
+      "title": "Acheron Outdoors | Δραστηριότητες στον Αχέροντα",
+      "url": "https://acheron-outdoors.gr/",
+      "breadcrumb": "https://acheron-outdoors.gr",
+      "website_name": "Acheron Outdoors",
+      "description": "Η Acheron Outdoors είναι μια εταιρεία εναλλακτικού τουρισμού με έδρα τη Γλυκή ... rafting, kayak και ιππασία. Μια μοναδική περιοχή με απαράμιλλη φυσική ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 69,
+      "rank_absolute": 76,
+      "domain": "www.dragonfly-kayak.com",
+      "title": "Dragonfly Kayak: Acheron Escape",
+      "url": "https://www.dragonfly-kayak.com/Acheron-Escape-kayak-Tour",
+      "breadcrumb": "https://www.dragonfly-kayak.com › Acheron-Escape-k...",
+      "website_name": "Dragonfly Kayak: The Acheron Experience",
+      "description": "Kayak adventures on the Acheron River near Parga.Explore the stunning scenery with our 3 unique tours. Perfect for famillies and Couples.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 70,
+      "rank_absolute": 77,
+      "domain": "acheronkayak.gr",
+      "title": "Kayaking and Canoeing",
+      "url": "https://acheronkayak.gr/activity/kayaking/",
+      "breadcrumb": "https://acheronkayak.gr › activity › kayaking",
+      "website_name": "Acheron Delta Kayaking Eco Tour",
+      "description": "Enjoy a guided lazy river tubing, rafting or kayaking trip or fishing for all ages. Calm lake water is perfect for fishing. Beat the heat, chill out and go with ...",
+      "highlighted": [
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 71,
+      "rank_absolute": 78,
+      "domain": "www.facebook.com",
+      "title": "Fantastic Tour in Acheron River for River Trekking & Rafting ...",
+      "url": "https://www.facebook.com/compassoutdooradventures/videos/fantastic-tour-in-acheron-river-for-river-trekking-rafting-listen-their-experien/1008479967339476/",
+      "breadcrumb": "8 reactions  ·  1 year ago",
+      "website_name": "Facebook · Compass Outdoor Adventures",
+      "is_video": true,
+      "description": "#acheronriver # acheron #acherontour #tour #river #rivertrekking # rafting #gorge #nature #activitiesforall #activities #vibes #travelvibes ...",
+      "highlighted": [
+        "acheron",
+        "rafting"
+      ],
+      "timestamp": "2024-06-14 16:25:30 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 72,
+      "rank_absolute": 79,
+      "domain": "www.explorerides.com",
+      "title": "Exploring the River Acheron the Gateway to the Underworld",
+      "url": "https://www.explorerides.com/exploring-the-river-acheron-the-gateway-to-the-underworld/",
+      "breadcrumb": "https://www.explorerides.com › Places & tips",
+      "website_name": "ExploreRides.com",
+      "description": "This legendary river is a peaceful and scenic destination, offering stunning natural landscapes, intriguing myths, and exciting outdoor activities."
+    },
+    {
+      "type": "organic",
+      "rank_group": 73,
+      "rank_absolute": 80,
+      "domain": "www.justgreece.com",
+      "title": "Holidays in Acheron Necromanteion Greece - Preveza",
+      "url": "https://www.justgreece.com/destinations/acheron-necromanteion-preveza.php",
+      "breadcrumb": "https://www.justgreece.com › destinations › acheron-necr...",
+      "website_name": "Just Greece",
+      "description": "Acheron (Acherontas) is a large river (52 kilometers (32 miles) long) in the ... Canoeing, kayaking and rafting is possible here. The wildlife of the ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 74,
+      "rank_absolute": 81,
+      "domain": "www.visitgreece.gr",
+      "title": "Acherodas River",
+      "url": "https://www.visitgreece.gr/experiences/nature/rivers/acherodas-river/",
+      "breadcrumb": "https://www.visitgreece.gr › experiences › nature › rivers",
+      "website_name": "Visit Greece",
+      "description": "Rafting, kayak & canoe at Stena; Mountain bike along the river; Canyoning at Stena; A caique mini cruise at the Acheron estuary; Swimming in the cold waters of ...",
+      "highlighted": [
+        "Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 75,
+      "rank_absolute": 82,
+      "domain": "rafting-athletic-center.gr",
+      "title": "Rafting",
+      "url": "https://rafting-athletic-center.gr/en/rafting.php",
+      "breadcrumb": "https://rafting-athletic-center.gr › rafting",
+      "website_name": "Rafting Athletic Center",
+      "description": "Acheron (Seriziana - Glyki). (2 level) Spectacular rafting trip in \"Gates of Hades\" with changes to landscape and river difficulties. Rapids 2-3rd and 4th ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 76,
+      "rank_absolute": 83,
+      "domain": "www.visitammoudia.com",
+      "title": "Walking to the springs of Acheron river",
+      "url": "https://www.visitammoudia.com/activities/walking-to-the-springs-of-acheron-river/",
+      "breadcrumb": "https://www.visitammoudia.com › activities › walking-t...",
+      "website_name": "visitammoudia.com",
+      "description": "A destination with lots of organized activities for young and old such as rafting, kayaking, gorge crossing, boating, archery and horse riding.",
+      "highlighted": [
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 77,
+      "rank_absolute": 84,
+      "domain": "isabellatours.com",
+      "title": "Acheron River Adventure - Isabella Tours - Travel Agency",
+      "url": "https://isabellatours.com/acheron-river-adventure/",
+      "breadcrumb": "https://isabellatours.com › acheron-river-adventure",
+      "website_name": "Isabella Tours",
+      "description": "The Acheron was said to be an entrance to the underworld, where the spirits of the dead would pass through on their way to eternal rest.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 78,
+      "rank_absolute": 85,
+      "domain": "isolaverde.gr",
+      "title": "Acheron River - Isola Verde Hotel",
+      "url": "https://isolaverde.gr/acheron-river/",
+      "breadcrumb": "https://isolaverde.gr › acheron-river",
+      "website_name": "isolaverde.gr",
+      "description": "This legendary river creates a unique scenery of serenity and unspoiled natural beauty with its crystal clear water and the surrounding rocky landscape."
+    },
+    {
+      "type": "organic",
+      "rank_group": 79,
+      "rank_absolute": 86,
+      "domain": "www.travel.gr",
+      "title": "Skala Tzavelaina: Natural Glory Above the Acheron River",
+      "url": "https://www.travel.gr/en/experiences-ee/skala-tzavelaina-natural-glory-above-the-acheron-river/",
+      "breadcrumb": "https://www.travel.gr › experiences-ee › skala-tzavelain...",
+      "website_name": "travel.gr",
+      "description": "Linked with the historical Souliote villages, it offers a stunning hiking experience in the mountainous landscape above the Acheron River.",
+      "pre_snippet": "10/03/2023 00:00:00",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2023-10-03 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 80,
+      "rank_absolute": 87,
+      "domain": "epirusforallseasons.gr",
+      "title": "Acheron River - Epirus for all seasons",
+      "url": "https://epirusforallseasons.gr/en/aksiotheata/nature/acheron-river/",
+      "breadcrumb": "https://epirusforallseasons.gr › aksiotheata › nature › ac...",
+      "website_name": "epirusforallseasons.gr",
+      "description": "Acheron is the mythical river that was associated with death in ancient times. Its name derives from the ancient word “achos”, which means grief, mental pain.",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 81,
+      "rank_absolute": 88,
+      "domain": "www.mysteriousgreece.com",
+      "title": "Acheron River by Alberto",
+      "url": "https://www.mysteriousgreece.com/2015/10/acheron-river-by-alberto/",
+      "breadcrumb": "https://www.mysteriousgreece.com › 2015/10 › achero...",
+      "website_name": "Mysterious Greece",
+      "description": "To do so, he had to cross the Acheron River, the watery border between Life and Death. ... • Rafting, kayak, canoe-kayak at Stená (=where the ...",
+      "pre_snippet": "10/09/2015 00:00:00",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ],
+      "timestamp": "2015-10-09 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 82,
+      "rank_absolute": 89,
+      "domain": "beyondlimits.gr",
+      "title": "private rafting & hiking tour in acheron springs - Beyond Limits",
+      "url": "https://beyondlimits.gr/en/private-tours/private-rafting-hiking-tour/",
+      "breadcrumb": "https://beyondlimits.gr › Αρχική › Private Tours",
+      "website_name": "beyondlimits.gr",
+      "description": "IN ACHERON SPRINGS. Private Rafting & Hiking Tour: Enter a world where mythology, nature and adventure coexist in this exclusive private tour with an ...",
+      "highlighted": [
+        "ACHERON",
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 83,
+      "rank_absolute": 90,
+      "domain": "realgreeks.net",
+      "title": "Acheron. The entrance of the Greek underworld",
+      "url": "https://realgreeks.net/travel/entrance-of-the-greek-underworld/",
+      "breadcrumb": "https://realgreeks.net › travel › entrance-of-the-greek-u...",
+      "website_name": "realgreeks.net",
+      "description": "The Acheron river flows in the Epirus region, in the North-West of Greece. Epirus is bound by Albania in the North and the Ionian sea in the ...",
+      "pre_snippet": "06/13/2022 00:00:00",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2022-06-13 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 84,
+      "rank_absolute": 91,
+      "domain": "www.atmangreece.com",
+      "title": "Experience • Atman Eco Lodge • Acheron Springs ...",
+      "url": "https://www.atmangreece.com/experience.php",
+      "breadcrumb": "https://www.atmangreece.com › experience",
+      "website_name": "Atman Eco Lodge",
+      "description": "Rafting / Canoeing / Kayaking on the Acheron Springs · Hiking / Gorge Crossing. Traverse the gorge through icy waters, riverside trails, or mountain slopes.",
+      "highlighted": [
+        "Rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 85,
+      "rank_absolute": 92,
+      "domain": "www.alamy.com",
+      "title": "Tourists White water rafting on the River Acheron without ...",
+      "url": "https://www.alamy.com/tourists-white-water-rafting-on-the-river-acheron-without-life-jackets-preveza-regionepirus-zaloggogreece-image225715346.html",
+      "breadcrumb": "https://www.alamy.com › tourists-white-water-rafting-o...",
+      "website_name": "Alamy",
+      "description": "Download this stock image: Tourists White water rafting on the River Acheron without life jackets Preveza region,Epirus Zaloggo,Greece - R3666A from Alamy's ...",
+      "price": {
+        "current": 39,
+        "currency": "USD",
+        "displayed_price": "$39.00"
+      },
+      "highlighted": [
+        "rafting",
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 86,
+      "rank_absolute": 93,
+      "domain": "www.krikonis-hotel.gr",
+      "title": "Action and myths in the Acheron River",
+      "url": "https://www.krikonis-hotel.gr/en/experiences/axerontas-trip",
+      "breadcrumb": "https://www.krikonis-hotel.gr › axerontas-trip",
+      "website_name": "Krikonis Hotel",
+      "description": "In the modern times, the Acheron River, with a length of some 52 kilometers, and the surrounding area, consist a popular destination for visitors due to their ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "images",
+      "rank_group": 1,
+      "rank_absolute": 94,
+      "title": "Images",
+      "url": "https://www.google.gr/search?num=100&sca_esv=33ca0e1d24074039&hl=en&gl=GR&glp=1&q=rafting+acheron&udm=2&source=univ&fir=3JAaI94JfnRnzM%252Cx3dP-V4ELG775M%252C_%253BA7FBGF_xZol60M%252CCxA1iCQJnPeHZM%252C_%253BgOK8vqwsd2PmEM%252C55CQLxR8kNHyEM%252C_%253BLUr8jqHDRdI01M%252CfPQo3zklCjpmNM%252C_%253BmhGr-433uYAEnM%252Cmpx4h2bra2fulM%252C_%253BrA8vpsEn2eGabM%252Cp1IcqOoDA49TdM%252C_%253Bi-VBjgh6v_N84M%252CHpZh-b6WHfHdCM%252C_%253BzW3pEQT2-_3adM%252CnaPeY6ub98AemM%252C_%253Bly_aBjJi4CieYM%252C55CQLxR8kNHyEM%252C_&usg=AI4_-kRi3XXyFUfWIDif4JIma3bu_RjU1A&sa=X&ved=2ahUKEwjN0pTjqfGNAxU4kYkEHZ1-NRAQ7Al6BAhdEAU",
+      "items": [
+        {
+          "type": "images_element",
+          "alt": "Rafting in Acheron River - Adventure Travel & Accommodation ...",
+          "url": "https://www.xtremegreece.gr/en/rafting/rafting-in-acheron-river.html",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:8"
+        },
+        {
+          "type": "images_element",
+          "alt": "Discover Acheron Rafting Club | Unlimited Adrenaline",
+          "url": "https://www.unlimited-adrenaline.gr/acheron-rafting-club/p/en/200",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:9"
+        },
+        {
+          "type": "images_element",
+          "alt": "Acheron Rafting Club | Gliki Thesprotias",
+          "url": "https://acheron-rafting.gr/index_en1.php",
+          "image_url": "https://api.dataforseo.com/cdn/i/06141925-9574-0139-0000-60346197e714:10"
+        },
+        {
+          "type": "images_element",
+          "alt": "Rafting - Acheron Riverdream Club, Rafting, Canoe Kayak ...",
+          "url": "https://riverdream.gr/activities/raftingen/?lang=en",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZohRt2zLNUc5kMFy6BnnvKM6Q-NsjgmKMLaNwFkXPEZS2TmNbctuY4o&s"
+        },
+        {
+          "type": "images_element",
+          "alt": "RAFTING ACHERON RIVER",
+          "url": "https://www.youtube.com/watch?v=1IfQ-xsrQf4",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpXT6maWVXPRq4jkM3Gf7sxSsxHNT9Q4fu44_L0PO80hJdRF4MOggal9Q&s"
+        },
+        {
+          "type": "images_element",
+          "alt": "Acheron Rafting - West Coast Travel - Activities Preveza ...",
+          "url": "https://west-coast-travel.com/package/acheron-rafting/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReeyGl-M7Za8HaKO8xM52vNyA6mVdiYZiowPeJu8jnsHug92Hu_4PSggw&s"
+        },
+        {
+          "type": "images_element",
+          "alt": "Acheron Rafting - Picture of Acheron Paths, Glyki - Tripadvisor",
+          "url": "https://www.tripadvisor.com/LocationPhotoDirectLink-g1188928-d14012757-i316468985-Acheron_Paths-Glyki_Thesprotia_Region_Epirus.html",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXIdzEEQzuvhwOjh46siHHeMOMJBPpNr0vXp3Dm9FOsyNbVg70_9Y3yLI&s"
+        },
+        {
+          "type": "images_element",
+          "alt": "Rafting Acheron - Heroes Of Adventure",
+          "url": "https://heroesofadventure.com/listing/rafting-acheron-acheron-greece/",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMynbzerGqZbKjr5a8IYOYo_hIWhSlC-C7x7vhWJvkmt076ciMRa1yvpg&s"
+        },
+        {
+          "type": "images_element",
+          "alt": "Acheron Rafting Club | Gliki Thesprotias",
+          "url": "https://acheron-rafting.gr/index_en1.php",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2_aRyFEAkGMEum1qutE-EGyKk5XaZ1VpKlh0TeUTcVFsXjI6D7_ptpEk&s"
+        }
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 87,
+      "rank_absolute": 95,
+      "domain": "poseidonbeachhotel.gr",
+      "title": "Acheron River - Preveza - Poseidon Beach Hotel",
+      "url": "https://poseidonbeachhotel.gr/location-preveza-poseidon-beach-hotel/acheron-river/",
+      "breadcrumb": "https://poseidonbeachhotel.gr › Preveza",
+      "website_name": "poseidonbeachhotel.gr",
+      "description": "The river is 64 kilometers long and it flows through the Prefectures of Ioannina, Thesprotia, and Preveza. The mountains Paramytha and Souli surrounding it ..."
+    },
+    {
+      "type": "organic",
+      "rank_group": 88,
+      "rank_absolute": 96,
+      "domain": "www.youtube.com",
+      "title": "Acheron River - Rafting & River Trekking",
+      "url": "https://www.youtube.com/watch?v=nmt4Hc56VuE",
+      "breadcrumb": "410+ views  ·  3 years ago",
+      "website_name": "YouTube · Compass OutdoorAdventures",
+      "is_video": true,
+      "description": "Acheron River - Rafting & River Trekking Half Day Tour Vafeiadis Anastasios COMPASS OUTDOOR ADVENTURES - Sivota Thesprotia website ...",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ],
+      "timestamp": "2022-05-21 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 89,
+      "rank_absolute": 97,
+      "domain": "www.5sensesvilla.com",
+      "title": "Acheron River - 5 Senses Villa",
+      "url": "https://www.5sensesvilla.com/en/epirus-ioannina-villa-location/364/acheron-river/",
+      "breadcrumb": "https://www.5sensesvilla.com › ac...",
+      "website_name": "5sensesvilla.com",
+      "description": "Acheron River is located at an altitude of 1,600 meters, and its name has ... rafting, kayaking or even horseback riding. Those even more adventurous ...",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 90,
+      "rank_absolute": 98,
+      "domain": "www.greece-is.com",
+      "title": "Acheron River: Knocking on the Underworld's Door (Map ...",
+      "url": "https://www.greece-is.com/acheron-river-knocking-on-the-underworlds-door-map-included/",
+      "breadcrumb": "https://www.greece-is.com › acheron-river-knocking-o...",
+      "website_name": "Greece Is",
+      "description": "The river flows for 64 kilometers before flowing into the Ionian Sea after forming not only its delta but also the wetlands of Valanidorachi and Splantza.",
+      "pre_snippet": "11/03/2016 00:00:00",
+      "timestamp": "2016-11-03 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 91,
+      "rank_absolute": 99,
+      "domain": "www.allovergreece.com",
+      "title": "Acheron Springs",
+      "url": "https://www.allovergreece.com/Greek-Springs/Descr/2/en",
+      "breadcrumb": "https://www.allovergreece.com › Greek-Springs › Descr",
+      "website_name": "ALLOVERGREECE",
+      "description": "Acheron river is well-known through the Greek mythology. The mythical river was known as the \"river of woe\", and was one of the five rivers of the Greek ...",
+      "highlighted": [
+        "Acheron"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 92,
+      "rank_absolute": 100,
+      "domain": "www.kalispera.se",
+      "title": "The river Styx (Acheron) near Parga on the Greek mainland.",
+      "url": "https://www.kalispera.se/mainland/the-river-styx-acheron-close-to-parga-on-the-greek-mainland.html",
+      "breadcrumb": "https://www.kalispera.se › mainland › the-river-styx-ache...",
+      "website_name": "Kalispera Greece",
+      "description": "The river Styx is an adventure for both adults and children. Boat trip in the river Styx north of Parga is fun for small children."
+    },
+    {
+      "type": "organic",
+      "rank_group": 93,
+      "rank_absolute": 101,
+      "domain": "eu.camperistas.com",
+      "title": "Acheron Springs - Camperistas.com",
+      "url": "http://eu.camperistas.com/1178/acheron-springs",
+      "breadcrumb": "http://eu.camperistas.com › acheron-springs",
+      "website_name": "camperistas.com",
+      "description": "During the day, the parking lot fills up, since this is the starting point for a variety of activities like rafting, horseback riding etc.. and ...",
+      "pre_snippet": "11/20/2013 00:00:00",
+      "highlighted": [
+        "rafting"
+      ],
+      "timestamp": "2013-11-20 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 94,
+      "rank_absolute": 102,
+      "domain": "www.shutterstock.com",
+      "title": "1+ Thousand Acheron River Royalty-Free Images, Stock ...",
+      "url": "https://www.shutterstock.com/search/acheron-river?page=3",
+      "breadcrumb": "https://www.shutterstock.com › ... › Water › Rivers",
+      "website_name": "Shutterstock",
+      "description": "August 21th 2023 - Acheron river, Greece: Rafting in Acheron river. August 19th 2023 - Parga, Greece - Amazing natural scenery in the canyon of Acheron river ...",
+      "highlighted": [
+        "Acheron",
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 95,
+      "rank_absolute": 103,
+      "domain": "nikana.gr",
+      "title": "Acheron river - Epirus what to see",
+      "url": "https://nikana.gr/en/tourist-guide/epirus/what-to-see/3259/acheron-river",
+      "breadcrumb": "https://nikana.gr › Tourist Guide › Epirus › What To See",
+      "website_name": "Nikana.gr",
+      "description": "The Acheron River is an attraction for tourists, where they can try rafting, canoeing, mountain biking, fishing, but above all where they can enjoy the ...",
+      "pre_snippet": "12/18/2017 00:00:00",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ],
+      "timestamp": "2017-12-18 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 96,
+      "rank_absolute": 104,
+      "domain": "heroesofadventure.com",
+      "title": "Acheron Springs - Heroes Of Adventure",
+      "url": "https://heroesofadventure.com/listing/acheron-springs-gliki-greece/",
+      "breadcrumb": "https://heroesofadventure.com › listing › acheron-sprin...",
+      "website_name": "heroesofadventure.com",
+      "description": "A popular area for Rafting, Kayaking,Canoeing, Horse riding, hiking. The number of passengers is determined by the size of the boat, but usually up to 8 people ...",
+      "highlighted": [
+        "Rafting"
+      ]
+    },
+    {
+      "type": "organic",
+      "rank_group": 97,
+      "rank_absolute": 105,
+      "domain": "pigeshotel.gr",
+      "title": "Gorge Crossing - Piges Hotel at Acheron",
+      "url": "https://pigeshotel.gr/en/experiences/gorge-crossing/",
+      "breadcrumb": "https://pigeshotel.gr › Αρχική › EXPERIENCES",
+      "website_name": "Piges Hotel",
+      "description": "The river that crosses it, the Acheron, is one of the cleanest rivers in Europe and is an ideal choice for your first rafting experiences. The ...",
+      "pre_snippet": "04/30/2025 00:00:00",
+      "highlighted": [
+        "Acheron",
+        "rafting"
+      ],
+      "timestamp": "2025-04-30 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 98,
+      "rank_absolute": 106,
+      "domain": "www.nationalgeographic.com",
+      "title": "Greece's river to the 'underworld' now lures adventure ...",
+      "url": "https://www.nationalgeographic.com/travel/article/greece-river-to-underworld-now-lures-adventure-travelers",
+      "breadcrumb": "https://www.nationalgeographic.com › travel › article",
+      "website_name": "National Geographic",
+      "description": "In real life, the Acheron is far from its ancient mythological reputation as “the river of woe.” The 32-mile-long waterway in Epirus, a region ...",
+      "pre_snippet": "02/22/2022 00:00:00",
+      "highlighted": [
+        "Acheron"
+      ],
+      "timestamp": "2022-02-22 00:00:00 +00:00"
+    },
+    {
+      "type": "organic",
+      "rank_group": 99,
+      "rank_absolute": 107,
+      "domain": "www.youtube.com",
+      "title": "Acheron Tour - Rafting in Acheron River - Every Day ...",
+      "url": "https://www.youtube.com/watch?v=j7SebfxFeKM",
+      "breadcrumb": "130+ views  ·  1 year ago",
+      "website_name": "YouTube · Compass OutdoorAdventures",
+      "is_video": true,
+      "description": "Rafting Acheron River - Acheron River Vafeiadis Anastasios COMPASS OUTDOOR ADVENTURES - Sivota Thesprotia website ...",
+      "highlighted": [
+        "Rafting Acheron"
+      ],
+      "timestamp": "2023-08-30 00:00:00 +00:00"
+    },
+    {
+      "type": "related_searches",
+      "rank_group": 1,
+      "rank_absolute": 108,
+      "items": [
+        "Water rafting acheron",
+        "Best rafting acheron",
+        "Rafting acheron prices",
+        "Acheron Springs",
+        "Acheron River Epirus",
+        "Parga to Acheron River",
+        "Acheron River activities",
+        "Fishing Acheron River greece"
+      ]
+    },
+    {
+      "type": "google_reviews",
+      "rank_group": 1,
+      "rank_absolute": 109,
+      "place_id": "ChIJvVEmi1FxXBMRFeLqoOnZUYs",
+      "feature": "0x135c71518b2651bd:0x8b51d9e9a0eae215",
+      "cid": "10039044641835901461"
+    }
+  ]
+}

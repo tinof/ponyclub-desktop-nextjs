@@ -1,0 +1,198 @@
+{
+  "id": "06141930-9574-0389-0000-7f2bd2f1d55d",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "items": [
+    {
+      "se_type": "google",
+      "keyword_data": {
+        "se_type": "google",
+        "keyword": "acheron greece",
+        "location_code": 2300,
+        "language_code": "en",
+        "keyword_info": {
+          "se_type": "google",
+          "last_updated_time": "2025-05-14 05:14:46 +00:00",
+          "competition": 0.06,
+          "competition_level": "LOW",
+          "cpc": 0.14,
+          "search_volume": 2900,
+          "low_top_of_page_bid": 0.2,
+          "high_top_of_page_bid": 0.87,
+          "categories": [
+            10004,
+            10276,
+            11088,
+            12382
+          ],
+          "monthly_searches": {
+            "2025-04": 1600,
+            "2025-03": 720,
+            "2025-02": 590,
+            "2025-01": 720,
+            "2024-12": 480,
+            "2024-11": 590,
+            "2024-10": 1900,
+            "2024-09": 4400,
+            "2024-08": 8100,
+            "2024-07": 8100,
+            "2024-06": 5400,
+            "2024-05": 2900
+          },
+          "search_volume_trend": {
+            "monthly": 122,
+            "quarterly": 171
+          }
+        },
+        "keyword_properties": {
+          "se_type": "google",
+          "keyword_difficulty": 14,
+          "detected_language": "en"
+        },
+        "avg_backlinks_info": {
+          "se_type": "google",
+          "backlinks": 112.8,
+          "dofollow": 79.4,
+          "referring_pages": 103.6,
+          "referring_domains": 37.4,
+          "referring_main_domains": 32.4,
+          "rank": 100.6,
+          "main_domain_rank": 547.8,
+          "last_updated_time": "2025-05-19 22:49:50 +00:00"
+        },
+        "search_intent_info": {
+          "se_type": "google",
+          "main_intent": "informational",
+          "last_updated_time": "2024-07-05 19:08:13 +00:00"
+        }
+      },
+      "first_domain_serp_element": {
+        "se_type": "google",
+        "type": "organic",
+        "rank_group": 47,
+        "rank_absolute": 53,
+        "domain": "ponyclub.gr",
+        "title": "Adventure Activities in Acheron River - Pony Club",
+        "url": "https://ponyclub.gr/river-village",
+        "breadcrumb": "https://ponyclub.gr › river-village",
+        "website_name": "ponyclub.gr",
+        "description": "In Greek mythology Acheron was known as the river of Underworld. The souls of the newly dead were carried to the Underworld by Hades' ferryman Charon. Of course ...",
+        "highlighted": [
+          "Greek",
+          "Acheron"
+        ],
+        "main_domain": "ponyclub.gr",
+        "relative_url": "/river-village",
+        "etv": 6.09,
+        "estimated_paid_traffic_cost": 0.853,
+        "rank_changes": {
+          "is_new": true
+        },
+        "rank_info": {
+          "main_domain_rank": 54
+        }
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword_data": {
+        "se_type": "google",
+        "keyword": "paros horseback riding",
+        "location_code": 2300,
+        "language_code": "en",
+        "keyword_info": {
+          "se_type": "google",
+          "last_updated_time": "2025-05-11 22:49:11 +00:00",
+          "competition": 0.23,
+          "competition_level": "LOW",
+          "cpc": 1.52,
+          "search_volume": 210,
+          "low_top_of_page_bid": 0.38,
+          "high_top_of_page_bid": 1.64,
+          "categories": [
+            10014,
+            10122,
+            13367
+          ],
+          "monthly_searches": {
+            "2025-04": 170,
+            "2025-03": 50,
+            "2025-02": 30,
+            "2025-01": 30,
+            "2024-12": 20,
+            "2024-11": 40,
+            "2024-10": 210,
+            "2024-09": 480,
+            "2024-08": 590,
+            "2024-07": 480,
+            "2024-06": 390,
+            "2024-05": 320
+          },
+          "search_volume_trend": {
+            "monthly": 240,
+            "quarterly": 467,
+            "yearly": 21
+          }
+        },
+        "keyword_properties": {
+          "se_type": "google",
+          "synonym_clustering_algorithm": "text_processing",
+          "detected_language": "en"
+        },
+        "avg_backlinks_info": {
+          "se_type": "google",
+          "backlinks": 5.4,
+          "dofollow": 4,
+          "referring_pages": 5.1,
+          "referring_domains": 3.7,
+          "referring_main_domains": 3.6,
+          "rank": 34.8,
+          "main_domain_rank": 357.3,
+          "last_updated_time": "2025-05-12 03:19:37 +00:00"
+        },
+        "search_intent_info": {
+          "se_type": "google",
+          "main_intent": "navigational",
+          "foreign_intent": [
+            "commercial"
+          ],
+          "last_updated_time": "2024-04-23 01:46:11 +00:00"
+        }
+      },
+      "first_domain_serp_element": {
+        "se_type": "google",
+        "type": "organic",
+        "rank_group": 78,
+        "rank_absolute": 82,
+        "domain": "ponyclub.gr",
+        "title": "Pony Club | Adventure Activities in Acheron River",
+        "url": "https://ponyclub.gr/",
+        "breadcrumb": "https://ponyclub.gr",
+        "website_name": "ponyclub.gr",
+        "description": "Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor ...",
+        "highlighted": [
+          "horse riding"
+        ],
+        "main_domain": "ponyclub.gr",
+        "relative_url": "/",
+        "etv": 0.441,
+        "estimated_paid_traffic_cost": 0.67,
+        "rank_changes": {
+          "is_new": true
+        },
+        "backlinks_info": {
+          "referring_domains": 12,
+          "referring_main_domains": 11,
+          "referring_pages": 22,
+          "dofollow": 8,
+          "backlinks": 22,
+          "time_update": "2025-05-29 10:14:51 +00:00"
+        },
+        "rank_info": {
+          "page_rank": 94,
+          "main_domain_rank": 54
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,913 @@
+{
+  "columns": [
+    "campaign.name",
+    "adGroup.name",
+    "keywordView.resourceName",
+    "metrics.conversions",
+    "metrics.clicks",
+    "metrics.impressions",
+    "metrics.costMicros"
+  ],
+  "data": [
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~10033806",
+      "0",
+      "23",
+      "610",
+      "3990000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~296082952013",
+      "0",
+      "24",
+      "849",
+      "5130000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~366368981237",
+      "0",
+      "0",
+      "8",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~382816355208",
+      "0",
+      "6",
+      "127",
+      "1730000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~382840174739",
+      "0",
+      "41",
+      "1397",
+      "8330000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~437246334231",
+      "0",
+      "0",
+      "28",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~483858487607",
+      "0",
+      "0",
+      "9",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~791574327811",
+      "0",
+      "0",
+      "298",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~1296973719309",
+      "0",
+      "0",
+      "4",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~1298703936673",
+      "0",
+      "7",
+      "42",
+      "1500000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~1411199510851",
+      "0",
+      "21",
+      "1360",
+      "3490000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~1636084205664",
+      "0",
+      "2",
+      "14",
+      "350000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974531340",
+      "0",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974531380",
+      "0",
+      "0",
+      "3",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974531420",
+      "0",
+      "0",
+      "9",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974532140",
+      "0",
+      "0",
+      "8",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974532540",
+      "0",
+      "0",
+      "5",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974532580",
+      "0",
+      "0",
+      "3",
+      "0"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974532620",
+      "0",
+      "1",
+      "4",
+      "190000"
+    ],
+    [
+      "PR 28/4/23",
+      "Ομάδα διαφημίσεων 1",
+      "customers/3281163984/keywordViews/151552043714~2018974532820",
+      "0",
+      "38",
+      "422",
+      "3360000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~10027501",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~10060421",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~11431526404",
+      "0",
+      "347",
+      "3505",
+      "148600000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~354172931219",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~358522212214",
+      "0",
+      "199",
+      "1195",
+      "94670000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~360935388197",
+      "0",
+      "61",
+      "488",
+      "25800000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~460188292723",
+      "0",
+      "66",
+      "707",
+      "23130000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~460188292963",
+      "0",
+      "29",
+      "353",
+      "10600000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~521998649982",
+      "0",
+      "368",
+      "3326",
+      "116280000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~720902931794",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~737039507516",
+      "0",
+      "0",
+      "2",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~1664713767732",
+      "0",
+      "24",
+      "182",
+      "3950000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359335",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359375",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359415",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668232",
+      "0",
+      "320",
+      "1496",
+      "82150000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668272",
+      "0",
+      "57",
+      "248",
+      "9700000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668312",
+      "0",
+      "30",
+      "125",
+      "10790000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~896586754957",
+      "0",
+      "1",
+      "4",
+      "1900000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368101",
+      "0",
+      "73",
+      "291",
+      "13190000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368141",
+      "0",
+      "0",
+      "5",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368381",
+      "0",
+      "0",
+      "3",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368581",
+      "0",
+      "67",
+      "239",
+      "19590000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1682921818935",
+      "0",
+      "151",
+      "877",
+      "47370000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1717848313082",
+      "0",
+      "10",
+      "67",
+      "100000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1717972948456",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1718236826849",
+      "0",
+      "1",
+      "3",
+      "10000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2018974531380",
+      "0",
+      "0",
+      "3",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2018974531900",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2088953678302",
+      "0",
+      "0",
+      "10",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~10027501",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~10060421",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~11431526404",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~354172931219",
+      "0",
+      "1",
+      "3",
+      "60000"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~358522212214",
+      "0",
+      "55",
+      "726",
+      "26041155"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~360935388197",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~460188292723",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~460188292963",
+      "0",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~521998649982",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~720902931794",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~737039507516",
+      "0",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~1664713767732",
+      "0",
+      "40",
+      "468",
+      "17474013"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359335",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359375",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2329112359415",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668232",
+      "0",
+      "140",
+      "949",
+      "63951117"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668272",
+      "0",
+      "20",
+      "178",
+      "8428575"
+    ],
+    [
+      "Website traffic-Search-ENG",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/160690724623~2494268668312",
+      "0",
+      "0",
+      "2",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368101",
+      "0",
+      "46",
+      "261",
+      "17346264"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368141",
+      "0",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368381",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1215273368581",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1682921818935",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1717848313082",
+      "0",
+      "14",
+      "65",
+      "5380000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1717972948456",
+      "0",
+      "1",
+      "10",
+      "390000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~1718236826849",
+      "0",
+      "2",
+      "20",
+      "740000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2018974531380",
+      "0",
+      "12",
+      "99",
+      "4343988"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2018974531900",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2088953678302",
+      "0",
+      "8",
+      "20",
+      "2789941"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2088953678822",
+      "0",
+      "7",
+      "28",
+      "2590000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2203085446222",
+      "0",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2204043964213",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2225489305599",
+      "0",
+      "4",
+      "16",
+      "1590000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2226282763090",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2227663276548",
+      "0",
+      "0",
+      "2",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2249768646194",
+      "0",
+      "7",
+      "15",
+      "2770000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2280039903087",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2282372586434",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2293039241710",
+      "0",
+      "6",
+      "8",
+      "2310378"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2310443188726",
+      "0",
+      "4",
+      "59",
+      "1591806"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2310619240446",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2321810629196",
+      "0",
+      "0",
+      "3",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2330459196124",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2330459196164",
+      "0",
+      "1",
+      "3",
+      "380000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2330459196204",
+      "0",
+      "15",
+      "121",
+      "4910000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2330459196364",
+      "0",
+      "2",
+      "2",
+      "780000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2332490518743",
+      "0",
+      "2",
+      "9",
+      "370000"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2332816070836",
+      "0",
+      "7",
+      "112",
+      "2471638"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2333010237092",
+      "0",
+      "38",
+      "298",
+      "12284654"
+    ],
+    [
+      "Website traffic-Search-GR",
+      "Ad group 1",
+      "customers/3281163984/keywordViews/162166208299~2333380086951",
+      "0",
+      "1",
+      "10",
+      "400000"
+    ]
+  ]
+}

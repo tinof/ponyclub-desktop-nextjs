@@ -1,0 +1,585 @@
+{
+  "id": "06141947-9574-0400-0000-c4e5c52a1d92",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "items": [
+    {
+      "se_type": "google",
+      "keyword": "greece weather-athens",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-05-19 20:56:07 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 135000,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-04": 165000,
+          "2025-03": 135000,
+          "2025-02": 165000,
+          "2025-01": 110000,
+          "2024-12": 165000,
+          "2024-11": 135000,
+          "2024-10": 110000,
+          "2024-09": 135000,
+          "2024-08": 90500,
+          "2024-07": 110000,
+          "2024-06": 110000,
+          "2024-05": 135000
+        },
+        "search_volume_trend": {
+          "monthly": 22,
+          "yearly": 50
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "greece weather athens",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 28,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 1130.6,
+        "dofollow": 1116.4,
+        "referring_pages": 1119.6,
+        "referring_domains": 17.3,
+        "referring_main_domains": 15.1,
+        "rank": 168.4,
+        "main_domain_rank": 623.3,
+        "last_updated_time": "2025-05-28 07:46:58 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2025-05-19 20:56:08 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "athens weather",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-05-14 05:35:22 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 135000,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-04": 165000,
+          "2025-03": 135000,
+          "2025-02": 165000,
+          "2025-01": 110000,
+          "2024-12": 165000,
+          "2024-11": 135000,
+          "2024-10": 110000,
+          "2024-09": 135000,
+          "2024-08": 90500,
+          "2024-07": 110000,
+          "2024-06": 110000,
+          "2024-05": 135000
+        },
+        "search_volume_trend": {
+          "monthly": 22,
+          "yearly": 50
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 40,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 1145.9,
+        "dofollow": 1127.9,
+        "referring_pages": 1130.8,
+        "referring_domains": 19.6,
+        "referring_main_domains": 16.6,
+        "rank": 224.2,
+        "main_domain_rank": 589.7,
+        "last_updated_time": "2025-05-19 04:21:44 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "navigational",
+        "last_updated_time": "2023-03-05 11:38:54 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "greece",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-05-09 19:46:30 +00:00",
+        "competition": 0.01,
+        "competition_level": "LOW",
+        "cpc": 2.18,
+        "search_volume": 74000,
+        "low_top_of_page_bid": 0.31,
+        "high_top_of_page_bid": 1.82,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-04": 60500,
+          "2025-03": 49500,
+          "2025-02": 40500,
+          "2025-01": 33100,
+          "2024-12": 33100,
+          "2024-11": 40500,
+          "2024-10": 60500,
+          "2024-09": 74000,
+          "2024-08": 165000,
+          "2024-07": 135000,
+          "2024-06": 110000,
+          "2024-05": 74000
+        },
+        "search_volume_trend": {
+          "monthly": 22,
+          "quarterly": 49,
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 82,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 45274.7,
+        "dofollow": 40371.9,
+        "referring_pages": 41075.6,
+        "referring_domains": 1669.2,
+        "referring_main_domains": 1480.2,
+        "rank": 410,
+        "main_domain_rank": 615.9,
+        "last_updated_time": "2025-05-19 04:32:05 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 11:54:39 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "superleague greece",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-12 12:18:13 +00:00",
+        "competition_level": "LOW",
+        "cpc": 1.05,
+        "search_volume": 49500,
+        "low_top_of_page_bid": 0.35,
+        "high_top_of_page_bid": 1.54,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 33100,
+          "2025-04": 49500,
+          "2025-03": 60500,
+          "2025-02": 90500,
+          "2025-01": 74000,
+          "2024-12": 74000,
+          "2024-11": 74000,
+          "2024-10": 60500,
+          "2024-09": 60500,
+          "2024-08": 40500,
+          "2024-07": 6600,
+          "2024-06": 4400
+        },
+        "search_volume_trend": {
+          "monthly": -33,
+          "quarterly": -45,
+          "yearly": -55
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 43,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 6310.4,
+        "dofollow": 6069.2,
+        "referring_pages": 6224.7,
+        "referring_domains": 155.1,
+        "referring_main_domains": 143.9,
+        "rank": 228.7,
+        "main_domain_rank": 668.8,
+        "last_updated_time": "2025-05-19 04:34:34 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 12:21:56 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "athens météo",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-14 04:51:00 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 33100,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 40500,
+          "2025-04": 40500,
+          "2025-03": 40500,
+          "2025-02": 49500,
+          "2025-01": 33100,
+          "2024-12": 49500,
+          "2024-11": 40500,
+          "2024-10": 27100,
+          "2024-09": 33100,
+          "2024-08": 22200,
+          "2024-07": 27100,
+          "2024-06": 27100
+        },
+        "search_volume_trend": {
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 42,
+        "detected_language": "fr",
+        "is_another_language": true
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 621.4,
+        "dofollow": 607.9,
+        "referring_pages": 610.4,
+        "referring_domains": 16.8,
+        "referring_main_domains": 14.7,
+        "rank": 221.8,
+        "main_domain_rank": 610.9,
+        "last_updated_time": "2025-05-09 01:46:08 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2025-03-05 21:52:31 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "athens meteo",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-13 21:10:45 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 33100,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 40500,
+          "2025-04": 40500,
+          "2025-03": 40500,
+          "2025-02": 49500,
+          "2025-01": 33100,
+          "2024-12": 49500,
+          "2024-11": 40500,
+          "2024-10": 27100,
+          "2024-09": 33100,
+          "2024-08": 22200,
+          "2024-07": 27100,
+          "2024-06": 27100
+        },
+        "search_volume_trend": {
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "meteo athens",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 29,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 7465.6,
+        "dofollow": 7463.4,
+        "referring_pages": 7465.2,
+        "referring_domains": 10.2,
+        "referring_main_domains": 9.4,
+        "rank": 178.6,
+        "main_domain_rank": 554.6,
+        "last_updated_time": "2025-05-25 19:40:46 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": [
+          "navigational"
+        ],
+        "last_updated_time": "2023-03-05 11:38:53 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "météo athens",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-05-14 09:51:40 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 33100,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-04": 40500,
+          "2025-03": 40500,
+          "2025-02": 49500,
+          "2025-01": 33100,
+          "2024-12": 49500,
+          "2024-11": 40500,
+          "2024-10": 27100,
+          "2024-09": 33100,
+          "2024-08": 22200,
+          "2024-07": 27100,
+          "2024-06": 27100,
+          "2024-05": 33100
+        },
+        "search_volume_trend": {
+          "quarterly": -18,
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "athens météo",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 67,
+        "detected_language": "fr",
+        "is_another_language": true
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 7637.5,
+        "dofollow": 7612.5,
+        "referring_pages": 7617,
+        "referring_domains": 23.6,
+        "referring_main_domains": 21.4,
+        "rank": 302.4,
+        "main_domain_rank": 612.2,
+        "last_updated_time": "2025-04-20 03:07:21 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 12:08:18 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "island of zante greece",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-12 00:36:10 +00:00",
+        "competition": 0.12,
+        "competition_level": "LOW",
+        "cpc": 0.62,
+        "search_volume": 33100,
+        "low_top_of_page_bid": 0.19,
+        "high_top_of_page_bid": 0.82,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 49500,
+          "2025-04": 18100,
+          "2025-03": 8100,
+          "2025-02": 5400,
+          "2025-01": 4400,
+          "2024-12": 3600,
+          "2024-11": 3600,
+          "2024-10": 27100,
+          "2024-09": 60500,
+          "2024-08": 74000,
+          "2024-07": 74000,
+          "2024-06": 60500
+        },
+        "search_volume_trend": {
+          "monthly": 173,
+          "quarterly": 511,
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "zante island greece",
+        "synonym_clustering_algorithm": "text_processing",
+        "detected_language": "en"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2025-05-23 18:54:02 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "elafonisi beach greece",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-14 08:13:09 +00:00",
+        "competition": 0.07,
+        "competition_level": "LOW",
+        "cpc": 0.38,
+        "search_volume": 33100,
+        "low_top_of_page_bid": 0.23,
+        "high_top_of_page_bid": 1.09,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 74000,
+          "2025-04": 33100,
+          "2025-03": 6600,
+          "2025-02": 2400,
+          "2025-01": 1900,
+          "2024-12": 1600,
+          "2024-11": 3600,
+          "2024-10": 27100,
+          "2024-09": 49500,
+          "2024-08": 74000,
+          "2024-07": 60500,
+          "2024-06": 49500
+        },
+        "search_volume_trend": {
+          "monthly": 124,
+          "quarterly": 1021,
+          "yearly": 173
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "detected_language": "en"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "transactional",
+        "last_updated_time": "2025-05-26 17:52:59 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "meteo athens",
+      "location_code": 2300,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-13 04:35:52 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 33100,
+        "categories": [
+          10017,
+          10145,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 40500,
+          "2025-04": 40500,
+          "2025-03": 40500,
+          "2025-02": 49500,
+          "2025-01": 33100,
+          "2024-12": 49500,
+          "2024-11": 40500,
+          "2024-10": 27100,
+          "2024-09": 33100,
+          "2024-08": 22200,
+          "2024-07": 27100,
+          "2024-06": 27100
+        },
+        "search_volume_trend": {
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 71,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 14422.1,
+        "dofollow": 13564.7,
+        "referring_pages": 13636.8,
+        "referring_domains": 97.4,
+        "referring_main_domains": 91.2,
+        "rank": 329.7,
+        "main_domain_rank": 535.6,
+        "last_updated_time": "2025-05-19 04:58:45 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": [
+          "navigational"
+        ],
+        "last_updated_time": "2023-03-05 12:06:16 +00:00"
+      }
+    }
+  ]
+}

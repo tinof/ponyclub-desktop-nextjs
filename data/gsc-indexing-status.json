@@ -1,0 +1,44 @@
+{
+  "homepage": {
+    "inspectionResult": {
+      "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ponyclub.gr&id=ekihwfzC4kvNDDWr4rDd9g&utm_medium=link&utm_source=api",
+      "indexStatusResult": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2025-06-04T20:18:30Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://www.ponyclub.gr/",
+        "userCanonical": "https://ponyclub.gr/",
+        "referringUrls": [
+          "http://www.ponyclub.gr/",
+          "http://ponyclub.gr/?p=97"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "mobileUsabilityResult": {
+        "verdict": "VERDICT_UNSPECIFIED"
+      }
+    }
+  },
+  "rafting_page": {
+    "inspectionResult": {
+      "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ponyclub.gr&id=ggZMRbeMOp10IYQS0RTynQ&utm_medium=link&utm_source=api",
+      "indexStatusResult": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Alternate page with proper canonical tag",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2025-06-11T01:34:57Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://www.ponyclub.gr/riding",
+        "userCanonical": "https://ponyclub.gr/",
+        "crawledAs": "MOBILE"
+      },
+      "mobileUsabilityResult": {
+        "verdict": "VERDICT_UNSPECIFIED"
+      }
+    }
+  }
+}
