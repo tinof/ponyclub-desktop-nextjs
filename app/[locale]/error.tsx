@@ -12,7 +12,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function ErrorPage({ error, reset }: ErrorProps) {
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -81,6 +81,7 @@ export default function Error({ error, reset }: ErrorProps) {
         {/* Styled heading */}
         <p className="mb-6 text-lg text-gray-700">{t.error.message}</p>
         <button
+          type="button"
           onClick={() => reset()}
           className={`
             rounded-lg bg-[#c27a5f] px-6 py-3 font-semibold text-white

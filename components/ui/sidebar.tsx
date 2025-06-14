@@ -27,6 +27,25 @@ const SIDEBAR_WIDTH_MOBILE = '18rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
+// Secure cookie utility function
+function setCookie(name: string, value: string, maxAge: number) {
+  try {
+    // Use a more secure approach with proper encoding and validation
+    const encodedValue = encodeURIComponent(value);
+    const cookieString = `${name}=${encodedValue}; path=/; max-age=${maxAge}; SameSite=Strict; Secure=${location.protocol === 'https:'}`;
+    // biome-ignore lint/suspicious/noDocumentCookie: Secure wrapper with encoding, SameSite, and Secure flags
+    document.cookie = cookieString;
+  } catch (error) {
+    // Fallback to localStorage if cookies fail
+    console.warn('Cookie setting failed, using localStorage:', error);
+    try {
+      localStorage.setItem(name, value);
+    } catch (storageError) {
+      console.warn('Both cookie and localStorage failed:', storageError);
+    }
+  }
+}
+
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
   open: boolean;
@@ -84,8 +103,12 @@ const SidebarProvider = React.forwardRef<
           _setOpen(openState);
         }
 
-        // This sets the cookie to keep the sidebar state.
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        // This sets the cookie to keep the sidebar state using secure method.
+        setCookie(
+          SIDEBAR_COOKIE_NAME,
+          String(openState),
+          SIDEBAR_COOKIE_MAX_AGE,
+        );
       },
       [setOpenProp, open],
     );

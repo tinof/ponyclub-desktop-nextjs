@@ -1,6 +1,8 @@
 // app/[locale]/layout.tsx is a Server Component
 import '../globals.css';
 
+import ClientLayout from '@/components/ClientLayout';
+import GDPRGoogleAnalytics from '@/components/client/GDPRGoogleAnalytics';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -8,8 +10,6 @@ import { Inter, Roboto_Slab } from 'next/font/google';
 import Script from 'next/script';
 import { connection } from 'next/server';
 import type React from 'react';
-import ClientLayout from '@/components/ClientLayout';
-import GDPRGoogleAnalytics from '@/components/client/GDPRGoogleAnalytics';
 
 // Remove the fetchCache export as we need dynamic rendering
 // export const fetchCache = 'default-cache';
@@ -224,7 +224,7 @@ export default async function LocaleLayout({
 
         {/* Nosecone automatically handles nonces, so we can remove manual nonce handling */}
         <Script
-          id="bokun-widgets-loader-global"
+          id={`bokun-widgets-loader-${locale}`}
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
           strategy="lazyOnload"
         />

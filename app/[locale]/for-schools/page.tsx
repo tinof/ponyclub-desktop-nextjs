@@ -18,10 +18,10 @@ import { Roboto_Slab } from 'next/font/google';
 import Link from 'next/link';
 
 import ResponsiveNavigation from '@/components/responsive-navigation';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { BorderBeam } from '@/components/ui/border-beam';
 import { GridPattern } from '@/components/ui/grid-pattern';
 import { NumberTicker } from '@/components/ui/number-ticker';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { PulsatingButton } from '@/components/ui/pulsating-button';
 
 // Define Roboto Slab font instance
@@ -346,7 +346,10 @@ export default function ForSchoolsPage() {
                         'Απολαμβάνουμε ένα θαυμάσιο γεύμα και επιστρέφουμε με νέες ιστορίες να μοιραστούμε.',
                     },
                   ].map((item, index) => (
-                    <div key={index} className="group relative">
+                    <div
+                      key={`schedule-${item.time}-${item.title}`}
+                      className="group relative"
+                    >
                       <div className="flex items-start space-x-6">
                         <div className="relative">
                           <div
@@ -576,7 +579,10 @@ export default function ForSchoolsPage() {
                       color: 'from-amber-500 to-orange-500',
                     },
                   ].map((activity, index) => (
-                    <div key={index} className="group relative">
+                    <div
+                      key={`activity-${activity.title}`}
+                      className="group relative"
+                    >
                       <div
                         className={`
                           absolute -inset-1 rounded-2xl bg-gradient-to-r
@@ -833,7 +839,10 @@ export default function ForSchoolsPage() {
                     title: 'Εξερεύνηση Φύσης',
                   },
                 ].map((image, index) => (
-                  <div key={index} className="group relative">
+                  <div
+                    key={`gallery-${image.title}`}
+                    className="group relative"
+                  >
                     <div
                       className={`
                         absolute -inset-1 rounded-3xl bg-gradient-to-r

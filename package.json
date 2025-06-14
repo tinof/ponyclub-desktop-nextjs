@@ -11,6 +11,8 @@
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "check": "biome check --write .",
+    "quality-check": "./scripts/biome-quality-check.sh dev",
+    "quality-check:ci": "./scripts/biome-quality-check.sh ci",
     "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true next build",
     "knip": "knip",
