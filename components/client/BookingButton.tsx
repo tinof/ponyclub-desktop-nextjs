@@ -37,6 +37,18 @@ export default function BookingButton({
         return
       }
 
+      // Ensure Bokun is ready before attempting to open
+      try {
+        if (typeof window.BokunWidgets.reinit === 'function') {
+          // Try calling reinit without parameters (safer)
+          window.BokunWidgets.reinit()
+        }
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[Booking Button] Error reinitializing Bokun:', error)
+        }
+      }
+
       if (clickedButtonRef.current) {
         // It's possible Bokun's scripts have now attached proper listeners.
         // A direct click might be better than trying to call their internal modal functions.

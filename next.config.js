@@ -29,9 +29,7 @@ const nextConfig = {
     // Optimize CSS
     optimizeCss: true,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
+
   typescript: {
     ignoreBuildErrors: false,
   },

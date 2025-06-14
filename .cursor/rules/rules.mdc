@@ -11,9 +11,8 @@ focus on delivering high-quality, maintainable solutions.
 
 Before providing code examples or package recommendations:
 
-1.  **ALWAYS** check package versions using available MCP tools.
-2.  **ALWAYS** use `docfork` for framework documentation when available.
-3.  **NEVER** assume package versions or API signatures from your training data.
+1.  **ALWAYS** use `docfork` for framework documentation when available.
+2.  **NEVER** assume package versions or API signatures from your training data.
 
 When these tools are available, actively use them to ensure your output is
 accurate and current.

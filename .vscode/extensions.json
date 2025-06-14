@@ -1,9 +1,5 @@
 {
   "recommendations": [
-    // Essential for ESLint and Prettier
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-
     // TypeScript and Next.js support
     "ms-vscode.vscode-typescript-next",
     "bradlc.vscode-tailwindcss",

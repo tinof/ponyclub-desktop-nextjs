@@ -1,5 +1,5 @@
 // Auto-generated sitemap data - Do not edit manually
-// Generated on: 2025-06-11T22:53:34.040Z
+// Generated on: 2025-06-14T11:23:26.995Z
 
 export interface RouteData {
   route: string;

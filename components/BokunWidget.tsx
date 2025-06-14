@@ -1,11 +1,12 @@
 'use client'
 
-import type { IFrameOptions } from 'iframe-resizer'
-import { iframeResizer } from 'iframe-resizer' // Types for v3/v4
-import { useEffect, useRef } from 'react'
+import type { IFrameOptions } from 'iframe-resizer';
+import { iframeResizer } from 'iframe-resizer'; // Types for v3/v4
+import { useEffect, useRef } from 'react';
 
-import { useLanguage } from '@/contexts/language-context'
-import { bokunLangMap } from '@/lib/bokun-lang'
+import { useLanguage } from '@/contexts/language-context';
+import { useBokunInit } from '@/hooks/use-bokun-init';
+import { bokunLangMap } from '@/lib/bokun-lang';
 
 // Define proper types for iframe resizer callbacks
 interface MessageData {
@@ -29,6 +30,9 @@ export default function BokunWidget({ experienceId, partialView = 1 }: BokunWidg
   const { language } = useLanguage()
   const bokunLang = bokunLangMap[language] || 'en'
   const widgetContainerRef = useRef<HTMLDivElement>(null)
+
+  // Ensure Bokun is initialized
+  useBokunInit()
 
   const baseUrl = 'https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience'
   const bokunWidgetSrcUrl = `${baseUrl}/${experienceId}?partialView=${partialView}&lang=${bokunLang}`

@@ -2,12 +2,12 @@
 
 import { Roboto_Slab } from 'next/font/google'
 
-import BokunStyles from '@/components/client/BokunStyles'
-import GoogleReviews from '@/components/client/GoogleReviews'
-import PriceListButton from '@/components/client/PriceListButton'
 import DynamicContactDetails from '@/components/DynamicContactDetails'
 import DynamicGoogleMap from '@/components/DynamicGoogleMap'
 import EnhancedPackageCard from '@/components/EnhancedPackageCard'
+import BokunStyles from '@/components/client/BokunStyles'
+import GoogleReviews from '@/components/client/GoogleReviews'
+import PriceListButton from '@/components/client/PriceListButton'
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
 import { useLanguage } from '@/contexts/language-context'
 
@@ -63,9 +63,9 @@ export default function HomePageContent() {
                 absolute inset-0 z-20 bg-linear-to-b from-black/10
                 to-transparent
               `}
-            ></div>
+            />
           </div>
-          <div className={`absolute inset-0 z-30 flex items-center justify-center`}>
+          <div className='absolute inset-0 z-30 flex items-center justify-center'>
             <div
               className={`
                 relative max-w-sm transform rounded-2xl border-2
@@ -102,12 +102,12 @@ export default function HomePageContent() {
                   {t.hero.subtitle}
                 </span>
               </h1>
-              <div
-                className={`
-                  absolute -inset-[1px] -z-10 rounded-2xl bg-linear-to-b
-                  from-amber-200/20 to-transparent blur-xs
-                `}
-              ></div>
+          <div
+            className={`
+              absolute -inset-[1px] -z-10 rounded-2xl bg-linear-to-b
+              from-amber-200/20 to-transparent blur-xs
+            `}
+          />
             </div>
           </div>
         </div>
@@ -222,8 +222,8 @@ export default function HomePageContent() {
               absolute inset-0 -z-10 rounded-2xl bg-linear-to-br
               from-[#f5f0e8]/95 via-white/90 to-[#f5f0e8]/95 backdrop-blur-md
             `}
-          ></div>
-          <div className='absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5'></div>
+          />
+          <div className='absolute inset-0 -z-20 rounded-2xl bg-[#6b8362]/5' />
 
           {/* Decorative effects */}
           <div
@@ -237,14 +237,14 @@ export default function HomePageContent() {
                 absolute inset-0 rounded-2xl bg-linear-to-tr from-amber-200/30
                 via-transparent to-[#6b8362]/20
               `}
-            ></div>
+            />
           </div>
           <div
             className={`
               pointer-events-none absolute inset-0 rounded-2xl border
               border-amber-200/30
             `}
-          ></div>
+          />
 
           {/* Main content */}
           <h2
@@ -261,7 +261,7 @@ export default function HomePageContent() {
                 absolute -bottom-2 left-0 h-[2px] w-full bg-linear-to-r
                 from-transparent via-[#6b8362]/70 to-transparent
               `}
-            ></div>
+            />
           </h2>
 
           <div className='relative'>
@@ -288,17 +288,17 @@ export default function HomePageContent() {
                 absolute -top-1 -left-1 h-10 w-10 rounded-tl-lg border-t-2
                 border-l-2 border-[#6b8362]/30
               `}
-            ></div>
+            />
             <div
               className={`
                 absolute -right-1 -bottom-1 h-10 w-10 rounded-br-lg border-r-2
                 border-b-2 border-[#6b8362]/30
               `}
-            ></div>
+            />
           </div>
 
           {/* Shadow effect */}
-          <div className='absolute -inset-[1px] -z-30 rounded-2xl shadow-xl'></div>
+          <div className='absolute -inset-[1px] -z-30 rounded-2xl shadow-xl' />
         </div>
 
         {/* SUMMER 2025 OFFERS Title */}
@@ -322,7 +322,7 @@ export default function HomePageContent() {
                 absolute -bottom-2 left-0 h-1 w-full bg-linear-to-r
                 from-transparent via-[#6b8362] to-transparent
               `}
-            ></div>
+            />
           </h2>
 
           {/* Client-side Price List Button */}
@@ -427,7 +427,7 @@ export default function HomePageContent() {
                 absolute -bottom-2 left-0 h-1 w-full bg-linear-to-r
                 from-transparent via-[#6b8362] to-transparent
               `}
-            ></div>
+            />
           </h2>
         </div>
 

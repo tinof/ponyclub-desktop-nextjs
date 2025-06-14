@@ -2,35 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "ESLint: Scan Workspace",
+      "label": "TypeScript: Check",
       "type": "shell",
-      "command": "npx eslint . --format=compact",
-      "problemMatcher": "$eslint-compact",
+      "command": "pnpm run type-check",
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
       "presentation": {
-        "echo": false,
-        "reveal": "silent",
+        "echo": true,
+        "reveal": "always",
         "focus": false,
-        "panel": "shared",
-        "showReuseMessage": false,
-        "clear": true
+        "panel": "shared"
       },
       "isBackground": false
-    },
-    {
-      "label": "ESLint: Watch",
-      "type": "shell",
-      "command": "npx eslint . --format=compact --watch",
-      "problemMatcher": "$eslint-compact",
-      "group": "test",
-      "isBackground": true,
-      "presentation": { "reveal": "always" }
     }
   ]
 }
