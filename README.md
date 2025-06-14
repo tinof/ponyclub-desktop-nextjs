@@ -47,6 +47,26 @@ A web application built with Next.js and React.
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see
    the application.
 
+## Available Scripts
+
+The following scripts are available for development and production:
+
+### Development
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm dev:webpack` - Start development server with Webpack
+- `pnpm dev:trace` - Start development server with Turbopack tracing enabled
+
+### Build & Production
+- `pnpm build` - Create production build
+- `pnpm start` - Start production server
+- `pnpm analyze` - Analyze bundle size
+
+### Quality & Maintenance
+- `pnpm type-check` - Run TypeScript type checking
+- `pnpm security:audit` - Run security audit
+- `pnpm performance:check` - Run performance checks
+- `pnpm performance:compress-video` - Compress hero video assets
+
 ## Production Build
 
 To create and run a production build locally:
@@ -55,6 +75,15 @@ To create and run a production build locally:
 pnpm build
 pnpm start
 ```
+
+## Code Quality
+
+This project uses TypeScript for type safety and maintains code quality through:
+- TypeScript strict mode configuration
+- Automated type checking during build process
+- Performance monitoring and optimization
+
+> **Note**: This project previously used ESLint and Prettier for code formatting and linting. These tools have been removed in preparation for migration to Biome, a faster all-in-one toolchain for web projects.
 
 ## Deployment to Vercel
 

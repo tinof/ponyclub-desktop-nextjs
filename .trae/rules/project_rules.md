@@ -403,7 +403,6 @@ here. Refer to the actual files for the current setup:
   for advanced tuning.)
 - **TypeScript:** `tsconfig.json`
 - **Tailwind CSS:** `app/globals.css` and `tailwind.config.js` (if present)
-- **ESLint:** `.eslintrc.json` or `eslint.config.mjs`
 
 ## Testing and Validation
 
@@ -417,10 +416,9 @@ here. Refer to the actual files for the current setup:
 
 ### Code Quality
 
-- ESLint with Next.js and React 19 rules
-- Prettier for formatting
-- TypeScript strict mode
-- Pre-commit hooks with Husky
+- TypeScript strict mode for type safety
+- Code formatting and linting tools (configurable)
+- Pre-commit hooks with Husky (optional)
 - Continuous Integration checks
 
 ## Common Pitfalls to Avoid

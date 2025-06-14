@@ -1,0 +1,3462 @@
+---
+library: webpro-nl/knip
+created_by: docfork.com
+source: https://github.com/webpro-nl/knip
+commit: a4c511b
+updated_at: 06/08/2025 11:50:03 PM UTC
+---
+
+title: Running Knip
+description: Demonstrates how to execute the `knip` command using `npm run knip` to identify unused files, unlisted dependencies, and unused exports within a project.
+source: templates/playground/basic/README.md#_snippet_0
+
+language: shell
+code:
+```
+$ npm run knip
+Unused files (1)
+clutter.ts
+Unlisted dependencies (1)
+lodash  util.ts
+Unused exports (1)
+unusedFunction  unknown  util.ts:6:14
+```
+
+---
+
+title: Configuring Github Actions for Knip
+description: Illustrates a GitHub Actions workflow configuration to integrate `knip` for continuous integration. The workflow checks out the code, sets up Node.js, installs dependencies, and runs `knip` to detect unused dependencies, exports, and files.
+source: packages/docs/src/content/docs/guides/using-knip-in-ci.md#_snippet_0
+
+language: yaml
+code:
+```
+name: Lint project
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Ubuntu/Node v20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+      - name: Run knip
+        run: npm run knip
+```
+
+---
+
+title: Creating New Plugin
+description: Demonstrates how to use the `create-plugin` script to generate the source and test files. Also shows how to run the test for the new plugin.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_2
+
+language: sh
+code:
+```
+cd packages/knip
+bun create-plugin --name tool
+```
+
+language: sh
+code:
+```
+bun test test/plugins/tool.test.ts
+```
+
+---
+
+title: Installing Canary Version of Knip
+description: Demonstrates how to install the canary version of `knip` using npm. This allows users to test the latest features and bug fixes before they are released in a stable version.
+source: packages/docs/src/content/docs/blog/slim-down-to-speed-up.md#_snippet_0
+
+language: sh
+code:
+```
+npm install -D knip@canary
+```
+
+---
+
+title: Cloning and Installing Dependencies
+description: Demonstrates cloning the repository, navigating to the project directory, and installing dependencies using `bun install`. This is the typical first step when contributing to a project.
+source: .github/DEVELOPMENT.md#_snippet_0
+
+language: shell
+code:
+```
+git clone git@github.com:[username]/knip.git
+# Or using gh CLI: gh repo fork webpro-nl/knip --clone
+cd knip
+bun install
+cd packages/knip
+bun run build
+bun run test
+```
+
+---
+
+title: Installing Knip - npm
+description: Demonstrates how to install the `knip` package as a development dependency using npm. This command adds Knip to your project, enabling you to analyze and optimize your codebase before deployment.
+source: packages/docs/src/content/docs/blog/knip-v3.mdx#_snippet_0
+
+language: shell
+code:
+```
+npm install -D knip
+```
+
+---
+
+title: Installing Knip - pnpm
+description: Illustrates the installation of `knip` as a development dependency using pnpm.  Using pnpm ensures efficient disk space utilization and faster installation speeds compared to npm or yarn.
+source: packages/docs/src/content/docs/blog/knip-v3.mdx#_snippet_1
+
+language: shell
+code:
+```
+pnpm add -D knip
+```
+
+---
+
+title: Installing Knip - bun
+description: Shows how to install `knip` as a development dependency using bun. Bun is a fast, all-in-one JavaScript runtime, and this command adds Knip to your project for unused code analysis.
+source: packages/docs/src/content/docs/blog/knip-v3.mdx#_snippet_2
+
+language: shell
+code:
+```
+bun add -D knip
+```
+
+---
+
+title: Installing Knip - yarn
+description: Demonstrates installing `knip` as a development dependency using yarn.  This allows you to integrate Knip into your project for identifying and removing unused dependencies.
+source: packages/docs/src/content/docs/blog/knip-v3.mdx#_snippet_3
+
+language: shell
+code:
+```
+yarn add -D knip
+```
+
+---
+
+title: Installing Knip via Npm
+description: Shows how to install Knip as a development dependency using npm. This command adds Knip to your project's `package.json` as a development tool, enabling you to run Knip during development and build processes.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_3
+
+language: shell
+code:
+```
+npm install -D knip
+```
+
+---
+
+title: Installing Knip via Pnpm
+description: Shows how to install Knip as a development dependency using pnpm. The `-D` flag ensures Knip is added to the `devDependencies` section of your `package.json` file.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_4
+
+language: shell
+code:
+```
+pnpm add -D knip
+```
+
+---
+
+title: Installing Knip via Bun
+description: Demonstrates how to install Knip as a development dependency using bun. This command adds `knip` as a development dependency to the project.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_5
+
+language: shell
+code:
+```
+bun add -D knip
+```
+
+---
+
+title: Installing Knip via Yarn
+description: Shows how to install Knip as a development dependency using yarn.  This will allow you to run `knip` during development.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_6
+
+language: shell
+code:
+```
+yarn add -D knip
+```
+
+---
+
+title: Installing Knip - npm
+description: Shows the command to install Knip as a development dependency using npm, enabling its use for identifying unused dependencies and exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_5
+
+language: shell
+code:
+```
+npm install -D knip
+```
+
+---
+
+title: Installing Knip - pnpm
+description: Shows the command to install Knip as a development dependency using pnpm, enabling its use for identifying unused dependencies and exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_6
+
+language: shell
+code:
+```
+pnpm add -D knip
+```
+
+---
+
+title: Installing Knip - bun
+description: Shows the command to install Knip as a development dependency using bun, enabling its use for identifying unused dependencies and exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_7
+
+language: shell
+code:
+```
+bun add -D knip
+```
+
+---
+
+title: Installing Knip - yarn
+description: Shows the command to install Knip as a development dependency using yarn, enabling its use for identifying unused dependencies and exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_8
+
+language: shell
+code:
+```
+yarn add -D knip
+```
+
+---
+
+title: Using Production Mode for Excluding Test Files - Shell
+description: Shows the recommended approach for excluding test files by using production mode. The command excludes test files to focus on production code analysis.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_8
+
+language: shell
+code:
+```
+knip --production
+```
+
+---
+
+title: Adding Knip to a Repository
+description: Demonstrates how to add `knip` and its peer dependencies to `devDependencies` using `npm init @knip/config`. This command automates the setup process by modifying the `package.json` file.
+source: packages/create-config/README.md#_snippet_0
+
+language: shell
+code:
+```
+npm init @knip/config
+```
+
+---
+
+title: Installing Knip with npm
+description: Demonstrates how to install and run `knip` using npm. This method sets up `knip` in your project for linting unused dependencies, exports, and files.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_0
+
+language: shell
+code:
+```
+npm init @knip/config
+```
+
+language: shell
+code:
+```
+npm run knip
+```
+
+---
+
+title: Installing Knip with pnpm
+description: Demonstrates how to install and run `knip` using pnpm.  This method sets up `knip` in your project for linting unused dependencies, exports, and files.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_1
+
+language: shell
+code:
+```
+pnpm create @knip/config
+```
+
+language: shell
+code:
+```
+pnpm knip
+```
+
+---
+
+title: Installing Knip with bun
+description: Demonstrates how to install and run `knip` using Bun. This method sets up `knip` in your project for linting unused dependencies, exports, and files.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_2
+
+language: shell
+code:
+```
+bun create @knip/config
+```
+
+language: shell
+code:
+```
+bun knip
+```
+
+---
+
+title: Installing Knip with yarn
+description: Demonstrates how to install and run `knip` using Yarn. This method sets up `knip` in your project for linting unused dependencies, exports, and files.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_3
+
+language: shell
+code:
+```
+yarn create @knip/config
+```
+
+language: shell
+code:
+```
+yarn knip
+```
+
+---
+
+title: Building Bash Parser
+description: Demonstrates how to build the `bash-parser` library using `esbuild`. This process bundles the source code, targets the Node.js platform, formats the output as an ECMAScript module, enables tree-shaking for smaller bundle sizes, and minifies the code for optimized performance. The final output is placed in the specified vendor directory.
+source: packages/knip/vendor/bash-parser/README.md#_snippet_0
+
+language: sh
+code:
+```
+git clone git@github.com:ericcornelissen/bash-parser.git
+cd bash-parser
+npm install
+npm run build
+npx esbuild src/index.js --outfile=$HOME/p/knip/knip/packages/knip/vendor/bash-parser/index.js --bundle --platform=node --format=esm --tree-shaking=true --minify
+```
+
+---
+
+title: Installing Knip Manually
+description: Demonstrates how to manually install `knip` and its peer dependencies using npm. Includes adding a `knip` script to `package.json` to run the linter.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_4
+
+language: shell
+code:
+```
+npm install -D knip typescript @types/node
+```
+
+language: json
+code:
+```
+{
+  "name": "my-project",
+  "scripts": {
+    "knip": "knip"
+  }
+}
+```
+
+---
+
+title: Running Knip
+description: Demonstrates running the `knip` command via `npm run knip`. This command analyzes the codebase for unused dependencies, unlisted dependencies, and unused exports, providing insights into potential code issues.
+source: templates/playground/monorepo/README.md#_snippet_0
+
+language: shell
+code:
+```
+$ npm run knip
+Unused dependencies (1)
+tinyglobby  package.json
+Unlisted dependencies (1)
+js-yaml  packages/shared/src/used-fn.ts
+Unused exports (1)
+unusedFunction  unknown  packages/shared/src/exports.ts:7:14
+```
+
+---
+
+title: Importing Named Exports in CommonJS
+description: Shows the correct way to import named exports from a CommonJS module using destructuring. It highlights that directly accessing properties from a default import (e.g., `DefaultImport.A`) is not the recommended approach, and it's better to destructure for clarity and to avoid potential issues with unused export detection.
+source: packages/docs/src/content/docs/guides/working-with-commonjs.md#_snippet_2
+
+language: javascript
+code:
+```
+const { A, B } = require('./common.js');
+const runtime = [A, B];
+```
+
+---
+
+title: Importing and Exporting a Variable - TypeScript
+description: Illustrates a simple export/import match scenario. `MyThing` is exported from `export.ts` and imported in `import.ts`, demonstrating a basic module dependency.
+source: packages/docs/src/content/docs/blog/slim-down-to-speed-up.md#_snippet_1
+
+language: typescript
+code:
+```
+import { MyThing } from './thing.ts';
+```
+
+language: typescript
+code:
+```
+export const MyThing = 'cool';
+```
+
+---
+
+title: Migrating Configuration (v0.13.3 to v1)
+description: Illustrates the changes required in the Knip configuration file when migrating from v0.13.3 or earlier to v1, including renaming `entryFiles` to `entry` and `projectFiles` to `project`, and removing the `dev` property.
+source: packages/docs/src/content/docs/blog/migration-to-v1.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entryFiles": ["src/index.ts"],
+  "projectFiles": ["src/**/*.ts", "!**/*.spec.ts"],
+  "dev": {
+    "entryFiles": ["src/index.ts", "src/**/*.spec.ts", "src/**/*.e2e.ts"],
+    "projectFiles": ["src/**/*.ts"]
+  }
+}
+```
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts!"],
+  "project": ["src/**/*.ts!"]
+}
+```
+
+---
+
+title: Exporting Version and getRocket - Typescript
+description: Defines two exports, `version` and `getRocket`, within the `my-namespace.js` module. The `version` export is a string, and `getRocket` is a function that returns a string.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_0
+
+language: ts
+code:
+```
+export const version = 'v5';
+export const getRocket = () => '[U+1F680]';
+```
+
+---
+
+title: Defining Entry File Patterns - Typescript
+description: Demonstrates defining entry file patterns for a Knip plugin using the `entry` property.  This specifies which files should be treated as entry points for dependency analysis, as shown in the Tailwind plugin example.  This allows Knip to identify relevant source files, like `tailwind.config.js`, even if they are not explicitly imported elsewhere.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_0
+
+language: typescript
+code:
+```
+import type { IsPluginEnabled, Plugin } from '../../types/config.js';
+import { hasDependency } from '../../util/plugin.js';
+
+const title = 'Tailwind';
+
+const enablers = ['tailwindcss'];
+
+const isEnabled: IsPluginEnabled = ({ dependencies }) =>
+  hasDependency(dependencies, enablers);
+
+const entry = ['tailwind.config.{js,cjs,mjs,ts}'];
+
+export default {
+  title,
+  enablers,
+  isEnabled,
+  entry,
+} satisfies Plugin;
+```
+
+---
+
+title: Running Knip With Bun
+description: Demonstrates how to execute Knip using the Bun runtime environment as an alternative to Node.js and jiti. The provided shell command initiates Knip through Bun, requiring Bun to be installed and addressing potential known issues.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_0
+
+language: shell
+code:
+```
+knip-bun
+```
+
+---
+
+title: Defining Unused Exports - Knip
+description: Illustrates two exports within `knip.js`, where a namespaced import in `index.js` explicitly references one export (`version`), leaving `getRocket` as an unused export, showcasing how Knip identifies unused exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_0
+
+language: ts
+code:
+```
+export const version = 'v5';
+export const getRocket = () => '[U+1F680]';
+```
+
+language: ts
+code:
+```
+import * as NS from './knip.js';
+
+console.log(NS.version);
+```
+
+---
+
+title: Illustrating Package Configuration with Knip
+description: Illustrates an example `package.json` configuration after running the `npm init @knip/config` command. This configuration includes the `knip` script and necessary `devDependencies` such as `@types/node`, `knip`, and `typescript`.
+source: packages/create-config/README.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "name": "my-package",
+  "scripts": {
+    "knip": "knip"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.8",
+    "knip": "^5.30.1",
+    "typescript": "^5.5.4"
+  }
+}
+```
+
+---
+
+title: Running Knip With the Fix Flag
+description: Demonstrates how to run `knip` with the `--fix` flag to automatically remove unused exports and dependencies.  The `--allow-remove-files` flag allows Knip to remove unused files.  The `--fix-type` option is used to specify issue types to fix.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_0
+
+language: sh
+code:
+```
+knip --fix
+```
+
+language: sh
+code:
+```
+knip --fix --allow-remove-files
+```
+
+language: sh
+code:
+```
+knip --fix-type exports,types
+knip --fix-type exports --fix-type types   # same as above
+```
+
+---
+
+title: Debugging with Knip
+description: Demonstrates how to run `knip` in debug mode using the `--debug` flag. This provides verbose output, including workspace configurations, enabled plugins, glob patterns, and compiled source files, aiding in issue diagnosis.
+source: packages/docs/src/content/docs/guides/troubleshooting.md#_snippet_0
+
+language: sh
+code:
+```
+knip --debug
+```
+
+---
+
+title: Running Knip With Nx Daemon Disabled
+description: Demonstrates how to disable the Nx Daemon when running Knip in Nx projects to avoid potential termination errors. Setting the `NX_DAEMON` environment variable to `false` ensures Knip can execute without interference from the Nx Daemon process.
+source: packages/docs/src/content/docs/reference/known-issues.md#_snippet_0
+
+language: sh
+code:
+```
+NX_DAEMON=false knip
+```
+
+---
+
+title: Defining Named Exports in CommonJS
+description: Demonstrates how to define named exports in CommonJS using `module.exports` by assigning keys to it, allowing for specific components like `A` and `B` to be exported. This approach improves clarity and is recommended for better maintainability and easier migration to ES modules.
+source: packages/docs/src/content/docs/guides/working-with-commonjs.md#_snippet_0
+
+language: javascript
+code:
+```
+const B = function () {};
+
+module.exports.A = { option: true };
+module.exports.B = B;
+```
+
+---
+
+title: Defining Shorthand Named Exports in CommonJS
+description: Illustrates how to define named exports in CommonJS using shorthand property assignments within `module.exports`. This method offers a concise way to export multiple variables (`A` and `B` in this example) as named exports, promoting code readability.
+source: packages/docs/src/content/docs/guides/working-with-commonjs.md#_snippet_1
+
+language: javascript
+code:
+```
+const A = function () {};
+const B = { option: true };
+
+module.exports = { A, B };
+```
+
+---
+
+title: Fixing Configuration Issues - TypeScript
+description: Demonstrates resolving common issues when loading configuration files authored in TypeScript and ESM using `Jiti v2`. It addresses errors such as `Cannot use 'import.meta' outside a module` and eliminates the "CJS build of Vite's Node API is deprecated" warning.
+source: packages/docs/src/content/docs/blog/two-years.mdx#_snippet_0
+
+language: text
+code:
+```
+Cannot use 'import.meta' outside a module
+await is only valid in async functions and the top level bodies of modules
+Unexpected identifier 'Promise'
+Reflect.metadata is not a function
+```
+
+---
+
+title: Defining Knip Configuration (TypeScript)
+description: Defines a `KnipConfig` object in TypeScript to specify entry points and project files for the Knip tool. This configuration allows Knip to analyze the specified files for unused dependencies and exports. Using TypeScript provides type safety and autocompletion for the configuration.
+source: packages/docs/src/content/docs/reference/dynamic-configuration.mdx#_snippet_0
+
+language: typescript
+code:
+```
+import type { KnipConfig } from 'knip';
+
+const config: KnipConfig = {
+  entry: ['src/index.ts'],
+  project: ['src/**/*.ts'],
+};
+
+export default config;
+```
+
+---
+
+title: Defining Knip Configuration (JavaScript)
+description: Defines a `KnipConfig` object in JavaScript to specify entry points and project files for the Knip tool.  This configuration allows Knip to analyze the specified files for unused dependencies and exports.  A JSDoc comment provides type hints for the configuration object.
+source: packages/docs/src/content/docs/reference/dynamic-configuration.mdx#_snippet_1
+
+language: javascript
+code:
+```
+/** @type {import('knip').KnipConfig} */
+const config = {
+  entry: ['src/index.ts'],
+  project: ['src/**/*.ts'],
+};
+
+export default config;
+```
+
+---
+
+title: Running Tests with Bun
+description: Demonstrates how to run tests using Bun. The `bun run test` command executes all tests in the project, ensuring code quality and functionality.
+source: .github/DEVELOPMENT.md#_snippet_1
+
+language: shell
+code:
+```
+bun run test test/my-feature.test.ts
+bun test test/plugins/my-plugin.test.ts
+```
+
+---
+
+title: Running Qa Checks
+description: Demonstrates how to execute QA checks including formatting, linting, and running Knip itself. These checks are important for ensuring code quality and compliance with project standards before submitting changes.
+source: .github/DEVELOPMENT.md#_snippet_7
+
+language: shell
+code:
+```
+bun format
+bun lint
+bun knip
+bun knip --strict
+bun run test
+```
+
+---
+
+title: Defining Commitlint Script- JSON
+description: Demonstrates a `commitlint` script configuration using `@commitlint/cli`. Using `npx commitlint` can be confusing because `commitlint` is a transitive dependency. This example showcases the distinction between direct and transitive dependency usage in npm scripts.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_4
+
+language: json
+code:
+```
+{
+  "name": "lib",
+  "scripts": {
+    "commitlint": "commitlint --edit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "*"
+  }
+}
+```
+
+---
+
+title: Configuring Workspaces with Custom Patterns
+description: Demonstrates how to configure workspaces in `knip.json` with custom `entry` and `project` patterns. This allows specifying different entry points and project file sets for each workspace within a monorepo, providing fine-grained control over analysis.
+source: packages/docs/src/content/docs/features/monorepos-and-workspaces.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "workspaces": {
+    ".": {
+      "entry": "scripts/*.js",
+      "project": "scripts/**/*.js"
+    },
+    "packages/*": {
+      "entry": "{index,cli}.ts",
+      "project": "**/*.ts"
+    },
+    "packages/cli": {
+      "entry": "bin/cli.js"
+    }
+  }
+}
+```
+
+---
+
+title: Measuring Performance - Shell
+description: Demonstrates how to measure Knip's performance using the `--performance` flag. This flag provides detailed metrics about the execution time and memory usage of different parts of Knip, helping to identify performance bottlenecks.
+source: packages/docs/src/content/docs/blog/slim-down-to-speed-up.md#_snippet_0
+
+language: shell
+code:
+```
+$ knip --performance
+```
+
+---
+
+title: Importing Exports as Namespace - Typescript
+description: Demonstrates how to import all exports from `my-namespace.js` as members of the `NS` namespace object in `my-module.ts`. It imports the namespace and then passes it to a `send` function. This may obscure whether specific exports are actually used.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_1
+
+language: ts
+code:
+```
+import * as NS from './my-namespace.js';
+import send from 'stats';
+send(NS);
+```
+
+---
+
+title: Defining Namespaced Exports - Typescript
+description: Defines two simple exports, `start` and `end`, within `my-namespace.ts`. These are used to demonstrate different namespace import/usage scenarios.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_4
+
+language: ts
+code:
+```
+export const start = 1;
+
+export const end = 1;
+```
+
+---
+
+title: Linting Projects with Knip
+description: Explains that Knip lints projects as a whole to find clutter across the project by creating module and dependency graphs. This contrasts with linters like ESLint that analyze files separately. It emphasizes the need for comprehensive graphs, especially in monorepos.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_0
+
+language: none
+code:
+```
+Linters like ESLint analyze files separately, while Knip lints projects as a
+whole.
+
+Knip requires full module and dependency graphs to find clutter across the
+project. Creating these comprehensive graphs is not a trivial task and it seems
+no such tool exists today, even more so when it comes to monorepos.
+```
+
+---
+
+title: Improving UX with Tree-Shaking
+description: Compares tree-shaking and Knip, noting that both aim to improve UX by removing unused code, but are different and complementary. Tree-shaking is a build-time optimization operating on bundled production code. Knip is a project linter that should be part of the QA phase, linting and fixing only your own source code.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_1
+
+language: none
+code:
+```
+In short: no. They share an important goal: improve UX by removing unused code.
+The main takeaway here is that tree-shaking and Knip are different and
+complementary tools.
+
+Tree-shaking is a build or compile-time activity to reduce production bundle
+size. It typically operates on bundled production code, which might include
+external/third-party code. An optimization in the build process, "out of your
+hands".
+
+On the other hand, Knip is a project linter that should be part of the QA phase.
+It lints, reports and fixes only your own source code. Moreover, in contrast
+with other linters, focuses on inter-file dependencies, so dead code within a
+file may not be caught by Knip.
+```
+
+---
+
+title: Parsing Package JSON Scripts
+description: Demonstrates how Knip parses the `scripts` section of a `package.json` file to identify entry files, dependencies, and configuration files. It shows how arguments like `--import`, `-c`, and positional arguments are interpreted to discover dependencies and configuration files like `tsx` and `tsconfig.app.json` respectively.
+source: packages/docs/src/content/docs/features/script-parser.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "name": "my-lib",
+  "scripts": {
+    "start": "node --import tsx/esm run.ts",
+    "bundle": "tsup -c tsup.lib.config.ts",
+    "type-check": "tsc -p tsconfig.app.json"
+  }
+}
+```
+
+---
+
+title: Defining Default Entry File Patterns
+description: Demonstrates the default configuration for entry files in Knip, including common file names (`index`, `main`, `cli`) and extensions (`js`, `cjs`, `mjs`, `jsx`, `ts`, `cts`, `mts`, `tsx`). It shows how these patterns are used to automatically add files like `main.cjs` and `src/cli.ts` as entry points, and specifies that values set override the defaults.
+source: packages/docs/src/content/docs/explanations/entry-files.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entry": [
+    "{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}",
+    "src/{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
+  ],
+  "project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}!"]
+}
+```
+
+---
+
+title: Finding Dependencies In Config Files - Typescript
+description: Illustrates how to locate dependencies within configuration files using the `config` and `resolveConfig` properties in a Knip plugin. The `config` array specifies the possible locations of configuration files, while `resolveConfig` extracts dependency information from the parsed configuration object.  This is useful for tools like `nyc` that define dependencies in configuration rather than through import statements.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_1
+
+language: typescript
+code:
+```
+import { toDeferResolve } from '../../util/input.js';
+import { hasDependency } from '../../util/plugin.js';
+import type { NycConfig } from './types.js';
+import type {
+  IsPluginEnabled,
+  Plugin,
+  ResolveConfig,
+} from '../../types/config.js';
+
+const title = 'nyc';
+
+const enablers = ['nyc'];
+
+const isEnabled: IsPluginEnabled = ({ dependencies }) =>
+  hasDependency(dependencies, enablers);
+
+const config = [
+  '.nycrc',
+  '.nycrc.{json,yml,yaml}',
+  'nyc.config.js',
+  'package.json',
+];
+
+const resolveConfig: ResolveConfig<NycConfig> = config => {
+  const extend = config?.extends ?? [];
+  const requires = config?.require ?? [];
+  return [extend, requires].flat().map(toDeferResolve);
+};
+
+export default {
+  title,
+  enablers,
+  isEnabled,
+  config,
+  resolveConfig,
+} satisfies Plugin;
+```
+
+language: json
+code:
+```
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "check-coverage": true
+}
+```
+
+---
+
+title: Displaying Default Configuration
+description: Demonstrates the default configuration settings used by Knip, including `entry` and `project` file patterns. It shows the starting point for Knip to find source files and dependencies when no custom configuration is provided.
+source: packages/docs/src/content/docs/overview/configuration.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entry": ["index.{js,ts}", "src/index.{js,ts}"],
+  "project": ["**/*.{js,ts}"]
+}
+```
+
+---
+
+title: Defining Entry and Project Files Correctly - JSON
+description: Demonstrates the correct way to define `entry` and `project` files in `knip.json` to analyze the relevant source code, while using `ignore` for files with potential unused exports. This configuration ensures that only source and script files are considered for analysis, improving performance and accuracy.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_3
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts", "scripts/*.ts"],
+  "project": ["src/**", "scripts/**"],
+  "ignore": ["src/generated.ts"]
+}
+```
+
+---
+
+title: Using Compact Reporter With Knip
+description: Demonstrates how to use the `compact` reporter with Knip. This reporter provides a concise output format for identifying unused files and dependencies.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_0
+
+language: sh
+code:
+```
+knip --reporter compact
+```
+
+---
+
+title: Generating JSON Report With Knip
+description: Shows how to generate a JSON report using the `json` reporter in Knip. This format is useful for integrating Knip's output with other tools and systems for automated analysis and reporting.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_1
+
+language: sh
+code:
+```
+knip --reporter json
+```
+
+---
+
+title: Generating CodeClimate Report With Knip
+description: Illustrates how to generate a Code Climate report using the `codeclimate` reporter in Knip. The Code Climate format is a standardized JSON format that can be consumed by Code Climate and other compatible tools for static analysis reporting.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_2
+
+language: text
+code:
+```
+$ knip --reporter codeclimate
+
+[
+  {
+    "type": "issue",
+    "check_name": "Unused exports",
+    "description": "isUnused",
+    "categories": ["Bug Risk"],
+    "location": {
+      "path": "path/to/file.ts",
+      "positions": {
+        "begin": {
+          "line": 6,
+          "column": 1
+        }
+      }
+    }
+    "severity": "major",
+    "fingerprint": "e9789995c1fe9f7d75eed6a0c0f89e84",
+  }
+]
+```
+
+---
+
+title: Running Knip in Production Mode - Shell
+description: Illustrates how to run Knip in production mode using the `--production` flag. This flag instructs Knip to analyze only the files and scripts marked as production code in the configuration.
+source: packages/docs/src/content/docs/features/production-mode.md#_snippet_1
+
+language: shell
+code:
+```
+knip --production
+```
+
+---
+
+title: Updating Dependencies After Fixing
+description: Demonstrates how to update dependencies after `knip` has fixed issues in `package.json`. The command to update depends on the package manager used.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_2
+
+language: shell
+code:
+```
+npm install
+```
+
+---
+
+title: Updating Dependencies After Fixing
+description: Demonstrates how to update dependencies after `knip` has fixed issues in `package.json`. The command to update depends on the package manager used.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_3
+
+language: shell
+code:
+```
+pnpm install
+```
+
+---
+
+title: Updating Dependencies After Fixing
+description: Demonstrates how to update dependencies after `knip` has fixed issues in `package.json`. The command to update depends on the package manager used.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_4
+
+language: shell
+code:
+```
+bun install
+```
+
+---
+
+title: Updating Dependencies After Fixing
+description: Demonstrates how to update dependencies after `knip` has fixed issues in `package.json`. The command to update depends on the package manager used.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_5
+
+language: shell
+code:
+```
+yarn
+```
+
+---
+
+title: Installing Unlisted Dependencies
+description: Illustrates how to install unlisted dependencies using various package managers after `knip` identifies them. This ensures that all required packages are installed in the project.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_6
+
+language: shell
+code:
+```
+npm install unlisted-package
+```
+
+---
+
+title: Running Knip Without Installation - npm
+description: Demonstrates how to run `knip` without installing it in your project using `npx`. Assumes `typescript` and `@types/node` are already installed.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_5
+
+language: shell
+code:
+```
+npx knip
+```
+
+---
+
+title: Running Knip Without Installation - pnpm
+description: Demonstrates how to run `knip` without installing it in your project using `pnpm dlx`. Assumes `typescript` and `@types/node` are already installed.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_6
+
+language: shell
+code:
+```
+pnpm dlx knip
+```
+
+---
+
+title: Running Knip Without Installation - bun
+description: Demonstrates how to run `knip` without installing it in your project using `bunx`. Assumes `typescript` and `@types/node` are already installed.
+source: packages/docs/src/content/docs/overview/getting-started.mdx#_snippet_7
+
+language: shell
+code:
+```
+bunx knip
+```
+
+---
+
+title: Configuring ESLint - JSON
+description: Illustrates a minimal `.eslintrc.json` configuration file that extends configurations and specifies plugins. This configuration style is common for ESLint setups and allows for extending established rulesets and incorporating specialized plugins.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["@typescript-eslint"]
+}
+```
+
+---
+
+title: Configuring Vitest - TypeScript
+description: Demonstrates a `vitest.config.ts` file that defines Vitest test configuration options. It configures coverage using the Istanbul provider and sets the environment to `happy-dom`. This example shows how to customize the testing environment and coverage reporting in Vitest.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_1
+
+language: typescript
+code:
+```
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    coverage: {
+      provider: 'istanbul',
+    },
+    environment: 'happy-dom',
+  },
+});
+```
+
+---
+
+title: Running Knip With Class Members
+description: Demonstrates how to include class members in the Knip report using the command-line interface.  This enables reporting of unused members of exported classes, which are not reported by default. Note that this feature increases linting time and memory usage.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_0
+
+language: sh
+code:
+```
+knip --include classMembers
+```
+
+---
+
+title: Excluding Enum Members When Running Knip
+description: Demonstrates how to exclude enum members from the Knip report using the command-line interface. By default, Knip reports unused enums and members of exported enums; this command disables that reporting.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_1
+
+language: sh
+code:
+```
+knip --exclude enumMembers
+```
+
+---
+
+title: Tracing Export Usage in Knip
+description: Illustrates how to use the `--trace` option to track where exports are used across re-exports, barrel files, and workspaces. The `--trace-file` option limits tracing to a specific file, while `--trace-export` focuses on a particular export name.
+source: packages/docs/src/content/docs/guides/troubleshooting.md#_snippet_1
+
+language: text
+code:
+```
+Use `--trace` to see where all exports are used. Or be more specific:
+
+- Use `--trace-file [path]` to output this only for the given file.
+- Use `--trace-export [name]` to output this only for the given export name.
+- Use both to trace a specific named or default export of a certain file.
+```
+
+---
+
+title: Handling Svelte or Astro Files
+description: Demonstrates how Knip handles non-standard files like `.mdx` and `.astro` to increase the coverage of the module graph. Knip includes basic "compilers" for common file types but allows overriding them with project-specific compilers for better accuracy.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_0
+
+---
+
+title: Using Dir Option - TypeScript
+description: Demonstrates how to use the `dir` option when creating inputs from specifiers to assign an input to a different workspace. In this example, `esbuild` is a dependency of the workspace in the `packages/app` directory.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_0
+
+language: ts
+code:
+```
+toDependency('esbuild', { dir: 'packages/app' });
+```
+
+---
+
+title: Debugging Performance with Flags
+description: Demonstrates the use of the `--debug` and `--performance` flags to identify potential performance bottlenecks in Knip. These flags provide insights into inefficient patterns and help optimize Knip's execution.
+source: packages/docs/src/content/docs/guides/performance.md#_snippet_0
+
+---
+
+title: Setting Exit Code Based on Issues
+description: Illustrates how Knip's exit code reflects linting issues: `0` for no issues, `1` for issues found, and `2` for errors during execution. Use `--no-exit-code` to always exit with code `0` or `--max-issues` to specify the maximum number of issues before a non-zero exit code is used.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_0
+
+---
+
+title: Running Tests with NPM
+description: Illustrates how to run tests specifically using Node.js and NPM. This can be useful for ensuring cross-compatibility and identifying environment-specific issues.
+source: .github/DEVELOPMENT.md#_snippet_2
+
+language: shell
+code:
+```
+npm run test:node
+npm run test:node:smoke
+```
+
+---
+
+title: Building with Watch Mode
+description: Demonstrates compiling TypeScript code to JavaScript using `bun run build`. The `bun run watch` command recompiles the code automatically on file changes, improving the development workflow.
+source: .github/DEVELOPMENT.md#_snippet_3
+
+language: shell
+code:
+```
+bun run watch
+```
+
+---
+
+title: Linting a Single Workspace
+description: Illustrates the usage of the `--workspace` argument to focus Knip on a specific workspace within a monorepo. This allows for faster analysis by limiting the scope to the target workspace and its ancestor/dependent workspaces, ensuring that dependencies and exports are correctly resolved.
+source: packages/docs/src/content/docs/features/monorepos-and-workspaces.md#_snippet_1
+
+language: sh
+code:
+```
+knip --workspace packages/my-lib
+```
+
+---
+
+title: Configuring Nextjs Page Extensions
+description: Demonstrates how to configure `pageExtensions` in `next.config.ts` to customize the file extensions Next.js uses for pages. It highlights the importance of Knip respecting this configuration to accurately identify used and unused files.
+source: packages/docs/src/content/docs/blog/state-of-knip.md#_snippet_0
+
+language: json
+code:
+```
+{ "next": { "entry": ["next.config.ts", "src/pages/**/*.tsx"] } }
+```
+
+language: typescript
+code:
+```
+const nextConfig = {
+  pageExtensions: ['page.tsx'],
+};
+
+export default nextConfig;
+```
+
+---
+
+title: Parsing Yarn and Vitest Commands
+description: Demonstrates how Knip parses custom CLI arguments for executables like `yarn` and `vitest`.  It shows how Knip needs to extract the workspace directory using `--cwd` and config file using `-c`.
+source: packages/docs/src/content/docs/blog/state-of-knip.md#_snippet_2
+
+language: json
+code:
+```
+{
+  "scripts": {
+    "test": "yarn --cwd packages/frontend vitest -c vitest.components.config.ts"
+  }
+}
+```
+
+---
+
+title: Parsing Playwright Commands in Github Actions
+description: Demonstrates how Knip parses commands in GitHub Actions workflows, identifying the configuration file and associated workspace. It illustrates the importance of Knip assigning a configuration file to a specific workspace and applying the configuration to that particular workspace.
+source: packages/docs/src/content/docs/blog/state-of-knip.md#_snippet_3
+
+language: yaml
+code:
+```
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - run: playwright test -c playwright.e2e.config.ts
+        working-directory: e2e
+```
+
+---
+
+title: Filtering Report by Issue Type
+description: Demonstrates how to use the `--files` flag to filter the Knip report and focus specifically on unused files. This allows for targeted analysis and resolution of file-related issues before addressing other problem areas such as dependencies or exports.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_0
+
+language: sh
+code:
+```
+knip --files
+```
+
+---
+
+title: Handling Dynamic Import Specifiers
+description: Illustrates a scenario where dynamic import specifiers, such as `import(path.join(baseDir, 'entry.ts'))`, are not automatically resolved by Knip.  The solution involves manually adding the target file (`entry.ts` in this case) to the `entry` patterns in the Knip configuration to ensure it is included in the analysis.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_1
+
+language: ts
+code:
+```
+const entry = await import(path.join(baseDir, 'entry.ts'));
+```
+
+---
+
+title: Handling Unsupported Arguments in Scripts
+description: Shows how to handle scenarios where Knip doesn't recognize arguments passed to commands in `package.json` scripts. To resolve this, the relevant file (e.g., `production.ts`) needs to be explicitly added to the `entry` patterns in the Knip configuration, ensuring it's considered during analysis.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_2
+
+language: json
+code:
+```
+{
+  "name": "my-lib",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "unknown-build-cli --entry production.ts"
+  }
+}
+```
+
+---
+
+title: Handling Unsupported File Formats
+description: Demonstrates how to handle entry files referenced in HTML files, where Knip may not automatically recognize them. The solution is to add the file (e.g., `production.js`) to the `entry` patterns.  Alternatively, you can add an HTML compiler to extract and resolve the `<script src>` value.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_3
+
+language: html
+code:
+```
+<html>
+  <body>
+    <script type="module" src="production.js"></script>
+  </body>
+</html>
+```
+
+---
+
+title: Filtering Report by Dependencies
+description: Demonstrates how to use the `--dependencies` flag to filter the Knip report, focusing specifically on dependency-related issues. This allows for targeted analysis and resolution of problems related to unused dependencies.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_6
+
+language: sh
+code:
+```
+knip --dependencies
+```
+
+---
+
+title: Exporting and Instantiating a Class - TypeScript
+description: Illustrates how a class can be exported and then instantiated via an alias.  The `MyClass` and its method `do` are exported as `OtherName` and then instantiated from `instance.ts`.
+source: packages/docs/src/content/docs/blog/slim-down-to-speed-up.md#_snippet_2
+
+language: typescript
+code:
+```
+class MyClass {
+  constructor() {
+    this.method();
+  }
+  method() {}
+  do() {}
+}
+
+export const OtherName = MyClass;
+```
+
+language: typescript
+code:
+```
+import * as MyNamespace from './MyClass.ts';
+
+const { OtherName } = MyNamespace;
+
+const instance = new OtherName();
+
+instance.do();
+```
+
+---
+
+title: Referencing an Export Through Namespace - TypeScript
+description: Demonstrates how an export can be referenced through a namespace import. The `referencedExport` function is exported from `namespace.ts`, imported as part of the `NS` namespace in `index.ts`, and then called via `NS.referencedExport()`.
+source: packages/docs/src/content/docs/blog/slim-down-to-speed-up.md#_snippet_3
+
+language: typescript
+code:
+```
+export const referencedExport = () => {};
+```
+
+language: typescript
+code:
+```
+import * as NS from './namespace.ts';
+
+NS.referencedExport();
+```
+
+---
+
+title: Configuring Cypress Entry Points
+description: Demonstrates how to configure entry points for Cypress end-to-end test files (`*.e2e.ts`) within the Knip configuration, using the `cypress` property to override the default spec file patterns.
+source: packages/docs/src/content/docs/blog/migration-to-v1.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "entry": "src/index.ts!",
+  "project": "src/**/*.ts!",
+  "cypress": {
+    "entry": "src/**/*.e2e.ts"
+  }
+}
+```
+
+---
+
+title: Accessing Namespace Property - Typescript
+description: Shows that when a property of a namespace, such as `NS.version`, is accessed, Knip considers individual exports of the namespace separately. In this scenario, only the used properties (`version`) are considered used, while others like `getRocket` may be flagged as unused.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_3
+
+language: ts
+code:
+```
+import { NS } from './my-module.js';
+
+const version = NS.version;
+```
+
+---
+
+title: Referencing Namespace Objects - Typescript
+description: Demonstrates multiple ways of referencing the imported namespace object `NS` without accessing any properties. When no properties are accessed, Knip considers all exports of the namespace to be used, avoiding false positives.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_5
+
+language: ts
+code:
+```
+import * as NS from './my-namespace.js';
+import send from 'stats';
+
+send(NS);
+
+const spread = { ...NS };
+
+const shorthand = { NS };
+
+const assignment = NS;
+
+const item = [NS];
+
+type TypeOf = typeof NS;
+
+Object.values(NS);
+
+for (const fruit in Fruits) {
+  //
+}
+
+export { NS };
+
+export { NS as AliasedNS };
+
+export = NS;
+```
+
+---
+
+title: Enabling Unused Class Members in Knip
+description: Demonstrates how to include unused class members in Knip analysis. It shows the CLI argument and the configuration option to enable the `classMembers` feature, which is now opt-in due to potential memory issues with large repositories.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_0
+
+language: shell
+code:
+```
+knip --include classMembers
+```
+
+language: json
+code:
+```
+{
+  "include": ["classMembers"]
+}
+```
+
+---
+
+title: Configuring Entry Files for Integrated Monorepos
+description: Demonstrates how to configure the `entry` and `project` settings in `knip.json` to specify entry point files for an integrated monorepo using a glob pattern. This ensures that Knip correctly analyzes files within the `apps` and `libs` directories, looking for `index.ts` or `index.tsx` files.
+source: packages/docs/src/content/docs/features/integrated-monorepos.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entry": ["{apps,libs}/**/src/index.{ts,tsx}"],
+  "project": ["{apps,libs}/**/src/**/*.{ts,tsx}"]
+}
+```
+
+---
+
+title: Configuring Plugins for ESLint and Cypress in Integrated Monorepos
+description: Illustrates how to configure the ESLint and Cypress plugins in `knip.json` for an integrated monorepo. This prevents configuration and test files in application directories from being incorrectly reported as unused. The configuration specifies the locations of ESLint configuration files and Cypress entry points, ensuring that Knip correctly identifies them as used.
+source: packages/docs/src/content/docs/features/integrated-monorepos.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "eslint": {
+    "config": ["{apps,libs}/**/.eslintrc.json"]
+  },
+  "cypress": {
+    "entry": ["apps/**/cypress.config.ts", "apps/**/cypress/e2e/*.spec.ts"]
+  }
+}
+```
+
+---
+
+title: Configuring Entry Patterns - Typescript
+description: Demonstrates configuring entry file patterns for tools like Mocha using the `entry` and `resolveConfig` properties.  The `entry` array provides default patterns, while `resolveConfig` allows overriding these patterns based on user-defined configuration in files like `mocha.config.js`. This prevents users from duplicating configuration settings between Knip and the tool itself.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_2
+
+language: typescript
+code:
+```
+const entry = ['**/test/*.{js,cjs,mjs}'];
+
+const resolveConfig: ResolveConfig<MochaConfig> = localConfig => {
+  const entryPatterns = localConfig.spec ? [localConfig.spec].flat() : entry;
+  return entryPatterns.map(id => toEntry(id));
+};
+
+export default {
+  entry,
+  resolveConfig,
+};
+```
+
+---
+
+title: Configuring Package Exports
+description: Illustrates how the `exports` field in `package.json` defines entry points for a package, mapping module specifiers to file paths. It shows how different patterns can be used to specify entry points, including direct file paths and wildcard patterns.
+source: packages/docs/src/content/docs/features/source-mapping.md#_snippet_0
+
+language: jsonc
+code:
+```
+{
+  "name": "my-workspace",
+  "main": "index.js",
+  "exports": {
+    ".": "./src/entry.js",
+    "./feat": "./lib/feat.js",
+    "./public": "./dist/app.js",
+    "./public/*": "./dist/*.js",
+    "./public/*.js": "./dist/*.js",
+    "./dist/internal/*": null
+  }
+}
+```
+
+---
+
+title: Configuring TypeScript Compiler Options
+description: Demonstrates how `tsconfig.json` is used to configure the TypeScript compiler, specifically the `baseUrl` and `outDir` options. These options are crucial for mapping output files in the `outDir` back to their original source files during analysis.
+source: packages/docs/src/content/docs/features/source-mapping.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "dist"
+  }
+}
+```
+
+---
+
+title: Importing Modules in a Monorepo
+description: Demonstrates how modules are imported from other workspaces within a monorepo using the `@org/shared` naming convention.  It shows that the module resolver resolves the import to `dist/index.js`, but Knip aims to map it back to the original source file, `src/index.ts`, using `tsconfig.json`.
+source: packages/docs/src/content/docs/features/source-mapping.md#_snippet_2
+
+language: ts
+code:
+```
+import { helper } from '@org/shared';
+```
+
+---
+
+title: Defining Package Main Entry Point (Monorepo)
+description: Illustrates how the `package.json` file in a monorepo defines the main entry point for a shared module.  The `main` field points to the compiled output file (`dist/index.js`), which Knip attempts to map back to the source file during analysis using the target workspace's `tsconfig.json`.
+source: packages/docs/src/content/docs/features/source-mapping.md#_snippet_3
+
+language: json
+code:
+```
+{
+  "name": "@org/shared",
+  "main": "dist/index.js"
+}
+```
+
+---
+
+title: Filtering Issue Types Using Include
+description: Demonstrates how to use the `--include` flag to report only specific issue types. The example shows two equivalent commands that include only `files` and `dependencies` issue types.
+source: packages/docs/src/content/docs/features/rules-and-filters.md#_snippet_0
+
+language: sh
+code:
+```
+knip --include files --include dependencies
+knip --include files,dependencies
+```
+
+---
+
+title: Excluding Issue Types Using Exclude
+description: Illustrates how to use the `--exclude` flag to ignore specific issue types.  The example shows a command that includes the `files` issue type but excludes `enumMembers` and `duplicates`.
+source: packages/docs/src/content/docs/features/rules-and-filters.md#_snippet_1
+
+language: sh
+code:
+```
+knip --include files --exclude enumMembers,duplicates
+```
+
+---
+
+title: Using Named Imports - Knip
+description: Illustrates replacing namespaced imports with named imports in `index.js` to improve code clarity and make explicit which exports are being used from `knip.js`, aiding in identifying and managing unused exports.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_2
+
+language: ts
+code:
+```
+import { version, getRocket } from './knip.js';
+
+send({ version, getRocket });
+```
+
+---
+
+title: Customizing Configuration Using Knipjson
+description: Illustrates how to customize Knip's configuration using a `knip.json` file to specify project-specific `entry` and `project` file patterns. This allows Knip to accurately identify source files and unused dependencies within a project.
+source: packages/docs/src/content/docs/overview/configuration.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/index.ts", "scripts/{build,create}.js"],
+  "project": ["src/**/*.ts", "scripts/**/*.js"]
+}
+```
+
+---
+
+title: Configuring Entry Files With Negated Patterns - JSON
+description: Demonstrates how to use negated patterns in the `entry` configuration to exclude specific files from being considered as entry points. This is useful when you want to explicitly include route files, except those starting with an underscore.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entry": ["src/routes/*.ts", "!src/routes/_*.ts"]
+}
+```
+
+---
+
+title: Configuring Project Files With Negated Patterns - JSON
+description: Illustrates how to use negated patterns in the `project` configuration to exclude certain files from being considered as project source files, preventing them from being incorrectly reported as unused.  The `entry` field specifies the main entry point, while the `project` field defines all source files except those in the `src/exclude` directory.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts"],
+  "project": ["src/**/*.ts", "!src/exclude/**"]
+}
+```
+
+---
+
+title: Excluding Test Helpers in Production Mode - JSON
+description: Illustrates how to exclude test utility files in production mode by using an exclamation mark (`!`) on both ends of the file pattern. This ensures that test helper files are excluded from the analysis when running in production mode.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_9
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts!"],
+  "project": ["src/**/*.ts!", "!src/test-helpers/**!"]
+}
+```
+
+---
+
+title: Overriding Built-in Mdx Compiler
+description: Illustrates how to override the built-in MDX compiler with a custom implementation using `@mdx-js/mdx`. This allows for more advanced MDX processing and integration with Knip.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_2
+
+language: ts
+code:
+```
+import { compile } from '@mdx-js/mdx';
+
+export default {
+  compilers: {
+    mdx: async text => (await compile(text)).toString(),
+  },
+};
+
+```
+
+---
+
+title: Importing Vue Compiler Dependencies
+description: Imports necessary modules from `vue/compiler-sfc` for parsing Vue Single File Components (SFCs). These modules are used to extract script and style blocks from Vue components, enabling Knip to analyze their dependencies.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_3
+
+language: ts
+code:
+```
+import type { KnipConfig } from 'knip';
+import {
+  parse,
+  type SFCScriptBlock,
+  type SFCStyleBlock,
+} from 'vue/compiler-sfc';
+
+```
+
+---
+
+title: Defining Helper Functions for Vue Compiler
+description: Defines helper functions `getScriptBlockContent`, `getStyleBlockContent`, and `getStyleImports` to extract relevant content from Vue SFC script and style blocks. These functions handle both inline content and content imported via `src` attributes.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_4
+
+language: ts
+code:
+```
+function getScriptBlockContent(block: SFCScriptBlock | null): string[] {
+  if (!block) return [];
+  if (block.src) return [`import '${block.src}'`];
+  return [block.content];
+}
+
+function getStyleBlockContent(block: SFCStyleBlock | null): string[] {
+  if (!block) return [];
+  if (block.src) return [`@import '${block.src}';`];
+  return [block.content];
+}
+
+function getStyleImports(content: string): string {
+  return [...content.matchAll(/(?<=@)import[^;]+/g)].join('\n');
+}
+
+```
+
+---
+
+title: Configuring Vue Compiler in Knip
+description: Configures a custom Vue compiler within the Knip configuration. It uses `vue/compiler-sfc` to parse Vue SFCs, extracts imports from script and style blocks, and returns a string containing all found imports for dependency analysis by Knip.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_5
+
+language: ts
+code:
+```
+const config = {
+  compilers: {
+    vue: (text: string, filename: string) => {
+      const { descriptor } = parse(text, { filename, sourceMap: false });
+      return [
+        ...getScriptBlockContent(descriptor.script),
+        ...getScriptBlockContent(descriptor.scriptSetup),
+        ...descriptor.styles.flatMap(getStyleBlockContent).map(getStyleImports),
+      ].join('\n');
+    },
+  },
+} satisfies KnipConfig;
+
+export default config;
+
+```
+
+---
+
+title: Finding Dependencies - Depcheck
+description: Demonstrates the equivalent command in `knip` to find dependencies, similar to `depcheck`. It shows how `knip` can be used to achieve similar dependency analysis, including plugins and compilers for non-standard files.
+source: packages/docs/src/content/docs/explanations/comparison-and-migration.md#_snippet_0
+
+language: sh
+code:
+```
+depcheck
+knip --dependencies
+```
+
+---
+
+title: Finding Dangling Files and Unused Dependencies - Unimported
+description: Illustrates how to use `knip` to find dangling files and unused dependencies in production mode, similar to `unimported`. This command configuration is useful when focusing solely on production-related issues and avoiding non-production items.
+source: packages/docs/src/content/docs/explanations/comparison-and-migration.md#_snippet_1
+
+language: sh
+code:
+```
+unimported
+knip --production --dependencies --files
+```
+
+---
+
+title: Finding Unused Exports - Ts-prune
+description: Demonstrates the `knip` command to find unused exports in a TypeScript project, similar to `ts-prune`. It shows how to include exports, types, namespace exports, and namespace types in the analysis.
+source: packages/docs/src/content/docs/explanations/comparison-and-migration.md#_snippet_2
+
+language: sh
+code:
+```
+ts-prune
+knip --include exports,types,nsExports,nsTypes
+```
+
+---
+
+title: Finding Unused Exports - Ts-unused-exports
+description: Demonstrates the `knip` command to find unused exports in a TypeScript project, similar to `ts-unused-exports`. It shows how to include exports, types, namespace exports, and namespace types in the analysis.
+source: packages/docs/src/content/docs/explanations/comparison-and-migration.md#_snippet_3
+
+language: sh
+code:
+```
+ts-unused-exports
+knip --include exports,types,nsExports,nsTypes
+```
+
+---
+
+title: Defining Custom Reporter (TypeScript)
+description: Demonstrates how to define a custom reporter in TypeScript for Knip. The reporter function receives analysis results, allowing you to format and output the data in a specific way, such as writing to `stdout` or a file.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_3
+
+language: typescript
+code:
+```
+import type { Reporter } from 'knip';
+
+const reporter: Reporter = function (options) {
+  console.log(options.issues);
+  console.log(options.counters);
+};
+
+export default reporter;
+```
+
+---
+
+title: Using Local Custom Reporter With Knip
+description: Demonstrates how to use a local custom reporter with Knip.  The `--reporter` flag is used to specify the path to the TypeScript or JavaScript file containing the reporter function.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_4
+
+language: sh
+code:
+```
+knip --reporter ./my-reporter.ts
+```
+
+---
+
+title: Configuring Production Code - JSON
+description: Demonstrates how to configure Knip to identify production code by adding an exclamation mark (`!`) to the end of file patterns in the `knip.json` configuration file. This tells Knip to only focus on the code that is shipped to production.
+source: packages/docs/src/content/docs/features/production-mode.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts!", "build/script.js"],
+  "project": ["src/**/*.ts!", "build/*.js"]
+}
+```
+
+---
+
+title: Configuring Entry Files
+description: Shows how to configure entry files using glob patterns in the `entry` array within the `knip.json` file.  The example includes positive and negative patterns to specify which files should be considered entry points.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_2
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts", "scripts/*.ts", "!scripts/except-this-one.ts"]
+}
+```
+
+---
+
+title: Configuring Project Files
+description: Demonstrates how to configure project files using glob patterns in the `project` array within the `knip.json` file. The example specifies that all `.ts` files in `src/` and `scripts/` directories should be considered project files.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_3
+
+language: json
+code:
+```
+{
+  "project": ["src/**/*.ts", "scripts/**/*.ts"]
+}
+```
+
+---
+
+title: Configuring Vite with React and Vitest - TypeScript
+description: Demonstrates a Vite configuration file (`vite.config.ts`) that imports and uses the React plugin (`@vitejs/plugin-react`). It also configures Vitest with setup files, a `happy-dom` environment, and coverage using the `c8` provider. This file showcases how to integrate multiple tools and configure testing within a Vite project.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_7
+
+language: typescript
+code:
+```
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig(async ({ mode, command }) => {
+  return {
+    plugins: [react()],
+    test: {
+      setupFiles: ['./setup-tests.ts'],
+      environment: 'happy-dom',
+      coverage: {
+        provider: 'c8',
+      },
+    },
+  };
+});
+```
+
+---
+
+title: Allowing Include Exports - TypeScript
+description: Illustrates how to use the `allowIncludeExports` option with `toProductionEntry` to allow exports of entry files to be reported as unused when using `--include-entry-exports`. This is useful when certain tools and frameworks consume named exports from entry files.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_1
+
+language: ts
+code:
+```
+toProductionEntry('./entry.ts', { allowIncludeExports: true });
+```
+
+---
+
+title: Analyzing Performance with Metrics
+description: Demonstrates the use of the `--performance` flag with `--include classMembers` to measure the invocation count and time spent in potentially expensive functions within Knip. This helps identify performance-critical areas, such as `findReferences`.
+source: packages/docs/src/content/docs/guides/performance.md#_snippet_2
+
+language: sh
+code:
+```
+knip --include classMembers --performance
+```
+
+---
+
+title: Defining a Default Export in CommonJS
+description: Illustrates how to define a default export in CommonJS by adding a `__esModule` property to the `module.exports` object. This approach is useful for interoperability between CommonJS and ES modules, signaling that the module should be treated as an ES module with a default export.
+source: packages/docs/src/content/docs/guides/working-with-commonjs.md#_snippet_3
+
+language: javascript
+code:
+```
+const A = function () {};
+const B = { option: true };
+
+module.exports = { __esModule: true, A, B };
+```
+
+---
+
+title: Marking Exports As Public - Typescript
+description: Demonstrates how to use the `@public` tag to mark an export as intended for public use, preventing Knip from reporting it as unused in non-entry files. This is useful for libraries and modules that expose certain functions or variables for external consumption.
+source: packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md#_snippet_2
+
+language: ts
+code:
+```
+/**
+ * @public
+ */
+export const unusedFunction = () => {};
+```
+
+---
+
+title: Using Asynchronous Function for Knip Configuration (TypeScript)
+description: Demonstrates using an asynchronous function to define the `KnipConfig` in TypeScript, allowing dynamic configuration based on asynchronous operations. This enables fetching external data (e.g., from `fetchRepoInfo()`) to determine entry points, making the configuration more flexible and data-driven.
+source: packages/docs/src/content/docs/reference/dynamic-configuration.mdx#_snippet_2
+
+language: typescript
+code:
+```
+import type { KnipConfig } from 'knip';
+
+const config = async (): Promise<KnipConfig> => {
+  const items = await fetchRepoInfo();
+
+  return {
+    entry: ['src/index.ts', ...items],
+    project: ['src/**/*.ts'],
+  };
+};
+
+export default config;
+```
+
+---
+
+title: Using Asynchronous Function for Knip Configuration (JavaScript)
+description: Demonstrates using an asynchronous function to define the `KnipConfig` in JavaScript, allowing dynamic configuration based on asynchronous operations.  This enables scenarios where the configuration needs to be determined at runtime, such as fetching data from an API.
+source: packages/docs/src/content/docs/reference/dynamic-configuration.mdx#_snippet_3
+
+language: javascript
+code:
+```
+const config = async () => ({
+  entry: ['src/index.ts'],
+  project: ['src/**/*.ts'],
+});
+
+export default config;
+```
+
+---
+
+title: Running Knip without Compilation
+description: Illustrates how to run Knip directly from TypeScript source files using `tsx`. This allows for faster iteration during development without needing to compile first.
+source: .github/DEVELOPMENT.md#_snippet_4
+
+language: shell
+code:
+```
+npx tsx path/to/knip/packages/knip/src/cli.ts
+```
+
+---
+
+title: Using Npx With Explicit Flags
+description: Illustrates how using `npx` in scripts can require explicit `--yes` or `--no-install` flags for Knip to correctly interpret the intention. This ensures Knip either ignores or considers the referenced binary and packages appropriately.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_3
+
+language: shell
+code:
+```
+npx --yes
+npx --no-install
+```
+
+---
+
+title: Re-exporting a Namespace - Typescript
+description: Illustrates how to re-export a namespace `NS` from `my-module.ts`.  If this is the only usage of `NS`, Knip cannot determine whether individual exports like `version` or `getRocket` will be used.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_2
+
+language: ts
+code:
+```
+import * as NS from './my-namespace.js';
+
+export { NS };
+```
+
+---
+
+title: Referencing Namespace Object with Property Access - Javascript
+description: Shows a case where a property (`NS.start`) of the namespace `NS` is accessed, and the namespace object itself is also referenced using the `send` function. In this case, Knip will consider only the `start` export as used, and may report `end` as unused.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_6
+
+language: js
+code:
+```
+import * as NS from './namespace.js';
+
+const begin = NS.start;
+
+send(NS);
+```
+
+---
+
+title: Tagging Exports with JSDoc Comments
+description: Demonstrates how to tag exports using custom JSDoc comments for filtering in Knip.  This allows including or excluding specific exports from the analysis based on custom tags defined in the JSDoc, offering fine-grained control over the reported issues.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_2
+
+language: typescript
+code:
+```
+/** @custom */
+export const myExport = 1;
+```
+
+language: shell
+code:
+```
+knip --experimental-tags=+custom
+knip --experimental-tags=-custom,-internal
+```
+
+---
+
+title: Configuring Vitest with Plugins
+description: Explains how Knip plugins prevent configuration overhead by accurately adding entry files for installed tools. The Vitest plugin knows that the default value for `environment` is `node`, which does not require an extra package, but will translate `edge-runtime` to the `@edge-runtime/vm` package.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_2
+
+language: none
+code:
+```
+For instance, Vitest has the `environment` configuration option. The Vitest
+plugin knows `"node"` is the default value for `environment` which does not
+require an extra package, but will translate `"edge-runtime"` to the
+`@edge-runtime/vm` package. This allows Knip to report it if this package is not
+listed in `package.json`, or when it is no longer used after changes in the
+Vitest configuration.
+```
+
+---
+
+title: Monitoring Memory Usage With Knip
+description: Demonstrates how to use the `--memory` flag to display memory usage statistics during Knip's execution. This is useful for diagnosing memory-related issues and can be combined with `--isolate-workspaces` to analyze garbage collection behavior.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_2
+
+language: txt
+code:
+```
+knip --memory
+
+(results)
+
+heapUsed  heapTotal  freemem
+--------  ---------  -------
+   42.09      70.91  2251.00
+  927.04    1042.58  1166.47
+  973.29    1047.33  1160.92
+  971.54    1079.83  1121.66
+  997.80    1080.33  1120.34
+ 1001.88    1098.08  1100.72
+ 1038.69    1116.58  1100.72
+ 1082.12    1166.33  1100.72
+ 1145.46    1224.50  1100.72
+ 1115.82    1240.25  1100.72
+ 1182.35    1249.75   973.05
+  637.32    1029.17   943.63
+  674.30    1029.33   943.39
+  682.24    1029.33   941.63
+  707.70    1029.33   937.48
+
+Total running time: 4.3s
+```
+
+---
+
+title: Configuring Unused Exports in Namespaces - Knip
+description: Demonstrates how to include the `nsExports` and `nsTypes` categories in Knip v5 to report unused exports within namespaces, either by using the command-line argument `--include nsExports` or by adding it to the `knip.json` configuration file, enabling more granular control over reporting.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_1
+
+language: shell
+code:
+```
+knip --include nsExports
+```
+
+language: json
+code:
+```
+{
+  "include": ["nsExports", "nsTypes"]
+}
+```
+
+---
+
+title: Specifying Configuration File with the Config Flag
+description: Demonstrates how to use the `--config` flag with the `knip` command-line tool to specify a custom configuration file path. This allows users to use configuration files with non-standard names or locations.
+source: packages/docs/src/content/docs/overview/configuration.md#_snippet_2
+
+language: sh
+code:
+```
+knip --config path/to/knip.json
+```
+
+---
+
+title: Defining a Custom Css Compiler
+description: Defines a custom compiler for CSS files in `knip.ts`. It uses a regular expression to extract `@import` statements from the CSS text.  This enables Knip to recognize CSS imports as dependencies.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_1
+
+language: ts
+code:
+```
+export default {
+  compilers: {
+    css: (text: string) => [...text.matchAll(/(?<=@)import[^;]+/g)].join('\n'),
+  },
+};
+
+```
+
+---
+
+title: Defining Custom Preprocessor (TypeScript)
+description: Illustrates how to define a custom preprocessor in TypeScript for Knip. Preprocessors are functions that modify the analysis results before they are passed to reporters, enabling custom data transformations and filtering.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_5
+
+language: typescript
+code:
+```
+import type { Preprocessor } from 'knip';
+
+const preprocess: Preprocessor = function (options) {
+  // modify options.issues and options.counters
+  return options;
+};
+
+export default preprocess;
+```
+
+---
+
+title: Using Local Custom Preprocessor With Knip
+description: Shows how to use a local custom preprocessor with Knip.  The `--preprocessor` flag is used to specify the path to the TypeScript or JavaScript file containing the preprocessor function.
+source: packages/docs/src/content/docs/features/reporters.md#_snippet_6
+
+language: sh
+code:
+```
+knip --preprocessor ./preprocess.ts
+```
+
+---
+
+title: Running Knip in Strict and Production Modes - Shell
+description: Demonstrates how to run Knip in both strict and production modes using the `--strict` flag.  `--strict` implies `--production`, and enables additional checks, such as verifying that workspaces use strictly their own dependencies.
+source: packages/docs/src/content/docs/features/production-mode.md#_snippet_3
+
+language: shell
+code:
+```
+knip --production --strict
+```
+
+---
+
+title: Formatting Modified Files After Fixing
+description: Illustrates how to use the `--format` flag with `knip --fix` to format modified files using a project's formatter. This supports Biome, deno fmt, dprint and Prettier.
+source: packages/docs/src/content/docs/features/auto-fix.mdx#_snippet_1
+
+language: sh
+code:
+```
+knip --fix --format
+```
+
+---
+
+title: Configuring Import Aliases with Paths
+description: Illustrates how to configure import aliases using the `paths` option in `knip.json`. This allows Knip to resolve custom import paths like `@lib` and `@lib/*` to their corresponding file locations.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_4
+
+language: json
+code:
+```
+{
+  "paths": {
+    "@lib": ["./lib/index.ts"],
+    "@lib/*": ["./lib/*"]
+  }
+}
+```
+
+---
+
+title: Configuring TypeScript Compiler Options
+description: Illustrates the use of `extends` and `compilerOptions.types` in a `tsconfig.json` file. It demonstrates how to extend a base configuration and specify JSX settings.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "jsxImportSource": "hastscript/svg"
+  }
+}
+```
+
+---
+
+title: Isolating Workspaces for Performance
+description: Illustrates how Knip shares files from separate workspaces based on `tsconfig.json` configuration, aiming to reduce memory consumption. The `--isolate-workspaces` flag disables this behavior, which can be useful in cases with memory issues or incompatible `compilerOptions` across workspaces.  Debugging output shows the number of programs Knip uses.
+source: packages/docs/src/content/docs/guides/performance.md#_snippet_1
+
+language: sh
+code:
+```
+...[*]	Installed 2 programs for 29 workspaces
+...[*]	Analyzing used resolved files [P1/1] (123)
+...[*]	Analyzing used resolved files [P1/2] (8)
+...[*]	Analyzing used resolved files [P2/1] (41)
+...
+```
+
+---
+
+title: Suppressing Configuration Hints
+description: Demonstrates how to suppress configuration hints using the `--no-config-hints` flag.  This can be useful when you want to avoid seeing suggestions for improving your Knip configuration.  Alternatively, `--treat-config-hints-as-errors` will cause Knip to exit with a non-zero code if any hints are present.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_1
+
+---
+
+title: Ignoring Exports Using Lintignore Tag - Typescript
+description: Demonstrates how to use the `@lintignore` tag to exclude specific exports and imports from being reported as unused by Knip. This can be useful for suppressing false positives or temporarily excluding code that is not yet in use.
+source: packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md#_snippet_0
+
+language: ts
+code:
+```
+/** @lintignore */
+export const myUnusedExport = 1;
+
+/** @lintignore */
+import Unresolved from './generated/lib.js';
+```
+
+---
+
+title: Configuring Knip to Include or Exclude Tags
+description: Illustrates how to configure Knip to include or exclude exports based on tags. The `--tags` option in the command-line interface allows you to specify which tags should be included or excluded from the report. This provides fine-grained control over which exports are considered used or unused.
+source: packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md#_snippet_1
+
+language: shell
+code:
+```
+knip --tags=-lintignore,-internal
+```
+
+---
+
+title: Attaching Debugger to Nodejs
+description: Demonstrates how to attach a debugger to a Node.js process running Knip. This allows for step-by-step debugging and inspection of the code during execution.
+source: .github/DEVELOPMENT.md#_snippet_5
+
+language: shell
+code:
+```
+cd fixtures/feature
+tsx --inspect ../../src/cli.ts
+```
+
+---
+
+title: Attaching Debugger to Tests
+description: Illustrates how to attach a debugger while running tests. Setting breakpoints and inspecting code during test execution allows detailed analysis of test failures.
+source: .github/DEVELOPMENT.md#_snippet_6
+
+language: shell
+code:
+```
+tsx --inspect --test --import ./transform-test.js test/**/*.test.ts
+```
+
+---
+
+title: Configuring Paths in Knip- JSON
+description: Demonstrates how to configure `paths` in `knip.json` to resolve external aliased imports, specifically for `unplugin-icons`. This configuration helps Knip locate icon types by specifying the mapping between import aliases and their corresponding type definition files.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_0
+
+language: json
+code:
+```
+{
+  "paths": {
+    "~icons/*": ["node_modules/unplugin-icons/types/[framework].d.ts"]
+  }
+}
+```
+
+---
+
+title: Handling Environment Variables While Configuring Nextjs
+description: Illustrates a scenario where `next.config.ts` relies on environment variables. This highlights the challenge of Knip needing to execute configuration files, potentially encountering errors if required environment variables are not defined, which could lead to unexpected issues.
+source: packages/docs/src/content/docs/blog/state-of-knip.md#_snippet_1
+
+language: typescript
+code:
+```
+const nextConfig = {
+  pageExtensions: ['page.tsx'],
+  env: {
+    BASE_URL: process.env.BASE_URL.toLowerCase(),
+  },
+};
+
+export default nextConfig;
+```
+
+language: shell
+code:
+```
+$ knip
+[U+1F4A5] LoaderError: Error loading next.config.ts
+[U+1F4A5] Reason: Cannot read properties of undefined (reading 'toLowerCase')
+```
+
+---
+
+title: Configuring TypeScript Path Aliases in Monorepos
+description: Illustrates how TypeScript path aliases in monorepos can lead to false positives in Knip reports if aliases reference other workspaces. The recommended solution is to move such aliases from `compilerOptions` in `tsconfig.json` to `dependencies` or `devDependencies` in `package.json`, explicitly listing the other workspaces as dependencies. This ensures that Knip correctly identifies and analyzes the dependencies between workspaces.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_4
+
+language: json
+code:
+```
+{
+  "compilerOptions": {
+    "paths": {
+      "@org/common/*": ["packages/common/*"]
+    }
+  }
+}
+```
+
+language: json
+code:
+```
+{
+  "name": "@org/lib",
+  "dependencies": {
+    "@org/common": "workspace:*"
+  }
+}
+```
+
+---
+
+title: Extending Entry File Patterns
+description: Demonstrates how to extend the `entry` file patterns to include files that are automatically included by certain frameworks, such as auto-mocking or auto-imports. This ensures that Knip considers these files during analysis, preventing them from being incorrectly reported as unused.  Alternatively, you can exclude files using negated `project` patterns.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_5
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts", "src/models/*.ts"]
+}
+```
+
+language: json
+code:
+```
+{
+  "project": ["src/**/*.ts", "!**/__mocks__/**"]
+}
+```
+
+---
+
+title: Running Scripts with Execa and Bun/ZX
+description: Illustrates how Knip identifies scripts within template strings in source files. It shows examples using `execa` and `bun/zx` to execute Node.js scripts, demonstrating how Knip parses these dynamic script executions to track dependencies.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_3
+
+language: typescript
+code:
+```
+await $({ stdio: 'inherit' })`c8 node hydrate.js`; // execa
+await $`node scripts/parse.js`; // bun/zx
+```
+
+---
+
+title: Defining Scripts in Package JSON
+description: Demonstrates how Knip identifies scripts defined within the `package.json` file. It shows examples of scripts using `node` and `vitest`, highlighting how Knip parses these scripts to find entry files and dependencies.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_4
+
+language: json
+code:
+```
+{
+  "name": "my-lib",
+  "scripts": {
+    "start": "node --import tsx/esm run.ts",
+    "start": "vitest -c config/vitest.config.ts"
+  }
+}
+```
+
+---
+
+title: Configuring CI Workflow Files with Plugins
+description: Explains how Knip plugins handle CI workflow files, such as `.github/workflows/ci.yml`. It shows examples of running Playwright tests and Node.js scripts within the workflow, demonstrating how Knip identifies and parses these scripts and configuration files.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_5
+
+language: yaml
+code:
+```
+jobs:
+  test:
+    steps:
+      run: playwright test e2e/**/*.spec.ts --config playwright.e2e.config.ts
+      run: node --import tsx/esm run.ts
+```
+
+---
+
+title: Parsing Bun Template Strings
+description: Illustrates how Knip detects and parses shell scripts within template strings when the `bun` dependency is imported. It shows that the contents of the tagged template literal are treated as scripts, allowing Knip to identify binaries like `boxen` as dependencies.
+source: packages/docs/src/content/docs/features/script-parser.md#_snippet_1
+
+language: typescript
+code:
+```
+import { $ } from 'bun';
+await $`bun boxen I ❤ unicorns`;
+await $`boxen I ❤ unicorns`;
+```
+
+---
+
+title: Parsing Execa Template Strings
+description: Illustrates how Knip detects and parses shell scripts within template strings when the `execa` dependency is imported.  The example shows how `hydrate.js` is added as an entry file, and `c8` is marked as a dependency based on the command within the template string.
+source: packages/docs/src/content/docs/features/script-parser.md#_snippet_2
+
+language: typescript
+code:
+```
+await $({ stdio: 'inherit' })`c8 node hydrate.js`;
+```
+
+---
+
+title: Parsing Zx Template Strings
+description: Illustrates how Knip detects and parses shell scripts within template strings when the `zx` dependency is imported. The example shows how `scripts/parse.js` is added as an entry file.
+source: packages/docs/src/content/docs/features/script-parser.md#_snippet_3
+
+language: typescript
+code:
+```
+await $`node scripts/parse.js`;
+```
+
+---
+
+title: Illustrating Unobtrusive Configuration - JavaScript
+description: Demonstrates the use of standard comments in JavaScript, such as `eslint-disable-next-line`, `prettier-ignore`, and `@ts-expect-error`, to manage linter and code formatting configurations directly within the code. It explains that `knip` does not introduce custom comments, encouraging the use of standardized annotations.
+source: packages/docs/src/content/docs/explanations/why-use-knip.md#_snippet_0
+
+language: javascript
+code:
+```
+// eslint-disable-next-line
+// prettier-ignore
+// @ts-expect-error
+```
+
+---
+
+title: Parsing AST for Component Paths - Typescript
+description: Illustrates using `resolveFromAST` to extract component paths directly from the Abstract Syntax Tree (AST) of a configuration file. This allows Knip to identify entry files, such as Starlight components in `astro.config.ts`, that are not explicitly referenced through import statements. The function uses TypeScript compiler API and AST helpers to traverse the AST and extract relevant information.
+source: packages/docs/src/content/docs/guides/writing-a-plugin.md#_snippet_3
+
+language: typescript
+code:
+```
+import ts from 'typescript';
+import {
+  getDefaultImportName,
+  getImportMap,
+  getPropertyValues,
+} from '../../typescript/ast-helpers.js';
+
+const title = 'Astro';
+
+const production = [
+  'src/pages/**/*.{astro,mdx,js,ts}',
+  'src/content/**/*.mdx',
+  'src/middleware.{js,ts}',
+  'src/actions/index.{js,ts}',
+];
+
+const getComponentPathsFromSourceFile = (sourceFile: ts.SourceFile) => {
+  const componentPaths: Set<string> = new Set();
+  const importMap = getImportMap(sourceFile);
+  const importName = getDefaultImportName(importMap, '@astrojs/starlight');
+
+  function visit(node: ts.Node) {
+    if (
+      ts.isCallExpression(node) &&
+      ts.isIdentifier(node.expression) &&
+      node.expression.text === importName // match the starlight() function call
+    ) {
+      const starlightConfig = node.arguments[0];
+      if (ts.isObjectLiteralExpression(starlightConfig)) {
+        const values = getPropertyValues(starlightConfig, 'components');
+        for (const value of values) componentPaths.add(value);
+      }
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+
+  return componentPaths;
+};
+
+const resolveFromAST: ResolveFromAST = (sourceFile: ts.SourceFile) => {
+  // Include './src/components/Head.astro' and './src/components/Footer.astro'
+  // as production entry files so they're also part of the analysis
+  const componentPaths = getComponentPathsFromSourceFile(sourceFile);
+  return [...production, ...componentPaths].map(id => toProductionEntry(id));
+};
+
+export default {
+  title,
+  production,
+  resolveFromAST,
+} satisfies Plugin;
+```
+
+---
+
+title: Filtering Issue Types Using Exclude
+description: Illustrates how to exclude specific issue types from the Knip report using the `--exclude` flag. The command demonstrates excluding `classMembers` and `enumMembers` either by comma-separated values or by repeating the flag.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_3
+
+language: sh
+code:
+```
+knip --exclude classMembers,enumMembers
+knip --exclude classMembers --exclude enumMembers
+```
+
+---
+
+title: Filtering Issue Types Using Include
+description: Illustrates how to include specific issue types in the Knip report using the `--include` flag. The command demonstrates including `files` and `dependencies` either by comma-separated values or by repeating the flag.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_4
+
+language: sh
+code:
+```
+knip --include files,dependencies
+knip --include files --include dependencies
+```
+
+---
+
+title: Tagging Exports With JSDoc TSDoc
+description: Demonstrates how to tag exports using JSDoc/TSDoc tags and selectively include or exclude them from the Knip report using the `--tags` flag. This allows for fine-grained control over which exports are analyzed based on custom or predefined tags.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_5
+
+language: ts
+code:
+```
+/**
+ * Description of my exported value
+ *
+ * @type number
+ * @internal Important matters
+ * @lintignore
+ */
+export const myExport = 1;
+```
+
+language: shell
+code:
+```
+knip --tags=-lintignore,-internal
+knip --tags=+custom
+```
+
+language: shell
+code:
+```
+knip --tags @lintignore --tags @internal
+```
+
+---
+
+title: Defining Entry and Project Files - JSON
+description: Demonstrates an incorrect approach of using `ignore` to exclude build artifacts and a better approach of including source and script files in `project` patterns. The corrected configuration improves performance by analyzing only relevant source files and scripts, and uses `ignore` only for files with potentially unused exports.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_2
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts", "scripts/*.ts"],
+  "ignore": ["build/**", "dist/**", "src/generated.ts"]
+}
+```
+
+---
+
+title: Using a Separate Configuration File for Production - Shell
+description: Demonstrates using a separate configuration file for production mode in larger projects where a single configuration gets too complex.  The command uses `knip.production.json` file to configure `knip` when running in production mode.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_10
+
+language: shell
+code:
+```
+knip --production --config knip.production.json
+```
+
+---
+
+title: Enabling Mdx Compiler
+description: Demonstrates how to manually enable the built-in MDX compiler in `knip.ts` if the enabling dependencies are not automatically detected. This ensures that Knip can process `.mdx` files even when the required dependencies are not explicitly present in the project.
+source: packages/docs/src/content/docs/features/compilers.md#_snippet_0
+
+language: ts
+code:
+```
+export default {
+  compilers: {
+    mdx: true,
+  },
+};
+
+```
+
+---
+
+title: Excluding Files in Production Mode - JSON
+description: Shows how to exclude specific files from production mode analysis using negated patterns in the `knip.json` configuration file.  This is useful for excluding files like mocks or test helpers that might be reported as unused otherwise.
+source: packages/docs/src/content/docs/features/production-mode.md#_snippet_2
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts!"],
+  "project": ["src/**/*.ts!", "!src/test-helpers/**!"]
+}
+```
+
+---
+
+title: Defining JSON Schema for Configuration
+description: Demonstrates how to define a JSON schema URL in a `knip.json` file. This enables IDE support for validation and error detection during configuration.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_0
+
+language: json
+code:
+```
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json"
+}
+```
+
+---
+
+title: Defining JSONC Schema for Configuration
+description: Illustrates how to specify a JSONC schema URL in a `knip.jsonc` file. This schema allows for comments and trailing commas in the configuration file, which are not permitted in standard JSON.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_1
+
+language: json
+code:
+```
+{
+  "$schema": "https://unpkg.com/knip@5/schema-jsonc.json"
+}
+```
+
+---
+
+title: Configuring Playwright Test Directory and Match - TypeScript
+description: Demonstrates how to configure the test directory (`testDir`) and test match patterns (`testMatch`) in a Playwright configuration file (`playwright.config.ts`). This allows users to specify where their tests are located and how they are named, providing control over test discovery.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_2
+
+language: typescript
+code:
+```
+import type { PlaywrightTestConfig } from '@playwright/test';
+
+const config: PlaywrightTestConfig = {
+  testDir: 'integration',
+  testMatch: ['**/*-test.ts'],
+};
+
+export default config;
+```
+
+---
+
+title: Overriding Playwright Entry Files in Knip Configuration - JSON
+description: Illustrates how to override default entry file patterns for Playwright within a Knip configuration file (`knip.json`). This provides a way to customize Knip's analysis by specifying alternative entry points for Playwright tests, which can be useful when the default patterns do not align with the project's structure.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_3
+
+language: json
+code:
+```
+{
+  "playwright": {
+    "entry": "src/**/*.integration.ts"
+  }
+}
+```
+
+---
+
+title: Configuring Angular Project Build - JSON
+description: Demonstrates the configuration of an Angular project's build options within `angular.json`. Specifically, it shows how to set the `main` entry point to `src/main.ts` and associate it with a `tsConfig` file (`tsconfig.app.json`). This configuration is crucial for defining the build process of an Angular application.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_4
+
+language: json
+code:
+```
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "projects": {
+    "knip-angular-example": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/knip-angular-example",
+            "main": "src/main.ts",
+            "tsConfig": "tsconfig.app.json"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+title: Defining GitHub Actions Workflow Scripts - YAML
+description: Demonstrates how to define `run` scripts within a GitHub Actions workflow file (`deploy.yml`). These scripts execute commands during the workflow, such as installing dependencies (`npm install`), building the project (`node scripts/build.js`), and deploying the application (`node --loader tsx scripts/deploy.ts`).
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_5
+
+language: yaml
+code:
+```
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install
+      - run: node scripts/build.js
+      - run: node --loader tsx scripts/deploy.ts
+      - run: playwright test -c playwright.web.config.ts
+        working-dir: e2e
+```
+
+---
+
+title: Configuring Webpack Entry Points and Rules - JavaScript
+description: Illustrates a webpack configuration file (`webpack.config.js`) that defines entry points (`main` and `vendor`) and rules for handling different file types (e.g., images, fonts). The example shows how to use `base64-inline-loader` to inline certain file types as base64 strings.
+source: packages/docs/src/content/docs/explanations/plugins.md#_snippet_6
+
+language: javascript
+code:
+```
+module.exports = env => {
+  return {
+    entry: {
+      main: './src/app.ts',
+      vendor: './src/vendor.ts',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(woff|ttf|ico|woff2|jpg|jpeg|png|webp)$/i,
+          use: 'base64-inline-loader',
+        },
+      ],
+    },
+  };
+};
+```
+
+---
+
+title: Compiling Vue Files
+description: Illustrates that Knip uses basic "compilers" (regular expressions) for non-standard file types, which might not be accurate. Recommends overriding the built-in Vue "compiler" with the real one in your project to extract import statements correctly.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_1
+
+---
+
+title: Describing Production Mode
+description: Explains that Knip's default mode includes all source files, tests, dependencies, dev dependencies, and tooling configurations. On the other hand, production mode only considers source files and production dependencies, with plugins adding only production entry files.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_2
+
+---
+
+title: Marking Exports As Internal - Typescript
+description: Illustrates how to use the `@internal` tag to mark an export as intended only for internal use, such as within tests. When running Knip in production mode, these exports will not be reported as unused. This is helpful for differentiating between public APIs and internal implementation details.
+source: packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md#_snippet_3
+
+language: ts
+code:
+```
+/** @internal */
+export const internalTestedFunction = () => {};
+```
+
+---
+
+title: Preventing Duplicate Export Reports Using Alias - Typescript
+description: Demonstrates how to use the `@alias` tag to prevent Knip from reporting duplicate exports.  Tagging one of the duplicate exports with `@alias` tells Knip that these exports are intentionally aliased and should not be flagged as errors.
+source: packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md#_snippet_4
+
+language: ts
+code:
+```
+export const Component = () => {};
+
+/** @alias */
+export default Component;
+```
+
+---
+
+title: Importing Components Without Extensions- Vue
+description: Demonstrates how extensionless imports can behave in Vue components.  The first import resolves correctly because `.vue` is a known extension, while the second import may fail because `.svg` is not, highlighting the importance of specifying file extensions for non-standard formats.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_2
+
+language: ts
+code:
+```
+import Component from './Component'; // → Should resolve to ./Component.vue
+import ArrowIcon from '../icons/Arrow'; // → Does NOT resolve to ../icons/Arrow.svg
+```
+
+---
+
+title: Including nsExports in Configuration - JSON
+description: Illustrates how to configure Knip to consider each export on a namespace individually by including the `nsExports` issue type in the configuration. This disables the heuristic where all exports are considered used if the namespace object is referenced without property access.
+source: packages/docs/src/content/docs/guides/namespace-imports.md#_snippet_7
+
+language: json
+code:
+```
+{
+  "include": ["nsExports"]
+}
+```
+
+---
+
+title: Ignoring Files with Globs in Knip Configuration
+description: Illustrates how to specify files to ignore using globs in the Knip configuration.  The `ignore` option now requires globs like `examples/**` to correctly exclude files within a directory, instead of patterns like `examples/`.
+source: packages/docs/src/content/docs/blog/knip-v4.mdx#_snippet_1
+
+language: text
+code:
+```
+The `ignore` option accepted patterns like `examples/`, but if you want to
+ignore the files inside this folder you should update to globs like
+`examples/**`.
+```
+
+---
+
+title: Suppressing Color Output Using NO_COLOR
+description: Illustrates how to disable color output in Knip's default reporters by setting the `NO_COLOR` environment variable. This leverages the `picocolors` library for a color-free terminal experience.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_1
+
+language: sh
+code:
+```
+NO_COLOR=1 knip
+```
+
+---
+
+title: Specifying Reporter Options With Json
+description: Shows how to pass extra options to a Knip reporter using the `--reporter-options` flag with a JSON string. This allows customization of the reporter's behavior, such as specifying a file path for the `codeowners` reporter.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_6
+
+language: sh
+code:
+```
+knip --reporter codeowners --reporter-options '{"path":".github/CODEOWNERS"}'
+```
+
+---
+
+title: Using Preprocessors With Options
+description: Demonstrates how to use a preprocessor with Knip, along with passing options to the preprocessor using `--preprocessor-options` with a JSON string. This allows for customizing the preprocessor's behavior, such as passing key-value pairs.
+source: packages/docs/src/content/docs/reference/cli.md#_snippet_7
+
+language: sh
+code:
+```
+knip --preprocessor ./preproc.ts --preprocessor-options '{"key":"value"}'
+```
+
+---
+
+title: Configuring Rules in Knip Json
+description: Demonstrates how to configure rules in `knip.json` to customize how issue types are handled.  The example shows how to set the `files` issue type to `warn` and the `classMembers` and `duplicates` issue types to `off`.
+source: packages/docs/src/content/docs/features/rules-and-filters.md#_snippet_2
+
+language: json
+code:
+```
+{
+  "rules": {
+    "files": "warn",
+    "classMembers": "off",
+    "duplicates": "off"
+  }
+}
+```
+
+---
+
+title: Standardizing JSDoc Tags - Knip
+description: Illustrates the usage of JSDoc tags like `@public` to exclude specific exports from Knip reports, even when imported using a namespace, providing a way to mark certain exports as intentionally exposed for public use.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_3
+
+language: ts
+code:
+```
+export const version = 'v5';
+/** @public */
+export const getRocket = () => '[U+1F680]';
+```
+
+---
+
+title: Ignoring Specific Files - JSON
+description: Shows how to use the `ignore` configuration option to exclude specific files from having their unused exports reported. This is especially useful for generated files that might export everything, and you don't want these exports to be included in the unused exports report.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_4
+
+language: json
+code:
+```
+{
+  "entry": ["src/index.ts"],
+  "project": ["src/**/*.ts"],
+  "ignore": ["src/generated.ts"]
+}
+```
+
+---
+
+title: Listing Default Entry and Project Files - JSON
+description: Shows the default entry and project file patterns used by Knip for each workspace. These defaults are used if no explicit configuration is provided.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_11
+
+language: json
+code:
+```
+{
+  "entry": [
+    "{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}",
+    "src/{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
+  ],
+  "project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}!"]
+}
+```
+
+---
+
+title: Excluding Types from the Report - Shell
+description: Illustrates how to exclude types from the Knip report by using the `--exclude types` flag. This can be used to focus the report on other types of issues.
+source: packages/docs/src/content/docs/features/production-mode.md#_snippet_4
+
+language: shell
+code:
+```
+knip --production --exclude types
+```
+
+---
+
+title: Modifying Plugin Behavior
+description: Demonstrates how to modify plugin behavior by overriding plugin configuration, enabling a plugin, and disabling a plugin in `knip.json`. This includes overriding `config` and `entry` locations.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_5
+
+language: json
+code:
+```
+{
+  "mocha": {
+    "config": "config/mocha.config.js",
+    "entry": ["**/*.spec.js"]
+  },
+  "playwright": true,
+  "webpack": false
+}
+```
+
+---
+
+title: Enabling Ignore Exports Used In File
+description: Shows how to ignore exports that are used only internally within a file, by enabling the `ignoreExportsUsedInFile` option. This can be enabled globally or for specific issue types.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_15
+
+language: json
+code:
+```
+{
+  "ignoreExportsUsedInFile": true
+}
+```
+
+---
+
+title: Enabling Ignore Exports Used In File for Specific Types
+description: Illustrates how to ignore specific issue types, such as interfaces and types, using the `ignoreExportsUsedInFile` option in `knip.json`. This provides finer-grained control over which exports are ignored.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_16
+
+language: json
+code:
+```
+{
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  }
+}
+```
+
+---
+
+title: Including Entry Exports
+description: Demonstrates how to include entry files when reporting unused exports by setting the `includeEntryExports` option to `true`. This will report unused exports in entry source files but not configuration files.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_17
+
+language: json
+code:
+```
+{
+  "includeEntryExports": true
+}
+```
+
+---
+
+title: Referencing Exports Through External Libraries- JavaScript
+description: Illustrates how external libraries can reference exports, leading to non-standard consumption patterns. Knip may not detect these usages by default, requiring the inclusion of external type definitions via the `--include-libs` flag.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_5
+
+language: ts
+code:
+```
+import loadable from '@loadable/component';
+
+export const DynamicApple = dynamic(() =>
+  import('./components.js').then(mod => mod.Apple)
+);
+
+export const LoadableOrange = loadable(() => import('./components.js'), {
+  resolveComponent: components => components.Orange,
+});
+```
+
+---
+
+title: Exporting Components- JavaScript
+description: Defines two exported components, `Apple` and `Orange`.  `Orange` is referenced through an external function, which Knip may not detect without including external type definitions via `--include-libs`.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_6
+
+language: ts
+code:
+```
+export const Apple = () => 'Apple';
+export const Orange = () => 'Orange';
+```
+
+---
+
+title: Excluding Arbitrary JSDoc Tags - Knip
+description: Demonstrates how to use arbitrary JSDoc tags with the `--experimental-tags` flag in Knip to exclude exports from being reported as unused, even when imported through a namespace, offering fine-grained control over which exports are considered used.
+source: packages/docs/src/content/docs/blog/knip-v5.mdx#_snippet_4
+
+language: ts
+code:
+```
+export const version = 'v5';
+/** @launch */
+export const getRocket = () => '[U+1F680]';
+```
+
+language: shell
+code:
+```
+$ knip --experimental-tags=-launch
+Exports in used namespace (1)
+version  NS  unknown  knip.js:1:1
+```
+
+---
+
+title: Ignoring Issues from Matching Files
+description: Shows how to ignore issues from specific files using the `ignore` option in `knip.json`. This option takes an array of glob patterns to exclude files from the analysis.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_7
+
+language: json
+code:
+```
+{
+  "ignore": ["src/generated.ts", "fixtures/**"]
+}
+```
+
+---
+
+title: Ignoring Binaries
+description: Demonstrates how to exclude binaries from the report when they are used but not provided by any dependency.  The `ignoreBinaries` option in `knip.json` accepts an array of binary names or regular expressions.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_8
+
+language: json
+code:
+```
+{
+  "ignoreBinaries": ["zip", "docker-compose", "pm2-.+"]
+}
+```
+
+---
+
+title: Ignoring Binaries Using Regular Expressions
+description: Demonstrates using regular expressions in dynamic configurations to ignore binaries. This allows for more flexible matching of binary names using the `ignoreBinaries` option.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_9
+
+language: typescript
+code:
+```
+export default {
+  ignoreBinaries: [/^pm2-.+/],
+};
+
+```
+
+---
+
+title: Ignoring Dependencies
+description: Demonstrates how to exclude specific packages from the report using the `ignoreDependencies` option in `knip.json`. The option accepts an array of package names or regular expressions.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_10
+
+language: json
+code:
+```
+{
+  "ignoreDependencies": ["hidden-package", "@org/.+"]
+}
+```
+
+---
+
+title: Ignoring Dependencies Using Regular Expressions
+description: Shows how to use regular expressions in dynamic configurations to ignore dependencies. This allows for more flexible matching of package names.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_11
+
+language: typescript
+code:
+```
+export default {
+  ignoreDependencies: [/@org\/.*/, /^lib-.+/],
+};
+
+```
+
+---
+
+title: Ignoring Unresolved Specifiers
+description: Demonstrates how to exclude specific specifiers from the report using the `ignoreUnresolved` option in `knip.json`. The option accepts an array of specifiers or regular expressions.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_12
+
+language: json
+code:
+```
+{
+  "ignoreUnresolved": ["ignore-unresolved-import", "#virtual/.+"]
+}
+```
+
+---
+
+title: Ignoring Unresolved Specifiers Using Regular Expressions
+description: Demonstrates how to use regular expressions in dynamic configurations to ignore unresolved specifiers, allowing for more flexible matching.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_13
+
+language: typescript
+code:
+```
+export default {
+  ignoreUnresolved: [/^#/.+/],
+};
+
+```
+
+---
+
+title: Ignoring Workspaces
+description: Demonstrates how to ignore specific workspaces using the `ignoreWorkspaces` option in `knip.json`. The option accepts an array of workspace names or glob patterns.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_14
+
+language: json
+code:
+```
+{
+  "ignoreWorkspaces": [
+    "packages/go-server",
+    "packages/flat/*"
+    "packages/deep/**"
+  ]
+}
+```
+
+---
+
+title: Using Dynamic Imports With Template Strings- TypeScript
+description: Illustrates the use of dynamic imports with template strings in TypeScript.  When Knip cannot resolve these imports, adding the file(s) to the `entry` patterns or the dependency to the `ignoreDependencies` list resolves the issue.
+source: packages/docs/src/content/docs/guides/handling-issues.mdx#_snippet_1
+
+language: ts
+code:
+```
+import(`./${value}.ts`);
+import(`@org/name/dist/${value}.js`);
+```
+
+---
+
+title: Handling Non-Standard Import Syntax-Typescript
+description: Explains Knip's resilience against non-standard import syntax used by webpack loaders or Vite asset imports. Knip strips off prefixes and suffixes in import specifiers.
+source: packages/docs/src/content/docs/reference/faq.md#_snippet_6
+
+language: typescript
+code:
+```
+import Icon from './icon.svg?raw';
+import Styles from '-!style-loader!css-loader?modules!./styles.css';
+```
+
+---
+
+title: Excluding Exports Using Tags
+description: Illustrates how to use JSDoc/TSDoc tags to include or exclude exports from Knip's reports. It demonstrates including exports tagged `@lintignore` or `@internal` and excluding exports tagged `lintignore`.
+source: packages/docs/src/content/docs/reference/configuration.md#_snippet_6
+
+language: json
+code:
+```
+{
+  "tags": ["@lintignore", "@internal"]
+}
+```
+
+---
+
+title: Excluding Test Files Using Ignore - JSON
+description: Illustrates the incorrect way to exclude test files using the `ignore` option. This is not a good idea, since `ignore` patterns only exclude issues in matching files from the report, but the files are still part of the analysis.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_5
+
+language: json
+code:
+```
+{
+  "ignore": ["**/*.test.js"]
+}
+```
+
+---
+
+title: Excluding Test Files Using Negated Entry - JSON
+description: Shows an ineffective method of excluding test files using a negated pattern in the `entry` configuration. This approach may not work because plugins can still add test files as entry files.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_6
+
+language: json
+code:
+```
+{
+  "entry": ["index.ts", "!**/*.test.js"]
+}
+```
+
+---
+
+title: Excluding Test Files Using Negated Project - JSON
+description: Illustrates the incorrect approach of using negated `project` patterns to exclude test files from the analysis. This method is ineffective because `project` patterns are meant for finding unused files, and plugins may still add test files as entry files.
+source: packages/docs/src/content/docs/guides/configuring-project-files.md#_snippet_7
+
+language: json
+code:
+```
+{
+  "project": ["**/*.ts", "!**/*.spec.ts"]
+}
+```
+
+---
