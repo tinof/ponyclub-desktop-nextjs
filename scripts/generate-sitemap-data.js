@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 /**
  * Get the last Git commit timestamp for a file
@@ -15,7 +15,7 @@ function getGitLastModified(filePath) {
     const gitCmd = `git log -1 --format="%ct" -- "${filePath}"`;
     const result = execSync(gitCmd, { encoding: 'utf8' }).trim();
     return result ? Number.parseInt(result) : Math.floor(Date.now() / 1000);
-  } catch (error) {
+  } catch (_error) {
     console.warn(
       `Could not get Git timestamp for ${filePath}, using current time`,
     );

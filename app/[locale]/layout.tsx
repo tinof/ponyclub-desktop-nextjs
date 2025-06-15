@@ -1,8 +1,6 @@
 // app/[locale]/layout.tsx is a Server Component
 import '../globals.css';
 
-import ClientLayout from '@/components/ClientLayout';
-import GDPRGoogleAnalytics from '@/components/client/GDPRGoogleAnalytics';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -10,7 +8,13 @@ import { Inter, Roboto_Slab } from 'next/font/google';
 import Script from 'next/script';
 import { connection } from 'next/server';
 import type React from 'react';
-
+import ClientLayout from '@/components/ClientLayout';
+import GoogleAnalytics from '@/components/client/GoogleAnalytics';
+import {
+  generateWebsiteStructuredData,
+  organizationData,
+} from '@/lib/structured-data';
+import StructuredData from '@/components/StructuredData';
 // Remove the fetchCache export as we need dynamic rendering
 // export const fetchCache = 'default-cache';
 
@@ -87,93 +91,11 @@ export async function generateMetadata(
     },
   };
 
-  // Example for locale-specific JSON-LD (if needed)
-  // For now, keeping the generic one from parent or define a new one
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'TouristAttraction',
-    name: 'Pony Club',
-    description:
-      locale === 'el'
-        ? 'Το Pony Club προσφέρει εμπειρίες ράφτινγκ, ιππασίας, καγιάκ και πεζοπορίας στον πανέμορφο ποταμό Αχέροντα, Γλυκή, Ελλάδα. Ελάτε μαζί μας για αξέχαστες υπαίθριες περιπέτειες.'
-        : 'Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor adventures.',
-    url: new URL(locale, baseUrl).toString(),
-    image: [
-      new URL('/images/hero-image.webp', baseUrl).toString(),
-      new URL('/images/round1.jpg', baseUrl).toString(),
-      new URL('/images/round2.jpg', baseUrl).toString(),
-      new URL('/images/round3.jpg', baseUrl).toString(),
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Glyki, Thesprotias',
-      addressRegion: 'Epirus',
-      postalCode: '46200',
-      addressCountry: 'GR',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '39.32581744774602',
-      longitude: '20.606971798121965',
-    },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ],
-      opens: '10:00',
-      closes: '18:00',
-    },
-    priceRange: '€€',
-    telephone: '+30 26650 71150',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '156',
-      bestRating: '5',
-    },
-    offers: [
-      {
-        '@type': 'Offer',
-        name:
-          locale === 'el'
-            ? 'Πακέτο Ράφτινγκ & Ιππασία'
-            : 'Rafting & Horse Riding Package',
-        description:
-          locale === 'el'
-            ? 'Ράφτινγκ 30 λεπτά, ιππασία 10-15 λεπτά, πεζοπορία διάσχισης φαραγγιού'
-            : '30 minutes rafting, 10-15 minutes horse riding, canyon crossing hiking',
-        price: '20',
-        priceCurrency: 'EUR',
-        availability: 'https://schema.org/InStock',
-      },
-      {
-        '@type': 'Offer',
-        name:
-          locale === 'el'
-            ? 'Πακέτο Καγιάκ & Ιππασία'
-            : 'Kayak & Horse Riding Package',
-        description:
-          locale === 'el'
-            ? 'Καγιάκ 30 λεπτά, ιππασία 10-15 λεπτά, πεζοπορία διάσχισης φαραγγιού'
-            : '30 minutes kayak, 10-15 minutes horse riding, canyon crossing hiking',
-        price: '25',
-        priceCurrency: 'EUR',
-        availability: 'https://schema.org/InStock',
-      },
-    ],
-    sameAs: [
-      'https://www.facebook.com/ponyclub.acheron',
-      'https://www.instagram.com/ponyclub_acheron',
-    ],
-  };
-  commonMetadata.other = { 'structured-data': JSON.stringify(structuredData) };
+  // Generate structured data using our utilities
+  const websiteStructuredData = generateWebsiteStructuredData(locale);
+
+  // We'll render structured data in the component instead of metadata
+  // to have better control and avoid duplication
 
   return commonMetadata;
 }
@@ -186,6 +108,9 @@ export default async function LocaleLayout({
   await connection();
 
   const { locale } = await paramsPromise;
+
+  // Generate structured data for the layout
+  const websiteStructuredData = generateWebsiteStructuredData(locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -237,11 +162,12 @@ export default async function LocaleLayout({
         `}
         suppressHydrationWarning
       >
+        <StructuredData data={[websiteStructuredData, organizationData]} />
         <ClientLayout initialLocale={locale}>
           {children}
           <SpeedInsights />
           <Analytics />
-          <GDPRGoogleAnalytics gaId="G-6J3ELVNTQE" />
+          <GoogleAnalytics gaId="G-6J3ELVNTQE" />
         </ClientLayout>
       </body>
     </html>

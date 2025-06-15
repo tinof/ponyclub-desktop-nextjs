@@ -5,6 +5,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
+  serverExternalPackages: [
+    'import-in-the-middle',
+    'require-in-the-middle',
+  ],
   // Optimized Turbopack configuration for Next.js 15
   turbopack: {
     // Configure path aliases for better module resolution
@@ -21,13 +25,6 @@ const nextConfig = {
   compiler: {
     // Remove console.log in production
     removeConsole: process.env.NODE_ENV === 'production',
-  },
-  // Experimental features for performance
-  experimental: {
-    // Use modern JavaScript features
-    esmExternals: true,
-    // Optimize CSS
-    optimizeCss: true,
   },
 
   typescript: {
@@ -55,6 +52,8 @@ const nextConfig = {
       },
     ],
   },
+  // Experimental features for performance
+
   experimental: {
     // Next.js 15 built-in critical CSS inlining (replaces deprecated critters)
     inlineCss: true,

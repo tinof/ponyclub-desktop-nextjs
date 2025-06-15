@@ -12,7 +12,7 @@ const defaultLocale = 'en';
 const isDev = process.env.NODE_ENV === 'development';
 
 // Define additional script sources for development
-const devScriptSources = isDev
+const _devScriptSources = isDev
   ? ([
       "'unsafe-eval'",
       "'unsafe-inline'",

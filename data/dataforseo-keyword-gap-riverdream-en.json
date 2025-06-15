@@ -19,11 +19,7 @@
           "search_volume": 260,
           "low_top_of_page_bid": 0.14,
           "high_top_of_page_bid": 0.3,
-          "categories": [
-            10001,
-            10027,
-            10215
-          ],
+          "categories": [10001, 10027, 10215],
           "monthly_searches": {
             "2025-04": 110,
             "2025-03": 140,
@@ -63,9 +59,7 @@
         "search_intent_info": {
           "se_type": "google",
           "main_intent": "commercial",
-          "foreign_intent": [
-            "navigational"
-          ],
+          "foreign_intent": ["navigational"],
           "last_updated_time": "2023-05-03 22:14:19 +00:00"
         }
       },
@@ -80,10 +74,7 @@
         "breadcrumb": "https://riverdream.gr › drasthriotites",
         "website_name": "riverdream.gr",
         "description": "Το κανόε καγιάκ είναι ναυτικό άθλημα που διεξάγεται σε λίμνη, ποτάμι ή κωπηλατοδρόμιο με δύο τύπους σκαφών: κανόε (canoe) και καγιάκ (kayak), ...",
-        "highlighted": [
-          "canoe",
-          "kayak"
-        ],
+        "highlighted": ["canoe", "kayak"],
         "main_domain": "riverdream.gr",
         "relative_url": "/drasthriotites/riverdream-canoe-kayak/",
         "etv": 0.546,
@@ -109,11 +100,7 @@
           "last_updated_time": "2025-05-10 18:47:42 +00:00",
           "competition_level": "LOW",
           "search_volume": 110,
-          "categories": [
-            10014,
-            13605,
-            13616
-          ],
+          "categories": [10014, 13605, 13616],
           "monthly_searches": {
             "2025-04": 10,
             "2025-02": 10,
@@ -149,9 +136,7 @@
         "search_intent_info": {
           "se_type": "google",
           "main_intent": "commercial",
-          "foreign_intent": [
-            "informational"
-          ],
+          "foreign_intent": ["informational"],
           "last_updated_time": "2023-08-20 11:09:03 +00:00"
         }
       },
@@ -166,9 +151,7 @@
         "breadcrumb": "https://riverdream.gr › activities › trekking",
         "website_name": "riverdream.gr",
         "description": "Trekking on the Acherontas River paths in nature. Trekking for teams. Trekking for groups, teams, schools by appointment throughout the year.",
-        "highlighted": [
-          "Acherontas River"
-        ],
+        "highlighted": ["Acherontas River"],
         "main_domain": "riverdream.gr",
         "relative_url": "/activities/trekking/?lang=en",
         "etv": 0.231,

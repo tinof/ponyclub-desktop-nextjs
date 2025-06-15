@@ -9,6 +9,7 @@ import DynamicGoogleMap from '@/components/DynamicGoogleMap';
 import EnhancedPackageCard from '@/components/EnhancedPackageCard';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { useLanguage } from '@/contexts/language-context';
+import { useBokunInit } from '@/hooks/use-bokun-init';
 
 const robotoSlab = Roboto_Slab({
   subsets: ['latin', 'greek'],
@@ -17,7 +18,8 @@ const robotoSlab = Roboto_Slab({
 });
 
 export default function HomePageContent() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  useBokunInit();
 
   return (
     <>
@@ -300,7 +302,7 @@ export default function HomePageContent() {
           <div className="absolute -inset-[1px] -z-30 rounded-2xl shadow-xl" />
         </div>
 
-        {/* SUMMER 2025 OFFERS Title */}
+        {/* Our Adventure Packages Section */}
         <div
           className={`
             mt-16 flex flex-col items-center text-center
@@ -315,7 +317,9 @@ export default function HomePageContent() {
               md:text-5xl
             `}
           >
-            {t.activities.exploreNature}
+            {language === 'el'
+              ? 'Τα Πακέτα Περιπέτειάς μας'
+              : 'Our Adventure Packages'}
             <div
               className={`
                 absolute -bottom-2 left-0 h-1 w-full bg-linear-to-r
@@ -323,6 +327,12 @@ export default function HomePageContent() {
               `}
             />
           </h2>
+
+          <p className="mt-4 max-w-2xl text-lg text-gray-700 md:text-xl">
+            {language === 'el'
+              ? 'Ανακαλύψτε τα δημοφιλή πακέτα μας που συνδυάζουν rafting, ιππασία και πεζοπορία για μια ολοκληρωμένη εμπειρία στον Αχέροντα.'
+              : 'Discover our popular packages combining rafting, horse riding, and hiking for a complete Acheron River experience.'}
+          </p>
 
           {/* Client-side Price List Button */}
           <PriceListButton text={t.booking.ourPriceList} />

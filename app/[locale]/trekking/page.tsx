@@ -14,18 +14,21 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
 
-  const isGreek = locale === 'el';
+  const title =
+    locale === 'el'
+      ? 'Πεζοπορία Αχέροντας Τιμές | Οδηγημένες Διαδρομές για Οικογένειες'
+      : 'Acheron Trekking Prices | Guided Family-Friendly Hiking Tours';
+  const description =
+    locale === 'el'
+      ? 'Δείτε τις τιμές για πεζοπορία στον Αχέροντα. Προσφέρουμε οδηγημένες διαδρομές για οικογένειες και αρχάριους. Κλείστε την περιπέτειά σας σήμερα!'
+      : 'See our Acheron trekking prices. We offer guided hiking tours perfect for families and beginners. Book your adventure today!';
 
   return {
-    title: isGreek
-      ? 'Πεζοπορία Αχέροντας - Pony Club | Μονοπάτια & Διαδρομές Γλυκή Θεσπρωτίας'
-      : 'Acheron Trekking - Pony Club | Hiking Trails & Routes Glyki Thesprotia',
-    description: isGreek
-      ? 'Ανακαλύψτε τα μυθικά μονοπάτια του Αχέροντα με οδηγημένες πεζοπορίες. Εξερευνήστε τις πηγές, τα φαράγγια και τη φύση της Θεσπρωτίας με ασφάλεια.'
-      : 'Discover the mythical trails of Acheron River with guided trekking tours. Explore springs, gorges and nature of Thesprotia safely with experienced guides.',
-    keywords: isGreek
-      ? 'πεζοπορία Αχέροντας, trekking Γλυκή, μονοπάτια Θεσπρωτία, πεζοπορία Ήπειρος, φύση Αχέροντας, οδηγημένες πεζοπορίες'
-      : 'Acheron trekking, hiking Glyki, trails Thesprotia, trekking Epirus, Acheron nature, guided hiking tours Greece',
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/trekking`,
+    },
   };
 }
 

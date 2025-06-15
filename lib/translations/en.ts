@@ -1,7 +1,7 @@
 export const en = {
   hero: {
-    title: '1-day excursion in',
-    subtitle: 'Acheron River',
+    title: 'The Original Acheron River Adventures:',
+    subtitle: 'Rafting, Riding & More',
   },
   introduction: {
     mainTitle:
@@ -87,26 +87,7 @@ export const en = {
     en: 'English',
     el: 'Greek',
   },
-  gdpr: {
-    title: 'We value your privacy',
-    description:
-      "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking 'Accept All', you consent to our use of cookies.",
-    acceptAll: 'Accept All',
-    rejectAll: 'Reject All',
-    customize: 'Customize',
-    necessary: 'Necessary',
-    necessaryDescription:
-      'These cookies are essential for the website to function and cannot be switched off.',
-    analytics: 'Analytics',
-    analyticsDescription:
-      'These cookies help us understand how visitors interact with our website.',
-    marketing: 'Marketing',
-    marketingDescription:
-      'These cookies are used to deliver personalized advertisements.',
-    save: 'Save Preferences',
-    privacyPolicy: 'Privacy Policy',
-    cookiePolicy: 'Cookie Policy',
-  },
+
   // Riding Page Content
   riding: {
     pageTitle: 'Horse Riding',

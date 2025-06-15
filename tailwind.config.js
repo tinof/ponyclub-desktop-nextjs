@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'xs': '480px',
+        xs: '480px',
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -80,23 +80,26 @@ module.exports = {
         'text-shine': 'text-shine 4s ease-in-out infinite',
       },
       textShadow: {
-        'lg': '0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)',
-        'xl': '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4)',
+        lg: '0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)',
+        xl: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4)',
       },
     },
   },
   plugins: [
     // Custom plugin for text shadow utilities
-    function({ addUtilities }) {
+    ({ addUtilities }) => {
       const newUtilities = {
         '.text-shadow-lg': {
-          textShadow: '0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)',
+          textShadow:
+            '0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2)',
         },
         '.text-shadow-xl': {
-          textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4)',
+          textShadow:
+            '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4)',
         },
         '.gradient-text': {
-          background: 'linear-gradient(90deg, hsl(var(--river-accent)), #6b8362)',
+          background:
+            'linear-gradient(90deg, hsl(var(--river-accent)), #6b8362)',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           color: 'transparent',
@@ -125,8 +128,10 @@ module.exports = {
             inset: '0',
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(45deg, hsl(var(--river-accent)), #6b8362)',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            background:
+              'linear-gradient(45deg, hsl(var(--river-accent)), #6b8362)',
+            WebkitMask:
+              'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'destination-out',
             maskComposite: 'exclude',

@@ -13,11 +13,7 @@
         "last_updated_time": "2025-05-19 20:56:07 +00:00",
         "competition_level": "LOW",
         "search_volume": 135000,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-04": 165000,
           "2025-03": 135000,
@@ -71,11 +67,7 @@
         "last_updated_time": "2025-05-14 05:35:22 +00:00",
         "competition_level": "LOW",
         "search_volume": 135000,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-04": 165000,
           "2025-03": 135000,
@@ -132,15 +124,7 @@
         "search_volume": 74000,
         "low_top_of_page_bid": 0.31,
         "high_top_of_page_bid": 1.82,
-        "categories": [
-          10004,
-          10017,
-          10145,
-          10276,
-          11088,
-          12382,
-          13582
-        ],
+        "categories": [10004, 10017, 10145, 10276, 11088, 12382, 13582],
         "monthly_searches": {
           "2025-04": 60500,
           "2025-03": 49500,
@@ -197,11 +181,7 @@
         "search_volume": 49500,
         "low_top_of_page_bid": 0.35,
         "high_top_of_page_bid": 1.54,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 33100,
           "2025-04": 49500,
@@ -255,11 +235,7 @@
         "last_updated_time": "2025-06-14 04:51:00 +00:00",
         "competition_level": "LOW",
         "search_volume": 33100,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 40500,
           "2025-04": 40500,
@@ -312,11 +288,7 @@
         "last_updated_time": "2025-06-13 21:10:45 +00:00",
         "competition_level": "LOW",
         "search_volume": 33100,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 40500,
           "2025-04": 40500,
@@ -356,9 +328,7 @@
       "search_intent_info": {
         "se_type": "google",
         "main_intent": "informational",
-        "foreign_intent": [
-          "navigational"
-        ],
+        "foreign_intent": ["navigational"],
         "last_updated_time": "2023-03-05 11:38:53 +00:00"
       }
     },
@@ -372,11 +342,7 @@
         "last_updated_time": "2025-05-14 09:51:40 +00:00",
         "competition_level": "LOW",
         "search_volume": 33100,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-04": 40500,
           "2025-03": 40500,
@@ -435,11 +401,7 @@
         "search_volume": 33100,
         "low_top_of_page_bid": 0.19,
         "high_top_of_page_bid": 0.82,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 49500,
           "2025-04": 18100,
@@ -486,11 +448,7 @@
         "search_volume": 33100,
         "low_top_of_page_bid": 0.23,
         "high_top_of_page_bid": 1.09,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 74000,
           "2025-04": 33100,
@@ -532,11 +490,7 @@
         "last_updated_time": "2025-06-13 04:35:52 +00:00",
         "competition_level": "LOW",
         "search_volume": 33100,
-        "categories": [
-          10017,
-          10145,
-          13582
-        ],
+        "categories": [10017, 10145, 13582],
         "monthly_searches": {
           "2025-05": 40500,
           "2025-04": 40500,
@@ -575,9 +529,7 @@
       "search_intent_info": {
         "se_type": "google",
         "main_intent": "informational",
-        "foreign_intent": [
-          "navigational"
-        ],
+        "foreign_intent": ["navigational"],
         "last_updated_time": "2023-03-05 12:06:16 +00:00"
       }
     }

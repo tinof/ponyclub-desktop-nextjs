@@ -18,10 +18,10 @@ import { Roboto_Slab } from 'next/font/google';
 import Link from 'next/link';
 
 import ResponsiveNavigation from '@/components/responsive-navigation';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { BorderBeam } from '@/components/ui/border-beam';
 import { GridPattern } from '@/components/ui/grid-pattern';
 import { NumberTicker } from '@/components/ui/number-ticker';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { PulsatingButton } from '@/components/ui/pulsating-button';
 
 // Define Roboto Slab font instance

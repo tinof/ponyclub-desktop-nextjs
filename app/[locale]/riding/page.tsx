@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 import ActivityPageLayout from '@/components/ActivityPageLayout';
 import DynamicBokunWidget from '@/components/DynamicBokunWidget';
-
+import StructuredData from '@/components/StructuredData';
+import { generateActivityStructuredData } from '@/lib/structured-data';
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
@@ -12,40 +13,54 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
 
-  const isGreek = locale === 'el';
+  const title =
+    locale === 'el'
+      ? 'Ιππασία Αχέροντας Τιμές | Ασφαλείς Βόλτες για Αρχάριους'
+      : 'Acheron Horse Riding Prices | Safe Beginner-Friendly Tours';
+  const description =
+    locale === 'el'
+      ? 'Δείτε τις τιμές για ιππασία στον Αχέροντα. Προσφέρουμε ασφαλείς βόλτες με άλογα για αρχάριους και οικογένειες. Κλείστε την περιπέτειά σας σήμερα!'
+      : 'See our Acheron horse riding prices. We offer safe horseback rides perfect for beginners and families. Book your adventure today!';
 
   return {
-    title: isGreek
-      ? 'Ιππασία στον Αχέροντα - Pony Club | Βόλτες με Άλογα Γλυκή Θεσπρωτίας'
-      : 'Horse Riding in Acheron - Pony Club | Horseback Adventures Glyki Thesprotia',
-    description: isGreek
-      ? 'Απολαύστε μαγικές βόλτες με άλογα στις όχθες του Αχέροντα. Ασφαλείς ιππικές εμπειρίες για όλες τις ηλικίες με εκπαιδευμένα άλογα στη Γλυκή Θεσπρωτίας.'
-      : 'Enjoy magical horseback rides along the banks of Acheron River. Safe equestrian experiences for all ages with trained horses in Glyki, Thesprotia.',
-    keywords: isGreek
-      ? 'ιππασία Αχέροντας, ιππασία Γλυκή, άλογα Θεσπρωτία, ιππασία Ήπειρος, βόλτες με άλογα, ποταμός Αχέροντας'
-      : 'horse riding Acheron, horseback riding Glyki, horses Thesprotia, riding Epirus, Acheron river horseback, Greece horse riding',
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/riding`,
+    },
   };
 }
 
 const RidingPage = async ({ params }: PageProps) => {
-  const { locale: _locale } = await params;
+  const { locale } = await params;
+  const isGreek = locale === 'el';
   const bokunExperienceId = '1020659'; // Riding experience ID
 
+  // Content is now managed through Bokun widget for easier maintenance
+  // SEO content has been moved to Bokun descriptions
+  const seoContent = null;
+
+  // Generate structured data for this activity
+  const structuredData = generateActivityStructuredData('riding', locale);
+
   return (
-    <ActivityPageLayout
-      title="Riding"
-      subtitle=""
-      descriptionTitle=""
-      descriptionContent={
-        <DynamicBokunWidget experienceId={bokunExperienceId} />
-      } // Use DynamicBokunWidget
-      detailsTitle=""
-      detailsContent={<></>}
-      pricingTitle=""
-      pricingContent={<></>}
-      showBookingButton={false}
-      fullWidthContent={true}
-    />
+    <>
+      <StructuredData data={structuredData} />
+      <ActivityPageLayout
+        title="Riding"
+        subtitle=""
+        descriptionTitle=""
+        descriptionContent={
+          <DynamicBokunWidget experienceId={bokunExperienceId} />
+        }
+        detailsTitle=""
+        detailsContent={<></>}
+        pricingTitle=""
+        pricingContent={<></>}
+        showBookingButton={false}
+        fullWidthContent={true}
+      />
+    </>
   );
 };
 

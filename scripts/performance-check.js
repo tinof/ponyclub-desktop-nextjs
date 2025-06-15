@@ -5,9 +5,9 @@
  * Monitors key performance metrics and bundle sizes
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const { execSync } = require('node:child_process');
 
 // Colors for console output
 const colors = {
@@ -26,11 +26,13 @@ function log(message, color = 'reset') {
 }
 
 function formatBytes(bytes) {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) {
+    return '0 Bytes';
+  }
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Number.parseFloat((bytes / k ** i).toFixed(2)) + ' ' + sizes[i];
+  return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
 }
 
 function checkImageSizes() {
@@ -118,7 +120,7 @@ function getTotalDirectorySize(dirPath) {
 
   try {
     calculateSize(dirPath);
-  } catch (error) {
+  } catch (_error) {
     // Ignore errors for inaccessible files
   }
 

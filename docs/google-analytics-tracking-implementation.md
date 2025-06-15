@@ -4,24 +4,24 @@
 
 This document outlines the comprehensive Google Analytics tracking
 implementation for the Pony Club adventure activities booking website. The
-implementation includes GA4 events, enhanced ecommerce tracking, conversion
-tracking, and GDPR compliance.
+implementation includes GA4 events, enhanced ecommerce tracking, and conversion
+tracking.
 
 ## Current Implementation Status
 
-**Last Updated:** May 28, 2025  
-**Status:** ✅ Active and Working  
-**GDPR Compliance:** ✅ Implemented
+**Last Updated:** June 15, 2025
+**Status:** ✅ Active and Working
+**GDPR Compliance:** ❌ Removed (Temporarily disabled)
 
 ## Architecture Overview
 
-### 1. GDPR Context System
+### 1. Standard Google Analytics Implementation
 
-**Location:** `/contexts/gdpr-context.tsx`
+**Location:** `/components/client/GoogleAnalytics.tsx`
 
-- Manages user consent for analytics and marketing cookies
-- Controls when tracking events are fired
-- Ensures compliance with European privacy regulations
+- Direct Google Analytics implementation without consent management
+- All tracking events fire unconditionally
+- Simplified implementation for testing purposes
 
 ### 2. Booking Button Component
 
@@ -170,9 +170,7 @@ The `trackBookingClick` function in BookingButton component:
 ### Core Tracking Files
 
 - `/components/client/BookingButton.tsx` - Main tracking implementation
-- `/contexts/gdpr-context.tsx` - GDPR consent management
-- `/components/client/GDPRBanner.tsx` - Cookie consent UI
-- `/components/client/GDPRGoogleAnalytics.tsx` - Analytics initialization
+- `/components/client/GoogleAnalytics.tsx` - Standard Analytics initialization
 
 ### Homepage Implementation
 
@@ -180,7 +178,6 @@ The `trackBookingClick` function in BookingButton component:
 
 ### Documentation
 
-- `/docs/gdpr-implementation.md` - GDPR compliance details
 - `/docs/google-ads-tracking-setup.md` - Google Ads setup guide
 - `/docs/book-now-tracking-implementation.md` - Booking tracking details
 

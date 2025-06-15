@@ -14,7 +14,9 @@ export function useBokunInit() {
 
   useEffect(() => {
     const initializeBokun = () => {
-      if (typeof window === 'undefined') return;
+      if (typeof window === 'undefined') {
+        return;
+      }
 
       // Check if Bokun script is loaded
       if (window.BokunWidgets) {
@@ -114,7 +116,7 @@ export function useBokunInit() {
       clearTimeout(timeoutId);
       initAttempts.current = 0;
     };
-  }, []); // Empty dependency array - only run once on mount
+  }, []); // Run once on mount
 
   // Also provide a manual reinit function for cases where new widgets are added dynamically
   const reinitBokun = () => {

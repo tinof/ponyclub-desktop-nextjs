@@ -19,13 +19,7 @@
           "search_volume": 3600,
           "low_top_of_page_bid": 0.43,
           "high_top_of_page_bid": 1.06,
-          "categories": [
-            10004,
-            10282,
-            11287,
-            12589,
-            13196
-          ],
+          "categories": [10004, 10282, 11287, 12589, 13196],
           "monthly_searches": {
             "2025-04": 2900,
             "2025-03": 880,
@@ -64,10 +58,7 @@
         "search_intent_info": {
           "se_type": "google",
           "main_intent": "commercial",
-          "foreign_intent": [
-            "navigational",
-            "informational"
-          ],
+          "foreign_intent": ["navigational", "informational"],
           "last_updated_time": "2023-08-18 18:04:01 +00:00"
         }
       },

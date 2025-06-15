@@ -2,8 +2,6 @@
 
 import { useCallback, useRef } from 'react';
 
-import { useGDPR } from '@/contexts/gdpr-context';
-
 interface BookingButtonProps {
   id: string;
   dataSrc: string;
@@ -23,55 +21,9 @@ export default function BookingButton({
   packageName = 'Unknown Package',
   packagePrice = '0',
 }: BookingButtonProps) {
-  const clickedButtonRef = useRef<HTMLButtonElement | null>(null);
-  const bokunReadyAttempts = useRef(0);
-  const { consent } = useGDPR();
-
-  const ensureBokunIsReadyAndOpen = useCallback(() => {
-    if (
-      window.BokunWidgets &&
-      (typeof window.BokunWidgets.init === 'function' ||
-        typeof window.BokunWidgets.reinit === 'function')
-    ) {
-      // Check if a modal is already open (very basic check, might need refinement)
-      if (
-        document.querySelector('.bokunModalContainer') ||
-        document.querySelector('.bokun-modal-open')
-      ) {
-        return;
-      }
-
-      // Ensure Bokun is ready before attempting to open
-      try {
-        if (typeof window.BokunWidgets.reinit === 'function') {
-          // Try calling reinit without parameters (safer)
-          window.BokunWidgets.reinit();
-        }
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('[Booking Button] Error reinitializing Bokun:', error);
-        }
-      }
-
-      if (clickedButtonRef.current) {
-        // It's possible Bokun's scripts have now attached proper listeners.
-        // A direct click might be better than trying to call their internal modal functions.
-        clickedButtonRef.current.click();
-        clickedButtonRef.current = null; // Clear after attempting
-      }
-      bokunReadyAttempts.current = 0; // Reset attempts
-    } else if (bokunReadyAttempts.current < 30) {
-      // Try for ~3 seconds
-      bokunReadyAttempts.current++;
-      setTimeout(ensureBokunIsReadyAndOpen, 100);
-    } else {
-      bokunReadyAttempts.current = 0; // Reset attempts
-    }
-  }, []);
-
-  // Comprehensive tracking function for GDPR-compliant analytics
+  // Comprehensive tracking function for analytics
   const trackBookingClick = useCallback(() => {
-    if (typeof window === 'undefined' || !consent) {
+    if (typeof window === 'undefined') {
       return;
     }
 
@@ -79,8 +31,8 @@ export default function BookingButton({
     const numericPrice =
       Number.parseFloat(packagePrice.replace(/[^\d.]/g, '')) || 0;
 
-    // Google Analytics 4 Event Tracking (only if analytics consent given)
-    if (window.gtag && consent.analytics) {
+    // Google Analytics 4 Event Tracking
+    if (window.gtag) {
       // Standard GA4 event
       window.gtag('event', 'book_now_click', {
         event_category: 'Booking',
@@ -119,7 +71,7 @@ export default function BookingButton({
           send_to: `${googleAdsConversionId}/${googleAdsConversionLabel}`,
           value: numericPrice,
           currency: 'EUR',
-          transaction_id: `booking_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          transaction_id: `booking_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         });
       } else if (process.env.NODE_ENV === 'development') {
         console.warn(
@@ -128,8 +80,8 @@ export default function BookingButton({
       }
     }
 
-    // Vercel Analytics (if available and analytics consent given)
-    if (window.va && consent.analytics) {
+    // Vercel Analytics (if available)
+    if (window.va) {
       type VercelAnalytics = (
         event: string,
         data: { name: string; data: Record<string, unknown> },
@@ -145,8 +97,8 @@ export default function BookingButton({
       });
     }
 
-    // Facebook Pixel (if available and marketing consent given)
-    if (window.fbq && consent.marketing) {
+    // Facebook Pixel (if available)
+    if (window.fbq) {
       window.fbq('track', 'InitiateCheckout', {
         content_name: packageName,
         content_category: 'Adventure Package',
@@ -158,18 +110,19 @@ export default function BookingButton({
     if (process.env.NODE_ENV === 'development') {
       console.log(
         `[Booking Tracking] ${trackingLabel} clicked - Package: ${packageName}, Price: €${numericPrice}`,
-        'Consent:',
-        consent,
       );
     }
-  }, [trackingLabel, packageName, packagePrice, id, consent]);
+  }, [trackingLabel, packageName, packagePrice, id]);
 
-  const handleBookNowClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // Track the click immediately
-    trackBookingClick();
+  const handleBookNowClick = () => {
+    // Defer tracking the click to avoid interfering with Bokun's immediate action
+    setTimeout(() => {
+      trackBookingClick();
+    }, 0); // Defer to the next tick of the event loop
 
-    clickedButtonRef.current = event.currentTarget;
-    ensureBokunIsReadyAndOpen(); // Direct call as loader is global
+    // Allow Bokun's native click handler to execute immediately
+    // No need for manual re-initialization or re-clicking the button here,
+    // as Bokun's script should handle it if properly loaded.
   };
 
   return (

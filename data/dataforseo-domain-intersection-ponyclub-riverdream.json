@@ -19,12 +19,7 @@
           "search_volume": 2900,
           "low_top_of_page_bid": 0.2,
           "high_top_of_page_bid": 0.87,
-          "categories": [
-            10004,
-            10276,
-            11088,
-            12382
-          ],
+          "categories": [10004, 10276, 11088, 12382],
           "monthly_searches": {
             "2025-04": 1600,
             "2025-03": 720,
@@ -77,10 +72,7 @@
         "breadcrumb": "https://ponyclub.gr › river-village",
         "website_name": "ponyclub.gr",
         "description": "In Greek mythology Acheron was known as the river of Underworld. The souls of the newly dead were carried to the Underworld by Hades' ferryman Charon. Of course ...",
-        "highlighted": [
-          "Greek",
-          "Acheron"
-        ],
+        "highlighted": ["Greek", "Acheron"],
         "main_domain": "ponyclub.gr",
         "relative_url": "/river-village",
         "etv": 6.09,
@@ -109,11 +101,7 @@
           "search_volume": 210,
           "low_top_of_page_bid": 0.38,
           "high_top_of_page_bid": 1.64,
-          "categories": [
-            10014,
-            10122,
-            13367
-          ],
+          "categories": [10014, 10122, 13367],
           "monthly_searches": {
             "2025-04": 170,
             "2025-03": 50,
@@ -153,9 +141,7 @@
         "search_intent_info": {
           "se_type": "google",
           "main_intent": "navigational",
-          "foreign_intent": [
-            "commercial"
-          ],
+          "foreign_intent": ["commercial"],
           "last_updated_time": "2024-04-23 01:46:11 +00:00"
         }
       },
@@ -170,9 +156,7 @@
         "breadcrumb": "https://ponyclub.gr",
         "website_name": "ponyclub.gr",
         "description": "Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor ...",
-        "highlighted": [
-          "horse riding"
-        ],
+        "highlighted": ["horse riding"],
         "main_domain": "ponyclub.gr",
         "relative_url": "/",
         "etv": 0.441,
