@@ -147,11 +147,22 @@ export default async function LocaleLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pony Club" />
 
-        {/* Nosecone automatically handles nonces, so we can remove manual nonce handling */}
+        {/* Preload Bokun resources for better performance */}
+        <link
+          rel="preconnect"
+          href="https://widgets.bokun.io"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="dns-prefetch"
+          href="https://widgets.bokun.io"
+        />
+
+        {/* Optimized Bokun script loading */}
         <Script
           id={`bokun-widgets-loader-${locale}`}
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
       </head>
       <body

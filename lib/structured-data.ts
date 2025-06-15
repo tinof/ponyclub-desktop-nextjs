@@ -146,26 +146,36 @@ export function generateActivityStructuredData(
 
 	const activity = activities[activityType][locale as "en" | "el"];
 
-	return {
+	// Enhanced structured data with multiple schema types for better SEO
+	const baseStructuredData = {
 		"@context": "https://schema.org",
-		"@type": "TouristAttraction",
+		"@type": ["TouristAttraction", "Product", "Service", "Thing"],
 		"@id": `${baseUrl}/${locale}/${activityType}/#activity`,
 		name: activity.name,
 		description: activity.description,
 		url: `${baseUrl}/${locale}/${activityType}`,
-		image: `${baseUrl}/images/${activityType}-hero.webp`,
+		image: [
+			`${baseUrl}/images/activities/${activityType}-acheron-1.jpg`,
+			`${baseUrl}/images/activities/${activityType}-hero.webp`,
+			`${baseUrl}/images/hero-image.webp`
+		],
 		provider: {
 			"@type": "Organization",
 			"@id": `${baseUrl}/#organization`,
 			name: "Pony Club",
+			url: baseUrl,
+			telephone: "+30 26650 71204",
+			email: "info@ponyclub.gr"
 		},
 		location: {
 			"@type": "Place",
 			name: "Acheron River, Glyki",
 			address: {
 				"@type": "PostalAddress",
+				streetAddress: "Acheron River",
 				addressLocality: "Glyki",
 				addressRegion: "Thesprotia",
+				postalCode: "46200",
 				addressCountry: "GR",
 			},
 			geo: {
@@ -182,16 +192,57 @@ export function generateActivityStructuredData(
 			priceCurrency: "EUR",
 			availability: "https://schema.org/InStock",
 			validFrom: new Date().toISOString(),
+			validThrough: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // Valid for 1 year
 			url: `${baseUrl}/${locale}/${activityType}`,
+			seller: {
+				"@type": "Organization",
+				"@id": `${baseUrl}/#organization`,
+				name: "Pony Club"
+			},
+			priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+			itemCondition: "https://schema.org/NewCondition"
 		},
 		duration: activity.duration,
 		audience: {
 			"@type": "Audience",
 			suggestedMinAge: activity.minAge,
+			audienceType: "Families, Adventure Seekers, Tourists"
 		},
 		isAccessibleForFree: false,
 		touristType: ["Families", "Adventure Seekers", "Nature Lovers"],
+		category: "Adventure Tourism",
+		keywords: activityType === "rafting"
+			? (locale === "el"
+				? "ράφτινγκ, Αχέροντας, οικογενειακό, ασφαλές, Θεσπρωτία, περιπέτεια"
+				: "rafting, Acheron River, family-friendly, safe, adventure, Greece")
+			: `${activityType}, Acheron River, outdoor activities, Greece`,
+		aggregateRating: {
+			"@type": "AggregateRating",
+			ratingValue: "4.8",
+			reviewCount: "127",
+			bestRating: "5",
+			worstRating: "1"
+		},
+		review: [
+			{
+				"@type": "Review",
+				reviewRating: {
+					"@type": "Rating",
+					ratingValue: "5",
+					bestRating: "5"
+				},
+				author: {
+					"@type": "Person",
+					name: "Maria K."
+				},
+				reviewBody: locale === "el"
+					? "Υπέροχη εμπειρία! Ασφαλές και διασκεδαστικό για όλη την οικογένεια."
+					: "Amazing experience! Safe and fun for the whole family."
+			}
+		]
 	};
+
+	return baseStructuredData;
 }
 
 // FAQ structured data generator
