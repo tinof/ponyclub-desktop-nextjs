@@ -424,6 +424,7 @@ export default function ForSchoolsPage() {
                       src="/images/children_rafting_activity_bright_outdoors.jpg"
                       alt="Σχολική εκδρομή στον Αχέροντα"
                       fill
+                      imageType="content"
                       className={`
                         object-cover transition-transform duration-700
                         group-hover:scale-110

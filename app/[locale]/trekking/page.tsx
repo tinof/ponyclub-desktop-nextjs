@@ -339,7 +339,8 @@ const TrekkingPage = async ({ params }: PageProps) => {
             src="/images/ponyClub_map.jpg"
             alt="Trekking Routes Map"
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            imageType="fullWidth"
+            isAboveFold={false}
             className="object-contain"
           />
           <div
