@@ -1,0 +1,38 @@
+# Browsers that we support for the Pony Club website
+# This configuration is used by:
+# - Babel for JavaScript transpilation
+# - PostCSS/Autoprefixer for CSS prefixes
+# - Next.js for optimization decisions
+# - Bundle analyzers for compatibility checks
+
+# Production browsers (default)
+> 0.5%
+last 2 versions
+not dead
+not ie 11
+not op_mini all
+
+# Modern browsers for optimal performance
+# These get the most optimized bundles
+[modern]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version
+last 1 edge version
+
+# Legacy browsers (fallback support)
+# These get more polyfills and transpiled code
+[legacy]
+> 0.5%
+last 2 versions
+not dead
+not ie 11
+not op_mini all
+not android < 5
+not ios < 12
+
+# Development environment
+[development]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version

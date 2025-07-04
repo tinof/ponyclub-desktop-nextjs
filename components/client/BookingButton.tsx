@@ -135,8 +135,13 @@ export default function BookingButton({
       data-src={dataSrc}
       data-testid="widget-book-button"
       onClick={handleBookNowClick}
+      aria-label={`Book ${packageName} package for ${packagePrice}`}
+      aria-describedby={`${id}-description`}
     >
       {children}
+      <span id={`${id}-description`} className="sr-only">
+        Opens booking form for {packageName} adventure package
+      </span>
     </button>
   );
 }

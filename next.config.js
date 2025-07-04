@@ -2,6 +2,9 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
   openAnalyzer: false, // Don't auto-open browser
+  analyzerMode: 'static', // Generate static HTML files
+  reportFilename: 'bundle-analysis.html',
+  defaultSizes: 'gzip', // Show gzipped sizes by default
 });
 
 const nextConfig = {
@@ -59,6 +62,40 @@ const nextConfig = {
       dynamic: 30, // seconds
       static: 180, // seconds
     },
+  },
+
+  // Webpack optimizations for better bundle analysis and performance
+  webpack: (config, { dev, isServer }) => {
+    // Production optimizations
+    if (!dev) {
+      // Optimize bundle splitting
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks.cacheGroups,
+            // Separate vendor chunks for better caching
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+            },
+            // Separate common chunks
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              priority: 5,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
+
+    return config;
   },
   async redirects() {
     return [

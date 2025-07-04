@@ -28,6 +28,8 @@ export default function DynamicGoogleMap() {
         shadow-xl transition-shadow duration-300
         hover:shadow-2xl
       `}
+      role="region"
+      aria-label="Pony Club Acheron location map - Springs of Acheron River, Glyki, Thesprotias, Greece"
     >
       <GoogleMapsEmbed
         apiKey={apiKey}

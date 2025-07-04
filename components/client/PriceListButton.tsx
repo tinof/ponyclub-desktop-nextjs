@@ -1,8 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 
-import { VintagePriceListPopup } from "@/components/ui/VintagePriceListPopup";
+// Dynamic import for the popup to reduce initial bundle size
+const DynamicVintagePriceListPopup = dynamic(
+	() => import("@/components/ui/VintagePriceListPopup").then(mod => ({ default: mod.VintagePriceListPopup })),
+	{
+		ssr: false,
+		loading: () => null, // No loading state needed for popup
+	}
+);
 
 interface PriceListButtonProps {
 	text: string;
@@ -31,10 +39,12 @@ export default function PriceListButton({ text }: PriceListButtonProps) {
 				{text}
 			</button>
 
-			<VintagePriceListPopup
-				isOpen={isPriceListOpen}
-				onClose={() => setIsPriceListOpen(false)}
-			/>
+			{isPriceListOpen && (
+				<DynamicVintagePriceListPopup
+					isOpen={isPriceListOpen}
+					onClose={() => setIsPriceListOpen(false)}
+				/>
+			)}
 		</>
 	);
 }

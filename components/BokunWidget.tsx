@@ -1,7 +1,7 @@
 'use client';
 
 import type { IFrameOptions } from 'iframe-resizer';
-import { iframeResizer } from 'iframe-resizer'; // Types for v3/v4
+import { iframeResizer } from 'iframe-resizer';
 import { useEffect, useRef } from 'react';
 
 import { useLanguage } from '@/contexts/language-context';

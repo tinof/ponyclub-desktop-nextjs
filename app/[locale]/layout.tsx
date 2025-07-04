@@ -4,7 +4,7 @@ import '../globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, ResolvingMetadata } from 'next';
-import { Inter, Roboto_Slab } from 'next/font/google';
+import { inter, robotoSlab, allFontVariables } from '@/app/fonts';
 import Script from 'next/script';
 import { connection } from 'next/server';
 import type React from 'react';
@@ -19,17 +19,7 @@ import {
 // Remove the fetchCache export as we need dynamic rendering
 // export const fetchCache = 'default-cache';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-const robotoSlab = Roboto_Slab({
-  subsets: ['latin', 'greek'],
-  weight: ['400', '700'],
-  variable: '--font-roboto-slab',
-  display: 'swap',
-});
+// Fonts are now imported from centralized fonts.ts file
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -157,8 +147,7 @@ export default async function LocaleLayout({
       </head>
       <body
         className={`
-          ${inter.variable}
-          ${robotoSlab.variable}
+          ${allFontVariables}
           font-sans
         `}
         suppressHydrationWarning

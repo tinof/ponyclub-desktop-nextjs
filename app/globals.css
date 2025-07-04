@@ -180,22 +180,22 @@
 @layer base {
   :root {
     --background: 40 50% 97%; /* Light warm off-white */
-    --foreground: 90 25% 15%; /* Dark, slightly desaturated green */
+    --foreground: 90 25% 12%; /* Darker green for better contrast */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 90 25% 15%; /* Dark green text on cards */
+    --card-foreground: 90 25% 12%; /* Darker green text on cards */
 
     --popover: 0 0% 100%; /* White */
-    --popover-foreground: 90 25% 15%; /* Dark green text on popovers */
+    --popover-foreground: 90 25% 12%; /* Darker green text on popovers */
 
-    --primary: 90 30% 35%; /* Main earthy green */
+    --primary: 90 30% 30%; /* Darker earthy green for better contrast */
     --primary-foreground: 40 50% 97%; /* Light text on primary */
 
     --secondary: 40 50% 92%; /* Slightly darker beige */
-    --secondary-foreground: 90 30% 35%; /* Green text on secondary */
+    --secondary-foreground: 90 30% 25%; /* Darker green text on secondary */
 
     --muted: 40 40% 88%; /* Muted beige */
-    --muted-foreground: 90 25% 40%; /* Less prominent green text */
+    --muted-foreground: 90 25% 25%; /* Darker green text for better contrast */
 
     --accent: 30 70% 60%; /* Warm amber */
     --accent-foreground: 0 0% 100%; /* White text on accent */

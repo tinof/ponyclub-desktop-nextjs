@@ -21,22 +21,58 @@ export default function GoogleReviews() {
         nextButton.setAttribute('aria-label', 'Next review');
       }
 
-      // Add alt text and lazy loading to profile images
+      // Fix ARIA hidden focus issue: Remove focusable elements from hidden slides
+      const hiddenSlides = document.querySelectorAll('.slick-slide[aria-hidden="true"]');
+      hiddenSlides.forEach((slide) => {
+        const focusableElements = slide.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusableElements.forEach((element) => {
+          // Store original tabindex to restore later if needed
+          if (!element.hasAttribute('data-original-tabindex')) {
+            const originalTabIndex = element.getAttribute('tabindex') || '0';
+            element.setAttribute('data-original-tabindex', originalTabIndex);
+          }
+          // Make element non-focusable when slide is hidden
+          element.setAttribute('tabindex', '-1');
+        });
+      });
+
+      // Restore focusability for visible slides
+      const visibleSlides = document.querySelectorAll('.slick-slide:not([aria-hidden="true"])');
+      visibleSlides.forEach((slide) => {
+        const focusableElements = slide.querySelectorAll('[data-original-tabindex]');
+        focusableElements.forEach((element) => {
+          const originalTabIndex = element.getAttribute('data-original-tabindex') || '0';
+          element.setAttribute('tabindex', originalTabIndex);
+        });
+      });
+
+      // Add alt text, lazy loading, and proxy Google images for better optimization
       const profileImages = document.querySelectorAll('.css-1pelb8y');
       profileImages.forEach((img, index) => {
-        if (!img.getAttribute('alt')) {
-          img.setAttribute(
+        const imgElement = img as HTMLImageElement;
+
+        if (!imgElement.getAttribute('alt')) {
+          imgElement.setAttribute(
             'alt',
             `Google reviewer profile picture ${index + 1}`,
           );
         }
+
         // Add lazy loading to profile images for better performance
-        if (!img.getAttribute('loading')) {
-          img.setAttribute('loading', 'lazy');
+        if (!imgElement.getAttribute('loading')) {
+          imgElement.setAttribute('loading', 'lazy');
         }
+
         // Add decoding attribute for better performance
-        if (!img.getAttribute('decoding')) {
-          img.setAttribute('decoding', 'async');
+        if (!imgElement.getAttribute('decoding')) {
+          imgElement.setAttribute('decoding', 'async');
+        }
+
+        // Proxy Google images through our API for better optimization and caching
+        const currentSrc = imgElement.src;
+        if (currentSrc && currentSrc.includes('googleusercontent.com')) {
+          const proxiedSrc = `/api/image-proxy?url=${encodeURIComponent(currentSrc)}`;
+          imgElement.src = proxiedSrc;
         }
       });
     };

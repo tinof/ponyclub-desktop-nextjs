@@ -1,8 +1,8 @@
 "use client";
 
-import { Roboto_Slab } from "next/font/google";
+import dynamic from "next/dynamic";
+import { robotoSlab } from "@/app/fonts";
 import BokunStyles from "@/components/client/BokunStyles";
-import GoogleReviews from "@/components/client/GoogleReviews";
 import PriceListButton from "@/components/client/PriceListButton";
 import DynamicContactDetails from "@/components/DynamicContactDetails";
 import DynamicGoogleMap from "@/components/DynamicGoogleMap";
@@ -10,15 +10,30 @@ import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import VintagePackageCard from "@/components/VintagePackageCard";
 import { useLanguage } from "@/contexts/language-context";
 import { useBokunInit } from "@/hooks/use-bokun-init";
+import { useIsMobile } from "@/hooks/use-media-query";
 
-const robotoSlab = Roboto_Slab({
-	subsets: ["latin", "greek"],
-	weight: ["400", "700"],
-	variable: "--font-roboto-slab",
-});
+// Dynamic imports for heavy components to improve initial bundle size
+const DynamicGoogleReviews = dynamic(
+	() => import("@/components/client/GoogleReviews"),
+	{
+		ssr: false,
+		loading: () => (
+			<div className="mt-6 mb-20 px-4 md:px-8">
+				<div className="mx-auto max-w-6xl rounded-2xl bg-white/90 p-4 shadow-md">
+					<div className="h-80 w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center">
+						<span className="text-gray-500">Loading reviews...</span>
+					</div>
+				</div>
+			</div>
+		),
+	}
+);
+
+// Font is now imported from centralized fonts.ts file
 
 export default function HomePageContent() {
 	const { t, language } = useLanguage();
+	const isMobile = useIsMobile();
 	useBokunInit();
 
 	return (
@@ -49,11 +64,12 @@ export default function HomePageContent() {
 							className="absolute inset-0 h-full w-full object-cover"
 						/>
 						<video
-							autoPlay
+							autoPlay={!isMobile} // Disable autoplay on mobile to save bandwidth
 							muted
 							loop
 							playsInline
 							preload="metadata"
+							poster="/images/hero-image.webp"
 							className="absolute inset-0 z-10 h-full w-full object-cover"
 						>
 							<source src="/images/hero-video.webm" type="video/webm" />
@@ -440,8 +456,10 @@ export default function HomePageContent() {
 					</h2>
 				</div>
 
-				{/* Reviews Widget */}
-				<GoogleReviews />
+				{/* Reviews Widget - Fixed height container to prevent CLS */}
+				<div className="min-h-[320px] w-full">
+					<DynamicGoogleReviews />
+				</div>
 
 				{/* Map and Contact Section */}
 				<div
@@ -467,7 +485,10 @@ export default function HomePageContent() {
             `}
 					>
 						<div className="lg:w-3/5">
-							<DynamicGoogleMap />
+							{/* Fixed height container for Google Map to prevent CLS */}
+							<div className="min-h-[400px] w-full">
+								<DynamicGoogleMap />
+							</div>
 						</div>
 						<div className="lg:w-2/5">
 							<DynamicContactDetails />
