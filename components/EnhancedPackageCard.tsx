@@ -213,7 +213,7 @@ export default function EnhancedPackageCard({
             {[activities.primary, activities.riding, activities.hiking].map(
               (activity, index) => (
                 <li
-                  key={index}
+                  key={activity}
                   className={`
                   flex items-center text-sm
                   sm:text-base

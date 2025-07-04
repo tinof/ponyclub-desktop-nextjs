@@ -48,11 +48,12 @@ export function LanguageProvider({
   // to the new URL, causing the app to re-render with the correct locale.
   const setLanguage = (newLocale: Language) => {
     // Set cookie to remember the user's choice
+    // biome-ignore lint/suspicious/noDocumentCookie: Required for Next.js locale persistence
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
 
     // Determine the new path
     const currentLocale = language;
-    let newPath;
+    let newPath: string;
     if (pathname.startsWith(`/${currentLocale}/`)) {
       newPath = pathname.replace(`/${currentLocale}/`, `/${newLocale}/`);
     } else if (pathname === `/${currentLocale}`) {

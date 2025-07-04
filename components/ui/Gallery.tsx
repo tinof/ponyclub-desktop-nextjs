@@ -56,7 +56,7 @@ export function Gallery({
       >
         {images.map((image, index) => (
           <div
-            key={index}
+            key={image.src}
             className={`
               relative h-64 cursor-pointer overflow-hidden rounded-xl border
               border-amber-100/70 shadow-md transition-all duration-300

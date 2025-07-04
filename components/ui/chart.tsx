@@ -104,6 +104,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   return (
     <style
       nonce={nonce}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Safe CSS theme injection for chart styling
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(

@@ -10,11 +10,12 @@ import { connection } from 'next/server';
 import type React from 'react';
 import ClientLayout from '@/components/ClientLayout';
 import GoogleAnalytics from '@/components/client/GoogleAnalytics';
+import StructuredData from '@/components/StructuredData';
 import {
   generateWebsiteStructuredData,
   organizationData,
 } from '@/lib/structured-data';
-import StructuredData from '@/components/StructuredData';
+
 // Remove the fetchCache export as we need dynamic rendering
 // export const fetchCache = 'default-cache';
 
@@ -92,7 +93,7 @@ export async function generateMetadata(
   };
 
   // Generate structured data using our utilities
-  const websiteStructuredData = generateWebsiteStructuredData(locale);
+  const _websiteStructuredData = generateWebsiteStructuredData(locale);
 
   // We'll render structured data in the component instead of metadata
   // to have better control and avoid duplication
@@ -147,22 +148,11 @@ export default async function LocaleLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pony Club" />
 
-        {/* Preload Bokun resources for better performance */}
-        <link
-          rel="preconnect"
-          href="https://widgets.bokun.io"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="dns-prefetch"
-          href="https://widgets.bokun.io"
-        />
-
-        {/* Optimized Bokun script loading */}
+        {/* Nosecone automatically handles nonces, so we can remove manual nonce handling */}
         <Script
           id={`bokun-widgets-loader-${locale}`}
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </head>
       <body

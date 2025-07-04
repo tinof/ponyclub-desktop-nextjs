@@ -5,10 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  serverExternalPackages: [
-    'import-in-the-middle',
-    'require-in-the-middle',
-  ],
+  serverExternalPackages: ['import-in-the-middle', 'require-in-the-middle'],
   // Optimized Turbopack configuration for Next.js 15
   turbopack: {
     // Configure path aliases for better module resolution

@@ -1,35 +1,40 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { PriceListPopup } from '@/components/ui/PriceListPopup';
+import { VintagePriceListPopup } from "@/components/ui/VintagePriceListPopup";
 
 interface PriceListButtonProps {
-  text: string;
+	text: string;
 }
 
 export default function PriceListButton({ text }: PriceListButtonProps) {
-  const [isPriceListOpen, setIsPriceListOpen] = useState(false);
+	const [isPriceListOpen, setIsPriceListOpen] = useState(false);
 
-  return (
-    <>
-      <button
-        onClick={() => setIsPriceListOpen(true)}
-        className={`
-          mt-4 mb-8 rounded-lg bg-[#6b8362] px-8 py-3 text-lg font-semibold
-          text-white shadow-md transition-colors duration-300
-          hover:bg-[#3E5A35] hover:shadow-lg
+	return (
+		<>
+			<button
+				onClick={() => setIsPriceListOpen(true)}
+				className={`
+          mt-4 mb-8 rounded-lg px-8 py-3 text-lg font-bold
+          text-white shadow-lg transition-all duration-300
+          hover:shadow-xl hover:scale-105
           md:mb-12
+          bg-gradient-to-r from-[#2d5a3d] to-[#4a7c59]
+          hover:from-[#4a7c59] hover:to-[#2d5a3d]
+          border-3 border-[#2d5a3d]
+          font-serif tracking-wider uppercase
+          transform
         `}
-        aria-label="Open price list"
-      >
-        {text}
-      </button>
+				aria-label="Open price list"
+			>
+				{text}
+			</button>
 
-      <PriceListPopup
-        isOpen={isPriceListOpen}
-        onClose={() => setIsPriceListOpen(false)}
-      />
-    </>
-  );
+			<VintagePriceListPopup
+				isOpen={isPriceListOpen}
+				onClose={() => setIsPriceListOpen(false)}
+			/>
+		</>
+	);
 }

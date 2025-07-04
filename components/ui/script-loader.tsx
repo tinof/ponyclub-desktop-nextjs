@@ -31,7 +31,7 @@ export function ScriptLoader({
   dataSrc,
   dataTestId,
   nonce: propNonce, // Use the prop name
-  ...props
+  ..._props
 }: ScriptLoaderProps) {
   const [shouldLoad, setShouldLoad] = useState(!inViewport);
   const [effectiveNonce, setEffectiveNonce] = useState(propNonce || '');
@@ -91,6 +91,7 @@ export function ScriptLoader({
       strategy={strategy}
       onLoad={onLoad}
       onError={onError}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Controlled script content injection for third-party widgets
       dangerouslySetInnerHTML={dangerouslySetInnerHTML}
       data-src={dataSrc}
       data-testid={dataTestId}

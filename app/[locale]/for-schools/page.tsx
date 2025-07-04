@@ -675,9 +675,9 @@ export default function ForSchoolsPage() {
                             'Τοξοβολία',
                             'Πεζοπορία',
                             'Εξοπλισμός',
-                          ].map((item, idx) => (
+                          ].map((item) => (
                             <span
-                              key={idx}
+                              key={item}
                               className={`
                                 inline-flex items-center rounded-full
                                 bg-[#6b8362]/10 px-3 py-1 text-xs font-medium

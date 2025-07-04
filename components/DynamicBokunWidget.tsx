@@ -3,29 +3,16 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-// Enhanced loading placeholder with better UX
-const LoadingPlaceholder = () => (
-  <div className="h-96 w-full rounded-lg bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse">
-    <div className="p-6 space-y-4">
-      <div className="h-6 bg-gray-300 rounded w-3/4 animate-pulse"></div>
-      <div className="space-y-2">
-        <div className="h-4 bg-gray-300 rounded animate-pulse"></div>
-        <div className="h-4 bg-gray-300 rounded w-5/6 animate-pulse"></div>
-      </div>
-      <div className="flex justify-center items-center h-32">
-        <div className="text-gray-500 text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600 mx-auto mb-2"></div>
-          <p className="text-sm">Loading booking options...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-// Dynamically import BokunWidget with optimized loading
+// Dynamically import BokunWidget with ssr: false and a loading placeholder
 const BokunWidget = dynamic(() => import('@/components/BokunWidget'), {
   ssr: false,
-  loading: LoadingPlaceholder,
+  loading: () => (
+    <div
+      className={`
+    h-96 w-full animate-pulse rounded-lg bg-gray-200
+  `}
+    />
+  ),
 });
 
 type DynamicBokunWidgetProps = {
@@ -38,7 +25,6 @@ export default function DynamicBokunWidget({
   partialView,
 }: DynamicBokunWidgetProps) {
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,23 +33,17 @@ export default function DynamicBokunWidget({
       return;
     }
 
-    // Use modern Intersection Observer with better performance
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // Load when the placeholder is intersecting or nearly intersecting
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Delay loading slightly to improve perceived performance
-          const timer = setTimeout(() => {
-            setShouldLoad(true);
-            observer.disconnect();
-          }, 100);
-
-          return () => clearTimeout(timer);
+          setShouldLoad(true);
+          observer.disconnect(); // Stop observing once loaded
         }
       },
       {
-        rootMargin: '150px 0px', // Reduced from 200px for better performance
-        threshold: 0.1, // Increased threshold for better UX
+        rootMargin: '200px 0px', // Load when 200px away from viewport
+        threshold: 0.01, // Trigger even if only 1% is visible
       },
     );
 
@@ -76,32 +56,17 @@ export default function DynamicBokunWidget({
       }
       observer.disconnect();
     };
-  }, []);
-
-  // Preload the widget when it becomes visible but before it loads
-  useEffect(() => {
-    if (isVisible && !shouldLoad) {
-      // Preload critical resources
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = 'https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js';
-      link.as = 'script';
-      document.head.appendChild(link);
-    }
-  }, [isVisible, shouldLoad]);
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    <div
-      ref={ref}
-      className="bokun-widget-wrapper"
-      style={{ minHeight: '384px' }}
-      // Add performance hints
-      data-loading={shouldLoad ? 'loaded' : 'pending'}
-    >
+    <div ref={ref} style={{ minHeight: '384px' }}>
+      {' '}
+      {/* Wrapper div for observer, with min-height matching placeholder */}
       {shouldLoad ? (
         <BokunWidget experienceId={experienceId} partialView={partialView} />
       ) : (
-        <LoadingPlaceholder />
+        // Render the loading placeholder defined in dynamic import
+        <div className="h-96 w-full animate-pulse rounded-lg bg-gray-200" />
       )}
     </div>
   );

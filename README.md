@@ -1,5 +1,7 @@
 # Pony Club
 
+[![CI/CD Pipeline](https://github.com/[username]/ponyclub-v0/actions/workflows/ci.yml/badge.svg)](https://github.com/[username]/ponyclub-v0/actions/workflows/ci.yml)
+
 A web application built with Next.js and React.
 
 ## Tech Stack
@@ -15,6 +17,8 @@ A web application built with Next.js and React.
 - **Visualization**: Recharts for data visualization
 - **Icons**: Lucide React
 - **Maps**: Google Maps Embed (via @next/third-parties)
+- **Code Quality**: [Biome](https://biomejs.dev/) (v2.0) for formatting and linting
+- **CI/CD**: GitHub Actions with parallel quality checks
 
 ## Local Development
 
@@ -61,8 +65,15 @@ The following scripts are available for development and production:
 - `pnpm start` - Start production server
 - `pnpm analyze` - Analyze bundle size
 
-### Quality & Maintenance
+### Code Quality & CI
+- `pnpm ci:check` - **CI-optimized** Biome check (format + lint) - used in GitHub Actions
+- `pnpm format` - Format code with Biome (write mode)
+- `pnpm lint` - Lint code with Biome (write mode)
+- `pnpm check` - Run all Biome checks (write mode)
 - `pnpm type-check` - Run TypeScript type checking
+- `pnpm test` - Run automated tests (placeholder - configure Jest/Vitest)
+
+### Maintenance & Analysis
 - `pnpm knip` - Detect unused files, dependencies, and exports
 - `pnpm security:audit` - Run security audit
 - `pnpm performance:check` - Run performance checks
@@ -79,36 +90,72 @@ pnpm start
 
 ## Code Quality & Maintenance
 
-This project maintains high code quality and cleanliness through multiple automated tools:
+This project maintains high code quality through a comprehensive suite of automated tools and processes:
 
-### Type Safety
+### 🚀 Biome v2.0 - Modern Code Quality
+
+[Biome](https://biomejs.dev/) is our primary tool for code formatting and linting, providing:
+
+- **Ultra-fast performance** - 10-100x faster than ESLint/Prettier
+- **Zero configuration** - Works out of the box with sensible defaults
+- **Unified toolchain** - Formatting, linting, and import sorting in one tool
+- **TypeScript-first** - Built specifically for modern JavaScript/TypeScript projects
+
+**Key Features:**
+- Automatic code formatting (replaces Prettier)
+- Advanced linting rules (replaces ESLint)
+- Import organization and sorting
+- CSS and JSON support
+- IDE integration with real-time feedback
+
+**Local Development Workflow:**
+```bash
+# Format and fix all issues automatically
+pnpm check
+
+# Just format code
+pnpm format
+
+# Just lint code
+pnpm lint
+
+# CI-style check (no fixes, just report)
+pnpm ci:check
+```
+
+### 🔍 Type Safety & Analysis
+
 - **TypeScript** with strict mode configuration
+- **Knip** for detecting unused files, dependencies, and exports
 - Automated type checking during build process
 - Runtime type validation where needed
 
-### Code Cleanliness
-- **Knip** for detecting unused files, dependencies, and exports
-- Automated dependency cleanup and optimization
-- CI/CD integration to prevent code bloat
+### 🛡️ Security & Performance
 
-### Performance & Security
-- Performance monitoring and optimization
 - Regular security audits of dependencies
+- Performance monitoring and optimization
 - Bundle size analysis and optimization
+- Automated vulnerability scanning
 
-### Running Code Quality Checks
+### 📋 Pre-Commit Quality Checklist
 
-To run all code quality checks locally:
+Before pushing code, run these commands locally:
 
 ```bash
-# Type checking
+# 1. Format and lint your code
+pnpm check
+
+# 2. Verify TypeScript types
 pnpm type-check
 
-# Unused code detection
+# 3. Check for unused code
 pnpm knip
 
-# Security audit
+# 4. Security audit
 pnpm security:audit
+
+# 5. Test the build
+pnpm build
 ```
 
 ### About Knip
@@ -126,46 +173,130 @@ pnpm security:audit
 - Cleaner, more maintainable codebase
 - Lower security surface area
 
-> **Note**: This project previously used ESLint and Prettier for code formatting and linting. These tools have been removed in preparation for migration to Biome, a faster all-in-one toolchain for web projects.
+## 🔄 CI/CD Pipeline
 
-## CI/CD Pipeline
+Our professional CI/CD pipeline ensures code quality and prevents issues from reaching production through automated checks on every pull request and push.
 
-This project includes automated CI/CD checks that run on every pull request and push to main branches:
+### 🏗️ GitHub Actions Workflow Architecture
 
-### Automated Checks
-- **Type Safety**: TypeScript compilation and type checking
-- **Code Cleanliness**: Knip analysis for unused code detection
-- **Security**: Dependency vulnerability scanning
-- **Build Verification**: Ensures the application builds successfully
+The pipeline (`.github/workflows/ci.yml`) uses **3 parallel jobs** for maximum efficiency:
 
-### GitHub Actions Workflow
+#### 1. 🔍 Quality Checks Job
+**Runs in parallel** - Fast feedback on code quality issues
+```yaml
+- Biome CI Check (Format & Lint)    # pnpm ci:check
+- TypeScript Type Check             # pnpm type-check
+- Knip (Unused Code) Check         # pnpm knip
+- Security Audit Dependencies      # pnpm security:audit
+```
 
-The CI pipeline (`.github/workflows/ci.yml`) runs the following jobs:
+#### 2. 🧪 Automated Tests Job
+**Runs in parallel** - Validates functionality
+```yaml
+- Unit Tests                       # pnpm test
+- Component Tests                  # (Ready for Jest/Vitest setup)
+- Integration Tests                # (Expandable)
+```
 
-1. **Lint and Type Check**
-   - Install dependencies with pnpm
-   - Run TypeScript type checking
-   - Execute Knip for unused code detection
-   - Perform security audit
+#### 3. 🏗️ Build Verification Job
+**Runs after** quality checks and tests pass
+```yaml
+- Production Build                 # pnpm build
+- Build Artifact Verification      # Ensures deployability
+```
 
-2. **Build**
-   - Create production build
-   - Upload build artifacts for verification
+### ⚡ Pipeline Benefits
 
-### Troubleshooting CI Failures
+- **Parallel Execution**: Quality checks and tests run simultaneously
+- **Fast Feedback**: Issues caught in ~2-3 minutes
+- **Quality Gates**: Prevents bad code from merging
+- **Build Safety**: Ensures production deployability
+- **Developer Experience**: Clear error messages and actionable feedback
 
-**Knip Failures:**
-- Review the unused files/dependencies reported
-- Update `knip.json` configuration if false positives are detected
-- Remove genuinely unused code before merging
+### 🎯 Quality Gates & Standards
 
-**Type Check Failures:**
-- Fix TypeScript errors locally with `pnpm type-check`
-- Ensure all imports and exports are properly typed
+The CI pipeline enforces these standards:
 
-**Build Failures:**
-- Test the build locally with `pnpm build`
-- Check for missing dependencies or configuration issues
+| Check | Tool | Purpose | Failure Impact |
+|-------|------|---------|----------------|
+| **Code Format** | Biome | Consistent code style | ❌ Blocks merge |
+| **Linting** | Biome | Code quality rules | ❌ Blocks merge |
+| **Type Safety** | TypeScript | Runtime error prevention | ❌ Blocks merge |
+| **Unused Code** | Knip | Codebase cleanliness | ⚠️ Warning (configurable) |
+| **Security** | pnpm audit | Vulnerability detection | ⚠️ Warning (moderate+) |
+| **Build** | Next.js | Production readiness | ❌ Blocks merge |
+
+### 🚨 Troubleshooting CI Failures
+
+#### **Biome Failures (Format/Lint)**
+```bash
+# Fix automatically
+pnpm check
+
+# Or check what would be fixed
+pnpm ci:check
+```
+
+#### **TypeScript Failures**
+```bash
+# Check types locally
+pnpm type-check
+
+# Common fixes:
+# - Add missing type annotations
+# - Fix import/export types
+# - Update component prop types
+```
+
+#### **Knip Failures (Unused Code)**
+```bash
+# Review unused items
+pnpm knip
+
+# Actions:
+# - Remove unused files/dependencies
+# - Update knip.json if false positive
+# - Add to ignore list if intentionally unused
+```
+
+#### **Security Audit Failures**
+```bash
+# Check vulnerabilities
+pnpm security:audit
+
+# Fix high/critical issues:
+pnpm audit --fix
+```
+
+#### **Build Failures**
+```bash
+# Test build locally
+pnpm build
+
+# Common issues:
+# - Missing environment variables
+# - Import/export errors
+# - Configuration problems
+```
+
+### 🔧 Local Development Integration
+
+**Before pushing code:**
+```bash
+# Quick check (recommended)
+pnpm ci:check && pnpm type-check
+
+# Full quality check
+pnpm check && pnpm type-check && pnpm knip
+
+# Test production build
+pnpm build
+```
+
+**IDE Integration:**
+- Biome extension provides real-time feedback
+- TypeScript errors shown inline
+- Auto-format on save available
 
 ## Deployment to Vercel
 
@@ -225,7 +356,9 @@ For more deployment options and configuration, refer to the
 - **[Turbopack Optimization](docs/turbopack-optimization.md)** - Build optimization with Turbopack
 
 ### Quick Reference
-- **Code Quality**: Run `pnpm type-check && pnpm knip` before committing
+- **Pre-Commit**: Run `pnpm ci:check && pnpm type-check` before pushing
+- **Code Quality**: Use `pnpm check` to format and fix issues automatically
 - **Security**: Run `pnpm security:audit` weekly
 - **Performance**: Use `pnpm analyze` to monitor bundle size
+- **CI Status**: Check GitHub Actions for pipeline status
 - **Maintenance**: Follow the [Maintenance Guide](MAINTENANCE.md) for regular tasks

@@ -4,6 +4,7 @@ import ActivityPageLayout from '@/components/ActivityPageLayout';
 import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 import StructuredData from '@/components/StructuredData';
 import { generateActivityStructuredData } from '@/lib/structured-data';
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
@@ -33,12 +34,12 @@ export async function generateMetadata({
 
 const RidingPage = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const isGreek = locale === 'el';
+  const _isGreek = locale === 'el';
   const bokunExperienceId = '1020659'; // Riding experience ID
 
   // Content is now managed through Bokun widget for easier maintenance
   // SEO content has been moved to Bokun descriptions
-  const seoContent = null;
+  const _seoContent = null;
 
   // Generate structured data for this activity
   const structuredData = generateActivityStructuredData('riding', locale);

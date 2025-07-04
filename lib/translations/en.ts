@@ -1,7 +1,7 @@
 export const en = {
   hero: {
-    title: 'The Original Acheron River Adventures:',
-    subtitle: 'Rafting, Riding & More',
+    title: '1-day excursion in Acheron River',
+    subtitle: '',
   },
   introduction: {
     mainTitle:

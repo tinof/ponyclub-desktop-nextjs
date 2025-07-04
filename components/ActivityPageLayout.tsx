@@ -3,7 +3,6 @@ import { Roboto_Slab } from 'next/font/google';
 // ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly.
 // SiteHeader is now part of PageLayout.
 import { Container } from './ui/Container'; // Import the Container component
-import Breadcrumbs from './Breadcrumbs';
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
@@ -11,11 +10,6 @@ const robotoSlab = Roboto_Slab({
   variable: '--font-roboto-slab',
   weight: ['400', '700', '900'],
 });
-
-interface BreadcrumbItem {
-  name: string;
-  href?: string;
-}
 
 interface ActivityPageLayoutProps {
   title: string;
@@ -29,13 +23,12 @@ interface ActivityPageLayoutProps {
   showBookingButton?: boolean;
   useSingleColumn?: boolean;
   fullWidthContent?: boolean;
-  breadcrumbs?: BreadcrumbItem[];
 }
 
 export default function ActivityPageLayout({
-  title,
-  subtitle,
-  descriptionTitle,
+  title: _title,
+  subtitle: _subtitle,
+  descriptionTitle: _descriptionTitle,
   descriptionContent,
   detailsTitle,
   detailsContent,
@@ -44,7 +37,6 @@ export default function ActivityPageLayout({
   showBookingButton: _showBookingButton = true,
   useSingleColumn = false,
   fullWidthContent: _fullWidthContent = false,
-  breadcrumbs,
 }: ActivityPageLayoutProps) {
   // Determine content max-width class based on column preference
   const contentMaxWidthClass = useSingleColumn ? 'max-w-none' : 'max-w-none';
@@ -61,75 +53,8 @@ export default function ActivityPageLayout({
       */}
       <Container className="py-6">
         <div className="flex flex-col gap-8">
-          {/* Breadcrumb Navigation */}
-          {breadcrumbs && breadcrumbs.length > 0 && (
-            <Breadcrumbs items={breadcrumbs} className="mb-4" />
-          )}
-
-          {/* Hero Section with Title and Subtitle */}
-          {title && (
-            <div className="text-center">
-              <h1
-                className={`
-                  ${robotoSlab.variable}
-                  font-roboto-slab text-4xl font-bold text-amber-800 mb-2
-                  md:text-5xl lg:text-6xl
-                `}
-              >
-                {title}
-              </h1>
-              {subtitle && (
-                <p className="text-xl text-gray-600 md:text-2xl">
-                  {subtitle}
-                </p>
-              )}
-            </div>
-          )}
-
           {/* Description Section */}
-          {descriptionTitle && descriptionContent && (
-            <div
-              className={`
-                relative rounded-lg border border-amber-100/70 bg-white/80 p-6
-                shadow-lg backdrop-blur-sm transition-shadow duration-300
-                hover:shadow-xl
-              `}
-            >
-              <h2
-                className={`
-                  ${robotoSlab.variable}
-                  relative mb-4 inline-block font-roboto-slab text-2xl font-bold
-                  text-amber-800
-                `}
-              >
-                {descriptionTitle}
-                <div
-                  className={`
-                    absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r
-                    from-transparent via-amber-500/50 to-transparent
-                  `}
-                />
-              </h2>
-              <div
-                className={`
-                  prose
-                  ${contentMaxWidthClass}
-                  text-gray-700
-                `}
-              >
-                {descriptionContent}
-              </div>
-              <div
-                className={`
-                  absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
-                  from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
-                `}
-              />
-            </div>
-          )}
-
-          {/* Description Section without title (for backward compatibility) */}
-          {!descriptionTitle && descriptionContent && (
+          {descriptionContent && (
             <div
               className={`
                 relative rounded-lg border border-amber-100/70 bg-white/80 p-6
@@ -145,49 +70,6 @@ export default function ActivityPageLayout({
                 `}
               >
                 {descriptionContent}
-              </div>
-              <div
-                className={`
-                  absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
-                  from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
-                `}
-              />
-            </div>
-          )}
-
-
-          {/* Pricing Section */}
-          {pricingTitle && pricingContent && (
-            <div
-              className={`
-                relative rounded-lg border border-amber-100/70 bg-white/80 p-6
-                shadow-lg backdrop-blur-sm transition-shadow duration-300
-                hover:shadow-xl
-              `}
-            >
-              <h2
-                className={`
-                  ${robotoSlab.variable}
-                  relative mb-4 inline-block font-roboto-slab text-2xl font-bold
-                  text-amber-800
-                `}
-              >
-                {pricingTitle}
-                <div
-                  className={`
-                    absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r
-                    from-transparent via-amber-500/50 to-transparent
-                  `}
-                />
-              </h2>
-              <div
-                className={`
-                  prose
-                  ${contentMaxWidthClass}
-                  text-gray-700
-                `}
-              >
-                {pricingContent}
               </div>
               <div
                 className={`
@@ -230,6 +112,48 @@ export default function ActivityPageLayout({
                 `}
               >
                 {detailsContent}
+              </div>
+              <div
+                className={`
+                  absolute -inset-[1px] -z-10 rounded-lg bg-gradient-to-tr
+                  from-amber-200/20 via-white/50 to-[#6b8362]/20 blur-sm
+                `}
+              />
+            </div>
+          )}
+
+          {/* Pricing Section */}
+          {pricingTitle && pricingContent && (
+            <div
+              className={`
+                relative rounded-lg border border-amber-100/70 bg-white/80 p-6
+                shadow-lg backdrop-blur-sm transition-shadow duration-300
+                hover:shadow-xl
+              `}
+            >
+              <h2
+                className={`
+                  ${robotoSlab.variable}
+                  relative mb-4 inline-block font-roboto-slab text-2xl font-bold
+                  text-amber-800
+                `}
+              >
+                {pricingTitle}
+                <div
+                  className={`
+                    absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r
+                    from-transparent via-amber-500/50 to-transparent
+                  `}
+                />
+              </h2>
+              <div
+                className={`
+                  prose
+                  ${contentMaxWidthClass}
+                  text-gray-700
+                `}
+              >
+                {pricingContent}
               </div>
               <div
                 className={`
