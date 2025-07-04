@@ -24,6 +24,9 @@ importers:
       '@nosecone/next':
         specifier: 1.0.0-beta.8
         version: 1.0.0-beta.8(next@15.3.5(@babel/core@7.28.0)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@qwik.dev/partytown':
+        specifier: ^0.11.1
+        version: 0.11.1
       '@radix-ui/react-accordion':
         specifier: ^1.2.11
         version: 1.2.11(@types/react-dom@19.1.3(@types/react@19.1.3))(@types/react@19.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -965,6 +968,11 @@ packages:
     resolution: {integrity: sha512-JC8qzgEDuFKjuBsqrZvXHINUb12psnE6Qy3q5p2MBhalC1KW1MBBUwuonx6iS5TCfCdtNslHft8uc2r+EdLWWg==}
     peerDependencies:
       '@opentelemetry/api': ^1.8
+
+  '@qwik.dev/partytown@0.11.1':
+    resolution: {integrity: sha512-sOjcsBsl6T+SVdLOfEYlOBssPDL5aVScA2TjUalsxvf55fMHhUaLl16JgrNi8iouhCA1hAezp74i6y8Sd9wOWw==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
 
   '@radix-ui/number@1.1.1':
     resolution: {integrity: sha512-MkKCwxlXTgz6CFoJx3pCwn07GKp36+aZyu/u2Ln2VrA5DcdyCZkASEDBTd8x5whTQQL5CiYf4prXKLcgQdv29g==}
@@ -4613,6 +4621,10 @@ snapshots:
       '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
     transitivePeerDependencies:
       - supports-color
+
+  '@qwik.dev/partytown@0.11.1':
+    dependencies:
+      dotenv: 16.6.1
 
   '@radix-ui/number@1.1.1': {}
 

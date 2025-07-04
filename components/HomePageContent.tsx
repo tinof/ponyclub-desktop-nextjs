@@ -5,7 +5,6 @@ import { robotoSlab } from "@/app/fonts";
 import BokunStyles from "@/components/client/BokunStyles";
 import PriceListButton from "@/components/client/PriceListButton";
 import DynamicContactDetails from "@/components/DynamicContactDetails";
-import DynamicGoogleMap from "@/components/DynamicGoogleMap";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import VintagePackageCard from "@/components/VintagePackageCard";
 import { useLanguage } from "@/contexts/language-context";
@@ -24,6 +23,18 @@ const DynamicGoogleReviews = dynamic(
 						<span className="text-gray-500">Loading reviews...</span>
 					</div>
 				</div>
+			</div>
+		),
+	}
+);
+
+const DynamicGoogleMap = dynamic(
+	() => import("@/components/DynamicGoogleMap"),
+	{
+		ssr: false,
+		loading: () => (
+			<div className="min-h-[400px] w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center">
+				<span className="text-gray-500">Loading map...</span>
 			</div>
 		),
 	}

@@ -6,10 +6,13 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { inter, robotoSlab, allFontVariables } from '@/app/fonts';
 import Script from 'next/script';
-import { connection } from 'next/server';
+// PERFORMANCE OPTIMIZATION: Removed connection import as it's no longer needed
+// import { connection } from 'next/server';
 import type React from 'react';
 import ClientLayout from '@/components/ClientLayout';
+import BokunScripts from '@/components/client/BokunScripts';
 import GoogleAnalytics from '@/components/client/GoogleAnalytics';
+import PartyTownConfig from '@/components/PartyTownConfig';
 import StructuredData from '@/components/StructuredData';
 import {
   generateWebsiteStructuredData,
@@ -95,8 +98,8 @@ export default async function LocaleLayout({
   children,
   params: paramsPromise,
 }: LocaleLayoutProps) {
-  // Opt-out of static generation for CSP nonce support
-  await connection();
+  // PERFORMANCE OPTIMIZATION: Removed connection() call to enable static generation
+  // Previously: await connection(); - This was forcing dynamic rendering
 
   const { locale } = await paramsPromise;
 
@@ -138,12 +141,10 @@ export default async function LocaleLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pony Club" />
 
-        {/* Nosecone automatically handles nonces, so we can remove manual nonce handling */}
-        <Script
-          id={`bokun-widgets-loader-${locale}`}
-          src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=c078b762-6f7f-474f-8edb-bdd1bdb7d12a"
-          strategy="lazyOnload"
-        />
+        {/* PERFORMANCE OPTIMIZATION: Partytown configuration for web worker scripts */}
+        <PartyTownConfig />
+
+
       </head>
       <body
         className={`
@@ -158,6 +159,7 @@ export default async function LocaleLayout({
           <SpeedInsights />
           <Analytics />
           <GoogleAnalytics gaId="G-6J3ELVNTQE" />
+          <BokunScripts locale={locale} />
         </ClientLayout>
       </body>
     </html>

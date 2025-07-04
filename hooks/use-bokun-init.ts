@@ -24,6 +24,8 @@ export function useBokunInit() {
           console.log(
             '[Bokun Init] BokunWidgets found, checking for elements...',
           );
+          console.log('[Bokun Init] Available methods:', Object.keys(window.BokunWidgets));
+          console.log('[Bokun Init] BokunWidgets object:', window.BokunWidgets);
         }
 
         // Check if there are any Bokun elements that need initialization
@@ -45,38 +47,56 @@ export function useBokunInit() {
         }
 
         try {
-          // Instead of calling init/reinit directly, let's trigger Bokun's natural initialization
-          // by dispatching a custom event or by calling a safer method
-
-          // First, try the reinit method if available (safer than init)
-          if (typeof window.BokunWidgets.reinit === 'function') {
-            // Try calling reinit without parameters first
-            window.BokunWidgets.reinit();
+          // Check if BokunWidgets is already initialized
+          if (window.BokunWidgets.bookingChannelUUID && window.BokunWidgets.origin) {
             if (process.env.NODE_ENV === 'development') {
-              console.log(
-                '[Bokun Init] BokunWidgets.reinit() called successfully',
-              );
+              console.log('[Bokun Init] BokunWidgets already initialized');
             }
-          } else if (typeof window.BokunWidgets.scan === 'function') {
-            // Some Bokun versions have a scan method to re-scan for widgets
-            window.BokunWidgets.scan();
-            if (process.env.NODE_ENV === 'development') {
-              console.log(
-                '[Bokun Init] BokunWidgets.scan() called successfully',
-              );
-            }
-          } else {
-            // If no safe methods available, just log and let Bokun handle it naturally
-            if (process.env.NODE_ENV === 'development') {
-              console.log(
-                '[Bokun Init] No safe initialization method found, relying on natural initialization',
-              );
-            }
+            // Reset attempt counter on successful initialization
+            initAttempts.current = 0;
+            return true;
           }
 
-          // Reset attempt counter on successful initialization
-          initAttempts.current = 0;
-          return true;
+          // Initialize BokunWidgets using the correct API
+          if (typeof window.BokunWidgets.init === 'function') {
+            // Extract booking channel UUID from the script URL
+            const scriptElements = document.querySelectorAll('script[src*="bokun"]');
+            let bookingChannelUUID = '';
+
+            for (const script of scriptElements) {
+              const src = script.getAttribute('src');
+              if (src && src.includes('bookingChannelUUID=')) {
+                const match = src.match(/bookingChannelUUID=([^&]+)/);
+                if (match) {
+                  bookingChannelUUID = match[1];
+                  break;
+                }
+              }
+            }
+
+            if (bookingChannelUUID) {
+              window.BokunWidgets.init({
+                bookingChannelUUID,
+                origin: 'https://widgets.bokun.io'
+              });
+              if (process.env.NODE_ENV === 'development') {
+                console.log('[Bokun Init] Successfully initialized BokunWidgets with bookingChannelUUID:', bookingChannelUUID);
+              }
+              // Reset attempt counter on successful initialization
+              initAttempts.current = 0;
+              return true;
+            } else {
+              if (process.env.NODE_ENV === 'development') {
+                console.warn('[Bokun Init] Could not find bookingChannelUUID in script src');
+              }
+              return false;
+            }
+          } else {
+            if (process.env.NODE_ENV === 'development') {
+              console.warn('[Bokun Init] BokunWidgets.init method not available');
+            }
+            return false;
+          }
         } catch (error) {
           if (process.env.NODE_ENV === 'development') {
             console.error(

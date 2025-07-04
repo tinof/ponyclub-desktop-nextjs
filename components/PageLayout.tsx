@@ -1,11 +1,21 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
-import Footer from './Footer';
 import SiteHeader from './site-header'; // Added SiteHeader import
+
+// Dynamic import for Footer since it's always below the fold
+const DynamicFooter = dynamic(() => import('./Footer'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-32 w-full animate-pulse bg-gray-200 flex items-center justify-center">
+      <span className="text-gray-500">Loading footer...</span>
+    </div>
+  ),
+});
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -30,7 +40,7 @@ export default function PageLayout({ children }: PageLayoutProps) {
         {/* Page content */}
         {children}
       </main>
-      {!isHomePage && <Footer />}
+      {!isHomePage && <DynamicFooter />}
     </div>
   );
 }

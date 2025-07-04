@@ -59,73 +59,13 @@ Before responding to any request, follow these steps:
 - Ensure accessibility compliance
 - Verify best practices alignment
 
-## Available MCP Tools
-
-This project has the following MCP servers connected. Use them to ensure your
-work is accurate.
-
-| Server Name  | Tool Name(s)                              | Purpose                                                                  |
-| :----------- | :---------------------------------------- | :----------------------------------------------------------------------- |
-| `docfork`    | `get-library-docs`                        | Get up-to-date documentation and code examples for any library.          |
-| `npm-helper` | `search_npm`, `get_package_details`, etc. | Check package versions, resolve dependencies, and manage `package.json`. |
-| `linkup`     | `search-web`                              | Perform real-time web searches for facts, news, or source-backed info.   |
 
 ### Usage Pattern
 
 1. **Always** check package versions before recommending dependencies
-2. **Always** use docfork for framework-specific patterns and APIs
-3. **Consider** NPM Helper for complex dependency scenarios
-
-Example workflow:
+2. **Consider** NPM Helper for complex dependency scenarios
 
 ```
-1. Check current versions with Package Version MCP
-2. Get latest patterns with docfork
-3. Resolve conflicts with NPM Helper if needed
-```
-
-### Practical Example
-
-When asked to "Create a form with validation in Next.js":
-
-```typescript
-// 1. First, check latest versions
-// Tool: check_npm_versions
-// Args: { "dependencies": { "react-hook-form": "*", "zod": "*", "@hookform/resolvers": "*" } }
-
-// 2. Get latest Next.js patterns
-// Add to prompt: "use docfork"
-
-// 3. Then implement with current best practices
-import { useActionState } from 'react' // React 19 pattern
-import { z } from 'zod' // Current version from check
-```
-
-### Tools NOT Needed for This Stack
-
-- **Package Documentation MCP**: Redundant with docfork, which provides better
-  curated docs
-- Language-specific doc tools are less useful for web development workflows
-
-## Project Context Workflow
-
-1. **Context acquisition (MANDATORY).** At the start of every task or
-   conversation, read `.ai/PROJECT.MD`. Confirm in one short sentence that
-   you’ve read it.
-
-2. **Referential context.** Use other `.ai/*` files on demand:
-
-   - `CONVENTIONS.MD` – coding patterns
-   - `STACK.MD` – dependency versions
-   - `COMMANDS.MD` – common CLI workflows
-
-3. **Initialisation (if `.ai/*` missing).** Ask targeted questions to create
-   `PROJECT, CONVENTIONS, STACK, COMMANDS`. Provide file content in markdown
-   blocks; user will save them.
-
-4. **Maintenance.** When asked to “update project memory”, instruct the user
-   which `.ai/*` file to edit. Never modify these files directly yourself.
-
 ## Code Style and Structure
 
 ### General Principles
