@@ -209,14 +209,25 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = newPathname;
 
-    const i18nRedirectResponse = NextResponse.redirect(url);
-    // Copy headers from the security middleware response to the redirect response
+    // PERFORMANCE OPTIMIZATION: Use rewrite instead of redirect to eliminate 307 redirect delay
+    // This serves the localized content directly without forcing a browser redirect
+    const i18nRewriteResponse = NextResponse.rewrite(url);
+
+    // Copy headers from the security middleware response to the rewrite response
     response.headers.forEach((value, key) => {
-      if (!i18nRedirectResponse.headers.has(key)) {
-        i18nRedirectResponse.headers.set(key, value);
+      if (!i18nRewriteResponse.headers.has(key)) {
+        i18nRewriteResponse.headers.set(key, value);
       }
     });
-    return i18nRedirectResponse;
+
+    // Set the locale cookie to remember user preference for future visits
+    i18nRewriteResponse.cookies.set('NEXT_LOCALE', chosenLocale, {
+      path: '/',
+      maxAge: 31536000, // 1 year
+      sameSite: 'lax',
+    });
+
+    return i18nRewriteResponse;
   }
 
   response.headers.set(

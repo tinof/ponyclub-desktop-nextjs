@@ -1,14 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function useBokunLanguage(lang: string) {
+  const previousLang = useRef<string>(lang);
+
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
-    const bokun = (window as any).BokunWidgets;
-    if (!bokun) {
+
+    // Skip if language hasn't actually changed
+    if (previousLang.current === lang) {
       return;
     }
+
+    const bokun = (window as any).BokunWidgets;
+    if (!bokun) {
+      // Store the language for when Bokun loads
+      (window as any).__bokunPendingLanguage = lang;
+      previousLang.current = lang;
+      return;
+    }
+
+    console.log(`[Bokun Language] Switching from ${previousLang.current} to ${lang}`);
 
     // Set global default for pop-up checkout (if supported)
     if (typeof bokun.setLanguage === 'function') {
@@ -29,9 +42,16 @@ export function useBokunLanguage(lang: string) {
         el.setAttribute('data-lang', lang);
       });
 
-    // Reload widgets to apply language change
-    if (typeof bokun.reload === 'function') {
-      bokun.reload();
+    // PERFORMANCE OPTIMIZATION: Only reload widgets if language actually changed
+    // and avoid reload during initial page load
+    if (previousLang.current !== lang && typeof bokun.reload === 'function') {
+      // Use a small delay to batch multiple language changes
+      setTimeout(() => {
+        bokun.reload();
+        console.log(`[Bokun Language] Widgets reloaded for language: ${lang}`);
+      }, 100);
     }
+
+    previousLang.current = lang;
   }, [lang]);
 }

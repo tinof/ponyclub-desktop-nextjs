@@ -90,7 +90,7 @@
   },
 
   // AI-Friendly Display Settings
-  "editor.minimap.enabled": true,
+  "editor.minimap.enabled": false,
   "editor.minimap.maxColumn": 120,
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
