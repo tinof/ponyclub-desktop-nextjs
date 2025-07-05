@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
+// PERFORMANCE OPTIMIZATION: ISR configuration for blog pages
+// Blog content may be updated periodically with new information, tips, or seasonal updates
+export const revalidate = 7200; // Revalidate every 2 hours (blog content changes less frequently)
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }

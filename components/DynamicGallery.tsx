@@ -4,15 +4,17 @@ import dynamic from 'next/dynamic';
 
 // Dynamically import Gallery with ssr: false
 const Gallery = dynamic(
-  () => import('@/components/ui/Gallery').then((mod) => mod.Gallery),
+  () => import(/* webpackChunkName: "gallery" */ '@/components/ui/Gallery').then((mod) => mod.Gallery),
   {
     ssr: false,
     loading: () => (
       <div
         className={`
-    h-96 w-full animate-pulse rounded-lg bg-gray-200
-  `}
-      />
+      h-96 w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center
+    `}
+      >
+        <span className="text-gray-500">Loading gallery...</span>
+      </div>
     ),
   },
 );

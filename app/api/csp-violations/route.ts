@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
 
+// PERFORMANCE OPTIMIZATION: Configure API route behavior
+// CSP violation reporting must remain dynamic to handle POST requests
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST(request: Request) {
   try {
     const report = await request.json();

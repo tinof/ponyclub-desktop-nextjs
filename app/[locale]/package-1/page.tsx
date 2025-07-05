@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 import ActivityPageLayout from '@/components/ActivityPageLayout';
 import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 
+// PERFORMANCE OPTIMIZATION: ISR configuration for package pages
+// Package content may change periodically (pricing, availability, descriptions)
+export const revalidate = 3600; // Revalidate every hour
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }

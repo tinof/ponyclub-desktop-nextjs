@@ -4,16 +4,21 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
 // Dynamically import BokunWidget with ssr: false and a loading placeholder
-const BokunWidget = dynamic(() => import('@/components/BokunWidget'), {
-  ssr: false,
-  loading: () => (
-    <div
-      className={`
-    h-96 w-full animate-pulse rounded-lg bg-gray-200
-  `}
-    />
-  ),
-});
+const BokunWidget = dynamic(
+  () => import(/* webpackChunkName: "bokun-widget" */ '@/components/BokunWidget'),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className={`
+      h-96 w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center
+    `}
+      >
+        <span className="text-gray-500">Loading booking widget...</span>
+      </div>
+    ),
+  }
+);
 
 type DynamicBokunWidgetProps = {
   experienceId: string;

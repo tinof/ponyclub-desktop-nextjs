@@ -5,10 +5,10 @@ import { useState } from "react";
 
 // Dynamic import for the popup to reduce initial bundle size
 const DynamicVintagePriceListPopup = dynamic(
-	() => import("@/components/ui/VintagePriceListPopup").then(mod => ({ default: mod.VintagePriceListPopup })),
+	() => import(/* webpackChunkName: "price-list-popup" */ "@/components/ui/VintagePriceListPopup").then(mod => ({ default: mod.VintagePriceListPopup })),
 	{
 		ssr: false,
-		loading: () => null, // No loading state needed for popup
+		loading: () => null, // No loading state needed for popup - it opens instantly
 	}
 );
 

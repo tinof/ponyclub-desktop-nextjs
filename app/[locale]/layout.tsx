@@ -19,8 +19,10 @@ import {
   organizationData,
 } from '@/lib/structured-data';
 
-// Remove the fetchCache export as we need dynamic rendering
-// export const fetchCache = 'default-cache';
+// PERFORMANCE OPTIMIZATION: Configure default caching behavior for better performance
+// Since we're using static generation, we can cache fetch requests by default
+export const fetchCache = 'default-cache';
+export const revalidate = 3600; // Revalidate every hour for any dynamic content
 
 // Fonts are now imported from centralized fonts.ts file
 

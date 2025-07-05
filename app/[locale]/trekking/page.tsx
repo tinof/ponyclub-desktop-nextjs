@@ -5,6 +5,10 @@ import DynamicGallery from '@/components/DynamicGallery';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { trekkingGalleryImages } from '@/lib/gallery-data';
 
+// PERFORMANCE OPTIMIZATION: ISR configuration for activity pages
+// Activity content may change periodically (pricing, availability, seasonal updates)
+export const revalidate = 3600; // Revalidate every hour
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }

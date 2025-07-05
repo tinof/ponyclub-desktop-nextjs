@@ -1,32 +1,12 @@
 'use client';
 
-import Script from 'next/script';
-import { useEffect } from 'react';
-
 interface GoogleAnalyticsProps {
   gaId: string;
 }
 
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
-  // Initialize gtag in a CSP-compliant way
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Initialize dataLayer and gtag function
-      window.dataLayer = window.dataLayer || [];
-      function gtag(...args: unknown[]) {
-        window.dataLayer?.push(args);
-      }
-      window.gtag = gtag;
-
-      gtag('js', new Date());
-      gtag('config', gaId, {
-        page_title: document.title,
-        page_location: window.location.href,
-      });
-
-      console.log('[GA] Google Analytics initialized on main thread');
-    }
-  }, [gaId]);
+  // PERFORMANCE OPTIMIZATION: Google Analytics now runs exclusively in Partytown web worker
+  // Removed main thread initialization to prevent double-loading
 
   return (
     <>

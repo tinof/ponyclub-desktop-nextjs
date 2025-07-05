@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// PERFORMANCE OPTIMIZATION: Configure caching for API route
+// This route handles dynamic image proxying, so it should remain dynamic
+// but with aggressive caching headers (already implemented below)
+export const dynamic = 'force-dynamic'; // Required for query parameter handling
+export const runtime = 'nodejs'; // Use Node.js runtime for better performance with image processing
+
 /**
  * Enhanced Image Proxy API Route
  *

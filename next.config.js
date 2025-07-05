@@ -55,8 +55,7 @@ const nextConfig = {
   // Experimental features for performance
 
   experimental: {
-    // Next.js 15 built-in critical CSS inlining (replaces deprecated critters)
-    inlineCss: true,
+    // Stable performance optimizations
     scrollRestoration: true,
     staleTimes: {
       dynamic: 30, // seconds
@@ -64,11 +63,11 @@ const nextConfig = {
     },
   },
 
-  // Webpack optimizations for better bundle analysis and performance
+  // Enhanced webpack optimizations for Tailwind v4 and CSS performance
   webpack: (config, { dev, isServer }) => {
     // Production optimizations
     if (!dev) {
-      // Optimize bundle splitting
+      // Optimize bundle splitting with CSS-specific optimizations
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -81,6 +80,14 @@ const nextConfig = {
               name: 'vendors',
               chunks: 'all',
               priority: 10,
+            },
+            // Separate CSS chunks for better caching
+            styles: {
+              name: 'styles',
+              test: /\.(css|scss|sass)$/,
+              chunks: 'all',
+              priority: 20,
+              enforce: true,
             },
             // Separate common chunks
             common: {

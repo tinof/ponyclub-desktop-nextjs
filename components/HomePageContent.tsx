@@ -13,7 +13,7 @@ import { useIsMobile } from "@/hooks/use-media-query";
 
 // Dynamic imports for heavy components to improve initial bundle size
 const DynamicGoogleReviews = dynamic(
-	() => import("@/components/client/GoogleReviews"),
+	() => import(/* webpackChunkName: "google-reviews" */ "@/components/client/GoogleReviews"),
 	{
 		ssr: false,
 		loading: () => (
@@ -29,7 +29,7 @@ const DynamicGoogleReviews = dynamic(
 );
 
 const DynamicGoogleMap = dynamic(
-	() => import("@/components/DynamicGoogleMap"),
+	() => import(/* webpackChunkName: "google-map" */ "@/components/DynamicGoogleMap"),
 	{
 		ssr: false,
 		loading: () => (

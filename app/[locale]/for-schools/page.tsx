@@ -13,6 +13,10 @@ import {
   Users,
   Waves,
 } from 'lucide-react';
+
+// PERFORMANCE OPTIMIZATION: ISR configuration for content pages
+// School program content may change periodically (pricing, programs, seasonal updates)
+export const revalidate = 7200; // Revalidate every 2 hours
 import type { Metadata } from 'next';
 import { Roboto_Slab } from 'next/font/google';
 import Link from 'next/link';

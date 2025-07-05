@@ -5,6 +5,10 @@ import DynamicBokunWidget from '@/components/DynamicBokunWidget';
 import StructuredData from '@/components/StructuredData';
 import { generateActivityStructuredData } from '@/lib/structured-data';
 
+// PERFORMANCE OPTIMIZATION: ISR configuration for activity pages
+// Activity content may change periodically (pricing, availability, seasonal updates)
+export const revalidate = 3600; // Revalidate every hour
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }

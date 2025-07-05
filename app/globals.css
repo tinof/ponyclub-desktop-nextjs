@@ -1,10 +1,24 @@
 @import 'tailwindcss';
 
-@source '../**/*.{js,ts,jsx,tsx}';
+/* Optimized source paths for better tree-shaking and performance */
+@source '../components/ui/**/*.{js,ts,jsx,tsx}';
+@source '../components/layout/**/*.{js,ts,jsx,tsx}';
+@source '../components/**/*.{js,ts,jsx,tsx}';
+@source '../app/**/page.{js,ts,jsx,tsx}';
+@source '../app/**/layout.{js,ts,jsx,tsx}';
+@source '../app/**/*.{js,ts,jsx,tsx}';
+@source '../lib/utils.{js,ts}';
+@source '../lib/**/*.{js,ts,jsx,tsx}';
+@source '../contexts/**/*.{js,ts,jsx,tsx}';
+@source '../hooks/**/*.{js,ts,jsx,tsx}';
+
+/* Include specific high-usage component patterns */
+@source '../**/*{Button,Card,Dialog,Form,Input,Modal}*.{js,ts,jsx,tsx}';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  /* Breakpoints - Enhanced with container query support */
   --breakpoint-*: initial;
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -13,6 +27,7 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
+  /* Color system - Enhanced with OKLCH support for better color consistency */
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -40,16 +55,26 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
+  /* Custom brand colors */
+  --color-river-accent: hsl(var(--river-accent));
+
+  /* Border radius system */
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --font-sans: var(--font-inter);
-  --font-roboto-slab: var(--font-roboto-slab);
+  /* Typography system */
+  --font-sans: var(--font-inter), sans-serif;
+  --font-roboto-slab: var(--font-roboto-slab), serif;
 
+  /* Animation system */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-text-shine: text-shine 4s ease-in-out infinite;
+
+  /* Text shadow utilities */
+  --text-shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  --text-shadow-xl: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
 
   @keyframes accordion-down {
     from {
@@ -95,6 +120,123 @@
   text-wrap: balance;
 }
 
+/* Container Query Utilities - New in Tailwind v4 */
+@utility responsive-card {
+  container-type: inline-size;
+
+  /* Small container */
+  @container (min-width: 300px) {
+    padding: 1.5rem;
+
+    & .card-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Medium container */
+  @container (min-width: 500px) {
+    padding: 2rem;
+
+    & .card-title {
+      font-size: 1.5rem;
+    }
+
+    & .card-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+
+  /* Large container */
+  @container (min-width: 700px) {
+    padding: 2.5rem;
+
+    & .card-title {
+      font-size: 1.875rem;
+    }
+
+    & .card-content {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@utility container-card {
+  container-type: inline-size;
+  border-radius: var(--radius-lg);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  padding: 1rem;
+
+  @container (min-width: 400px) {
+    padding: 1.5rem;
+  }
+
+  @container (min-width: 600px) {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+/* 3D Transform Utilities - Enhanced in Tailwind v4 */
+@utility card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(20px);
+  }
+}
+
+@utility flip-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+
+  & .flip-card-front,
+  & .flip-card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+  }
+
+  & .flip-card-back {
+    transform: rotateY(180deg);
+  }
+}
+
+@utility floating-3d {
+  transform: perspective(1000px) translateZ(0);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: perspective(1000px) translateZ(30px) rotateX(10deg);
+  }
+}
+
+@utility parallax-3d {
+  transform-style: preserve-3d;
+
+  & .parallax-layer-1 {
+    transform: translateZ(-100px) scale(1.1);
+  }
+
+  & .parallax-layer-2 {
+    transform: translateZ(-200px) scale(1.2);
+  }
+
+  & .parallax-layer-3 {
+    transform: translateZ(-300px) scale(1.3);
+  }
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -131,17 +273,30 @@
   }
 }
 @utility text-shadow-lg {
-  /* Text shadow utilities */
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.6),
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Enhanced text shadow utilities using theme variables */
+  text-shadow: var(--text-shadow-lg);
 }
+
 @utility text-shadow-xl {
+  text-shadow: var(--text-shadow-xl);
+}
+
+/* New enhanced 3D text utilities */
+@utility text-3d {
   text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    0 8px 16px rgba(0, 0, 0, 0.4);
+    1px 1px 0 hsl(var(--muted)),
+    2px 2px 0 hsl(var(--muted)),
+    3px 3px 0 hsl(var(--muted)),
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  transform: perspective(500px) rotateX(15deg);
+}
+
+@utility text-glow {
+  text-shadow:
+    0 0 5px hsl(var(--river-accent)),
+    0 0 10px hsl(var(--river-accent)),
+    0 0 15px hsl(var(--river-accent)),
+    0 0 20px hsl(var(--river-accent));
 }
 @utility animate-text-shine {
   /* Text shine animation */
@@ -156,8 +311,10 @@
   color: transparent;
 }
 @utility frosted-card {
-  /* Frosted glass card accent frame */
+  /* Enhanced frosted glass card with modern CSS features */
   position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   &::before {
     content: '';
@@ -166,8 +323,14 @@
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(45deg, hsl(var(--river-accent)), #6b8362);
+    -webkit-mask-image:
+      linear-gradient(#fff 0 0),
+      linear-gradient(#fff 0 0);
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-image:
+      linear-gradient(#fff 0 0),
       linear-gradient(#fff 0 0);
     mask:
       linear-gradient(#fff 0 0) content-box,
@@ -175,6 +338,69 @@
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
+}
+
+/* Modern CSS Features - OKLCH Colors and Advanced Utilities */
+@utility oklch-primary {
+  /* Using OKLCH for better color consistency across devices */
+  background: oklch(70% 0.15 250);
+  color: oklch(95% 0.02 250);
+}
+
+@utility oklch-accent {
+  background: oklch(75% 0.2 200);
+  color: oklch(20% 0.05 200);
+}
+
+@utility oklch-success {
+  background: oklch(70% 0.15 140);
+  color: oklch(95% 0.02 140);
+}
+
+@utility oklch-warning {
+  background: oklch(80% 0.15 60);
+  color: oklch(20% 0.05 60);
+}
+
+@utility oklch-error {
+  background: oklch(65% 0.2 20);
+  color: oklch(95% 0.02 20);
+}
+
+/* Advanced Layout Utilities */
+@utility grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@utility grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+@utility subgrid-rows {
+  display: subgrid;
+  grid-template-rows: subgrid;
+}
+
+@utility subgrid-columns {
+  display: subgrid;
+  grid-template-columns: subgrid;
+}
+
+/* Modern Animation Utilities */
+@utility animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@utility animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@utility animate-bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @layer base {
@@ -257,7 +483,7 @@
   }
 }
 
-/* Custom styles for the program cards */
+/* Enhanced keyframes for modern animations */
 @layer components {
   @keyframes textShine {
     0% {
@@ -268,6 +494,43 @@
     }
     100% {
       background-position: 0% 50%;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
     }
   }
 }

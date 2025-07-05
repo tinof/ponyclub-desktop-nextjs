@@ -9,6 +9,10 @@ import {
   generateFAQStructuredData,
 } from '@/lib/structured-data';
 
+// PERFORMANCE OPTIMIZATION: ISR configuration for package pages
+// Package content may change periodically (pricing, availability, descriptions)
+export const revalidate = 3600; // Revalidate every hour
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }

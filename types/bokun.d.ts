@@ -5,8 +5,8 @@ declare global {
   interface Window {
     BokunWidgets?: {
       [key: string]: any;
-      init?: (config?: { bookingChannelUUID?: string }) => void;
-      reinit?: (config?: { bookingChannelUUID?: string }) => void;
+      init?: (config?: { bookingChannelUUID?: string; origin?: string }) => void;
+      reinit?: (config?: { bookingChannelUUID?: string; origin?: string }) => void;
       scan?: () => void;
       setLanguage?: (lang: string) => void;
     };
