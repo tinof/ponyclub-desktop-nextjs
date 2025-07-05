@@ -80,7 +80,6 @@ export default function HomePageContent() {
 							loop
 							playsInline
 							preload="metadata"
-							poster="/images/hero-image.webp"
 							className="absolute inset-0 z-10 h-full w-full object-cover"
 						>
 							<source src="/images/hero-video.webm" type="video/webm" />

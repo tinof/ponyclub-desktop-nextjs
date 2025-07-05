@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "next": true,
+  "ignore": [
+    "**/*.d.ts",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "public/~partytown/**"
+  ],
+  "ignoreDependencies": [
+    "vercel"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "include": ["files", "dependencies", "unlisted", "exports"],
+  "exclude": ["enumMembers", "nsExports", "nsTypes"]
+}

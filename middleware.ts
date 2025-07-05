@@ -221,7 +221,7 @@ export async function middleware(request: NextRequest) {
     });
 
     // Set the locale cookie to remember user preference for future visits
-    i18nRewriteResponse.cookies.set('NEXT_LOCALE', chosenLocale, {
+    i18nRewriteResponse.cookies.set('NEXT_LOCALE', chosenLocale || defaultLocale, {
       path: '/',
       maxAge: 31536000, // 1 year
       sameSite: 'lax',
