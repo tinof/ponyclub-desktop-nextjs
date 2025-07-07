@@ -32,7 +32,6 @@ This document lists the key technologies, libraries, and integrations used in th
 
 ## Analytics & Monitoring
 
-- **@sentry/nextjs:** ^9.27.0 (for error and performance monitoring)
 - **@vercel/analytics:** 1.5.0
 - **@vercel/speed-insights:** 1.2.0
 
