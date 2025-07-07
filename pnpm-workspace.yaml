@@ -1,11 +1,14 @@
+packages:
+  - "."
+
 ignoredBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - '@vercel/speed-insights'
+  - "@tailwindcss/oxide"
+  - "@vercel/speed-insights"
   - esbuild
   - iframe-resizer
   - sharp
   - unrs-resolver
 
 public-hoist-pattern:
-  - '*import-in-the-middle*'
-  - '*require-in-the-middle*'
+  - "*import-in-the-middle*"
+  - "*require-in-the-middle*"
