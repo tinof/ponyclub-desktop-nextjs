@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from "@/contexts/language-context";
 
 export default function Footer() {
   const { t } = useLanguage();
   const mapsUrl =
-    'https://www.google.com/maps/dir/?api=1&destination=Pony+Club+Ecotourism';
+    "https://www.google.com/maps/dir/?api=1&destination=Pony+Club+Ecotourism";
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative border-t border-border bg-secondary">
-      {' '}
+      {" "}
       {/* Removed mt-16 pt-12 pb-12 to eliminate spacing */}
       <div
         className={`
@@ -21,7 +21,7 @@ export default function Footer() {
           lg:px-8
         `}
       >
-        {' '}
+        {" "}
         {/* Added padding to the container instead */}
         <h2 className="mb-8 text-center text-3xl font-bold text-primary">
           {t.footer.contactUs}
@@ -104,7 +104,7 @@ export default function Footer() {
             mt-12 text-center text-xs tracking-wide text-muted-foreground
           `}
         >
-          <p>{t.footer.copyright.replace('{year}', currentYear.toString())}</p>
+          <p>{t.footer.copyright.replace("{year}", currentYear.toString())}</p>
         </div>
       </div>
     </footer>

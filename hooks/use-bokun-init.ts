@@ -1,6 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
+
+// Move regex to top level for performance
+const BOOKING_CHANNEL_UUID_REGEX = /bookingChannelUUID=([^&]+)/;
 
 /**
  * Custom hook to ensure Bokun widgets are properly initialized
@@ -13,44 +16,60 @@ export function useBokunInit() {
   const retryDelay = 100; // Delay between attempts in milliseconds
 
   useEffect(() => {
+    const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKun !== "false";
+
+    if (!isBokunEnabled) {
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          "[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag"
+        );
+      }
+      return;
+    }
     const initializeBokun = () => {
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         return;
       }
 
       // Check if Bokun script is loaded
       if (window.BokunWidgets) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            '[Bokun Init] BokunWidgets found, checking for elements...',
+            "[Bokun Init] BokunWidgets found, checking for elements..."
           );
-          console.log('[Bokun Init] Available methods:', Object.keys(window.BokunWidgets));
-          console.log('[Bokun Init] BokunWidgets object:', window.BokunWidgets);
+          console.log(
+            "[Bokun Init] Available methods:",
+            Object.keys(window.BokunWidgets)
+          );
+          console.log("[Bokun Init] BokunWidgets object:", window.BokunWidgets);
         }
 
         // Check if there are any Bokun elements that need initialization
-        const widgets = document.querySelectorAll('.bokunWidget, .bokunButton');
+        const widgets = document.querySelectorAll(".bokunWidget, .bokunButton");
         if (widgets.length === 0) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.log(
-              '[Bokun Init] No Bokun elements found, skipping initialization',
+              "[Bokun Init] No Bokun elements found, skipping initialization"
             );
           }
           initAttempts.current = 0;
           return true;
         }
 
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            `[Bokun Init] Found ${widgets.length} Bokun elements to initialize`,
+            `[Bokun Init] Found ${widgets.length} Bokun elements to initialize`
           );
         }
 
         try {
           // Check if BokunWidgets is already initialized
-          if (window.BokunWidgets.bookingChannelUUID && window.BokunWidgets.origin) {
-            if (process.env.NODE_ENV === 'development') {
-              console.log('[Bokun Init] BokunWidgets already initialized');
+          if (
+            window.BokunWidgets.bookingChannelUUID &&
+            window.BokunWidgets.origin
+          ) {
+            if (process.env.NODE_ENV === "development") {
+              console.log("[Bokun Init] BokunWidgets already initialized");
             }
             // Reset attempt counter on successful initialization
             initAttempts.current = 0;
@@ -58,15 +77,17 @@ export function useBokunInit() {
           }
 
           // Initialize BokunWidgets using the correct API
-          if (typeof window.BokunWidgets.init === 'function') {
+          if (typeof window.BokunWidgets.init === "function") {
             // Extract booking channel UUID from the script URL
-            const scriptElements = document.querySelectorAll('script[src*="bokun"]');
-            let bookingChannelUUID = '';
+            const scriptElements = document.querySelectorAll(
+              'script[src*="bokun"]'
+            );
+            let bookingChannelUUID = "";
 
             for (const script of scriptElements) {
-              const src = script.getAttribute('src');
-              if (src && src.includes('bookingChannelUUID=')) {
-                const match = src.match(/bookingChannelUUID=([^&]+)/);
+              const src = script.getAttribute("src");
+              if (src?.includes("bookingChannelUUID=")) {
+                const match = src.match(BOOKING_CHANNEL_UUID_REGEX);
                 if (match) {
                   bookingChannelUUID = match[1];
                   break;
@@ -77,31 +98,34 @@ export function useBokunInit() {
             if (bookingChannelUUID) {
               window.BokunWidgets.init({
                 bookingChannelUUID,
-                origin: 'https://widgets.bokun.io'
+                origin: "https://widgets.bokun.io",
               });
-              if (process.env.NODE_ENV === 'development') {
-                console.log('[Bokun Init] Successfully initialized BokunWidgets with bookingChannelUUID:', bookingChannelUUID);
+              if (process.env.NODE_ENV === "development") {
+                console.log(
+                  "[Bokun Init] Successfully initialized BokunWidgets with bookingChannelUUID:",
+                  bookingChannelUUID
+                );
               }
               // Reset attempt counter on successful initialization
               initAttempts.current = 0;
               return true;
-            } else {
-              if (process.env.NODE_ENV === 'development') {
-                console.warn('[Bokun Init] Could not find bookingChannelUUID in script src');
-              }
-              return false;
             }
-          } else {
-            if (process.env.NODE_ENV === 'development') {
-              console.warn('[Bokun Init] BokunWidgets.init method not available');
+            if (process.env.NODE_ENV === "development") {
+              console.warn(
+                "[Bokun Init] Could not find bookingChannelUUID in script src"
+              );
             }
             return false;
           }
+          if (process.env.NODE_ENV === "development") {
+            console.warn("[Bokun Init] BokunWidgets.init method not available");
+          }
+          return false;
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.error(
-              '[Bokun Init] Error initializing Bokun widgets:',
-              error,
+              "[Bokun Init] Error initializing Bokun widgets:",
+              error
             );
           }
           return false;
@@ -111,16 +135,16 @@ export function useBokunInit() {
       // If Bokun script is not ready yet, retry
       initAttempts.current++;
       if (initAttempts.current < maxAttempts) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            `[Bokun Init] BokunWidgets not ready yet, attempt ${initAttempts.current}/${maxAttempts}`,
+            `[Bokun Init] BokunWidgets not ready yet, attempt ${initAttempts.current}/${maxAttempts}`
           );
         }
         setTimeout(initializeBokun, retryDelay);
       } else {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.warn(
-            '[Bokun Init] Max attempts reached, Bokun widgets may not be available',
+            "[Bokun Init] Max attempts reached, Bokun widgets may not be available"
           );
         }
       }
@@ -140,27 +164,27 @@ export function useBokunInit() {
 
   // Also provide a manual reinit function for cases where new widgets are added dynamically
   const reinitBokun = () => {
-    if (typeof window !== 'undefined' && window.BokunWidgets) {
+    if (typeof window !== "undefined" && window.BokunWidgets) {
       try {
-        if (typeof window.BokunWidgets.reinit === 'function') {
+        if (typeof window.BokunWidgets.reinit === "function") {
           // Try calling reinit without parameters first (safer)
           window.BokunWidgets.reinit();
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Bokun Init] Manual reinit called successfully');
+          if (process.env.NODE_ENV === "development") {
+            console.log("[Bokun Init] Manual reinit called successfully");
           }
           return true;
         }
-        if (typeof window.BokunWidgets.scan === 'function') {
+        if (typeof window.BokunWidgets.scan === "function") {
           // Try scan method as alternative
           window.BokunWidgets.scan();
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Bokun Init] Manual scan called successfully');
+          if (process.env.NODE_ENV === "development") {
+            console.log("[Bokun Init] Manual scan called successfully");
           }
           return true;
         }
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('[Bokun Init] Error during manual reinit:', error);
+        if (process.env.NODE_ENV === "development") {
+          console.error("[Bokun Init] Error during manual reinit:", error);
         }
         return false;
       }

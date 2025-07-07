@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import ResponsiveNavigation from '@/components/responsive-navigation';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import ResponsiveNavigation from "@/components/responsive-navigation";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 export default function SiteHeader() {
   return (

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ChevronDown, Globe, Phone } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { ChevronDown, Globe, Phone } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from "@/contexts/language-context";
 
 export default function DesktopMenu() {
   const { t, language, setLanguage } = useLanguage();
@@ -17,18 +17,18 @@ export default function DesktopMenu() {
 
   // Activities menu items
   const activities =
-    language === 'el'
+    language === "el"
       ? [
-          { id: 'kayaking', label: 'Καγιάκ', href: '/kayaking' },
-          { id: 'rafting', label: 'Ράφτινγκ', href: '/rafting' },
-          { id: 'riding', label: 'Ιππασία', href: '/riding' },
-          { id: 'trekking', label: 'Πεζοπορία', href: '/trekking' },
+          { id: "kayaking", label: "Καγιάκ", href: "/kayaking" },
+          { id: "rafting", label: "Ράφτινγκ", href: "/rafting" },
+          { id: "riding", label: "Ιππασία", href: "/riding" },
+          { id: "trekking", label: "Πεζοπορία", href: "/trekking" },
         ]
       : [
-          { id: 'kayaking', label: 'Kayaking', href: '/kayaking' },
-          { id: 'rafting', label: 'Rafting', href: '/rafting' },
-          { id: 'riding', label: 'Riding', href: '/riding' },
-          { id: 'trekking', label: 'Trekking', href: '/trekking' },
+          { id: "kayaking", label: "Kayaking", href: "/kayaking" },
+          { id: "rafting", label: "Rafting", href: "/rafting" },
+          { id: "riding", label: "Riding", href: "/riding" },
+          { id: "trekking", label: "Trekking", href: "/trekking" },
         ];
 
   // Handle clicks outside the menu to close them
@@ -48,13 +48,13 @@ export default function DesktopMenu() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <nav className="flex items-center gap-4">
-      {' '}
+      {" "}
       {/* Increased gap */}
       {/* Home link */}
       <Link
@@ -63,9 +63,9 @@ export default function DesktopMenu() {
           border-b-2 px-3 py-2 text-base transition-all
           ${
             /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-            pathname === '/'
-              ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
-              : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+            pathname === "/"
+              ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
+              : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
           }
         `}
       >
@@ -75,6 +75,7 @@ export default function DesktopMenu() {
       {/* Activities dropdown */}
       <div className="relative" ref={activitiesMenuRef}>
         <button
+          type="button"
           onClick={() => setActivitiesMenuOpen(!activitiesMenuOpen)}
           className={`
             flex items-center gap-1 border-b-2 px-3 py-2 text-base
@@ -83,8 +84,8 @@ export default function DesktopMenu() {
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
               activities.some((activity) => pathname === activity.href) ||
               activitiesMenuOpen
-                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
-                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+                ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
+                : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
             }
           `}
           aria-label="Activities menu"
@@ -102,7 +103,7 @@ export default function DesktopMenu() {
               border-border bg-card shadow-lg
             `}
           >
-            {' '}
+            {" "}
             {/* Cleaner dropdown style */}
             <div className="py-1">
               {activities.map((activity) => (
@@ -114,8 +115,8 @@ export default function DesktopMenu() {
                     ${
                       /* Adjusted padding */
                       pathname === activity.href
-                        ? 'font-semibold text-primary' /* Active item: darker green text, no bg */
-                        : 'text-foreground hover:bg-secondary hover:text-primary' /* Standard item: hover bg and text */
+                        ? "font-semibold text-primary" /* Active item: darker green text, no bg */
+                        : "text-foreground hover:bg-secondary hover:text-primary" /* Standard item: hover bg and text */
                     }
                   `}
                 >
@@ -127,16 +128,16 @@ export default function DesktopMenu() {
         )}
       </div>
       {/* River & Village - English only */}
-      {language === 'en' && (
+      {language === "en" && (
         <Link
           href="/river-village"
           className={`
             border-b-2 px-3 py-2 text-base transition-all
             ${
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-              pathname === '/river-village'
-                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
-                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+              pathname === "/river-village"
+                ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
+                : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
             }
           `}
         >
@@ -145,16 +146,16 @@ export default function DesktopMenu() {
         </Link>
       )}
       {/* For Schools (Για τα σχολεία) - Greek only */}
-      {language === 'el' && (
+      {language === "el" && (
         <Link
           href="/for-schools"
           className={`
             border-b-2 px-3 py-2 text-base transition-all
             ${
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-              pathname === '/for-schools'
-                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
-                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+              pathname === "/for-schools"
+                ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
+                : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
             }
           `}
         >
@@ -164,13 +165,13 @@ export default function DesktopMenu() {
       )}
       {/* Phone number with click tracking */}
       <a
-        href={`tel:${t.contact.phone1.replace(/\s+/g, '')}`}
+        href={`tel:${t.contact.phone1.replace(/\s+/g, "")}`}
         onClick={() => {
-          if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('event', 'conversion', {
-              send_to: 'AW-PLACEHOLDER-CONVERSION_ID/PLACEHOLDER_LABEL',
+          if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("event", "conversion", {
+              send_to: "AW-PLACEHOLDER-CONVERSION_ID/PLACEHOLDER_LABEL",
               value: 0,
-              currency: 'EUR',
+              currency: "EUR",
             });
           }
         }}
@@ -185,6 +186,7 @@ export default function DesktopMenu() {
       {/* Language selector */}
       <div className="relative ml-2" ref={languageMenuRef}>
         <button
+          type="button"
           onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
           className={`
             flex items-center gap-1 border-b-2 px-3 py-2 text-base
@@ -192,13 +194,13 @@ export default function DesktopMenu() {
             ${
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
               languageMenuOpen
-                ? 'border-primary font-semibold text-primary' /* Darker green active text, active border */
-                : 'border-transparent font-medium text-foreground hover:text-primary' /* Standard text, hover, transparent border */
+                ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
+                : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
             }
           `}
         >
           <Globe className="h-5 w-5" />
-          <span>{language === 'en' ? 'EN' : 'EL'}</span>
+          <span>{language === "en" ? "EN" : "EL"}</span>
           {/* Removed inset div */}
         </button>
 
@@ -209,29 +211,31 @@ export default function DesktopMenu() {
               border-border bg-card shadow-lg
             `}
           >
-            {' '}
+            {" "}
             {/* Cleaner dropdown style */}
             <div className="py-1">
               <button
+                type="button"
                 onClick={() => {
-                  setLanguage('en');
+                  setLanguage("en");
                   setLanguageMenuOpen(false);
                 }}
                 className={`
                   block w-full px-4 py-2 text-left text-base
-                  ${language === 'en' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  ${language === "en" ? "font-semibold text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}
                 `} /* Adjusted padding, active/hover style */
               >
                 English
               </button>
               <button
+                type="button"
                 onClick={() => {
-                  setLanguage('el');
+                  setLanguage("el");
                   setLanguageMenuOpen(false);
                 }}
                 className={`
                   block w-full px-4 py-2 text-left text-base
-                  ${language === 'el' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  ${language === "el" ? "font-semibold text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}
                 `} /* Adjusted padding, active/hover style */
               >
                 Ελληνικά

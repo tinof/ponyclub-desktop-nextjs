@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Dialog, DialogContent } from './dialog';
-import { GalleryImage, OptimizedImage } from './OptimizedImage';
+import { Dialog, DialogContent } from "./dialog.tsx";
+import { GalleryImage, OptimizedImage } from "./OptimizedImage.tsx";
 
 interface GalleryProps {
   images: {
@@ -19,7 +19,7 @@ interface GalleryProps {
 export function Gallery({
   images,
   title,
-  ariaLabel = 'Photo gallery',
+  ariaLabel = "Photo gallery",
 }: GalleryProps) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
@@ -111,6 +111,7 @@ export function Gallery({
                 // imageType="default" // Or let OptimizedImage decide based on props
               />
               <button
+                type="button"
                 onClick={() => setSelectedImage(null)}
                 className={`
                   absolute top-4 right-4 z-10 rounded-full bg-white/80 p-2

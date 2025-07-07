@@ -1,0 +1,88 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**",
+      "!.next/**",
+      "!node_modules/**",
+      "!dist/**",
+      "!build/**",
+      "!coverage/**",
+      "!.turbo/**",
+      "!tsconfig.tsbuildinfo",
+      "!pnpm-lock.yaml",
+      "!package-lock.json",
+      "!yarn.lock",
+      "!public/~partytown/**",
+      "!data/**/*.js",
+      "!**/*.min.js",
+      "!**/*.generated.*"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
+    },
+    "rules": {
+      "style": "off",
+      "a11y": "off",
+      "complexity": {
+        "recommended": false,
+        "noUselessFragments": "off"
+      },
+      "nursery": "off",
+      "correctness": "error",
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "performance": "warn",
+      "suspicious": {
+        "recommended": true,
+        "noExplicitAny": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "always"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
+  "assist": {
+    "enabled": true
+  },
+  "overrides": [
+    {
+      "includes": ["scripts/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noNodejsModules": "off"
+          }
+        }
+      }
+    }
+  ]
+}

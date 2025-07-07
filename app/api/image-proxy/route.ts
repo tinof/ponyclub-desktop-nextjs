@@ -1,10 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 
 // PERFORMANCE OPTIMIZATION: Configure caching for API route
 // This route handles dynamic image proxying, so it should remain dynamic
 // but with aggressive caching headers (already implemented below)
-export const dynamic = 'force-dynamic'; // Required for query parameter handling
-export const runtime = 'nodejs'; // Use Node.js runtime for better performance with image processing
+export const dynamic = "force-dynamic"; // Required for query parameter handling
+export const runtime = "nodejs"; // Use Node.js runtime for better performance with image processing
+
+// Move regex to top level for performance
+const GOOGLE_IMAGES_SIZE_REGEX = /=.*$/;
 
 /**
  * Enhanced Image Proxy API Route
@@ -25,53 +28,48 @@ export const runtime = 'nodejs'; // Use Node.js runtime for better performance w
  */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const imageUrl = searchParams.get('url');
-  const width = searchParams.get('w');
-  const height = searchParams.get('h');
-  const quality = searchParams.get('q');
+  const imageUrl = searchParams.get("url");
+  const width = searchParams.get("w");
+  const height = searchParams.get("h");
+  const quality = searchParams.get("q");
 
   // Validate the image URL
   if (!imageUrl) {
     return NextResponse.json(
-      { error: 'Missing url parameter' },
+      { error: "Missing url parameter" },
       { status: 400 }
     );
   }
 
   // Security: Only allow specific domains to prevent abuse
   const allowedDomains = [
-    'lh3.googleusercontent.com',
-    'lh4.googleusercontent.com',
-    'lh5.googleusercontent.com',
-    'lh6.googleusercontent.com',
-    'images.unsplash.com',
+    "lh3.googleusercontent.com",
+    "lh4.googleusercontent.com",
+    "lh5.googleusercontent.com",
+    "lh6.googleusercontent.com",
+    "images.unsplash.com",
   ];
 
   let hostname: string;
   try {
     hostname = new URL(imageUrl).hostname;
   } catch {
-    return NextResponse.json(
-      { error: 'Invalid URL format' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid URL format" }, { status: 400 });
   }
 
   if (!allowedDomains.includes(hostname)) {
-    return NextResponse.json(
-      { error: 'Domain not allowed' },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: "Domain not allowed" }, { status: 403 });
   }
 
   try {
     // Build optimized URL for Google images if size parameters are provided
     let optimizedUrl = imageUrl;
-    if (hostname.includes('googleusercontent.com') && (width || height)) {
+    if (hostname.includes("googleusercontent.com") && (width || height)) {
       // Google Images supports size parameters: =s400 for square, =w400-h300 for specific dimensions
-      const sizeParam = width && height ? `=w${width}-h${height}` : `=s${width || height}`;
-      optimizedUrl = imageUrl.includes('=')
-        ? imageUrl.replace(/=.*$/, sizeParam)
+      const sizeParam =
+        width && height ? `=w${width}-h${height}` : `=s${width || height}`;
+      optimizedUrl = imageUrl.includes("=")
+        ? imageUrl.replace(GOOGLE_IMAGES_SIZE_REGEX, sizeParam)
         : `${imageUrl}${sizeParam}`;
     }
 
@@ -81,8 +79,8 @@ export async function GET(request: NextRequest) {
 
     const response = await fetch(optimizedUrl, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; NextJS Image Proxy)',
-        'Accept': 'image/webp,image/avif,image/*,*/*;q=0.8',
+        "User-Agent": "Mozilla/5.0 (compatible; NextJS Image Proxy)",
+        Accept: "image/webp,image/avif,image/*,*/*;q=0.8",
       },
       signal: controller.signal,
     });
@@ -91,16 +89,18 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: `Failed to fetch image: ${response.status} ${response.statusText}` },
+        {
+          error: `Failed to fetch image: ${response.status} ${response.statusText}`,
+        },
         { status: response.status }
       );
     }
 
     // Validate content type
-    const contentType = response.headers.get('content-type') || 'image/jpeg';
-    if (!contentType.startsWith('image/')) {
+    const contentType = response.headers.get("content-type") || "image/jpeg";
+    if (!contentType.startsWith("image/")) {
       return NextResponse.json(
-        { error: 'Invalid content type - not an image' },
+        { error: "Invalid content type - not an image" },
         { status: 400 }
       );
     }
@@ -111,56 +111,54 @@ export async function GET(request: NextRequest) {
     // Validate image size (prevent abuse)
     const maxSize = 10 * 1024 * 1024; // 10MB limit
     if (imageBuffer.byteLength > maxSize) {
-      return NextResponse.json(
-        { error: 'Image too large' },
-        { status: 413 }
-      );
+      return NextResponse.json({ error: "Image too large" }, { status: 413 });
     }
 
     // Generate cache key for better ETag
-    const cacheKey = `${imageUrl}-${width || 'auto'}-${height || 'auto'}-${quality || 'auto'}`;
-    const etag = `"${Buffer.from(cacheKey).toString('base64').slice(0, 16)}"`;
+    const cacheKey = `${imageUrl}-${width || "auto"}-${height || "auto"}-${quality || "auto"}`;
+    const etag = `"${Buffer.from(cacheKey).toString("base64").slice(0, 16)}"`;
 
     // Create response with enhanced caching headers for optimal performance
     return new NextResponse(imageBuffer, {
       status: 200,
       headers: {
-        'Content-Type': contentType,
+        "Content-Type": contentType,
         // Browser cache: 1 year for immutable images
-        'Cache-Control': 'public, max-age=31536000, immutable, stale-while-revalidate=86400',
+        "Cache-Control":
+          "public, max-age=31536000, immutable, stale-while-revalidate=86400",
         // CDN cache: 1 year with stale-while-revalidate
-        'CDN-Cache-Control': 'public, max-age=31536000, stale-while-revalidate=86400',
-        'Vercel-CDN-Cache-Control': 'public, max-age=31536000, stale-while-revalidate=86400',
+        "CDN-Cache-Control":
+          "public, max-age=31536000, stale-while-revalidate=86400",
+        "Vercel-CDN-Cache-Control":
+          "public, max-age=31536000, stale-while-revalidate=86400",
         // Additional performance headers
-        'Vary': 'Accept-Encoding, Accept',
-        'X-Content-Type-Options': 'nosniff',
-        'X-Frame-Options': 'DENY',
-        'X-Content-Security-Policy': "default-src 'none'; img-src 'self'",
+        Vary: "Accept-Encoding, Accept",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-Content-Security-Policy": "default-src 'none'; img-src 'self'",
         // Enhanced ETag for better cache validation
-        'ETag': etag,
+        ETag: etag,
         // Add content length for better caching
-        'Content-Length': imageBuffer.byteLength.toString(),
+        "Content-Length": imageBuffer.byteLength.toString(),
       },
     });
   } catch (error) {
     // Enhanced error logging
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Image proxy error:', {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Image proxy error:", {
       url: imageUrl,
       error: errorMessage,
       timestamp: new Date().toISOString(),
     });
 
     // Handle specific error types
-    if (error instanceof Error && error.name === 'AbortError') {
-      return NextResponse.json(
-        { error: 'Request timeout' },
-        { status: 408 }
-      );
+    if (error instanceof Error && error.name === "AbortError") {
+      return NextResponse.json({ error: "Request timeout" }, { status: 408 });
     }
 
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
@@ -171,9 +169,9 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
   });
 }

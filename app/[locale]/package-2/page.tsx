@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicBokunWidget from "@/components/DynamicBokunWidget";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for package pages
 // Package content may change periodically (pricing, availability, descriptions)
@@ -17,13 +17,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Πακέτο 2: Kayak & Ιππασία Αχέροντας | Νέα Εμπειρία Περιπέτειας'
-      : 'Package 2: Kayak & Horse Riding Adventure | New Adventure Experience';
+    locale === "el"
+      ? "Πακέτο 2: Kayak & Ιππασία Αχέροντας | Νέα Εμπειρία Περιπέτειας"
+      : "Package 2: Kayak & Horse Riding Adventure | New Adventure Experience";
   const description =
-    locale === 'el'
-      ? 'Νέα εμπειρία περιπέτειας! Συνδυάζει kayak, ιππασία και πεζοπορία στον Αχέροντα. Ιδανικό για όσους θέλουν κάτι διαφορετικό. Κλείστε τώρα!'
-      : 'New adventure experience! Combines kayaking, horse riding and hiking at Acheron River. Perfect for those wanting something different. Book now!';
+    locale === "el"
+      ? "Νέα εμπειρία περιπέτειας! Συνδυάζει kayak, ιππασία και πεζοπορία στον Αχέροντα. Ιδανικό για όσους θέλουν κάτι διαφορετικό. Κλείστε τώρα!"
+      : "New adventure experience! Combines kayaking, horse riding and hiking at Acheron River. Perfect for those wanting something different. Book now!";
 
   return {
     title,
@@ -36,8 +36,8 @@ export async function generateMetadata({
 
 const Package2Page = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const isGreek = locale === 'el';
-  const bokunExperienceId = '1020569'; // Package 2 experience ID
+  const isGreek = locale === "el";
+  const bokunExperienceId = "1020569"; // Package 2 experience ID
 
   const seoContent = isGreek ? (
     <div className="mb-8">

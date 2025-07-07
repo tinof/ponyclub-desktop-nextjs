@@ -17,7 +17,10 @@
     "analyze": "ANALYZE=true next build",
     "analyze:server": "ANALYZE=true BUNDLE_ANALYZE=server next build",
     "analyze:browser": "ANALYZE=true BUNDLE_ANALYZE=browser next build",
-    "analyze:both": "ANALYZE=true BUNDLE_ANALYZE=both next build"
+    "analyze:both": "ANALYZE=true BUNDLE_ANALYZE=both next build",
+    "lint": "biome lint --max-diagnostics=2000 .",
+    "format": "biome format --write .",
+    "check": "biome check --write --max-diagnostics=2000 ."
   },
   "dependencies": {
     "@next/third-parties": "15.3.5",
@@ -40,6 +43,7 @@
     "vercel": "^44.2.12"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.0.6",
     "@next/bundle-analyzer": "15.3.5",
     "@tailwindcss/postcss": "4.1.11",
     "@types/node": "24.0.10",

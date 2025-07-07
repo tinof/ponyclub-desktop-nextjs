@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import type { IFrameOptions } from 'iframe-resizer';
-import { iframeResizer } from 'iframe-resizer';
-import { useEffect, useRef } from 'react';
+import type { IFrameOptions } from "iframe-resizer";
+import { iframeResizer } from "iframe-resizer";
+import { useEffect, useRef } from "react";
 
-import { useLanguage } from '@/contexts/language-context';
-import { useBokunInit } from '@/hooks/use-bokun-init';
-import { bokunLangMap } from '@/lib/bokun-lang';
+import { useLanguage } from "@/contexts/language-context";
+import { useBokunInit } from "@/hooks/use-bokun-init";
+import { bokunLangMap } from "@/lib/bokun-lang";
 
 // Define proper types for iframe resizer callbacks
 interface MessageData {
@@ -31,29 +31,29 @@ export default function BokunWidget({
   partialView = 1,
 }: BokunWidgetProps) {
   const { language } = useLanguage();
-  const bokunLang = bokunLangMap[language] || 'en';
+  const bokunLang = bokunLangMap[language] || "en";
   const widgetContainerRef = useRef<HTMLDivElement>(null);
 
   // Ensure Bokun is initialized
   useBokunInit();
 
   const baseUrl =
-    'https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience';
+    "https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience";
   const bokunWidgetSrcUrl = `${baseUrl}/${experienceId}?partialView=${partialView}&lang=${bokunLang}`;
 
   useEffect(() => {
     const containerElement = widgetContainerRef.current;
     if (!containerElement) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Bokun Widget Parent] Container ref not found.');
+      if (process.env.NODE_ENV === "development") {
+        console.log("[Bokun Widget Parent] Container ref not found.");
       }
       return;
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.log(
-        '[Bokun Widget Parent] useEffect triggered. Container element:',
-        containerElement,
+        "[Bokun Widget Parent] useEffect triggered. Container element:",
+        containerElement
       );
     }
 
@@ -62,31 +62,31 @@ export default function BokunWidget({
       onResized?: (sizeData: SizeData) => void;
       onInit?: (iFrameEl: HTMLIFrameElement) => void;
     } = {
-      log: process.env.NODE_ENV === 'development', // Enable logs only in dev
+      log: process.env.NODE_ENV === "development", // Enable logs only in dev
       checkOrigin: false, // Be cautious in production
       // Updated to use current callback names
       onMessage: (messageData: MessageData) => {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            '[Bokun Widget Parent] Received message from iframe (onMessage):',
-            messageData.message,
+            "[Bokun Widget Parent] Received message from iframe (onMessage):",
+            messageData.message
           );
         }
         // Potentially handle specific messages if needed in the future
       },
       onResized: (sizeData: SizeData) => {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            '[Bokun Widget Parent] iframeResizer onResized:',
-            sizeData,
+            "[Bokun Widget Parent] iframeResizer onResized:",
+            sizeData
           );
         }
       },
       onInit: (iFrameEl: HTMLIFrameElement) => {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log(
-            '[Bokun Widget Parent] iframeResizer onInit: iframe is ready.',
-            iFrameEl,
+            "[Bokun Widget Parent] iframeResizer onInit: iframe is ready.",
+            iFrameEl
           );
         }
       },
@@ -108,12 +108,12 @@ export default function BokunWidget({
       windowWithResizer.iFrameResizer = {};
     }
     windowWithResizer.iFrameResizer.onMessage = (messageData: MessageData) => {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         console.log(
-          '[Bokun Widget Parent] window.iFrameResizer.onMessage received:',
+          "[Bokun Widget Parent] window.iFrameResizer.onMessage received:",
           messageData.message,
-          'from iframe:',
-          messageData.iframe.id,
+          "from iframe:",
+          messageData.iframe.id
         );
       }
       // Call the options.onMessage handler as well
@@ -127,49 +127,49 @@ export default function BokunWidget({
     // 1. Initialize iframeResizer for the iframe embedded within this component (catalogue view)
     const catalogueObserver = new MutationObserver(
       (_mutationsList, observerInstance) => {
-        const catalogueIframe = containerElement.querySelector('iframe');
+        const catalogueIframe = containerElement.querySelector("iframe");
         if (catalogueIframe && !catalogueIframe.dataset.resizerAttached) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.log(
-              '[Bokun Widget Parent] Found catalogue iframe, initializing iframeResizer:',
-              catalogueIframe,
+              "[Bokun Widget Parent] Found catalogue iframe, initializing iframeResizer:",
+              catalogueIframe
             );
           }
           try {
             iframeResizer(options, catalogueIframe);
-            catalogueIframe.dataset.resizerAttached = 'true'; // Mark as initialized
-            if (process.env.NODE_ENV === 'development') {
+            catalogueIframe.dataset.resizerAttached = "true"; // Mark as initialized
+            if (process.env.NODE_ENV === "development") {
               console.log(
-                '[Bokun Widget Parent] iframeResizer initialized for catalogue iframe.',
+                "[Bokun Widget Parent] iframeResizer initialized for catalogue iframe."
               );
             }
           } catch (error) {
-            if (process.env.NODE_ENV === 'development') {
+            if (process.env.NODE_ENV === "development") {
               console.error(
-                '[Bokun Widget Parent] Error initializing iframeResizer for catalogue iframe:',
-                error,
+                "[Bokun Widget Parent] Error initializing iframeResizer for catalogue iframe:",
+                error
               );
             }
           }
           observerInstance.disconnect(); // Stop observing once the catalogue iframe is found and initialized
         } else if (catalogueIframe?.dataset.resizerAttached) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.log(
-              '[Bokun Widget Parent] Catalogue iframe already has resizer attached.',
+              "[Bokun Widget Parent] Catalogue iframe already has resizer attached."
             );
           }
           observerInstance.disconnect();
-        } else if (process.env.NODE_ENV === 'development') {
+        } else if (process.env.NODE_ENV === "development") {
           console.log(
-            '[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback.',
+            "[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback."
           );
         }
-      },
+      }
     );
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.log(
-        '[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe.',
+        "[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe."
       );
     }
     catalogueObserver.observe(containerElement, {
@@ -181,42 +181,42 @@ export default function BokunWidget({
     const bodyObserver = new MutationObserver(
       (_mutationsList, _observerInstance) => {
         const cartIframe = document.getElementById(
-          'bokun-widgets-cart',
+          "bokun-widgets-cart"
         ) as HTMLIFrameElement | null;
         // Check if the cart iframe exists and hasn't been initialized yet
         if (cartIframe && !cartIframe.dataset.resizerAttached) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.log(
-              '[Bokun Widget Parent] Found cart iframe in body, initializing iframeResizer:',
-              cartIframe,
+              "[Bokun Widget Parent] Found cart iframe in body, initializing iframeResizer:",
+              cartIframe
             );
           }
           try {
             iframeResizer(options, cartIframe);
-            cartIframe.dataset.resizerAttached = 'true'; // Mark as initialized
-            if (process.env.NODE_ENV === 'development') {
+            cartIframe.dataset.resizerAttached = "true"; // Mark as initialized
+            if (process.env.NODE_ENV === "development") {
               console.log(
-                '[Bokun Widget Parent] iframeResizer initialized for cart iframe.',
+                "[Bokun Widget Parent] iframeResizer initialized for cart iframe."
               );
             }
             // Optional: Disconnect if you only expect one cart iframe instance
             // observerInstance.disconnect();
           } catch (error) {
-            if (process.env.NODE_ENV === 'development') {
+            if (process.env.NODE_ENV === "development") {
               console.error(
-                '[Bokun Widget Parent] Error initializing iframeResizer for cart iframe:',
-                error,
+                "[Bokun Widget Parent] Error initializing iframeResizer for cart iframe:",
+                error
               );
             }
           }
         }
         // Cart iframe already has resizer attached - no action needed
-      },
+      }
     );
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.log(
-        '[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe.',
+        "[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe."
       );
     }
     // Observe the body for additions/removals, including the cart iframe
@@ -224,9 +224,9 @@ export default function BokunWidget({
 
     // Cleanup function
     return () => {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         console.log(
-          '[Bokun Widget Parent] useEffect cleanup: Disconnecting observers.',
+          "[Bokun Widget Parent] useEffect cleanup: Disconnecting observers."
         );
       }
       catalogueObserver.disconnect();
@@ -244,7 +244,7 @@ export default function BokunWidget({
         className="bokunWidget"
         data-src={bokunWidgetSrcUrl}
         data-lang={bokunLang}
-        style={{ width: '100%', minHeight: '500px' }} // Ensure div has dimensions
+        style={{ width: "100%", minHeight: "500px" }} // Ensure div has dimensions
       >
         {/* Bokun's script will inject the iframe here */}
       </div>

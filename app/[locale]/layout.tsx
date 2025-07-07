@@ -1,27 +1,26 @@
 // app/[locale]/layout.tsx is a Server Component
-import '../globals.css';
+import "../globals.css";
 
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import type { Metadata, ResolvingMetadata } from 'next';
-import { inter, robotoSlab, allFontVariables } from '@/app/fonts';
-import Script from 'next/script';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata, ResolvingMetadata } from "next";
 // PERFORMANCE OPTIMIZATION: Removed connection import as it's no longer needed
 // import { connection } from 'next/server';
-import type React from 'react';
-import ClientLayout from '@/components/ClientLayout';
-import BokunScripts from '@/components/client/BokunScripts';
-import GoogleAnalytics from '@/components/client/GoogleAnalytics';
-import PartyTownConfig from '@/components/PartyTownConfig';
-import StructuredData from '@/components/StructuredData';
+import type React from "react";
+import { allFontVariables } from "@/app/fonts";
+import ClientLayout from "@/components/ClientLayout";
+import BokunScripts from "@/components/client/BokunScripts";
+import GoogleAnalytics from "@/components/client/GoogleAnalytics";
+import PartyTownConfig from "@/components/PartyTownConfig";
+import StructuredData from "@/components/StructuredData";
 import {
   generateWebsiteStructuredData,
   organizationData,
-} from '@/lib/structured-data';
+} from "@/lib/structured-data";
 
 // PERFORMANCE OPTIMIZATION: Configure default caching behavior for better performance
 // Since we're using static generation, we can cache fetch requests by default
-export const fetchCache = 'default-cache';
+export const fetchCache = "default-cache";
 export const revalidate = 3600; // Revalidate every hour for any dynamic content
 
 // Fonts are now imported from centralized fonts.ts file
@@ -32,57 +31,57 @@ interface LocaleLayoutProps {
 }
 
 export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'el' }];
+  return [{ locale: "en" }, { locale: "el" }];
 }
 
 export async function generateMetadata(
   { params: paramsPromise }: { params: Promise<{ locale: string }> },
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { locale } = await paramsPromise;
-  const baseUrl = (await parent).metadataBase || new URL('https://ponyclub.gr');
+  const baseUrl = (await parent).metadataBase || new URL("https://ponyclub.gr");
 
   // Common metadata, can be extended or overridden
   const commonMetadata: Metadata = {
     metadataBase: baseUrl,
-    title: 'Pony Club | Adventure Activities in Acheron River',
+    title: "Pony Club | Adventure Activities in Acheron River",
     description:
-      'Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor adventures.',
+      "Pony Club offers rafting, horse riding, kayaking and trekking experiences in the beautiful Acheron River, Glyki, Greece. Join us for unforgettable outdoor adventures.",
     keywords:
-      'Pony Club, Acheron River, rafting, horse riding, kayaking, trekking, Glyki, Greece, outdoor activities',
-    generator: 'v0.dev',
-    authors: [{ name: 'Pony Club' }],
+      "Pony Club, Acheron River, rafting, horse riding, kayaking, trekking, Glyki, Greece, outdoor activities",
+    generator: "v0.dev",
+    authors: [{ name: "Pony Club" }],
     alternates: {
-      canonical: '/',
+      canonical: "/",
       languages: {
-        en: '/en',
-        el: '/el',
+        en: "/en",
+        el: "/el",
       },
     },
     openGraph: {
-      title: 'Pony Club | Adventure Activities in Acheron River',
+      title: "Pony Club | Adventure Activities in Acheron River",
       description:
-        'Join Pony Club for unforgettable rafting, horse riding, kayaking and trekking experiences in Acheron River, Greece.',
+        "Join Pony Club for unforgettable rafting, horse riding, kayaking and trekking experiences in Acheron River, Greece.",
       url: new URL(locale, baseUrl).toString(),
-      siteName: 'Pony Club',
-      locale: locale === 'el' ? 'el_GR' : 'en_US',
-      type: 'website',
+      siteName: "Pony Club",
+      locale: locale === "el" ? "el_GR" : "en_US",
+      type: "website",
       images: [
         {
-          url: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
+          url: new URL("/images/ponyclub_logo.png", baseUrl).toString(),
           width: 200,
           height: 200,
-          alt: 'Pony Club Logo',
+          alt: "Pony Club Logo",
         },
       ],
     },
     icons: {
-      icon: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
-      shortcut: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
-      apple: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
+      icon: new URL("/images/ponyclub_logo.png", baseUrl).toString(),
+      shortcut: new URL("/images/ponyclub_logo.png", baseUrl).toString(),
+      apple: new URL("/images/ponyclub_logo.png", baseUrl).toString(),
       other: {
-        rel: 'apple-touch-icon-precomposed',
-        url: new URL('/images/ponyclub_logo.png', baseUrl).toString(),
+        rel: "apple-touch-icon-precomposed",
+        url: new URL("/images/ponyclub_logo.png", baseUrl).toString(),
       },
     },
   };
@@ -106,7 +105,7 @@ export default async function LocaleLayout({
   const { locale } = await paramsPromise;
 
   // Feature flag to conditionally disable Bokun-related resources
-  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
 
   // Generate structured data for the layout
   const websiteStructuredData = generateWebsiteStructuredData(locale);
@@ -153,8 +152,6 @@ export default async function LocaleLayout({
 
         {/* PERFORMANCE OPTIMIZATION: Partytown configuration for web worker scripts */}
         <PartyTownConfig />
-
-
       </head>
       <body
         className={`

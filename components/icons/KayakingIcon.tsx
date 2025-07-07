@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from "react";
 
 interface KayakingIconProps {
   className?: string;
@@ -6,10 +6,10 @@ interface KayakingIconProps {
   color?: string;
 }
 
-export const KayakingIcon: React.FC<KayakingIconProps> = ({ 
-  className = '', 
-  size = 24, 
-  color = 'currentColor' 
+export const KayakingIcon: React.FC<KayakingIconProps> = ({
+  className = "",
+  size = 24,
+  color = "currentColor",
 }) => {
   return (
     <svg
@@ -27,28 +27,23 @@ export const KayakingIcon: React.FC<KayakingIconProps> = ({
         fill={color}
         opacity="0.8"
       />
-      
+
       {/* Kayak pointed ends */}
       <path
         d="M2 15l-1-1v2l1-1zM22 15l1-1v2l-1-1z"
         fill={color}
         opacity="0.6"
       />
-      
+
       {/* Person silhouette */}
-      <circle
-        cx="12"
-        cy="10"
-        r="1.5"
-        fill={color}
-      />
+      <circle cx="12" cy="10" r="1.5" fill={color} />
       <path
         d="M12 11.5v2"
         stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
       />
-      
+
       {/* Paddle */}
       <path
         d="M6 8l6 4 6-4"
@@ -58,7 +53,7 @@ export const KayakingIcon: React.FC<KayakingIconProps> = ({
         strokeLinejoin="round"
         fill="none"
       />
-      
+
       {/* Paddle blades */}
       <ellipse
         cx="6"
@@ -78,7 +73,7 @@ export const KayakingIcon: React.FC<KayakingIconProps> = ({
         opacity="0.7"
         transform="rotate(30 18 8)"
       />
-      
+
       {/* Water ripples */}
       <path
         d="M3 18c2-1 4-1 6 0s4 1 6 0 4-1 6 0"

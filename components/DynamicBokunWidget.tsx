@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 
 // Dynamically import BokunWidget with ssr: false and a loading placeholder
 const BokunWidget = dynamic(
-  () => import(/* webpackChunkName: "bokun-widget" */ '@/components/BokunWidget'),
+  () =>
+    import(/* webpackChunkName: "bokun-widget" */ "@/components/BokunWidget"),
   {
     ssr: false,
     loading: () => (
@@ -47,9 +48,9 @@ export default function DynamicBokunWidget({
         }
       },
       {
-        rootMargin: '200px 0px', // Load when 200px away from viewport
+        rootMargin: "200px 0px", // Load when 200px away from viewport
         threshold: 0.01, // Trigger even if only 1% is visible
-      },
+      }
     );
 
     observer.observe(currentRef);
@@ -64,8 +65,8 @@ export default function DynamicBokunWidget({
   }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    <div ref={ref} style={{ minHeight: '384px' }}>
-      {' '}
+    <div ref={ref} style={{ minHeight: "384px" }}>
+      {" "}
       {/* PERFORMANCE OPTIMIZATION: Fixed height to prevent CLS */}
       {shouldLoad ? (
         <BokunWidget experienceId={experienceId} partialView={partialView} />
@@ -73,7 +74,7 @@ export default function DynamicBokunWidget({
         // Render the loading placeholder with fixed height to prevent CLS
         <div
           className="h-96 w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center"
-          style={{ minHeight: '384px' }} // Ensure consistent height
+          style={{ minHeight: "384px" }} // Ensure consistent height
         >
           <span className="text-gray-500">Loading booking widget...</span>
         </div>

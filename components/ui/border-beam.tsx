@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import type { MotionStyle, Transition } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { MotionStyle, Transition } from "framer-motion";
+import { motion } from "framer-motion";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 interface BorderBeamProps {
   /**
@@ -53,8 +53,8 @@ export const BorderBeam = ({
   size = 50,
   delay = 0,
   duration = 6,
-  colorFrom = '#ffaa40',
-  colorTo = '#9c40ff',
+  colorFrom = "#ffaa40",
+  colorTo = "#9c40ff",
   transition,
   style,
   reverse = false,
@@ -72,19 +72,19 @@ export const BorderBeam = ({
     >
       <motion.div
         className={cn(
-          'absolute aspect-square',
+          "absolute aspect-square",
           `
             bg-gradient-to-l from-[var(--color-from)] via-[var(--color-to)]
             to-transparent
           `,
-          className,
+          className
         )}
         style={
           {
             width: size,
             offsetPath: `rect(0 auto auto 0 round ${size}px)`,
-            '--color-from': colorFrom,
-            '--color-to': colorTo,
+            "--color-from": colorFrom,
+            "--color-to": colorTo,
             ...style,
           } as MotionStyle
         }
@@ -96,7 +96,7 @@ export const BorderBeam = ({
         }}
         transition={{
           repeat: Number.POSITIVE_INFINITY,
-          ease: 'linear',
+          ease: "linear",
           duration,
           delay: -delay,
           ...transition,

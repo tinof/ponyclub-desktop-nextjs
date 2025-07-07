@@ -1,4 +1,4 @@
-declare module 'vite' {
+declare module "vite" {
   export interface Plugin {
     name?: string;
     [key: string]: unknown;

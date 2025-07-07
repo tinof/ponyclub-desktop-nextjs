@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 // Dynamically import Gallery with ssr: false
 const Gallery = dynamic(
-  () => import(/* webpackChunkName: "gallery" */ '@/components/ui/Gallery').then((mod) => mod.Gallery),
+  () =>
+    import(/* webpackChunkName: "gallery" */ "@/components/ui/Gallery").then(
+      (mod) => mod.Gallery
+    ),
   {
     ssr: false,
     loading: () => (
@@ -16,7 +19,7 @@ const Gallery = dynamic(
         <span className="text-gray-500">Loading gallery...</span>
       </div>
     ),
-  },
+  }
 );
 
 type GalleryImage = {

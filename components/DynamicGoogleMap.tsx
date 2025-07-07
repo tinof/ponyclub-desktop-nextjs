@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { GoogleMapsEmbed } from '@next/third-parties/google';
+import { GoogleMapsEmbed } from "@next/third-parties/google";
 
 export default function DynamicGoogleMap() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;

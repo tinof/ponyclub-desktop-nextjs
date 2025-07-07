@@ -1,5 +1,5 @@
-import type React from 'react'; // Added JSX import
-import type { JSX } from 'react';
+import type React from "react"; // Added JSX import
+import type { JSX } from "react";
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -18,16 +18,16 @@ interface ContainerProps {
  */
 export function Container({
   children,
-  className = '',
-  as: Component = 'div',
+  className = "",
+  as: Component = "div",
   fluid = false,
 }: ContainerProps) {
   // Base classes for all containers
-  let containerClasses = 'mx-auto px-4 sm:px-6 md:px-8 lg:px-10';
+  let containerClasses = "mx-auto px-4 sm:px-6 md:px-8 lg:px-10";
 
   // Add max-width constraint if not fluid
   if (!fluid) {
-    containerClasses += ' max-w-screen-xl'; // 1280px max width for desktop
+    containerClasses += " max-w-screen-xl"; // 1280px max width for desktop
   }
 
   return (

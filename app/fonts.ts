@@ -1,4 +1,4 @@
-import { Inter, Roboto_Slab, Playfair_Display } from 'next/font/google';
+import { Inter, Playfair_Display, Roboto_Slab } from "next/font/google";
 
 /**
  * Centralized font configuration for the application
@@ -7,48 +7,40 @@ import { Inter, Roboto_Slab, Playfair_Display } from 'next/font/google';
 
 // Primary font - Inter for body text and UI elements
 export const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap', // Improves font loading performance
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap", // Improves font loading performance
   preload: true, // Preload the font for better performance
   fallback: [
-    'system-ui',
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica Neue',
-    'Arial',
-    'sans-serif',
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    "Arial",
+    "sans-serif",
   ],
 });
 
 // Secondary font - Roboto Slab for headings and emphasis
 export const robotoSlab = Roboto_Slab({
-  subsets: ['latin', 'greek'], // Include Greek subset for localization
-  weight: ['400', '700'],
-  variable: '--font-roboto-slab',
-  display: 'swap',
+  subsets: ["latin", "greek"], // Include Greek subset for localization
+  weight: ["400", "700"],
+  variable: "--font-roboto-slab",
+  display: "swap",
   preload: true,
-  fallback: [
-    'Georgia',
-    'Times New Roman',
-    'serif',
-  ],
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 // Decorative font - Playfair Display for vintage/elegant elements
 export const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-playfair-display',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-playfair-display",
+  display: "swap",
   preload: false, // Only preload if used above the fold
-  fallback: [
-    'Georgia',
-    'Times New Roman',
-    'serif',
-  ],
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 /**
@@ -71,13 +63,13 @@ export const allFontVariables = `${inter.variable} ${robotoSlab.variable} ${play
 export const fontOptimizations = {
   // Preconnect hints for Google Fonts (if any external fonts are still used)
   preconnectHints: [
-    'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
   ],
-  
+
   // Font display strategies
   displayStrategies: {
-    critical: 'swap', // For above-the-fold content
-    deferred: 'optional', // For below-the-fold content
+    critical: "swap", // For above-the-fold content
+    deferred: "optional", // For below-the-fold content
   },
 } as const;

@@ -8,9 +8,7 @@
     "build/**",
     "public/~partytown/**"
   ],
-  "ignoreDependencies": [
-    "vercel"
-  ],
+  "ignoreDependencies": ["vercel"],
   "ignoreExportsUsedInFile": true,
   "include": ["files", "dependencies", "unlisted", "exports"],
   "exclude": ["enumMembers", "nsExports", "nsTypes"]

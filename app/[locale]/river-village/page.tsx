@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Roboto_Slab } from 'next/font/google';
+import { Roboto_Slab } from "next/font/google";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
-import { useLanguage } from '@/contexts/language-context';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import { useLanguage } from "@/contexts/language-context";
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
-  subsets: ['latin', 'greek'],
-  variable: '--font-roboto-slab',
-  weight: ['400', '700', '900'],
+  subsets: ["latin", "greek"],
+  variable: "--font-roboto-slab",
+  weight: ["400", "700", "900"],
 });
 
 export default function RiverVillagePage() {
@@ -75,7 +75,7 @@ export default function RiverVillagePage() {
       {/* Content */}
       <div className="prose max-w-none text-gray-700">
         <div className="space-y-4">
-          {language === 'en' ? (
+          {language === "en" ? (
             <>
               <p>
                 Acheron (gre. Ἀχέρων/ lat. Styx) is a 58 km long river starting
@@ -202,7 +202,7 @@ export default function RiverVillagePage() {
       {/* Content */}
       <div className="prose max-w-none text-gray-700">
         <div className="space-y-4">
-          {language === 'en' ? (
+          {language === "en" ? (
             <>
               <p>
                 Acheron river has been acknowledged by its strange energy that
@@ -247,9 +247,9 @@ export default function RiverVillagePage() {
         {/* Natura 2000 logo with enhanced styling */}
         <div className="mt-8 flex flex-col items-center">
           <p className="mb-3 text-center text-sm text-gray-600 italic">
-            {language === 'en'
+            {language === "en"
               ? "Protected by EU's Natura 2000 program"
-              : 'Προστατεύεται από το πρόγραμμα Natura 2000 της ΕΕ'}
+              : "Προστατεύεται από το πρόγραμμα Natura 2000 της ΕΕ"}
           </p>
           <div
             className={`

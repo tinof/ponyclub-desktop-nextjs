@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { execSync } = require('node:child_process');
-const fs = require('node:fs');
-const path = require('node:path');
+const { execSync } = require("node:child_process");
+const fs = require("node:fs");
+const path = require("node:path");
 
 /**
  * Get the last Git commit timestamp for a file
@@ -13,11 +13,11 @@ function getGitLastModified(filePath) {
   try {
     // Get the timestamp of the last commit that modified this file
     const gitCmd = `git log -1 --format="%ct" -- "${filePath}"`;
-    const result = execSync(gitCmd, { encoding: 'utf8' }).trim();
+    const result = execSync(gitCmd, { encoding: "utf8" }).trim();
     return result ? Number.parseInt(result) : Math.floor(Date.now() / 1000);
   } catch (_error) {
     console.warn(
-      `Could not get Git timestamp for ${filePath}, using current time`,
+      `Could not get Git timestamp for ${filePath}, using current time`
     );
     return Math.floor(Date.now() / 1000);
   }
@@ -29,27 +29,27 @@ function getGitLastModified(filePath) {
 function generateSitemapData() {
   // Define the routes and their corresponding file paths
   const routes = [
-    { route: '', filePath: 'app/[locale]/page.tsx' },
-    { route: '/kayaking', filePath: 'app/[locale]/kayaking/page.tsx' },
-    { route: '/rafting', filePath: 'app/[locale]/rafting/page.tsx' },
-    { route: '/riding', filePath: 'app/[locale]/riding/page.tsx' },
+    { route: "", filePath: "app/[locale]/page.tsx" },
+    { route: "/kayaking", filePath: "app/[locale]/kayaking/page.tsx" },
+    { route: "/rafting", filePath: "app/[locale]/rafting/page.tsx" },
+    { route: "/riding", filePath: "app/[locale]/riding/page.tsx" },
     {
-      route: '/river-village',
-      filePath: 'app/[locale]/river-village/page.tsx',
+      route: "/river-village",
+      filePath: "app/[locale]/river-village/page.tsx",
     },
-    { route: '/trekking', filePath: 'app/[locale]/trekking/page.tsx' },
+    { route: "/trekking", filePath: "app/[locale]/trekking/page.tsx" },
 
-    { route: '/for-schools', filePath: 'app/[locale]/for-schools/page.tsx' },
+    { route: "/for-schools", filePath: "app/[locale]/for-schools/page.tsx" },
     {
-      route: '/kayak-rafting',
-      filePath: 'app/[locale]/kayak-rafting/page.tsx',
+      route: "/kayak-rafting",
+      filePath: "app/[locale]/kayak-rafting/page.tsx",
     },
   ];
 
   const routeData = routes.map(({ route, filePath }) => {
     const lastModified = getGitLastModified(filePath);
     console.log(
-      `${route || '/'}: ${new Date(lastModified * 1000).toISOString()}`,
+      `${route || "/"}: ${new Date(lastModified * 1000).toISOString()}`
     );
     return {
       route,
@@ -70,10 +70,10 @@ export const routeData: RouteData[] = ${JSON.stringify(routeData, null, 2)};
 `;
 
   // Write to a TypeScript file that can be imported by sitemap.ts
-  const outputPath = path.join(__dirname, '../lib/sitemap-data.ts');
+  const outputPath = path.join(__dirname, "../lib/sitemap-data.ts");
   fs.writeFileSync(outputPath, tsContent);
 
-  console.log('\n✅ Sitemap data generated successfully:');
+  console.log("\n✅ Sitemap data generated successfully:");
   console.log(`📁 Output: ${outputPath}`);
   console.log(`📊 Routes processed: ${routeData.length}`);
 }

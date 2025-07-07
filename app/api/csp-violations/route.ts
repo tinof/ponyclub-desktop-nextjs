@@ -1,31 +1,31 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 // PERFORMANCE OPTIMIZATION: Configure API route behavior
 // CSP violation reporting must remain dynamic to handle POST requests
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
     const report = await request.json();
     // Log CSP violations in development
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('CSP Violation:', report);
+    if (process.env.NODE_ENV === "development") {
+      console.warn("CSP Violation:", report);
     }
     // In a real application, you would send this report to a logging service
     // like Sentry, Report URI, or a custom analytics platform.
     return NextResponse.json(
-      { message: 'CSP report received' },
-      { status: 200 },
+      { message: "CSP report received" },
+      { status: 200 }
     );
   } catch (error) {
     // Log errors in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error processing CSP report:', error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error processing CSP report:", error);
     }
     return NextResponse.json(
-      { message: 'Error processing report' },
-      { status: 400 },
+      { message: "Error processing report" },
+      { status: 400 }
     );
   }
 }

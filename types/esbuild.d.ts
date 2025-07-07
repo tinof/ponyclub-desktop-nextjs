@@ -1,4 +1,4 @@
-declare module 'esbuild' {
+declare module "esbuild" {
   export interface Plugin {
     name?: string;
     setup?: (...args: unknown[]) => void;

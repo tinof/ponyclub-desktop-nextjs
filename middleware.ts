@@ -4,13 +4,13 @@
 //   createMiddleware as createNoseconeMiddleware,
 //   defaults as noseconeDefaults,
 // } from '@nosecone/next';
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-const locales = ['en', 'el'];
-const defaultLocale = 'en';
+const locales = ["en", "el"];
+const defaultLocale = "en";
 
-const isDev = process.env.NODE_ENV === 'development';
+const _isDev = process.env.NODE_ENV === "development";
 
 // PERFORMANCE OPTIMIZATION: Temporarily disabled CSP-related variables
 // Define additional script sources for development
@@ -190,22 +190,22 @@ export async function middleware(request: NextRequest) {
   //   response = NextResponse.next();
   // }
 
-  let response = NextResponse.next();
+  const response = NextResponse.next();
 
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
   if (!pathnameHasLocale) {
     // Check for a saved locale preference in the cookie
-    const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
+    const localeCookie = request.cookies.get("NEXT_LOCALE")?.value;
     const chosenLocale = locales.includes(localeCookie as string)
       ? localeCookie
       : defaultLocale;
 
     const newPathname =
-      pathname === '/' ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
+      pathname === "/" ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
     const url = request.nextUrl.clone();
     url.pathname = newPathname;
 
@@ -221,18 +221,22 @@ export async function middleware(request: NextRequest) {
     });
 
     // Set the locale cookie to remember user preference for future visits
-    i18nRewriteResponse.cookies.set('NEXT_LOCALE', chosenLocale || defaultLocale, {
-      path: '/',
-      maxAge: 31536000, // 1 year
-      sameSite: 'lax',
-    });
+    i18nRewriteResponse.cookies.set(
+      "NEXT_LOCALE",
+      chosenLocale || defaultLocale,
+      {
+        path: "/",
+        maxAge: 31536000, // 1 year
+        sameSite: "lax",
+      }
+    );
 
     return i18nRewriteResponse;
   }
 
   response.headers.set(
-    'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=(self), payment=()',
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=(self), payment=()"
   );
 
   return response;
@@ -240,6 +244,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)',
+    "/((?!api|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)",
   ],
 };

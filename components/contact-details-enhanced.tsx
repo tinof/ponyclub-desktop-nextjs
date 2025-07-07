@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from "@/contexts/language-context";
 
 interface SocialIconProps {
   href: string;

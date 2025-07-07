@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import ResponsiveNavigation from '@/components/responsive-navigation';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
-import { useLanguage } from '@/contexts/language-context';
+import ResponsiveNavigation from "@/components/responsive-navigation";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function NotFound() {
   const { t } = useLanguage();
@@ -53,11 +53,11 @@ export default function NotFound() {
           p-4 pt-20 text-center
         `}
       >
-        {' '}
+        {" "}
         {/* Added bg color and pt-20 */}
         <h1 className="mb-4 text-6xl font-bold text-amber-800">
           {t.notFound.title}
-        </h1>{' '}
+        </h1>{" "}
         {/* Styled heading */}
         <p className="mb-6 text-lg text-gray-700">{t.notFound.message}</p>
         <Link

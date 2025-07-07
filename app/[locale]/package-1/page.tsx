@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicBokunWidget from "@/components/DynamicBokunWidget";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for package pages
 // Package content may change periodically (pricing, availability, descriptions)
@@ -17,13 +17,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Πακέτο 1: Rafting & Ιππασία Αχέροντας | Συνδυασμένη Περιπέτεια'
-      : 'Package 1: Rafting & Horse Riding Adventure | Combined Acheron Experience';
+    locale === "el"
+      ? "Πακέτο 1: Rafting & Ιππασία Αχέροντας | Συνδυασμένη Περιπέτεια"
+      : "Package 1: Rafting & Horse Riding Adventure | Combined Acheron Experience";
   const description =
-    locale === 'el'
-      ? 'Το δημοφιλέστερο πακέτο μας! Συνδυάζει rafting, ιππασία και πεζοπορία στον Αχέροντα. Ιδανικό για οικογένειες και αρχάριους. Κλείστε τώρα!'
-      : 'Our most popular package! Combines rafting, horse riding and hiking at Acheron River. Perfect for families and beginners. Book now!';
+    locale === "el"
+      ? "Το δημοφιλέστερο πακέτο μας! Συνδυάζει rafting, ιππασία και πεζοπορία στον Αχέροντα. Ιδανικό για οικογένειες και αρχάριους. Κλείστε τώρα!"
+      : "Our most popular package! Combines rafting, horse riding and hiking at Acheron River. Perfect for families and beginners. Book now!";
 
   return {
     title,
@@ -36,8 +36,8 @@ export async function generateMetadata({
 
 const Package1Page = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const isGreek = locale === 'el';
-  const bokunExperienceId = '1020598'; // Package 1 experience ID
+  const isGreek = locale === "el";
+  const bokunExperienceId = "1020598"; // Package 1 experience ID
 
   const seoContent = isGreek ? (
     <div className="mb-8">

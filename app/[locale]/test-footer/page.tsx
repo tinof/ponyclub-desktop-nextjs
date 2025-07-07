@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import ResponsiveNavigation from '@/components/responsive-navigation';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import ResponsiveNavigation from "@/components/responsive-navigation";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 export default function TestFooterPage() {
   return (
@@ -45,7 +45,7 @@ export default function TestFooterPage() {
       </header>
 
       <main className="pt-20">
-        {' '}
+        {" "}
         {/* Added main wrapper and padding-top */}
         <div className="container mx-auto px-4 py-12">
           <h1 className="text-3xl font-bold">Test Footer Page</h1>

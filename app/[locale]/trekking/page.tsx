@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicGallery from '@/components/DynamicGallery';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
-import { trekkingGalleryImages } from '@/lib/gallery-data';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicGallery from "@/components/DynamicGallery";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import { trekkingGalleryImages } from "@/lib/gallery-data";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for activity pages
 // Activity content may change periodically (pricing, availability, seasonal updates)
@@ -19,13 +19,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Πεζοπορία Αχέροντας Τιμές | Οδηγημένες Διαδρομές για Οικογένειες'
-      : 'Acheron Trekking Prices | Guided Family-Friendly Hiking Tours';
+    locale === "el"
+      ? "Πεζοπορία Αχέροντας Τιμές | Οδηγημένες Διαδρομές για Οικογένειες"
+      : "Acheron Trekking Prices | Guided Family-Friendly Hiking Tours";
   const description =
-    locale === 'el'
-      ? 'Δείτε τις τιμές για πεζοπορία στον Αχέροντα. Προσφέρουμε οδηγημένες διαδρομές για οικογένειες και αρχάριους. Κλείστε την περιπέτειά σας σήμερα!'
-      : 'See our Acheron trekking prices. We offer guided hiking tours perfect for families and beginners. Book your adventure today!';
+    locale === "el"
+      ? "Δείτε τις τιμές για πεζοπορία στον Αχέροντα. Προσφέρουμε οδηγημένες διαδρομές για οικογένειες και αρχάριους. Κλείστε την περιπέτειά σας σήμερα!"
+      : "See our Acheron trekking prices. We offer guided hiking tours perfect for families and beginners. Book your adventure today!";
 
   return {
     title,
@@ -42,7 +42,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
 
   // Define content sections using JSX with the updated content
   const descriptionContent =
-    language === 'el' ? (
+    language === "el" ? (
       <div className="space-y-4">
         <h2 className="mb-2 text-2xl font-bold">
           Πεζοπορία στον Θρυλικό Αχέροντα
@@ -220,7 +220,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
     );
 
   const detailsContent =
-    language === 'el' ? (
+    language === "el" ? (
       <div className="space-y-4">
         <h3 className="mb-3 text-xl font-semibold">Τι να Περιμένετε</h3>
         <ul className="space-y-2">

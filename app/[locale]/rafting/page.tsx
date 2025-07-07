@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget';
-import StructuredData from '@/components/StructuredData';
-import { generateActivityStructuredData } from '@/lib/structured-data';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicBokunWidget from "@/components/DynamicBokunWidget";
+import StructuredData from "@/components/StructuredData";
+import { generateActivityStructuredData } from "@/lib/structured-data";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for activity pages
 // Activity content may change periodically (pricing, availability, seasonal updates)
@@ -19,13 +19,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Rafting Αχέροντας Τιμές | Ασφαλής Κατάβαση για Οικογένειες'
-      : 'Acheron River Rafting Prices | Safe Family Rafting Tours';
+    locale === "el"
+      ? "Rafting Αχέροντας Τιμές | Ασφαλής Κατάβαση για Οικογένειες"
+      : "Acheron River Rafting Prices | Safe Family Rafting Tours";
   const description =
-    locale === 'el'
-      ? 'Δείτε τις τιμές για rafting στον Αχέροντα. Προσφέρουμε ασφαλείς καταβάσεις για οικογένειες και αρχάριους. Κλείστε την περιπέτειά σας σήμερα!'
-      : 'See our Acheron River rafting prices. We offer safe river descents perfect for families and beginners. Book your adventure today!';
+    locale === "el"
+      ? "Δείτε τις τιμές για rafting στον Αχέροντα. Προσφέρουμε ασφαλείς καταβάσεις για οικογένειες και αρχάριους. Κλείστε την περιπέτειά σας σήμερα!"
+      : "See our Acheron River rafting prices. We offer safe river descents perfect for families and beginners. Book your adventure today!";
 
   return {
     title,
@@ -38,17 +38,17 @@ export async function generateMetadata({
 
 const RaftingPage = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const _isGreek = locale === 'el';
+  const _isGreek = locale === "el";
 
   // Define the experience ID for rafting
-  const bokunExperienceId = '1020611';
+  const bokunExperienceId = "1020611";
 
   // Content is now managed through Bokun widget for easier maintenance
   // SEO content has been moved to Bokun descriptions
   const _seoContent = null;
 
   // Generate structured data for this activity
-  const structuredData = generateActivityStructuredData('rafting', locale);
+  const structuredData = generateActivityStructuredData("rafting", locale);
 
   return (
     <>

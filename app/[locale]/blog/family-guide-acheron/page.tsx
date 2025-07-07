@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for blog pages
 // Blog content may be updated periodically with new information, tips, or seasonal updates
@@ -17,13 +17,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Οικογενειακός Οδηγός για τον Αχέροντα | Δραστηριότητες για Παιδιά Γλυκή'
-      : 'A Complete Family Guide to the Acheron River | Kids Activities Glyki';
+    locale === "el"
+      ? "Οικογενειακός Οδηγός για τον Αχέροντα | Δραστηριότητες για Παιδιά Γλυκή"
+      : "A Complete Family Guide to the Acheron River | Kids Activities Glyki";
   const description =
-    locale === 'el'
-      ? 'Ο πλήρης οδηγός για οικογένειες που επισκέπτονται τον Αχέροντα. Ασφαλείς δραστηριότητες για παιδιά, συμβουλές και τι να περιμένετε στη Γλυκή.'
-      : 'The complete guide for families visiting Acheron River. Safe activities for children, tips and what to expect in Glyki, Thesprotia.';
+    locale === "el"
+      ? "Ο πλήρης οδηγός για οικογένειες που επισκέπτονται τον Αχέροντα. Ασφαλείς δραστηριότητες για παιδιά, συμβουλές και τι να περιμένετε στη Γλυκή."
+      : "The complete guide for families visiting Acheron River. Safe activities for children, tips and what to expect in Glyki, Thesprotia.";
 
   return {
     title,
@@ -36,7 +36,7 @@ export async function generateMetadata({
 
 const FamilyGuideAcheronPage = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const isGreek = locale === 'el';
+  const isGreek = locale === "el";
 
   const blogContent = isGreek ? (
     <div className="mb-8">
@@ -156,7 +156,7 @@ const FamilyGuideAcheronPage = async ({ params }: PageProps) => {
         </h2>
 
         <p>
-          Για οικογένειες με παιδιά 6-12 ετών, συνιστούμε το{' '}
+          Για οικογένειες με παιδιά 6-12 ετών, συνιστούμε το{" "}
           <strong>Πακέτο 1</strong>
           που συνδυάζει rafting, ιππασία και πεζοπορία. Είναι το πιο δημοφιλές
           επιλογή για οικογένειες και προσφέρει την καλύτερη αξία.
@@ -295,7 +295,7 @@ const FamilyGuideAcheronPage = async ({ params }: PageProps) => {
         </h2>
 
         <p>
-          For families with children aged 6-12, we recommend{' '}
+          For families with children aged 6-12, we recommend{" "}
           <strong>Package 1</strong>
           which combines rafting, horse riding, and hiking. It's the most
           popular choice for families and offers the best value.

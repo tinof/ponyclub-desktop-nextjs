@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget';
-import StructuredData from '@/components/StructuredData';
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicBokunWidget from "@/components/DynamicBokunWidget";
+import StructuredData from "@/components/StructuredData";
 import {
   generateActivityStructuredData,
   generateBreadcrumbStructuredData,
   generateFAQStructuredData,
-} from '@/lib/structured-data';
+} from "@/lib/structured-data";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for package pages
 // Package content may change periodically (pricing, availability, descriptions)
@@ -23,27 +23,27 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Πακέτο Rafting & Ιππασία στον Αχέροντα | Καλύτερη Τιμή'
-      : 'Acheron Rafting & Horse Riding Package | Best Value Deal';
+    locale === "el"
+      ? "Πακέτο Rafting & Ιππασία στον Αχέροντα | Καλύτερη Τιμή"
+      : "Acheron Rafting & Horse Riding Package | Best Value Deal";
   const description =
-    locale === 'el'
-      ? 'Συνδυάστε τις δύο κορυφαίες δραστηριότητες στον Αχέροντα σε ένα πακέτο. Ιδανικό για οικογένειες και παρέες. Κλείστε online στην καλύτερη τιμή.'
-      : 'Combine the top two Acheron activities in one package. Ideal for families and groups. Book online for the best price.';
+    locale === "el"
+      ? "Συνδυάστε τις δύο κορυφαίες δραστηριότητες στον Αχέροντα σε ένα πακέτο. Ιδανικό για οικογένειες και παρέες. Κλείστε online στην καλύτερη τιμή."
+      : "Combine the top two Acheron activities in one package. Ideal for families and groups. Book online for the best price.";
 
   const openGraphTitle =
-    locale === 'el'
-      ? 'Πακέτο Rafting & Ιππασία | Pony Club'
-      : 'Rafting & Horse Riding Package | Pony Club';
+    locale === "el"
+      ? "Πακέτο Rafting & Ιππασία | Pony Club"
+      : "Rafting & Horse Riding Package | Pony Club";
   const openGraphDescription =
-    locale === 'el'
-      ? 'Η καλύτερη προσφορά για περιπέτεια στον Αχέροντα! Rafting και ιππασία σε ένα πακέτο. Κλείστε τη θέση σας σήμερα!'
-      : 'The best deal for Acheron adventure! Rafting and horse riding in one package. Book your spot today!';
+    locale === "el"
+      ? "Η καλύτερη προσφορά για περιπέτεια στον Αχέροντα! Rafting και ιππασία σε ένα πακέτο. Κλείστε τη θέση σας σήμερα!"
+      : "The best deal for Acheron adventure! Rafting and horse riding in one package. Book your spot today!";
 
   const keywords =
-    locale === 'el'
-      ? 'πακέτο rafting ιππασία, αχέροντας πακέτο, συνδυασμένη περιπέτεια, καλύτερη τιμή, οικογενειακό πακέτο, Pony Club, Θεσπρωτία'
-      : 'rafting horse riding package, acheron package deal, combined adventure, best value, family package, Pony Club, Thesprotia';
+    locale === "el"
+      ? "πακέτο rafting ιππασία, αχέροντας πακέτο, συνδυασμένη περιπέτεια, καλύτερη τιμή, οικογενειακό πακέτο, Pony Club, Θεσπρωτία"
+      : "rafting horse riding package, acheron package deal, combined adventure, best value, family package, Pony Club, Thesprotia";
 
   return {
     title,
@@ -52,35 +52,35 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://ponyclub.gr/${locale}/packages/rafting-riding`,
       languages: {
-        en: 'https://ponyclub.gr/en/packages/rafting-riding',
-        el: 'https://ponyclub.gr/el/packages/rafting-riding',
+        en: "https://ponyclub.gr/en/packages/rafting-riding",
+        el: "https://ponyclub.gr/el/packages/rafting-riding",
       },
     },
     openGraph: {
       title: openGraphTitle,
       description: openGraphDescription,
       url: `https://ponyclub.gr/${locale}/packages/rafting-riding`,
-      siteName: 'Pony Club',
+      siteName: "Pony Club",
       images: [
         {
-          url: 'https://ponyclub.gr/images/packages/rafting-riding-package.jpg',
+          url: "https://ponyclub.gr/images/packages/rafting-riding-package.jpg",
           width: 1200,
           height: 630,
           alt:
-            locale === 'el'
-              ? 'Πακέτο Rafting & Ιππασία στον Αχέροντα'
-              : 'Rafting & Horse Riding Package at Acheron',
+            locale === "el"
+              ? "Πακέτο Rafting & Ιππασία στον Αχέροντα"
+              : "Rafting & Horse Riding Package at Acheron",
         },
       ],
-      locale: locale === 'el' ? 'el_GR' : 'en_US',
-      type: 'website',
+      locale: locale === "el" ? "el_GR" : "en_US",
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: openGraphTitle,
       description: openGraphDescription,
       images: [
-        'https://ponyclub.gr/images/packages/rafting-riding-package.jpg',
+        "https://ponyclub.gr/images/packages/rafting-riding-package.jpg",
       ],
     },
     robots: {
@@ -89,9 +89,9 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };
@@ -99,27 +99,27 @@ export async function generateMetadata({
 
 const RaftingRidingPackagePage = async ({ params }: PageProps) => {
   const { locale } = await params;
-  const isGreek = locale === 'el';
+  const isGreek = locale === "el";
 
   // Define the experience ID for the rafting & riding package
-  const bokunExperienceId = '1020598'; // Using existing package-1 ID as it matches the description
+  const bokunExperienceId = "1020598"; // Using existing package-1 ID as it matches the description
 
   // Generate structured data for this package
-  const structuredData = generateActivityStructuredData('rafting', locale); // Using rafting as base, will enhance later
+  const structuredData = generateActivityStructuredData("rafting", locale); // Using rafting as base, will enhance later
 
   // Generate breadcrumb structured data
   const breadcrumbData = generateBreadcrumbStructuredData(
     [
       {
-        name: isGreek ? 'Αρχική' : 'Home',
+        name: isGreek ? "Αρχική" : "Home",
         url: `https://ponyclub.gr/${locale}`,
       },
       {
-        name: isGreek ? 'Πακέτα' : 'Packages',
+        name: isGreek ? "Πακέτα" : "Packages",
         url: `https://ponyclub.gr/${locale}#packages`,
       },
     ],
-    isGreek ? 'Rafting & Ιππασία' : 'Rafting & Horse Riding',
+    isGreek ? "Rafting & Ιππασία" : "Rafting & Horse Riding"
   );
 
   // Generate FAQ structured data
@@ -127,26 +127,26 @@ const RaftingRidingPackagePage = async ({ params }: PageProps) => {
     isGreek
       ? [
           {
-            question: 'Τι περιλαμβάνει το πακέτο Rafting & Ιππασία;',
+            question: "Τι περιλαμβάνει το πακέτο Rafting & Ιππασία;",
             answer:
-              'Το πακέτο περιλαμβάνει 30 λεπτά rafting στον Αχέροντα, 15 λεπτά ιππασία, όλο τον εξοπλισμό ασφαλείας και επαγγελματία οδηγό.',
+              "Το πακέτο περιλαμβάνει 30 λεπτά rafting στον Αχέροντα, 15 λεπτά ιππασία, όλο τον εξοπλισμό ασφαλείας και επαγγελματία οδηγό.",
           },
           {
-            question: 'Ποια είναι η καλύτερη τιμή για το πακέτο;',
+            question: "Ποια είναι η καλύτερη τιμή για το πακέτο;",
             answer:
-              'Το πακέτο κοστίζει €20 για ενήλικες και €10 για παιδιά 6-12 ετών. Είναι η καλύτερη αξία για δύο δραστηριότητες!',
+              "Το πακέτο κοστίζει €20 για ενήλικες και €10 για παιδιά 6-12 ετών. Είναι η καλύτερη αξία για δύο δραστηριότητες!",
           },
           {
-            question: 'Είναι κατάλληλο για οικογένειες;',
+            question: "Είναι κατάλληλο για οικογένειες;",
             answer:
-              'Ναι! Το πακέτο είναι σχεδιασμένο για οικογένειες και αρχάριους. Δεχόμαστε παιδιά από 6 ετών.',
+              "Ναι! Το πακέτο είναι σχεδιασμένο για οικογένειες και αρχάριους. Δεχόμαστε παιδιά από 6 ετών.",
           },
         ]
       : [
           {
             question: "What's included in the Rafting & Horse Riding package?",
             answer:
-              'The package includes 30 minutes of Acheron rafting, 15 minutes of horse riding, all safety equipment, and a professional guide.',
+              "The package includes 30 minutes of Acheron rafting, 15 minutes of horse riding, all safety equipment, and a professional guide.",
           },
           {
             question: "What's the best price for this package?",
@@ -154,12 +154,12 @@ const RaftingRidingPackagePage = async ({ params }: PageProps) => {
               "The package costs €20 for adults and €10 for children 6-12 years. It's the best value for two activities!",
           },
           {
-            question: 'Is it suitable for families?',
+            question: "Is it suitable for families?",
             answer:
-              'Yes! The package is designed for families and beginners. We accept children from 6 years old.',
+              "Yes! The package is designed for families and beginners. We accept children from 6 years old.",
           },
         ],
-    `https://ponyclub.gr/${locale}/packages/rafting-riding`,
+    `https://ponyclub.gr/${locale}/packages/rafting-riding`
   );
 
   const packageDescription = isGreek ? (
@@ -225,22 +225,22 @@ const RaftingRidingPackagePage = async ({ params }: PageProps) => {
       <ActivityPageLayout
         title={
           isGreek
-            ? 'Πακέτο Rafting & Ιππασία'
-            : 'Rafting & Horse Riding Package'
+            ? "Πακέτο Rafting & Ιππασία"
+            : "Rafting & Horse Riding Package"
         }
         subtitle={
           isGreek
-            ? 'Η καλύτερη προσφορά για περιπέτεια!'
-            : 'Best value for adventure!'
+            ? "Η καλύτερη προσφορά για περιπέτεια!"
+            : "Best value for adventure!"
         }
-        descriptionTitle={isGreek ? 'Περιγραφή Πακέτου' : 'Package Description'}
+        descriptionTitle={isGreek ? "Περιγραφή Πακέτου" : "Package Description"}
         descriptionContent={packageDescription}
-        pricingTitle={isGreek ? 'Κράτηση Πακέτου' : 'Package Booking'}
+        pricingTitle={isGreek ? "Κράτηση Πακέτου" : "Package Booking"}
         pricingContent={
           <div className="space-y-8">
             <div className="border-t border-gray-200 pt-6">
               <h3 className="text-xl font-bold text-center mb-4 text-amber-800">
-                {isGreek ? 'Κλείστε το Πακέτο Online' : 'Book Package Online'}
+                {isGreek ? "Κλείστε το Πακέτο Online" : "Book Package Online"}
               </h3>
               <div className="bokun-widget-container">
                 <DynamicBokunWidget experienceId={bokunExperienceId} />
@@ -248,45 +248,45 @@ const RaftingRidingPackagePage = async ({ params }: PageProps) => {
             </div>
           </div>
         }
-        detailsTitle={isGreek ? 'Λεπτομέρειες Πακέτου' : 'Package Details'}
+        detailsTitle={isGreek ? "Λεπτομέρειες Πακέτου" : "Package Details"}
         detailsContent={
           <div className="space-y-4">
             <h3 className="text-2xl font-bold">
-              {isGreek ? 'Τι Περιλαμβάνει' : "What's Included"}
+              {isGreek ? "Τι Περιλαμβάνει" : "What's Included"}
             </h3>
             <ul className="space-y-2">
               <li className="flex items-start">
                 <span className="mr-2 text-amber-600">•</span>
                 <span>
-                  <strong>{isGreek ? 'Rafting:' : 'Rafting:'}</strong>{' '}
+                  <strong>{isGreek ? "Rafting:" : "Rafting:"}</strong>{" "}
                   {isGreek
-                    ? '30 λεπτά στον Αχέροντα'
-                    : '30 minutes on Acheron River'}
+                    ? "30 λεπτά στον Αχέροντα"
+                    : "30 minutes on Acheron River"}
                 </span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-amber-600">•</span>
                 <span>
-                  <strong>{isGreek ? 'Ιππασία:' : 'Horse Riding:'}</strong>{' '}
+                  <strong>{isGreek ? "Ιππασία:" : "Horse Riding:"}</strong>{" "}
                   {isGreek
-                    ? '15 λεπτά με εκπαιδευμένα άλογα'
-                    : '15 minutes with trained horses'}
+                    ? "15 λεπτά με εκπαιδευμένα άλογα"
+                    : "15 minutes with trained horses"}
                 </span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-amber-600">•</span>
                 <span>
-                  <strong>{isGreek ? 'Εξοπλισμός:' : 'Equipment:'}</strong>{' '}
+                  <strong>{isGreek ? "Εξοπλισμός:" : "Equipment:"}</strong>{" "}
                   {isGreek
-                    ? 'Πλήρης εξοπλισμός ασφαλείας'
-                    : 'Complete safety equipment'}
+                    ? "Πλήρης εξοπλισμός ασφαλείας"
+                    : "Complete safety equipment"}
                 </span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-amber-600">•</span>
                 <span>
-                  <strong>{isGreek ? 'Οδηγός:' : 'Guide:'}</strong>{' '}
-                  {isGreek ? 'Επαγγελματίας οδηγός' : 'Professional guide'}
+                  <strong>{isGreek ? "Οδηγός:" : "Guide:"}</strong>{" "}
+                  {isGreek ? "Επαγγελματίας οδηγός" : "Professional guide"}
                 </span>
               </li>
             </ul>

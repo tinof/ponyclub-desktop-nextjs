@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface GoogleAnalyticsProps {
   gaId: string;
@@ -51,8 +51,6 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
           `,
         }}
       />
-
-
     </>
   );
 }

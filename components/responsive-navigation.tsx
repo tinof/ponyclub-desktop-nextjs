@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useIsMobileOrTablet } from '@/hooks/use-media-query';
-import HamburgerMenu from './hamburger-menu';
-import DesktopMenu from './desktop-menu';
+import { useEffect, useState } from "react";
+import { useIsMobileOrTablet } from "@/hooks/use-media-query";
+import DesktopMenu from "./desktop-menu.tsx";
+import HamburgerMenu from "./hamburger-menu.tsx";
 
 export default function ResponsiveNavigation() {
   // Use the consistent media query hook for mobile/tablet detection

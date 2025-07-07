@@ -12,32 +12,33 @@ import {
   TreePine,
   Users,
   Waves,
-} from 'lucide-react';
+} from "lucide-react";
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for content pages
 // School program content may change periodically (pricing, programs, seasonal updates)
 export const revalidate = 7200; // Revalidate every 2 hours
-import type { Metadata } from 'next';
-import { Roboto_Slab } from 'next/font/google';
-import Link from 'next/link';
 
-import ResponsiveNavigation from '@/components/responsive-navigation';
-import { BorderBeam } from '@/components/ui/border-beam';
-import { GridPattern } from '@/components/ui/grid-pattern';
-import { NumberTicker } from '@/components/ui/number-ticker';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
-import { PulsatingButton } from '@/components/ui/pulsating-button';
+import type { Metadata } from "next";
+import { Roboto_Slab } from "next/font/google";
+import Link from "next/link";
+
+import ResponsiveNavigation from "@/components/responsive-navigation";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { GridPattern } from "@/components/ui/grid-pattern";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import { PulsatingButton } from "@/components/ui/pulsating-button";
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
-  subsets: ['latin', 'greek'],
-  variable: '--font-roboto-slab',
-  weight: ['400', '700', '900'],
+  subsets: ["latin", "greek"],
+  variable: "--font-roboto-slab",
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
-  title: 'Για τα σχολεία | Pony Club',
-  description: 'Προγράμματα εκδρομών για σχολεία στις πηγές του Αχέροντα',
+  title: "Για τα σχολεία | Pony Club",
+  description: "Προγράμματα εκδρομών για σχολεία στις πηγές του Αχέροντα",
 };
 
 export default function ForSchoolsPage() {
@@ -189,11 +190,11 @@ export default function ForSchoolsPage() {
                   />
                   <div
                     className="h-2 w-2 animate-bounce rounded-full bg-amber-300"
-                    style={{ animationDelay: '0.1s' }}
+                    style={{ animationDelay: "0.1s" }}
                   />
                   <div
                     className="h-2 w-2 animate-bounce rounded-full bg-amber-300"
-                    style={{ animationDelay: '0.2s' }}
+                    style={{ animationDelay: "0.2s" }}
                   />
                 </div>
               </div>
@@ -322,32 +323,32 @@ export default function ForSchoolsPage() {
                 <div className="space-y-8">
                   {[
                     {
-                      time: '9:00-10:00',
+                      time: "9:00-10:00",
                       icon: MapPin,
-                      title: 'Άφιξη & Υποδοχή',
+                      title: "Άφιξη & Υποδοχή",
                       description:
-                        'Άφιξη στον μυστηριώδη χώρο της περιπέτειας και γνωριμία με το περιβάλλον.',
+                        "Άφιξη στον μυστηριώδη χώρο της περιπέτειας και γνωριμία με το περιβάλλον.",
                     },
                     {
-                      time: '10:00-10:30',
+                      time: "10:00-10:30",
                       icon: Users,
-                      title: 'Ομαδοποίηση & Briefing',
+                      title: "Ομαδοποίηση & Briefing",
                       description:
-                        'Ενώνουμε τις δυνάμεις μας και αποκτούμε γνώσεις για το ταξίδι μας στις πηγές του ποταμού.',
+                        "Ενώνουμε τις δυνάμεις μας και αποκτούμε γνώσεις για το ταξίδι μας στις πηγές του ποταμού.",
                     },
                     {
-                      time: '10:30-13:00',
+                      time: "10:30-13:00",
                       icon: Target,
-                      title: 'Δραστηριότητες & Εξερεύνηση',
+                      title: "Δραστηριότητες & Εξερεύνηση",
                       description:
-                        'Εξερευνούμε τα μυστικά μονοπάτια και πραγματοποιούμε διάφορες αποστολές σε ομάδες.',
+                        "Εξερευνούμε τα μυστικά μονοπάτια και πραγματοποιούμε διάφορες αποστολές σε ομάδες.",
                     },
                     {
-                      time: '13:00-14:00',
+                      time: "13:00-14:00",
                       icon: Star,
-                      title: 'Γεύμα & Επιστροφή',
+                      title: "Γεύμα & Επιστροφή",
                       description:
-                        'Απολαμβάνουμε ένα θαυμάσιο γεύμα και επιστρέφουμε με νέες ιστορίες να μοιραστούμε.',
+                        "Απολαμβάνουμε ένα θαυμάσιο γεύμα και επιστρέφουμε με νέες ιστορίες να μοιραστούμε.",
                     },
                   ].map((item, index) => (
                     <div
@@ -564,24 +565,24 @@ export default function ForSchoolsPage() {
                   {[
                     {
                       icon: Waves,
-                      title: 'ΡΑΦΤΙΝΓΚ ΜΕ ΤΗΝ ΟΙΚΟΓΕΝΕΙΑ',
+                      title: "ΡΑΦΤΙΝΓΚ ΜΕ ΤΗΝ ΟΙΚΟΓΕΝΕΙΑ",
                       description:
-                        'Κατευθυνθείτε σε μια συναρπαστική περιπέτεια μέσα από ειδικές διαδρομές για μικρούς και μεγάλους!',
-                      color: 'from-blue-500 to-cyan-500',
+                        "Κατευθυνθείτε σε μια συναρπαστική περιπέτεια μέσα από ειδικές διαδρομές για μικρούς και μεγάλους!",
+                      color: "from-blue-500 to-cyan-500",
                     },
                     {
                       icon: TreePine,
-                      title: 'ΑΝΑΚΑΛΥΨΤΕ ΤΙΣ ΠΗΓΕΣ',
+                      title: "ΑΝΑΚΑΛΥΨΤΕ ΤΙΣ ΠΗΓΕΣ",
                       description:
-                        'Περπατήστε στα μονοπάτια της φύσης και ανακαλύψτε τις μυστικές πηγές και τους κρυστάλλινους ποταμούς.',
-                      color: 'from-green-500 to-emerald-500',
+                        "Περπατήστε στα μονοπάτια της φύσης και ανακαλύψτε τις μυστικές πηγές και τους κρυστάλλινους ποταμούς.",
+                      color: "from-green-500 to-emerald-500",
                     },
                     {
                       icon: Target,
-                      title: 'ΤΟΞΟΒΟΛΙΑ ΣΤΗ ΦΥΣΗ',
+                      title: "ΤΟΞΟΒΟΛΙΑ ΣΤΗ ΦΥΣΗ",
                       description:
-                        'Αφήστε την απόλυτη ελευθερία να σας κατακτήσει σε μια συναρπαστική εμπειρία τοξοβολίας στη φύση.',
-                      color: 'from-amber-500 to-orange-500',
+                        "Αφήστε την απόλυτη ελευθερία να σας κατακτήσει σε μια συναρπαστική εμπειρία τοξοβολίας στη φύση.",
+                      color: "from-amber-500 to-orange-500",
                     },
                   ].map((activity, index) => (
                     <div
@@ -676,10 +677,10 @@ export default function ForSchoolsPage() {
                         </div>
                         <div className="mt-4 flex flex-wrap gap-2">
                           {[
-                            'Ράφτινγκ',
-                            'Τοξοβολία',
-                            'Πεζοπορία',
-                            'Εξοπλισμός',
+                            "Ράφτινγκ",
+                            "Τοξοβολία",
+                            "Πεζοπορία",
+                            "Εξοπλισμός",
                           ].map((item) => (
                             <span
                               key={item}
@@ -767,11 +768,11 @@ export default function ForSchoolsPage() {
                           <p className="leading-relaxed text-gray-700">
                             Στον χώρο της εκδρομής, θα βρείτε εστιατόρια με
                             αυθεντική κουζίνα και άριστη υποδομή, όπου μπορείτε
-                            να απολαύσετε γεύματα με θέα στη φύση, με τιμές από{' '}
+                            να απολαύσετε γεύματα με θέα στη φύση, με τιμές από{" "}
                             <span className="font-bold text-[#6b8362]">
-                              <NumberTicker value={7} /> έως{' '}
+                              <NumberTicker value={7} /> έως{" "}
                               <NumberTicker value={10} /> ευρώ
-                            </span>{' '}
+                            </span>{" "}
                             ανά άτομο.
                           </p>
                         </div>
@@ -829,19 +830,19 @@ export default function ForSchoolsPage() {
               >
                 {[
                   {
-                    src: '/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg',
-                    alt: 'Παιδιά σε δραστηριότητες ράφτινγκ',
-                    title: 'Ράφτινγκ Περιπέτεια',
+                    src: "/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg",
+                    alt: "Παιδιά σε δραστηριότητες ράφτινγκ",
+                    title: "Ράφτινγκ Περιπέτεια",
                   },
                   {
-                    src: '/images/ChildrenRafting_GreenOutdoor_Adventurous_RiverScene.jpg',
-                    alt: 'Παιδιά σε περιπέτεια ράφτινγκ',
-                    title: 'Ομαδική Δραστηριότητα',
+                    src: "/images/ChildrenRafting_GreenOutdoor_Adventurous_RiverScene.jpg",
+                    alt: "Παιδιά σε περιπέτεια ράφτινγκ",
+                    title: "Ομαδική Δραστηριότητα",
                   },
                   {
-                    src: '/images/Hiking_Group_Green_Nature_Stream.jpg',
-                    alt: 'Ομάδα σε πεζοπορία στη φύση',
-                    title: 'Εξερεύνηση Φύσης',
+                    src: "/images/Hiking_Group_Green_Nature_Stream.jpg",
+                    alt: "Ομάδα σε πεζοπορία στη φύση",
+                    title: "Εξερεύνηση Φύσης",
                   },
                 ].map((image, index) => (
                   <div

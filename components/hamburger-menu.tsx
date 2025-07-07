@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Menu, Phone } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Menu, Phone } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from "@/contexts/language-context";
 
 export default function HamburgerMenu() {
   const { t, language, setLanguage } = useLanguage();
@@ -24,31 +24,31 @@ export default function HamburgerMenu() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Activities menu items
   const activities = [
     {
-      id: 'kayak-rafting',
-      label: language === 'el' ? 'Καγιάκ & Ράφτινγκ' : 'Kayak & Rafting',
-      href: '/kayak-rafting',
+      id: "kayak-rafting",
+      label: language === "el" ? "Καγιάκ & Ράφτινγκ" : "Kayak & Rafting",
+      href: "/kayak-rafting",
     },
     {
-      id: 'riding',
-      label: language === 'el' ? 'Ιππασία' : 'Riding',
-      href: '/riding',
+      id: "riding",
+      label: language === "el" ? "Ιππασία" : "Riding",
+      href: "/riding",
     },
     {
-      id: 'trekking',
-      label: language === 'el' ? 'Πεζοπορία' : 'Trekking',
-      href: '/trekking',
+      id: "trekking",
+      label: language === "el" ? "Πεζοπορία" : "Trekking",
+      href: "/trekking",
     },
   ];
 
   // Handle language change
-  const handleLanguageChange = (lang: 'en' | 'el') => {
+  const handleLanguageChange = (lang: "en" | "el") => {
     setLanguage(lang);
     closeMenu();
   };
@@ -57,6 +57,7 @@ export default function HamburgerMenu() {
     <div className="relative" ref={menuRef}>
       {/* Hamburger button */}
       <button
+        type="button"
         onClick={toggleMenu}
         className={`
           flex h-10 w-10 items-center justify-center rounded-full p-2
@@ -70,7 +71,7 @@ export default function HamburgerMenu() {
             h-5 w-5 text-foreground
             hover:text-primary
           `}
-        />{' '}
+        />{" "}
         {/* Standard icon color */}
         {/* Removed inset div */}
       </button>
@@ -83,12 +84,12 @@ export default function HamburgerMenu() {
             border-border bg-card shadow-lg
           `}
         >
-          {' '}
+          {" "}
           {/* Cleaner dropdown style */}
           <div className="px-1 py-2">
             {/* Call us button - prominently displayed at top */}
             <a
-              href={`tel:${t.contact.phone1.replace(/\s+/g, '')}`}
+              href={`tel:${t.contact.phone1.replace(/\s+/g, "")}`}
               className={`
                 mx-3 mb-3 flex items-center justify-center gap-3 rounded-xl
                 border border-primary-foreground/10 bg-gradient-to-r
@@ -112,9 +113,9 @@ export default function HamburgerMenu() {
                 block px-4 py-2.5 text-sm
                 ${
                   /* Removed rounded-md */
-                  pathname === '/'
-                    ? 'font-semibold text-primary' /* Active: darker green text, no bg */
-                    : 'text-foreground hover:bg-secondary hover:text-primary' /* Inactive: hover bg and text */
+                  pathname === "/"
+                    ? "font-semibold text-primary" /* Active: darker green text, no bg */
+                    : "text-foreground hover:bg-secondary hover:text-primary" /* Inactive: hover bg and text */
                 }
                 transition-colors
               `}
@@ -124,16 +125,16 @@ export default function HamburgerMenu() {
             </Link>
 
             {/* River & Village - English only */}
-            {language === 'en' && (
+            {language === "en" && (
               <Link
                 href="/river-village"
                 className={`
                   block px-4 py-2.5 text-sm
                   ${
                     /* Removed rounded-md */
-                    pathname === '/river-village'
-                      ? 'font-semibold text-primary'
-                      : 'text-foreground hover:bg-secondary hover:text-primary'
+                    pathname === "/river-village"
+                      ? "font-semibold text-primary"
+                      : "text-foreground hover:bg-secondary hover:text-primary"
                   }
                   transition-colors
                 `}
@@ -144,16 +145,16 @@ export default function HamburgerMenu() {
             )}
 
             {/* For Schools (Για τα σχολεία) - Greek only */}
-            {language === 'el' && (
+            {language === "el" && (
               <Link
                 href="/for-schools"
                 className={`
                   block px-4 py-2.5 text-sm
                   ${
                     /* Removed rounded-md */
-                    pathname === '/for-schools'
-                      ? 'font-semibold text-primary'
-                      : 'text-foreground hover:bg-secondary hover:text-primary'
+                    pathname === "/for-schools"
+                      ? "font-semibold text-primary"
+                      : "text-foreground hover:bg-secondary hover:text-primary"
                   }
                   transition-colors
                 `}
@@ -165,7 +166,7 @@ export default function HamburgerMenu() {
 
             {/* Activities section */}
             <div className="mt-1 border-t border-border pt-1">
-              {' '}
+              {" "}
               {/* Cleaner border */}
               <div
                 className={`
@@ -173,7 +174,7 @@ export default function HamburgerMenu() {
                   text-muted-foreground uppercase
                 `}
               >
-                {' '}
+                {" "}
                 {/* Standard header text */}
                 {t.navigation.activities}
               </div>
@@ -186,8 +187,8 @@ export default function HamburgerMenu() {
                     ${
                       /* Removed rounded-md */
                       pathname === activity.href
-                        ? 'font-semibold text-primary'
-                        : 'text-foreground hover:bg-secondary hover:text-primary'
+                        ? "font-semibold text-primary"
+                        : "text-foreground hover:bg-secondary hover:text-primary"
                     }
                     transition-colors
                   `}
@@ -200,7 +201,7 @@ export default function HamburgerMenu() {
 
             {/* Language selector in menu */}
             <div className="mt-1 border-t border-border pt-1">
-              {' '}
+              {" "}
               {/* Cleaner border */}
               <div
                 className={`
@@ -208,29 +209,31 @@ export default function HamburgerMenu() {
                   text-muted-foreground uppercase
                 `}
               >
-                {' '}
+                {" "}
                 {/* Standard header text */}
                 {t.navigation.language}
               </div>
               {/* Simplified language buttons to look like text options */}
               <button
+                type="button"
                 className={`
                   block w-full px-4 py-2.5 text-left text-sm
-                  ${language === 'en' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  ${language === "en" ? "font-semibold text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}
                   transition-colors
                 `}
-                onClick={() => handleLanguageChange('en')}
+                onClick={() => handleLanguageChange("en")}
                 aria-label="Switch to English"
               >
                 English
               </button>
               <button
+                type="button"
                 className={`
                   block w-full px-4 py-2.5 text-left text-sm
-                  ${language === 'el' ? 'font-semibold text-primary' : 'text-foreground hover:bg-secondary hover:text-primary'}
+                  ${language === "el" ? "font-semibold text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}
                   transition-colors
                 `}
-                onClick={() => handleLanguageChange('el')}
+                onClick={() => handleLanguageChange("el")}
                 aria-label="Switch to Greek"
               >
                 Ελληνικά

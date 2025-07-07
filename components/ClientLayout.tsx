@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import PageLayout from '@/components/PageLayout';
-import { ThemeProvider } from '@/components/theme-provider';
-import { LanguageProvider } from '@/contexts/language-context';
-import { useBokunInit } from '@/hooks/use-bokun-init'; // Import the hook
+import type React from "react";
+import PageLayout from "@/components/PageLayout";
+import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/contexts/language-context";
+import { useBokunInit } from "@/hooks/use-bokun-init"; // Import the hook
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -13,15 +13,6 @@ interface ClientLayoutProps {
 
 // Component to call useBokunInit - respects feature flag
 function BokunInitializer() {
-  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
-
-  if (!isBokunEnabled) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag');
-    }
-    return null;
-  }
-
   useBokunInit();
   return null; // This component doesn't render anything itself
 }
@@ -30,7 +21,7 @@ export default function ClientLayout({
   children,
   initialLocale,
 }: ClientLayoutProps) {
-  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
 
   return (
     <LanguageProvider initialLang={initialLocale}>
@@ -44,7 +35,7 @@ export default function ClientLayout({
         <PageLayout>{children}</PageLayout>
         {/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
         {isBokunEnabled && (
-          <div className="bokunWidget" style={{ display: 'none' }} />
+          <div className="bokunWidget" style={{ display: "none" }} />
         )}
       </ThemeProvider>
     </LanguageProvider>

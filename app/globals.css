@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Optimized source paths for better tree-shaking and performance */
 @source '../components/ui/**/*.{js,ts,jsx,tsx}';
@@ -17,91 +17,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-  /* Breakpoints - Enhanced with container query support */
-  --breakpoint-*: initial;
-  --breakpoint-xs: 480px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-
-  /* Color system - Enhanced with OKLCH support for better color consistency */
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  /* Custom brand colors */
-  --color-river-accent: hsl(var(--river-accent));
-
-  /* Border radius system */
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
-  /* Typography system */
-  --font-sans: var(--font-inter), sans-serif;
-  --font-roboto-slab: var(--font-roboto-slab), serif;
-
-  /* Animation system */
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-text-shine: text-shine 4s ease-in-out infinite;
-
-  /* Text shadow utilities */
-  --text-shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
-  --text-shadow-xl: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
-  @keyframes text-shine {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+@layer base {
+  :root {
+    --breakpoint-xs: 480px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
   }
 }
 
@@ -260,13 +183,13 @@
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/pattern.svg');
+    background: url("/pattern.svg");
     opacity: 0.18;
     mix-blend-mode: overlay;
     pointer-events: none;
@@ -317,20 +240,14 @@
   -webkit-backdrop-filter: blur(10px);
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(45deg, hsl(var(--river-accent)), #6b8362);
-    -webkit-mask-image:
-      linear-gradient(#fff 0 0),
-      linear-gradient(#fff 0 0);
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask-image:
-      linear-gradient(#fff 0 0),
       linear-gradient(#fff 0 0);
     mask:
       linear-gradient(#fff 0 0) content-box,
@@ -478,8 +395,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
-      'liga' 1,
-      'calt' 1; /* Enable ligatures and contextual alternates */
+      "liga" 1,
+      "calt" 1; /* Enable ligatures and contextual alternates */
   }
 }
 

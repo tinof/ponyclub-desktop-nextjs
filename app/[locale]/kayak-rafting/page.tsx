@@ -1,12 +1,12 @@
-import ActivityPageLayout from '@/components/ActivityPageLayout';
-import DynamicBokunWidget from '@/components/DynamicBokunWidget'; // Import this
+import ActivityPageLayout from "@/components/ActivityPageLayout";
+import DynamicBokunWidget from "@/components/DynamicBokunWidget"; // Import this
 
 // PERFORMANCE OPTIMIZATION: ISR configuration for activity pages
 // Activity content may change periodically (pricing, availability, seasonal updates)
 export const revalidate = 3600; // Revalidate every hour
 
 const KayakRaftingPage = () => {
-  const bokunExperienceId = '1020611'; // Assuming this is the correct ID for Kayak & Rafting
+  const bokunExperienceId = "1020611"; // Assuming this is the correct ID for Kayak & Rafting
 
   return (
     <ActivityPageLayout

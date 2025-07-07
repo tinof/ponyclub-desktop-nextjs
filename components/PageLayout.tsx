@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 
-import SiteHeader from './site-header'; // Added SiteHeader import
+import SiteHeader from "./site-header.tsx"; // Added SiteHeader import
 
 // Dynamic import for Footer since it's always below the fold
-const DynamicFooter = dynamic(() => import('./Footer'), {
+const DynamicFooter = dynamic(() => import("./Footer.tsx"), {
   ssr: false,
   loading: () => (
     <div className="h-32 w-full animate-pulse bg-gray-200 flex items-center justify-center">
@@ -28,7 +28,7 @@ export default function PageLayout({ children }: PageLayoutProps) {
   useEffect(() => {
     // More defensive check for homepage
     if (pathname) {
-      setIsHomePage(pathname === '/' || pathname === '');
+      setIsHomePage(pathname === "/" || pathname === "");
     }
   }, [pathname]);
 

@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import HomePageContent from '@/components/HomePageContent';
+import type { Metadata } from "next";
+import HomePageContent from "@/components/HomePageContent";
 
 // This page now uses the global translation system via HomePageContent component
 
@@ -13,13 +13,13 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title =
-    locale === 'el'
-      ? 'Pony Club Αχέροντας | Rafting, Ιππασία & Kayak - Κάντε Κράτηση'
-      : 'Pony Club Acheron: Official Rafting, Riding & Kayak Tours - Book Now';
+    locale === "el"
+      ? "Pony Club Αχέροντας | Rafting, Ιππασία & Kayak - Κάντε Κράτηση"
+      : "Pony Club Acheron: Official Rafting, Riding & Kayak Tours - Book Now";
   const description =
-    locale === 'el'
-      ? 'Οι καλύτερες δραστηριότητες στον Αχέροντα από το 1999. Ασφαλές rafting, ιππασία για αρχάριους και οικογένειες. Δείτε τα πακέτα μας!'
-      : 'The original Acheron River adventures since 1999. Safe rafting, beginner-friendly horse riding, and family fun. View our packages and book your tour today!';
+    locale === "el"
+      ? "Οι καλύτερες δραστηριότητες στον Αχέροντα από το 1999. Ασφαλές rafting, ιππασία για αρχάριους και οικογένειες. Δείτε τα πακέτα μας!"
+      : "The original Acheron River adventures since 1999. Safe rafting, beginner-friendly horse riding, and family fun. View our packages and book your tour today!";
 
   return {
     title,

@@ -1,131 +1,117 @@
 {
-	"cline.modelSettings.o3Mini.reasoningEffort": "high",
-
-	// Editor Configuration
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true,
-	"editor.formatOnType": false,
-	"editor.codeActionsOnSave": {
-		"source.organizeImports": "explicit"
-	},
-
-	// Language-specific settings
-	"[javascript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
-	},
-
-	// TypeScript Configuration
-	"typescript.preferences.importModuleSpecifier": "relative",
-	"typescript.preferences.includePackageJsonAutoImports": "on",
-	"typescript.suggest.autoImports": true,
-	"typescript.suggest.completeFunctionCalls": true,
-	"typescript.suggest.includeCompletionsForModuleExports": true,
-	"typescript.suggest.includeCompletionsWithSnippetText": true,
-	"typescript.updateImportsOnFileMove.enabled": "always",
-	"typescript.inlayHints.parameterNames.enabled": "all",
-	"typescript.inlayHints.variableTypes.enabled": true,
-	"typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-
-	// Enhanced TypeScript IntelliSense for third-party components
-	// These settings help prevent invalid prop suggestions (like aria-label on GoogleMapsEmbed)
-	"typescript.preferences.strictFunctionTypes": true,
-	"typescript.preferences.noImplicitReturns": true,
-	"typescript.preferences.strictNullChecks": true,
-
-	// Next.js specific settings
-	"emmet.includeLanguages": {
-		"typescript": "html",
-		"typescriptreact": "html"
-	},
-
-	// React/JSX IntelliSense improvements
-	"typescript.suggest.objectLiteralMethodSnippets.enabled": false,
-	"typescript.suggest.jsdoc.generateReturns": false,
-	"html.suggest.html5": false, // Prevent HTML attribute suggestions in JSX components
-
-	// File Explorer and Editor
-	"explorer.fileNesting.enabled": true,
-	"explorer.fileNesting.patterns": {
-		"*.ts": "${capture}.js",
-		"*.js": "${capture}.js.map",
-		"*.jsx": "${capture}.js",
-		"*.tsx": "${capture}.ts",
-		"tsconfig.json": "tsconfig.*.json",
-		"package.json": "package-lock.json",
-		"tailwind.config.mjs": "postcss.config.mjs",
-		"next.config.js": "next-env.d.ts"
-	},
-
-	// Search and IntelliSense
-	"search.exclude": {
-		"**/node_modules": true,
-		"**/.next": true,
-		"**/.vercel": true,
-		"**/dist": true,
-		"**/build": true,
-		"**/.turbo": true,
-		"**/coverage": true
-	},
-	"files.watcherExclude": {
-		"**/node_modules/**": true,
-		"**/.next/**": true,
-		"**/.vercel/**": true,
-		"**/dist/**": true,
-		"**/build/**": true,
-		"**/.turbo/**": true
-	},
-
-	// AI-Friendly Display Settings
-	"editor.minimap.enabled": false,
-	"editor.minimap.maxColumn": 120,
-	"editor.rulers": [80, 120],
-	"editor.wordWrap": "bounded",
-	"editor.wordWrapColumn": 120,
-	"editor.lineNumbers": "on",
-	"editor.renderWhitespace": "boundary",
-	"editor.bracketPairColorization.enabled": true,
-	"editor.guides.bracketPairs": true,
-	"editor.inlineSuggest.enabled": true,
-
-	// Problem Handling
-	"problems.showCurrentInStatus": true,
-	"problems.sortOrder": "severity",
-
-	// Git Integration
-	"git.enableCommitSigning": false,
-	"git.autofetch": true,
-	"git.enableSmartCommit": true,
-
-	// Performance
-	"extensions.experimental.affinity": {
-		"asvetliakov.vscode-neovim": 1
-	},
-
-	// Terminal
-	"terminal.integrated.defaultProfile.osx": "zsh",
-	"terminal.integrated.fontSize": 11,
-
-	// Auto-save for better AI workflow
-	"files.autoSave": "onFocusChange",
-	"files.autoSaveDelay": 1000,
-
-	// File Associations
-	"files.associations": {
-		"*.js": "javascript",
-		"*.jsx": "javascriptreact",
-		"*.ts": "typescript",
-		"*.tsx": "typescriptreact"
-	}
+  "cline.modelSettings.o3Mini.reasoningEffort": "high",
+  // Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  // Language-specific settings
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  // TypeScript Configuration
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.includeCompletionsForModuleExports": true,
+  "typescript.suggest.includeCompletionsWithSnippetText": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  // Enhanced TypeScript IntelliSense for third-party components
+  // These settings help prevent invalid prop suggestions (like aria-label on GoogleMapsEmbed)
+  "typescript.preferences.strictFunctionTypes": true,
+  "typescript.preferences.noImplicitReturns": true,
+  "typescript.preferences.strictNullChecks": true,
+  // Next.js specific settings
+  "emmet.includeLanguages": {
+    "typescript": "html",
+    "typescriptreact": "html"
+  },
+  // React/JSX IntelliSense improvements
+  "typescript.suggest.objectLiteralMethodSnippets.enabled": false,
+  "typescript.suggest.jsdoc.generateReturns": false,
+  "html.suggest.html5": false, // Prevent HTML attribute suggestions in JSX components
+  // File Explorer and Editor
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json",
+    "tailwind.config.mjs": "postcss.config.mjs",
+    "next.config.js": "next-env.d.ts"
+  },
+  // Search and IntelliSense
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.vercel": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.turbo": true,
+    "**/coverage": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.vercel/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/.turbo/**": true
+  },
+  // AI-Friendly Display Settings
+  "editor.minimap.enabled": false,
+  "editor.minimap.maxColumn": 120,
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "editor.lineNumbers": "on",
+  "editor.renderWhitespace": "boundary",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.inlineSuggest.enabled": true,
+  // Problem Handling
+  "problems.showCurrentInStatus": true,
+  "problems.sortOrder": "severity",
+  // Git Integration
+  "git.enableCommitSigning": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  // Performance
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  // Terminal
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontSize": 11,
+  // Auto-save for better AI workflow
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveDelay": 1000,
+  // File Associations
+  "files.associations": {
+    "*.js": "javascript",
+    "*.jsx": "javascriptreact",
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact"
+  }
 }

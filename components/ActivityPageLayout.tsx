@@ -1,14 +1,14 @@
-import { Roboto_Slab } from 'next/font/google';
+import { Roboto_Slab } from "next/font/google";
 
 // ResponsiveNavigation and Link/OptimizedImage for logo are no longer needed here directly.
 // SiteHeader is now part of PageLayout.
-import { Container } from './ui/Container'; // Import the Container component
+import { Container } from "./ui/Container.tsx"; // Import the Container component
 
 // Define Roboto Slab font instance
 const robotoSlab = Roboto_Slab({
-  subsets: ['latin', 'greek'],
-  variable: '--font-roboto-slab',
-  weight: ['400', '700', '900'],
+  subsets: ["latin", "greek"],
+  variable: "--font-roboto-slab",
+  weight: ["400", "700", "900"],
 });
 
 interface ActivityPageLayoutProps {
@@ -39,7 +39,7 @@ export default function ActivityPageLayout({
   fullWidthContent: _fullWidthContent = false,
 }: ActivityPageLayoutProps) {
   // Determine content max-width class based on column preference
-  const contentMaxWidthClass = useSingleColumn ? 'max-w-none' : 'max-w-none';
+  const contentMaxWidthClass = useSingleColumn ? "max-w-none" : "max-w-none";
 
   return (
     <>

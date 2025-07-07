@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { usePathname, useRouter } from 'next/navigation';
-import type React from 'react';
-import { createContext, useContext } from 'react';
+import { usePathname, useRouter } from "next/navigation";
+import type React from "react";
+import { createContext, useContext } from "react";
 
-import { bokunLangMap } from '@/lib/bokun-lang';
+import { bokunLangMap } from "@/lib/bokun-lang";
 import {
   type Language,
   type TranslationKeys,
   translations,
-} from '@/lib/translations';
-import { useBokunLanguage } from '@/lib/use-bokun-language';
+} from "@/lib/translations";
+import { useBokunLanguage } from "@/lib/use-bokun-language";
 
 type LanguageContextType = {
   language: Language;
@@ -18,7 +18,7 @@ type LanguageContextType = {
   setLanguage: (lang: Language) => void;
 };
 
-const defaultLanguage: Language = 'en';
+const defaultLanguage: Language = "en";
 
 interface LanguageProviderProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ interface LanguageProviderProps {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export function LanguageProvider({
@@ -39,7 +39,7 @@ export function LanguageProvider({
   // The language is now directly determined by the `initialLang` prop from the URL.
   // This ensures the URL is the single source of truth.
   const language =
-    initialLang === 'en' || initialLang === 'el'
+    initialLang === "en" || initialLang === "el"
       ? initialLang
       : defaultLanguage;
 
@@ -60,7 +60,7 @@ export function LanguageProvider({
       newPath = `/${newLocale}`;
     } else {
       // Fallback for unexpected path structures
-      newPath = `/${newLocale}${pathname === '/' ? '' : pathname}`;
+      newPath = `/${newLocale}${pathname === "/" ? "" : pathname}`;
     }
 
     // Navigate to the new path, preserving query parameters
@@ -84,7 +84,7 @@ export function LanguageProvider({
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 }

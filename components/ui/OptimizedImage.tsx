@@ -1,25 +1,33 @@
-'use client';
+"use client";
 
-import type { ImageProps } from 'next/image';
-import Image from 'next/image';
+import type { ImageProps } from "next/image";
+import Image from "next/image";
 
 import {
+  optimizeAvatarImage,
+  optimizeContentImage,
+  optimizeFullWidthImage,
   optimizeGalleryImage,
   optimizeHeroImage,
   optimizeImageProps,
-  optimizeContentImage,
-  optimizeFullWidthImage,
-  optimizeAvatarImage,
-} from '@/lib/image-optimization';
+} from "@/lib/image-optimization";
 
-export type OptimizedImageProps = Omit<ImageProps, 'src' | 'alt'> & {
+export type OptimizedImageProps = Omit<ImageProps, "src" | "alt"> & {
   src: string;
   alt: string;
-  imageType?: 'default' | 'hero' | 'gallery' | 'avatar' | 'logo' | 'thumbnail' | 'content' | 'fullWidth';
+  imageType?:
+    | "default"
+    | "hero"
+    | "gallery"
+    | "avatar"
+    | "logo"
+    | "thumbnail"
+    | "content"
+    | "fullWidth";
   index?: number; // For gallery images
   aspectRatio?: string; // For setting specific aspect ratios
   containerClassName?: string; // For styling the container
-  fetchPriority?: 'high' | 'low' | 'auto'; // For LCP optimization
+  fetchPriority?: "high" | "low" | "auto"; // For LCP optimization
   isAboveFold?: boolean; // For fullWidth images to determine priority
   enableBlurPlaceholder?: boolean; // Override blur placeholder setting
 };
@@ -29,7 +37,7 @@ export type OptimizedImageProps = Omit<ImageProps, 'src' | 'alt'> & {
  * that automatically applies performance optimizations
  */
 export function OptimizedImage({
-  imageType = 'default',
+  imageType = "default",
   index = 0,
   aspectRatio,
   containerClassName,
@@ -42,20 +50,20 @@ export function OptimizedImage({
   // Apply image-type specific optimizations
   const optimizedProps = (() => {
     switch (imageType) {
-      case 'hero':
+      case "hero":
         return optimizeHeroImage(props);
-      case 'gallery':
+      case "gallery":
         return optimizeGalleryImage(props, index);
-      case 'avatar':
+      case "avatar":
         return optimizeAvatarImage(props);
-      case 'content':
+      case "content":
         return optimizeContentImage(props);
-      case 'fullWidth':
+      case "fullWidth":
         return optimizeFullWidthImage(props, isAboveFold);
       default:
         return optimizeImageProps({
           ...props,
-          type: imageType as any,
+          type: imageType as "default",
           fetchPriority,
           enableBlurPlaceholder,
         });
@@ -65,28 +73,36 @@ export function OptimizedImage({
   // If using fill, we need to wrap in a container with relative positioning
   if (optimizedProps.fill) {
     // Apply responsive aspect ratio if provided
-    const aspectRatioClass = aspectRatio ? `aspect-${aspectRatio}` : '';
+    const aspectRatioClass = aspectRatio ? `aspect-${aspectRatio}` : "";
 
     // Build image props with all optimizations
-    const imageProps: any = {
+    const imageProps: ImageProps = {
       src: props.src,
       alt: props.alt,
       fill: true,
-      sizes: optimizedProps.sizes || '100vw',
+      sizes: optimizedProps.sizes || "100vw",
       quality: optimizedProps.quality,
       priority: optimizedProps.priority,
-      loading: !optimizedProps.priority ? optimizedProps.loading || 'lazy' : undefined,
-      className: `object-cover ${className || ''}`,
+      loading: !optimizedProps.priority
+        ? optimizedProps.loading || "lazy"
+        : undefined,
+      className: `object-cover ${className || ""}`,
     };
 
     // Add fetchPriority if available
-    if (fetchPriority || (optimizedProps as any).fetchPriority) {
-      imageProps.fetchPriority = fetchPriority || (optimizedProps as any).fetchPriority;
+    if (
+      fetchPriority ||
+      (optimizedProps as ImageProps & { fetchPriority?: string }).fetchPriority
+    ) {
+      (imageProps as ImageProps & { fetchPriority?: string }).fetchPriority =
+        fetchPriority ||
+        (optimizedProps as ImageProps & { fetchPriority?: string })
+          .fetchPriority;
     }
 
     // Add blur placeholder if available
-    if (optimizedProps.placeholder === 'blur' && optimizedProps.blurDataURL) {
-      imageProps.placeholder = 'blur';
+    if (optimizedProps.placeholder === "blur" && optimizedProps.blurDataURL) {
+      imageProps.placeholder = "blur";
       imageProps.blurDataURL = optimizedProps.blurDataURL;
     }
 
@@ -95,9 +111,9 @@ export function OptimizedImage({
         className={`
           relative overflow-hidden
           ${aspectRatioClass}
-          ${containerClassName || ''}
+          ${containerClassName || ""}
         `}
-        style={!aspectRatioClass ? { height: '100%' } : undefined}
+        style={!aspectRatioClass ? { height: "100%" } : undefined}
       >
         <Image {...imageProps} />
       </div>
@@ -105,26 +121,33 @@ export function OptimizedImage({
   }
 
   // For non-fill images, build optimized props
-  const imageProps: any = {
+  const imageProps: ImageProps = {
     src: props.src,
     alt: props.alt,
     width: optimizedProps.width,
     height: optimizedProps.height,
     quality: optimizedProps.quality,
     priority: optimizedProps.priority,
-    loading: !optimizedProps.priority ? optimizedProps.loading || 'lazy' : undefined,
+    loading: !optimizedProps.priority
+      ? optimizedProps.loading || "lazy"
+      : undefined,
     sizes: optimizedProps.sizes,
     className,
   };
 
   // Add fetchPriority if available
-  if (fetchPriority || (optimizedProps as any).fetchPriority) {
-    imageProps.fetchPriority = fetchPriority || (optimizedProps as any).fetchPriority;
+  if (
+    fetchPriority ||
+    (optimizedProps as ImageProps & { fetchPriority?: string }).fetchPriority
+  ) {
+    (imageProps as ImageProps & { fetchPriority?: string }).fetchPriority =
+      fetchPriority ||
+      (optimizedProps as ImageProps & { fetchPriority?: string }).fetchPriority;
   }
 
   // Add blur placeholder if available
-  if (optimizedProps.placeholder === 'blur' && optimizedProps.blurDataURL) {
-    imageProps.placeholder = 'blur';
+  if (optimizedProps.placeholder === "blur" && optimizedProps.blurDataURL) {
+    imageProps.placeholder = "blur";
     imageProps.blurDataURL = optimizedProps.blurDataURL;
   }
 
@@ -134,7 +157,7 @@ export function OptimizedImage({
 /**
  * HeroImage component - Specialized for hero images
  */
-export function HeroImage(props: Omit<OptimizedImageProps, 'imageType'>) {
+export function HeroImage(props: Omit<OptimizedImageProps, "imageType">) {
   return <OptimizedImage {...props} imageType="hero" />;
 }
 
@@ -144,21 +167,21 @@ export function HeroImage(props: Omit<OptimizedImageProps, 'imageType'>) {
 export function GalleryImage({
   index = 0,
   ...props
-}: Omit<OptimizedImageProps, 'imageType'> & { index?: number }) {
+}: Omit<OptimizedImageProps, "imageType"> & { index?: number }) {
   return <OptimizedImage {...props} imageType="gallery" index={index} />;
 }
 
 /**
  * AvatarImage component - Specialized for avatar images
  */
-export function AvatarImage(props: Omit<OptimizedImageProps, 'imageType'>) {
+export function AvatarImage(props: Omit<OptimizedImageProps, "imageType">) {
   return <OptimizedImage {...props} imageType="avatar" />;
 }
 
 /**
  * ContentImage component - Specialized for images within content/articles
  */
-export function ContentImage(props: Omit<OptimizedImageProps, 'imageType'>) {
+export function ContentImage(props: Omit<OptimizedImageProps, "imageType">) {
   return <OptimizedImage {...props} imageType="content" />;
 }
 
@@ -168,8 +191,14 @@ export function ContentImage(props: Omit<OptimizedImageProps, 'imageType'>) {
 export function FullWidthImage({
   isAboveFold = false,
   ...props
-}: Omit<OptimizedImageProps, 'imageType'> & { isAboveFold?: boolean }) {
-  return <OptimizedImage {...props} imageType="fullWidth" isAboveFold={isAboveFold} />;
+}: Omit<OptimizedImageProps, "imageType"> & { isAboveFold?: boolean }) {
+  return (
+    <OptimizedImage
+      {...props}
+      imageType="fullWidth"
+      isAboveFold={isAboveFold}
+    />
+  );
 }
 
 export default OptimizedImage;
