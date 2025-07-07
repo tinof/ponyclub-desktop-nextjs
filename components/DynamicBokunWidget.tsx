@@ -66,12 +66,17 @@ export default function DynamicBokunWidget({
   return (
     <div ref={ref} style={{ minHeight: '384px' }}>
       {' '}
-      {/* Wrapper div for observer, with min-height matching placeholder */}
+      {/* PERFORMANCE OPTIMIZATION: Fixed height to prevent CLS */}
       {shouldLoad ? (
         <BokunWidget experienceId={experienceId} partialView={partialView} />
       ) : (
-        // Render the loading placeholder defined in dynamic import
-        <div className="h-96 w-full animate-pulse rounded-lg bg-gray-200" />
+        // Render the loading placeholder with fixed height to prevent CLS
+        <div
+          className="h-96 w-full animate-pulse rounded-lg bg-gray-200 flex items-center justify-center"
+          style={{ minHeight: '384px' }} // Ensure consistent height
+        >
+          <span className="text-gray-500">Loading booking widget...</span>
+        </div>
       )}
     </div>
   );

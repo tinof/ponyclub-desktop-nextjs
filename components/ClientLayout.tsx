@@ -11,8 +11,17 @@ interface ClientLayoutProps {
   initialLocale: string;
 }
 
-// Component to call useBokunInit
+// Component to call useBokunInit - respects feature flag
 function BokunInitializer() {
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
+
+  if (!isBokunEnabled) {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag');
+    }
+    return null;
+  }
+
   useBokunInit();
   return null; // This component doesn't render anything itself
 }
@@ -21,6 +30,8 @@ export default function ClientLayout({
   children,
   initialLocale,
 }: ClientLayoutProps) {
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
+
   return (
     <LanguageProvider initialLang={initialLocale}>
       <BokunInitializer />
@@ -31,8 +42,10 @@ export default function ClientLayout({
         disableTransitionOnChange
       >
         <PageLayout>{children}</PageLayout>
-        {/* Hidden Bokun widget container to ensure script initialization */}
-        <div className="bokunWidget" style={{ display: 'none' }} />
+        {/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
+        {isBokunEnabled && (
+          <div className="bokunWidget" style={{ display: 'none' }} />
+        )}
       </ThemeProvider>
     </LanguageProvider>
   );

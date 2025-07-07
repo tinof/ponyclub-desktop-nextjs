@@ -72,24 +72,63 @@ const nextConfig = {
         ...config.optimization,
         splitChunks: {
           ...config.optimization.splitChunks,
+          chunks: 'all',
+          minSize: 20000,
+          maxSize: 244000,
           cacheGroups: {
             ...config.optimization.splitChunks.cacheGroups,
-            // Separate vendor chunks for better caching
+            // React and React-DOM in separate chunk
+            react: {
+              test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+              name: 'react',
+              chunks: 'all',
+              priority: 40,
+            },
+            // Next.js framework chunk
+            nextjs: {
+              test: /[\\/]node_modules[\\/]next[\\/]/,
+              name: 'nextjs',
+              chunks: 'all',
+              priority: 35,
+            },
+            // Framer Motion in separate chunk (heavy animation library)
+            framerMotion: {
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              name: 'framer-motion',
+              chunks: 'all',
+              priority: 30,
+            },
+            // Sentry in separate chunk (monitoring)
+            sentry: {
+              test: /[\\/]node_modules[\\/]@sentry[\\/]/,
+              name: 'sentry',
+              chunks: 'all',
+              priority: 25,
+            },
+            // Remaining Radix UI components (if any)
+            radixUI: {
+              test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+              name: 'radix-ui',
+              chunks: 'all',
+              priority: 20,
+            },
+            // CSS chunks for better caching
+            styles: {
+              name: 'styles',
+              test: /\.(css|scss|sass)$/,
+              chunks: 'all',
+              priority: 50,
+              enforce: true,
+            },
+            // Default vendor chunk for remaining dependencies
             vendor: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
               chunks: 'all',
               priority: 10,
+              minChunks: 1,
             },
-            // Separate CSS chunks for better caching
-            styles: {
-              name: 'styles',
-              test: /\.(css|scss|sass)$/,
-              chunks: 'all',
-              priority: 20,
-              enforce: true,
-            },
-            // Separate common chunks
+            // Common chunks for shared code
             common: {
               name: 'common',
               minChunks: 2,

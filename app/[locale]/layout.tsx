@@ -105,14 +105,22 @@ export default async function LocaleLayout({
 
   const { locale } = await paramsPromise;
 
+  // Feature flag to conditionally disable Bokun-related resources
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== 'false';
+
   // Generate structured data for the layout
   const websiteStructuredData = generateWebsiteStructuredData(locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://static.bokun.io" />
-        <link rel="preconnect" href="https://widgets.bokun.io" />
+        {/* Conditionally preconnect to Bokun domains only if enabled */}
+        {isBokunEnabled && (
+          <>
+            <link rel="preconnect" href="https://static.bokun.io" />
+            <link rel="preconnect" href="https://widgets.bokun.io" />
+          </>
+        )}
         <link rel="preconnect" href="https://universe-static.elfsightcdn.com" />
         <link rel="preconnect" href="https://static.elfsight.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
