@@ -100,7 +100,8 @@ export default function DesktopMenu() {
 					<div
 						className={`
               absolute left-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border
-              border-[--border] bg-[--card] shadow-lg
+              border-gray-200 bg-white/95 backdrop-blur-sm shadow-lg
+              supports-[backdrop-filter]:bg-white/90
             `}
 					>
 						{" "}
@@ -208,7 +209,8 @@ export default function DesktopMenu() {
 					<div
 						className={`
               absolute right-0 z-50 mt-2 w-32 overflow-hidden rounded-lg border
-              border-[--border] bg-[--card] shadow-lg
+              border-gray-200 bg-white/95 backdrop-blur-sm shadow-lg
+              supports-[backdrop-filter]:bg-white/90
             `}
 					>
 						{" "}
