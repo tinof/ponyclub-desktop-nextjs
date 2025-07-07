@@ -13,6 +13,7 @@
     "test": "echo 'No tests configured yet' && exit 0",
     "knip": "knip",
     "knip:production": "knip --production",
+    "security:audit": "pnpm audit --audit-level moderate",
     "analyze": "ANALYZE=true next build",
     "analyze:server": "ANALYZE=true BUNDLE_ANALYZE=server next build",
     "analyze:browser": "ANALYZE=true BUNDLE_ANALYZE=browser next build",

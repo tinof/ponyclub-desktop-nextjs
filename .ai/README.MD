@@ -157,8 +157,8 @@ npx tsc --noEmit --watch
 #### 2. Testing & Validation
 
 ```bash
-# Lint code
-pnpm lint
+# Type check code
+pnpm type-check
 
 # Security audit
 pnpm audit --audit-level moderate

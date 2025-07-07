@@ -17,7 +17,7 @@ A web application built with Next.js and React.
 - **Visualization**: Recharts for data visualization
 - **Icons**: Lucide React
 - **Maps**: Google Maps Embed (via @next/third-parties)
-- **Code Quality**: [Biome](https://biomejs.dev/) (v2.0) for formatting and linting
+
 - **CI/CD**: GitHub Actions with parallel quality checks
 
 ## Local Development
@@ -66,10 +66,6 @@ The following scripts are available for development and production:
 - `pnpm analyze` - Analyze bundle size
 
 ### Code Quality & CI
-- `pnpm ci:check` - **CI-optimized** Biome check (format + lint) - used in GitHub Actions
-- `pnpm format` - Format code with Biome (write mode)
-- `pnpm lint` - Lint code with Biome (write mode)
-- `pnpm check` - Run all Biome checks (write mode)
 - `pnpm type-check` - Run TypeScript type checking
 - `pnpm test` - Run automated tests (placeholder - configure Jest/Vitest)
 
@@ -91,37 +87,6 @@ pnpm start
 ## Code Quality & Maintenance
 
 This project maintains high code quality through a comprehensive suite of automated tools and processes:
-
-### 🚀 Biome v2.0 - Modern Code Quality
-
-[Biome](https://biomejs.dev/) is our primary tool for code formatting and linting, providing:
-
-- **Ultra-fast performance** - 10-100x faster than ESLint/Prettier
-- **Zero configuration** - Works out of the box with sensible defaults
-- **Unified toolchain** - Formatting, linting, and import sorting in one tool
-- **TypeScript-first** - Built specifically for modern JavaScript/TypeScript projects
-
-**Key Features:**
-- Automatic code formatting (replaces Prettier)
-- Advanced linting rules (replaces ESLint)
-- Import organization and sorting
-- CSS and JSON support
-- IDE integration with real-time feedback
-
-**Local Development Workflow:**
-```bash
-# Format and fix all issues automatically
-pnpm check
-
-# Just format code
-pnpm format
-
-# Just lint code
-pnpm lint
-
-# CI-style check (no fixes, just report)
-pnpm ci:check
-```
 
 ### 🔍 Type Safety & Analysis
 
@@ -184,7 +149,6 @@ The pipeline (`.github/workflows/ci.yml`) uses **3 parallel jobs** for maximum e
 #### 1. 🔍 Quality Checks Job
 **Runs in parallel** - Fast feedback on code quality issues
 ```yaml
-- Biome CI Check (Format & Lint)    # pnpm ci:check
 - TypeScript Type Check             # pnpm type-check
 - Knip (Unused Code) Check         # pnpm knip
 - Security Audit Dependencies      # pnpm security:audit
@@ -219,23 +183,12 @@ The CI pipeline enforces these standards:
 
 | Check | Tool | Purpose | Failure Impact |
 |-------|------|---------|----------------|
-| **Code Format** | Biome | Consistent code style | ❌ Blocks merge |
-| **Linting** | Biome | Code quality rules | ❌ Blocks merge |
 | **Type Safety** | TypeScript | Runtime error prevention | ❌ Blocks merge |
 | **Unused Code** | Knip | Codebase cleanliness | ⚠️ Warning (configurable) |
 | **Security** | pnpm audit | Vulnerability detection | ⚠️ Warning (moderate+) |
 | **Build** | Next.js | Production readiness | ❌ Blocks merge |
 
 ### 🚨 Troubleshooting CI Failures
-
-#### **Biome Failures (Format/Lint)**
-```bash
-# Fix automatically
-pnpm check
-
-# Or check what would be fixed
-pnpm ci:check
-```
 
 #### **TypeScript Failures**
 ```bash
