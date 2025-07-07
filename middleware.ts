@@ -12,6 +12,10 @@ const defaultLocale = "en";
 
 const _isDev = process.env.NODE_ENV === "development";
 
+// BFCACHE OPTIMIZATION: Cache-Control header that allows back/forward cache
+// Removes 'no-store' directive while maintaining fresh validation semantics
+const BF_CACHE_HEADER = "private, no-cache, max-age=0, must-revalidate";
+
 // PERFORMANCE OPTIMIZATION: Temporarily disabled CSP-related variables
 // Define additional script sources for development
 // const _devScriptSources = isDev
@@ -183,67 +187,75 @@ const _isDev = process.env.NODE_ENV === "development";
 // const configuredNoseconeMiddleware = createNoseconeMiddleware(noseconeOptions);
 
 export async function middleware(request: NextRequest) {
-  // PERFORMANCE OPTIMIZATION: Temporarily disable dynamic CSP middleware to enable static generation
-  // let response = await configuredNoseconeMiddleware();
+	// PERFORMANCE OPTIMIZATION: Temporarily disable dynamic CSP middleware to enable static generation
+	// let response = await configuredNoseconeMiddleware();
 
-  // if (!response) {
-  //   response = NextResponse.next();
-  // }
+	// if (!response) {
+	//   response = NextResponse.next();
+	// }
 
-  const response = NextResponse.next();
+	const response = NextResponse.next();
 
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+	const { pathname } = request.nextUrl;
+	const pathnameHasLocale = locales.some(
+		(locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+	);
 
-  if (!pathnameHasLocale) {
-    // Check for a saved locale preference in the cookie
-    const localeCookie = request.cookies.get("NEXT_LOCALE")?.value;
-    const chosenLocale = locales.includes(localeCookie as string)
-      ? localeCookie
-      : defaultLocale;
+	if (!pathnameHasLocale) {
+		// Check for a saved locale preference in the cookie
+		const localeCookie = request.cookies.get("NEXT_LOCALE")?.value;
+		const chosenLocale = locales.includes(localeCookie as string)
+			? localeCookie
+			: defaultLocale;
 
-    const newPathname =
-      pathname === "/" ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
-    const url = request.nextUrl.clone();
-    url.pathname = newPathname;
+		const newPathname =
+			pathname === "/" ? `/${chosenLocale}` : `/${chosenLocale}${pathname}`;
+		const url = request.nextUrl.clone();
+		url.pathname = newPathname;
 
-    // PERFORMANCE OPTIMIZATION: Use rewrite instead of redirect to eliminate 307 redirect delay
-    // This serves the localized content directly without forcing a browser redirect
-    const i18nRewriteResponse = NextResponse.rewrite(url);
+		// PERFORMANCE OPTIMIZATION: Use rewrite instead of redirect to eliminate 307 redirect delay
+		// This serves the localized content directly without forcing a browser redirect
+		const i18nRewriteResponse = NextResponse.rewrite(url);
 
-    // Copy headers from the security middleware response to the rewrite response
-    response.headers.forEach((value, key) => {
-      if (!i18nRewriteResponse.headers.has(key)) {
-        i18nRewriteResponse.headers.set(key, value);
-      }
-    });
+		// Copy headers from the security middleware response to the rewrite response
+		response.headers.forEach((value, key) => {
+			if (!i18nRewriteResponse.headers.has(key)) {
+				i18nRewriteResponse.headers.set(key, value);
+			}
+		});
 
-    // Set the locale cookie to remember user preference for future visits
-    i18nRewriteResponse.cookies.set(
-      "NEXT_LOCALE",
-      chosenLocale || defaultLocale,
-      {
-        path: "/",
-        maxAge: 31536000, // 1 year
-        sameSite: "lax",
-      }
-    );
+		// BFCACHE OPTIMIZATION: Set bfcache-friendly Cache-Control header
+		// This allows the page to be restored from back/forward cache
+		i18nRewriteResponse.headers.set("Cache-Control", BF_CACHE_HEADER);
 
-    return i18nRewriteResponse;
-  }
+		// Set the locale cookie to remember user preference for future visits
+		i18nRewriteResponse.cookies.set(
+			"NEXT_LOCALE",
+			chosenLocale || defaultLocale,
+			{
+				path: "/",
+				maxAge: 31536000, // 1 year
+				sameSite: "lax",
+			},
+		);
 
-  response.headers.set(
-    "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=(self), payment=()"
-  );
+		return i18nRewriteResponse;
+	}
 
-  return response;
+	// BFCACHE OPTIMIZATION: Set bfcache-friendly Cache-Control header for all responses
+	// This allows pages to be restored from back/forward cache
+	response.headers.set("Cache-Control", BF_CACHE_HEADER);
+
+	response.headers.set(
+		"Permissions-Policy",
+		"camera=(), microphone=(), geolocation=(self), payment=()",
+	);
+
+	return response;
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)",
-  ],
+	matcher: [
+		"/((?!api|_next/static|_next/image|images|assets|fonts|favicon.ico|robots.txt|sitemap.xml|sw.js|manifest.webmanifest|.*\\..*).*)",
+	],
 };
