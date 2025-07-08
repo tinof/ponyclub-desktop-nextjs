@@ -1,28 +1,71 @@
 "use client";
 
+import Script from "next/script";
+import { useEffect, useState } from "react";
+
 interface GoogleAnalyticsProps {
-  gaId: string;
+	gaId: string;
 }
 
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
-  // PERFORMANCE OPTIMIZATION: Google Analytics now runs exclusively in Partytown web worker
-  // Removed main thread initialization to prevent double-loading
+	const [hasConsent, setHasConsent] = useState(false);
 
-  return (
-    <>
-      {/* PERFORMANCE OPTIMIZATION: Google Analytics script running in web worker via Partytown */}
-      <script
-        id="ga-gtag-script"
-        type="text/partytown"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-      />
+	// Check for analytics consent on mount and when cookies change
+	useEffect(() => {
+		const checkConsent = () => {
+			try {
+				const consentCookie = document.cookie
+					.split("; ")
+					.find((row) => row.startsWith("consent="));
 
-      {/* Initialize Google Analytics in web worker with enhanced error handling */}
-      <script
-        id="ga-init-script"
-        type="text/partytown"
-        dangerouslySetInnerHTML={{
-          __html: `
+				if (consentCookie) {
+					const consent = JSON.parse(
+						decodeURIComponent(consentCookie.split("=")[1]),
+					);
+					setHasConsent(consent.analytics === true);
+				}
+			} catch (error) {
+				if (process.env.NODE_ENV === "development") {
+					console.warn("[GA] Error reading consent:", error);
+				}
+			}
+		};
+
+		checkConsent();
+
+		// Listen for consent changes
+		const handleStorageChange = () => checkConsent();
+		window.addEventListener("storage", handleStorageChange);
+
+		// Also check periodically for cookie changes
+		const interval = setInterval(checkConsent, 1000);
+
+		return () => {
+			window.removeEventListener("storage", handleStorageChange);
+			clearInterval(interval);
+		};
+	}, []);
+
+	// Only render Google Analytics if user has given consent
+	if (!hasConsent) {
+		return null;
+	}
+
+	return (
+		<>
+			{/* PERFORMANCE OPTIMIZATION: Google Analytics script running in web worker via Partytown */}
+			<script
+				id="ga-gtag-script"
+				type="text/partytown"
+				src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+			/>
+
+			{/* Initialize Google Analytics in web worker with enhanced error handling */}
+			<script
+				id="ga-init-script"
+				type="text/partytown"
+				dangerouslySetInnerHTML={{
+					__html: `
             try {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -31,16 +74,22 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
                 page_title: document.title,
                 page_location: window.location.href
               });
-              console.log('[GA] Google Analytics initialized in web worker');
-
-              // Monitor script loading success
-              if (typeof gtag !== 'undefined') {
-                console.log('[GA] Google Analytics script loaded successfully via Partytown');
-              }
+              ${
+								process.env.NODE_ENV === "development"
+									? `console.log('[GA] Google Analytics initialized in web worker');
+                     if (typeof gtag !== 'undefined') {
+                       console.log('[GA] Google Analytics script loaded successfully via Partytown');
+                     }`
+									: ""
+							}
             } catch (error) {
-              console.error('[GA] Error initializing Google Analytics in web worker:', error);
+              ${
+								process.env.NODE_ENV === "development"
+									? `console.error('[GA] Error initializing Google Analytics in web worker:', error);`
+									: ""
+							}
 
-              // Report error to console for monitoring
+              // Report error for monitoring
               if (typeof gtag !== 'undefined') {
                 gtag('event', 'exception', {
                   description: 'GA initialization error: ' + error.message,
@@ -49,8 +98,8 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
               }
             }
           `,
-        }}
-      />
-    </>
-  );
+				}}
+			/>
+		</>
+	);
 }
