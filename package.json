@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:webpack": "next dev",
     "dev:trace": "NEXT_TURBOPACK_TRACING=1 next dev --turbopack",
-    "build": "npm run partytown && node scripts/generate-sitemap-data.js && next build && node scripts/generate-critical-css.js && cp -r public .next/standalone/",
+    "build": "pnpm run partytown && node scripts/generate-sitemap-data.js && next build && node scripts/generate-critical-css.js && cp -r public .next/standalone/",
     "partytown": "partytown copylib public/~partytown",
     "start": "node .next/standalone/server.js",
     "type-check": "tsc --noEmit",
