@@ -17,6 +17,203 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* c15t Cookie Consent Banner Styling */
+/* Custom styling to match Pony Club vintage design system */
+
+.cookie-consent-banner {
+  font-family: inherit;
+  z-index: 9999;
+}
+
+/* Banner container styling */
+.c15t-banner {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  margin: 1rem;
+  max-width: 600px;
+}
+
+/* Banner text styling */
+.c15t-banner-title {
+  color: #6b8362;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.c15t-banner-description {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Button styling to match your design system */
+.c15t-button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  margin: 0 0.25rem;
+}
+
+.c15t-button-primary {
+  background-color: #6b8362;
+  color: white;
+}
+
+.c15t-button-primary:hover {
+  background-color: #5a6f52;
+  transform: translateY(-1px);
+}
+
+.c15t-button-secondary {
+  background-color: transparent;
+  color: #6b8362;
+  border: 1px solid #6b8362;
+}
+
+.c15t-button-secondary:hover {
+  background-color: #6b8362;
+  color: white;
+}
+
+.c15t-button-tertiary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.c15t-button-tertiary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Settings modal styling */
+.c15t-modal {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.c15t-modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.c15t-modal-header {
+  padding: 1.5rem 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.c15t-modal-title {
+  color: #6b8362;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.c15t-modal-body {
+  padding: 1.5rem;
+}
+
+.c15t-category {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #f9fafb;
+}
+
+.c15t-category-title {
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.c15t-category-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Toggle switch styling */
+.c15t-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.c15t-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c15t-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: 0.2s;
+  border-radius: 24px;
+}
+
+.c15t-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+.c15t-toggle input:checked + .c15t-toggle-slider {
+  background-color: #6b8362;
+}
+
+.c15t-toggle input:checked + .c15t-toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .c15t-banner {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .c15t-button {
+    display: block;
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+
+  .c15t-modal-content {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+}
+
 @layer base {
   :root {
     --breakpoint-xs: 480px;
