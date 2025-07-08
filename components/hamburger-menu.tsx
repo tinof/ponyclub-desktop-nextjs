@@ -100,9 +100,8 @@ export default function HamburgerMenu() {
                 hover:scale-[1.02] hover:from-primary/90 hover:to-primary/70
                 hover:shadow-lg
               `}
-							showIcon={false}
+							showIcon={true}
 						>
-							<Phone className="h-5 w-5 text-primary-foreground/90" />
 							<span className="font-medium tracking-wide">
 								{t.navigation.callUs}
 							</span>

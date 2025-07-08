@@ -302,11 +302,7 @@ export function trackToAllPlatforms(
 	// Vercel Analytics
 	if (typeof window !== "undefined" && window.va) {
 		try {
-			type VercelAnalytics = (
-				event: string,
-				data: { name: string; data: Record<string, unknown> },
-			) => void;
-			(window.va as VercelAnalytics)("event", {
+			window.va("event", {
 				name: eventName,
 				data: data,
 			});
@@ -321,9 +317,9 @@ export function trackToAllPlatforms(
 			// Map common events to Facebook Pixel events
 			if (eventName === "book_now_click") {
 				window.fbq("track", "InitiateCheckout", {
-					content_name: data.package_name,
+					content_name: data.package_name as string,
 					content_category: "Adventure Package",
-					value: data.package_price,
+					value: data.package_price as number,
 					currency: "EUR",
 				});
 			}
@@ -382,15 +378,4 @@ if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
 	);
 }
 
-// Declare global types for window objects
-declare global {
-	interface Window {
-		gtag?: (...args: unknown[]) => void;
-		va?: (event: string, data?: Record<string, unknown>) => void;
-		fbq?: (
-			action: string,
-			event: string,
-			data?: Record<string, unknown>,
-		) => void;
-	}
-}
+// Note: Global types for gtag and fbq are declared in types/global.d.ts
