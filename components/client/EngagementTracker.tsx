@@ -12,7 +12,7 @@ export default function EngagementTracker() {
   useEffect(() => {
     // Initialize scroll depth tracking
     const cleanupScroll = initScrollTracking();
-    
+
     // Initialize time on page tracking
     initTimeTracking();
 

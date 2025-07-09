@@ -6,7 +6,8 @@
     ".next/**",
     "dist/**",
     "build/**",
-    "public/~partytown/**"
+    "public/~partytown/**",
+    "docs/**"
   ],
   "ignoreDependencies": ["vercel"],
   "ignoreExportsUsedInFile": true,

@@ -2,10 +2,10 @@
 
 import { ConsentManagerProvider } from "@c15t/nextjs";
 import { useLanguage } from "@/contexts/language-context";
-import ConsentBridge from "./ConsentBridge";
+import ConsentBridge from "./ConsentBridge.tsx";
 
 interface ConsentProviderProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 /**
@@ -16,18 +16,18 @@ interface ConsentProviderProps {
  * analytics system.
  */
 export default function ConsentProvider({ children }: ConsentProviderProps) {
-	const { language } = useLanguage();
+  const { language } = useLanguage();
 
-	return (
-		<ConsentManagerProvider
-			options={{
-				mode: "offline", // Use offline mode - no backend required
-				consentCategories: ["necessary", "analytics", "marketing"] as any,
-				ignoreGeoLocation: true, // Useful for development
-			}}
-		>
-			<ConsentBridge />
-			{children}
-		</ConsentManagerProvider>
-	);
+  return (
+    <ConsentManagerProvider
+      options={{
+        mode: "offline", // Use offline mode - no backend required
+        consentCategories: ["necessary", "analytics", "marketing"],
+        ignoreGeoLocation: true, // Useful for development
+      }}
+    >
+      <ConsentBridge />
+      {children}
+    </ConsentManagerProvider>
+  );
 }

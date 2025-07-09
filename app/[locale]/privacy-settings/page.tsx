@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
-import PrivacySettingsClient from "./PrivacySettingsClient";
+import PrivacySettingsClient from "./PrivacySettingsClient.tsx";
 
 interface PrivacySettingsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata(
-  { params: paramsPromise }: { params: Promise<{ locale: string }> }
-): Promise<Metadata> {
+export async function generateMetadata({
+  params: paramsPromise,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await paramsPromise;
-  
-  const title = locale === 'el' 
-    ? 'Ρυθμίσεις Απορρήτου - Pony Club'
-    : 'Privacy Settings - Pony Club';
-    
-  const description = locale === 'el'
-    ? 'Διαχειριστείτε τις προτιμήσεις cookies και απορρήτου για τον ιστότοπο Pony Club.'
-    : 'Manage your cookie and privacy preferences for the Pony Club website.';
+
+  const title =
+    locale === "el"
+      ? "Ρυθμίσεις Απορρήτου - Pony Club"
+      : "Privacy Settings - Pony Club";
+
+  const description =
+    locale === "el"
+      ? "Διαχειριστείτε τις προτιμήσεις cookies και απορρήτου για τον ιστότοπο Pony Club."
+      : "Manage your cookie and privacy preferences for the Pony Club website.";
 
   return {
     title,
@@ -35,15 +39,14 @@ export default async function PrivacySettingsPage({
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">
-            {locale === 'el' ? 'Ρυθμίσεις Απορρήτου' : 'Privacy Settings'}
+            {locale === "el" ? "Ρυθμίσεις Απορρήτου" : "Privacy Settings"}
           </h1>
-          
+
           <div className="prose prose-gray max-w-none mb-8">
             <p className="text-gray-600">
-              {locale === 'el' 
-                ? 'Διαχειριστείτε τις προτιμήσεις cookies και απορρήτου σας. Μπορείτε να αλλάξετε αυτές τις ρυθμίσεις ανά πάσα στιγμή.'
-                : 'Manage your cookie and privacy preferences. You can change these settings at any time.'
-              }
+              {locale === "el"
+                ? "Διαχειριστείτε τις προτιμήσεις cookies και απορρήτου σας. Μπορείτε να αλλάξετε αυτές τις ρυθμίσεις ανά πάσα στιγμή."
+                : "Manage your cookie and privacy preferences. You can change these settings at any time."}
             </p>
           </div>
 

@@ -9,50 +9,50 @@ import { LanguageProvider } from "@/contexts/language-context";
 import { useBokunInit } from "@/hooks/use-bokun-init"; // Import the hook
 
 interface ClientLayoutProps {
-	children: React.ReactNode;
-	initialLocale: string;
+  children: React.ReactNode;
+  initialLocale: string;
 }
 
 // Component to call useBokunInit - respects feature flag
 function BokunInitializer() {
-	useBokunInit();
-	return null; // This component doesn't render anything itself
+  useBokunInit();
+  return null; // This component doesn't render anything itself
 }
 
 export default function ClientLayout({
-	children,
-	initialLocale,
+  children,
+  initialLocale,
 }: ClientLayoutProps) {
-	const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
-	const isC15tEnabled = process.env.NEXT_PUBLIC_ENABLE_C15T !== "false";
+  const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
+  const isC15tEnabled = process.env.NEXT_PUBLIC_ENABLE_C15T !== "false";
 
-	// Conditional wrapper for c15t consent provider
-	const ConsentWrapper = ({ children }: { children: React.ReactNode }) => {
-		if (isC15tEnabled) {
-			return <ConsentProvider>{children}</ConsentProvider>;
-		}
-		return <>{children}</>;
-	};
+  // Conditional wrapper for c15t consent provider
+  const ConsentWrapper = ({ children }: { children: React.ReactNode }) => {
+    if (isC15tEnabled) {
+      return <ConsentProvider>{children}</ConsentProvider>;
+    }
+    return <>{children}</>;
+  };
 
-	return (
-		<LanguageProvider initialLang={initialLocale}>
-			<ConsentWrapper>
-				<BokunInitializer />
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="light"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<PageLayout>{children}</PageLayout>
-					{/* Show c15t banner only if enabled */}
-					{isC15tEnabled && <CookieConsentBanner />}
-					{/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
-					{isBokunEnabled && (
-						<div className="bokunWidget" style={{ display: "none" }} />
-					)}
-				</ThemeProvider>
-			</ConsentWrapper>
-		</LanguageProvider>
-	);
+  return (
+    <LanguageProvider initialLang={initialLocale}>
+      <ConsentWrapper>
+        <BokunInitializer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PageLayout>{children}</PageLayout>
+          {/* Show c15t banner only if enabled */}
+          {isC15tEnabled && <CookieConsentBanner />}
+          {/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
+          {isBokunEnabled && (
+            <div className="bokunWidget" style={{ display: "none" }} />
+          )}
+        </ThemeProvider>
+      </ConsentWrapper>
+    </LanguageProvider>
+  );
 }
