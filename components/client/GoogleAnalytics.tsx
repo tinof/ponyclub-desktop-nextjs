@@ -1,56 +1,19 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
 
 interface GoogleAnalyticsProps {
 	gaId: string;
 }
 
+/**
+ * GoogleAnalytics Component
+ *
+ * This component loads Google Analytics scripts with Partytown optimization.
+ * It should be wrapped with ConsentGate in the layout to ensure consent-based loading.
+ * The ConsentInitializer component handles the default consent state.
+ */
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
-	const [hasConsent, setHasConsent] = useState(false);
-
-	// Check for analytics consent on mount and when cookies change
-	useEffect(() => {
-		const checkConsent = () => {
-			try {
-				const consentCookie = document.cookie
-					.split("; ")
-					.find((row) => row.startsWith("consent="));
-
-				if (consentCookie) {
-					const consent = JSON.parse(
-						decodeURIComponent(consentCookie.split("=")[1]),
-					);
-					setHasConsent(consent.analytics === true);
-				}
-			} catch (error) {
-				if (process.env.NODE_ENV === "development") {
-					console.warn("[GA] Error reading consent:", error);
-				}
-			}
-		};
-
-		checkConsent();
-
-		// Listen for consent changes
-		const handleStorageChange = () => checkConsent();
-		window.addEventListener("storage", handleStorageChange);
-
-		// Also check periodically for cookie changes
-		const interval = setInterval(checkConsent, 1000);
-
-		return () => {
-			window.removeEventListener("storage", handleStorageChange);
-			clearInterval(interval);
-		};
-	}, []);
-
-	// Only render Google Analytics if user has given consent
-	if (!hasConsent) {
-		return null;
-	}
-
 	return (
 		<>
 			{/* PERFORMANCE OPTIMIZATION: Google Analytics script running in web worker via Partytown */}
@@ -76,7 +39,7 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
               });
               ${
 								process.env.NODE_ENV === "development"
-									? `console.log('[GA] Google Analytics initialized in web worker');
+									? `console.log('[GA] Google Analytics initialized in web worker with consent');
                      if (typeof gtag !== 'undefined') {
                        console.log('[GA] Google Analytics script loaded successfully via Partytown');
                      }`

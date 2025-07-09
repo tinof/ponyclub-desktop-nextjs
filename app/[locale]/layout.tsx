@@ -10,6 +10,8 @@ import type React from "react";
 import { allFontVariables } from "@/app/fonts";
 import ClientLayout from "@/components/ClientLayout";
 import BokunScripts from "@/components/client/BokunScripts";
+import ConsentGate from "@/components/client/ConsentGate";
+import ConsentInitializer from "@/components/client/ConsentInitializer";
 import GoogleAnalytics from "@/components/client/GoogleAnalytics";
 import PartyTownConfig from "@/components/PartyTownConfig";
 import StructuredData from "@/components/StructuredData";
@@ -113,6 +115,9 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<head>
+				{/* GDPR Consent Mode v2: Initialize default consent state BEFORE any tracking scripts */}
+				<ConsentInitializer />
+
 				{/* Conditionally preconnect to Bokun domains only if enabled */}
 				{isBokunEnabled && (
 					<>
@@ -163,10 +168,18 @@ export default async function LocaleLayout({
 				<StructuredData data={[websiteStructuredData, organizationData]} />
 				<ClientLayout initialLocale={locale}>
 					{children}
-					<SpeedInsights />
-					<Analytics />
-					<GoogleAnalytics gaId="G-6J3ELVNTQE" />
-					<BokunScripts locale={locale} />
+
+					{/* Analytics scripts wrapped with ConsentGate for GDPR compliance */}
+					<ConsentGate preference="analytics">
+						<SpeedInsights />
+						<Analytics />
+						<GoogleAnalytics gaId="G-6J3ELVNTQE" />
+					</ConsentGate>
+
+					{/* Bokun booking scripts - necessary for core functionality */}
+					<ConsentGate preference="necessary">
+						<BokunScripts locale={locale} />
+					</ConsentGate>
 				</ClientLayout>
 			</body>
 		</html>

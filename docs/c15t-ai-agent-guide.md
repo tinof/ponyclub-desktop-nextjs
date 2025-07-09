@@ -21,9 +21,12 @@ The c15t cookie consent management system provides a professional, GDPR-complian
 
 ### Key Implementation Principles
 - **Offline Mode**: Uses `@c15t/nextjs` in offline mode (no backend required)
+- **Google Consent Mode v2**: Full integration with Google's Consent Mode v2 API for GDPR compliance
 - **Backward Compatibility**: Bridges c15t consent state to existing JSON cookie format
 - **Feature Flag Approach**: Gradual rollout with `NEXT_PUBLIC_ENABLE_C15T` environment variable
 - **Zero Breaking Changes**: Existing `GoogleAnalytics.tsx` and `lib/analytics.ts` continue working unchanged
+- **Consent Gating**: All third-party scripts are wrapped with ConsentGate components
+- **Compliance Monitoring**: Real-time monitoring of consent violations and compliance events
 
 ### Package Dependencies
 ```json
@@ -57,9 +60,13 @@ The c15t cookie consent management system provides a professional, GDPR-complian
 ```
 components/client/
 ├── ConsentProvider.tsx          # Main c15t wrapper component
-├── ConsentBridge.tsx           # Bridges c15t to legacy cookie format
+├── ConsentBridge.tsx           # Bridges c15t to legacy cookie format + GCMv2
+├── ConsentGate.tsx             # Conditional rendering based on consent
+├── ConsentInitializer.tsx      # ✅ Google Consent Mode v2 initialization
 ├── CookieConsentBanner.tsx     # Professional consent banner UI
-└── GoogleAnalytics.tsx         # Existing analytics (unchanged)
+├── ComplianceMonitor.tsx       # Real-time compliance monitoring (future)
+├── ScriptManager.tsx           # Advanced script management (future)
+└── GoogleAnalytics.tsx         # ✅ Updated for ConsentGate integration
 
 app/[locale]/privacy-settings/
 ├── page.tsx                    # Privacy settings page
@@ -71,6 +78,10 @@ lib/
 └── translations/
     ├── en.ts                   # English consent translations
     └── el.ts                   # Greek consent translations
+
+docs/
+├── gdpr-compliance-validation.md  # ✅ Testing procedures and validation
+└── gdpr-consent-mode-v2-implementation-plan.md  # Implementation plan
 ```
 
 ### Component Hierarchy & Integration Points
@@ -172,6 +183,8 @@ ConsentBridge (monitors consent changes)
     ↓
 Legacy Cookie Update ({"analytics": boolean, "marketing": boolean})
     ↓
+Google Consent Mode v2 Update (gtag('consent', 'update', {...}))
+    ↓
 Storage Event Dispatch
     ↓
 GoogleAnalytics.tsx (existing component, unchanged)
@@ -179,6 +192,104 @@ GoogleAnalytics.tsx (existing component, unchanged)
 lib/analytics.ts (existing helper, unchanged)
     ↓
 Google Analytics/Ads Loading
+```
+
+## Google Consent Mode v2 Integration
+
+### Overview
+The implementation includes full Google Consent Mode v2 (GCMv2) integration for enhanced GDPR compliance and better integration with Google's advertising and analytics ecosystem.
+
+### Key Components
+
+#### 1. ConsentInitializer (`components/client/ConsentInitializer.tsx`)
+**Purpose**: Initializes Google Consent Mode v2 with default DENIED state before any tracking scripts load.
+
+**Critical Implementation Details**:
+- Uses `strategy="beforeInteractive"` to load before other scripts
+- Sets all consent types to 'denied' by default except 'security_storage'
+- Must be placed in the `<head>` section before any tracking scripts
+
+**Consent Types Managed**:
+```typescript
+{
+  'analytics_storage': 'denied',      // Google Analytics cookies
+  'ad_storage': 'denied',             // Advertising cookies
+  'ad_user_data': 'denied',           // User data for ads
+  'ad_personalization': 'denied',     // Ad personalization
+  'functionality_storage': 'denied',  // Functional cookies
+  'personalization_storage': 'denied', // Personalization cookies
+  'security_storage': 'granted'       // Security cookies (always granted)
+}
+```
+
+#### 2. Enhanced ConsentBridge with GCMv2
+**Purpose**: Bridges c15t consent state to both legacy cookie format AND Google Consent Mode v2.
+
+**Consent Mapping**:
+```typescript
+const consentMapping = {
+  analytics: ['analytics_storage', 'personalization_storage'],
+  marketing: ['ad_storage', 'ad_user_data', 'ad_personalization'],
+  necessary: ['functionality_storage', 'security_storage']
+};
+```
+
+**Implementation Flow**:
+1. Monitor c15t consent changes
+2. Update legacy cookie format (existing functionality)
+3. **NEW**: Call `gtag('consent', 'update', {...})` with appropriate consent states
+4. Handle consent revocation with cookie cleanup
+5. Dispatch storage events for existing components
+
+#### 3. ConsentGate Component (`components/client/ConsentGate.tsx`)
+**Purpose**: Conditionally render third-party scripts and components based on consent status.
+
+**Usage Examples**:
+```typescript
+// Analytics scripts
+<ConsentGate category="analytics" debugLabel="Google Analytics">
+  <GoogleAnalyticsScript />
+</ConsentGate>
+
+// Marketing scripts
+<ConsentGate category="marketing" debugLabel="Facebook Pixel">
+  <FacebookPixelScript />
+</ConsentGate>
+
+// With fallback content
+<ConsentGate
+  category="analytics"
+  fallback={<div>Analytics disabled</div>}
+>
+  <AnalyticsComponent />
+</ConsentGate>
+```
+
+#### 4. ScriptManager Component (`components/client/ScriptManager.tsx`)
+**Purpose**: Advanced script management with consent-based loading and cleanup.
+
+**Features**:
+- Dynamic script injection based on consent
+- Script cleanup when consent is revoked
+- Cookie cleanup on consent revocation
+- Loading state management
+
+#### 5. ComplianceMonitor Component (`components/client/ComplianceMonitor.tsx`)
+**Purpose**: Real-time monitoring of consent compliance and violation detection.
+
+**Features**:
+- Monitor consent state changes
+- Detect tracking cookies without consent
+- Detect scripts loading without consent
+- Log compliance events
+- Export compliance logs for auditing
+
+**Debug Utilities** (Development only):
+```javascript
+// Available at window.gdprCompliance
+gdprCompliance.getLog()        // View compliance log
+gdprCompliance.checkViolations() // Manual violation check
+gdprCompliance.exportLog()     // Export log as JSON
 ```
 
 ### Critical Integration Points

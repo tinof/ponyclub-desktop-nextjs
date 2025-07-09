@@ -19,6 +19,72 @@ type LegacyConsentStatus = {
 export default function ConsentBridge() {
 	const { consents, hasConsentFor } = useConsentManager();
 
+	// Function to handle consent revocation and cleanup
+	const handleConsentRevocation = (category: "analytics" | "marketing") => {
+		if (typeof window === "undefined") return;
+
+		if (category === "analytics") {
+			// Remove Google Analytics cookies
+			const gaCookies = [
+				"_ga",
+				"_ga_*",
+				"_gid",
+				"_gat",
+				"_gat_gtag_*",
+				"_gcl_au",
+				"_gcl_dc",
+				"_gcl_aw",
+			];
+
+			gaCookies.forEach((cookieName) => {
+				// Remove for current domain
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+				// Remove for parent domain (with leading dot)
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+				// Remove without domain specification
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+			});
+
+			// Clear Vercel Analytics data if available
+			if (window.va) {
+				try {
+					// Vercel Analytics doesn't have a direct clear method, but we can stop tracking
+					console.log("[ConsentBridge] Analytics consent revoked - cleared GA cookies");
+				} catch (error) {
+					console.warn("[ConsentBridge] Error clearing Vercel Analytics:", error);
+				}
+			}
+		}
+
+		if (category === "marketing") {
+			// Remove Facebook Pixel cookies
+			const fbCookies = ["_fbp", "_fbc", "fr"];
+
+			fbCookies.forEach((cookieName) => {
+				// Remove for current domain
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+				// Remove for parent domain (with leading dot)
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+				// Remove without domain specification
+				document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+			});
+
+			// Revoke Facebook Pixel consent if available
+			if (window.fbq) {
+				try {
+					window.fbq("consent", "revoke");
+					console.log("[ConsentBridge] Marketing consent revoked - cleared FB cookies");
+				} catch (error) {
+					console.warn("[ConsentBridge] Error revoking Facebook Pixel consent:", error);
+				}
+			}
+		}
+
+		if (process.env.NODE_ENV === "development") {
+			console.log(`[ConsentBridge] Cleaned up cookies for revoked ${category} consent`);
+		}
+	};
+
 	// Function to update the legacy JSON cookie format
 	const updateLegacyCookie = (
 		analyticsConsent: boolean,
@@ -62,13 +128,49 @@ export default function ConsentBridge() {
 		return null;
 	};
 
-	// Sync c15t consent changes to legacy cookie format
+	// Sync c15t consent changes to legacy cookie format AND Google Consent Mode v2
 	useEffect(() => {
+		if (!consents) return;
+
 		const analyticsConsent = hasConsentFor("analytics" as any);
 		const marketingConsent = hasConsentFor("marketing" as any);
 
-		// Update the legacy cookie format
+		// Check for consent revocation and clean up if needed
+		const previousConsent = readLegacyCookie();
+		if (previousConsent) {
+			if (previousConsent.analytics && !analyticsConsent) {
+				handleConsentRevocation("analytics");
+			}
+			if (previousConsent.marketing && !marketingConsent) {
+				handleConsentRevocation("marketing");
+			}
+		}
+
+		// Update the legacy cookie format (existing functionality)
 		updateLegacyCookie(analyticsConsent, marketingConsent);
+
+		// NEW: Update Google Consent Mode v2
+		if (typeof window !== "undefined" && window.gtag) {
+			window.gtag("consent", "update", {
+				analytics_storage: analyticsConsent ? "granted" : "denied",
+				ad_storage: marketingConsent ? "granted" : "denied",
+				ad_user_data: marketingConsent ? "granted" : "denied",
+				ad_personalization: marketingConsent ? "granted" : "denied",
+				functionality_storage: "granted", // Usually always granted for necessary functionality
+				personalization_storage: analyticsConsent ? "granted" : "denied",
+			});
+
+			if (process.env.NODE_ENV === "development") {
+				console.log("[ConsentBridge] Updated Google Consent Mode v2:", {
+					analytics_storage: analyticsConsent ? "granted" : "denied",
+					ad_storage: marketingConsent ? "granted" : "denied",
+					ad_user_data: marketingConsent ? "granted" : "denied",
+					ad_personalization: marketingConsent ? "granted" : "denied",
+					functionality_storage: "granted",
+					personalization_storage: analyticsConsent ? "granted" : "denied",
+				});
+			}
+		}
 
 		// Trigger storage event for components listening to consent changes
 		// This ensures GoogleAnalytics.tsx picks up the changes immediately
