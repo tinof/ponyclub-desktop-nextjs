@@ -74,8 +74,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       vercel:
-        specifier: ^44.2.13
-        version: 44.2.13(rollup@2.79.2)
+        specifier: ^44.3.0
+        version: 44.3.0(rollup@2.79.2)
     devDependencies:
       '@biomejs/biome':
         specifier: 2.1.1
@@ -3105,8 +3105,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  vercel@44.2.13:
-    resolution: {integrity: sha512-PmT8G4uoazCVC/xs+0PuASIDsvhj8RfEUXYBy+1Qvdd2yAaNDWb8rJ6TCe9h3ybqO3nnkzThmMK04ZpJx2jGXQ==}
+  vercel@44.3.0:
+    resolution: {integrity: sha512-LaEFTDTPCdwOb1V+n3nAC9CYgPls+U8pI5yROwIJq/pZG0Uy7X0X9Vq1Np3npoHhy0zgIg3tiKWjCxgf5Qh4Cw==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -6198,7 +6198,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  vercel@44.2.13(rollup@2.79.2):
+  vercel@44.3.0(rollup@2.79.2):
     dependencies:
       '@vercel/blob': 1.0.2
       '@vercel/build-utils': 10.6.5
