@@ -3,9 +3,13 @@
 import { useConsentManager } from "@c15t/nextjs";
 import { useEffect, useState } from "react";
 
+// Note: c15t only supports 'necessary' and 'marketing' categories
+// We map 'analytics' to 'marketing' for compatibility
+type ConsentCategory = "necessary" | "analytics" | "marketing";
+
 interface ConsentGateProps {
   children: React.ReactNode;
-  preference: "necessary" | "analytics" | "marketing";
+  preference: ConsentCategory;
   fallback?: React.ReactNode;
 }
 
@@ -26,7 +30,10 @@ export default function ConsentGate({
   useEffect(() => {
     // Only render if consent preferences are available and the specific preference is granted
     if (consents) {
-      setShouldRender(hasConsentFor(preference as any));
+      // Map analytics to marketing since c15t only has 'necessary' and 'marketing'
+      const c15tCategory =
+        preference === "analytics" ? "marketing" : preference;
+      setShouldRender(hasConsentFor(c15tCategory as any));
     }
   }, [consents, hasConsentFor, preference]);
 

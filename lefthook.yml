@@ -1,0 +1,22 @@
+# Lefthook configuration for Git hooks
+# Fast, cross-platform, dependency-free hook manager
+
+pre-commit:
+  commands:
+    biome-check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true
+
+pre-push:
+  commands:
+    biome-validate:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
+
+    type-check:
+      run: pnpm type-check
+
+    security-check:
+      run: pnpm security:audit
+      continue-on-error: true

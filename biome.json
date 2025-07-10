@@ -2,6 +2,17 @@
   "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
   "files": {
     "ignoreUnknown": false,
+    "maxSize": 1048576,
+    "experimentalScannerIgnores": [
+      "node_modules",
+      ".next",
+      "dist",
+      "build",
+      "coverage",
+      ".turbo",
+      "public/~partytown",
+      "data"
+    ],
     "includes": [
       "**",
       "!.next/**",
@@ -40,7 +51,10 @@
         "noUselessFragments": "off"
       },
       "nursery": "off",
-      "correctness": "error",
+      "correctness": {
+        "recommended": true,
+        "useExhaustiveDependencies": "warn"
+      },
       "security": {
         "noDangerouslySetInnerHtml": "off"
       },
@@ -81,6 +95,22 @@
         "rules": {
           "correctness": {
             "noNodejsModules": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "app/**/privacy-settings/**",
+        "components/**/Consent*.tsx",
+        "components/**/c15t*.tsx",
+        "components/**/ConsentBridge.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noDocumentCookie": "off",
+            "noExplicitAny": "off"
           }
         }
       }

@@ -1,7 +1,6 @@
 "use client";
 
 import { ConsentManagerProvider } from "@c15t/nextjs";
-import { useLanguage } from "@/contexts/language-context";
 import ConsentBridge from "./ConsentBridge.tsx";
 
 interface ConsentProviderProps {
@@ -16,13 +15,14 @@ interface ConsentProviderProps {
  * analytics system.
  */
 export default function ConsentProvider({ children }: ConsentProviderProps) {
-  const { language } = useLanguage();
+  // Note: language is available but not currently used in this component
+  // const { language } = useLanguage();
 
   return (
     <ConsentManagerProvider
       options={{
         mode: "offline", // Use offline mode - no backend required
-        consentCategories: ["necessary", "analytics", "marketing"],
+        consentCategories: ["necessary", "marketing"],
         ignoreGeoLocation: true, // Useful for development
       }}
     >

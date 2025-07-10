@@ -53,7 +53,7 @@ export function useBokunLanguage(lang: string) {
     if (previousLang.current !== lang && typeof bokun.reload === "function") {
       // Use a small delay to batch multiple language changes
       setTimeout(() => {
-        (bokun as any).reload();
+        (bokun as { reload: () => void }).reload();
         console.log(`[Bokun Language] Widgets reloaded for language: ${lang}`);
       }, 100);
     }

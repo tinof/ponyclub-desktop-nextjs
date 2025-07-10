@@ -68,7 +68,15 @@ export default function BookingButton({
         `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: €${numericPrice}`
       );
     }
-  }, [trackingLabel, packageName, packagePrice, id]);
+  }, [
+    trackingLabel,
+    packageName,
+    packagePrice,
+    id,
+    conversionLabel,
+    packageType,
+    sourcePage,
+  ]);
 
   const handleBookNowClick = () => {
     // Defer tracking the click to avoid interfering with Bokun's immediate action

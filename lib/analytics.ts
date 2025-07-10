@@ -235,7 +235,7 @@ export function trackEngagement(params: {
 /**
  * Initialize scroll depth tracking for engagement optimization
  */
-export function initScrollTracking(): (() => void) | void {
+export function initScrollTracking(): (() => void) | undefined {
   if (typeof window === "undefined") return;
 
   const scrollDepths = [25, 50, 75, 90];
@@ -335,7 +335,7 @@ export function trackToAllPlatforms(
  */
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
   // Expose analytics functions for manual testing
-  (window as any).analyticsDebug = {
+  (window as Window & { analyticsDebug?: object }).analyticsDebug = {
     gtagEvent,
     sendAdsConversion,
     trackBookingClick,

@@ -28,10 +28,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Biome lint check
-        run: pnpm lint
+      - name: Cache Biome
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/biome
+            .biome-cache
+          key: biome-${{ runner.os }}-${{ hashFiles('biome.json', 'package.json') }}
+          restore-keys: |
+            biome-${{ runner.os }}-
 
-      - name: Biome format check
+      - name: Biome check (format + lint)
         run: pnpm check
 
       - name: Type check
@@ -88,4 +95,3 @@ jobs:
             .next/standalone/
             .next/static/
             public/
-          retention-days: 7

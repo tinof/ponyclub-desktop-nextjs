@@ -1,7 +1,7 @@
 "use client";
 
 import { useConsentManager } from "@c15t/nextjs";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 /**
  * ConsentBridge Component
@@ -16,111 +16,116 @@ type LegacyConsentStatus = {
   marketing: boolean;
 };
 
+// Note: Using 'as any' for consent categories due to c15t library type constraints
+
 export default function ConsentBridge() {
   const { consents, hasConsentFor } = useConsentManager();
 
   // Function to handle consent revocation and cleanup
-  const handleConsentRevocation = (category: "analytics" | "marketing") => {
-    if (typeof window === "undefined") return;
+  const handleConsentRevocation = useCallback(
+    (category: "analytics" | "marketing") => {
+      if (typeof window === "undefined") return;
 
-    if (category === "analytics") {
-      // Remove Google Analytics cookies
-      const gaCookies = [
-        "_ga",
-        "_ga_*",
-        "_gid",
-        "_gat",
-        "_gat_gtag_*",
-        "_gcl_au",
-        "_gcl_dc",
-        "_gcl_aw",
-      ];
+      if (category === "analytics") {
+        // Remove Google Analytics cookies
+        const gaCookies = [
+          "_ga",
+          "_ga_*",
+          "_gid",
+          "_gat",
+          "_gat_gtag_*",
+          "_gcl_au",
+          "_gcl_dc",
+          "_gcl_aw",
+        ];
 
-      gaCookies.forEach((cookieName) => {
-        // Remove for current domain
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
-        // Remove for parent domain (with leading dot)
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
-        // Remove without domain specification
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-      });
+        gaCookies.forEach((cookieName) => {
+          // Remove for current domain
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+          // Remove for parent domain (with leading dot)
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+          // Remove without domain specification
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        });
 
-      // Clear Vercel Analytics data if available
-      if (window.va) {
-        try {
-          // Vercel Analytics doesn't have a direct clear method, but we can stop tracking
-          console.log(
-            "[ConsentBridge] Analytics consent revoked - cleared GA cookies"
-          );
-        } catch (error) {
-          console.warn(
-            "[ConsentBridge] Error clearing Vercel Analytics:",
-            error
-          );
+        // Clear Vercel Analytics data if available
+        if (window.va) {
+          try {
+            // Vercel Analytics doesn't have a direct clear method, but we can stop tracking
+            console.log(
+              "[ConsentBridge] Analytics consent revoked - cleared GA cookies"
+            );
+          } catch (error) {
+            console.warn(
+              "[ConsentBridge] Error clearing Vercel Analytics:",
+              error
+            );
+          }
         }
       }
-    }
 
-    if (category === "marketing") {
-      // Remove Facebook Pixel cookies
-      const fbCookies = ["_fbp", "_fbc", "fr"];
+      if (category === "marketing") {
+        // Remove Facebook Pixel cookies
+        const fbCookies = ["_fbp", "_fbc", "fr"];
 
-      fbCookies.forEach((cookieName) => {
-        // Remove for current domain
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
-        // Remove for parent domain (with leading dot)
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
-        // Remove without domain specification
-        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-      });
+        fbCookies.forEach((cookieName) => {
+          // Remove for current domain
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+          // Remove for parent domain (with leading dot)
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+          // Remove without domain specification
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        });
 
-      // Revoke Facebook Pixel consent if available
-      if (window.fbq) {
-        try {
-          window.fbq("consent", "revoke");
-          console.log(
-            "[ConsentBridge] Marketing consent revoked - cleared FB cookies"
-          );
-        } catch (error) {
-          console.warn(
-            "[ConsentBridge] Error revoking Facebook Pixel consent:",
-            error
-          );
+        // Revoke Facebook Pixel consent if available
+        if (window.fbq) {
+          try {
+            window.fbq("consent", "revoke");
+            console.log(
+              "[ConsentBridge] Marketing consent revoked - cleared FB cookies"
+            );
+          } catch (error) {
+            console.warn(
+              "[ConsentBridge] Error revoking Facebook Pixel consent:",
+              error
+            );
+          }
         }
       }
-    }
 
-    if (process.env.NODE_ENV === "development") {
-      console.log(
-        `[ConsentBridge] Cleaned up cookies for revoked ${category} consent`
-      );
-    }
-  };
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          `[ConsentBridge] Cleaned up cookies for revoked ${category} consent`
+        );
+      }
+    },
+    []
+  );
 
   // Function to update the legacy JSON cookie format
-  const updateLegacyCookie = (
-    analyticsConsent: boolean,
-    marketingConsent: boolean
-  ) => {
-    const legacyConsent: LegacyConsentStatus = {
-      analytics: analyticsConsent,
-      marketing: marketingConsent,
-    };
+  const updateLegacyCookie = useCallback(
+    (analyticsConsent: boolean, marketingConsent: boolean) => {
+      const legacyConsent: LegacyConsentStatus = {
+        analytics: analyticsConsent,
+        marketing: marketingConsent,
+      };
 
-    // Set the cookie in the same format as the existing system
-    const cookieValue = encodeURIComponent(JSON.stringify(legacyConsent));
-    const expires = new Date();
-    expires.setFullYear(expires.getFullYear() + 1); // 1 year expiry
+      // Set the cookie in the same format as the existing system
+      const cookieValue = encodeURIComponent(JSON.stringify(legacyConsent));
+      const expires = new Date();
+      expires.setFullYear(expires.getFullYear() + 1); // 1 year expiry
 
-    document.cookie = `consent=${cookieValue}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+      document.cookie = `consent=${cookieValue}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("[ConsentBridge] Updated legacy cookie:", legacyConsent);
-    }
-  };
+      if (process.env.NODE_ENV === "development") {
+        console.log("[ConsentBridge] Updated legacy cookie:", legacyConsent);
+      }
+    },
+    []
+  );
 
   // Function to read existing legacy cookie and sync to c15t if needed
-  const readLegacyCookie = (): LegacyConsentStatus | null => {
+  const readLegacyCookie = useCallback((): LegacyConsentStatus | null => {
     try {
       const consentCookie = document.cookie
         .split("; ")
@@ -138,14 +143,16 @@ export default function ConsentBridge() {
       }
     }
     return null;
-  };
+  }, []);
 
   // Sync c15t consent changes to legacy cookie format AND Google Consent Mode v2
   useEffect(() => {
     if (!consents) return;
 
-    const analyticsConsent = hasConsentFor("analytics" as any);
+    // Map c15t categories to our legacy format
+    // Since c15t only has 'necessary' and 'marketing', we map both analytics and marketing to 'marketing'
     const marketingConsent = hasConsentFor("marketing" as any);
+    const analyticsConsent = marketingConsent; // Analytics consent follows marketing consent
 
     // Check for consent revocation and clean up if needed
     const previousConsent = readLegacyCookie();
@@ -194,15 +201,21 @@ export default function ConsentBridge() {
         marketing: marketingConsent,
       });
     }
-  }, [consents, hasConsentFor]);
+  }, [
+    consents,
+    hasConsentFor,
+    handleConsentRevocation,
+    readLegacyCookie, // Update the legacy cookie format (existing functionality)
+    updateLegacyCookie,
+  ]);
 
   // Initialize c15t with existing legacy consent if available
   useEffect(() => {
     const legacyConsent = readLegacyCookie();
     if (legacyConsent) {
       // Check if c15t consent differs from legacy consent
-      const c15tAnalytics = hasConsentFor("analytics" as any);
       const c15tMarketing = hasConsentFor("marketing" as any);
+      const c15tAnalytics = c15tMarketing; // Analytics follows marketing in c15t
 
       if (
         c15tAnalytics !== legacyConsent.analytics ||
@@ -220,7 +233,12 @@ export default function ConsentBridge() {
         updateLegacyCookie(c15tAnalytics, c15tMarketing);
       }
     }
-  }, [consents, hasConsentFor]);
+  }, [
+    hasConsentFor,
+    readLegacyCookie, // Note: In a real implementation, you would use c15t's API to update consent
+    // For now, we'll let c15t be the source of truth and update the legacy cookie
+    updateLegacyCookie,
+  ]);
 
   // This component doesn't render anything - it's just for bridging consent state
   return null;

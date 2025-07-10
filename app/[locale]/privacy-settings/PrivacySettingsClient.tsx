@@ -4,20 +4,22 @@ import { ConsentManagerDialog, useConsentManager } from "@c15t/nextjs";
 import { useEffect, useState } from "react";
 import { checkConsentStatus } from "@/components/client/ConsentBridge";
 
+// Note: Using 'as any' for consent categories due to c15t library type constraints
+
 interface PrivacySettingsClientProps {
   locale: string;
 }
 
 // Component to handle c15t dialog with proper hooks
-function C15tPrivacyDialog({ locale }: { locale: string }) {
+function _C15tPrivacyDialog({ locale }: { locale: string }) {
   const consentManager = useConsentManager();
-  const { consents } = consentManager;
 
   // Monitor consent changes and sync to legacy format
   useEffect(() => {
     // Get current consent state from c15t
-    const analytics = consentManager.hasConsentFor("analytics" as any);
+    // Map analytics to marketing since c15t only has 'necessary' and 'marketing'
     const marketing = consentManager.hasConsentFor("marketing" as any);
+    const analytics = marketing; // Analytics follows marketing in c15t
 
     // Update the legacy cookie format for backward compatibility
     const legacyConsent = { analytics, marketing };
@@ -33,7 +35,7 @@ function C15tPrivacyDialog({ locale }: { locale: string }) {
     if (process.env.NODE_ENV === "development") {
       console.log("[PrivacySettings] Updated consent:", legacyConsent);
     }
-  }, [consents, consentManager]);
+  }, [consentManager]);
 
   // Open the privacy dialog automatically when this component mounts
   useEffect(() => {
@@ -95,14 +97,8 @@ export default function PrivacySettingsClient({
   };
 
   if (isC15tEnabled) {
-    // Use c15t dialog if enabled - must be inside ConsentManagerProvider
-    // Temporarily disabled due to TypeScript compilation issues with c15t package
-    // return <C15tPrivacyDialog locale={locale} />;
-
-    // Fallback to manual controls for now
-    console.warn(
-      "[PrivacySettings] c15t enabled but falling back to manual controls due to compilation issues"
-    );
+    // Use c15t privacy dialog
+    return <_C15tPrivacyDialog locale={locale} />;
   }
 
   // Fallback manual consent management if c15t is disabled

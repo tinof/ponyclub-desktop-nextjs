@@ -1,7 +1,5 @@
 "use client";
 
-import Script from "next/script";
-
 interface GoogleAnalyticsProps {
   gaId: string;
 }

@@ -88,6 +88,44 @@ pnpm start
 
 This project maintains high code quality through a comprehensive suite of automated tools and processes:
 
+### 🛠️ Code Formatting & Linting with Biome
+
+We use [Biome](https://biomejs.dev/) as our formatter and linter to ensure consistent code style and catch issues early.
+
+- Biome is installed as a dev dependency: `@biomejs/biome`
+- Configuration is in `biome.json` at the project root
+- Run formatting and linting with:
+
+```bash
+pnpm check          # Format, lint, and apply safe fixes
+pnpm lint           # Lint only
+pnpm format         # Format only
+```
+
+- For performance profiling, use:
+
+```bash
+pnpm lint:trace     # Lint with tracing logs
+pnpm check:trace    # Check with tracing logs
+```
+
+- Editor integration: Use the Biome VS Code extension for real-time feedback and auto-format on save.
+
+### 🔧 Git Hooks with Lefthook
+
+We use [Lefthook](https://github.com/evilmartians/lefthook) to automate code quality checks on git actions.
+
+- Install hooks locally with:
+
+```bash
+npx lefthook install
+```
+
+- Hooks run on:
+
+  - **pre-commit**: Formats, lints, and stages fixes on staged files
+  - **pre-push**: Runs Biome check, type-check, and security audit on pushed files
+
 ### 🔍 Type Safety & Analysis
 
 - **TypeScript** with strict mode configuration

@@ -1,7 +1,6 @@
 "use client";
 
 import { CookieBanner } from "@c15t/nextjs";
-import { useLanguage } from "@/contexts/language-context";
 
 /**
  * CookieConsentBanner Component
@@ -10,7 +9,8 @@ import { useLanguage } from "@/contexts/language-context";
  * that matches the Pony Club vintage design system.
  */
 export default function CookieConsentBanner() {
-  const { language } = useLanguage();
+  // Note: language is available but not currently used in this component
+  // const { language } = useLanguage();
 
   return (
     <div

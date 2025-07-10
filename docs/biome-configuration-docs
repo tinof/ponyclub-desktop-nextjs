@@ -1,0 +1,1397 @@
+# Configure Biome
+
+This guide will help you to understand how to configure Biome. It explains the structure of a Biome configuration file and how Biome resolves its configuration. If you are already familiar with the configuration, you may want to take a look at the [configuration reference](https://biomejs.dev/reference/configuration/), which details all the options available.
+
+Biome allows you to customize its behavior using CLI options or a configuration file named `biome.json` or `biome.jsonc`. We recommend that you create a configuration file for each project. This ensures that each team member has the same configuration in the CLI and in any editor that allows Biome integration. Many of the options available in a configuration file are also available in the CLI.
+
+## Configuration file structure
+
+[Section titled “Configuration file structure”](https://biomejs.dev/guides/configure-biome/#configuration-file-structure)
+
+A Biome configuration file is named `biome.json` or `biome.jsonc`. It is usually placed in your project’s root folder, next to your project’s `package.json`.
+
+Because Biome is a toolchain, its configuration is organized around the tools it provides. At the moment, Biome provides three tools: the formatter, the linter and the assist. All of these tools are enabled by default. You can disable one or several of them using the `<tool>.enabled` field:
+
+biome.json
+
+    1{2  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",3  "formatter": {4    "enabled": false5  },6  "linter": {7    "enabled": false8  },9  "assist": {10    "enabled": false11  }12}
+
+Options that apply to more than one language are placed in the corresponding tool field. Language-specific options of a tool are placed under a `<language>.<tool>` field. This also allows overriding general options for a given language. You can also enable or disable a tool based on the language. In the following example, we configure the general options `formatter.indentStyle` and `formatter.lineWidth` for all the languages. Also, we set the JavaScript-specific option `quoteStyle` in `javascript.formatter` and we override `formatter.lineWidth`. We disabled the formatter for JSON files.
+
+biome.jsonc
+
+    1{2  "formatter": {3    "indentStyle": "space", // default is `tab`4    "lineWidth": 100 // default is `80`5  },6  "javascript": {7    "formatter": {8      "quoteStyle": "single", // default is `double`9      "lineWidth": 120 // override `formatter.lineWidth`10    }11  },12  "json": {13    "formatter": {14      "enabled": false15    }16  }17}
+
+Note
+
+Biome refers to all variants of the JavaScript language as `javascript`. This includes TypeScript, JSX and TSX.
+
+## Configuration file resolution
+
+[Section titled “Configuration file resolution”](https://biomejs.dev/guides/configure-biome/#configuration-file-resolution)
+
+Biome uses auto discovery to find the nearest configuration file. It looks in the working directory and its parent folders until it finds a `biome.json` or a `biome.jsonc` file. If no configuration is found, Biome’s default configuration is used. If both `biome.json` and `biome.jsonc` are present in the same folder, `biome.json` is used.
+
+Here’s an example:
+
+-   Directoryapp/
+    
+    -   Directorybackend/
+        
+        -   biome.json
+        -   package.json
+        
+    -   Directoryfrontend/
+        
+        -   Directorylegacy/
+            
+            -   package.json
+            
+        -   Directorynew/
+            
+            -   package.json
+            
+        -   biome.json
+        
+    
+
+-   Biome commands that run in `app/backend/package.json` will use the configuration file `app/backend/biome.json`;
+-   Biome commands that run in `app/frontend/legacy/package.json` and `app/frontend/new/package.json` will use the configuration file `app/frontend/biome.json`;
+
+Note
+
+Biome (since v2.0.0) supports nested `biome.json` files. For more information, read [Use Biome in big projects](https://biomejs.dev/guides/big-projects#use-multiple-configuration-files).
+
+## Specifying files to process
+
+[Section titled “Specifying files to process”](https://biomejs.dev/guides/configure-biome/#specifying-files-to-process)
+
+You can control the files/folders to process using different strategies, either CLI, configuration and VCS.
+
+Note
+
+By default, Biome always ignores some files that are said to be **protected files**. This means that no diagnostics will be ever emitted by Biome for those files. At the moment, the following files are protected:
+
+-   `composer.lock`
+-   `npm-shrinkwrap.json`
+-   `package-lock.json`
+-   `yarn.lock`
+
+### Include files via CLI
+
+[Section titled “Include files via CLI”](https://biomejs.dev/guides/configure-biome/#include-files-via-cli)
+
+The first way to control which files and folders are processed by Biome is to list them in the CLI. In the following command, we only format `file1.js` and all the files in the `src` folder, because folders are recursively traversed.
+
+Terminal window
+
+    1biome format file1.js src/
+
+Caution
+
+Glob patterns used on the command line are not interpreted by Biome. They are expanded by your shell. Some shells don’t support the recursive glob `**`.
+
+### Control files via configuration
+
+[Section titled “Control files via configuration”](https://biomejs.dev/guides/configure-biome/#control-files-via-configuration)
+
+The Biome configuration file can be used to refine which files are processed. You can explicitly list the files to be processed using [the `files.includes` field](https://biomejs.dev/reference/configuration/#filesincludes). `files.includes` accepts [glob patterns](https://biomejs.dev/reference/configuration/#glob-syntax-reference) such as `src/**/*.js`. Negated patterns starting with `!` can be used to exclude files.
+
+Paths and globs inside Biome’s configuration file are resolved relative to the folder the configuration file is in. An exception to this is when a configuration file is [extended](https://biomejs.dev/reference/configuration/#extends) by another.
+
+`files.includes` applies to all of Biome’s tools, meaning the files specified here are processed by the linter, the formatter and the assist, unless specified otherwise. For the individual tools, you can further refine the matching files using `<tool>.includes`.
+
+#### Include files via configuration
+
+[Section titled “Include files via configuration”](https://biomejs.dev/guides/configure-biome/#include-files-via-configuration)
+
+Let’s take the following configuration, where we want to include only JavaScript files (`.js`) that are inside the `src/` folder, the `test/` folder, and ignore files that have `.min.js` in their name:
+
+biome.json
+
+    1{2  "files": {3    "includes": ["src/**/*.js", "test/**/*.js", "!**/*.min.js"]4  },5  "linter": {6    "includes": ["**", "!test/**"]7  }8}
+
+And run the following command:
+
+Terminal window
+
+    1biome format test/
+
+The command will format the files that end with the `.js` extension and don’t end with the `.min.js` extension from the `test/` folder.
+
+The files in `src/` are not formatted because the folder is not listed in the CLI.
+
+If we run the following command, no files are linted because files inside the `test/` folder are explicitly ignored for the linter.
+
+Terminal window
+
+    1biome lint test/
+
+Caution
+
+The global `files.includes` has slightly different semantics than the more specific `<tool>.includes` fields. Any file or folder that doesn’t match `files.includes` is excluded from use by any of Biome’s tools. This means that any tool-specific `includes` field can never match a file that doesn’t also match `files.includes`.
+
+#### Exclude files via configuration
+
+[Section titled “Exclude files via configuration”](https://biomejs.dev/guides/configure-biome/#exclude-files-via-configuration)
+
+If you want to exclude files and folders from being processed by Biome, you can use the `files.includes` configuration and use the negated patterns, using the leading `!`.
+
+Before listing the negated globs, **they must be preceded by the `**` pattern**.
+
+In the following example, we tell Biome to include files, excluded the `dist` directory, and all files that have `.generated.js` in their name
+
+biome.json
+
+    1{2  "files": {3    "includes": [4      "**",5      "!**/dist/**",6      "!**/*.generated.js"7    ]8  }9}
+
+### Control files via VCS
+
+[Section titled “Control files via VCS”](https://biomejs.dev/guides/configure-biome/#control-files-via-vcs)
+
+You can [ignore files ignored by your VCS](https://biomejs.dev/guides/integrate-in-vcs#use-the-ignore-file).
+
+## Well-known files
+
+[Section titled “Well-known files”](https://biomejs.dev/guides/configure-biome/#well-known-files)
+
+Here are some well-known files that we specifically treat based on their file names, rather than their extensions. Currently, the well-known files are JSON-like files only, but we may broaden the list to include other types when we support new parsers.
+
+The following files are parsed as `JSON` files with both the options `json.parser.allowComments` and `json.parser.allowTrailingCommas` set to `false`.
+
+-   `.all-contributorsrc`
+-   `.arcconfig`
+-   `.auto-changelog`
+-   `.bowerrc`
+-   `.c8rc`
+-   `.htmlhintrc`
+-   `.imgbotconfig`
+-   `.jslintrc`
+-   `.nycrc`
+-   `.tern-config`
+-   `.tern-project`
+-   `.vuerc`
+-   `.watchmanconfig`
+-   `mcmod.info`
+
+The following files are parsed as `JSON` files with the options `json.parser.allowComments` set to `true` but `json.parser.allowTrailingCommas` set to `false`. This is because the tools consuming these files can only strip comments.
+
+-   `.ember-cli`
+-   `.eslintrc.json`
+-   `.jscsrc`
+-   `.jshintrc`
+-   `tslint.json`
+-   `turbo.json`
+
+The following files are parsed as `JSON` files with the options `json.parser.allowComments` and `json.parser.allowTrailingCommas` set to `true`. This is because the tools consuming these files are designed to accommodate such settings.
+
+-   `.babelrc`
+-   `.babelrc.json`
+-   `.devcontainer.json`
+-   `.hintrc`
+-   `.hintrc.json`
+-   `.swcrc`
+-   `api-documenter.json`
+-   `api-extractor.json`
+-   `babel.config.json`
+-   `deno.json`
+-   `devcontainer.json`
+-   `dprint.json`
+-   `jsconfig.json`
+-   `jsr.json`
+-   `language-configuration.json`
+-   `nx.json`
+-   `project.json`
+-   `tsconfig.json`
+-   `typedoc.json`
+-   `typescript.json`
+
+'''
+
+# [configuration reference]
+
+## `$schema`
+
+[Section titled “$schema”](https://biomejs.dev/reference/configuration/#schema)
+
+Allows to pass a path to a JSON schema file.
+
+We publish a JSON schema file for our `biome.json`/`biome.jsonc` files.
+
+You can specify a relative path to the schema inside the `@biomejs/biome` NPM package if it is installed in the `node_modules` folder:
+
+biome.json
+
+    1{2  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json"3}
+
+If you have problems with resolving the physical file, you can use the one published on this site:
+
+biome.json
+
+    1{2  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json"3}
+
+## `extends`
+
+[Section titled “extends”](https://biomejs.dev/reference/configuration/#extends)
+
+A list of paths to other Biome configuration files. Biome resolves and applies the configuration settings from the files contained in the `extends` list, and eventually applies the options contained in this `biome.json`/`biome.jsonc` file.
+
+The order of paths to extend goes from least relevant to most relevant.
+
+Since v2, this option accepts a string that must match the value `"//"`, which can be used when setting up [monorepos](https://biomejs.dev/guides/big-projects#monorepo)
+
+## `root`
+
+[Section titled “root”](https://biomejs.dev/reference/configuration/#root)
+
+Whether this configuration should be treated as a root. By default, any configuration file is considered a root by default. When a configuration file is a “nested configuration”, it must set `"root": false`, otherwise an error is thrown.
+
+This is required so Biome can orchestrate multiple files in CLI and editors at the same time.
+
+> Default: `true`
+
+## `files`
+
+[Section titled “files”](https://biomejs.dev/reference/configuration/#files)
+
+### `files.includes`
+
+[Section titled “files.includes”](https://biomejs.dev/reference/configuration/#filesincludes)
+
+A list of [glob patterns](https://biomejs.dev/reference/configuration/#glob-syntax-reference) of files to process.
+
+If a folder matches a glob pattern, all files inside that folder will be processed.
+
+The following example matches all files with a `.js` extension inside the `src` folder:
+
+biome.json
+
+    1{2  "files": {3    "includes": ["src/**/*.js"]4  }5}
+
+`*` is used to match _all files in a folder_, while `**` _recursively_ matches all files and subfolders in a folder. For more information on globs, see the [glob syntax reference](https://biomejs.dev/reference/configuration/#glob-syntax-reference)
+
+`includes` also supports negated patterns, or exceptions. These are patterns that start with `!` and they can be used to instruct Biome to process all files _except_ those matching the negated pattern. When using a negated pattern, you should always specify `**` first to match all files and folders, otherwise the negated pattern will not match any files.
+
+Note that exceptions are processed in order, allowing you to specify exceptions to exceptions.
+
+Consider the following example:
+
+biome.json
+
+    1{2  "files": {3    "includes": ["**", "!**/*.test.js", "**/special.test.js", "!test"]4  }5}
+
+This example specifies that:
+
+1.  All files inside all (sub)folders are processed, thanks to the `**` pattern…
+2.  … _except_ when those files have a `.test.js` extension…
+3.  … but the file `special.test.ts` _is_ still processed…
+4.  … _except_ when it occurs in the folder named `test`, because _no_ files inside that folder are processed.
+
+This means that:
+
+-   `src/app.js` **is** processed.
+-   `src/app.test.js` **is not** processed.
+-   `src/special.test.js` \*_is_ processed.
+-   `test/special.test.js` \*_is not_ processed.
+
+#### Note on Biome’s scanner
+
+[Section titled “Note on Biome’s scanner”](https://biomejs.dev/reference/configuration/#note-on-biomes-scanner)
+
+Biome has a scanner that is responsible for discovering `.gitignore` files as well as indexing projects if any of the rules from the project domain are enabled.
+
+The scanner mostly respects the `files.includes` setting, but there are some exceptions. See the [scanner documentation](https://biomejs.dev/internals/architecture/#scanner) for more information.
+
+### `files.ignoreUnknown`
+
+[Section titled “files.ignoreUnknown”](https://biomejs.dev/reference/configuration/#filesignoreunknown)
+
+If `true`, Biome won’t emit diagnostics if it encounters files that it can’t handle.
+
+biome.json
+
+    1{2  "files": {3    "ignoreUnknown": true4  }5}
+
+> Default: `false`
+
+### `files.maxSize`
+
+[Section titled “files.maxSize”](https://biomejs.dev/reference/configuration/#filesmaxsize)
+
+The maximum allowed size for source code files in bytes. Files above this limit will be ignored for performance reasons.
+
+> Default: `1048576` (1024\*1024, 1MB)
+
+### `files.experimentalScannerIgnores`
+
+[Section titled “files.experimentalScannerIgnores”](https://biomejs.dev/reference/configuration/#filesexperimentalscannerignores)
+
+An array of literal paths that the scanner should ignore during the crawling. The ignored files won’t be indexed, which means that these files won’t be part of the module graph, and types won’t be inferred from them.
+
+In the following example, the folders `lodash` and `dist` and the file `RedisCommander.d.ts` will be ignored:
+
+biome.json
+
+    1{2  "files" : {3    "experimentalScannerIgnores": [4      "lodash",5      "dist",6      "RedisCommander.d.ts"7    ]8  }9}
+
+You should use this option only as a last resort in cases Biome takes a lot of time to lint/check your project. (Glob) paths aren’t supported, and only basenames are matched.
+
+See the [scanner documentation](https://biomejs.dev/internals/architecture/#scanner) for more information.
+
+Caution
+
+As an experimental option, its usage is subject to change. The goal is to make Biome as fast as possible and eventually remove the option.
+
+## `vcs`
+
+[Section titled “vcs”](https://biomejs.dev/reference/configuration/#vcs)
+
+Set of properties to integrate Biome with a VCS (Version Control Software).
+
+### `vcs.enabled`
+
+[Section titled “vcs.enabled”](https://biomejs.dev/reference/configuration/#vcsenabled)
+
+Whether Biome should integrate itself with the VCS client
+
+> Default: `false`
+
+### `vcs.clientKind`
+
+[Section titled “vcs.clientKind”](https://biomejs.dev/reference/configuration/#vcsclientkind)
+
+The kind of client.
+
+Values:
+
+-   `"git"`
+
+### `vcs.useIgnoreFile`
+
+[Section titled “vcs.useIgnoreFile”](https://biomejs.dev/reference/configuration/#vcsuseignorefile)
+
+Whether Biome should use the project’s VCS ignore file. When `true`, Biome will ignore the files specified in the VCS ignore file as well as those specified in a `.ignore` file.
+
+### `vcs.root`
+
+[Section titled “vcs.root”](https://biomejs.dev/reference/configuration/#vcsroot)
+
+The folder where Biome should check for VCS files. By default, Biome will use the same folder where `biome.json` was found.
+
+If Biome can’t find the configuration, it will attempt to use the current working directory. If no current working directory can’t be found, Biome won’t use the VCS integration, and a diagnostic will be emitted
+
+### `vcs.defaultBranch`
+
+[Section titled “vcs.defaultBranch”](https://biomejs.dev/reference/configuration/#vcsdefaultbranch)
+
+The main branch of the project. Biome will use this branch when evaluating the changed files.
+
+## `linter`
+
+[Section titled “linter”](https://biomejs.dev/reference/configuration/#linter)
+
+### `linter.enabled`
+
+[Section titled “linter.enabled”](https://biomejs.dev/reference/configuration/#linterenabled)
+
+Enables Biome’s linter.
+
+> Default: `true`
+
+### `linter.includes`
+
+[Section titled “linter.includes”](https://biomejs.dev/reference/configuration/#linterincludes)
+
+A list of [glob patterns](https://biomejs.dev/reference/configuration/#glob-syntax-reference) of files to lint.
+
+The following example lints all files with a `.js` extension inside the `src` folder:
+
+biome.json
+
+    1{2  "linter": {3    "includes": ["src/**/*.js"]4  }5}
+
+`*` is used to match _all files in a folder_, while `**` _recursively_ matches all files and subfolders in a folder. For more information on globs, see the [glob syntax reference](https://biomejs.dev/reference/configuration/#glob-syntax-reference)
+
+`includes` also supports negated patterns, or exceptions. These are patterns that start with `!` and they can be used to instruct Biome to process all files _except_ those matching the negated pattern.
+
+Note that exceptions are processed in order, allowing you to specify exceptions to exceptions.
+
+Consider the following example:
+
+biome.json
+
+    1{2  "linter": {3    "includes": ["**", "!**/*.test.js", "**/special.test.js"]4  }5}
+
+This example specifies that:
+
+1.  All files inside all (sub)folders are linted, thanks to the `**` pattern…
+2.  … _except_ when those files have a `.test.js` extension…
+3.  … but the file `special.test.ts` _is_ still linted.
+
+This means that:
+
+-   `src/app.js` **is** linted.
+-   `src/app.test.js` **is not** linted.
+-   `src/special.test.js` \*_is_ linted.
+
+Note that `linter.includes` is applied _after_ `files.includes`. This means that any file that is not matched by `files.includes` can no longer be matched `linter.includes`. This means the following example **doesn’t work**:
+
+biome.jsonc
+
+    1{2  "files": {3    "includes": "src/**"4  },5  "linter": {6    // This matches nothing because there is no overlap with `files.includes`:7    "includes": "scripts/**"8  }9}
+
+If `linter.includes` is not specified, all files matched by [`files.includes`](https://biomejs.dev/reference/configuration/#filesincludes) are linted.
+
+Note
+
+Due to a technical limitation, `linter.includes` also cannot match folders while `files.includes` can. If you want to match all files inside a folder, you should explicitly add `/**` at the end.
+
+### `linter.rules.recommended`
+
+[Section titled “linter.rules.recommended”](https://biomejs.dev/reference/configuration/#linterrulesrecommended)
+
+Enables the recommended rules for all groups.
+
+> Default: `true`
+
+### `linter.rules.[group]`
+
+[Section titled “linter.rules.\[group\]”](https://biomejs.dev/reference/configuration/#linterrulesgroup)
+
+Options that influence the rules of a single group. Biome supports the following groups:
+
+-   accessibility: Rules focused on preventing accessibility problems.
+-   complexity: Rules that focus on inspecting complex code that could be simplified.
+-   correctness: Rules that detect code that is guaranteed to be incorrect or useless.
+-   nursery: New rules that are still under development. Nursery rules require explicit opt-in via configuration on stable versions because they may still have bugs or performance problems. They are enabled by default on nightly builds, but as they are unstable their diagnostic severity may be set to either error or warning, depending on whether we intend for the rule to be recommended or not when it eventually gets stabilized. Nursery rules get promoted to other groups once they become stable or may be removed. Rules that belong to this group are not subject to semantic version.
+-   performance: Rules catching ways your code could be written to run faster, or generally be more efficient.
+-   security: Rules that detect potential security flaws.
+-   style: Rules enforcing a consistent and idiomatic way of writing your code.
+-   suspicious: Rules that detect code that is likely to be incorrect or useless.
+
+Each group can accept, as a value, a string that represents the severity or an object where each rule can be configured.
+
+When passing the severity, you can control the severity emitted by all the rules that belong to a group. For example, you can configure the `a11y` group to emit information diagnostics:
+
+biome.json
+
+    1{2  "linter": {3    "rules": {4      "a11y": "info"5    }6  }7}
+
+Here are the accepted values:
+
+-   `"on"`: each rule that belongs to the group will emit a diagnostic with the default severity of the rule. Refer to the documentation of the rule, or use the `explain` command:
+    
+    Terminal window
+    
+        biome explain noDebugger
+    
+-   `"off"`: none of the rules that belong to the group will emit any diagnostics.
+-   `"info"`: all rules that belong to the group will emit a [diagnostic with information severity](https://biomejs.dev/reference/diagnostics#information).
+-   `"warn"`: all rules that belong to the group will emit a [diagnostic with warning severity](https://biomejs.dev/reference/diagnostics#warning).
+-   `"error"`: all rules that belong to the group will emit a [diagnostic with error severity](https://biomejs.dev/reference/diagnostics#error).
+
+### `linter.rules.[group].recommended`
+
+[Section titled “linter.rules.\[group\].recommended”](https://biomejs.dev/reference/configuration/#linterrulesgrouprecommended)
+
+Enables the recommended rules for a single group.
+
+Example:
+
+biome.json
+
+    1{2  "linter": {3    "enabled": true,4    "rules": {5      "nursery": {6        "recommended": true7      }8    }9  }10}
+
+## `formatter`
+
+[Section titled “formatter”](https://biomejs.dev/reference/configuration/#formatter)
+
+These options apply to all languages. There are additional language-specific formatting options below.
+
+### `formatter.enabled`
+
+[Section titled “formatter.enabled”](https://biomejs.dev/reference/configuration/#formatterenabled)
+
+Enables Biome’s formatter.
+
+> Default: `true`
+
+### `formatter.includes`
+
+[Section titled “formatter.includes”](https://biomejs.dev/reference/configuration/#formatterincludes)
+
+A list of [glob patterns](https://biomejs.dev/reference/configuration/#glob-syntax-reference) of files to format.
+
+The following example formats all files with a `.js` extension inside the `src` folder:
+
+biome.json
+
+    1{2  "formatter": {3    "includes": ["src/**/*.js"]4  }5}
+
+`*` is used to match _all files in a folder_, while `**` _recursively_ matches all files and subfolders in a folder. For more information on globs, see the [glob syntax reference](https://biomejs.dev/reference/configuration/#glob-syntax-reference)
+
+`includes` also supports negated patterns, or exceptions. These are patterns that start with `!` and they can be used to instruct Biome to process all files _except_ those matching the negated pattern.
+
+Note that exceptions are processed in order, allowing you to specify exceptions to exceptions.
+
+Consider the following example:
+
+biome.json
+
+    1{2  "formatter": {3    "includes": ["**", "!**/*.test.js", "**/special.test.js"]4  }5}
+
+This example specifies that:
+
+1.  All files inside all (sub)folders are formatted, thanks to the `**` pattern…
+2.  … _except_ when those files have a `.test.js` extension…
+3.  … but the file `special.test.ts` _is_ still formatted.
+
+This means that:
+
+-   `src/app.js` **is** formatted.
+-   `src/app.test.js` **is not** formatted.
+-   `src/special.test.js` \*_is_ formatted.
+
+Note that `formatter.includes` is applied _after_ `files.includes`. This means that any file that is not matched by `files.includes` can no longer be matched `formatter.includes`. This means the following example **doesn’t work**:
+
+biome.jsonc
+
+    1{2  "files": {3    "includes": "src/**"4  },5  "formatter": {6    // This matches nothing because there is no overlap with `files.includes`:7    "includes": "scripts/**"8  }9}
+
+If `formatter.includes` is not specified, all files matched by [`files.includes`](https://biomejs.dev/reference/configuration/#filesincludes) are formatted.
+
+Note
+
+Due to a technical limitation, `formatter.includes` also cannot match folders while `files.includes` can. If you want to match all files inside a folder, you should explicitly add `/**` at the end.
+
+### `formatter.formatWithErrors`
+
+[Section titled “formatter.formatWithErrors”](https://biomejs.dev/reference/configuration/#formatterformatwitherrors)
+
+Allows to format a document that has syntax errors.
+
+biome.json
+
+    1{2  "formatter": {3    "formatWithErrors": true4  }5}
+
+> Default: `false`
+
+### `formatter.indentStyle`
+
+[Section titled “formatter.indentStyle”](https://biomejs.dev/reference/configuration/#formatterindentstyle)
+
+The style of the indentation. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `formatter.indentWidth`
+
+[Section titled “formatter.indentWidth”](https://biomejs.dev/reference/configuration/#formatterindentwidth)
+
+How big the indentation should be.
+
+> Default: `2`
+
+### `formatter.lineEnding`
+
+[Section titled “formatter.lineEnding”](https://biomejs.dev/reference/configuration/#formatterlineending)
+
+The type of line ending.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `formatter.lineWidth`
+
+[Section titled “formatter.lineWidth”](https://biomejs.dev/reference/configuration/#formatterlinewidth)
+
+The amount of characters that can be written on a single line..
+
+> Default: `80`
+
+### `formatter.attributePosition`
+
+[Section titled “formatter.attributePosition”](https://biomejs.dev/reference/configuration/#formatterattributeposition)
+
+The attribute position style in HTMLish languages.
+
+-   `"auto"`, the attributes are automatically formatted, and they will collapse in multiple lines only when they hit certain criteria;
+-   `"multiline"`, the attributes will collapse in multiple lines if more than 1 attribute is used.
+
+> Default: `"auto"`
+
+### `formatter.bracketSpacing`
+
+[Section titled “formatter.bracketSpacing”](https://biomejs.dev/reference/configuration/#formatterbracketspacing)
+
+Choose whether spaces should be added between brackets and inner values.
+
+> Default: `true`
+
+### `formatter.expand`
+
+[Section titled “formatter.expand”](https://biomejs.dev/reference/configuration/#formatterexpand)
+
+Whether to expand arrays and objects on multiple lines.
+
+-   `"auto"`, object literals are formatted on multiple lines if the first property has a newline, and array literals are formatted on a single line if it fits in the line.
+-   `"always"`, these literals are formatted on multiple lines, regardless of length of the list.
+-   `"never"`, these literals are formatted on a single line if it fits in the line.
+
+When formatting `package.json`, Biome will use `always` unless configured otherwise.
+
+> Default: `"auto"`
+
+### `formatter.useEditorconfig`
+
+[Section titled “formatter.useEditorconfig”](https://biomejs.dev/reference/configuration/#formatteruseeditorconfig)
+
+Whether Biome should use the `.editorconfig` file to determine the formatting options.
+
+The config files `.editorconfig` and `biome.json` will follow the follwing rules:
+
+-   Formatting settings in `biome.json` always take precedence over `.editorconfig` files.
+-   `.editorconfig` files that exist higher up in the hierarchy than a `biome.json` file are already ignored. This is to avoid loading formatting settings from someone’s home directory into a project with a `biome.json` file.
+-   Nested `.editorconfig` files aren’t supported currently.
+
+> Default: `false`
+
+## `javascript`
+
+[Section titled “javascript”](https://biomejs.dev/reference/configuration/#javascript)
+
+These options apply only to JavaScript (and TypeScript) files.
+
+### `javascript.parser.unsafeParameterDecoratorsEnabled`
+
+[Section titled “javascript.parser.unsafeParameterDecoratorsEnabled”](https://biomejs.dev/reference/configuration/#javascriptparserunsafeparameterdecoratorsenabled)
+
+Allows to support the unsafe/experimental parameter decorators.
+
+biome.json
+
+    1{2  "javascript": {3    "parser": {4      "unsafeParameterDecoratorsEnabled": true5    }6  }7}
+
+> Default: `false`
+
+### `javascript.parser.jsxEverywhere`
+
+[Section titled “javascript.parser.jsxEverywhere”](https://biomejs.dev/reference/configuration/#javascriptparserjsxeverywhere)
+
+When set to `true`, allows to parse JSX syntax inside `.js` files. When set to `false`, Biome will raise diagnostics when it encounters JSX syntax inside `.js` files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "javascript": {3    "parser": {4      "jsxEverywhere": false5    }6  }7}
+
+### `javascript.formatter.quoteStyle`
+
+[Section titled “javascript.formatter.quoteStyle”](https://biomejs.dev/reference/configuration/#javascriptformatterquotestyle)
+
+The type of quote used when representing string literals. It can be `"single"` or `"double"`.
+
+> Default: `"double"`
+
+### `javascript.formatter.jsxQuoteStyle`
+
+[Section titled “javascript.formatter.jsxQuoteStyle”](https://biomejs.dev/reference/configuration/#javascriptformatterjsxquotestyle)
+
+The type of quote used when representing jsx string literals. It can be `"single"` or `"double"`.
+
+> Default: `"double"`
+
+biome.json
+
+    1{2  "javascript": {3    "formatter": {4      "jsxQuoteStyle": "single"5    }6  }7}
+
+### `javascript.formatter.quoteProperties`
+
+[Section titled “javascript.formatter.quoteProperties”](https://biomejs.dev/reference/configuration/#javascriptformatterquoteproperties)
+
+When properties inside objects should be quoted. It can be `"asNeeded"` or `"preserve"`.
+
+> Default: `"asNeeded"`
+
+biome.json
+
+    1{2  "javascript": {3    "formatter": {4      "quoteProperties": "preserve"5    }6  }7}
+
+### `javascript.formatter.trailingCommas`
+
+[Section titled “javascript.formatter.trailingCommas”](https://biomejs.dev/reference/configuration/#javascriptformattertrailingcommas)
+
+Print trailing commas wherever possible in multi-line comma-separated syntactic structures. Possible values:
+
+-   `"all"`, the trailing comma is always added;
+-   `"es5"`, the trailing comma is added only in places where it’s supported by older version of JavaScript;
+-   `"none"`, trailing commas are never added.
+
+> Default: `"all"`
+
+### `javascript.formatter.semicolons`
+
+[Section titled “javascript.formatter.semicolons”](https://biomejs.dev/reference/configuration/#javascriptformattersemicolons)
+
+It configures where the formatter prints semicolons:
+
+-   `"always"`, the semicolons is always added at the end of each statement;
+-   `"asNeeded"`, the semicolons are added only in places where it’s needed, to protect from [ASI](https://en.wikibooks.org/wiki/JavaScript/Automatic_semicolon_insertion).
+
+> Default: `"always"`
+
+Example:
+
+biome.json
+
+    1{2  "javascript": {3    "formatter": {4      "semicolons": "asNeeded"5    }6  }7}
+
+### `javascript.formatter.arrowParentheses`
+
+[Section titled “javascript.formatter.arrowParentheses”](https://biomejs.dev/reference/configuration/#javascriptformatterarrowparentheses)
+
+Whether to add non-necessary parentheses to arrow functions:
+
+-   `"always"`, the parentheses are always added;
+-   `"asNeeded"`, the parentheses are added only when they are needed.
+
+> Default: `"always"`
+
+### `javascript.formatter.enabled`
+
+[Section titled “javascript.formatter.enabled”](https://biomejs.dev/reference/configuration/#javascriptformatterenabled)
+
+Enables Biome’s formatter for JavaScript (and its super languages) files.
+
+> Default: `true`
+
+### `javascript.formatter.indentStyle`
+
+[Section titled “javascript.formatter.indentStyle”](https://biomejs.dev/reference/configuration/#javascriptformatterindentstyle)
+
+The style of the indentation for JavaScript (and its super languages) files. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `javascript.formatter.indentWidth`
+
+[Section titled “javascript.formatter.indentWidth”](https://biomejs.dev/reference/configuration/#javascriptformatterindentwidth)
+
+How big the indentation should be for JavaScript (and its super languages) files.
+
+> Default: `2`
+
+### `javascript.formatter.lineEnding`
+
+[Section titled “javascript.formatter.lineEnding”](https://biomejs.dev/reference/configuration/#javascriptformatterlineending)
+
+The type of line ending for JavaScript (and its super languages) files.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `javascript.formatter.lineWidth`
+
+[Section titled “javascript.formatter.lineWidth”](https://biomejs.dev/reference/configuration/#javascriptformatterlinewidth)
+
+The amount of characters that can be written on a single line in JavaScript (and its super languages) files.
+
+> Default: `80`
+
+### `javascript.formatter.bracketSameLine`
+
+[Section titled “javascript.formatter.bracketSameLine”](https://biomejs.dev/reference/configuration/#javascriptformatterbracketsameline)
+
+Choose whether the ending `>` of a multi-line JSX element should be on the last attribute line or not
+
+> Default: `false`
+
+### `javascript.formatter.bracketSpacing`
+
+[Section titled “javascript.formatter.bracketSpacing”](https://biomejs.dev/reference/configuration/#javascriptformatterbracketspacing)
+
+Choose whether spaces should be added between brackets and inner values.
+
+> Default: `true`
+
+### `javascript.formatter.attributePosition`
+
+[Section titled “javascript.formatter.attributePosition”](https://biomejs.dev/reference/configuration/#javascriptformatterattributeposition)
+
+The attribute position style in jsx elements.
+
+-   `"auto"`, do not enforce single attribute per line.
+-   `"multiline"`, enforce single attribute per line.
+
+> Default: `"auto"`
+
+### `javascript.formatter.expand`
+
+[Section titled “javascript.formatter.expand”](https://biomejs.dev/reference/configuration/#javascriptformatterexpand)
+
+Whether to expand arrays and objects on multiple lines.
+
+-   `"auto"`, object literals are formatted on multiple lines if the first property has a newline, and array literals are formatted on a single line if it fits in the line.
+-   `"always"`, these literals are formatted on multiple lines, regardless of length of the list.
+-   `"never"`, these literals are formatted on a single line if it fits in the line.
+
+> Default: `"auto"`
+
+### `javascript.globals`
+
+[Section titled “javascript.globals”](https://biomejs.dev/reference/configuration/#javascriptglobals)
+
+A list of global names that Biome should ignore (analyzer, linter, etc.)
+
+biome.json
+
+    1{2  "javascript": {3    "globals": ["$", "_", "externalVariable"]4  }5}
+
+### `javascript.jsxRuntime`
+
+[Section titled “javascript.jsxRuntime”](https://biomejs.dev/reference/configuration/#javascriptjsxruntime)
+
+Indicates the type of runtime or transformation used for interpreting JSX.
+
+-   `"transparent"` — Indicates a modern or native JSX environment, that doesn’t require special handling by Biome.
+-   `"reactClassic"` — Indicates a classic React environment that requires the `React` import. Corresponds to the `react` value for the `jsx` option in TypeScript’s [`tsconfig.json`](https://www.typescriptlang.org/tsconfig#jsx).
+
+biome.json
+
+    1{2  "javascript": {3    "jsxRuntime": "reactClassic"4  }5}
+
+For more information about the old vs. new JSX runtime, please see: [https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html](https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)
+
+> Default: `"transparent"`
+
+### `javascript.linter.enabled`
+
+[Section titled “javascript.linter.enabled”](https://biomejs.dev/reference/configuration/#javascriptlinterenabled)
+
+Enables Biome’s linter for JavaScript (and its super languages) files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "javascript": {3    "linter": {4      "enabled": false5    }6  }7}
+
+### `javascript.assist.enabled`
+
+[Section titled “javascript.assist.enabled”](https://biomejs.dev/reference/configuration/#javascriptassistenabled)
+
+Enables Biome’s assist for JavaScript (and its super languages) files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "javascript": {3    "assist": {4      "enabled": false5    }6  }7}
+
+## `json`
+
+[Section titled “json”](https://biomejs.dev/reference/configuration/#json)
+
+Options applied to the JSON files.
+
+### `json.parser.allowComments`
+
+[Section titled “json.parser.allowComments”](https://biomejs.dev/reference/configuration/#jsonparserallowcomments)
+
+Enables the parsing of comments in JSON files.
+
+biome.json
+
+    1{2  "json": {3    "parser": {4      "allowComments": true5    }6  }7}
+
+### `json.parser.allowTrailingCommas`
+
+[Section titled “json.parser.allowTrailingCommas”](https://biomejs.dev/reference/configuration/#jsonparserallowtrailingcommas)
+
+Enables the parsing of trailing commas in JSON files.
+
+biome.json
+
+    1{2  "json": {3    "parser": {4      "allowTrailingCommas": true5    }6  }7}
+
+### `json.formatter.enabled`
+
+[Section titled “json.formatter.enabled”](https://biomejs.dev/reference/configuration/#jsonformatterenabled)
+
+Enables Biome’s formatter for JSON (and its super languages) files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "json": {3    "formatter": {4      "enabled": false5    }6  }7}
+
+### `json.formatter.indentStyle`
+
+[Section titled “json.formatter.indentStyle”](https://biomejs.dev/reference/configuration/#jsonformatterindentstyle)
+
+The style of the indentation for JSON (and its super languages) files. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `json.formatter.indentWidth`
+
+[Section titled “json.formatter.indentWidth”](https://biomejs.dev/reference/configuration/#jsonformatterindentwidth)
+
+How big the indentation should be for JSON (and its super languages) files.
+
+> Default: `2`
+
+### `json.formatter.lineEnding`
+
+[Section titled “json.formatter.lineEnding”](https://biomejs.dev/reference/configuration/#jsonformatterlineending)
+
+The type of line ending for JSON (and its super languages) files.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `json.formatter.lineWidth`
+
+[Section titled “json.formatter.lineWidth”](https://biomejs.dev/reference/configuration/#jsonformatterlinewidth)
+
+The amount of characters that can be written on a single line in JSON (and its super languages) files.
+
+> Default: `80`
+
+### `json.formatter.trailingCommas`
+
+[Section titled “json.formatter.trailingCommas”](https://biomejs.dev/reference/configuration/#jsonformattertrailingcommas)
+
+Print trailing commas wherever possible in multi-line comma-separated syntactic structures.
+
+Allowed values:
+
+-   `"none"`: the trailing comma is removed;
+-   `"all"`: the trailing comma is kept **and** preferred.
+
+> Default: `"none"`
+
+### `json.formatter.bracketSpacing`
+
+[Section titled “json.formatter.bracketSpacing”](https://biomejs.dev/reference/configuration/#jsonformatterbracketspacing)
+
+Choose whether spaces should be added between brackets and inner values.
+
+> Default: `true`
+
+### `json.formatter.expand`
+
+[Section titled “json.formatter.expand”](https://biomejs.dev/reference/configuration/#jsonformatterexpand)
+
+Whether to expand arrays and objects on multiple lines.
+
+-   `"auto"`, object literals are formatted on multiple lines if the first property has a newline, and array literals are formatted on a single line if it fits in the line.
+-   `"always"`, these literals are formatted on multiple lines, regardless of length of the list.
+-   `"never"`, these literals are formatted on a single line if it fits in the line.
+
+When formatting `package.json`, Biome will use `always` unless configured otherwise.
+
+> Default: `"auto"`
+
+### `json.linter.enabled`
+
+[Section titled “json.linter.enabled”](https://biomejs.dev/reference/configuration/#jsonlinterenabled)
+
+Enables Biome’s formatter for JSON (and its super languages) files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "json": {3    "linter": {4      "enabled": false5    }6  }7}
+
+### `json.assist.enabled`
+
+[Section titled “json.assist.enabled”](https://biomejs.dev/reference/configuration/#jsonassistenabled)
+
+Enables Biome’s assist for JSON (and its super languages) files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "json": {3    "assist": {4      "enabled": false5    }6  }7}
+
+## `css`
+
+[Section titled “css”](https://biomejs.dev/reference/configuration/#css)
+
+Options applied to the CSS files.
+
+### `css.parser.cssModules`
+
+[Section titled “css.parser.cssModules”](https://biomejs.dev/reference/configuration/#cssparsercssmodules)
+
+Enables parsing of [CSS modules](https://github.com/css-modules/css-modules)
+
+> Default: `false`
+
+### `css.formatter.enabled`
+
+[Section titled “css.formatter.enabled”](https://biomejs.dev/reference/configuration/#cssformatterenabled)
+
+Enables Biome’s formatter for CSS files.
+
+> Default: `false`
+
+biome.json
+
+    1{2  "css": {3    "formatter": {4      "enabled": false5    }6  }7}
+
+### `css.formatter.indentStyle`
+
+[Section titled “css.formatter.indentStyle”](https://biomejs.dev/reference/configuration/#cssformatterindentstyle)
+
+The style of the indentation for CSS files. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `css.formatter.indentWidth`
+
+[Section titled “css.formatter.indentWidth”](https://biomejs.dev/reference/configuration/#cssformatterindentwidth)
+
+How big the indentation should be for CSS files.
+
+> Default: `2`
+
+biome.json
+
+    1{2  "css": {3    "formatter": {4      "indentWidth": 25    }6  }7}
+
+### `css.formatter.lineEnding`
+
+[Section titled “css.formatter.lineEnding”](https://biomejs.dev/reference/configuration/#cssformatterlineending)
+
+The type of line ending for CSS files.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `css.formatter.lineWidth`
+
+[Section titled “css.formatter.lineWidth”](https://biomejs.dev/reference/configuration/#cssformatterlinewidth)
+
+The amount of characters that can be written on a single line in CSS files.
+
+> Default: `80`
+
+### `css.formatter.quoteStyle`
+
+[Section titled “css.formatter.quoteStyle”](https://biomejs.dev/reference/configuration/#cssformatterquotestyle)
+
+The type of quote used when representing string literals. It can be `"single"` or `"double"`.
+
+> Default: `"double"`
+
+### `css.linter.enabled`
+
+[Section titled “css.linter.enabled”](https://biomejs.dev/reference/configuration/#csslinterenabled)
+
+Enables Biome’s linter for CSS files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "css": {3    "linter": {4      "enabled": false5    }6  }7}
+
+### `css.assist.enabled`
+
+[Section titled “css.assist.enabled”](https://biomejs.dev/reference/configuration/#cssassistenabled)
+
+Enables Biome’s assist for CSS files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "css": {3    "assist": {4      "enabled": false5    }6  }7}
+
+## `graphql`
+
+[Section titled “graphql”](https://biomejs.dev/reference/configuration/#graphql)
+
+Options applied to the GraphQL files.
+
+### `graphql.formatter.enabled`
+
+[Section titled “graphql.formatter.enabled”](https://biomejs.dev/reference/configuration/#graphqlformatterenabled)
+
+Enables Biome’s formatter for GraphQL files.
+
+> Default: `false`
+
+### `graphql.formatter.indentStyle`
+
+[Section titled “graphql.formatter.indentStyle”](https://biomejs.dev/reference/configuration/#graphqlformatterindentstyle)
+
+The style of the indentation for GraphQL files. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `graphql.formatter.indentWidth`
+
+[Section titled “graphql.formatter.indentWidth”](https://biomejs.dev/reference/configuration/#graphqlformatterindentwidth)
+
+How big the indentation should be for GraphQL files.
+
+> Default: `2`
+
+### `graphql.formatter.lineEnding`
+
+[Section titled “graphql.formatter.lineEnding”](https://biomejs.dev/reference/configuration/#graphqlformatterlineending)
+
+The type of line ending for GraphQL files.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `graphql.formatter.lineWidth`
+
+[Section titled “graphql.formatter.lineWidth”](https://biomejs.dev/reference/configuration/#graphqlformatterlinewidth)
+
+The amount of characters that can be written on a single line in GraphQL files.
+
+> Default: `80`
+
+### `graphql.formatter.quoteStyle`
+
+[Section titled “graphql.formatter.quoteStyle”](https://biomejs.dev/reference/configuration/#graphqlformatterquotestyle)
+
+The type of quote used when representing string literals. It can be `"single"` or `"double"`.
+
+> Default: `"double"`
+
+### `graphql.linter.enabled`
+
+[Section titled “graphql.linter.enabled”](https://biomejs.dev/reference/configuration/#graphqllinterenabled)
+
+Enables Biome’s linter for GraphQL files.
+
+> Default: `true`
+
+### `graphql.assist.enabled`
+
+[Section titled “graphql.assist.enabled”](https://biomejs.dev/reference/configuration/#graphqlassistenabled)
+
+Enables Biome’s assist for GraphQL files.
+
+> Default: `true`
+
+## `grit`
+
+[Section titled “grit”](https://biomejs.dev/reference/configuration/#grit)
+
+Options applied to the Grit files.
+
+### `grit.formatter.enabled`
+
+[Section titled “grit.formatter.enabled”](https://biomejs.dev/reference/configuration/#gritformatterenabled)
+
+Enables Biome’s formatter for Grit files.
+
+> Default: `false`
+
+### `grit.formatter.indentStyle`
+
+[Section titled “grit.formatter.indentStyle”](https://biomejs.dev/reference/configuration/#gritformatterindentstyle)
+
+The style of the indentation for Grit files. It can be `"tab"` or `"space"`.
+
+> Default: `"tab"`
+
+### `grit.formatter.indentWidth`
+
+[Section titled “grit.formatter.indentWidth”](https://biomejs.dev/reference/configuration/#gritformatterindentwidth)
+
+How big the indentation should be for Grit files.
+
+> Default: `2`
+
+### `grit.formatter.lineEnding`
+
+[Section titled “grit.formatter.lineEnding”](https://biomejs.dev/reference/configuration/#gritformatterlineending)
+
+The type of line ending for Grit files.
+
+-   `"lf"`, Line Feed only (`\n`), common on Linux and macOS as well as inside git repos;
+-   `"crlf"`, Carriage Return + Line Feed characters (`\r\n`), common on Windows;
+-   `"cr"`, Carriage Return character only (`\r`), used very rarely.
+
+> Default: `"lf"`
+
+### `grit.formatter.lineWidth`
+
+[Section titled “grit.formatter.lineWidth”](https://biomejs.dev/reference/configuration/#gritformatterlinewidth)
+
+The amount of characters that can be written on a single line in Grit files.
+
+> Default: `80`
+
+### `grit.formatter.quoteStyle`
+
+[Section titled “grit.formatter.quoteStyle”](https://biomejs.dev/reference/configuration/#gritformatterquotestyle)
+
+The type of quote used when representing string literals. It can be `"single"` or `"double"`.
+
+> Default: `"double"`
+
+### `grit.linter.enabled`
+
+[Section titled “grit.linter.enabled”](https://biomejs.dev/reference/configuration/#gritlinterenabled)
+
+Enables Biome’s linter for Grit files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "grit": {3    "linter": {4      "enabled": false5    }6  }7}
+
+### `grit.assist.enabled`
+
+[Section titled “grit.assist.enabled”](https://biomejs.dev/reference/configuration/#gritassistenabled)
+
+Enables Biome’s assist for Grit files.
+
+> Default: `true`
+
+biome.json
+
+    1{2  "grit": {3    "assist": {4      "enabled": false5    }6  }7}
+
+## `overrides`
+
+[Section titled “overrides”](https://biomejs.dev/reference/configuration/#overrides)
+
+A list of patterns.
+
+Use this configuration to change the behaviour of the tools for certain files.
+
+When a file is matched against an override pattern, the configuration specified in that pattern will be override the top-level configuration.
+
+The order of the patterns matter. If a file _can_ match three patterns, only the first one is used.
+
+### `overrides.<ITEM>.includes`
+
+[Section titled “overrides.<ITEM>.includes”](https://biomejs.dev/reference/configuration/#overridesitemincludes)
+
+A list of [glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) of files for which to apply customised settings.
+
+biome.jsonc
+
+    1{2  "overrides": [{3    "includes": ["scripts/*.js"],4    // settings that should only apply to the files specified in the includes field.5  }]6}
+
+### `overrides.<ITEM>.formatter`
+
+[Section titled “overrides.<ITEM>.formatter”](https://biomejs.dev/reference/configuration/#overridesitemformatter)
+
+It will include the options of [top level formatter](https://biomejs.dev/reference/configuration/#formatter) configuration, minus `ignore` and `include`.
+
+#### Examples
+
+[Section titled “Examples”](https://biomejs.dev/reference/configuration/#examples)
+
+For example, it’s possible to modify the formatter `lineWidth`, `indentStyle` for certain files that are included in the glob path `generated/**`:
+
+biome.json
+
+    1{2  "formatter": {3    "lineWidth": 1004  },5  "overrides": [6    {7      "includes": ["generated/**"],8      "formatter": {9        "lineWidth": 160,10        "indentStyle": "space"11      }12    }13  ]14}
+
+### `overrides.<ITEM>.linter`
+
+[Section titled “overrides.<ITEM>.linter”](https://biomejs.dev/reference/configuration/#overridesitemlinter)
+
+It will include the options of [top level linter](https://biomejs.dev/reference/configuration/#linter) configuration, minus `ignore` and `include`.
+
+#### Examples
+
+[Section titled “Examples”](https://biomejs.dev/reference/configuration/#examples-1)
+
+You can disable certain rules for certain glob paths, and disable the linter for other glob paths:
+
+biome.json
+
+    1{2  "linter": {3    "enabled": true,4    "rules": {5      "recommended": true6    }7  },8  "overrides": [9    {10      "includes": ["lib/**"],11      "linter": {12        "rules": {13          "suspicious": {14            "noDebugger": "off"15          }16        }17      }18    },19    {20      "includes": ["shims/**"],21      "linter": {22        "enabled": false23      }24    }25  ]26}
+
+### `overrides.<ITEM>.organizeImports`
+
+[Section titled “overrides.<ITEM>.organizeImports”](https://biomejs.dev/reference/configuration/#overridesitemorganizeimports)
+
+It will include the options of [top level organize imports](https://biomejs.dev/reference/configuration/#organizeimports), minus `ignore` and `include`.
+
+### `overrides.<ITEM>.javascript`
+
+[Section titled “overrides.<ITEM>.javascript”](https://biomejs.dev/reference/configuration/#overridesitemjavascript)
+
+It will include the options of [top level javascript](https://biomejs.dev/reference/configuration/#javascript) configuration.
+
+#### Examples
+
+[Section titled “Examples”](https://biomejs.dev/reference/configuration/#examples-2)
+
+You can change the formatting behaviour of JavaScript files in certain folders:
+
+biome.json
+
+    1{2  "formatter": {3    "lineWidth": 1204  },5  "javascript": {6    "formatter": {7      "quoteStyle": "single"8    }9  },10  "overrides": [11    {12      "includes": ["lib/**"],13      "javascript": {14        "formatter": {15          "quoteStyle": "double"16        }17      }18    }19  ]20}
+
+### `overrides.<ITEM>.json`
+
+[Section titled “overrides.<ITEM>.json”](https://biomejs.dev/reference/configuration/#overridesitemjson)
+
+It will include the options of [top level json](https://biomejs.dev/reference/configuration/#json) configuration.
+
+#### Examples
+
+[Section titled “Examples”](https://biomejs.dev/reference/configuration/#examples-3)
+
+You can enable parsing features for certain JSON files:
+
+biome.json
+
+    1{2  "linter": {3    "enabled": true,4    "rules": {5      "recommended": true6    }7  },8  "overrides": [9    {10      "includes": [".vscode/**"],11      "json": {12        "parser": {13          "allowComments": true,14          "allowTrailingCommas": true15        }16      }17    }18  ]19}
+
+## Glob syntax reference
+
+[Section titled “Glob syntax reference”](https://biomejs.dev/reference/configuration/#glob-syntax-reference)
+
+Glob patterns are used to match paths of files and folders. Biome supports the following syntax in globs:
+
+-   `*` matches zero or more characters. It cannot match the path separator `/`.
+-   `**` recursively matches directories and files. This sequence must be used as an entire path component, so both `**a` and `b**` are invalid and will result in an error. A sequence of more than two consecutive `*` characters is also invalid.
+-   `[...]` matches any character inside the brackets. Ranges of characters can also be specified, as ordered by Unicode, so e.g. `[0-9]` specifies any character between 0 and 9 inclusive.
+-   `[!...]` is the negation of `[...]`, i.e. it matches any characters **not** in the brackets.
+-   If the entire glob starts with `!`, it is a so-called negated pattern. This glob only matches if the path _doesn’t_ match the glob. Negated patterns cannot be used alone, they can only be used as _exception_ to a regular glob.
+
+Some examples:
+
+-   `dist/**` matches the `dist/` folder and all files inside it.
+-   `**/test/**` matches all files under any folder named `test`, regardless of where they are. E.g. `dist/test`, `src/test`.
+-   `**/*.js` matches all files ending with the extension `.js` in all folders.
+
+Caution
+
+Glob patterns can be used in a Biome configuration file, but they can also be specified from the command line. When you specify a glob on the command line, it is interpreted by your shell rather than by Biome. Shells may support slightly different syntax for globs. For instance, some shells do not support the recursive pattern `**`.
