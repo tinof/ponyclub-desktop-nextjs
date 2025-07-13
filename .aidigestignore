@@ -1,0 +1,41 @@
+# Documentation and non-code files
+docs/
+data/
+
+# Build artifacts and generated files
+.next/
+node_modules/
+dist/
+build/
+out/
+
+# Large third-party files
+public/~partytown/
+public/images/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.svg
+*.ico
+*.avif
+*.webm
+*.mp4
+
+# IDE and development files
+.idea/
+.vscode/
+.husky/
+*.tsbuildinfo
+
+# Configuration that's not essential for understanding code
+biome-report.txt
+pnpm-lock.yaml
+*.log
+
+# Test and build scripts
+scripts/
+
+# Temporary files
+*.tmp
+*.temp
