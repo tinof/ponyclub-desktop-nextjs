@@ -12,40 +12,58 @@ The primary objective of the Google Ads campaigns is to drive direct, measurable
 
 ## 2. Campaign & Ad Group Structure
 
-To ensure budget is allocated effectively and ad copy is highly relevant, the account will be structured as follows:
+To ensure budget is allocated effectively and ad copy is highly relevant, the account will be structured using **language-based campaigns** that consolidate all intents while maximizing Google's AI learning and budget efficiency:
 
-### Campaign 1: Acheron Core Activities (Search)
-- **Goal:** Capture high-intent searches for the specific activities offered.
+### Campaign 1: `GR - Search - Summer 2025`
+- **Goal:** Target Greek speakers within Greece for all activity and package intents.
+- **Language Targeting:** Greek
+- **Location Targeting:** Greece
 - **Ad Groups:**
-    - **Ad Group: Rafting Acheron**
+    - **Ad Group: GR - Rafting Acheron**
+        - **Keywords:** `rafting acheron`, `rafting glyki`, `οικογενειακό rafting acheron`, `τιμές rafting ποταμός αχέρων`.
+        - **Landing Page:** `/el/rafting`
+    - **Ad Group: GR - Horse Riding Acheron**
+        - **Keywords:** `ιππασία αχέρων`, `glyki horse riding`, `ιππασία για αρχάριους ελλάδα`, `άλογα αχέρων`.
+        - **Landing Page:** `/el/riding`
+    - **Ad Group: GR - Kayaking Acheron**
+        - **Keywords:** `kayak acheron`, `καγιάκ ποταμός αχέρων`, `κανό καγιάκ αχέρων`.
+        - **Landing Page:** `/el/kayaking`
+    - **Ad Group: GR - Holiday Packages**
+        - **Keywords:** `πακέτο περιπέτειας αχέρων`, `διακοπές rafting ιππασία ελλάδα`, `πακέτο δραστηριοτήτων ήπειρος`.
+        - **Landing Page:** `/el/packages` or `/el/` homepage
+    - **Ad Group: GR - Brand Pony Club**
+        - **Keywords:** `pony club acheron`, `ponyclub glyki`, `αχέρων pony club`.
+        - **Landing Page:** `/el/` homepage
+
+### Campaign 2: `ENG - Search - Summer 2025`
+- **Goal:** Target international tourists searching in English.
+- **Language Targeting:** English
+- **Location Targeting:** UK, Germany, Netherlands, Italy, USA, France, Austria **AND Greece** (to catch tourists already here)
+- **Ad Groups:**
+    - **Ad Group: ENG - Rafting Acheron**
         - **Keywords:** `acheron rafting`, `rafting glyki`, `family rafting acheron`, `acheron river rafting prices`.
         - **Landing Page:** `/rafting`
-    - **Ad Group: Horse Riding Acheron**
+    - **Ad Group: ENG - Horse Riding Acheron**
         - **Keywords:** `horse riding acheron`, `glyki horse riding`, `beginner horse riding greece`, `acheron horses`.
         - **Landing Page:** `/riding`
-    - **Ad Group: Kayaking Acheron**
+    - **Ad Group: ENG - Kayaking Acheron**
         - **Keywords:** `kayak acheron`, `acheron river kayaking`, `canoe kayak acheron`.
         - **Landing Page:** `/kayaking`
-
-### Campaign 2: Holiday Packages (Search)
-- **Goal:** Target users with a higher commercial intent who are searching for complete holiday packages.
-- **Ad Groups:**
-    - **Ad Group: Package 1 - Rafting & Riding**
-        - **Keywords:** `acheron adventure package`, `rafting and riding holiday greece`, `epirus activity package`.
-        - **Landing Page:** `/package-1` (once created)
-    - **Ad Group: Package 2 - Full Adventure**
-        - **Keywords:** `acheron holiday package`, `greece adventure holiday`, `epirus tour package`.
-        - **Landing Page:** `/package-2` (once created)
-
-### Campaign 3: Brand & Competitors (Search)
-- **Goal:** Protect brand search terms and capture traffic from users comparing options.
-- **Ad Groups:**
-    - **Ad Group: Pony Club Brand**
+    - **Ad Group: ENG - Holiday Packages**
+        - **Keywords:** `acheron adventure package`, `rafting and riding holiday greece`, `epirus activity package`, `greece adventure holiday`.
+        - **Landing Page:** `/packages` or homepage
+    - **Ad Group: ENG - Brand Pony Club**
         - **Keywords:** `pony club acheron`, `ponyclub glyki`, `acheron pony club`.
         - **Landing Page:** Homepage
-    - **Ad Group: Competitors** (Optional, based on budget)
+    - **Ad Group: ENG - Competitors** (Optional, based on budget)
         - **Keywords:** `riverdream glyki`, `acheron river dream`.
         - **Landing Page:** Homepage
+
+**Why This Structure is Superior:**
+1. **Faster AI Learning:** Consolidating all intents per language gives Google more conversion data to optimize with
+2. **Better Budget Flexibility:** Google can shift budget in real-time between ad groups based on performance
+3. **Maintained Relevance:** All ad groups remain highly specific and relevant
+4. **Optimized for Goals:** Package ad groups can be bid more aggressively, call extensions work at campaign level, activity ad groups ensure top positions
 
 ---
 
@@ -94,10 +112,12 @@ Accurate tracking is non-negotiable for success. This requires a robust setup us
 ## 6. Budget, Bidding & Optimization
 
 - **Bidding Strategy:**
-    - **Initial Phase:** Start with "Maximize Clicks" to gather data.
-    - **Primary Phase:** Swiftly move to a conversion-focused bidding strategy like **"Maximize Conversions"** or **"Target CPA"** (Cost Per Acquisition) once sufficient conversion data is available (approx. 15-20 conversions per month).
+    - **Initial Phase:** Start with **Manual CPC** with **"Enhanced CPC"** enabled. This provides more control than Maximize Clicks while allowing Google to increase bids when conversions are likely.
+    - **Primary Phase:** Swiftly move to a conversion-focused bidding strategy like **"Maximize Conversions"** or **"Target CPA"** (Cost Per Acquisition) once sufficient conversion data is available (approx. 15-20 conversions per campaign).
 - **Budget Allocation:**
-    - Allocate the majority of the budget to the "Acheron Core Activities" and "Holiday Packages" campaigns, as they target the highest-intent users.
+    - Allocate budget between the two language-based campaigns based on your target audience split (Greek vs. International)
+    - Within each campaign, prioritize the "Holiday Packages" ad groups for highest-value conversions
+    - Use ad group-level bid adjustments to bid more aggressively for package-related keywords
 - **Optimization Cycle:**
     - **Weekly:** Review search term reports to add new keywords and negative keywords. Pause underperforming keywords or ads.
     - **Monthly:** Analyze performance by campaign, ad group, and device. Adjust budgets based on which campaigns are driving the most cost-effective conversions.

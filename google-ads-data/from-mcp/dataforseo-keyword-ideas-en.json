@@ -1,0 +1,634 @@
+{
+  "id": "07131606-9574-0400-0000-5b5f03061539",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "items": [
+    {
+      "se_type": "google",
+      "keyword": "people in greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-07-13 07:39:45 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 27100,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-06": 33100,
+          "2025-05": 40500,
+          "2025-04": 33100,
+          "2025-03": 33100,
+          "2025-02": 27100,
+          "2025-01": 27100,
+          "2024-12": 27100,
+          "2024-11": 27100,
+          "2024-10": 27100,
+          "2024-09": 27100,
+          "2024-08": 27100,
+          "2024-07": 33100
+        },
+        "search_volume_trend": {
+          "monthly": -18,
+          "yearly": 22
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "greece people",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 21,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 925.7,
+        "dofollow": 746.7,
+        "referring_pages": 822.5,
+        "referring_domains": 183.9,
+        "referring_main_domains": 159.8,
+        "rank": 145.6,
+        "main_domain_rank": 556.1,
+        "last_updated_time": "2025-05-30 13:47:16 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-02 02:45:44 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "amanzoe greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-15 03:35:09 +00:00",
+        "competition": 0.37,
+        "competition_level": "MEDIUM",
+        "cpc": 3.25,
+        "search_volume": 1600,
+        "low_top_of_page_bid": 0.64,
+        "high_top_of_page_bid": 5,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 1900,
+          "2025-04": 1300,
+          "2025-03": 1900,
+          "2025-02": 1300,
+          "2025-01": 1300,
+          "2024-12": 1300,
+          "2024-11": 1000,
+          "2024-10": 1000,
+          "2024-09": 1300,
+          "2024-08": 1600,
+          "2024-07": 1600,
+          "2024-06": 1600
+        },
+        "search_volume_trend": {
+          "monthly": 46,
+          "yearly": -21
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 22,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 6362.3,
+        "dofollow": 1848.5,
+        "referring_pages": 6098.2,
+        "referring_domains": 424,
+        "referring_main_domains": 396.8,
+        "rank": 141.6,
+        "main_domain_rank": 637.7,
+        "last_updated_time": "2025-06-01 03:25:00 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "commercial",
+        "foreign_intent": [
+          "informational"
+        ],
+        "last_updated_time": "2023-03-03 13:15:28 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "tolo greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-07-10 20:27:32 +00:00",
+        "competition": 0.04,
+        "competition_level": "LOW",
+        "cpc": 4.84,
+        "search_volume": 720,
+        "low_top_of_page_bid": 0.67,
+        "high_top_of_page_bid": 3.92,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-06": 1000,
+          "2025-05": 880,
+          "2025-04": 880,
+          "2025-03": 880,
+          "2025-02": 480,
+          "2025-01": 480,
+          "2024-12": 320,
+          "2024-11": 390,
+          "2024-10": 590,
+          "2024-09": 720,
+          "2024-08": 880,
+          "2024-07": 1000
+        },
+        "search_volume_trend": {
+          "monthly": 14,
+          "quarterly": 14
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 11.9,
+        "dofollow": 9.8,
+        "referring_pages": 11.8,
+        "referring_domains": 8.3,
+        "referring_main_domains": 5.7,
+        "rank": 35.5,
+        "main_domain_rank": 647.3,
+        "last_updated_time": "2025-06-02 01:55:15 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 14:54:44 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "pederasty in greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-15 02:47:52 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 3600,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 2900,
+          "2025-04": 5400,
+          "2025-03": 3600,
+          "2025-02": 3600,
+          "2025-01": 4400,
+          "2024-12": 3600,
+          "2024-11": 4400,
+          "2024-10": 2900,
+          "2024-09": 1900,
+          "2024-08": 2900,
+          "2024-07": 2900,
+          "2024-06": 3600
+        },
+        "search_volume_trend": {
+          "monthly": -46,
+          "quarterly": -19,
+          "yearly": -56
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "pederasty greece",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 23,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 242,
+        "dofollow": 128.5,
+        "referring_pages": 194.1,
+        "referring_domains": 71.2,
+        "referring_main_domains": 63,
+        "rank": 104.8,
+        "main_domain_rank": 609.5,
+        "last_updated_time": "2025-06-08 17:57:13 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2025-06-05 04:30:18 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "achaea greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-07-10 07:59:15 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 2900,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-06": 2900,
+          "2025-05": 2900,
+          "2025-04": 2400,
+          "2025-03": 2400,
+          "2025-02": 2900,
+          "2025-01": 2900,
+          "2024-12": 3600,
+          "2024-11": 2900,
+          "2024-10": 2900,
+          "2024-09": 2900,
+          "2024-08": 2400,
+          "2024-07": 2400
+        },
+        "search_volume_trend": {
+          "quarterly": 21,
+          "yearly": 21
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "keyword_difficulty": 3,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 81.5,
+        "dofollow": 60.8,
+        "referring_pages": 72.8,
+        "referring_domains": 30.2,
+        "referring_main_domains": 24.5,
+        "rank": 65.8,
+        "main_domain_rank": 551.5,
+        "last_updated_time": "2025-05-31 12:34:16 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-04 05:09:21 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "greece wikipedia",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-13 18:50:50 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 880,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 1000,
+          "2025-04": 880,
+          "2025-03": 720,
+          "2025-02": 880,
+          "2025-01": 720,
+          "2024-12": 720,
+          "2024-11": 720,
+          "2024-10": 720,
+          "2024-09": 880,
+          "2024-08": 880,
+          "2024-07": 880,
+          "2024-06": 880
+        },
+        "search_volume_trend": {
+          "monthly": 14,
+          "quarterly": 39,
+          "yearly": 14
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 62,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 11184.2,
+        "dofollow": 8469.6,
+        "referring_pages": 8913.3,
+        "referring_domains": 1016.2,
+        "referring_main_domains": 842.6,
+        "rank": 295.1,
+        "main_domain_rank": 825.9,
+        "last_updated_time": "2025-06-01 21:58:03 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 23:42:35 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "megali greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-14 17:11:21 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 70,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 50,
+          "2025-04": 90,
+          "2025-03": 70,
+          "2025-02": 70,
+          "2025-01": 50,
+          "2024-12": 90,
+          "2024-11": 50,
+          "2024-10": 70,
+          "2024-09": 70,
+          "2024-08": 70,
+          "2024-07": 50,
+          "2024-06": 70
+        },
+        "search_volume_trend": {
+          "monthly": -44,
+          "quarterly": -29,
+          "yearly": -29
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "keyword_difficulty": 2,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 44.5,
+        "dofollow": 36,
+        "referring_pages": 40.5,
+        "referring_domains": 16.9,
+        "referring_main_domains": 14.7,
+        "rank": 39.9,
+        "main_domain_rank": 742.1,
+        "last_updated_time": "2025-07-06 00:29:28 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 16:24:56 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "adaf greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-15 04:58:11 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 10,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 10,
+          "2025-04": 10,
+          "2025-03": 10,
+          "2025-02": 10,
+          "2025-01": 10,
+          "2024-12": 10,
+          "2024-11": 10,
+          "2024-07": 10
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "detected_language": "en"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-04 05:33:33 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "lions in greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-14 11:56:22 +00:00",
+        "competition_level": "LOW",
+        "search_volume": 1000,
+        "categories": [
+          10004,
+          10013,
+          10017,
+          10103,
+          10145,
+          10276,
+          10556,
+          11088,
+          12382,
+          13582
+        ],
+        "monthly_searches": {
+          "2025-05": 1000,
+          "2025-04": 1300,
+          "2025-03": 1300,
+          "2025-02": 1000,
+          "2025-01": 1000,
+          "2024-12": 1000,
+          "2024-11": 880,
+          "2024-10": 1000,
+          "2024-09": 1000,
+          "2024-08": 1000,
+          "2024-07": 1000,
+          "2024-06": 1000
+        },
+        "search_volume_trend": {
+          "monthly": -23,
+          "quarterly": -23
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 2,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 60.1,
+        "dofollow": 45.3,
+        "referring_pages": 54.6,
+        "referring_domains": 16.9,
+        "referring_main_domains": 15.8,
+        "rank": 63.6,
+        "main_domain_rank": 543.8,
+        "last_updated_time": "2025-06-01 13:16:00 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "last_updated_time": "2023-03-05 09:52:20 +00:00"
+      }
+    },
+    {
+      "se_type": "google",
+      "keyword": "florina greece",
+      "location_code": 2840,
+      "language_code": "en",
+      "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2025-06-12 11:51:49 +00:00",
+        "competition": 0.02,
+        "competition_level": "LOW",
+        "search_volume": 590,
+        "categories": [
+          10004,
+          10017,
+          10145,
+          10276,
+          11088,
+          12382,
+          13582,
+          14306
+        ],
+        "monthly_searches": {
+          "2025-05": 480,
+          "2025-04": 480,
+          "2025-03": 480,
+          "2025-02": 480,
+          "2025-01": 880,
+          "2024-12": 720,
+          "2024-11": 720,
+          "2024-10": 390,
+          "2024-09": 590,
+          "2024-08": 590,
+          "2024-07": 590,
+          "2024-06": 480
+        },
+        "search_volume_trend": {
+          "yearly": 23
+        }
+      },
+      "keyword_properties": {
+        "se_type": "google",
+        "keyword_difficulty": 6,
+        "detected_language": "en"
+      },
+      "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 63.7,
+        "dofollow": 52.4,
+        "referring_pages": 56.9,
+        "referring_domains": 21,
+        "referring_main_domains": 18.3,
+        "rank": 63.9,
+        "main_domain_rank": 698.8,
+        "last_updated_time": "2025-06-02 18:47:24 +00:00"
+      },
+      "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "commercial",
+        "foreign_intent": [
+          "informational",
+          "transactional"
+        ],
+        "last_updated_time": "2023-03-05 14:46:43 +00:00"
+      }
+    }
+  ]
+}<environment_details>
+# VSCode Visible Files
+data/dataforseo-keyword-gap-riverdream-en.json
+
+# VSCode Open Tabs
+data/dataforseo-domain-intersection-ponyclub-riverdream.json
+data/dataforseo-horse-riding-acheron-serp.json
+data/dataforseo-keyword-gap-acheron-rafting-en.json
+data/dataforseo-keyword-gap-riverdream-en.json
+
+# Current Time
+13/07/2025, 4:06:53 pm (Europe/Helsinki, UTC+3:00)
+
+# Context Window Usage
+271,449 / 1,048.576K tokens used (26%)
+
+# Current Mode
+ACT MODE
+</environment_details>

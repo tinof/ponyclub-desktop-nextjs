@@ -1,0 +1,317 @@
+{
+	"id": "07131604-9574-0139-0000-07fcfbf6e7de",
+	"status_code": 20000,
+	"status_message": "Ok.",
+	"items": [
+		{
+			"type": "organic",
+			"rank_group": 1,
+			"rank_absolute": 1,
+			"domain": "riverdream.gr",
+			"title": "Riverdream Club Αχέροντας",
+			"url": "https://riverdream.gr/",
+			"breadcrumb": "https://riverdream.gr",
+			"website_name": "Riverdream Club Αχέροντας",
+			"description": "99000 +. επισκέπτες. riverdream acheron ippasia 3. Αν ψάχνετε έναν προορισμό όπου μικροί και μεγάλοι θα ζήσουν τη φύση ...",
+			"highlighted": ["ippasia"],
+			"links": [
+				{
+					"type": "link_element",
+					"title": "Δραστηριότητες",
+					"description": "Δραστηριότητες. Riverdream Club Αχέροντας. Acheron ...",
+					"url": "https://riverdream.gr/drasthriotites/",
+					"domain": "riverdream.gr"
+				},
+				{
+					"type": "link_element",
+					"title": "Rafting",
+					"description": "Our beach side is not only terrific for all types of water sports but ...",
+					"url": "https://riverdream.gr/drasthriotites/riverdream-rafting/",
+					"domain": "riverdream.gr"
+				}
+			]
+		},
+		{
+			"type": "organic",
+			"rank_group": 2,
+			"rank_absolute": 2,
+			"domain": "www.unlimited-adrenaline.gr",
+			"title": "Ιππασία στον Αχέροντα",
+			"url": "https://www.unlimited-adrenaline.gr/%CE%B9%CF%80%CF%80%CE%B1%CF%83%CE%B9%CE%B1-%CF%83%CF%84%CE%BF%CE%BD-%CE%B1%CF%87%CE%B5%CF%81%CE%BF%CE%BD%CF%84%CE%B1/a/2334",
+			"breadcrumb": "https://www.unlimited-adrenaline.gr › ιππασια-στον-αχε...",
+			"website_name": "Unlimited Adrenaline",
+			"description": "Canoe-Kayak (Εξορμήσεις), Hiking/Trekking, Ιππασία · Καγιάκ, Ιππασία και Πεζοπορία στον Αχέροντα. Γλυκή, Θεσπρωτία. 3 ώρες. από 25.00 € / άτομο. Δείτε επίσης.",
+			"highlighted": ["Ιππασία", "Αχέροντα"]
+		},
+		{
+			"type": "local_pack",
+			"rank_group": 1,
+			"rank_absolute": 3,
+			"title": "Riverdream Club Αχέροντας",
+			"description": "10+ έτη επιχειρηματικής δραστηριότητας · Γλυκή \nΑνοιχτά ⋅ Κλείνει στις 8:00 μ.μ. \nΙστότοπος \n",
+			"domain": "riverdream.gr",
+			"phone": "694 575 7363",
+			"url": "http://riverdream.gr/",
+			"rating": {
+				"rating_type": "Max5",
+				"value": 4.8,
+				"rating_max": 5
+			},
+			"cid": "8042390904431272387"
+		},
+		{
+			"type": "local_pack",
+			"rank_group": 2,
+			"rank_absolute": 4,
+			"title": "Acheron River Club",
+			"description": "5+ έτη επιχειρηματικής δραστηριότητας · Γλυκή \nΑνοιχτά τώρα \n",
+			"phone": "694 259 1307",
+			"rating": {
+				"rating_type": "Max5",
+				"value": 4.9,
+				"votes_count": 203,
+				"rating_max": 5
+			},
+			"cid": "14428920459404880079"
+		},
+		{
+			"type": "local_pack",
+			"rank_group": 3,
+			"rank_absolute": 5,
+			"title": "Acheron Rafting Club",
+			"description": "15+ έτη επιχειρηματικής δραστηριότητας · Γλυκή \n\nΙστότοπος \n",
+			"domain": "www.acheron-rafting.gr",
+			"phone": "695 100 4747",
+			"url": "http://www.acheron-rafting.gr/",
+			"rating": {
+				"rating_type": "Max5",
+				"value": 4.8,
+				"votes_count": 546,
+				"rating_max": 5
+			},
+			"cid": "10039044641835901461"
+		},
+		{
+			"type": "compare_sites",
+			"rank_group": 1,
+			"rank_absolute": 6,
+			"title": "Ιστότοποι για μέρη",
+			"items": [
+				{
+					"type": "compare_sites_element",
+					"title": "Pony Club Acheron (Γλυκή, Ελλάδα) - Κριτικές - Tripadvisor",
+					"url": "https://www.tripadvisor.com.gr/Attraction_Review-g1188928-d8472505-Reviews-Pony_Club_Acheron-Glyki_Thesprotia_Region_Epirus.html",
+					"domain": "www.tripadvisor.com.gr",
+					"image_url": "https://api.dataforseo.com/cdn/i/07131604-9574-0139-0000-07fcfbf6e7de:0",
+					"source": "Tripadvisor"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Ιππασία - Γη - Δραστηριότητες στην Ελλάδα εναλλακτικές περιπέτεια",
+					"url": "https://www.xtremegreece.gr/el/ippasia/",
+					"domain": "www.xtremegreece.gr",
+					"image_url": "https://api.dataforseo.com/cdn/i/07131604-9574-0139-0000-07fcfbf6e7de:1",
+					"source": "Xtreme Greece"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Exo Club - Acheron club-Αχέρον is with Maroula Bazora and 41 others at Exo - Café On The River.",
+					"url": "https://www.facebook.com/acheronclub/videos/%CE%B1%CF%87%CE%B5%CF%81%CE%BF%CE%BD%CF%84%CE%B1%CF%82-%CE%B9%CF%80%CF%80%CE%B1%CF%83%CE%AF%CE%B1/301874833836145/",
+					"domain": "www.facebook.com",
+					"image_url": "https://api.dataforseo.com/cdn/i/07131604-9574-0139-0000-07fcfbf6e7de:2",
+					"source": "Facebook"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Αχέροντας, ράφτινγκ, ιππασία, Flying fox, Νεκρομαντείο Αχέροντα, που πρέπει να πάτε",
+					"url": "http://www.hotelsline.gr/root/newhotel/paravalou/article.asp?id=42",
+					"domain": "www.hotelsline.gr",
+					"image_url": "https://api.dataforseo.com/cdn/i/07131604-9574-0139-0000-07fcfbf6e7de:3",
+					"source": "Hotelsline.gr"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Ποταμός Αχέροντας",
+					"url": "https://www.visitgreece.gr/el/experiences/nature/rivers/acherodas-river/",
+					"domain": "www.visitgreece.gr",
+					"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0oPUkppiBjbHkSX1VU4G-B5Oxp3-MtJU&s=0",
+					"source": "Visit Greece"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Αχέροντας: Μια απόδραση στο μυθικό ποτάμι της Ηπείρου",
+					"url": "https://experiences.filoxeno.com/axerontas-mia-apodrasi-sto-mythiko-potami-tis-ipeirou/",
+					"domain": "experiences.filoxeno.com",
+					"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP-_kVlQz7Fvq3LQvUxC0dQxmW8G3pE1c&s=0",
+					"source": "Filoxeno.com"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "6 Λόγοι για μια εκδρομή στον Αχέροντα",
+					"url": "http://www.arttravel.gr/arttravel-best_best-stories/article/23490/6-logoi-gia-mia-ekdromh-ston-axeronta",
+					"domain": "www.arttravel.gr",
+					"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxM5F_MdvwCy5AjBVVodSdWimNXt4Grmg&s=0",
+					"source": "ArtTravel"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Riverdream Club - Δραστηριότητες Rafting Αχέροντας Θεσπρωτία",
+					"url": "https://www.elepod.gr/business/46552-drasteriotetes-rafting-acherontas-thesprotia",
+					"domain": "www.elepod.gr",
+					"source": "Elepod"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Καταλύματα · Gliki · ★4,88 · 3 υπνοδωμάτια · 5 κρεβάτια · 1 μπάνιο",
+					"url": "https://www.airbnb.gr/rooms/7253111",
+					"domain": "www.airbnb.gr",
+					"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHNq48Xs2enVRScmublMCzRfqHJpbqhoA&s=0",
+					"source": "Airbnb"
+				},
+				{
+					"type": "compare_sites_element",
+					"title": "Acherontas, Γλυκή (ενημερωμένες τιμές για το 2025) - Booking.com",
+					"url": "https://www.booking.com/hotel/gr/acherontas.el.html",
+					"domain": "www.booking.com",
+					"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvOQyhh7NP4G79W69q6Vurnyihr1Yh060&s=0",
+					"source": "Booking.com"
+				}
+			]
+		},
+		{
+			"type": "video",
+			"rank_group": 1,
+			"rank_absolute": 7,
+			"items": [
+				{
+					"type": "video_element",
+					"source": "YouTube",
+					"title": "Ιππασία στα νερά του ποταμού Αχέροντα | Action ...",
+					"timestamp": "2024-06-29 00:00:00 +00:00",
+					"url": "https://www.youtube.com/watch?v=H6Z4S7KP08M"
+				},
+				{
+					"type": "video_element",
+					"source": "YouTube",
+					"title": "Ιππασία στα νερά του Αχέροντα",
+					"timestamp": "2018-09-29 00:00:00 +00:00",
+					"url": "https://www.youtube.com/watch?v=49g5jJxcjio"
+				},
+				{
+					"type": "video_element",
+					"source": "YouTube",
+					"title": "Rafting και ιππασία δίπλα στις πηγές του Αχέροντα | 25/04 ...",
+					"timestamp": "2024-04-25 00:00:00 +00:00",
+					"url": "https://www.youtube.com/watch?v=Kdb-EhBACLg"
+				}
+			]
+		},
+		{
+			"type": "organic",
+			"rank_group": 3,
+			"rank_absolute": 8,
+			"domain": "www.tripadvisor.com.gr",
+			"title": "Pony Club Acheron (Γλυκή, Ελλάδα) - Κριτικές",
+			"url": "https://www.tripadvisor.com.gr/Attraction_Review-g1188928-d8472505-Reviews-Pony_Club_Acheron-Glyki_Thesprotia_Region_Epirus.html",
+			"breadcrumb": "https://www.tripadvisor.com.gr › ... › Γλυκή Αξιοθέατα",
+			"website_name": "Tripadvisor",
+			"description": "Γνωριστήκαμε μας ενημέρωσαν για την προσφορα κανο και αλογα στα 15 ευρω το ατομο και ξεκινήσαμε το κανο. Πολύ ωραία εμπειρία πολύ διασκεδαστικό και καθόλου ..."
+		},
+		{
+			"type": "organic",
+			"rank_group": 4,
+			"rank_absolute": 9,
+			"domain": "www.xtremegreece.gr",
+			"title": "Ιππασία - Δραστηριότητες στην Ελλάδα εναλλακτικές περιπέτεια",
+			"url": "https://www.xtremegreece.gr/el/ippasia/",
+			"breadcrumb": "https://www.xtremegreece.gr › ippasia",
+			"website_name": "xtremegreece.gr",
+			"description": "Βόλτα με άλογα στο Πάπιγκο Ζαγόρι από 30 € · Ιππασία Φοινικιά, Ηράκλειο από 70 € · Ιππασία στα βουνά κοντά Ηράκλειο Κρήτη από 50 € · Ιππασία απογευματινή Φοινικιά, ...",
+			"highlighted": ["Ιππασία"]
+		},
+		{
+			"type": "organic",
+			"rank_group": 5,
+			"rank_absolute": 10,
+			"domain": "www.acheron-rafting.gr",
+			"title": "Acheron Rafting Club | Γλυκή Θεσπρωτίας",
+			"url": "http://www.acheron-rafting.gr/",
+			"breadcrumb": "http://www.acheron-rafting.gr",
+			"website_name": "Acheron Rafting Club",
+			"description": "Κατάβαση του ποταμού Αχέροντα με την βοήθεια έμπειρων οδηγών. ιππασια αλογα στον ποταμο Αχεροντα. RIDING. Απολαύστε μια μοναδική διαδρομή με άλογα στις όχθες ...",
+			"highlighted": ["Αχέροντα", "ιππασια"]
+		},
+		{
+			"type": "organic",
+			"rank_group": 6,
+			"rank_absolute": 11,
+			"domain": "travelbug.gr",
+			"title": "RAFTING & ΙΠΠΑΣΙΑ ΣΤΟΝ ΑΧΕΡΟΝΤΑ - Travelbug",
+			"url": "https://travelbug.gr/portfolio-item/rafting-%CE%B9%CF%80%CF%80%CE%B1%CF%83%CE%B9%CE%B1-%CF%83%CF%84%CE%BF%CE%BD-%CE%B1%CF%87%CE%B5%CF%81%CE%BF%CE%BD%CF%84%CE%B1/",
+			"breadcrumb": "https://travelbug.gr › portfolio-item › rafting-ιππασια-σ...",
+			"website_name": "travelbug.gr",
+			"description": "Το Rafting στον ποταμό Αχέροντα, είναι μία υπαίθρια δραστηριότητα αναψυχής η οποία περιλαμβάνει την κατάβαση ενός ποταμού με φουσκωτή βάρκα. Ανάλογα με το ...",
+			"highlighted": ["Αχέροντα"]
+		},
+		{
+			"type": "organic",
+			"rank_group": 7,
+			"rank_absolute": 12,
+			"domain": "www.unlimited-adrenaline.gr",
+			"title": "Ιππασία στον Αχέροντα Ποταμό",
+			"url": "https://www.unlimited-adrenaline.gr/%CE%B9%CF%80%CF%80%CE%B1%CF%83%CE%B9%CE%B1-%CF%83%CF%84%CE%BF%CE%BD-%CE%B1%CF%87%CE%B5%CF%81%CE%BF%CE%BD%CF%84%CE%B1-%CF%80%CE%BF%CF%84%CE%B1%CE%BC%CE%BF/a/1099",
+			"breadcrumb": "https://www.unlimited-adrenaline.gr › ιππασια-στον-αχε...",
+			"website_name": "Unlimited Adrenaline",
+			"description": "Ιππασία στον Αχέροντα. Γλυκή, Θεσπρωτία. 15 λεπτά. από 10.00 € / άτομο. Canoe-Kayak (Εξορμήσεις), Hiking/Trekking, Ιππασία · Καγιάκ, Ιππασία και Πεζοπορία στον ...",
+			"highlighted": ["Ιππασία στον Αχέροντα"]
+		},
+		{
+			"type": "organic",
+			"rank_group": 8,
+			"rank_absolute": 13,
+			"domain": "www.tripadvisor.com.gr",
+			"title": "Riverdream Club (Γλυκή, Ελλάδα) - Κριτικές",
+			"url": "https://www.tripadvisor.com.gr/Attraction_Review-g1188928-d11699880-Reviews-Riverdream_Club-Glyki_Thesprotia_Region_Epirus.html",
+			"breadcrumb": "https://www.tripadvisor.com.gr › ... › Γλυκή Αξιοθέατα",
+			"website_name": "Tripadvisor",
+			"description": "Κάναμε ιππασία,ήταν μοναδική εμπειρία!!! Το τοπίο τρομερό και το προσωπικό πολύ ευγενικό ιδιαίτερα ο Κώστας που μας πήγε τη βόλτα με τα άλογα.",
+			"highlighted": ["ιππασία"]
+		},
+		{
+			"type": "people_also_search",
+			"rank_group": 1,
+			"rank_absolute": 14,
+			"items": [
+				"Riverdream Club Αχέροντας",
+				"Αχερων Ποταμός",
+				"Πηγές Αχέροντα ‑ Στενά Αχέρ...",
+				"ZipLine Greece Acheron Ri...",
+				"ADVENTU... CLUB HELLAS",
+				"Sani Treetop Adventure"
+			]
+		},
+		{
+			"type": "related_searches",
+			"rank_group": 1,
+			"rank_absolute": 15,
+			"items": [
+				"ιππασια αχεροντας τιμη",
+				"Ιππασία στον αχέροντα",
+				"Τοξοβολια αχεροντασ",
+				"River trekking αχεροντασ",
+				"Trekking hellas αχεροντασ",
+				"Νεκρομαντειο αχεροντα τιμη εισοδου",
+				"Acheron Rafting Club",
+				"Kayak αχεροντασ"
+			]
+		},
+		{
+			"type": "google_reviews",
+			"rank_group": 1,
+			"rank_absolute": 16,
+			"place_id": "ChIJnd3ATP5zXBMRw2F1y-pPnG8",
+			"feature": "0x135c73fe4cc0dd9d:0x6f9c4feacb7561c3",
+			"cid": "8042390904431272387"
+		}
+	]
+}
