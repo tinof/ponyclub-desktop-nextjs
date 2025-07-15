@@ -7,8 +7,8 @@
  */
 
 type ConsentStatus = {
-	analytics: boolean;
-	marketing: boolean;
+  analytics: boolean;
+  marketing: boolean;
 };
 
 /**
@@ -16,27 +16,27 @@ type ConsentStatus = {
  * Integrates with the existing consent management system
  */
 function hasAnalyticsConsent(): boolean {
-	if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") return false;
 
-	// Check for consent cookie from the existing consent system
-	try {
-		const consentCookie = document.cookie
-			.split("; ")
-			.find((row) => row.startsWith("consent="));
+  // Check for consent cookie from the existing consent system
+  try {
+    const consentCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("consent="));
 
-		if (consentCookie) {
-			const consent = JSON.parse(
-				decodeURIComponent(consentCookie.split("=")[1]),
-			) as ConsentStatus;
-			return consent.analytics;
-		}
-	} catch (error) {
-		if (process.env.NODE_ENV === "development") {
-			console.warn("[Analytics] Error reading consent:", error);
-		}
-	}
+    if (consentCookie) {
+      const consent = JSON.parse(
+        decodeURIComponent(consentCookie.split("=")[1])
+      ) as ConsentStatus;
+      return consent.analytics;
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[Analytics] Error reading consent:", error);
+    }
+  }
 
-	return false;
+  return false;
 }
 
 /**
@@ -44,40 +44,40 @@ function hasAnalyticsConsent(): boolean {
  * Only fires if user has given analytics consent and gtag is available
  */
 export function gtagEvent(
-	eventName: string,
-	parameters: Record<string, unknown> = {},
+  eventName: string,
+  parameters: Record<string, unknown> = {}
 ): void {
-	if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return;
 
-	// Check consent first
-	if (!hasAnalyticsConsent()) {
-		if (process.env.NODE_ENV === "development") {
-			console.debug(
-				"[Analytics] Event blocked - no analytics consent:",
-				eventName,
-				parameters,
-			);
-		}
-		return;
-	}
+  // Check consent first
+  if (!hasAnalyticsConsent()) {
+    if (process.env.NODE_ENV === "development") {
+      console.debug(
+        "[Analytics] Event blocked - no analytics consent:",
+        eventName,
+        parameters
+      );
+    }
+    return;
+  }
 
-	// Check if gtag is available
-	if (typeof window.gtag !== "function") {
-		if (process.env.NODE_ENV === "development") {
-			console.warn("[Analytics] gtag not available for event:", eventName);
-		}
-		return;
-	}
+  // Check if gtag is available
+  if (typeof window.gtag !== "function") {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[Analytics] gtag not available for event:", eventName);
+    }
+    return;
+  }
 
-	try {
-		window.gtag("event", eventName, parameters);
+  try {
+    window.gtag("event", eventName, parameters);
 
-		if (process.env.NODE_ENV === "development") {
-			console.debug("[Analytics] Event sent:", eventName, parameters);
-		}
-	} catch (error) {
-		console.warn("[Analytics] Error sending event:", error);
-	}
+    if (process.env.NODE_ENV === "development") {
+      console.debug("[Analytics] Event sent:", eventName, parameters);
+    }
+  } catch (error) {
+    console.warn("[Analytics] Error sending event:", error);
+  }
 }
 
 /**
@@ -87,266 +87,266 @@ export function gtagEvent(
  * @param currency - The currency code (default: 'EUR')
  */
 export function sendAdsConversion(
-	conversionLabel: string,
-	value: number = 0,
-	currency: string = "EUR",
+  conversionLabel: string,
+  value: number = 0,
+  currency: string = "EUR"
 ): void {
-	if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return;
 
-	const conversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID;
+  const conversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID;
 
-	if (!conversionId) {
-		if (process.env.NODE_ENV === "development") {
-			console.warn(
-				"[Analytics] Missing NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID environment variable",
-			);
-		}
-		return;
-	}
+  if (!conversionId) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn(
+        "[Analytics] Missing NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID environment variable"
+      );
+    }
+    return;
+  }
 
-	if (!conversionLabel) {
-		console.warn("[Analytics] Missing conversion label for ads conversion");
-		return;
-	}
+  if (!conversionLabel) {
+    console.warn("[Analytics] Missing conversion label for ads conversion");
+    return;
+  }
 
-	// Check consent
-	if (!hasAnalyticsConsent()) {
-		if (process.env.NODE_ENV === "development") {
-			console.debug(
-				"[Analytics] Ads conversion blocked - no analytics consent",
-			);
-		}
-		return;
-	}
+  // Check consent
+  if (!hasAnalyticsConsent()) {
+    if (process.env.NODE_ENV === "development") {
+      console.debug(
+        "[Analytics] Ads conversion blocked - no analytics consent"
+      );
+    }
+    return;
+  }
 
-	// Generate unique transaction ID to prevent duplicate conversions
-	const transactionId = `conversion_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+  // Generate unique transaction ID to prevent duplicate conversions
+  const transactionId = `conversion_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
-	gtagEvent("conversion", {
-		send_to: `${conversionId}/${conversionLabel}`,
-		value: value,
-		currency: currency,
-		transaction_id: transactionId,
-	});
+  gtagEvent("conversion", {
+    send_to: `${conversionId}/${conversionLabel}`,
+    value: value,
+    currency: currency,
+    transaction_id: transactionId,
+  });
 }
 
 /**
  * Track booking button clicks with enhanced ecommerce
  */
 export function trackBookingClick(params: {
-	packageName: string;
-	packagePrice: number;
-	buttonId: string;
-	trackingLabel: string;
-	conversionLabel?: string;
-	sourcePage?: string;
-	packageType?: string;
+  packageName: string;
+  packagePrice: number;
+  buttonId: string;
+  trackingLabel: string;
+  conversionLabel?: string;
+  sourcePage?: string;
+  packageType?: string;
 }): void {
-	const {
-		packageName,
-		packagePrice,
-		buttonId,
-		trackingLabel,
-		conversionLabel,
-		sourcePage = "unknown",
-		packageType,
-	} = params;
+  const {
+    packageName,
+    packagePrice,
+    buttonId,
+    trackingLabel,
+    conversionLabel,
+    sourcePage = "unknown",
+    packageType,
+  } = params;
 
-	// Standard GA4 event with source page and package type
-	gtagEvent("book_now_click", {
-		event_category: "Booking",
-		event_label: trackingLabel,
-		package_name: packageName,
-		package_price: packagePrice,
-		package_type: packageType,
-		source_page: sourcePage,
-		currency: "EUR",
-		button_id: buttonId,
-		page_location: typeof window !== "undefined" ? window.location.href : "",
-		page_title: typeof window !== "undefined" ? document.title : "",
-	});
+  // Standard GA4 event with source page and package type
+  gtagEvent("book_now_click", {
+    event_category: "Booking",
+    event_label: trackingLabel,
+    package_name: packageName,
+    package_price: packagePrice,
+    package_type: packageType,
+    source_page: sourcePage,
+    currency: "EUR",
+    button_id: buttonId,
+    page_location: typeof window !== "undefined" ? window.location.href : "",
+    page_title: typeof window !== "undefined" ? document.title : "",
+  });
 
-	// Enhanced Ecommerce - Begin Checkout Event
-	gtagEvent("begin_checkout", {
-		currency: "EUR",
-		value: packagePrice,
-		items: [
-			{
-				item_id: buttonId,
-				item_name: packageName,
-				item_category: "Adventure Package",
-				price: packagePrice,
-				quantity: 1,
-			},
-		],
-	});
+  // Enhanced Ecommerce - Begin Checkout Event
+  gtagEvent("begin_checkout", {
+    currency: "EUR",
+    value: packagePrice,
+    items: [
+      {
+        item_id: buttonId,
+        item_name: packageName,
+        item_category: "Adventure Package",
+        price: packagePrice,
+        quantity: 1,
+      },
+    ],
+  });
 
-	// Google Ads conversion if label provided
-	if (conversionLabel) {
-		sendAdsConversion(conversionLabel, packagePrice);
-	}
+  // Google Ads conversion if label provided
+  if (conversionLabel) {
+    sendAdsConversion(conversionLabel, packagePrice);
+  }
 }
 
 /**
  * Track phone click events with device-aware conversion tracking
  */
 export function trackPhoneClick(
-	phone: string,
-	deviceType: "mobile" | "desktop",
+  phone: string,
+  deviceType: "mobile" | "desktop"
 ): void {
-	gtagEvent("phone_click", {
-		event_category: "Contact",
-		event_label: `Phone CTA - ${deviceType}`,
-		phone_number: phone.replace(/\s+/g, ""),
-		device_type: deviceType,
-		page_location: typeof window !== "undefined" ? window.location.href : "",
-		page_title: typeof window !== "undefined" ? document.title : "",
-	});
+  gtagEvent("phone_click", {
+    event_category: "Contact",
+    event_label: `Phone CTA - ${deviceType}`,
+    phone_number: phone.replace(/\s+/g, ""),
+    device_type: deviceType,
+    page_location: typeof window !== "undefined" ? window.location.href : "",
+    page_title: typeof window !== "undefined" ? document.title : "",
+  });
 
-	// Send Google Ads conversion with device-specific label
-	const phoneConversionLabel =
-		deviceType === "mobile"
-			? process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE
-			: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP;
+  // Send Google Ads conversion with device-specific label
+  const phoneConversionLabel =
+    deviceType === "mobile"
+      ? process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE
+      : process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP;
 
-	if (phoneConversionLabel) {
-		sendAdsConversion(phoneConversionLabel, 0);
-	} else {
-		// Fallback to generic phone label if device-specific not available
-		const genericLabel = process.env.NEXT_PUBLIC_ADS_LABEL_PHONE;
-		if (genericLabel) {
-			sendAdsConversion(genericLabel, 0);
-		} else if (process.env.NODE_ENV === "development") {
-			console.warn(
-				`[Analytics] Missing phone conversion labels. Expected: NEXT_PUBLIC_ADS_LABEL_PHONE_${deviceType.toUpperCase()} or NEXT_PUBLIC_ADS_LABEL_PHONE`,
-			);
-		}
-	}
+  if (phoneConversionLabel) {
+    sendAdsConversion(phoneConversionLabel, 0);
+  } else {
+    // Fallback to generic phone label if device-specific not available
+    const genericLabel = process.env.NEXT_PUBLIC_ADS_LABEL_PHONE;
+    if (genericLabel) {
+      sendAdsConversion(genericLabel, 0);
+    } else if (process.env.NODE_ENV === "development") {
+      console.warn(
+        `[Analytics] Missing phone conversion labels. Expected: NEXT_PUBLIC_ADS_LABEL_PHONE_${deviceType.toUpperCase()} or NEXT_PUBLIC_ADS_LABEL_PHONE`
+      );
+    }
+  }
 }
 
 /**
  * Track engagement micro-conversions for low-traffic optimization
  */
 export function trackEngagement(params: {
-	type: "scroll_depth" | "time_on_page" | "page_interaction" | "content_view";
-	value?: number;
-	threshold?: string;
-	element?: string;
+  type: "scroll_depth" | "time_on_page" | "page_interaction" | "content_view";
+  value?: number;
+  threshold?: string;
+  element?: string;
 }): void {
-	const { type, value, threshold, element } = params;
+  const { type, value, threshold, element } = params;
 
-	// Track engagement event with detailed parameters
-	gtagEvent("engagement", {
-		event_category: "Engagement",
-		event_label: type,
-		engagement_type: type,
-		engagement_value: value,
-		engagement_threshold: threshold,
-		engagement_element: element,
-		page_location: typeof window !== "undefined" ? window.location.href : "",
-		page_title: typeof window !== "undefined" ? document.title : "",
-	});
+  // Track engagement event with detailed parameters
+  gtagEvent("engagement", {
+    event_category: "Engagement",
+    event_label: type,
+    engagement_type: type,
+    engagement_value: value,
+    engagement_threshold: threshold,
+    engagement_element: element,
+    page_location: typeof window !== "undefined" ? window.location.href : "",
+    page_title: typeof window !== "undefined" ? document.title : "",
+  });
 
-	if (process.env.NODE_ENV === "development") {
-		console.debug(`[Analytics] Engagement tracked: ${type}`, params);
-	}
+  if (process.env.NODE_ENV === "development") {
+    console.debug(`[Analytics] Engagement tracked: ${type}`, params);
+  }
 }
 
 /**
  * Initialize scroll depth tracking for engagement optimization
  */
 export function initScrollTracking(): (() => void) | undefined {
-	if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return;
 
-	const scrollDepths = [25, 50, 75, 90];
-	const trackedDepths = new Set<number>();
+  const scrollDepths = [25, 50, 75, 90];
+  const trackedDepths = new Set<number>();
 
-	const handleScroll = () => {
-		const scrollPercent = Math.round(
-			(window.scrollY /
-				(document.documentElement.scrollHeight - window.innerHeight)) *
-				100,
-		);
+  const handleScroll = () => {
+    const scrollPercent = Math.round(
+      (window.scrollY /
+        (document.documentElement.scrollHeight - window.innerHeight)) *
+        100
+    );
 
-		scrollDepths.forEach((depth) => {
-			if (scrollPercent >= depth && !trackedDepths.has(depth)) {
-				trackedDepths.add(depth);
-				trackEngagement({
-					type: "scroll_depth",
-					value: depth,
-					threshold: `${depth}%`,
-				});
-			}
-		});
-	};
+    scrollDepths.forEach((depth) => {
+      if (scrollPercent >= depth && !trackedDepths.has(depth)) {
+        trackedDepths.add(depth);
+        trackEngagement({
+          type: "scroll_depth",
+          value: depth,
+          threshold: `${depth}%`,
+        });
+      }
+    });
+  };
 
-	window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true });
 
-	// Clean up function
-	return () => window.removeEventListener("scroll", handleScroll);
+  // Clean up function
+  return () => window.removeEventListener("scroll", handleScroll);
 }
 
 /**
  * Initialize time on page tracking
  */
 export function initTimeTracking(): void {
-	if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return;
 
-	const timeThresholds = [30, 60, 120, 300]; // seconds
-	const trackedTimes = new Set<number>();
+  const timeThresholds = [30, 60, 120, 300]; // seconds
+  const trackedTimes = new Set<number>();
 
-	timeThresholds.forEach((threshold) => {
-		setTimeout(() => {
-			if (!trackedTimes.has(threshold)) {
-				trackedTimes.add(threshold);
-				trackEngagement({
-					type: "time_on_page",
-					value: threshold,
-					threshold: `${threshold}s`,
-				});
-			}
-		}, threshold * 1000);
-	});
+  timeThresholds.forEach((threshold) => {
+    setTimeout(() => {
+      if (!trackedTimes.has(threshold)) {
+        trackedTimes.add(threshold);
+        trackEngagement({
+          type: "time_on_page",
+          value: threshold,
+          threshold: `${threshold}s`,
+        });
+      }
+    }, threshold * 1000);
+  });
 }
 
 /**
  * Track other analytics platforms if available
  */
 export function trackToAllPlatforms(
-	eventName: string,
-	data: Record<string, unknown>,
+  eventName: string,
+  data: Record<string, unknown>
 ): void {
-	// Google Analytics (already handled by gtagEvent)
-	gtagEvent(eventName, data);
+  // Google Analytics (already handled by gtagEvent)
+  gtagEvent(eventName, data);
 
-	// Vercel Analytics
-	if (typeof window !== "undefined" && window.va) {
-		try {
-			window.va("event", {
-				name: eventName,
-				data: data,
-			});
-		} catch (error) {
-			console.warn("[Analytics] Vercel Analytics error:", error);
-		}
-	}
+  // Vercel Analytics
+  if (typeof window !== "undefined" && window.va) {
+    try {
+      window.va("event", {
+        name: eventName,
+        data: data,
+      });
+    } catch (error) {
+      console.warn("[Analytics] Vercel Analytics error:", error);
+    }
+  }
 
-	// Facebook Pixel (if consent given for marketing)
-	if (typeof window !== "undefined" && window.fbq && hasAnalyticsConsent()) {
-		try {
-			// Map common events to Facebook Pixel events
-			if (eventName === "book_now_click") {
-				window.fbq("track", "InitiateCheckout", {
-					content_name: data.package_name as string,
-					content_category: "Adventure Package",
-					value: data.package_price as number,
-					currency: "EUR",
-				});
-			}
-		} catch (error) {
-			console.warn("[Analytics] Facebook Pixel error:", error);
-		}
-	}
+  // Facebook Pixel (if consent given for marketing)
+  if (typeof window !== "undefined" && window.fbq && hasAnalyticsConsent()) {
+    try {
+      // Map common events to Facebook Pixel events
+      if (eventName === "book_now_click") {
+        window.fbq("track", "InitiateCheckout", {
+          content_name: data.package_name as string,
+          content_category: "Adventure Package",
+          value: data.package_price as number,
+          currency: "EUR",
+        });
+      }
+    } catch (error) {
+      console.warn("[Analytics] Facebook Pixel error:", error);
+    }
+  }
 }
 
 /**
@@ -354,54 +354,54 @@ export function trackToAllPlatforms(
  * Available in browser console for testing
  */
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-	// Expose analytics functions for manual testing
-	(window as Window & { analyticsDebug?: object }).analyticsDebug = {
-		gtagEvent,
-		sendAdsConversion,
-		trackBookingClick,
-		hasConsent: hasAnalyticsConsent,
-		testBooking: () => {
-			trackBookingClick({
-				packageName: "Test Package",
-				packagePrice: 100,
-				buttonId: "test-btn",
-				trackingLabel: "Debug Test",
-				conversionLabel: "TEST_LABEL",
-			});
-		},
-		testPhoneClick: () => {
-			trackPhoneClick("+30 26650 61314", "mobile");
-			console.log("Phone click test (mobile) fired");
-		},
-		testPhoneClickDesktop: () => {
-			trackPhoneClick("+30 26650 61314", "desktop");
-			console.log("Phone click test (desktop) fired");
-		},
-		checkEnvironment: () => {
-			console.log("Analytics Environment Check:", {
-				GA_ID: process.env.NEXT_PUBLIC_GA_ID,
-				ADS_CONVERSION_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
-				PACKAGE1_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE1,
-				PACKAGE2_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE2,
-				HOMEPAGE_PACKAGE1_LABEL:
-					process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1,
-				HOMEPAGE_PACKAGE2_LABEL:
-					process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2,
-				PHONE_MOBILE_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE,
-				PHONE_DESKTOP_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP,
-				PHONE_GENERIC_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE,
-				hasConsent: hasAnalyticsConsent(),
-				gtagAvailable: typeof window.gtag === "function",
-			});
-		},
-	};
+  // Expose analytics functions for manual testing
+  (window as Window & { analyticsDebug?: object }).analyticsDebug = {
+    gtagEvent,
+    sendAdsConversion,
+    trackBookingClick,
+    hasConsent: hasAnalyticsConsent,
+    testBooking: () => {
+      trackBookingClick({
+        packageName: "Test Package",
+        packagePrice: 100,
+        buttonId: "test-btn",
+        trackingLabel: "Debug Test",
+        conversionLabel: "TEST_LABEL",
+      });
+    },
+    testPhoneClick: () => {
+      trackPhoneClick("+30 26650 61314", "mobile");
+      console.log("Phone click test (mobile) fired");
+    },
+    testPhoneClickDesktop: () => {
+      trackPhoneClick("+30 26650 61314", "desktop");
+      console.log("Phone click test (desktop) fired");
+    },
+    checkEnvironment: () => {
+      console.log("Analytics Environment Check:", {
+        GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+        ADS_CONVERSION_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
+        PACKAGE1_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE1,
+        PACKAGE2_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE2,
+        HOMEPAGE_PACKAGE1_LABEL:
+          process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1,
+        HOMEPAGE_PACKAGE2_LABEL:
+          process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2,
+        PHONE_MOBILE_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE,
+        PHONE_DESKTOP_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP,
+        PHONE_GENERIC_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE,
+        hasConsent: hasAnalyticsConsent(),
+        gtagAvailable: typeof window.gtag === "function",
+      });
+    },
+  };
 
-	console.log(
-		"[Analytics] Debug utilities available at window.analyticsDebug",
-		"\nTry: analyticsDebug.checkEnvironment()",
-		"\nTry: analyticsDebug.testBooking()",
-		"\nTry: analyticsDebug.testPhoneClick()",
-	);
+  console.log(
+    "[Analytics] Debug utilities available at window.analyticsDebug",
+    "\nTry: analyticsDebug.checkEnvironment()",
+    "\nTry: analyticsDebug.testBooking()",
+    "\nTry: analyticsDebug.testPhoneClick()"
+  );
 }
 
 // Note: Global types for gtag and fbq are declared in types/global.d.ts

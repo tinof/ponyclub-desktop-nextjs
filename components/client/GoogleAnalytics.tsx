@@ -3,7 +3,7 @@
 import { GoogleAnalytics as NextGoogleAnalytics } from "@next/third-parties/google";
 
 interface GoogleAnalyticsProps {
-	gaId: string;
+  gaId: string;
 }
 
 /**
@@ -14,9 +14,9 @@ interface GoogleAnalyticsProps {
  * It should be wrapped with ConsentGate in the layout to ensure consent-based loading.
  */
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
-	if (process.env.NODE_ENV === "development") {
-		console.log("[GA] Google Analytics component loaded with ID:", gaId);
-	}
+  if (process.env.NODE_ENV === "development") {
+    console.log("[GA] Google Analytics component loaded with ID:", gaId);
+  }
 
-	return <NextGoogleAnalytics gaId={gaId} />;
+  return <NextGoogleAnalytics gaId={gaId} />;
 }

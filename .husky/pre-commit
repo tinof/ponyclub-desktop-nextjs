@@ -1,0 +1,24 @@
+echo "🔍 Running pre-commit quality checks..."
+
+# Run Biome check (format + lint)
+echo "📝 Running Biome format and lint check..."
+pnpm check || {
+  echo "❌ Biome check failed. Please fix formatting and linting issues."
+  exit 1
+}
+
+# Run TypeScript type check
+echo "🔧 Running TypeScript type check..."
+pnpm type-check || {
+  echo "❌ TypeScript type check failed. Please fix type errors."
+  exit 1
+}
+
+# Run security audit
+echo "🔒 Running security audit..."
+pnpm security:audit || {
+  echo "❌ Security audit failed. Please address security vulnerabilities."
+  exit 1
+}
+
+echo "✅ All pre-commit checks passed!"

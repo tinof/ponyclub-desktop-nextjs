@@ -11,7 +11,8 @@
       "coverage",
       ".turbo",
       "public/~partytown",
-      "data"
+      "data",
+      "google-ads-data"
     ],
     "includes": [
       "**",
@@ -29,7 +30,8 @@
       "!data/**/*.js",
       "!**/*.min.js",
       "!**/*.generated.*",
-      "!docs/**"
+      "!docs/**",
+      "!google-ads-data/**"
     ]
   },
   "vcs": {

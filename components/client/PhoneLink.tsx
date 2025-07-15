@@ -7,66 +7,66 @@ import { useCallback, useEffect, useState } from "react";
 import { trackPhoneClick } from "@/lib/analytics";
 
 interface PhoneLinkProps {
-	phone: string;
-	children?: React.ReactNode;
-	className?: string;
-	showIcon?: boolean;
-	onClick?: () => void;
+  phone: string;
+  children?: React.ReactNode;
+  className?: string;
+  showIcon?: boolean;
+  onClick?: () => void;
 }
 
 export default function PhoneLink({
-	phone,
-	children,
-	className = "",
-	showIcon = true,
-	onClick,
+  phone,
+  children,
+  className = "",
+  showIcon = true,
+  onClick,
 }: PhoneLinkProps) {
-	const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-	// Detect device type on mount
-	useEffect(() => {
-		const checkMobile = () => {
-			const userAgent = navigator.userAgent.toLowerCase();
-			const mobileKeywords = ["mobile", "android", "iphone", "ipad", "tablet"];
-			const isMobileUA = mobileKeywords.some((keyword) =>
-				userAgent.includes(keyword),
-			);
-			const isMobileScreen = window.innerWidth <= 768;
-			setIsMobile(isMobileUA || isMobileScreen);
-		};
+  // Detect device type on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ["mobile", "android", "iphone", "ipad", "tablet"];
+      const isMobileUA = mobileKeywords.some((keyword) =>
+        userAgent.includes(keyword)
+      );
+      const isMobileScreen = window.innerWidth <= 768;
+      setIsMobile(isMobileUA || isMobileScreen);
+    };
 
-		checkMobile();
-		window.addEventListener("resize", checkMobile);
-		return () => window.removeEventListener("resize", checkMobile);
-	}, []);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-	const handlePhoneClick = useCallback(() => {
-		const deviceType = isMobile ? "mobile" : "desktop";
+  const handlePhoneClick = useCallback(() => {
+    const deviceType = isMobile ? "mobile" : "desktop";
 
-		// Use centralized tracking function with device type
-		trackPhoneClick(phone, deviceType);
+    // Use centralized tracking function with device type
+    trackPhoneClick(phone, deviceType);
 
-		// Call custom onClick handler if provided
-		if (onClick) {
-			onClick();
-		}
+    // Call custom onClick handler if provided
+    if (onClick) {
+      onClick();
+    }
 
-		if (process.env.NODE_ENV === "development") {
-			console.log(`[PhoneLink] Phone click tracked: ${phone} (${deviceType})`);
-		}
-	}, [phone, onClick, isMobile]);
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[PhoneLink] Phone click tracked: ${phone} (${deviceType})`);
+    }
+  }, [phone, onClick, isMobile]);
 
-	// Clean phone number for tel: link (remove spaces and formatting)
-	const cleanPhone = phone.replace(/\s+/g, "");
+  // Clean phone number for tel: link (remove spaces and formatting)
+  const cleanPhone = phone.replace(/\s+/g, "");
 
-	return (
-		<a
-			href={`tel:${cleanPhone}`}
-			onClick={handlePhoneClick}
-			className={className}
-		>
-			{showIcon && <Phone className="h-4 w-4" />}
-			{children || <span>{phone}</span>}
-		</a>
-	);
+  return (
+    <a
+      href={`tel:${cleanPhone}`}
+      onClick={handlePhoneClick}
+      className={className}
+    >
+      {showIcon && <Phone className="h-4 w-4" />}
+      {children || <span>{phone}</span>}
+    </a>
+  );
 }
