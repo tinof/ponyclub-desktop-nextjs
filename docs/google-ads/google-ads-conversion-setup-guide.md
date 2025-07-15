@@ -1,60 +1,79 @@
 # Google Ads Conversion Actions Setup Guide
 
-## Required Conversion Actions
+## 1. Strategic Purpose
 
-Create these 5 conversion actions in your Google Ads account:
+This guide outlines a granular conversion tracking setup for the Pony Club Acheron Next.js website. The strategy is to create distinct conversion actions for each high-value user interaction. This provides the Google Ads automated bidding algorithm with precise data, allowing it to differentiate between high and low-intent clicks and optimize bids more effectively.
+
+**Key Principles:**
+
+- **Source Awareness:** Differentiate between a booking made from the homepage versus a dedicated package page.
+- **Device Awareness:** Differentiate between a phone call made from a mobile device versus a desktop.
+- **Primary vs. Secondary Actions:** All actions defined here are direct revenue-drivers or lead generators and should be set as **Primary conversion actions** in Google Ads to be used for bidding optimization.
+
+## 2. Required Conversion Actions
+
+Create these 6 conversion actions in your Google Ads account:
 
 ### 1. Package 1 Booking - Homepage
+
 - **Name:** "Package 1 Booking - Homepage"
 - **Category:** Purchase
-- **Value:** Use different values for each conversion
+- **Value:** Use different values for each conversion (e.g., based on package price)
 - **Count:** One
-- **Attribution:** Data-driven (recommended)
+- **Goal Type:** Primary
 
-### 2. Package 1 Booking - Package Page  
+### 2. Package 1 Booking - Package Page
+
 - **Name:** "Package 1 Booking - Package Page"
 - **Category:** Purchase
 - **Value:** Use different values for each conversion
 - **Count:** One
-- **Attribution:** Data-driven (recommended)
+- **Goal Type:** Primary
 
 ### 3. Package 2 Booking - Homepage
-- **Name:** "Package 2 Booking - Homepage" 
+
+- **Name:** "Package 2 Booking - Homepage"
 - **Category:** Purchase
 - **Value:** Use different values for each conversion
 - **Count:** One
-- **Attribution:** Data-driven (recommended)
+- **Goal Type:** Primary
 
 ### 4. Package 2 Booking - Package Page
+
 - **Name:** "Package 2 Booking - Package Page"
-- **Category:** Purchase  
+- **Category:** Purchase
 - **Value:** Use different values for each conversion
 - **Count:** One
-- **Attribution:** Data-driven (recommended)
+- **Goal Type:** Primary
 
-### 5. Phone Click - Mobile Priority
+### 5. Phone Click - Mobile
+
 - **Name:** "Phone Click - Mobile"
-- **Category:** Phone calls
-- **Value:** 0 (or assign value for lead scoring)
+- **Category:** Phone call lead
+- **Value:** Assign a nominal value for lead scoring (e.g., €1) or leave as 0.
 - **Count:** One
-- **Attribution:** Data-driven (recommended)
+- **Goal Type:** Primary
 
 ### 6. Phone Click - Desktop
-- **Name:** "Phone Click - Desktop"
-- **Category:** Phone calls
-- **Value:** 0 (or assign value for lead scoring)  
-- **Count:** One
-- **Attribution:** Data-driven (recommended)
 
-## After Creating Each Action
+- **Name:** "Phone Click - Desktop"
+- **Category:** Phone call lead
+- **Value:** Assign a nominal value for lead scoring (e.g., €1) or leave as 0.
+- **Count:** One
+- **Goal Type:** Primary
+
+## 3. Implementation in Next.js
+
+### After Creating Each Action
 
 Google Ads will provide:
-- **Conversion ID:** Format `AW-XXXXXXXXXX` (same for all actions)
-- **Conversion Label:** Unique string for each action (different for each)
 
-## Update Environment Variables
+- **Conversion ID:** Format `AW-XXXXXXXXXX` (this will be the same for all actions in the account).
+- **Conversion Label:** A unique string for each of the 6 actions created above.
 
-Once you have the IDs and labels, update your `.env.local` file:
+### Update Environment Variables
+
+Once you have the ID and labels, update your `.env.local` file. This allows the Next.js components (`<BookingButton />`, `<PhoneLink />`) to dynamically fire the correct conversion event.
 
 ```bash
 # Google Ads Conversion Tracking
@@ -69,21 +88,4 @@ NEXT_PUBLIC_ADS_LABEL_PACKAGE2=your_package_page_package2_label
 # Phone Click Conversion Labels (Mobile-First)
 NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE=your_mobile_phone_label
 NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP=your_desktop_phone_label
-NEXT_PUBLIC_ADS_LABEL_PHONE=your_generic_phone_label
 ```
-
-## Testing Conversion Tracking
-
-1. **Install Google Tag Assistant** browser extension
-2. **Enable Test Mode** in Google Ads for your conversion actions
-3. **Test on your site** - conversions should appear in real-time in test mode
-4. **Check Google Ads** - live conversions appear within 24-48 hours
-
-## Verification Checklist
-
-- [ ] All 6 conversion actions created in Google Ads
-- [ ] Conversion ID and labels copied to `.env.local`
-- [ ] Development server restarted (`pnpm dev`)
-- [ ] Test conversions firing in browser console
-- [ ] Google Tag Assistant shows conversions
-- [ ] Test mode conversions appear in Google Ads dashboard

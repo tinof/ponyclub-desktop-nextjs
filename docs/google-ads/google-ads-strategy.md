@@ -8,116 +8,146 @@ The primary objective of the Google Ads campaigns is to drive direct, measurable
 2.  **Package 2 Booking:** A user clicks the "Book Now" button associated with the "Package 2" offering on the homepage or dedicated package page.
 3.  **Phone Call Lead:** A user clicks the main phone number link in the website's top menu bar to initiate a call.
 
+'''
+
+# Pony Club Acheron: Google Ads Strategy (Updated July 2025)
+
+## 0. Executive Summary of Changes
+
+This document outlines the live, updated strategy for the Pony Club Acheron Google Ads account. Key strategic shifts from the original plan include:
+
+- **Expanded Ad Group Structure:** Addition of dedicated `Competitors` and `General & Springs` ad groups to capture a wider range of user intent.
+- **Data-Driven Keyword Expansion:** Keyword list has been expanded based on competitor gap analysis (DataForSEO) and live Search Term Reports.
+- **Refined Bidding Strategy:** A two-phase approach has been implemented, starting with **Maximize Clicks (with a bid cap)** to gather data, before graduating to **Maximize Conversions**. This replaces the obsolete ECPC strategy.
+- **Ad Asset Implementation:** A formal strategy for Sitelinks, Callouts, and Structured Snippets has been added to improve ad rank and CTR.
+- **Audience Layering:** In-Market and Affinity audiences are now applied in "Observation" mode to gather data and inform automated bidding.
+
+## 1. Primary Objective & Conversion Goals
+
+The primary objective is to drive direct, measurable, and profitable customer actions. All campaigns are optimized towards a set of granular conversion goals which signal high user intent.
+
+**Primary Conversion Actions:**
+
+1.  **Package Bookings:** A user clicks a "Book Now" button for any package. Tracking is source-aware (distinguishing between homepage and package page clicks).
+2.  **Phone Call Leads:** A user clicks a `tel:` link to initiate a call. Tracking is device-aware (distinguishing between mobile and desktop clicks).
+
+_(For a detailed breakdown of the specific conversion actions and their setup, see the `google-ads-conversion-setup-guide.md` document.)_
+
 ---
 
 ## 2. Campaign & Ad Group Structure
 
-To ensure budget is allocated effectively and ad copy is highly relevant, the account will be structured using **language-based campaigns** that consolidate all intents while maximizing Google's AI learning and budget efficiency:
+The account uses language-based campaigns to consolidate conversion data, allowing Google's AI to learn faster and optimize budget allocation effectively.
 
 ### Campaign 1: `GR - Search - Summer 2025`
+
 - **Goal:** Target Greek speakers within Greece for all activity and package intents.
 - **Language Targeting:** Greek
 - **Location Targeting:** Greece
 - **Ad Groups:**
-    - **Ad Group: GR - Rafting Acheron**
-        - **Keywords:** `rafting acheron`, `rafting glyki`, `οικογενειακό rafting acheron`, `τιμές rafting ποταμός αχέρων`.
-        - **Landing Page:** `/el/rafting`
-    - **Ad Group: GR - Horse Riding Acheron**
-        - **Keywords:** `ιππασία αχέρων`, `glyki horse riding`, `ιππασία για αρχάριους ελλάδα`, `άλογα αχέρων`.
-        - **Landing Page:** `/el/riding`
-    - **Ad Group: GR - Kayaking Acheron**
-        - **Keywords:** `kayak acheron`, `καγιάκ ποταμός αχέρων`, `κανό καγιάκ αχέρων`.
-        - **Landing Page:** `/el/kayaking`
-    - **Ad Group: GR - Holiday Packages**
-        - **Keywords:** `πακέτο περιπέτειας αχέρων`, `διακοπές rafting ιππασία ελλάδα`, `πακέτο δραστηριοτήτων ήπειρος`.
-        - **Landing Page:** `/el/packages` or `/el/` homepage
-    - **Ad Group: GR - Brand Pony Club**
-        - **Keywords:** `pony club acheron`, `ponyclub glyki`, `αχέρων pony club`.
-        - **Landing Page:** `/el/` homepage
+  - **GR - Acheron General & Springs:** (NEW) Captures broad, top-of-funnel searches.
+    - **Keywords:** `αχεροντασ`, `πηγεσ αχεροντα`, `αχερων ποταμόσ`
+    - **Landing Page:** `/el/packages` or `/el/`
+  - **GR - Rafting Acheron:**
+    - **Keywords:** `rafting αχεροντασ`, `τιμες rafting αχεροντας`
+    - **Landing Page:** `/el/rafting`
+  - **GR - Horse Riding Acheron:**
+    - **Keywords:** `ιππασία αχέρων`, `ιππασια αχεροντας τιμη`
+    - **Landing Page:** `/el/riding`
+  - **GR - Kayaking Acheron:**
+    - **Keywords:** `kayak acheron`, `καγιακ`, `canoe kayak`
+    - **Landing Page:** `/el/kayaking`
+  - **GR - Holiday Packages:** High-intent users looking for bundled activities.
+    - **Keywords:** `πηγεσ αχεροντα δραστηριοτητεσ`, `αχεροντασ δραστηριοτητεσ`
+    - **Landing Page:** `/el/packages`
+  - **GR - Brand Pony Club:**
+    - **Keywords:** `pony club acheron`, `ponyclub glyki`
+    - **Landing Page:** `/el/`
+  - **GR - Competitors:** (NEW) Targets users searching for competitors by name.
+    - **Keywords:** `riverdream`, `acheron rafting club`
+    - **Landing Page:** `/el/`
 
 ### Campaign 2: `ENG - Search - Summer 2025`
+
 - **Goal:** Target international tourists searching in English.
 - **Language Targeting:** English
-- **Location Targeting:** UK, Germany, Netherlands, Italy, USA, France, Austria **AND Greece** (to catch tourists already here)
+- **Location Targeting:** UK, Germany, Netherlands, Italy, USA, France, Austria **AND Greece** (to catch tourists already here).
 - **Ad Groups:**
-    - **Ad Group: ENG - Rafting Acheron**
-        - **Keywords:** `acheron rafting`, `rafting glyki`, `family rafting acheron`, `acheron river rafting prices`.
-        - **Landing Page:** `/rafting`
-    - **Ad Group: ENG - Horse Riding Acheron**
-        - **Keywords:** `horse riding acheron`, `glyki horse riding`, `beginner horse riding greece`, `acheron horses`.
-        - **Landing Page:** `/riding`
-    - **Ad Group: ENG - Kayaking Acheron**
-        - **Keywords:** `kayak acheron`, `acheron river kayaking`, `canoe kayak acheron`.
-        - **Landing Page:** `/kayaking`
-    - **Ad Group: ENG - Holiday Packages**
-        - **Keywords:** `acheron adventure package`, `rafting and riding holiday greece`, `epirus activity package`, `greece adventure holiday`.
-        - **Landing Page:** `/packages` or homepage
-    - **Ad Group: ENG - Brand Pony Club**
-        - **Keywords:** `pony club acheron`, `ponyclub glyki`, `acheron pony club`.
-        - **Landing Page:** Homepage
-    - **Ad Group: ENG - Competitors** (Optional, based on budget)
-        - **Keywords:** `riverdream glyki`, `acheron river dream`.
-        - **Landing Page:** Homepage
-
-**Why This Structure is Superior:**
-1. **Faster AI Learning:** Consolidating all intents per language gives Google more conversion data to optimize with
-2. **Better Budget Flexibility:** Google can shift budget in real-time between ad groups based on performance
-3. **Maintained Relevance:** All ad groups remain highly specific and relevant
-4. **Optimized for Goals:** Package ad groups can be bid more aggressively, call extensions work at campaign level, activity ad groups ensure top positions
+  - **ENG - Rafting Acheron:**
+    - **Keywords:** `acheron rafting`, `rafting acheron prices`
+    - **Landing Page:** `/rafting`
+  - **ENG - Horse Riding Acheron:**
+    - **Keywords:** `horse riding acheron`, `acheron river horse riding`
+    - **Landing Page:** `/riding`
+  - **ENG - Kayaking Acheron:**
+    - **Keywords:** `kayak acheron`, `acheron river kayaking`
+    - **Landing Page:** `/kayaking`
+  - **ENG - Holiday Packages:**
+    - **Keywords:** `acheron adventure package`, `acheron river tour`, `acheron springs`
+    - **Landing Page:** `/packages`
+  - **ENG - Brand Pony Club:**
+    - **Keywords:** `pony club acheron`, `ponyclub glyki`
+    - **Landing Page:** `/`
+  - **ENG - Competitors:**
+    - **Keywords:** `riverdream`, `acheron river club`
+    - **Landing Page:** `/`
 
 ---
 
 ## 3. Keyword Targeting Strategy
 
-- **Foundation:** The initial keyword lists will be built from `data/gads-performance-keywords.json`, prioritizing terms with a proven history of conversions.
+- **Foundation:** The keyword list is built and continuously expanded from three core sources:
+  1.  Historical campaign performance (`gads-performance-keywords.json`).
+  2.  Ongoing analysis of the **Search Terms Report** to "mine" for converting queries.
+  3.  Competitive gap analysis using the **DataForSEO API** to find keywords competitors rank for.
 - **Match Types:**
-    - **Phrase Match:** Will be used for core commercial terms (e.g., "acheron rafting") to capture relevant variations.
-    - **Exact Match:** Will be used for the highest-performing, top-converting keywords to maximize impression share.
-    - **Broad Match:** To be used sparingly in Performance Max campaigns or for keyword discovery, with careful monitoring.
-- **Negative Keywords:** A comprehensive negative keyword list will be maintained to exclude irrelevant searches (e.g., `free`, `jobs`, `reviews`, `videos`).
+  - **Phrase & Exact Match:** Used for the majority of core commercial and high-intent terms to maintain tight control and relevance (e.g., `"acheron rafting prices"`, `[things to do in parga]`).
+  - **Broad Match:** Used sparingly and strategically only for high-volume, single-word discovery keywords like `καγιακ`, where we want to capture the widest possible range of related searches.
+- **Negative Keywords:** A comprehensive negative keyword list is maintained at the campaign level to exclude irrelevant searches. Key categories include:
+  - **Geographical:** `corfu`, `zakynthos`, `athens`, etc.
+  - **Informational:** `jobs`, `reviews`, `videos`, `map`, `wiki`.
+  - **Irrelevant:** `free`, `youtube`, competitor names from other regions.
 
 ---
 
-## 4. Ad Copy & Landing Page Alignment
+## 4. Ad Copy & Asset Strategy
 
 - **Ad Copy Principles:**
-    - **Highlight USPs:** Every ad should feature unique selling points like "Since 1999," "Family-Friendly," "Official & Safe."
-    - **Strong Call-to-Action (CTA):** Use direct CTAs like "Book Your Adventure," "View Packages," "Call for Info."
-    - **Keyword Relevance:** The ad headline and description must be highly relevant to the keywords in the ad group.
-- **Landing Pages:**
-    - Ads must direct users to the most specific and relevant page. An ad for "rafting prices" must go to the rafting page, not the homepage.
-    - The new, dedicated package pages (`/package-1`, `/package-2`) will be the primary landing pages for package-related ads.
+  - **Highlight USPs:** Every ad features unique selling points like **"Since 1999," "Family-Run," "The Original Acheron Club,"** and **"Safety First."**
+  - **Strong Call-to-Action (CTA):** Use direct CTAs like **"Book Your Adventure," "View Packages," "Κλείστε την Θέση σας."**
+  - **Competitor Conquesting:** Ads in competitor ad groups directly contrast Pony Club's strengths (e.g., "The Original Experts, Not [Competitor Name]") to capture competitor search traffic.
+- **Ad Assets (Extensions):**
+  - **Sitelinks:** Implemented at the campaign level to direct users to key pages (Packages, Rafting, Horse Riding, Kayaking), increasing ad size and providing more options.
+  - **Callouts:** Used to highlight key business benefits that don't fit in headlines (e.g., "Family-Friendly Fun," "Book Online," "Ασφάλεια & Πιστοποίηση").
+  - **Structured Snippets:** Used to list the range of services offered (Rafting, Horse Riding, Kayaking, etc.) under the "Service catalog" header.
+  - **Call Assets:** Implemented to display the phone number directly in ads, facilitating direct call leads.
 
 ---
 
-## 5. Conversion Tracking Implementation
+## 5. Audience & Conversion Tracking
 
-Accurate tracking is non-negotiable for success. This requires a robust setup using Google Tag Manager (GTM) and Google Analytics 4 (GA4).
-
-- **Step 1: Create GA4 Events:**
-    - `click_book_package_1`
-    - `click_book_package_2`
-    - `click_phone_number`
-- **Step 2: Configure GTM Triggers:**
-    - **Trigger 1 (Package 1):** Fires on a click event where the Click Element matches the CSS selector for the "Book Now" button of Package 1.
-    - **Trigger 2 (Package 2):** Fires on a click event where the Click Element matches the CSS selector for the "Book Now" button of Package 2.
-    - **Trigger 3 (Phone Call):** Fires on a click event where the Click URL starts with `tel:`.
-- **Step 3: Configure GTM Tags:**
-    - Create three separate GA4 Event Tags, one for each of the events above, linking them to their respective triggers.
-- **Step 4: Import to Google Ads:**
-    - In the Google Ads interface, import the three GA4 events as primary conversion actions.
+- **Audience Strategy:** Proven high-performing "In-Market" and "Affinity" audiences (e.g., _Travel Buffs_, _Trips to Greece_) are applied to campaigns in **"Observation" mode**. This allows us to gather performance data for these segments without restricting ad delivery, feeding crucial signals to Google's automated bidding strategies.
+- **Conversion Tracking:** A granular, component-based tracking system is implemented directly in the Next.js application. This provides highly specific conversion data to Google's AI. For full implementation details, see **`google-ads-conversion-setup-guide.md`**.
 
 ---
 
 ## 6. Budget, Bidding & Optimization
 
-- **Bidding Strategy:**
-    - **Initial Phase:** Start with **Manual CPC** with **"Enhanced CPC"** enabled. This provides more control than Maximize Clicks while allowing Google to increase bids when conversions are likely.
-    - **Primary Phase:** Swiftly move to a conversion-focused bidding strategy like **"Maximize Conversions"** or **"Target CPA"** (Cost Per Acquisition) once sufficient conversion data is available (approx. 15-20 conversions per campaign).
-- **Budget Allocation:**
-    - Allocate budget between the two language-based campaigns based on your target audience split (Greek vs. International)
-    - Within each campaign, prioritize the "Holiday Packages" ad groups for highest-value conversions
-    - Use ad group-level bid adjustments to bid more aggressively for package-related keywords
-- **Optimization Cycle:**
-    - **Weekly:** Review search term reports to add new keywords and negative keywords. Pause underperforming keywords or ads.
-    - **Monthly:** Analyze performance by campaign, ad group, and device. Adjust budgets based on which campaigns are driving the most cost-effective conversions.
+This campaign employs a modern, two-phase bidding strategy designed for optimal data collection and performance scaling.
+
+- ### Bidding Strategy
+
+  - **Phase 1: Data & Traffic Generation (First ~3-4 Weeks)**
+
+    - **Strategy:** **Maximize Clicks**
+    - **Critical Control:** A **Max CPC bid limit** (e.g., €0.75) is set to act as a safety rail, ensuring the budget is spent efficiently across many clicks rather than on a few expensive ones.
+    - **Goal:** Gather sufficient click and conversion data to "teach" Google's algorithm what a valuable user looks like.
+
+  - **Phase 2: Performance & Scaling (After 20-30 Conversions/Month)**
+    - **Strategy:** **Maximize Conversions**
+    - **Goal:** Transition to a fully automated, conversion-focused strategy. The algorithm will use the data from Phase 1 to predict and bid higher on users most likely to convert.
+    - **Optional Refinement:** A **Target CPA (Cost Per Acquisition)** can be added later to maintain efficiency as the budget scales.
+
+- ### Optimization Cycle
+  - **Weekly:** Review **Search Term Reports** to add new negative keywords and "mine" for new high-performing exact/phrase match keywords.
+  - **Monthly:** Analyze performance by **Campaign, Ad Group, and Audience Segment**. Adjust ad group bids and ad copy based on which areas are driving the most cost-effective conversions.
