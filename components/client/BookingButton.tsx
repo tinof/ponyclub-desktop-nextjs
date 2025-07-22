@@ -29,54 +29,21 @@ export default function BookingButton({
   sourcePage = "unknown",
   packageType,
 }: BookingButtonProps) {
-  // Comprehensive tracking function for analytics
+  // GTM-based tracking function for analytics
   const trackBookingClick = useCallback(() => {
-    // Extract numeric price for conversion tracking
-    const numericPrice =
-      Number.parseFloat(packagePrice.replace(/[^\d.]/g, "")) || 0;
-
-    // Determine conversion label based on package type and source page
-    let finalConversionLabel = conversionLabel;
-
-    if (!finalConversionLabel && packageType && sourcePage) {
-      // Generate conversion label based on package type and source page
-      const labelKey =
-        sourcePage === "homepage"
-          ? `NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_${packageType.toUpperCase()}`
-          : `NEXT_PUBLIC_ADS_LABEL_${packageType.toUpperCase()}`;
-
-      finalConversionLabel = process.env[labelKey as keyof typeof process.env];
-
-      if (!finalConversionLabel && process.env.NODE_ENV === "development") {
-        console.warn(`[BookingButton] Missing conversion label: ${labelKey}`);
-      }
-    }
-
-    // Use centralized analytics helper with enhanced parameters
+    // Use centralized GTM analytics helper
     trackBookingClickHelper({
       packageName,
-      packagePrice: numericPrice,
-      buttonId: id,
-      trackingLabel: `${trackingLabel} - ${sourcePage}`,
-      conversionLabel: finalConversionLabel,
-      sourcePage,
-      packageType,
+      packagePrice,
+      sourcePage: sourcePage || "unknown",
     });
 
     if (process.env.NODE_ENV === "development") {
       console.log(
-        `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: €${numericPrice}`
+        `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: ${packagePrice}`
       );
     }
-  }, [
-    trackingLabel,
-    packageName,
-    packagePrice,
-    id,
-    conversionLabel,
-    packageType,
-    sourcePage,
-  ]);
+  }, [trackingLabel, packageName, packagePrice, sourcePage]);
 
   const handleBookNowClick = () => {
     // Defer tracking the click to avoid interfering with Bokun's immediate action

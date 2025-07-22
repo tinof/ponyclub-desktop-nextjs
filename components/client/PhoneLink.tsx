@@ -43,8 +43,11 @@ export default function PhoneLink({
   const handlePhoneClick = useCallback(() => {
     const deviceType = isMobile ? "mobile" : "desktop";
 
-    // Use centralized tracking function with device type
-    trackPhoneClick(phone, deviceType);
+    // Use centralized GTM tracking function with device type
+    trackPhoneClick({
+      phoneNumber: phone,
+      device: deviceType,
+    });
 
     // Call custom onClick handler if provided
     if (onClick) {

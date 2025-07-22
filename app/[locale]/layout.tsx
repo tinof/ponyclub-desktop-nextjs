@@ -1,6 +1,7 @@
 // app/[locale]/layout.tsx is a Server Component
 import "../globals.css";
 
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -13,8 +14,7 @@ import BokunScripts from "@/components/client/BokunScripts";
 import ConsentGate from "@/components/client/ConsentGate";
 import ConsentInitializer from "@/components/client/ConsentInitializer";
 import EngagementTracker from "@/components/client/EngagementTracker";
-import GoogleAds from "@/components/client/GoogleAds";
-import GoogleAnalytics from "@/components/client/GoogleAnalytics";
+
 import PartyTownConfig from "@/components/PartyTownConfig";
 import StructuredData from "@/components/StructuredData";
 import {
@@ -178,14 +178,7 @@ export default async function LocaleLayout({
           <ConsentGate preference="analytics">
             <SpeedInsights />
             <Analytics />
-            <GoogleAnalytics
-              gaId={process.env.NEXT_PUBLIC_GA_ID || "G-6J3ELVNTQE"}
-            />
-            {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
-              <GoogleAds
-                conversionId={process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}
-              />
-            )}
+            <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
             <EngagementTracker />
           </ConsentGate>
 

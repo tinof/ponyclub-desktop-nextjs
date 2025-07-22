@@ -1,14 +1,18 @@
 /**
- * Centralized analytics helper for Google Analytics and Google Ads tracking
+ * Centralized analytics helper for Google Tag Manager (GTM) tracking
  * Ensures GDPR compliance and consistent tracking across the application
  *
  * Debug Mode: Set NODE_ENV=development to enable console logging
  * Test Mode: Use window.analyticsDebug = true for verbose logging
  */
 
+"use client";
+
+import { sendGTMEvent } from "@next/third-parties/google";
+
 type ConsentStatus = {
-  analytics: boolean;
-  marketing: boolean;
+	analytics: boolean;
+	marketing: boolean;
 };
 
 /**
@@ -16,392 +20,141 @@ type ConsentStatus = {
  * Integrates with the existing consent management system
  */
 function hasAnalyticsConsent(): boolean {
-  if (typeof window === "undefined") return false;
+	if (typeof window === "undefined") return false;
 
-  // Check for consent cookie from the existing consent system
-  try {
-    const consentCookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("consent="));
+	// Check for consent cookie from the existing consent system
+	try {
+		const consentCookie = document.cookie
+			.split("; ")
+			.find((row) => row.startsWith("consent="));
 
-    if (consentCookie) {
-      const consent = JSON.parse(
-        decodeURIComponent(consentCookie.split("=")[1])
-      ) as ConsentStatus;
-      return consent.analytics;
-    }
-  } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("[Analytics] Error reading consent:", error);
-    }
-  }
+		if (consentCookie) {
+			const consent = JSON.parse(
+				decodeURIComponent(consentCookie.split("=")[1]),
+			) as ConsentStatus;
+			return consent.analytics;
+		}
+	} catch (error) {
+		if (process.env.NODE_ENV === "development") {
+			console.warn("[Analytics] Error reading consent:", error);
+		}
+	}
 
-  return false;
+	return false;
 }
 
 /**
- * Safe wrapper for Google Analytics gtag events
- * Only fires if user has given analytics consent and gtag is available
+ * Generic GTM Event Function
+ * Pushes events to the dataLayer via sendGTMEvent
  */
-export function gtagEvent(
-  eventName: string,
-  parameters: Record<string, unknown> = {}
-): void {
-  if (typeof window === "undefined") return;
+export const trackGTMEvent = (eventData: Record<string, unknown>) => {
+	if (typeof window === "undefined") return;
 
-  // Check consent first
-  if (!hasAnalyticsConsent()) {
-    if (process.env.NODE_ENV === "development") {
-      console.debug(
-        "[Analytics] Event blocked - no analytics consent:",
-        eventName,
-        parameters
-      );
-    }
-    return;
-  }
+	// Check consent first
+	if (!hasAnalyticsConsent()) {
+		if (process.env.NODE_ENV === "development") {
+			console.debug("[GTM] Event blocked - no analytics consent:", eventData);
+		}
+		return;
+	}
 
-  // Check if gtag is available
-  if (typeof window.gtag !== "function") {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("[Analytics] gtag not available for event:", eventName);
-    }
-    return;
-  }
-
-  try {
-    window.gtag("event", eventName, parameters);
-
-    if (process.env.NODE_ENV === "development") {
-      console.debug("[Analytics] Event sent:", eventName, parameters);
-    }
-  } catch (error) {
-    console.warn("[Analytics] Error sending event:", error);
-  }
-}
+	try {
+		if (process.env.NODE_ENV === "development") {
+			console.log("[GTM]", eventData);
+		}
+		sendGTMEvent(eventData);
+	} catch (error) {
+		console.warn("[GTM] Error sending event:", error);
+	}
+};
 
 /**
- * Send Google Ads conversion event
- * @param conversionLabel - The conversion label from Google Ads
- * @param value - The conversion value (default: 0)
- * @param currency - The currency code (default: 'EUR')
+ * Specific Event for Booking Button Clicks
  */
-export function sendAdsConversion(
-  conversionLabel: string,
-  value: number = 0,
-  currency: string = "EUR"
-): void {
-  if (typeof window === "undefined") return;
-
-  const conversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID;
-
-  if (!conversionId) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(
-        "[Analytics] Missing NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID environment variable"
-      );
-    }
-    return;
-  }
-
-  if (!conversionLabel) {
-    console.warn("[Analytics] Missing conversion label for ads conversion");
-    return;
-  }
-
-  // Check consent
-  if (!hasAnalyticsConsent()) {
-    if (process.env.NODE_ENV === "development") {
-      console.debug(
-        "[Analytics] Ads conversion blocked - no analytics consent"
-      );
-    }
-    return;
-  }
-
-  // Generate unique transaction ID to prevent duplicate conversions
-  const transactionId = `conversion_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-
-  gtagEvent("conversion", {
-    send_to: `${conversionId}/${conversionLabel}`,
-    value: value,
-    currency: currency,
-    transaction_id: transactionId,
-  });
+interface BookingClickProps {
+	packageName: string;
+	packagePrice: string | number;
+	sourcePage: string;
 }
 
+export const trackBookingClick = ({
+	packageName,
+	packagePrice,
+	sourcePage,
+}: BookingClickProps) => {
+	trackGTMEvent({
+		event: "booking_click",
+		package_name: packageName,
+		value: packagePrice,
+		currency: "EUR",
+		source_page: sourcePage,
+	});
+};
+
 /**
- * Track booking button clicks with enhanced ecommerce
+ * Specific Event for Phone Link Clicks
  */
-export function trackBookingClick(params: {
-  packageName: string;
-  packagePrice: number;
-  buttonId: string;
-  trackingLabel: string;
-  conversionLabel?: string;
-  sourcePage?: string;
-  packageType?: string;
-}): void {
-  const {
-    packageName,
-    packagePrice,
-    buttonId,
-    trackingLabel,
-    conversionLabel,
-    sourcePage = "unknown",
-    packageType,
-  } = params;
-
-  // Standard GA4 event with source page and package type
-  gtagEvent("book_now_click", {
-    event_category: "Booking",
-    event_label: trackingLabel,
-    package_name: packageName,
-    package_price: packagePrice,
-    package_type: packageType,
-    source_page: sourcePage,
-    currency: "EUR",
-    button_id: buttonId,
-    page_location: typeof window !== "undefined" ? window.location.href : "",
-    page_title: typeof window !== "undefined" ? document.title : "",
-  });
-
-  // Enhanced Ecommerce - Begin Checkout Event
-  gtagEvent("begin_checkout", {
-    currency: "EUR",
-    value: packagePrice,
-    items: [
-      {
-        item_id: buttonId,
-        item_name: packageName,
-        item_category: "Adventure Package",
-        price: packagePrice,
-        quantity: 1,
-      },
-    ],
-  });
-
-  // Google Ads conversion if label provided
-  if (conversionLabel) {
-    sendAdsConversion(conversionLabel, packagePrice);
-  }
+interface PhoneClickProps {
+	phoneNumber: string;
+	device: "mobile" | "desktop";
 }
 
-/**
- * Track phone click events with device-aware conversion tracking
- */
-export function trackPhoneClick(
-  phone: string,
-  deviceType: "mobile" | "desktop"
-): void {
-  gtagEvent("phone_click", {
-    event_category: "Contact",
-    event_label: `Phone CTA - ${deviceType}`,
-    phone_number: phone.replace(/\s+/g, ""),
-    device_type: deviceType,
-    page_location: typeof window !== "undefined" ? window.location.href : "",
-    page_title: typeof window !== "undefined" ? document.title : "",
-  });
-
-  // Send Google Ads conversion with device-specific label
-  const phoneConversionLabel =
-    deviceType === "mobile"
-      ? process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE
-      : process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP;
-
-  if (phoneConversionLabel) {
-    sendAdsConversion(phoneConversionLabel, 0);
-  } else {
-    // Fallback to generic phone label if device-specific not available
-    const genericLabel = process.env.NEXT_PUBLIC_ADS_LABEL_PHONE;
-    if (genericLabel) {
-      sendAdsConversion(genericLabel, 0);
-    } else if (process.env.NODE_ENV === "development") {
-      console.warn(
-        `[Analytics] Missing phone conversion labels. Expected: NEXT_PUBLIC_ADS_LABEL_PHONE_${deviceType.toUpperCase()} or NEXT_PUBLIC_ADS_LABEL_PHONE`
-      );
-    }
-  }
-}
+export const trackPhoneClick = ({ phoneNumber, device }: PhoneClickProps) => {
+	trackGTMEvent({
+		event: "phone_click",
+		phone_number: phoneNumber,
+		device_type: device,
+	});
+};
 
 /**
- * Track engagement micro-conversions for low-traffic optimization
- */
-export function trackEngagement(params: {
-  type: "scroll_depth" | "time_on_page" | "page_interaction" | "content_view";
-  value?: number;
-  threshold?: string;
-  element?: string;
-}): void {
-  const { type, value, threshold, element } = params;
-
-  // Track engagement event with detailed parameters
-  gtagEvent("engagement", {
-    event_category: "Engagement",
-    event_label: type,
-    engagement_type: type,
-    engagement_value: value,
-    engagement_threshold: threshold,
-    engagement_element: element,
-    page_location: typeof window !== "undefined" ? window.location.href : "",
-    page_title: typeof window !== "undefined" ? document.title : "",
-  });
-
-  if (process.env.NODE_ENV === "development") {
-    console.debug(`[Analytics] Engagement tracked: ${type}`, params);
-  }
-}
-
-/**
- * Initialize scroll depth tracking for engagement optimization
- */
-export function initScrollTracking(): (() => void) | undefined {
-  if (typeof window === "undefined") return;
-
-  const scrollDepths = [25, 50, 75, 90];
-  const trackedDepths = new Set<number>();
-
-  const handleScroll = () => {
-    const scrollPercent = Math.round(
-      (window.scrollY /
-        (document.documentElement.scrollHeight - window.innerHeight)) *
-        100
-    );
-
-    scrollDepths.forEach((depth) => {
-      if (scrollPercent >= depth && !trackedDepths.has(depth)) {
-        trackedDepths.add(depth);
-        trackEngagement({
-          type: "scroll_depth",
-          value: depth,
-          threshold: `${depth}%`,
-        });
-      }
-    });
-  };
-
-  window.addEventListener("scroll", handleScroll, { passive: true });
-
-  // Clean up function
-  return () => window.removeEventListener("scroll", handleScroll);
-}
-
-/**
- * Initialize time on page tracking
- */
-export function initTimeTracking(): void {
-  if (typeof window === "undefined") return;
-
-  const timeThresholds = [30, 60, 120, 300]; // seconds
-  const trackedTimes = new Set<number>();
-
-  timeThresholds.forEach((threshold) => {
-    setTimeout(() => {
-      if (!trackedTimes.has(threshold)) {
-        trackedTimes.add(threshold);
-        trackEngagement({
-          type: "time_on_page",
-          value: threshold,
-          threshold: `${threshold}s`,
-        });
-      }
-    }, threshold * 1000);
-  });
-}
-
-/**
- * Track other analytics platforms if available
- */
-export function trackToAllPlatforms(
-  eventName: string,
-  data: Record<string, unknown>
-): void {
-  // Google Analytics (already handled by gtagEvent)
-  gtagEvent(eventName, data);
-
-  // Vercel Analytics
-  if (typeof window !== "undefined" && window.va) {
-    try {
-      window.va("event", {
-        name: eventName,
-        data: data,
-      });
-    } catch (error) {
-      console.warn("[Analytics] Vercel Analytics error:", error);
-    }
-  }
-
-  // Facebook Pixel (if consent given for marketing)
-  if (typeof window !== "undefined" && window.fbq && hasAnalyticsConsent()) {
-    try {
-      // Map common events to Facebook Pixel events
-      if (eventName === "book_now_click") {
-        window.fbq("track", "InitiateCheckout", {
-          content_name: data.package_name as string,
-          content_category: "Adventure Package",
-          value: data.package_price as number,
-          currency: "EUR",
-        });
-      }
-    } catch (error) {
-      console.warn("[Analytics] Facebook Pixel error:", error);
-    }
-  }
-}
-
-/**
- * Development debugging utilities
+ * Development debugging utilities for GTM
  * Available in browser console for testing
  */
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  // Expose analytics functions for manual testing
-  (window as Window & { analyticsDebug?: object }).analyticsDebug = {
-    gtagEvent,
-    sendAdsConversion,
-    trackBookingClick,
-    hasConsent: hasAnalyticsConsent,
-    testBooking: () => {
-      trackBookingClick({
-        packageName: "Test Package",
-        packagePrice: 100,
-        buttonId: "test-btn",
-        trackingLabel: "Debug Test",
-        conversionLabel: "TEST_LABEL",
-      });
-    },
-    testPhoneClick: () => {
-      trackPhoneClick("+30 26650 61314", "mobile");
-      console.log("Phone click test (mobile) fired");
-    },
-    testPhoneClickDesktop: () => {
-      trackPhoneClick("+30 26650 61314", "desktop");
-      console.log("Phone click test (desktop) fired");
-    },
-    checkEnvironment: () => {
-      console.log("Analytics Environment Check:", {
-        GA_ID: process.env.NEXT_PUBLIC_GA_ID,
-        ADS_CONVERSION_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
-        PACKAGE1_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE1,
-        PACKAGE2_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE2,
-        HOMEPAGE_PACKAGE1_LABEL:
-          process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1,
-        HOMEPAGE_PACKAGE2_LABEL:
-          process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2,
-        PHONE_MOBILE_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE,
-        PHONE_DESKTOP_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP,
-        PHONE_GENERIC_LABEL: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE,
-        hasConsent: hasAnalyticsConsent(),
-        gtagAvailable: typeof window.gtag === "function",
-      });
-    },
-  };
+	// Expose GTM analytics functions for manual testing
+	const analyticsDebug = {
+		trackGTMEvent,
+		trackBookingClick,
+		trackPhoneClick,
+		hasConsent: hasAnalyticsConsent,
+		testBooking: () => {
+			trackBookingClick({
+				packageName: "Test Package",
+				packagePrice: 100,
+				sourcePage: "debug-test",
+			});
+		},
+		testPhoneClick: () => {
+			trackPhoneClick({
+				phoneNumber: "+30 26650 61314",
+				device: "mobile",
+			});
+			console.log("Phone click test (mobile) fired");
+		},
+		testPhoneClickDesktop: () => {
+			trackPhoneClick({
+				phoneNumber: "+30 26650 61314",
+				device: "desktop",
+			});
+			console.log("Phone click test (desktop) fired");
+		},
+		checkEnvironment: () => {
+			console.log("GTM Analytics Environment Check:", {
+				GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+				hasConsent: hasAnalyticsConsent(),
+			});
+		},
+	};
 
-  console.log(
-    "[Analytics] Debug utilities available at window.analyticsDebug",
-    "\nTry: analyticsDebug.checkEnvironment()",
-    "\nTry: analyticsDebug.testBooking()",
-    "\nTry: analyticsDebug.testPhoneClick()"
-  );
+	(window as any).analyticsDebug = analyticsDebug;
+
+	console.log(
+		"[GTM] Debug utilities available at window.analyticsDebug",
+		"\nTry: analyticsDebug.checkEnvironment()",
+		"\nTry: analyticsDebug.testBooking()",
+		"\nTry: analyticsDebug.testPhoneClick()",
+	);
 }
 
-// Note: Global types for gtag and fbq are declared in types/global.d.ts
+// Note: This file now uses Google Tag Manager (GTM) instead of direct gtag calls
