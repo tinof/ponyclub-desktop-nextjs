@@ -10,14 +10,20 @@ const path = require("node:path");
  * @returns {number} - Unix timestamp of last commit affecting this file
  */
 function getGitLastModified(filePath) {
+  // In CI/CD environments like Vercel, the .git directory might not be present.
+  // In such cases, fall back to the current timestamp.
+  if (process.env.VERCEL) {
+    return Math.floor(Date.now() / 1000);
+  }
+
   try {
     // Get the timestamp of the last commit that modified this file
     const gitCmd = `git log -1 --format="%ct" -- "${filePath}"`;
     const result = execSync(gitCmd, { encoding: "utf8" }).trim();
     return result ? Number.parseInt(result) : Math.floor(Date.now() / 1000);
-  } catch (_error) {
+  } catch (error) {
     console.warn(
-      `Could not get Git timestamp for ${filePath}, using current time`
+      `Could not get Git timestamp for ${filePath}, using current time. Error: ${error.message}`
     );
     return Math.floor(Date.now() / 1000);
   }

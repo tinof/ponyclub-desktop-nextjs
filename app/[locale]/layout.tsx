@@ -130,7 +130,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://universe-static.elfsightcdn.com" />
         <link rel="preconnect" href="https://static.elfsight.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
-        {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
+        {process.env.NEXT_PUBLIC_GTM_ID && (
           <link rel="preconnect" href="https://www.googletagmanager.com" />
         )}
 

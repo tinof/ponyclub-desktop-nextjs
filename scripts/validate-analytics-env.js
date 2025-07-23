@@ -1,26 +1,21 @@
 #!/usr/bin/env node
 
 /**
- * Validation script for Google Analytics and Ads environment variables
+ * Validation script for Google Tag Manager environment variables
  * Run this before deploying to ensure all required variables are set
+ *
+ * NOTE: After GTM migration, conversion labels are managed in GTM container,
+ * not as environment variables.
  */
 
-const requiredEnvVars = [
-  "NEXT_PUBLIC_GA_ID",
-  "NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID",
-  "NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1",
-  "NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2",
-  "NEXT_PUBLIC_ADS_LABEL_PACKAGE1",
-  "NEXT_PUBLIC_ADS_LABEL_PACKAGE2",
-  "NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE",
-  "NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP",
-];
+const requiredEnvVars = ["NEXT_PUBLIC_GTM_ID"];
 
 const optionalEnvVars = [
-  "NEXT_PUBLIC_ADS_LABEL_PHONE", // Fallback for phone clicks
+  "NEXT_PUBLIC_ENABLE_BOKUN", // Bokun feature flag
+  "NEXT_PUBLIC_ENABLE_C15T", // C15T consent feature flag
 ];
 
-console.log("🔍 Validating Analytics Environment Variables...\n");
+console.log("🔍 Validating GTM Environment Variables...\n");
 
 const missingRequired = [];
 const missingOptional = [];

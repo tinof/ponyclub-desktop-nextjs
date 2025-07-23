@@ -24,7 +24,7 @@
     "check": "biome check --write --max-diagnostics=2000 .",
     "check:trace": "biome check --log-level=tracing --log-kind=json --log-file=tracing.json --max-diagnostics=2000 .",
     "validate-analytics": "node scripts/validate-analytics-env.js",
-    "prepare": "husky"
+    "prepare": "if [ -z \"$CI\" ]; then husky; fi"
   },
   "dependencies": {
     "@c15t/nextjs": "^1.5.0-canary-20250722085128",

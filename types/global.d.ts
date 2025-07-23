@@ -46,6 +46,22 @@ declare global {
         currency?: string;
       }
     ) => void;
+
+    // Google Tag Manager dataLayer
+    dataLayer?: Array<{
+      [key: string]: unknown;
+      event?: string;
+      package_name?: string;
+      value?: string | number;
+      currency?: string;
+      source_page?: string;
+      phone_number?: string;
+      device_type?: string;
+      scroll_depth?: number;
+      scroll_threshold?: string;
+      time_threshold?: number;
+      time_threshold_label?: string;
+    }>;
   }
 }
 

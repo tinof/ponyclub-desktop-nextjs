@@ -18,7 +18,7 @@ export default function AnalyticsStatus({
   className = "",
 }: AnalyticsStatusProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [gtagLoaded, setGtagLoaded] = useState(false);
+  const [gtmLoaded, setGtmLoaded] = useState(false);
   const [environmentChecks, setEnvironmentChecks] = useState<
     EnvironmentCheck[]
   >([]);
@@ -29,95 +29,47 @@ export default function AnalyticsStatus({
       return;
     }
 
-    // Check all required environment variables
+    // Check GTM environment variables (post-migration)
     const checks: EnvironmentCheck[] = [
       {
-        key: "NEXT_PUBLIC_GA_ID",
-        label: "Google Analytics ID",
-        value: process.env.NEXT_PUBLIC_GA_ID,
+        key: "NEXT_PUBLIC_GTM_ID",
+        label: "Google Tag Manager ID",
+        value: process.env.NEXT_PUBLIC_GTM_ID,
         required: true,
-        status: process.env.NEXT_PUBLIC_GA_ID ? "set" : "missing",
+        status: process.env.NEXT_PUBLIC_GTM_ID ? "set" : "missing",
       },
       {
-        key: "NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID",
-        label: "Google Ads Conversion ID",
-        value: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
-        required: true,
-        status: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID
-          ? "set"
-          : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1",
-        label: "Homepage Package 1 Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE1
-          ? "set"
-          : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2",
-        label: "Homepage Package 2 Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_HOMEPAGE_PACKAGE2
-          ? "set"
-          : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_PACKAGE1",
-        label: "Package 1 Page Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE1,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE1 ? "set" : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_PACKAGE2",
-        label: "Package 2 Page Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE2,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_PACKAGE2 ? "set" : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE",
-        label: "Phone Mobile Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_MOBILE
-          ? "set"
-          : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP",
-        label: "Phone Desktop Label",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP,
-        required: true,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE_DESKTOP
-          ? "set"
-          : "missing",
-      },
-      {
-        key: "NEXT_PUBLIC_ADS_LABEL_PHONE",
-        label: "Phone Generic Label (Fallback)",
-        value: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE,
+        key: "NEXT_PUBLIC_ENABLE_BOKUN",
+        label: "Bokun Feature Flag",
+        value: process.env.NEXT_PUBLIC_ENABLE_BOKUN,
         required: false,
-        status: process.env.NEXT_PUBLIC_ADS_LABEL_PHONE ? "set" : "missing",
+        status: process.env.NEXT_PUBLIC_ENABLE_BOKUN ? "set" : "missing",
+      },
+      {
+        key: "NEXT_PUBLIC_ENABLE_C15T",
+        label: "C15T Consent Feature Flag",
+        value: process.env.NEXT_PUBLIC_ENABLE_C15T,
+        required: false,
+        status: process.env.NEXT_PUBLIC_ENABLE_C15T ? "set" : "missing",
       },
     ];
 
     setEnvironmentChecks(checks);
 
-    // Check if gtag is loaded
-    const checkGtag = () => {
-      if (typeof window !== "undefined" && typeof window.gtag === "function") {
-        setGtagLoaded(true);
+    // Check if GTM dataLayer is loaded
+    const checkGTM = () => {
+      if (
+        typeof window !== "undefined" &&
+        window.dataLayer &&
+        Array.isArray(window.dataLayer)
+      ) {
+        setGtmLoaded(true);
       }
     };
 
     // Check immediately and set up interval
-    checkGtag();
-    const interval = setInterval(checkGtag, 1000);
+    checkGTM();
+    const interval = setInterval(checkGTM, 1000);
 
     // Show the component
     setIsVisible(true);
@@ -135,7 +87,7 @@ export default function AnalyticsStatus({
   const missingRequired = allRequired.filter(
     (check) => check.status === "missing"
   );
-  const isHealthy = missingRequired.length === 0 && gtagLoaded;
+  const isHealthy = missingRequired.length === 0 && gtmLoaded;
 
   return (
     <div
@@ -143,7 +95,7 @@ export default function AnalyticsStatus({
     >
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-gray-800">
-          Analytics Health Check
+          GTM Analytics Health Check
         </h3>
         <div
           className={`w-3 h-3 rounded-full ${isHealthy ? "bg-green-500" : "bg-red-500"}`}
@@ -151,11 +103,11 @@ export default function AnalyticsStatus({
       </div>
 
       <div className="space-y-2 text-xs">
-        {/* Google Tag Status */}
+        {/* GTM Status */}
         <div className="flex items-center justify-between">
-          <span>Google Tag (gtag.js) Loaded</span>
-          <span className={gtagLoaded ? "text-green-600" : "text-red-600"}>
-            {gtagLoaded ? "✅ Ready" : "❌ Not Loaded"}
+          <span>Google Tag Manager (GTM) Loaded</span>
+          <span className={gtmLoaded ? "text-green-600" : "text-red-600"}>
+            {gtmLoaded ? "✅ Ready" : "❌ Not Loaded"}
           </span>
         </div>
 
