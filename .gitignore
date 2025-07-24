@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
 
 # next.js
 /.next/
@@ -9,6 +11,7 @@
 
 # production
 /build
+/dist
 
 # debug
 npm-debug.log*
@@ -16,27 +19,69 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# pnpm specific
+.pnpm-store/
+.pnpm-debug.log*
+
 # env files
 .env*
+!.env.example
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-codebase.md
-public/images/.DS_Store
-public/.DS_Store
+next-env.d.ts
+
+# turbopack
+.turbo/
+
+# biome
+biome-report.txt
+tracing.json
+.biome-cache/
+
+# bundle analyzer
+bundle-analysis.html
+bundle-analysis/
+
+# partytown
+public/~partytown/
+
+# critical css generation
+critical-css/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
 .DS_Store
-fixing-process.md
-magicui-mcp-learnings.md
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# temporary files
+*.tmp
+*.temp
+*.log
 
 # Sentry Config File
 .env.sentry-build-plugin
 
-
+# project specific
 /google-ads-data
 ponyclub.gr+2025-07-21.csv
 /.augment
 /.clinerules
 /docs
+codebase.md
+fixing-process.md
+magicui-mcp-learnings.md
