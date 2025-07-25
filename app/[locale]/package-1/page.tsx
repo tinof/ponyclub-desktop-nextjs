@@ -261,9 +261,9 @@ const Package1Page = async ({ params }: PageProps) => {
 			? "Το δημοφιλέστερο πακέτο μας! Συνδυάζει rafting, ιππασία και πεζοπορία στον Αχέροντα. Ιδανικό για οικογένειες και αρχάριους."
 			: "Our most popular package! Combines rafting, horse riding and hiking at Acheron River. Perfect for families and beginners.",
 		image: [
-			"https://ponyclub.gr/images/Rafting_Group_Blue_Adventure_River.jpg",
-			"https://ponyclub.gr/images/round2.jpg",
-			"https://ponyclub.gr/images/round1.jpg",
+			"https://www.ponyclub.gr/images/Rafting_Group_Blue_Adventure_River.jpg",
+			"https://www.ponyclub.gr/images/round2.jpg",
+			"https://www.ponyclub.gr/images/round1.jpg",
 		],
 		brand: {
 			"@type": "Organization",

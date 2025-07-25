@@ -50,7 +50,7 @@ const PackagesPage = async ({ params }: PageProps) => {
 			{ name: isGreek ? "Αρχική" : "Home", url: `/${locale}` },
 			{ name: isGreek ? "Πακέτα" : "Packages", url: `/${locale}/packages` },
 		],
-		`https://ponyclub.gr/${locale}/packages`,
+		`https://www.ponyclub.gr/${locale}/packages`,
 	);
 
 	return (
