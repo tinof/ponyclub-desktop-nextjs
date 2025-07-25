@@ -49,10 +49,6 @@ function generateSitemapData() {
 		{ route: "/packages", filePath: "app/[locale]/packages/page.tsx" },
 		{ route: "/package-1", filePath: "app/[locale]/package-1/page.tsx" },
 		{ route: "/package-2", filePath: "app/[locale]/package-2/page.tsx" },
-		{
-			route: "/packages/rafting-riding",
-			filePath: "app/[locale]/packages/rafting-riding/page.tsx",
-		},
 
 		{ route: "/for-schools", filePath: "app/[locale]/for-schools/page.tsx" },
 		{
