@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://ponyclub.gr/sitemap.xml 
+Sitemap: https://www.ponyclub.gr/sitemap.xml
