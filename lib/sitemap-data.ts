@@ -8,51 +8,51 @@ export interface RouteData {
 
 export const routeData: RouteData[] = [
   {
-    "route": "",
-    "fileMtime": 1751915026
+    route: "",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/kayaking",
-    "fileMtime": 1751915026
+    route: "/kayaking",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/rafting",
-    "fileMtime": 1751915026
+    route: "/rafting",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/riding",
-    "fileMtime": 1751915026
+    route: "/riding",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/river-village",
-    "fileMtime": 1751915026
+    route: "/river-village",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/trekking",
-    "fileMtime": 1751915026
+    route: "/trekking",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/packages",
-    "fileMtime": 1753462783
+    route: "/packages",
+    fileMtime: 1753462783,
   },
   {
-    "route": "/package-1",
-    "fileMtime": 1753462783
+    route: "/package-1",
+    fileMtime: 1753462783,
   },
   {
-    "route": "/package-2",
-    "fileMtime": 1753462108
+    route: "/package-2",
+    fileMtime: 1753462108,
   },
   {
-    "route": "/for-schools",
-    "fileMtime": 1751915026
+    route: "/for-schools",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/kayak-rafting",
-    "fileMtime": 1751915026
+    route: "/kayak-rafting",
+    fileMtime: 1751915026,
   },
   {
-    "route": "/privacy-settings",
-    "fileMtime": 1752077141
-  }
+    route: "/privacy-settings",
+    fileMtime: 1752077141,
+  },
 ];
