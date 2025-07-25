@@ -39,6 +39,7 @@ interface VintagePackageCardProps {
   variant: "green" | "orange";
   packageType?: "package1" | "package2";
   sourcePage?: string;
+  showLearnMoreLink?: boolean;
 }
 
 export default function VintagePackageCard({
@@ -56,6 +57,7 @@ export default function VintagePackageCard({
   variant,
   packageType,
   sourcePage,
+  showLearnMoreLink = true,
 }: VintagePackageCardProps) {
   const [nonce, setNonce] = useState("");
   const { language } = useLanguage();
@@ -280,10 +282,11 @@ export default function VintagePackageCard({
         </div>
 
         {/* Learn More Link - Critical for SEO */}
-        <div className="text-center mb-4">
-          <Link
-            href={packageUrl}
-            className={`
+        {showLearnMoreLink && (
+          <div className="text-center mb-4">
+            <Link
+              href={packageUrl}
+              className={`
               inline-block px-6 py-2 text-sm font-medium
               border-2 rounded-lg transition-all duration-300
               hover:scale-105 hover:shadow-md
@@ -291,10 +294,11 @@ export default function VintagePackageCard({
               bg-white hover:bg-gray-50
               font-serif tracking-wider uppercase
             `}
-          >
-            {learnMoreText}
-          </Link>
-        </div>
+            >
+              {learnMoreText}
+            </Link>
+          </div>
+        )}
 
         {/* Book Now Button */}
         <div className="text-center">

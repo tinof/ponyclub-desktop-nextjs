@@ -186,7 +186,9 @@ export default function DesktopMenu() {
           ml-2 flex cursor-pointer items-center gap-1 px-3 py-2 font-medium
           text-accent select-text
         `}
-      />
+      >
+        <span>{t.navigation.callUs}</span>
+      </PhoneLink>
       {/* Language selector */}
       <div className="relative ml-2" ref={languageMenuRef}>
         <button

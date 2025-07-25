@@ -150,11 +150,8 @@ export default function AnalyticsStatus({
         <div className="border-t pt-2">
           <button
             onClick={() => {
-              if (
-                typeof window !== "undefined" &&
-                (window as any).analyticsDebug
-              ) {
-                (window as any).analyticsDebug.checkEnvironment();
+              if (typeof window !== "undefined" && window.analyticsDebug) {
+                window.analyticsDebug.checkEnvironment();
               }
             }}
             className="text-blue-600 hover:text-blue-800 underline"
