@@ -104,25 +104,25 @@ interface PhoneClickProps {
 }
 
 export const trackPhoneClick = ({ phoneNumber, device }: PhoneClickProps) => {
-	// Send the GA4 event for general analytics
-	trackGTMEvent({
-		event: "phone_click",
-		phone_number: phoneNumber,
-		device_type: device,
-	});
+  // Send the GA4 event for general analytics
+  trackGTMEvent({
+    event: "phone_click",
+    phone_number: phoneNumber,
+    device_type: device,
+  });
 
-	// Determine the correct Google Ads conversion label based on the device
-	const conversionLabel =
-		device === "mobile"
-			? "-i5YCP39-e8aEMz6q8gp" // Phone Click - Mobile
-			: "9_TlCPj--e8aEMz6q8gp"; // Phone Click - Desktop
+  // Determine the correct Google Ads conversion label based on the device
+  const conversionLabel =
+    device === "mobile"
+      ? "-i5YCP39-e8aEMz6q8gp" // Phone Click - Mobile
+      : "9_TlCPj--e8aEMz6q8gp"; // Phone Click - Desktop
 
-	// Send a dedicated conversion event to Google Ads
-	trackAdsConversion({
-		conversionLabel,
-		value: 5, // Assign a static value of €5 for a phone call lead
-		currency: "EUR",
-	});
+  // Send a dedicated conversion event to Google Ads
+  trackAdsConversion({
+    conversionLabel,
+    value: 5, // Assign a static value of €5 for a phone call lead
+    currency: "EUR",
+  });
 };
 
 /**
