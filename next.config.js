@@ -80,14 +80,12 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
-    // Mobile-first device sizes optimized for LCP performance
-    deviceSizes: [480, 640, 750, 828, 1080, 1200, 1920, 2048],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [
       16, 32, 48, 64, 80, 96, 120, 128, 160, 184, 192, 224, 256, 320, 360, 384,
-      480,
     ],
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 3600, // Increased cache TTL for better performance
+    minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
     remotePatterns: [

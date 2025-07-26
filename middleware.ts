@@ -198,7 +198,7 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (!pathnameHasLocale) {
@@ -236,7 +236,7 @@ export async function middleware(request: NextRequest) {
         path: "/",
         maxAge: 31536000, // 1 year
         sameSite: "lax",
-      }
+      },
     );
 
     return i18nRewriteResponse;
@@ -248,7 +248,7 @@ export async function middleware(request: NextRequest) {
 
   response.headers.set(
     "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=(self), payment=()"
+    "camera=(), microphone=(), geolocation=(self), payment=()",
   );
 
   return response;

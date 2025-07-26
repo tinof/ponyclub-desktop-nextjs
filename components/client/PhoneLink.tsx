@@ -29,11 +29,11 @@ export default function PhoneLink({
     const checkMobile = () => {
       const userAgent = navigator.userAgent.toLowerCase();
       const mobileKeywords = ["mobile", "android", "iphone", "ipad", "tablet"];
-      const isMobileUA = mobileKeywords.some((keyword) =>
-        userAgent.includes(keyword)
+      const isMobileUa = mobileKeywords.some(keyword =>
+        userAgent.includes(keyword),
       );
       const isMobileScreen = window.innerWidth <= 768;
-      setIsMobile(isMobileUA || isMobileScreen);
+      setIsMobile(isMobileUa || isMobileScreen);
     };
 
     checkMobile();
@@ -76,11 +76,11 @@ export default function PhoneLink({
       if (process.env.NODE_ENV === "development") {
         console.log(
           `[PhoneLink] Phone click tracked: ${phone} (${deviceType}), Conversion Label: ${phoneConversionLabels[deviceType]}`,
-          !isMobile && !isRevealed ? " - Number revealed on desktop" : ""
+          !isMobile && !isRevealed ? " - Number revealed on desktop" : "",
         );
       }
     },
-    [phone, onClick, isMobile, isRevealed]
+    [phone, onClick, isMobile, isRevealed],
   );
 
   // Clean phone number for tel: link (remove spaces and formatting)

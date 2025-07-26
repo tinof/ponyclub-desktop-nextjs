@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
   if (!imageUrl) {
     return NextResponse.json(
       { error: "Missing url parameter" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
         {
           error: `Failed to fetch image: ${response.status} ${response.statusText}`,
         },
-        { status: response.status }
+        { status: response.status },
       );
     }
 
@@ -101,7 +101,7 @@ export async function GET(request: NextRequest) {
     if (!contentType.startsWith("image/")) {
       return NextResponse.json(
         { error: "Invalid content type - not an image" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -159,7 +159,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

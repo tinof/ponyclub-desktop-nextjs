@@ -53,7 +53,7 @@ export default function BokunWidget({
     if (process.env.NODE_ENV === "development") {
       console.log(
         "[Bokun Widget Parent] useEffect triggered. Container element:",
-        containerElement
+        containerElement,
       );
     }
 
@@ -69,7 +69,7 @@ export default function BokunWidget({
         if (process.env.NODE_ENV === "development") {
           console.log(
             "[Bokun Widget Parent] Received message from iframe (onMessage):",
-            messageData.message
+            messageData.message,
           );
         }
         // Potentially handle specific messages if needed in the future
@@ -78,7 +78,7 @@ export default function BokunWidget({
         if (process.env.NODE_ENV === "development") {
           console.log(
             "[Bokun Widget Parent] iframeResizer onResized:",
-            sizeData
+            sizeData,
           );
         }
       },
@@ -86,7 +86,7 @@ export default function BokunWidget({
         if (process.env.NODE_ENV === "development") {
           console.log(
             "[Bokun Widget Parent] iframeResizer onInit: iframe is ready.",
-            iFrameEl
+            iFrameEl,
           );
         }
       },
@@ -113,7 +113,7 @@ export default function BokunWidget({
           "[Bokun Widget Parent] window.iFrameResizer.onMessage received:",
           messageData.message,
           "from iframe:",
-          messageData.iframe.id
+          messageData.iframe.id,
         );
       }
       // Call the options.onMessage handler as well
@@ -132,7 +132,7 @@ export default function BokunWidget({
           if (process.env.NODE_ENV === "development") {
             console.log(
               "[Bokun Widget Parent] Found catalogue iframe, initializing iframeResizer:",
-              catalogueIframe
+              catalogueIframe,
             );
           }
           try {
@@ -140,14 +140,14 @@ export default function BokunWidget({
             catalogueIframe.dataset.resizerAttached = "true"; // Mark as initialized
             if (process.env.NODE_ENV === "development") {
               console.log(
-                "[Bokun Widget Parent] iframeResizer initialized for catalogue iframe."
+                "[Bokun Widget Parent] iframeResizer initialized for catalogue iframe.",
               );
             }
           } catch (error) {
             if (process.env.NODE_ENV === "development") {
               console.error(
                 "[Bokun Widget Parent] Error initializing iframeResizer for catalogue iframe:",
-                error
+                error,
               );
             }
           }
@@ -155,21 +155,21 @@ export default function BokunWidget({
         } else if (catalogueIframe?.dataset.resizerAttached) {
           if (process.env.NODE_ENV === "development") {
             console.log(
-              "[Bokun Widget Parent] Catalogue iframe already has resizer attached."
+              "[Bokun Widget Parent] Catalogue iframe already has resizer attached.",
             );
           }
           observerInstance.disconnect();
         } else if (process.env.NODE_ENV === "development") {
           console.log(
-            "[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback."
+            "[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback.",
           );
         }
-      }
+      },
     );
 
     if (process.env.NODE_ENV === "development") {
       console.log(
-        "[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe."
+        "[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe.",
       );
     }
     catalogueObserver.observe(containerElement, {
@@ -181,14 +181,14 @@ export default function BokunWidget({
     const bodyObserver = new MutationObserver(
       (_mutationsList, _observerInstance) => {
         const cartIframe = document.getElementById(
-          "bokun-widgets-cart"
+          "bokun-widgets-cart",
         ) as HTMLIFrameElement | null;
         // Check if the cart iframe exists and hasn't been initialized yet
         if (cartIframe && !cartIframe.dataset.resizerAttached) {
           if (process.env.NODE_ENV === "development") {
             console.log(
               "[Bokun Widget Parent] Found cart iframe in body, initializing iframeResizer:",
-              cartIframe
+              cartIframe,
             );
           }
           try {
@@ -196,7 +196,7 @@ export default function BokunWidget({
             cartIframe.dataset.resizerAttached = "true"; // Mark as initialized
             if (process.env.NODE_ENV === "development") {
               console.log(
-                "[Bokun Widget Parent] iframeResizer initialized for cart iframe."
+                "[Bokun Widget Parent] iframeResizer initialized for cart iframe.",
               );
             }
             // Optional: Disconnect if you only expect one cart iframe instance
@@ -205,18 +205,18 @@ export default function BokunWidget({
             if (process.env.NODE_ENV === "development") {
               console.error(
                 "[Bokun Widget Parent] Error initializing iframeResizer for cart iframe:",
-                error
+                error,
               );
             }
           }
         }
         // Cart iframe already has resizer attached - no action needed
-      }
+      },
     );
 
     if (process.env.NODE_ENV === "development") {
       console.log(
-        "[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe."
+        "[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe.",
       );
     }
     // Observe the body for additions/removals, including the cart iframe
@@ -226,7 +226,7 @@ export default function BokunWidget({
     return () => {
       if (process.env.NODE_ENV === "development") {
         console.log(
-          "[Bokun Widget Parent] useEffect cleanup: Disconnecting observers."
+          "[Bokun Widget Parent] useEffect cleanup: Disconnecting observers.",
         );
       }
       catalogueObserver.disconnect();

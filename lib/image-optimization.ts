@@ -7,8 +7,8 @@ import type { ImageProps } from "next/image";
  * Mobile-first approach: smaller images for mobile devices to improve loading speed
  */
 export const DEFAULT_IMAGE_SIZES = {
-  // Hero images: Mobile-first optimization with smaller sizes for faster LCP
-  hero: "(max-width:480px)480px,(max-width:768px)768px,(max-width:1024px)1024px,(max-width:1200px)1200px,1920px",
+  // Hero images: Full width on mobile, optimized for different breakpoints
+  hero: "(max-width:480px)100vw,(max-width:768px)100vw,(max-width:1024px)100vw,1920px",
 
   // Gallery images: Smaller on mobile for faster loading
   gallery:
@@ -41,9 +41,9 @@ export const DEFAULT_IMAGE_SIZES = {
  * Optimized based on PageSpeed insights - reduced quality for better compression
  */
 export const IMAGE_QUALITY = {
-  high: 75, // Increased for LCP hero images to maintain visual quality
-  medium: 60, // Slightly increased for better balance
-  low: 45, // Keep low for non-critical images
+  high: 65, // Reduced from 75 for better compression
+  medium: 55, // Reduced from 65 for better compression
+  low: 45, // Reduced from 50 for better compression
 };
 
 /**
@@ -57,7 +57,7 @@ export function optimizeImageProps(
     type?: keyof typeof DEFAULT_IMAGE_SIZES;
     fetchPriority?: "high" | "low" | "auto";
     enableBlurPlaceholder?: boolean;
-  }
+  },
 ): Partial<ImageProps> {
   const {
     type = "card",
@@ -107,48 +107,20 @@ export function generateBlurDataURL(): string {
 }
 
 /**
- * Generate a hero-specific blur data URL with nature colors
- */
-export function generateHeroBlurDataURL(): string {
-  // Hero image blur placeholder with nature-inspired gradient
-  const svg = `
-		<svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<defs>
-				<linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-					<stop offset="0%" style="stop-color:#4a7c59;stop-opacity:1" />
-					<stop offset="50%" style="stop-color:#6b8362;stop-opacity:1" />
-					<stop offset="100%" style="stop-color:#8fbc8f;stop-opacity:1" />
-				</linearGradient>
-			</defs>
-			<rect width="40" height="24" fill="url(#heroGradient)" />
-		</svg>
-	`;
-  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
-}
-
-/**
  * Apply optimized props to hero image
  */
 export function optimizeHeroImage(
-  props: Partial<ImageProps> & { src: string; alt: string }
+  props: Partial<ImageProps> & { src: string; alt: string },
 ): Partial<ImageProps> {
-  const optimizedProps = {
+  return {
     ...optimizeImageProps({
       ...props,
       type: "hero",
       priority: true,
       fetchPriority: "high", // High priority for LCP
-      enableBlurPlaceholder: true, // Enable blur for hero images
     }),
     quality: IMAGE_QUALITY.high,
   };
-
-  // Add hero-specific blur placeholder
-  if (optimizedProps.placeholder === "blur") {
-    optimizedProps.blurDataURL = generateHeroBlurDataURL();
-  }
-
-  return optimizedProps;
 }
 
 /**
@@ -156,7 +128,7 @@ export function optimizeHeroImage(
  */
 export function optimizeGalleryImage(
   props: Partial<ImageProps> & { src: string; alt: string },
-  index = 0
+  index = 0,
 ): Partial<ImageProps> {
   return {
     ...optimizeImageProps({
@@ -176,7 +148,7 @@ export function optimizeGalleryImage(
  * Apply optimized props to content images (within articles/text)
  */
 export function optimizeContentImage(
-  props: Partial<ImageProps> & { src: string; alt: string }
+  props: Partial<ImageProps> & { src: string; alt: string },
 ): Partial<ImageProps> {
   return {
     ...optimizeImageProps({
@@ -194,7 +166,7 @@ export function optimizeContentImage(
  */
 export function optimizeFullWidthImage(
   props: Partial<ImageProps> & { src: string; alt: string },
-  isAboveFold = false
+  isAboveFold = false,
 ): Partial<ImageProps> {
   return {
     ...optimizeImageProps({
@@ -212,7 +184,7 @@ export function optimizeFullWidthImage(
  * Apply optimized props to avatar/profile images
  */
 export function optimizeAvatarImage(
-  props: Partial<ImageProps> & { src: string; alt: string }
+  props: Partial<ImageProps> & { src: string; alt: string },
 ): Partial<ImageProps> {
   return {
     ...optimizeImageProps({
@@ -232,10 +204,11 @@ export function getOptimalImageFormat(): "webp" | "jpg" {
   if (typeof window !== "undefined") {
     // Check WebP support
     const canvas = document.createElement("canvas");
-    if (canvas.getContext?.("2d")) {
-      if (canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0) {
-        return "webp";
-      }
+    if (
+      canvas.getContext?.("2d") &&
+      canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0
+    ) {
+      return "webp";
     }
   }
   return "jpg";

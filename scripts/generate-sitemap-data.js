@@ -20,10 +20,10 @@ function getGitLastModified(filePath) {
     // Get the timestamp of the last commit that modified this file
     const gitCmd = `git log -1 --format="%ct" -- "${filePath}"`;
     const result = execSync(gitCmd, { encoding: "utf8" }).trim();
-    return result ? Number.parseInt(result) : Math.floor(Date.now() / 1000);
+    return result ? Number.parseInt(result, 10) : Math.floor(Date.now() / 1000);
   } catch (error) {
     console.warn(
-      `Could not get Git timestamp for ${filePath}, using current time. Error: ${error.message}`
+      `Could not get Git timestamp for ${filePath}, using current time. Error: ${error.message}`,
     );
     return Math.floor(Date.now() / 1000);
   }
@@ -64,7 +64,7 @@ function generateSitemapData() {
   const routeData = routes.map(({ route, filePath }) => {
     const lastModified = getGitLastModified(filePath);
     console.log(
-      `${route || "/"}: ${new Date(lastModified * 1000).toISOString()}`
+      `${route || "/"}: ${new Date(lastModified * 1000).toISOString()}`,
     );
     return {
       route,

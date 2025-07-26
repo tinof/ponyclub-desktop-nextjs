@@ -26,7 +26,7 @@ interface LanguageProviderProps {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function LanguageProvider({

@@ -18,7 +18,7 @@ const BokunWidget = dynamic(
         <span className="text-gray-500">Loading booking widget...</span>
       </div>
     ),
-  }
+  },
 );
 
 type DynamicBokunWidgetProps = {
@@ -50,7 +50,7 @@ export default function DynamicBokunWidget({
       {
         rootMargin: "200px 0px", // Load when 200px away from viewport
         threshold: 0.01, // Trigger even if only 1% is visible
-      }
+      },
     );
 
     observer.observe(currentRef);

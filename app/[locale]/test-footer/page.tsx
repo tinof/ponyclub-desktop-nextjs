@@ -29,7 +29,7 @@ export default function TestFooterPage() {
               <OptimizedImage
                 src="/images/ponyclub_logo.png"
                 alt="Pony Club Logo"
-                fill
+                fill={true}
                 sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
                 className="object-contain p-1"
                 imageType="logo"

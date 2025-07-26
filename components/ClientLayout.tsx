@@ -42,8 +42,8 @@ export default function ClientLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
+          enableSystem={true}
+          disableTransitionOnChange={true}
         >
           <PageLayout>{children}</PageLayout>
           {/* Show c15t banner only if enabled */}

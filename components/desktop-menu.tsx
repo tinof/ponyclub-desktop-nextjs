@@ -83,7 +83,7 @@ export default function DesktopMenu() {
             transition-all
             ${
               /* Adjusted padding, removed relative, rounded-full, bg, border, shadow */
-              activities.some((activity) => pathname === activity.href) ||
+              activities.some(activity => pathname === activity.href) ||
               activitiesMenuOpen
                 ? "border-primary font-semibold text-primary" /* Darker green active text, active border */
                 : "border-transparent font-medium text-foreground hover:text-primary" /* Standard text, hover, transparent border */
@@ -108,7 +108,7 @@ export default function DesktopMenu() {
             {" "}
             {/* Cleaner dropdown style */}
             <div className="py-1">
-              {activities.map((activity) => (
+              {activities.map(activity => (
                 <Link
                   key={activity.id}
                   href={activity.href}

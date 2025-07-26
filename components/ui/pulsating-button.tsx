@@ -20,7 +20,7 @@ export const PulsatingButton = React.forwardRef<
       duration = "1.5s",
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <button
@@ -30,7 +30,7 @@ export const PulsatingButton = React.forwardRef<
             relative flex cursor-pointer items-center justify-center rounded-lg
             bg-primary px-4 py-2 text-center text-primary-foreground
           `,
-          className
+          className,
         )}
         style={
           {
@@ -49,7 +49,7 @@ export const PulsatingButton = React.forwardRef<
         />
       </button>
     );
-  }
+  },
 );
 
 PulsatingButton.displayName = "PulsatingButton";

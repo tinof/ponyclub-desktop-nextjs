@@ -38,7 +38,7 @@ export default function DynamicGoogleMap() {
         mode="place"
         q="Pony+Club+Acheron"
         loading="lazy"
-        allowfullscreen
+        allowfullscreen={true}
         style="border: 0;"
       />
     </div>

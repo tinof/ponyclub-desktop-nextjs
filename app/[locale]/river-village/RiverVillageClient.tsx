@@ -261,7 +261,7 @@ export default function RiverVillageClient() {
             <OptimizedImage
               src="/images/natura_2000.png"
               alt="Natura 2000 Logo"
-              fill
+              fill={true}
               sizes="192px"
               className="object-contain"
               imageType="logo"

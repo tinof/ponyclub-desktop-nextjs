@@ -39,7 +39,7 @@ const DialogOverlay = forwardRef<
         data-[state=closed]:animate-out data-[state=closed]:fade-out-0
         fixed inset-0 z-50 bg-black/80 backdrop-blur-xs
       `,
-      className
+      className,
     )}
     {...props}
   />
@@ -68,7 +68,7 @@ const DialogContent = forwardRef<
           bg-white p-6 shadow-lg duration-200
           sm:rounded-lg
         `,
-        className
+        className,
       )}
       {...props}
     >
@@ -101,7 +101,7 @@ const DialogHeader = ({
         flex flex-col space-y-1.5 text-center
         sm:text-left
       `,
-      className
+      className,
     )}
     {...props}
   />
@@ -118,7 +118,7 @@ const DialogFooter = ({
         flex flex-col-reverse
         sm:flex-row sm:justify-end sm:space-x-2
       `,
-      className
+      className,
     )}
     {...props}
   />
@@ -133,7 +133,7 @@ const DialogTitle = forwardRef<
     ref={ref}
     className={cn(
       "text-lg leading-none font-semibold tracking-tight",
-      className
+      className,
     )}
     {...props}
   />

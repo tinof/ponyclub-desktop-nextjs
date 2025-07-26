@@ -34,7 +34,9 @@ export default function BookingButton({
 }: BookingButtonProps) {
   // Helper function to determine the correct Google Ads conversion label
   const getConversionLabel = useCallback(() => {
-    if (conversionLabel) return conversionLabel;
+    if (conversionLabel) {
+      return conversionLabel;
+    }
 
     // Map package type and source page to conversion labels from Google Ads
     const conversionMap = {
@@ -72,7 +74,7 @@ export default function BookingButton({
     const mappedValue =
       packageType &&
       valueMap[packageType]?.[sourcePage as keyof typeof valueMap.package1];
-    return mappedValue || parseFloat(packagePrice) || 0;
+    return mappedValue || Number.parseFloat(packagePrice) || 0;
   }, [packageType, sourcePage, packagePrice]);
 
   // GTM-based tracking function for analytics
@@ -96,7 +98,7 @@ export default function BookingButton({
 
     if (process.env.NODE_ENV === "development") {
       console.log(
-        `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: ${packagePrice}, Conversion Label: ${adsConversionLabel}`
+        `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: ${packagePrice}, Conversion Label: ${adsConversionLabel}`,
       );
     }
   }, [

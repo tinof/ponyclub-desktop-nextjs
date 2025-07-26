@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const localizedRoutes: MetadataRoute.Sitemap = [];
 
   routeData.forEach(({ route, fileMtime }) => {
-    locales.forEach((locale) => {
+    locales.forEach(locale => {
       // Ensure the path starts with a slash if it's not empty
       const pathSegment = route.startsWith("/") ? route : `/${route}`;
       // Handle the root path correctly for locales

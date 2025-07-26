@@ -1,0 +1,4231 @@
+> git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file -
+🔍 Running pre-commit quality checks...
+📝 Running Biome format and lint check...
+
+> ponyclub-gr@1.1.0 check /Users/tfotiou/Documents/GitHub/ponyclub-v0
+> biome check --write --max-diagnostics=2000 .
+
+app/[locale]/kayak-rafting/page.tsx:37:11 lint/correctness/noUnusedVariables ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This variable locale is unused.
+  
+    36 │ const KayakRaftingPage = async ({ params }: PageProps) => {
+  > 37 │   const { locale } = await params;
+       │           ^^^^^^
+    38 │   const bokunExperienceId = "1020611"; // Assuming this is the correct ID for Kayak & Rafting
+    39 │ 
+  
+  i Unused variables are often the result of an incomplete refactoring, typos, or other sources of bugs.
+  
+
+app/[locale]/layout.tsx:182:38 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    180 │             <SpeedInsights />
+    181 │             <Analytics />
+  > 182 │             <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+        │                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    183 │             <EngagementTracker />
+    184 │           </ConsentGate>
+  
+
+app/[locale]/privacy-settings/PrivacySettingsClient.tsx:35:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    33 │     window.dispatchEvent(new Event("storage"));
+    34 │ 
+  > 35 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    36 │       console.log("[PrivacySettings] Updated consent:", legacyConsent);
+    37 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+app/[locale]/privacy-settings/PrivacySettingsClient.tsx:70:22 lint/style/noProcessEnv ━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    68 │   useEffect(() => {
+    69 │     // Check if c15t is enabled
+  > 70 │     setIsC15tEnabled(process.env.NEXT_PUBLIC_ENABLE_C15T !== "false");
+       │                      ^^^^^^^^^^^
+    71 │ 
+    72 │     // Get current consent status
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+app/[locale]/privacy-settings/PrivacySettingsClient.tsx:188:11 lint/a11y/useButtonType ━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    187 │         <div className="mt-6 flex gap-4">
+  > 188 │           <button
+        │           ^^^^^^^
+  > 189 │             onClick={() => handleConsentChange(true, true)}
+  > 190 │             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+  > 191 │           >
+        │           ^
+    192 │             {locale === "el" ? "Αποδοχή Όλων" : "Accept All"}
+    193 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+app/[locale]/privacy-settings/PrivacySettingsClient.tsx:194:11 lint/a11y/useButtonType ━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    192 │             {locale === "el" ? "Αποδοχή Όλων" : "Accept All"}
+    193 │           </button>
+  > 194 │           <button
+        │           ^^^^^^^
+  > 195 │             onClick={() => handleConsentChange(false, false)}
+  > 196 │             className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+  > 197 │           >
+        │           ^
+    198 │             {locale === "el" ? "Απόρριψη Όλων" : "Reject All"}
+    199 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+app/[locale]/privacy-settings/PrivacySettingsClient.tsx:59:8 lint/style/noDefaultExport ━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    57 │ }
+    58 │ 
+  > 59 │ export default function PrivacySettingsClient({
+       │        ^^^^^^^
+    60 │   locale,
+    61 │ }: PrivacySettingsClientProps) {
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+app/[locale]/river-village/RiverVillageClient.tsx:16:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    14 │ });
+    15 │ 
+  > 16 │ export default function RiverVillageClient() {
+       │        ^^^^^^^
+    17 │   const { t, language } = useLanguage();
+    18 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+app/[locale]/river-village/page.tsx:32:11 lint/correctness/noUnusedVariables ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This variable locale is unused.
+  
+    31 │ export default async function RiverVillagePage({ params }: PageProps) {
+  > 32 │   const { locale } = await params;
+       │           ^^^^^^
+    33 │   return <RiverVillageClient />;
+    34 │ }
+  
+  i Unused variables are often the result of an incomplete refactoring, typos, or other sources of bugs.
+  
+
+app/api/csp-violations/route.ts:12:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    10 │     const report = await request.json();
+    11 │     // Log CSP violations in development
+  > 12 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    13 │       console.warn("CSP Violation:", report);
+    14 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+app/api/csp-violations/route.ts:23:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    21 │   } catch (error) {
+    22 │     // Log errors in development
+  > 23 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    24 │       console.error("Error processing CSP report:", error);
+    25 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+app/api/image-proxy/route.ts:83:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    81 │       headers: {
+    82 │         "User-Agent": "Mozilla/5.0 (compatible; NextJS Image Proxy)",
+  > 83 │         Accept: "image/webp,image/avif,image/*,*/*;q=0.8",
+       │         ^^^^^^
+    84 │       },
+    85 │       signal: controller.signal,
+  
+
+app/api/image-proxy/route.ts:135:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    133 │           "public, max-age=31536000, stale-while-revalidate=86400",
+    134 │         // Additional performance headers
+  > 135 │         Vary: "Accept-Encoding, Accept",
+        │         ^^^^
+    136 │         "X-Content-Type-Options": "nosniff",
+    137 │         "X-Frame-Options": "DENY",
+  
+
+app/api/image-proxy/route.ts:140:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in PascalCase because strictCase is set to `true`.
+  
+    138 │         "X-Content-Security-Policy": "default-src 'none'; img-src 'self'",
+    139 │         // Enhanced ETag for better cache validation
+  > 140 │         ETag: etag,
+        │         ^^^^
+    141 │         // Add content length for better caching
+    142 │         "Content-Length": imageBuffer.byteLength.toString(),
+  
+  i If you want to use consecutive uppercase characters in PascalCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+app/sitemap.ts:5:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    3 │ import { routeData } from "@/lib/sitemap-data";
+    4 │ 
+  > 5 │ export default function sitemap(): MetadataRoute.Sitemap {
+      │        ^^^^^^^
+    6 │   const baseUrl = "https://www.ponyclub.gr";
+    7 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/ActivityPageLayout.tsx:28:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    26 │ }
+    27 │ 
+  > 28 │ export default function ActivityPageLayout({
+       │        ^^^^^^^
+    29 │   title,
+    30 │   subtitle,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/ActivityPageLayout.tsx:31:3 lint/correctness/noUnusedFunctionParameters ━━━━━━━━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    29 │   title,
+    30 │   subtitle,
+  > 31 │   descriptionTitle,
+       │   ^^^^^^^^^^^^^^^^
+    32 │   descriptionContent,
+    33 │   detailsTitle,
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+
+components/ActivityPageLayout.tsx:38:3 lint/correctness/noUnusedFunctionParameters ━━━━━━━━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    36 │   pricingContent,
+    37 │ 
+  > 38 │   showBookingButton = true,
+       │   ^^^^^^^^^^^^^^^^^
+    39 │   useSingleColumn = false,
+    40 │   fullWidthContent = false,
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+
+components/ActivityPageLayout.tsx:40:3 lint/correctness/noUnusedFunctionParameters ━━━━━━━━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    38 │   showBookingButton = true,
+    39 │   useSingleColumn = false,
+  > 40 │   fullWidthContent = false,
+       │   ^^^^^^^^^^^^^^^^
+    41 │ }: ActivityPageLayoutProps) {
+    42 │   // Determine content max-width class based on column preference
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+
+components/BokunWidget.tsx:98:15 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in PascalCase because strictCase is set to `true`.
+  
+     96 │     // This is a workaround for the "onMessage function not defined" warning
+     97 │     // if the Bokun widget's internal iframe-resizer script is looking for a global function.
+   > 98 │     interface WindowWithIFrameResizer extends Window {
+        │               ^^^^^^^^^^^^^^^^^^^^^^^
+     99 │       iFrameResizer?: {
+    100 │         onMessage?: (messageData: MessageData) => void;
+  
+  i If you want to use consecutive uppercase characters in PascalCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+components/BokunWidget.tsx:29:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    27 │ };
+    28 │ 
+  > 29 │ export default function BokunWidget({
+       │        ^^^^^^^
+    30 │   experienceId,
+    31 │   partialView = 1,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/BokunWidget.tsx:47:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    45 │     const containerElement = widgetContainerRef.current;
+    46 │     if (!containerElement) {
+  > 47 │       if (process.env.NODE_ENV === "development") {
+       │           ^^^^^^^^^^^
+    48 │         console.log("[Bokun Widget Parent] Container ref not found.");
+    49 │       }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:53:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    51 │     }
+    52 │ 
+  > 53 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    54 │       console.log(
+    55 │         "[Bokun Widget Parent] useEffect triggered. Container element:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:65:12 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    63 │       onInit?: (iFrameEl: HTMLIFrameElement) => void;
+    64 │     } = {
+  > 65 │       log: process.env.NODE_ENV === "development", // Enable logs only in dev
+       │            ^^^^^^^^^^^
+    66 │       checkOrigin: false, // Be cautious in production
+    67 │       // Updated to use current callback names
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:69:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    67 │       // Updated to use current callback names
+    68 │       onMessage: (messageData: MessageData) => {
+  > 69 │         if (process.env.NODE_ENV === "development") {
+       │             ^^^^^^^^^^^
+    70 │           console.log(
+    71 │             "[Bokun Widget Parent] Received message from iframe (onMessage):",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:78:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    76 │       },
+    77 │       onResized: (sizeData: SizeData) => {
+  > 78 │         if (process.env.NODE_ENV === "development") {
+       │             ^^^^^^^^^^^
+    79 │           console.log(
+    80 │             "[Bokun Widget Parent] iframeResizer onResized:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:86:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    84 │       },
+    85 │       onInit: (iFrameEl: HTMLIFrameElement) => {
+  > 86 │         if (process.env.NODE_ENV === "development") {
+       │             ^^^^^^^^^^^
+    87 │           console.log(
+    88 │             "[Bokun Widget Parent] iframeResizer onInit: iframe is ready.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:111:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    109 │     }
+    110 │     windowWithResizer.iFrameResizer.onMessage = (messageData: MessageData) => {
+  > 111 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+    112 │         console.log(
+    113 │           "[Bokun Widget Parent] window.iFrameResizer.onMessage received:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:132:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    130 │         const catalogueIframe = containerElement.querySelector("iframe");
+    131 │         if (catalogueIframe && !catalogueIframe.dataset.resizerAttached) {
+  > 132 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    133 │             console.log(
+    134 │               "[Bokun Widget Parent] Found catalogue iframe, initializing iframeResizer:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:141:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    139 │             iframeResizer(options, catalogueIframe);
+    140 │             catalogueIframe.dataset.resizerAttached = "true"; // Mark as initialized
+  > 141 │             if (process.env.NODE_ENV === "development") {
+        │                 ^^^^^^^^^^^
+    142 │               console.log(
+    143 │                 "[Bokun Widget Parent] iframeResizer initialized for catalogue iframe.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:147:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    145 │             }
+    146 │           } catch (error) {
+  > 147 │             if (process.env.NODE_ENV === "development") {
+        │                 ^^^^^^^^^^^
+    148 │               console.error(
+    149 │                 "[Bokun Widget Parent] Error initializing iframeResizer for catalogue iframe:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:156:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    154 │           observerInstance.disconnect(); // Stop observing once the catalogue iframe is found and initialized
+    155 │         } else if (catalogueIframe?.dataset.resizerAttached) {
+  > 156 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    157 │             console.log(
+    158 │               "[Bokun Widget Parent] Catalogue iframe already has resizer attached.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:162:20 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    160 │           }
+    161 │           observerInstance.disconnect();
+  > 162 │         } else if (process.env.NODE_ENV === "development") {
+        │                    ^^^^^^^^^^^
+    163 │           console.log(
+    164 │             "[Bokun Widget Parent] Catalogue iframe not found yet in MutationObserver callback.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:170:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    168 │     );
+    169 │ 
+  > 170 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    171 │       console.log(
+    172 │         "[Bokun Widget Parent] Starting MutationObserver on container for catalogue iframe.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:188:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    186 │         // Check if the cart iframe exists and hasn't been initialized yet
+    187 │         if (cartIframe && !cartIframe.dataset.resizerAttached) {
+  > 188 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    189 │             console.log(
+    190 │               "[Bokun Widget Parent] Found cart iframe in body, initializing iframeResizer:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:197:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    195 │             iframeResizer(options, cartIframe);
+    196 │             cartIframe.dataset.resizerAttached = "true"; // Mark as initialized
+  > 197 │             if (process.env.NODE_ENV === "development") {
+        │                 ^^^^^^^^^^^
+    198 │               console.log(
+    199 │                 "[Bokun Widget Parent] iframeResizer initialized for cart iframe.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:205:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    203 │             // observerInstance.disconnect();
+    204 │           } catch (error) {
+  > 205 │             if (process.env.NODE_ENV === "development") {
+        │                 ^^^^^^^^^^^
+    206 │               console.error(
+    207 │                 "[Bokun Widget Parent] Error initializing iframeResizer for cart iframe:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:217:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    215 │     );
+    216 │ 
+  > 217 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    218 │       console.log(
+    219 │         "[Bokun Widget Parent] Starting MutationObserver on document body for cart iframe.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/BokunWidget.tsx:227:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    225 │     // Cleanup function
+    226 │     return () => {
+  > 227 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+    228 │         console.log(
+    229 │           "[Bokun Widget Parent] useEffect cleanup: Disconnecting observers.",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/ClientLayout.tsx:23:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    21 │ }
+    22 │ 
+  > 23 │ export default function ClientLayout({
+       │        ^^^^^^^
+    24 │   children,
+    25 │   initialLocale,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/ClientLayout.tsx:27:26 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    25 │   initialLocale,
+    26 │ }: ClientLayoutProps) {
+  > 27 │   const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
+       │                          ^^^^^^^^^^^
+    28 │   const isC15tEnabled = process.env.NEXT_PUBLIC_ENABLE_C15T !== "false";
+    29 │ 
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/ClientLayout.tsx:28:25 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    26 │ }: ClientLayoutProps) {
+    27 │   const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
+  > 28 │   const isC15tEnabled = process.env.NEXT_PUBLIC_ENABLE_C15T !== "false";
+       │                         ^^^^^^^^^^^
+    29 │ 
+    30 │   // Conditional wrapper for c15t consent provider
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/DynamicBokunWidget.tsx:29:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    27 │ };
+    28 │ 
+  > 29 │ export default function DynamicBokunWidget({
+       │        ^^^^^^^
+    30 │   experienceId,
+    31 │   partialView,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/DynamicContactDetails.tsx:25:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    23 │ );
+    24 │ 
+  > 25 │ export default function DynamicContactDetails() {
+       │        ^^^^^^^
+    26 │   return <ContactDetailsEnhanced />;
+    27 │ }
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/DynamicGallery.tsx:36:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    34 │ };
+    35 │ 
+  > 36 │ export default function DynamicGallery({
+       │        ^^^^^^^
+    37 │   images,
+    38 │   title,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/DynamicGoogleMap.tsx:6:18 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    5 │ export default function DynamicGoogleMap() {
+  > 6 │   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+      │                  ^^^^^^^^^^^
+    7 │ 
+    8 │   if (!apiKey) {
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/DynamicGoogleMap.tsx:5:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    3 │ import { GoogleMapsEmbed } from "@next/third-parties/google";
+    4 │ 
+  > 5 │ export default function DynamicGoogleMap() {
+      │        ^^^^^^^
+    6 │   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+    7 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/DynamicGoogleMap.tsx:31:7 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! The elements with this role can be changed to the following elements:
+    <section>
+  
+    29 │         hover:shadow-2xl
+    30 │       `}
+  > 31 │       role="region"
+       │       ^^^^^^^^^^^^^
+    32 │       aria-label="Pony Club Acheron location map - Springs of Acheron River, Glyki, Thesprotias, Greece"
+    33 │     >
+  
+  i For examples and more information, see WAI-ARIA Roles
+  
+
+components/Footer.tsx:7:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    5 │ import { useLanguage } from "@/contexts/language-context";
+    6 │ 
+  > 7 │ export default function Footer() {
+      │        ^^^^^^^
+    8 │   const { t } = useLanguage();
+    9 │   const mapsUrl =
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/HomePageContent.tsx:51:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    49 │ // Font is now imported from centralized fonts.ts file
+    50 │ 
+  > 51 │ export default function HomePageContent() {
+       │        ^^^^^^^
+    52 │   const { t, language } = useLanguage();
+    53 │   const isMobile = useIsMobile();
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/PackagesPageContent.tsx:12:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    10 │ }
+    11 │ 
+  > 12 │ export default function PackagesPageContent({
+       │        ^^^^^^^
+    13 │   isGreek,
+    14 │ }: PackagesPageContentProps) {
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/PageLayout.tsx:24:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    22 │ }
+    23 │ 
+  > 24 │ export default function PageLayout({ children }: PageLayoutProps) {
+       │        ^^^^^^^
+    25 │   const pathname = usePathname();
+    26 │   const [isHomePage, setIsHomePage] = useState(true);
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/PartyTownConfig.tsx:10:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     8 │  * improving main thread performance and Core Web Vitals scores
+     9 │  */
+  > 10 │ export default function PartyTownConfig() {
+       │        ^^^^^^^
+    11 │   return (
+    12 │     <Partytown
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/PartyTownConfig.tsx:14:14 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    12 │     <Partytown
+    13 │       // Enable debug mode in development
+  > 14 │       debug={process.env.NODE_ENV === "development"}
+       │              ^^^^^^^^^^^
+    15 │       // Forward specific functions that third-party scripts need access to
+    16 │       forward={[
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/StructuredData.tsx:5:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    3 │ }
+    4 │ 
+  > 5 │ export default function StructuredData({ data }: StructuredDataProps) {
+      │        ^^^^^^^
+    6 │   const jsonLd = Array.isArray(data) ? data : [data];
+    7 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/VintagePackageCard.tsx:45:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    43 │ }
+    44 │ 
+  > 45 │ export default function VintagePackageCard({
+       │        ^^^^^^^
+    46 │   title,
+    47 │   badge,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/BokunScripts.tsx:9:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     7 │ }
+     8 │ 
+   > 9 │ export default function BokunScripts({ locale }: BokunScriptsProps) {
+       │        ^^^^^^^
+    10 │   // Feature flag to conditionally disable Bokun scripts for performance testing
+    11 │   const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/BokunScripts.tsx:11:26 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+     9 │ export default function BokunScripts({ locale }: BokunScriptsProps) {
+    10 │   // Feature flag to conditionally disable Bokun scripts for performance testing
+  > 11 │   const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
+       │                          ^^^^^^^^^^^
+    12 │ 
+    13 │   // If Bokun is disabled, return null to skip script loading
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/BokunScripts.tsx:15:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    13 │   // If Bokun is disabled, return null to skip script loading
+    14 │   if (!isBokunEnabled) {
+  > 15 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    16 │       console.log(
+    17 │         "[Bokun] Scripts disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/BokunStyles.tsx:5:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    3 │ import { useEffect, useState } from "react";
+    4 │ 
+  > 5 │ export default function BokunStyles() {
+      │        ^^^^^^^
+    6 │   const [nonce, setNonce] = useState("");
+    7 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/BookingButton.tsx:23:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    21 │ }
+    22 │ 
+  > 23 │ export default function BookingButton({
+       │        ^^^^^^^
+    24 │   id,
+    25 │   dataSrc,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/BookingButton.tsx:99:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+     97 │     }
+     98 │ 
+   > 99 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    100 │       console.log(
+    101 │         `[BookingButton] ${trackingLabel} clicked - Package: ${packageName}, Price: ${packagePrice}, Conversion Label: ${adsConversionLabel}`,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:192:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    190 │         console.log("[ConsentBridge] Updated Google Consent Mode v2:", {
+    191 │           analytics_storage: analyticsConsent ? "granted" : "denied",
+  > 192 │           ad_storage: marketingConsent ? "granted" : "denied",
+        │           ^^^^^^^^^^
+    193 │           ad_user_data: marketingConsent ? "granted" : "denied",
+    194 │           ad_personalization: marketingConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:21:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    19 │ // Note: Using 'as any' for consent categories due to c15t library type constraints
+    20 │ 
+  > 21 │ export default function ConsentBridge() {
+       │        ^^^^^^^
+    22 │   const { consents, hasConsentFor } = useConsentManager();
+    23 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/ConsentBridge.tsx:258:17 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    256 │  * This maintains compatibility with the existing hasAnalyticsConsent() function
+    257 │  */
+  > 258 │ export function checkConsentStatus(): LegacyConsentStatus {
+        │                 ^^^^^^^^^^^^^^^^^^
+    259 │   try {
+    260 │     const consentCookie = document.cookie
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/client/ConsentBridge.tsx:287:17 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    285 │  * This maintains compatibility with the existing hasAnalyticsConsent() function
+    286 │  */
+  > 287 │ export function hasAnalyticsConsent(): boolean {
+        │                 ^^^^^^^^^^^^^^^^^^^
+    288 │   return checkConsentStatus().analytics;
+    289 │ }
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/client/ConsentBridge.tsx:294:17 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    292 │  * Utility function to check if marketing consent is granted
+    293 │  */
+  > 294 │ export function hasMarketingConsent(): boolean {
+        │                 ^^^^^^^^^^^^^^^^^^^
+    295 │   return checkConsentStatus().marketing;
+    296 │ }
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/client/ConsentBridge.tsx:98:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+     96 │       }
+     97 │ 
+   > 98 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+     99 │         console.log(
+    100 │           `[ConsentBridge] Cleaned up cookies for revoked ${category} consent`,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:122:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    120 │       document.cookie = `consent=${cookieValue}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+    121 │ 
+  > 122 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+    123 │         console.log("[ConsentBridge] Updated legacy cookie:", legacyConsent);
+    124 │       }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:143:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    141 │       }
+    142 │     } catch (error) {
+  > 143 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+    144 │         console.warn("[ConsentBridge] Error reading legacy cookie:", error);
+    145 │       }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:181:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    179 │     if (typeof window !== "undefined" && window.gtag) {
+    180 │       window.gtag("consent", "update", {
+  > 181 │         analytics_storage: analyticsConsent ? "granted" : "denied",
+        │         ^^^^^^^^^^^^^^^^^
+    182 │         ad_storage: marketingConsent ? "granted" : "denied",
+    183 │         ad_user_data: marketingConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:182:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    180 │       window.gtag("consent", "update", {
+    181 │         analytics_storage: analyticsConsent ? "granted" : "denied",
+  > 182 │         ad_storage: marketingConsent ? "granted" : "denied",
+        │         ^^^^^^^^^^
+    183 │         ad_user_data: marketingConsent ? "granted" : "denied",
+    184 │         ad_personalization: marketingConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:183:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    181 │         analytics_storage: analyticsConsent ? "granted" : "denied",
+    182 │         ad_storage: marketingConsent ? "granted" : "denied",
+  > 183 │         ad_user_data: marketingConsent ? "granted" : "denied",
+        │         ^^^^^^^^^^^^
+    184 │         ad_personalization: marketingConsent ? "granted" : "denied",
+    185 │         functionality_storage: "granted", // Usually always granted for necessary functionality
+  
+
+components/client/ConsentBridge.tsx:184:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    182 │         ad_storage: marketingConsent ? "granted" : "denied",
+    183 │         ad_user_data: marketingConsent ? "granted" : "denied",
+  > 184 │         ad_personalization: marketingConsent ? "granted" : "denied",
+        │         ^^^^^^^^^^^^^^^^^^
+    185 │         functionality_storage: "granted", // Usually always granted for necessary functionality
+    186 │         personalization_storage: analyticsConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:185:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    183 │         ad_user_data: marketingConsent ? "granted" : "denied",
+    184 │         ad_personalization: marketingConsent ? "granted" : "denied",
+  > 185 │         functionality_storage: "granted", // Usually always granted for necessary functionality
+        │         ^^^^^^^^^^^^^^^^^^^^^
+    186 │         personalization_storage: analyticsConsent ? "granted" : "denied",
+    187 │       });
+  
+
+components/client/ConsentBridge.tsx:186:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    184 │         ad_personalization: marketingConsent ? "granted" : "denied",
+    185 │         functionality_storage: "granted", // Usually always granted for necessary functionality
+  > 186 │         personalization_storage: analyticsConsent ? "granted" : "denied",
+        │         ^^^^^^^^^^^^^^^^^^^^^^^
+    187 │       });
+    188 │ 
+  
+
+components/client/ConsentBridge.tsx:189:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    187 │       });
+    188 │ 
+  > 189 │       if (process.env.NODE_ENV === "development") {
+        │           ^^^^^^^^^^^
+    190 │         console.log("[ConsentBridge] Updated Google Consent Mode v2:", {
+    191 │           analytics_storage: analyticsConsent ? "granted" : "denied",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:191:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    189 │       if (process.env.NODE_ENV === "development") {
+    190 │         console.log("[ConsentBridge] Updated Google Consent Mode v2:", {
+  > 191 │           analytics_storage: analyticsConsent ? "granted" : "denied",
+        │           ^^^^^^^^^^^^^^^^^
+    192 │           ad_storage: marketingConsent ? "granted" : "denied",
+    193 │           ad_user_data: marketingConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:193:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    191 │           analytics_storage: analyticsConsent ? "granted" : "denied",
+    192 │           ad_storage: marketingConsent ? "granted" : "denied",
+  > 193 │           ad_user_data: marketingConsent ? "granted" : "denied",
+        │           ^^^^^^^^^^^^
+    194 │           ad_personalization: marketingConsent ? "granted" : "denied",
+    195 │           functionality_storage: "granted",
+  
+
+components/client/ConsentBridge.tsx:194:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    192 │           ad_storage: marketingConsent ? "granted" : "denied",
+    193 │           ad_user_data: marketingConsent ? "granted" : "denied",
+  > 194 │           ad_personalization: marketingConsent ? "granted" : "denied",
+        │           ^^^^^^^^^^^^^^^^^^
+    195 │           functionality_storage: "granted",
+    196 │           personalization_storage: analyticsConsent ? "granted" : "denied",
+  
+
+components/client/ConsentBridge.tsx:195:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    193 │           ad_user_data: marketingConsent ? "granted" : "denied",
+    194 │           ad_personalization: marketingConsent ? "granted" : "denied",
+  > 195 │           functionality_storage: "granted",
+        │           ^^^^^^^^^^^^^^^^^^^^^
+    196 │           personalization_storage: analyticsConsent ? "granted" : "denied",
+    197 │         });
+  
+
+components/client/ConsentBridge.tsx:196:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    194 │           ad_personalization: marketingConsent ? "granted" : "denied",
+    195 │           functionality_storage: "granted",
+  > 196 │           personalization_storage: analyticsConsent ? "granted" : "denied",
+        │           ^^^^^^^^^^^^^^^^^^^^^^^
+    197 │         });
+    198 │       }
+  
+
+components/client/ConsentBridge.tsx:205:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    203 │     window.dispatchEvent(new Event("storage"));
+    204 │ 
+  > 205 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    206 │       console.log("[ConsentBridge] Synced consent to legacy format:", {
+    207 │         analytics: analyticsConsent,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:231:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    229 │         c15tMarketing !== legacyConsent.marketing
+    230 │       ) {
+  > 231 │         if (process.env.NODE_ENV === "development") {
+        │             ^^^^^^^^^^^
+    232 │           console.log(
+    233 │             "[ConsentBridge] Syncing legacy consent to c15t:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentBridge.tsx:271:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    269 │     }
+    270 │   } catch (error) {
+  > 271 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    272 │       console.warn("[ConsentBridge] Error checking consent status:", error);
+    273 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentGate.tsx:22:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    20 │  * This ensures third-party scripts and components only load after consent.
+    21 │  */
+  > 22 │ export default function ConsentGate({
+       │        ^^^^^^^
+    23 │   children,
+    24 │   preference,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/ConsentInitializer.tsx:37:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    36 │           ${
+  > 37 │             process.env.NODE_ENV === "development"
+       │             ^^^^^^^^^^^
+    38 │               ? `console.log('[ConsentInitializer] Default consent state set to denied for all categories except security');`
+    39 │               : ""
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/ConsentInitializer.tsx:15:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    13 │  * update these values using gtag('consent', 'update', {...}).
+    14 │  */
+  > 15 │ export default function ConsentInitializer() {
+       │        ^^^^^^^
+    16 │   return (
+    17 │     <Script
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/ConsentProvider.tsx:17:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    15 │  * analytics system.
+    16 │  */
+  > 17 │ export default function ConsentProvider({ children }: ConsentProviderProps) {
+       │        ^^^^^^^
+    18 │   // Note: language is available but not currently used in this component
+    19 │   // const { language } = useLanguage();
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/CookieConsentBanner.tsx:11:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     9 │  * that matches the Pony Club vintage design system.
+    10 │  */
+  > 11 │ export default function CookieConsentBanner() {
+       │        ^^^^^^^
+    12 │   // Note: language is available but not currently used in this component
+    13 │   // const { language } = useLanguage();
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/EngagementTracker.tsx:12:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    10 │  * Now uses GTM events instead of direct gtag calls
+    11 │  */
+  > 12 │ export default function EngagementTracker() {
+       │        ^^^^^^^
+    13 │   useEffect(() => {
+    14 │     // Initialize scroll depth tracking with GTM
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/EngagementTracker.tsx:47:13 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    45 │           trackGTMEvent({
+    46 │             event: "time_on_page",
+  > 47 │             time_threshold: threshold,
+       │             ^^^^^^^^^^^^^^
+    48 │             time_threshold_label: `${threshold}s`,
+    49 │           });
+  
+
+components/client/EngagementTracker.tsx:48:13 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    46 │             event: "time_on_page",
+    47 │             time_threshold: threshold,
+  > 48 │             time_threshold_label: `${threshold}s`,
+       │             ^^^^^^^^^^^^^^^^^^^^
+    49 │           });
+    50 │         }
+  
+
+components/client/EngagementTracker.tsx:30:13 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    28 │           trackGTMEvent({
+    29 │             event: "scroll_depth",
+  > 30 │             scroll_depth: depth,
+       │             ^^^^^^^^^^^^
+    31 │             scroll_threshold: `${depth}%`,
+    32 │           });
+  
+
+components/client/EngagementTracker.tsx:31:13 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    29 │             event: "scroll_depth",
+    30 │             scroll_depth: depth,
+  > 31 │             scroll_threshold: `${depth}%`,
+       │             ^^^^^^^^^^^^^^^^
+    32 │           });
+    33 │         }
+  
+
+components/client/GoogleAnalytics.tsx:16:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    14 │  * It should be wrapped with ConsentGate in the layout to ensure consent-based loading.
+    15 │  */
+  > 16 │ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
+       │        ^^^^^^^
+    17 │   if (process.env.NODE_ENV === "development") {
+    18 │     console.log("[GA] Google Analytics component loaded with ID:", gaId);
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/GoogleAnalytics.tsx:17:7 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    15 │  */
+    16 │ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
+  > 17 │   if (process.env.NODE_ENV === "development") {
+       │       ^^^^^^^^^^^
+    18 │     console.log("[GA] Google Analytics component loaded with ID:", gaId);
+    19 │   }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/GoogleReviews.tsx:7:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    5 │ import "react-google-reviews/dist/index.css";
+    6 │ 
+  > 7 │ export default function GoogleReviews() {
+      │        ^^^^^^^
+    8 │   const featurableWidgetId = "e22fc7c6-97ba-49d1-8391-7b5f236ffb84";
+    9 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/PhoneLink.tsx:17:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    15 │ }
+    16 │ 
+  > 17 │ export default function PhoneLink({
+       │        ^^^^^^^
+    18 │   phone,
+    19 │   children,
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/PhoneLink.tsx:76:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    74 │       }
+    75 │ 
+  > 76 │       if (process.env.NODE_ENV === "development") {
+       │           ^^^^^^^^^^^
+    77 │         console.log(
+    78 │           `[PhoneLink] Phone click tracked: ${phone} (${deviceType}), Conversion Label: ${phoneConversionLabels[deviceType]}`,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/client/PriceListButton.tsx:24:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    22 │ }
+    23 │ 
+  > 24 │ export default function PriceListButton({ text }: PriceListButtonProps) {
+       │        ^^^^^^^
+    25 │   const [isPriceListOpen, setIsPriceListOpen] = useState(false);
+    26 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/client/PriceListButton.tsx:29:7 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    27 │   return (
+    28 │     <>
+  > 29 │       <button
+       │       ^^^^^^^
+  > 30 │         onClick={() => setIsPriceListOpen(true)}
+        ...
+  > 42 │         aria-label="Open price list"
+  > 43 │       >
+       │       ^
+    44 │         {text}
+    45 │       </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+components/contact-details-enhanced.tsx:48:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    46 │ }
+    47 │ 
+  > 48 │ export default function ContactDetailsEnhanced() {
+       │        ^^^^^^^
+    49 │   const { t } = useLanguage();
+    50 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/desktop-menu.tsx:11:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     9 │ import { useLanguage } from "@/contexts/language-context";
+    10 │ 
+  > 11 │ export default function DesktopMenu() {
+       │        ^^^^^^^
+    12 │   const { t, language, setLanguage } = useLanguage();
+    13 │   const pathname = usePathname();
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/dev/AnalyticsStatus.tsx:46:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    44 │         value: process.env.NEXT_PUBLIC_ENABLE_BOKUN,
+    45 │         required: false,
+  > 46 │         status: process.env.NEXT_PUBLIC_ENABLE_BOKUN ? "set" : "missing",
+       │                 ^^^^^^^^^^^
+    47 │       },
+    48 │       {
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:17:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    15 │ }
+    16 │ 
+  > 17 │ export default function AnalyticsStatus({
+       │        ^^^^^^^
+    18 │   className = "",
+    19 │ }: AnalyticsStatusProps) {
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/dev/AnalyticsStatus.tsx:127:23 lint/style/noNestedTernary ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Do not nest ternary expressions.
+  
+    125 │                   check.status === "set"
+    126 │                     ? "text-green-600"
+  > 127 │                     : check.required
+        │                       ^^^^^^^^^^^^^^
+  > 128 │                       ? "text-red-600"
+  > 129 │                       : "text-gray-500"
+        │                       ^^^^^^^^^^^^^^^^^
+    130 │                 }
+    131 │               >
+  
+  i Nesting ternary expressions can make code more difficult to understand.
+  
+  i Convert nested ternary expression into if-else statements or separate the conditions to make the logic easier to understand.
+  
+
+components/dev/AnalyticsStatus.tsx:28:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    26 │   useEffect(() => {
+    27 │     // Only show in development mode
+  > 28 │     if (process.env.NODE_ENV !== "development") {
+       │         ^^^^^^^^^^^
+    29 │       return;
+    30 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:37:16 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    35 │         key: "NEXT_PUBLIC_GTM_ID",
+    36 │         label: "Google Tag Manager ID",
+  > 37 │         value: process.env.NEXT_PUBLIC_GTM_ID,
+       │                ^^^^^^^^^^^
+    38 │         required: true,
+    39 │         status: process.env.NEXT_PUBLIC_GTM_ID ? "set" : "missing",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:39:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    37 │         value: process.env.NEXT_PUBLIC_GTM_ID,
+    38 │         required: true,
+  > 39 │         status: process.env.NEXT_PUBLIC_GTM_ID ? "set" : "missing",
+       │                 ^^^^^^^^^^^
+    40 │       },
+    41 │       {
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:44:16 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    42 │         key: "NEXT_PUBLIC_ENABLE_BOKUN",
+    43 │         label: "Bokun Feature Flag",
+  > 44 │         value: process.env.NEXT_PUBLIC_ENABLE_BOKUN,
+       │                ^^^^^^^^^^^
+    45 │         required: false,
+    46 │         status: process.env.NEXT_PUBLIC_ENABLE_BOKUN ? "set" : "missing",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:51:16 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    49 │         key: "NEXT_PUBLIC_ENABLE_C15T",
+    50 │         label: "C15T Consent Feature Flag",
+  > 51 │         value: process.env.NEXT_PUBLIC_ENABLE_C15T,
+       │                ^^^^^^^^^^^
+    52 │         required: false,
+    53 │         status: process.env.NEXT_PUBLIC_ENABLE_C15T ? "set" : "missing",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:53:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    51 │         value: process.env.NEXT_PUBLIC_ENABLE_C15T,
+    52 │         required: false,
+  > 53 │         status: process.env.NEXT_PUBLIC_ENABLE_C15T ? "set" : "missing",
+       │                 ^^^^^^^^^^^
+    54 │       },
+    55 │     ];
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:82:7 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    81 │   // Don't render anything in production or if not visible
+  > 82 │   if (process.env.NODE_ENV !== "development" || !isVisible) {
+       │       ^^^^^^^^^^^
+    83 │     return null;
+    84 │   }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+components/dev/AnalyticsStatus.tsx:151:11 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    149 │         {/* Quick Debug Button */}
+    150 │         <div className="border-t pt-2">
+  > 151 │           <button
+        │           ^^^^^^^
+  > 152 │             onClick={() => {
+         ...
+  > 157 │             className="text-blue-600 hover:text-blue-800 underline"
+  > 158 │           >
+        │           ^
+    159 │             Run Debug Check (Console)
+    160 │           </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+components/hamburger-menu.tsx:11:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     9 │ import { useLanguage } from "@/contexts/language-context";
+    10 │ 
+  > 11 │ export default function HamburgerMenu() {
+       │        ^^^^^^^
+    12 │   const { t, language, setLanguage } = useLanguage();
+    13 │   const [isOpen, setIsOpen] = useState(false);
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/icons/HikingIcon.tsx:86:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    84 │ };
+    85 │ 
+  > 86 │ export default HikingIcon;
+       │        ^^^^^^^
+    87 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/icons/HikingIcon.tsx:86:16 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    84 │ };
+    85 │ 
+  > 86 │ export default HikingIcon;
+       │                ^^^^^^^^^^
+    87 │ 
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/icons/HikingIcon.tsx:15:5 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    13 │ }) => {
+    14 │   return (
+  > 15 │     <svg
+       │     ^^^^
+  > 16 │       width={size}
+        ...
+  > 22 │       aria-label="Hiking activity"
+  > 23 │     >
+       │     ^
+    24 │       {/* Mountains */}
+    25 │       <path
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+components/icons/HorseRidingIcon.tsx:15:5 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    13 │ }) => {
+    14 │   return (
+  > 15 │     <svg
+       │     ^^^^
+  > 16 │       width={size}
+        ...
+  > 22 │       aria-label="Horse riding activity"
+  > 23 │     >
+       │     ^
+    24 │       {/* Horse head and neck */}
+    25 │       <path
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+components/icons/HorseRidingIcon.tsx:88:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    86 │ };
+    87 │ 
+  > 88 │ export default HorseRidingIcon;
+       │        ^^^^^^^
+    89 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/icons/HorseRidingIcon.tsx:88:16 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    86 │ };
+    87 │ 
+  > 88 │ export default HorseRidingIcon;
+       │                ^^^^^^^^^^^^^^^
+    89 │ 
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/icons/KayakingIcon.tsx:15:5 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    13 │ }) => {
+    14 │   return (
+  > 15 │     <svg
+       │     ^^^^
+  > 16 │       width={size}
+        ...
+  > 22 │       aria-label="Kayaking activity"
+  > 23 │     >
+       │     ^
+    24 │       {/* Kayak hull */}
+    25 │       <path
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+components/icons/KayakingIcon.tsx:90:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    88 │ };
+    89 │ 
+  > 90 │ export default KayakingIcon;
+       │        ^^^^^^^
+    91 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/icons/KayakingIcon.tsx:90:16 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    88 │ };
+    89 │ 
+  > 90 │ export default KayakingIcon;
+       │                ^^^^^^^^^^^^
+    91 │ 
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/icons/RaftingIcon.tsx:15:5 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    13 │ }) => {
+    14 │   return (
+  > 15 │     <svg
+       │     ^^^^
+  > 16 │       width={size}
+        ...
+  > 22 │       aria-label="Rafting activity"
+  > 23 │     >
+       │     ^
+    24 │       {/* Raft base */}
+    25 │       <path
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+components/icons/RaftingIcon.tsx:57:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    55 │ };
+    56 │ 
+  > 57 │ export default RaftingIcon;
+       │        ^^^^^^^
+    58 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/icons/RaftingIcon.tsx:57:16 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    55 │ };
+    56 │ 
+  > 57 │ export default RaftingIcon;
+       │                ^^^^^^^^^^^
+    58 │ 
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/responsive-navigation.tsx:8:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     6 │ import HamburgerMenu from "./hamburger-menu.tsx";
+     7 │ 
+   > 8 │ export default function ResponsiveNavigation() {
+       │        ^^^^^^^
+     9 │   // Use the consistent media query hook for mobile/tablet detection
+    10 │   const isMobileOrTablet = useIsMobileOrTablet();
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/site-header.tsx:8:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     6 │ import { OptimizedImage } from "@/components/ui/OptimizedImage";
+     7 │ 
+   > 8 │ export default function SiteHeader() {
+       │        ^^^^^^^
+     9 │   return (
+    10 │     <header
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/ui/Gallery.tsx:58:11 lint/a11y/useKeyWithClickEvents ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Enforce to have the onClick mouse event with the onKeyUp, the onKeyDown, or the onKeyPress keyboard event.
+  
+    56 │       >
+    57 │         {images.map((image, index) => (
+  > 58 │           <div
+       │           ^^^^
+  > 59 │             key={image.src}
+        ...
+  > 65 │             onClick={() => setSelectedImage(index)}
+  > 66 │           >
+       │           ^
+    67 │             <GalleryImage
+    68 │               src={image.src}
+  
+  i Actions triggered using mouse events should have corresponding keyboard events to account for keyboard-only navigation.
+  
+
+components/ui/Gallery.tsx:123:17 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    121 │                 aria-label="Close image"
+    122 │               >
+  > 123 │                 <svg
+        │                 ^^^^
+  > 124 │                   xmlns="http://www.w3.org/2000/svg"
+         ...
+  > 132 │                   strokeLinejoin="round"
+  > 133 │                 >
+        │                 ^
+    134 │                   <line x1="18" y1="6" x2="6" y2="18" />
+    135 │                   <line x1="6" y1="6" x2="18" y2="18" />
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+components/ui/Gallery.tsx:54:9 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! The elements with this role can be changed to the following elements:
+    <section>
+  
+    52 │           lg:grid-cols-3
+    53 │         `}
+  > 54 │         role="region"
+       │         ^^^^^^^^^^^^^
+    55 │         aria-label={ariaLabel}
+    56 │       >
+  
+  i For examples and more information, see WAI-ARIA Roles
+  
+
+components/ui/Gallery.tsx:58:11 lint/a11y/noStaticElementInteractions ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Static Elements should not be interactive.
+  
+    56 │       >
+    57 │         {images.map((image, index) => (
+  > 58 │           <div
+       │           ^^^^
+  > 59 │             key={image.src}
+        ...
+  > 65 │             onClick={() => setSelectedImage(index)}
+  > 66 │           >
+       │           ^
+    67 │             <GalleryImage
+    68 │               src={image.src}
+  
+  i To add interactivity such as a mouse or key event listener to a static element, give the element an appropriate role value.
+  
+
+components/ui/OptimizedImage.tsx:204:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+    202 │ }
+    203 │ 
+  > 204 │ export default OptimizedImage;
+        │        ^^^^^^^
+    205 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+components/ui/OptimizedImage.tsx:204:16 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    202 │ }
+    203 │ 
+  > 204 │ export default OptimizedImage;
+        │                ^^^^^^^^^^^^^^
+    205 │ 
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/ui/VintagePriceListPopup.tsx:289:17 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    288 │                 {/* Close Button */}
+  > 289 │                 <button
+        │                 ^^^^^^^
+  > 290 │                   onClick={onClose}
+         ...
+  > 297 │                   aria-label="Close"
+  > 298 │                 >
+        │                 ^
+    299 │                   <X size={22} />
+    300 │                 </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+components/ui/VintagePriceListPopup.tsx:377:17 lint/a11y/useButtonType ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Provide an explicit type prop for the button element.
+  
+    376 │                 {/* Close Button */}
+  > 377 │                 <button
+        │                 ^^^^^^^
+  > 378 │                   onClick={onClose}
+  > 379 │                   className="close-button"
+  > 380 │                   aria-label="Close price list"
+  > 381 │                 >
+        │                 ^
+    382 │                   {t.priceListPopup.close}
+    383 │                 </button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+components/ui/dialog.tsx:156:3 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    155 │ export {
+  > 156 │   Dialog,
+        │   ^^^^^^
+    157 │   DialogPortal,
+    158 │   DialogOverlay,
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/ui/dialog.tsx:157:3 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    155 │ export {
+    156 │   Dialog,
+  > 157 │   DialogPortal,
+        │   ^^^^^^^^^^^^
+    158 │   DialogOverlay,
+    159 │   DialogClose,
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/ui/dialog.tsx:159:3 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    157 │   DialogPortal,
+    158 │   DialogOverlay,
+  > 159 │   DialogClose,
+        │   ^^^^^^^^^^^
+    160 │   DialogTrigger,
+    161 │   DialogContent,
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/ui/dialog.tsx:160:3 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    158 │   DialogOverlay,
+    159 │   DialogClose,
+  > 160 │   DialogTrigger,
+        │   ^^^^^^^^^^^^^
+    161 │   DialogContent,
+    162 │   DialogHeader,
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+components/ui/grid-pattern.tsx:58:9 lint/a11y/noSvgWithoutTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Alternative text title element cannot be empty
+  
+    56 │       <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${id})`} />
+    57 │       {squares && (
+  > 58 │         <svg x={x} y={y} className="overflow-visible">
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    59 │           {squares.map(([x, y]) => (
+    60 │             <rect
+  
+  i For accessibility purposes, SVGs should have an alternative text, provided via title element. If the svg element has role="img", you should add the aria-label or aria-labelledby attribute.
+  
+
+contexts/language-context.tsx:84:17 lint/style/useComponentExportOnlyModules ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Exporting a non-component with components is not allowed.
+  
+    82 │ }
+    83 │ 
+  > 84 │ export function useLanguage() {
+       │                 ^^^^^^^^^^^
+    85 │   const context = useContext(LanguageContext);
+    86 │   if (context === undefined) {
+  
+  i Fast Refresh only works when a file only exports components.
+  
+  i Consider separating non-component exports into a new file.
+  
+  i If it is a component, it may not be following the variable naming conventions.
+  
+
+hooks/use-bokun-init.ts:19:28 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    18 │   useEffect(() => {
+  > 19 │     const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKun !== "false";
+       │                            ^^^^^^^^^^^
+    20 │ 
+    21 │     if (!isBokunEnabled) {
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:22:11 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    21 │     if (!isBokunEnabled) {
+  > 22 │       if (process.env.NODE_ENV === "development") {
+       │           ^^^^^^^^^^^
+    23 │         console.log(
+    24 │           "[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:36:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    34 │       // Check if Bokun script is loaded
+    35 │       if (window.BokunWidgets) {
+  > 36 │         if (process.env.NODE_ENV === "development") {
+       │             ^^^^^^^^^^^
+    37 │           console.log(
+    38 │             "[Bokun Init] BokunWidgets found, checking for elements...",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:50:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    48 │         const widgets = document.querySelectorAll(".bokunWidget, .bokunButton");
+    49 │         if (widgets.length === 0) {
+  > 50 │           if (process.env.NODE_ENV === "development") {
+       │               ^^^^^^^^^^^
+    51 │             console.log(
+    52 │               "[Bokun Init] No Bokun elements found, skipping initialization",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:59:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    57 │         }
+    58 │ 
+  > 59 │         if (process.env.NODE_ENV === "development") {
+       │             ^^^^^^^^^^^
+    60 │           console.log(
+    61 │             `[Bokun Init] Found ${widgets.length} Bokun elements to initialize`,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:71:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    69 │             window.BokunWidgets.origin
+    70 │           ) {
+  > 71 │             if (process.env.NODE_ENV === "development") {
+       │                 ^^^^^^^^^^^
+    72 │               console.log("[Bokun Init] BokunWidgets already initialized");
+    73 │             }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:100:17 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+     98 │             if (bookingChannelUuid) {
+     99 │               window.BokunWidgets.init({
+  > 100 │                 bookingChannelUUID: bookingChannelUuid,
+        │                 ^^^^^^^^^^^^^^^^^^
+    101 │                 origin: "https://widgets.bokun.io",
+    102 │               });
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+hooks/use-bokun-init.ts:103:19 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    101 │                 origin: "https://widgets.bokun.io",
+    102 │               });
+  > 103 │               if (process.env.NODE_ENV === "development") {
+        │                   ^^^^^^^^^^^
+    104 │                 console.log(
+    105 │                   "[Bokun Init] Successfully initialized BokunWidgets with bookingChannelUUID:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:113:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    111 │               return true;
+    112 │             }
+  > 113 │             if (process.env.NODE_ENV === "development") {
+        │                 ^^^^^^^^^^^
+    114 │               console.warn(
+    115 │                 "[Bokun Init] Could not find bookingChannelUUID in script src",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:120:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    118 │             return false;
+    119 │           }
+  > 120 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    121 │             console.warn("[Bokun Init] BokunWidgets.init method not available");
+    122 │           }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:125:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    123 │           return false;
+    124 │         } catch (error) {
+  > 125 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    126 │             console.error(
+    127 │               "[Bokun Init] Error initializing Bokun widgets:",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:138:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    136 │       initAttempts.current++;
+    137 │       if (initAttempts.current < maxAttempts) {
+  > 138 │         if (process.env.NODE_ENV === "development") {
+        │             ^^^^^^^^^^^
+    139 │           console.log(
+    140 │             `[Bokun Init] BokunWidgets not ready yet, attempt ${initAttempts.current}/${maxAttempts}`,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:144:18 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    142 │         }
+    143 │         setTimeout(initializeBokun, retryDelay);
+  > 144 │       } else if (process.env.NODE_ENV === "development") {
+        │                  ^^^^^^^^^^^
+    145 │         console.warn(
+    146 │           "[Bokun Init] Max attempts reached, Bokun widgets may not be available",
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:170:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    168 │           // Try calling reinit without parameters first (safer)
+    169 │           window.BokunWidgets.reinit();
+  > 170 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    171 │             console.log("[Bokun Init] Manual reinit called successfully");
+    172 │           }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:178:15 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    176 │           // Try scan method as alternative
+    177 │           window.BokunWidgets.scan();
+  > 178 │           if (process.env.NODE_ENV === "development") {
+        │               ^^^^^^^^^^^
+    179 │             console.log("[Bokun Init] Manual scan called successfully");
+    180 │           }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+hooks/use-bokun-init.ts:184:13 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    182 │         }
+    183 │       } catch (error) {
+  > 184 │         if (process.env.NODE_ENV === "development") {
+        │             ^^^^^^^^^^^
+    185 │           console.error("[Bokun Init] Error during manual reinit:", error);
+    186 │         }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:59:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    57 │   // Check consent first
+    58 │   if (!hasAnalyticsConsent()) {
+  > 59 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    60 │       console.debug("[GTM] Event blocked - no analytics consent:", eventData);
+    61 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:40:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    38 │     }
+    39 │   } catch (error) {
+  > 40 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    41 │       console.warn("[Analytics] Error reading consent:", error);
+    42 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:52:14 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    50 │  * Pushes events to the dataLayer via sendGTMEvent
+    51 │  */
+  > 52 │ export const trackGTMEvent = (eventData: Record<string, unknown>) => {
+       │              ^^^^^^^^^^^^^
+    53 │   if (typeof window === "undefined") {
+    54 │     return;
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+lib/analytics.ts:66:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    65 │   try {
+  > 66 │     if (process.env.NODE_ENV === "development") {
+       │         ^^^^^^^^^^^
+    67 │       console.log("[GTM]", eventData);
+    68 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:91:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    89 │   trackGTMEvent({
+    90 │     event: "booking_click",
+  > 91 │     package_name: packageName,
+       │     ^^^^^^^^^^^^
+    92 │     value: packagePrice,
+    93 │     currency: "EUR",
+  
+
+lib/analytics.ts:94:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    92 │     value: packagePrice,
+    93 │     currency: "EUR",
+  > 94 │     source_page: sourcePage,
+       │     ^^^^^^^^^^^
+    95 │   });
+    96 │ };
+  
+
+lib/analytics.ts:109:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    107 │   trackGTMEvent({
+    108 │     event: "phone_click",
+  > 109 │     phone_number: phoneNumber,
+        │     ^^^^^^^^^^^^
+    110 │     device_type: device,
+    111 │   });
+  
+
+lib/analytics.ts:110:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    108 │     event: "phone_click",
+    109 │     phone_number: phoneNumber,
+  > 110 │     device_type: device,
+        │     ^^^^^^^^^^^
+    111 │   });
+    112 │ };
+  
+
+lib/analytics.ts:137:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    135 │   // Check consent first
+    136 │   if (!hasAnalyticsConsent()) {
+  > 137 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    138 │       console.debug("[GTM] Ads conversion blocked - no analytics consent:", {
+    139 │         conversionLabel,
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:150:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    148 │     const conversionData = {
+    149 │       event: "ads_conversion",
+  > 150 │       conversion_label: conversionLabel,
+        │       ^^^^^^^^^^^^^^^^
+    151 │       value: value || 0,
+    152 │       currency,
+  
+
+lib/analytics.ts:153:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    151 │       value: value || 0,
+    152 │       currency,
+  > 153 │       transaction_id: transactionId,
+        │       ^^^^^^^^^^^^^^
+    154 │     };
+    155 │ 
+  
+
+lib/analytics.ts:156:9 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    154 │     };
+    155 │ 
+  > 156 │     if (process.env.NODE_ENV === "development") {
+        │         ^^^^^^^^^^^
+    157 │       console.log("[GTM] Ads Conversion:", conversionData);
+    158 │     }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:168:3 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    166 │ // Type definition for analytics debug utilities
+    167 │ interface AnalyticsDebug {
+  > 168 │   trackGTMEvent: typeof trackGTMEvent;
+        │   ^^^^^^^^^^^^^
+    169 │   trackBookingClick: typeof trackBookingClick;
+    170 │   trackPhoneClick: typeof trackPhoneClick;
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+lib/analytics.ts:191:38 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    189 │  * Available in browser console for testing
+    190 │  */
+  > 191 │ if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+        │                                      ^^^^^^^^^^^
+    192 │   // Expose GTM analytics functions for manual testing
+    193 │   const analyticsDebug: AnalyticsDebug = {
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/analytics.ts:194:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    192 │   // Expose GTM analytics functions for manual testing
+    193 │   const analyticsDebug: AnalyticsDebug = {
+  > 194 │     trackGTMEvent,
+        │     ^^^^^^^^^^^^^
+    195 │     trackBookingClick,
+    196 │     trackPhoneClick,
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+lib/analytics.ts:230:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    228 │     checkEnvironment: () => {
+    229 │       console.log("GTM Analytics Environment Check:", {
+  > 230 │         GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+        │         ^^^^^^
+    231 │         hasConsent: hasAnalyticsConsent(),
+    232 │       });
+  
+
+lib/analytics.ts:230:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    228 │     checkEnvironment: () => {
+    229 │       console.log("GTM Analytics Environment Check:", {
+  > 230 │         GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+        │                 ^^^^^^^^^^^
+    231 │         hasConsent: hasAnalyticsConsent(),
+    232 │       });
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/image-optimization.ts:104:17 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    102 │  * Generate a simple blur data URL for placeholder
+    103 │  */
+  > 104 │ export function generateBlurDataURL(): string {
+        │                 ^^^^^^^^^^^^^^^^^^^
+    105 │   // Simple 1x1 pixel blur data URL - very lightweight
+    106 │   return "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB2aWV3Qm94PSIwIDAgMSAxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjRjNGNEY2Ii8+Cjwvc3ZnPgo=";
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+lib/structured-data.ts:4:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    2 │ type StructuredDataType = Record<string, unknown>;
+    3 │ 
+  > 4 │ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.ponyclub.gr";
+      │                 ^^^^^^^^^^^
+    5 │ 
+    6 │ // Base organization data
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+lib/structured-data.ts:198:17 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    197 │ // FAQ structured data generator
+  > 198 │ export function generateFAQStructuredData(
+        │                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+    199 │   faqs: Array<{ question: string; answer: string }>,
+    200 │   pageUrl: string,
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+lib/translations/el.ts:48:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    46 │     title: "Τιμοκατάλογος",
+    47 │     ridingTitle: "ΙΠΠΑΣΙΑ",
+  > 48 │     riding_10_15_min: "10-15 ΛΕΠΤΑ: €10",
+       │     ^^^^^^^^^^^^^^^^
+    49 │     riding_30_min: "30 ΛΕΠΤΑ: €25",
+    50 │     raftingTitle: "RAFTING (25-30 ΛΕΠΤΑ)",
+  
+
+lib/translations/el.ts:49:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    47 │     ridingTitle: "ΙΠΠΑΣΙΑ",
+    48 │     riding_10_15_min: "10-15 ΛΕΠΤΑ: €10",
+  > 49 │     riding_30_min: "30 ΛΕΠΤΑ: €25",
+       │     ^^^^^^^^^^^^^
+    50 │     raftingTitle: "RAFTING (25-30 ΛΕΠΤΑ)",
+    51 │     raftingIncludes: "*Περιλαμβάνει μεταφορά πίσω στο σημείο εκκίνησης*",
+  
+
+lib/translations/en.ts:49:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    47 │     title: "Our Price List",
+    48 │     ridingTitle: "RIDING",
+  > 49 │     riding_10_15_min: "10-15 MINUTES: €10",
+       │     ^^^^^^^^^^^^^^^^
+    50 │     riding_30_min: "30 MINUTES: €25",
+    51 │     raftingTitle: "RAFTING (25-30 MINUTES)",
+  
+
+lib/translations/en.ts:50:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This object property name should be in camelCase.
+  
+    48 │     ridingTitle: "RIDING",
+    49 │     riding_10_15_min: "10-15 MINUTES: €10",
+  > 50 │     riding_30_min: "30 MINUTES: €25",
+       │     ^^^^^^^^^^^^^
+    51 │     raftingTitle: "RAFTING (25-30 MINUTES)",
+    52 │     raftingIncludes: "*Includes ride back to starting point*",
+  
+
+lib/use-bokun-language.ts:17:28 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    16 │     const bokun = (
+  > 17 │       window as Window & { BokunWidgets?: { [key: string]: unknown } }
+       │                            ^^^^^^^^^^^^
+    18 │     ).BokunWidgets;
+    19 │     if (!bokun) {
+  
+
+middleware.ts:13:16 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    11 │ const defaultLocale = "en";
+    12 │ 
+  > 13 │ const _isDev = process.env.NODE_ENV === "development";
+       │                ^^^^^^^^^^^
+    14 │ 
+    15 │ // BFCACHE OPTIMIZATION: Cache-Control header that allows back/forward cache
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+next.config.js:89:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    87 │     formats: ["image/avif", "image/webp"],
+    88 │     minimumCacheTTL: 60,
+  > 89 │     dangerouslyAllowSVG: true,
+       │     ^^^^^^^^^^^^^^^^^^^
+    90 │     contentDispositionType: "inline",
+    91 │     remotePatterns: [
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+next.config.js:12:28 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    10 │ const VENDOR_MODULES_REGEX = /[\\/]node_modules[\\/]/;
+    11 │ 
+  > 12 │ const withBundleAnalyzer = require("@next/bundle-analyzer")({
+       │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    13 │   enabled: process.env.ANALYZE === "true",
+    14 │   openAnalyzer: false, // Don't auto-open browser
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+next.config.js:13:12 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    12 │ const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  > 13 │   enabled: process.env.ANALYZE === "true",
+       │            ^^^^^^^^^^^
+    14 │   openAnalyzer: false, // Don't auto-open browser
+    15 │   analyzerMode: "static", // Generate static HTML files
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+next.config.js:25:7 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    23 │   // DEVELOPMENT NETWORK ACCESS: Configure allowed origins for cross-origin requests
+    24 │   // This prevents warnings and future breaking changes when accessing dev server from network devices
+  > 25 │   ...(process.env.NODE_ENV === "development" && {
+       │       ^^^^^^^^^^^
+    26 │     allowedDevOrigins: [
+    27 │       // Allow access from local network IP (your current setup)
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+next.config.js:72:20 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    70 │   compiler: {
+    71 │     // Remove console.log in production
+  > 72 │     removeConsole: process.env.NODE_ENV === "production",
+       │                    ^^^^^^^^^^^
+    73 │   },
+    74 │ 
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+next.config.js:88:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    86 │     ],
+    87 │     formats: ["image/avif", "image/webp"],
+  > 88 │     minimumCacheTTL: 60,
+       │     ^^^^^^^^^^^^^^^
+    89 │     dangerouslyAllowSVG: true,
+    90 │     contentDispositionType: "inline",
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+next.config.js:157:13 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    155 │             },
+    156 │             // Remaining Radix UI components (if any)
+  > 157 │             radixUI: {
+        │             ^^^^^^^
+    158 │               test: RADIX_UI_MODULES_REGEX,
+    159 │               name: "radix-ui",
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+next.config.js:300:1 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM exports instead of module.exports.
+  
+    298 │ // Conditionally apply bundle analyzer only for production builds (webpack)
+    299 │ // Since Turbopack only supports dev, bundle analyzer should only run on builds
+  > 300 │ module.exports =
+        │ ^^^^^^^^^^^^^^
+    301 │   process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig;
+    302 │ 
+  
+  i ESM-style export statements are more easily statically analyzable and tree-shakable compared to CommonJs module.exports.
+  
+
+next.config.js:301:3 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    299 │ // Since Turbopack only supports dev, bundle analyzer should only run on builds
+    300 │ module.exports =
+  > 301 │   process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig;
+        │   ^^^^^^^^^^^
+    302 │ 
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+postcss.config.mjs:9:8 lint/style/noDefaultExport ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid default exports.
+  
+     7 │ };
+     8 │ 
+   > 9 │ export default config;
+       │        ^^^^^^^
+    10 │ 
+  
+  i Default exports cannot be easily discovered inside an editor and don't encourage the use of consistent names through a code base.
+  
+  i Use a named export instead.
+  
+
+scripts/generate-critical-css.js:279:1 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM exports instead of module.exports.
+  
+    277 │ }
+    278 │ 
+  > 279 │ module.exports = { main, processHtmlFile, findHtmlFiles };
+        │ ^^^^^^^^^^^^^^
+    280 │ 
+  
+  i ESM-style export statements are more easily statically analyzable and tree-shakable compared to CommonJs module.exports.
+  
+
+scripts/generate-critical-css.js:13:12 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    11 │  */
+    12 │ 
+  > 13 │ const fs = require("node:fs");
+       │            ^^^^^^^^^^^^^^^^^^
+    14 │ const path = require("node:path");
+    15 │ const { parse } = require("node-html-parser");
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-critical-css.js:14:14 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    13 │ const fs = require("node:fs");
+  > 14 │ const path = require("node:path");
+       │              ^^^^^^^^^^^^^^^^^^^^
+    15 │ const { parse } = require("node-html-parser");
+    16 │ 
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-critical-css.js:15:19 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    13 │ const fs = require("node:fs");
+    14 │ const path = require("node:path");
+  > 15 │ const { parse } = require("node-html-parser");
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    16 │ 
+    17 │ // Move regex patterns to top level for performance
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-critical-css.js:25:18 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    23 │ const DARK_MODE_REGEX = /\.dark\s/;
+    24 │ const ANIMATION_REGEX = /animation-/;
+  > 25 │ const Beasties = require("beasties");
+       │                  ^^^^^^^^^^^^^^^^^^^
+    26 │ const crypto = require("crypto-js");
+    27 │ 
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-critical-css.js:26:16 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    24 │ const ANIMATION_REGEX = /animation-/;
+    25 │ const Beasties = require("beasties");
+  > 26 │ const crypto = require("crypto-js");
+       │                ^^^^^^^^^^^^^^^^^^^^
+    27 │ 
+    28 │ // Configuration
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-sitemap-data.js:3:22 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    1 │ #!/usr/bin/env node
+    2 │ 
+  > 3 │ const { execSync } = require("node:child_process");
+      │                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 │ const fs = require("node:fs");
+    5 │ const path = require("node:path");
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-sitemap-data.js:4:12 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    3 │ const { execSync } = require("node:child_process");
+  > 4 │ const fs = require("node:fs");
+      │            ^^^^^^^^^^^^^^^^^^
+    5 │ const path = require("node:path");
+    6 │ 
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-sitemap-data.js:5:14 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM imports instead of require.
+  
+    3 │ const { execSync } = require("node:child_process");
+    4 │ const fs = require("node:fs");
+  > 5 │ const path = require("node:path");
+      │              ^^^^^^^^^^^^^^^^^^^^
+    6 │ 
+    7 │ /**
+  
+  i ESM-style import statements are more easily statically analyzable and tree-shakable compared to CommonJs require.
+  
+
+scripts/generate-sitemap-data.js:15:7 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    13 │   // In CI/CD environments like Vercel, the .git directory might not be present.
+    14 │   // In such cases, fall back to the current timestamp.
+  > 15 │   if (process.env.VERCEL) {
+       │       ^^^^^^^^^^^
+    16 │     return Math.floor(Date.now() / 1000);
+    17 │   }
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+scripts/generate-sitemap-data.js:101:1 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM exports instead of module.exports.
+  
+     99 │ }
+    100 │ 
+  > 101 │ module.exports = { generateSitemapData };
+        │ ^^^^^^^^^^^^^^
+    102 │ 
+  
+  i ESM-style export statements are more easily statically analyzable and tree-shakable compared to CommonJs module.exports.
+  
+
+scripts/validate-analytics-env.js:36:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    34 │ // Check optional variables
+    35 │ optionalEnvVars.forEach(envVar => {
+  > 36 │   const value = process.env[envVar];
+       │                 ^^^^^^^^^^^
+    37 │   if (value) {
+    38 │     console.log(`✅ ${envVar}: SET (optional)`);
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+scripts/validate-analytics-env.js:25:17 lint/style/noProcessEnv ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Don't use process.env.
+  
+    23 │ // Check required variables
+    24 │ requiredEnvVars.forEach(envVar => {
+  > 25 │   const value = process.env[envVar];
+       │                 ^^^^^^^^^^^
+    26 │   if (value) {
+    27 │     console.log(`✅ ${envVar}: SET`);
+  
+  i Use a centralized configuration file instead for better maintainability and deployment consistency.
+  
+
+tailwind.config.js:2:1 lint/style/noCommonJs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Use ESM exports instead of module.exports.
+  
+    1 │ /** @type {import('tailwindcss').Config} */
+  > 2 │ module.exports = {
+      │ ^^^^^^^^^^^^^^
+    3 │   // Content paths are now auto-detected in v4, but keeping minimal config for compatibility
+    4 │   darkMode: "class",
+  
+  i ESM-style export statements are more easily statically analyzable and tree-shakable compared to CommonJs module.exports.
+  
+
+types/bokun.d.ts:13:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+    11 │       }) => void;
+    12 │       reinit?: (config?: {
+  > 13 │         bookingChannelUUID?: string;
+       │         ^^^^^^^^^^^^^^^^^^
+    14 │         origin?: string;
+    15 │       }) => void;
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+types/bokun.d.ts:6:5 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    4 │ declare global {
+    5 │   interface Window {
+  > 6 │     BokunWidgets?: {
+      │     ^^^^^^^^^^^^
+    7 │       [key: string]: unknown;
+    8 │       init?: (config?: {
+  
+
+types/bokun.d.ts:9:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Two consecutive uppercase characters are not allowed in camelCase because strictCase is set to `true`.
+  
+     7 │       [key: string]: unknown;
+     8 │       init?: (config?: {
+   > 9 │         bookingChannelUUID?: string;
+       │         ^^^^^^^^^^^^^^^^^^
+    10 │         origin?: string;
+    11 │       }) => void;
+  
+  i If you want to use consecutive uppercase characters in camelCase, then set the strictCase option to `false`.
+    See the rule options for more details.
+  
+
+types/global.d.ts:23:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    21 │         analytics_storage?: "granted" | "denied";
+    22 │         ad_storage?: "granted" | "denied";
+  > 23 │         ad_user_data?: "granted" | "denied";
+       │         ^^^^^^^^^^^^
+    24 │         ad_personalization?: "granted" | "denied";
+    25 │         analytics_consent?: boolean;
+  
+
+types/global.d.ts:44:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    42 │         [key: string]: unknown;
+    43 │         content_name?: string;
+  > 44 │         content_category?: string;
+       │         ^^^^^^^^^^^^^^^^
+    45 │         value?: number;
+    46 │         currency?: string;
+  
+
+types/global.d.ts:54:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    52 │       [key: string]: unknown;
+    53 │       event?: string;
+  > 54 │       package_name?: string;
+       │       ^^^^^^^^^^^^
+    55 │       value?: string | number;
+    56 │       currency?: string;
+  
+
+types/global.d.ts:57:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    55 │       value?: string | number;
+    56 │       currency?: string;
+  > 57 │       source_page?: string;
+       │       ^^^^^^^^^^^
+    58 │       phone_number?: string;
+    59 │       device_type?: string;
+  
+
+types/global.d.ts:58:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    56 │       currency?: string;
+    57 │       source_page?: string;
+  > 58 │       phone_number?: string;
+       │       ^^^^^^^^^^^^
+    59 │       device_type?: string;
+    60 │       scroll_depth?: number;
+  
+
+types/global.d.ts:59:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    57 │       source_page?: string;
+    58 │       phone_number?: string;
+  > 59 │       device_type?: string;
+       │       ^^^^^^^^^^^
+    60 │       scroll_depth?: number;
+    61 │       scroll_threshold?: string;
+  
+
+types/global.d.ts:60:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    58 │       phone_number?: string;
+    59 │       device_type?: string;
+  > 60 │       scroll_depth?: number;
+       │       ^^^^^^^^^^^^
+    61 │       scroll_threshold?: string;
+    62 │       time_threshold?: number;
+  
+
+types/global.d.ts:61:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    59 │       device_type?: string;
+    60 │       scroll_depth?: number;
+  > 61 │       scroll_threshold?: string;
+       │       ^^^^^^^^^^^^^^^^
+    62 │       time_threshold?: number;
+    63 │       time_threshold_label?: string;
+  
+
+types/global.d.ts:62:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    60 │       scroll_depth?: number;
+    61 │       scroll_threshold?: string;
+  > 62 │       time_threshold?: number;
+       │       ^^^^^^^^^^^^^^
+    63 │       time_threshold_label?: string;
+    64 │     }>;
+  
+
+types/global.d.ts:63:7 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    61 │       scroll_threshold?: string;
+    62 │       time_threshold?: number;
+  > 63 │       time_threshold_label?: string;
+       │       ^^^^^^^^^^^^^^^^^^^^
+    64 │     }>;
+    65 │   }
+  
+
+types/global.d.ts:10:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+     8 │       config?: {
+     9 │         [key: string]: unknown;
+  > 10 │         send_to?: string;
+       │         ^^^^^^^
+    11 │         value?: number;
+    12 │         currency?: string;
+  
+
+types/global.d.ts:13:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    11 │         value?: number;
+    12 │         currency?: string;
+  > 13 │         transaction_id?: string;
+       │         ^^^^^^^^^^^^^^
+    14 │         event_category?: string;
+    15 │         event_label?: string;
+  
+
+types/global.d.ts:14:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    12 │         currency?: string;
+    13 │         transaction_id?: string;
+  > 14 │         event_category?: string;
+       │         ^^^^^^^^^^^^^^
+    15 │         event_label?: string;
+    16 │         package_name?: string;
+  
+
+types/global.d.ts:15:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    13 │         transaction_id?: string;
+    14 │         event_category?: string;
+  > 15 │         event_label?: string;
+       │         ^^^^^^^^^^^
+    16 │         package_name?: string;
+    17 │         package_price?: number;
+  
+
+types/global.d.ts:16:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    14 │         event_category?: string;
+    15 │         event_label?: string;
+  > 16 │         package_name?: string;
+       │         ^^^^^^^^^^^^
+    17 │         package_price?: number;
+    18 │         button_id?: string;
+  
+
+types/global.d.ts:17:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    15 │         event_label?: string;
+    16 │         package_name?: string;
+  > 17 │         package_price?: number;
+       │         ^^^^^^^^^^^^^
+    18 │         button_id?: string;
+    19 │         page_location?: string;
+  
+
+types/global.d.ts:29:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    27 │         consent_method?: string;
+    28 │         items?: Array<{
+  > 29 │           item_id?: string;
+       │           ^^^^^^^
+    30 │           item_name?: string;
+    31 │           item_category?: string;
+  
+
+types/global.d.ts:18:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    16 │         package_name?: string;
+    17 │         package_price?: number;
+  > 18 │         button_id?: string;
+       │         ^^^^^^^^^
+    19 │         page_location?: string;
+    20 │         page_title?: string;
+  
+
+types/global.d.ts:19:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    17 │         package_price?: number;
+    18 │         button_id?: string;
+  > 19 │         page_location?: string;
+       │         ^^^^^^^^^^^^^
+    20 │         page_title?: string;
+    21 │         analytics_storage?: "granted" | "denied";
+  
+
+types/global.d.ts:24:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    22 │         ad_storage?: "granted" | "denied";
+    23 │         ad_user_data?: "granted" | "denied";
+  > 24 │         ad_personalization?: "granted" | "denied";
+       │         ^^^^^^^^^^^^^^^^^^
+    25 │         analytics_consent?: boolean;
+    26 │         marketing_consent?: boolean;
+  
+
+types/global.d.ts:25:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    23 │         ad_user_data?: "granted" | "denied";
+    24 │         ad_personalization?: "granted" | "denied";
+  > 25 │         analytics_consent?: boolean;
+       │         ^^^^^^^^^^^^^^^^^
+    26 │         marketing_consent?: boolean;
+    27 │         consent_method?: string;
+  
+
+types/global.d.ts:26:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    24 │         ad_personalization?: "granted" | "denied";
+    25 │         analytics_consent?: boolean;
+  > 26 │         marketing_consent?: boolean;
+       │         ^^^^^^^^^^^^^^^^^
+    27 │         consent_method?: string;
+    28 │         items?: Array<{
+  
+
+types/global.d.ts:27:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    25 │         analytics_consent?: boolean;
+    26 │         marketing_consent?: boolean;
+  > 27 │         consent_method?: string;
+       │         ^^^^^^^^^^^^^^
+    28 │         items?: Array<{
+    29 │           item_id?: string;
+  
+
+types/global.d.ts:30:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    28 │         items?: Array<{
+    29 │           item_id?: string;
+  > 30 │           item_name?: string;
+       │           ^^^^^^^^^
+    31 │           item_category?: string;
+    32 │           price?: number;
+  
+
+types/global.d.ts:31:11 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    29 │           item_id?: string;
+    30 │           item_name?: string;
+  > 31 │           item_category?: string;
+       │           ^^^^^^^^^^^^^
+    32 │           price?: number;
+    33 │           quantity?: number;
+  
+
+types/global.d.ts:20:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    18 │         button_id?: string;
+    19 │         page_location?: string;
+  > 20 │         page_title?: string;
+       │         ^^^^^^^^^^
+    21 │         analytics_storage?: "granted" | "denied";
+    22 │         ad_storage?: "granted" | "denied";
+  
+
+types/global.d.ts:43:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    41 │       properties?: {
+    42 │         [key: string]: unknown;
+  > 43 │         content_name?: string;
+       │         ^^^^^^^^^^^^
+    44 │         content_category?: string;
+    45 │         value?: number;
+  
+
+types/global.d.ts:21:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    19 │         page_location?: string;
+    20 │         page_title?: string;
+  > 21 │         analytics_storage?: "granted" | "denied";
+       │         ^^^^^^^^^^^^^^^^^
+    22 │         ad_storage?: "granted" | "denied";
+    23 │         ad_user_data?: "granted" | "denied";
+  
+
+types/global.d.ts:22:9 lint/style/useNamingConvention ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! This property name should be in camelCase.
+  
+    20 │         page_title?: string;
+    21 │         analytics_storage?: "granted" | "denied";
+  > 22 │         ad_storage?: "granted" | "denied";
+       │         ^^^^^^^^^^
+    23 │         ad_user_data?: "granted" | "denied";
+    24 │         ad_personalization?: "granted" | "denied";
+  
+
+app/globals.css:289:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    287 │ }
+    288 │ 
+  > 289 │ @utility container-card {
+        │  ^^^^^^^
+    290 │   container-type: inline-size;
+    291 │   border-radius: var(--radius-lg);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:462:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    461 │ /* Modern CSS Features - OKLCH Colors and Advanced Utilities */
+  > 462 │ @utility oklch-primary {
+        │  ^^^^^^^
+    463 │   /* Using OKLCH for better color consistency across devices */
+    464 │   background: oklch(70% 0.15 250);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:11:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+     9 │ @source '../app/**/*.{js,ts,jsx,tsx}';
+    10 │ @source '../lib/utils.{js,ts}';
+  > 11 │ @source '../lib/**/*.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+    12 │ @source '../contexts/**/*.{js,ts,jsx,tsx}';
+    13 │ @source '../hooks/**/*.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:468:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    466 │ }
+    467 │ 
+  > 468 │ @utility oklch-accent {
+        │  ^^^^^^^
+    469 │   background: oklch(75% 0.2 200);
+    470 │   color: oklch(20% 0.05 200);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:473:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    471 │ }
+    472 │ 
+  > 473 │ @utility oklch-success {
+        │  ^^^^^^^
+    474 │   background: oklch(70% 0.15 140);
+    475 │   color: oklch(95% 0.02 140);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:478:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    476 │ }
+    477 │ 
+  > 478 │ @utility oklch-warning {
+        │  ^^^^^^^
+    479 │   background: oklch(80% 0.15 60);
+    480 │   color: oklch(20% 0.05 60);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:483:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    481 │ }
+    482 │ 
+  > 483 │ @utility oklch-error {
+        │  ^^^^^^^
+    484 │   background: oklch(65% 0.2 20);
+    485 │   color: oklch(95% 0.02 20);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:489:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    488 │ /* Advanced Layout Utilities */
+  > 489 │ @utility grid-auto-fit {
+        │  ^^^^^^^
+    490 │   display: grid;
+    491 │   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:495:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    493 │ }
+    494 │ 
+  > 495 │ @utility grid-auto-fill {
+        │  ^^^^^^^
+    496 │   display: grid;
+    497 │   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:501:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    499 │ }
+    500 │ 
+  > 501 │ @utility subgrid-rows {
+        │  ^^^^^^^
+    502 │   display: subgrid;
+    503 │   grid-template-rows: subgrid;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:506:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    504 │ }
+    505 │ 
+  > 506 │ @utility subgrid-columns {
+        │  ^^^^^^^
+    507 │   display: subgrid;
+    508 │   grid-template-columns: subgrid;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:512:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    511 │ /* Modern Animation Utilities */
+  > 512 │ @utility animate-fade-in {
+        │  ^^^^^^^
+    513 │   animation: fadeIn 0.5s ease-in-out;
+    514 │ }
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:516:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    514 │ }
+    515 │ 
+  > 516 │ @utility animate-slide-up {
+        │  ^^^^^^^
+    517 │   animation: slideUp 0.3s ease-out;
+    518 │ }
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:520:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    518 │ }
+    519 │ 
+  > 520 │ @utility animate-bounce-in {
+        │  ^^^^^^^
+    521 │   animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    522 │ }
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:594:6 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: apply 
+  
+    592 │ @layer base {
+    593 │   * {
+  > 594 │     @apply border-[--border] transition-colors duration-300 ease-in-out; /* Added global transition */
+        │      ^^^^^
+    595 │   }
+    596 │   body {
+  
+  i apply is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:597:6 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: apply 
+  
+    595 │   }
+    596 │   body {
+  > 597 │     @apply bg-[--background] text-[--foreground];
+        │      ^^^^^
+    598 │     font-feature-settings:
+    599 │       "liga" 1,
+  
+  i apply is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:382:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    380 │ }
+    381 │ 
+  > 382 │ @utility program-card {
+        │  ^^^^^^^
+    383 │   position: relative;
+    384 │   overflow: hidden;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:399:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    397 │   }
+    398 │ }
+  > 399 │ @utility text-shadow-lg {
+        │  ^^^^^^^
+    400 │   /* Enhanced text shadow utilities using theme variables */
+    401 │   text-shadow: var(--text-shadow-lg);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:404:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    402 │ }
+    403 │ 
+  > 404 │ @utility text-shadow-xl {
+        │  ^^^^^^^
+    405 │   text-shadow: var(--text-shadow-xl);
+    406 │ }
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:409:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    408 │ /* New enhanced 3D text utilities */
+  > 409 │ @utility text-3d {
+        │  ^^^^^^^
+    410 │   text-shadow:
+    411 │     1px 1px 0 hsl(var(--muted)),
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:348:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    346 │ }
+    347 │ 
+  > 348 │ @utility parallax-3d {
+        │  ^^^^^^^
+    349 │   transform-style: preserve-3d;
+    350 │ 
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:13:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    11 │ @source '../lib/**/*.{js,ts,jsx,tsx}';
+    12 │ @source '../contexts/**/*.{js,ts,jsx,tsx}';
+  > 13 │ @source '../hooks/**/*.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+    14 │ 
+    15 │ /* Include specific high-usage component patterns */
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:16:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    15 │ /* Include specific high-usage component patterns */
+  > 16 │ @source '../**/*{Button,Card,Dialog,Form,Input,Modal}*.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+    17 │ 
+    18 │ @custom-variant dark (&:is(.dark *));
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:18:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: custom-variant 
+  
+    16 │ @source '../**/*{Button,Card,Dialog,Form,Input,Modal}*.{js,ts,jsx,tsx}';
+    17 │ 
+  > 18 │ @custom-variant dark (&:is(.dark *));
+       │  ^^^^^^^^^^^^^^
+    19 │ 
+    20 │ /* c15t Cookie Consent Banner Styling */
+  
+  i custom-variant is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:232:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    230 │ }
+    231 │ 
+  > 232 │ @utility container {
+        │  ^^^^^^^
+    233 │   margin-inline: auto;
+    234 │   padding-inline: 2rem;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:243:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    241 │ }
+    242 │ 
+  > 243 │ @utility text-balance {
+        │  ^^^^^^^
+    244 │   text-wrap: balance;
+    245 │ }
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:248:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    247 │ /* Container Query Utilities - New in Tailwind v4 */
+  > 248 │ @utility responsive-card {
+        │  ^^^^^^^
+    249 │   container-type: inline-size;
+    250 │ 
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:418:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    416 │ }
+    417 │ 
+  > 418 │ @utility text-glow {
+        │  ^^^^^^^
+    419 │   text-shadow:
+    420 │     0 0 5px hsl(var(--river-accent)),
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:309:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    308 │ /* 3D Transform Utilities - Enhanced in Tailwind v4 */
+  > 309 │ @utility card-3d {
+        │  ^^^^^^^
+    310 │   transform-style: preserve-3d;
+    311 │   perspective: 1000px;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:319:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    317 │ }
+    318 │ 
+  > 319 │ @utility flip-card {
+        │  ^^^^^^^
+    320 │   transform-style: preserve-3d;
+    321 │   transition: transform 0.6s;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:339:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    337 │ }
+    338 │ 
+  > 339 │ @utility floating-3d {
+        │  ^^^^^^^
+    340 │   transform: perspective(1000px) translateZ(0);
+    341 │   transition: transform 0.3s ease;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:425:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    423 │     0 0 20px hsl(var(--river-accent));
+    424 │ }
+  > 425 │ @utility animate-text-shine {
+        │  ^^^^^^^
+    426 │   /* Text shine animation */
+    427 │   background-size: 200% auto;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:4:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    3 │ /* Optimized source paths for better tree-shaking and performance */
+  > 4 │ @source '../components/ui/**/*.{js,ts,jsx,tsx}';
+      │  ^^^^^^
+    5 │ @source '../components/layout/**/*.{js,ts,jsx,tsx}';
+    6 │ @source '../components/**/*.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:5:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    3 │ /* Optimized source paths for better tree-shaking and performance */
+    4 │ @source '../components/ui/**/*.{js,ts,jsx,tsx}';
+  > 5 │ @source '../components/layout/**/*.{js,ts,jsx,tsx}';
+      │  ^^^^^^
+    6 │ @source '../components/**/*.{js,ts,jsx,tsx}';
+    7 │ @source '../app/**/page.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:6:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    4 │ @source '../components/ui/**/*.{js,ts,jsx,tsx}';
+    5 │ @source '../components/layout/**/*.{js,ts,jsx,tsx}';
+  > 6 │ @source '../components/**/*.{js,ts,jsx,tsx}';
+      │  ^^^^^^
+    7 │ @source '../app/**/page.{js,ts,jsx,tsx}';
+    8 │ @source '../app/**/layout.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:7:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    5 │ @source '../components/layout/**/*.{js,ts,jsx,tsx}';
+    6 │ @source '../components/**/*.{js,ts,jsx,tsx}';
+  > 7 │ @source '../app/**/page.{js,ts,jsx,tsx}';
+      │  ^^^^^^
+    8 │ @source '../app/**/layout.{js,ts,jsx,tsx}';
+    9 │ @source '../app/**/*.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:8:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+     6 │ @source '../components/**/*.{js,ts,jsx,tsx}';
+     7 │ @source '../app/**/page.{js,ts,jsx,tsx}';
+   > 8 │ @source '../app/**/layout.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+     9 │ @source '../app/**/*.{js,ts,jsx,tsx}';
+    10 │ @source '../lib/utils.{js,ts}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:9:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+     7 │ @source '../app/**/page.{js,ts,jsx,tsx}';
+     8 │ @source '../app/**/layout.{js,ts,jsx,tsx}';
+   > 9 │ @source '../app/**/*.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+    10 │ @source '../lib/utils.{js,ts}';
+    11 │ @source '../lib/**/*.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:10:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+     8 │ @source '../app/**/layout.{js,ts,jsx,tsx}';
+     9 │ @source '../app/**/*.{js,ts,jsx,tsx}';
+  > 10 │ @source '../lib/utils.{js,ts}';
+       │  ^^^^^^
+    11 │ @source '../lib/**/*.{js,ts,jsx,tsx}';
+    12 │ @source '../contexts/**/*.{js,ts,jsx,tsx}';
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:430:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    428 │   animation: textShine 4s ease-in-out infinite;
+    429 │ }
+  > 430 │ @utility gradient-text {
+        │  ^^^^^^^
+    431 │   /* Gradient text for headings */
+    432 │   background: linear-gradient(90deg, hsl(var(--river-accent)), #6b8362);
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:437:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: utility 
+  
+    435 │   color: transparent;
+    436 │ }
+  > 437 │ @utility frosted-card {
+        │  ^^^^^^^
+    438 │   /* Enhanced frosted glass card with modern CSS features */
+    439 │   position: relative;
+  
+  i utility is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+app/globals.css:12:2 lint/nursery/noUnknownAtRule ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unexpected unknown at-rule: source 
+  
+    10 │ @source '../lib/utils.{js,ts}';
+    11 │ @source '../lib/**/*.{js,ts,jsx,tsx}';
+  > 12 │ @source '../contexts/**/*.{js,ts,jsx,tsx}';
+       │  ^^^^^^
+    13 │ @source '../hooks/**/*.{js,ts,jsx,tsx}';
+    14 │ 
+  
+  i source is not a standard CSS at-rule, which may lead to unexpected styling results or failure to interpret the styles as intended.
+  
+  i See MDN web docs for a known list of at-rules.
+  
+  i To fix this issue, consider removing the unknown at-rule.
+  
+
+Checked 111 files in 49ms. No fixes applied.
+Found 42 errors.
+Found 242 warnings.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+
+ ELIFECYCLE  Command failed with exit code 1.
+❌ Biome check failed. Please fix formatting and linting issues.
+husky - pre-commit script failed (code 1)

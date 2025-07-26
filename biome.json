@@ -1,63 +1,80 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
   "files": {
-    "ignoreUnknown": false,
-    "maxSize": 1048576,
-    "experimentalScannerIgnores": [
-      "node_modules",
-      ".next",
-      "dist",
-      "build",
-      "coverage",
-      ".turbo",
-      "public/~partytown",
-      "data",
-      "google-ads-data"
-    ],
     "includes": [
       "**",
-      "!.next/**",
       "!node_modules/**",
-      "!dist/**",
+      "!.next/**",
+      "!out/**",
       "!build/**",
-      "!coverage/**",
+      "!dist/**",
+      "!.vercel/**",
       "!.turbo/**",
-      "!tsconfig.tsbuildinfo",
-      "!pnpm-lock.yaml",
-      "!package-lock.json",
-      "!yarn.lock",
       "!public/~partytown/**",
-      "!data/**/*.js",
-      "!**/*.min.js",
-      "!**/*.generated.*",
+      "!critical-css/**",
+      "!bundle-analysis/**",
+      "!.biome-cache/**",
+      "!google-ads-data/**",
+      "!.augment/**",
+      "!.clinerules/**",
       "!docs/**",
-      "!google-ads-data/**"
-    ]
+      "!specs/**",
+      "!.ai/**",
+      "!.github/**",
+      "!.husky/**",
+      "!public/images/**",
+      "!public/favicon_io/**",
+      "!*.tsbuildinfo",
+      "!next-env.d.ts",
+      "!biome-report.txt",
+      "!tracing.json",
+      "!*.tmp",
+      "!*.temp",
+      "!*.log",
+      "!*.md",
+      "!*.yml",
+      "!*.yaml",
+      "!*.png",
+      "!*.jpg",
+      "!*.jpeg",
+      "!*.gif",
+      "!*.svg",
+      "!*.ico",
+      "!*.webp",
+      "!*.txt",
+      "!.npmrc",
+      "!.browserslistrc",
+      "!.aidigestignore",
+      "!pnpm-lock.yaml",
+      "!pnpm-workspace.yaml"
+    ],
+    "ignoreUnknown": true
   },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": true
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
   },
   "linter": {
     "enabled": true,
-    "domains": {
-      "next": "recommended",
-      "react": "recommended"
-    },
     "rules": {
-      "style": "off",
-      "a11y": "off",
+      "recommended": true,
+      "style": "warn",
+      "a11y": "warn",
       "complexity": {
-        "recommended": false,
+        "recommended": true,
         "noUselessFragments": "off"
       },
-      "nursery": "off",
+      "nursery": {
+        "recommended": true
+      },
       "correctness": {
         "recommended": true,
         "useExhaustiveDependencies": "warn"
       },
       "security": {
+        "recommended": true,
         "noDangerouslySetInnerHtml": "off"
       },
       "performance": "warn",
@@ -77,11 +94,18 @@
     "formatter": {
       "quoteStyle": "double",
       "jsxQuoteStyle": "double",
-      "trailingCommas": "es5",
-      "semicolons": "always"
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "asNeeded"
     }
   },
   "json": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
+  "css": {
     "formatter": {
       "enabled": true,
       "indentWidth": 2
@@ -92,7 +116,15 @@
   },
   "overrides": [
     {
-      "includes": ["scripts/**"],
+      "includes": [
+        "scripts/**",
+        "next.config.js",
+        "middleware.ts",
+        "postcss.config.mjs",
+        "tailwind.config.js",
+        "knip.json",
+        "lefthook.yml"
+      ],
       "linter": {
         "rules": {
           "correctness": {
@@ -113,6 +145,38 @@
           "suspicious": {
             "noDocumentCookie": "off",
             "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["types/**/*.d.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useExportType": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "app/**/page.tsx",
+        "app/**/layout.tsx",
+        "app/**/not-found.tsx",
+        "app/**/error.tsx",
+        "app/**/loading.tsx",
+        "app/**/global-error.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off",
+            "useComponentExportOnlyModules": "off",
+            "noProcessEnv": "off"
           }
         }
       }

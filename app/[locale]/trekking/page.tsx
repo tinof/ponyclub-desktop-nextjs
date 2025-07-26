@@ -342,7 +342,7 @@ const TrekkingPage = async ({ params }: PageProps) => {
           <OptimizedImage
             src="/images/ponyClub_map.jpg"
             alt="Trekking Routes Map"
-            fill
+            fill={true}
             imageType="fullWidth"
             isAboveFold={false}
             className="object-contain"

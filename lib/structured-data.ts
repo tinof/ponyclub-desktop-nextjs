@@ -67,7 +67,7 @@ export const organizationData = {
 // Activity-specific structured data generators
 export function generateActivityStructuredData(
   activityType: "rafting" | "riding" | "kayaking" | "trekking",
-  locale: string
+  locale: string,
 ): StructuredDataType {
   const activities = {
     rafting: {
@@ -197,13 +197,13 @@ export function generateActivityStructuredData(
 // FAQ structured data generator
 export function generateFAQStructuredData(
   faqs: Array<{ question: string; answer: string }>,
-  pageUrl: string
+  pageUrl: string,
 ): StructuredDataType {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${pageUrl}/#faq`,
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqs.map(faq => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
@@ -217,7 +217,7 @@ export function generateFAQStructuredData(
 // Breadcrumb structured data generator
 export function generateBreadcrumbStructuredData(
   breadcrumbs: Array<{ name: string; url: string }>,
-  currentPage: string
+  currentPage: string,
 ): StructuredDataType {
   const allBreadcrumbs = [
     ...breadcrumbs,
@@ -238,7 +238,7 @@ export function generateBreadcrumbStructuredData(
 
 // Website structured data
 export function generateWebsiteStructuredData(
-  locale: string
+  locale: string,
 ): StructuredDataType {
   return {
     "@context": "https://schema.org",

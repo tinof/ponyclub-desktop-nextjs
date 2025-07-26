@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     // like Sentry, Report URI, or a custom analytics platform.
     return NextResponse.json(
       { message: "CSP report received" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     // Log errors in development
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     }
     return NextResponse.json(
       { message: "Error processing report" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

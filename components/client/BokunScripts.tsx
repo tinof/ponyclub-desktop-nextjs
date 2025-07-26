@@ -14,7 +14,7 @@ export default function BokunScripts({ locale }: BokunScriptsProps) {
   if (!isBokunEnabled) {
     if (process.env.NODE_ENV === "development") {
       console.log(
-        "[Bokun] Scripts disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag"
+        "[Bokun] Scripts disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag",
       );
     }
     return null;
@@ -30,7 +30,7 @@ export default function BokunScripts({ locale }: BokunScriptsProps) {
         strategy="lazyOnload"
         onLoad={() => {
           console.log(
-            `[Bokun] Widget loader script loaded successfully for locale: ${locale}`
+            `[Bokun] Widget loader script loaded successfully for locale: ${locale}`,
           );
           // Store the current locale for widget initialization
           if (typeof window !== "undefined") {
@@ -39,7 +39,7 @@ export default function BokunScripts({ locale }: BokunScriptsProps) {
             ).__bokunCurrentLocale = locale;
           }
         }}
-        onError={(error) => {
+        onError={error => {
           console.error("[Bokun] Failed to load widget loader script:", error);
         }}
       />

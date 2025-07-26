@@ -23,13 +23,13 @@ export default function GoogleReviews() {
 
       // Fix ARIA hidden focus issue: Remove focusable elements from hidden slides
       const hiddenSlides = document.querySelectorAll(
-        '.slick-slide[aria-hidden="true"]'
+        '.slick-slide[aria-hidden="true"]',
       );
-      hiddenSlides.forEach((slide) => {
+      hiddenSlides.forEach(slide => {
         const focusableElements = slide.querySelectorAll(
-          'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])',
         );
-        focusableElements.forEach((element) => {
+        focusableElements.forEach(element => {
           // Store original tabindex to restore later if needed
           if (!element.hasAttribute("data-original-tabindex")) {
             const originalTabIndex = element.getAttribute("tabindex") || "0";
@@ -42,13 +42,13 @@ export default function GoogleReviews() {
 
       // Restore focusability for visible slides
       const visibleSlides = document.querySelectorAll(
-        '.slick-slide:not([aria-hidden="true"])'
+        '.slick-slide:not([aria-hidden="true"])',
       );
-      visibleSlides.forEach((slide) => {
+      visibleSlides.forEach(slide => {
         const focusableElements = slide.querySelectorAll(
-          "[data-original-tabindex]"
+          "[data-original-tabindex]",
         );
-        focusableElements.forEach((element) => {
+        focusableElements.forEach(element => {
           const originalTabIndex =
             element.getAttribute("data-original-tabindex") || "0";
           element.setAttribute("tabindex", originalTabIndex);
@@ -63,7 +63,7 @@ export default function GoogleReviews() {
         if (!imgElement.getAttribute("alt")) {
           imgElement.setAttribute(
             "alt",
-            `Google reviewer profile picture ${index + 1}`
+            `Google reviewer profile picture ${index + 1}`,
           );
         }
 

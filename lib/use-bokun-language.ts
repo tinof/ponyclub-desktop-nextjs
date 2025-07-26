@@ -26,7 +26,7 @@ export function useBokunLanguage(lang: string) {
     }
 
     console.log(
-      `[Bokun Language] Switching from ${previousLang.current} to ${lang}`
+      `[Bokun Language] Switching from ${previousLang.current} to ${lang}`,
     );
 
     // Set global default for pop-up checkout (if supported)
@@ -37,7 +37,7 @@ export function useBokunLanguage(lang: string) {
     // Update all widgets and buttons with the new language
     document
       .querySelectorAll<HTMLElement>(".bokunWidget, .bokunButton")
-      .forEach((el) => {
+      .forEach(el => {
         // Update data-src URL with lang query param
         if (el.dataset.src) {
           const url = new URL(el.dataset.src, window.location.origin);

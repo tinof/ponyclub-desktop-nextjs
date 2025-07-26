@@ -29,7 +29,7 @@ export default function SiteHeader() {
             <OptimizedImage
               src="/images/ponyclub_logo.png"
               alt="Acheron River Excursion"
-              fill
+              fill={true}
               sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
               imageType="logo"
               className="object-contain p-1"

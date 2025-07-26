@@ -28,7 +28,7 @@ const DynamicGoogleReviews = dynamic(
         </div>
       </div>
     ),
-  }
+  },
 );
 
 const DynamicGoogleMap = dynamic(
@@ -43,7 +43,7 @@ const DynamicGoogleMap = dynamic(
         <span className="text-gray-500">Loading map...</span>
       </div>
     ),
-  }
+  },
 );
 
 // Font is now imported from centralized fonts.ts file
@@ -69,28 +69,23 @@ export default function HomePageContent() {
               border-amber-200/30 shadow-xl
             `}
         >
-          {/* OptimizedImage for the poster - LCP element */}
+          {/* OptimizedImage for the poster */}
           <OptimizedImage
             src="/images/hero-image.webp"
             alt="Hero background"
-            fill
-            priority
+            fill={true}
+            priority={true}
             fetchPriority="high"
             imageType="hero"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          {/* Video overlay - only load after image for better LCP */}
           <video
             autoPlay={!isMobile} // Disable autoplay on mobile to save bandwidth
-            muted
-            loop
-            playsInline
-            preload={isMobile ? "none" : "metadata"} // Don't preload on mobile for better LCP
-            className="absolute inset-0 z-10 h-full w-full object-cover opacity-80"
-            style={{
-              // Ensure video doesn't interfere with LCP measurement
-              willChange: "auto",
-            }}
+            muted={true}
+            loop={true}
+            playsInline={true}
+            preload="metadata"
+            className="absolute inset-0 z-10 h-full w-full object-cover"
           >
             <source src="/images/hero-video.webm" type="video/webm" />
             <source src="/images/hero-video.mp4" type="video/mp4" />
@@ -179,7 +174,7 @@ export default function HomePageContent() {
             <OptimizedImage
               src="/images/round1.jpg"
               alt={t.activities.swimming}
-              fill
+              fill={true}
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
               className="object-cover"
@@ -207,7 +202,7 @@ export default function HomePageContent() {
               src="/images/round2.jpg"
               alt={t.activities.horseRiding}
               quality={55}
-              fill
+              fill={true}
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
               className="object-cover object-[center_20%]"
@@ -234,7 +229,7 @@ export default function HomePageContent() {
             <OptimizedImage
               src="/images/round3.jpg"
               alt={t.activities.kayaking}
-              fill
+              fill={true}
               imageType="thumbnail"
               sizes="(max-width: 479px) 80px, (max-width: 639px) 96px, (max-width: 767px) 128px, (max-width: 1023px) 160px, 192px"
               className="object-cover"

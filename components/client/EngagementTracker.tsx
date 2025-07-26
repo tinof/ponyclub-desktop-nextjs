@@ -19,10 +19,10 @@ export default function EngagementTracker() {
       const scrollPercent = Math.round(
         (window.scrollY /
           (document.documentElement.scrollHeight - window.innerHeight)) *
-          100
+          100,
       );
 
-      scrollDepths.forEach((depth) => {
+      scrollDepths.forEach(depth => {
         if (scrollPercent >= depth && !trackedDepths.has(depth)) {
           trackedDepths.add(depth);
           trackGTMEvent({
@@ -38,7 +38,7 @@ export default function EngagementTracker() {
     const timeThresholds = [30, 60, 120, 300]; // seconds
     const trackedTimes = new Set<number>();
 
-    timeThresholds.forEach((threshold) => {
+    timeThresholds.forEach(threshold => {
       setTimeout(() => {
         if (!trackedTimes.has(threshold)) {
           trackedTimes.add(threshold);

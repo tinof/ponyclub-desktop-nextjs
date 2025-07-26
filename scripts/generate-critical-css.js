@@ -160,12 +160,12 @@ async function processHtmlFile(filePath, beasties) {
       // Find all remaining CSS links
       const cssLinks = root.querySelectorAll('link[rel="stylesheet"]');
 
-      cssLinks.forEach((link) => {
+      cssLinks.forEach(link => {
         const href = link.getAttribute("href");
         if (href?.includes("/_next/static/css/")) {
           // Add preload hint
           const preload = parse(
-            `<link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'">`
+            `<link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'">`,
           );
           head.appendChild(preload);
 
@@ -269,7 +269,7 @@ async function main() {
 
 // Execute if run directly
 if (require.main === module) {
-  main().catch((error) => {
+  main().catch(error => {
     log(`💥 Fatal error: ${error.message}`, "red");
     console.error(error);
     process.exit(1);

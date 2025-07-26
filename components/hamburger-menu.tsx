@@ -197,7 +197,7 @@ export default function HamburgerMenu() {
                 {/* Standard header text */}
                 {t.navigation.activities}
               </div>
-              {activities.map((activity) => (
+              {activities.map(activity => (
                 <Link
                   key={activity.id}
                   href={activity.href}

@@ -19,7 +19,7 @@ const ContactDetailsEnhanced = dynamic(
         <span className="text-gray-500">Loading contact details...</span>
       </div>
     ),
-  }
+  },
 );
 
 export default function DynamicContactDetails() {

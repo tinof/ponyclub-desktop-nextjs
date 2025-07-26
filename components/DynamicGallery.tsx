@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 const Gallery = dynamic(
   () =>
     import(/* webpackChunkName: "gallery" */ "@/components/ui/Gallery").then(
-      (mod) => mod.Gallery
+      mod => mod.Gallery,
     ),
   {
     ssr: false,
@@ -19,7 +19,7 @@ const Gallery = dynamic(
         <span className="text-gray-500">Loading gallery...</span>
       </div>
     ),
-  }
+  },
 );
 
 type GalleryImage = {

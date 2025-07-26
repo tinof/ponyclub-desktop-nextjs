@@ -32,7 +32,7 @@ declare global {
           price?: number;
           quantity?: number;
         }>;
-      }
+      },
     ) => void;
 
     fbq?: (
@@ -44,7 +44,7 @@ declare global {
         content_category?: string;
         value?: number;
         currency?: string;
-      }
+      },
     ) => void;
 
     // Google Tag Manager dataLayer

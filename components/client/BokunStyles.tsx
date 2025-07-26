@@ -17,7 +17,7 @@ export default function BokunStyles() {
   }, []);
 
   return (
-    <style jsx global nonce={nonce}>{`
+    <style jsx={true} global={true} nonce={nonce}>{`
       #bokun_5b20d531_ca57_4550_94c0_0511c35077a0 {
         background-color: #6b8362 !important; /* theme green */
         color: white !important;

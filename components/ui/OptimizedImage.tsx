@@ -83,9 +83,9 @@ export function OptimizedImage({
       sizes: optimizedProps.sizes || "100vw",
       quality: optimizedProps.quality,
       priority: optimizedProps.priority,
-      loading: !optimizedProps.priority
-        ? optimizedProps.loading || "lazy"
-        : undefined,
+      loading: optimizedProps.priority
+        ? undefined
+        : optimizedProps.loading || "lazy",
       className: `object-cover ${className || ""}`,
     };
 
@@ -113,7 +113,7 @@ export function OptimizedImage({
           ${aspectRatioClass}
           ${containerClassName || ""}
         `}
-        style={!aspectRatioClass ? { height: "100%" } : undefined}
+        style={aspectRatioClass ? undefined : { height: "100%" }}
       >
         <Image {...imageProps} />
       </div>
@@ -128,9 +128,9 @@ export function OptimizedImage({
     height: optimizedProps.height,
     quality: optimizedProps.quality,
     priority: optimizedProps.priority,
-    loading: !optimizedProps.priority
-      ? optimizedProps.loading || "lazy"
-      : undefined,
+    loading: optimizedProps.priority
+      ? undefined
+      : optimizedProps.loading || "lazy",
     sizes: optimizedProps.sizes,
     className,
   };

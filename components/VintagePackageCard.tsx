@@ -173,7 +173,7 @@ export default function VintagePackageCard({
             <OptimizedImage
               src={images.main}
               alt={`${title} main activity`}
-              fill
+              fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
@@ -183,7 +183,7 @@ export default function VintagePackageCard({
             <OptimizedImage
               src={images.top}
               alt={`${title} activity 2`}
-              fill
+              fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
@@ -193,7 +193,7 @@ export default function VintagePackageCard({
             <OptimizedImage
               src={images.bottom}
               alt={`${title} activity 3`}
-              fill
+              fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
@@ -204,11 +204,7 @@ export default function VintagePackageCard({
         {/* Activities */}
         <div className="space-y-3 mb-6">
           <div className={`flex items-center text-sm ${theme.text} font-serif`}>
-            <div
-              className={
-                "mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0"
-              }
-            >
+            <div className="mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0">
               {getActivityIcon(activities.primary)}
             </div>
             <span className="font-semibold tracking-wide">
@@ -216,11 +212,7 @@ export default function VintagePackageCard({
             </span>
           </div>
           <div className={`flex items-center text-sm ${theme.text} font-serif`}>
-            <div
-              className={
-                "mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0"
-              }
-            >
+            <div className="mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0">
               {getActivityIcon(activities.riding)}
             </div>
             <span className="font-semibold tracking-wide">
@@ -228,11 +220,7 @@ export default function VintagePackageCard({
             </span>
           </div>
           <div className={`flex items-center text-sm ${theme.text} font-serif`}>
-            <div
-              className={
-                "mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0"
-              }
-            >
+            <div className="mr-3 w-6 h-6 flex items-center justify-center flex-shrink-0">
               {getActivityIcon(activities.hiking)}
             </div>
             <span className="font-semibold tracking-wide">
@@ -327,7 +315,7 @@ export default function VintagePackageCard({
       </div>
 
       {/* Vintage styling */}
-      <style jsx nonce={nonce}>{`
+      <style jsx={true} nonce={nonce}>{`
         .vintage-card {
           position: relative;
           background-color: ${theme.cardBg};

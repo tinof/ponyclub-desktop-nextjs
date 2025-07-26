@@ -24,7 +24,9 @@ export default function ConsentBridge() {
   // Function to handle consent revocation and cleanup
   const handleConsentRevocation = useCallback(
     (category: "analytics" | "marketing") => {
-      if (typeof window === "undefined") return;
+      if (typeof window === "undefined") {
+        return;
+      }
 
       if (category === "analytics") {
         // Remove Google Analytics cookies
@@ -39,7 +41,7 @@ export default function ConsentBridge() {
           "_gcl_aw",
         ];
 
-        gaCookies.forEach((cookieName) => {
+        gaCookies.forEach(cookieName => {
           // Remove for current domain
           document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
           // Remove for parent domain (with leading dot)
@@ -53,12 +55,12 @@ export default function ConsentBridge() {
           try {
             // Vercel Analytics doesn't have a direct clear method, but we can stop tracking
             console.log(
-              "[ConsentBridge] Analytics consent revoked - cleared GA cookies"
+              "[ConsentBridge] Analytics consent revoked - cleared GA cookies",
             );
           } catch (error) {
             console.warn(
               "[ConsentBridge] Error clearing Vercel Analytics:",
-              error
+              error,
             );
           }
         }
@@ -68,7 +70,7 @@ export default function ConsentBridge() {
         // Remove Facebook Pixel cookies
         const fbCookies = ["_fbp", "_fbc", "fr"];
 
-        fbCookies.forEach((cookieName) => {
+        fbCookies.forEach(cookieName => {
           // Remove for current domain
           document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
           // Remove for parent domain (with leading dot)
@@ -82,12 +84,12 @@ export default function ConsentBridge() {
           try {
             window.fbq("consent", "revoke");
             console.log(
-              "[ConsentBridge] Marketing consent revoked - cleared FB cookies"
+              "[ConsentBridge] Marketing consent revoked - cleared FB cookies",
             );
           } catch (error) {
             console.warn(
               "[ConsentBridge] Error revoking Facebook Pixel consent:",
-              error
+              error,
             );
           }
         }
@@ -95,11 +97,11 @@ export default function ConsentBridge() {
 
       if (process.env.NODE_ENV === "development") {
         console.log(
-          `[ConsentBridge] Cleaned up cookies for revoked ${category} consent`
+          `[ConsentBridge] Cleaned up cookies for revoked ${category} consent`,
         );
       }
     },
-    []
+    [],
   );
 
   // Function to update the legacy JSON cookie format
@@ -121,7 +123,7 @@ export default function ConsentBridge() {
         console.log("[ConsentBridge] Updated legacy cookie:", legacyConsent);
       }
     },
-    []
+    [],
   );
 
   // Function to read existing legacy cookie and sync to c15t if needed
@@ -129,11 +131,11 @@ export default function ConsentBridge() {
     try {
       const consentCookie = document.cookie
         .split("; ")
-        .find((row) => row.startsWith("consent="));
+        .find(row => row.startsWith("consent="));
 
       if (consentCookie) {
         const consent = JSON.parse(
-          decodeURIComponent(consentCookie.split("=")[1])
+          decodeURIComponent(consentCookie.split("=")[1]),
         ) as LegacyConsentStatus;
         return consent;
       }
@@ -147,7 +149,9 @@ export default function ConsentBridge() {
 
   // Sync c15t consent changes to legacy cookie format AND Google Consent Mode v2
   useEffect(() => {
-    if (!consents) return;
+    if (!consents) {
+      return;
+    }
 
     // Get marketing consent from c15t
     const marketingConsent = hasConsentFor("marketing" as any);
@@ -227,7 +231,7 @@ export default function ConsentBridge() {
         if (process.env.NODE_ENV === "development") {
           console.log(
             "[ConsentBridge] Syncing legacy consent to c15t:",
-            legacyConsent
+            legacyConsent,
           );
         }
 
@@ -255,11 +259,11 @@ export function checkConsentStatus(): LegacyConsentStatus {
   try {
     const consentCookie = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("consent="));
+      .find(row => row.startsWith("consent="));
 
     if (consentCookie) {
       const consent = JSON.parse(
-        decodeURIComponent(consentCookie.split("=")[1])
+        decodeURIComponent(consentCookie.split("=")[1]),
       ) as LegacyConsentStatus;
       return consent;
     }

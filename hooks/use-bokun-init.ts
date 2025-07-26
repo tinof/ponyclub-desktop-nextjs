@@ -21,7 +21,7 @@ export function useBokunInit() {
     if (!isBokunEnabled) {
       if (process.env.NODE_ENV === "development") {
         console.log(
-          "[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag"
+          "[Bokun] Initializer disabled via NEXT_PUBLIC_ENABLE_BOKUN feature flag",
         );
       }
       return;
@@ -35,11 +35,11 @@ export function useBokunInit() {
       if (window.BokunWidgets) {
         if (process.env.NODE_ENV === "development") {
           console.log(
-            "[Bokun Init] BokunWidgets found, checking for elements..."
+            "[Bokun Init] BokunWidgets found, checking for elements...",
           );
           console.log(
             "[Bokun Init] Available methods:",
-            Object.keys(window.BokunWidgets)
+            Object.keys(window.BokunWidgets),
           );
           console.log("[Bokun Init] BokunWidgets object:", window.BokunWidgets);
         }
@@ -49,7 +49,7 @@ export function useBokunInit() {
         if (widgets.length === 0) {
           if (process.env.NODE_ENV === "development") {
             console.log(
-              "[Bokun Init] No Bokun elements found, skipping initialization"
+              "[Bokun Init] No Bokun elements found, skipping initialization",
             );
           }
           initAttempts.current = 0;
@@ -58,7 +58,7 @@ export function useBokunInit() {
 
         if (process.env.NODE_ENV === "development") {
           console.log(
-            `[Bokun Init] Found ${widgets.length} Bokun elements to initialize`
+            `[Bokun Init] Found ${widgets.length} Bokun elements to initialize`,
           );
         }
 
@@ -80,30 +80,30 @@ export function useBokunInit() {
           if (typeof window.BokunWidgets.init === "function") {
             // Extract booking channel UUID from the script URL
             const scriptElements = document.querySelectorAll(
-              'script[src*="bokun"]'
+              'script[src*="bokun"]',
             );
-            let bookingChannelUUID = "";
+            let bookingChannelUuid = "";
 
             for (const script of scriptElements) {
               const src = script.getAttribute("src");
               if (src?.includes("bookingChannelUUID=")) {
                 const match = src.match(BOOKING_CHANNEL_UUID_REGEX);
                 if (match) {
-                  bookingChannelUUID = match[1];
+                  bookingChannelUuid = match[1];
                   break;
                 }
               }
             }
 
-            if (bookingChannelUUID) {
+            if (bookingChannelUuid) {
               window.BokunWidgets.init({
-                bookingChannelUUID,
+                bookingChannelUUID: bookingChannelUuid,
                 origin: "https://widgets.bokun.io",
               });
               if (process.env.NODE_ENV === "development") {
                 console.log(
                   "[Bokun Init] Successfully initialized BokunWidgets with bookingChannelUUID:",
-                  bookingChannelUUID
+                  bookingChannelUuid,
                 );
               }
               // Reset attempt counter on successful initialization
@@ -112,7 +112,7 @@ export function useBokunInit() {
             }
             if (process.env.NODE_ENV === "development") {
               console.warn(
-                "[Bokun Init] Could not find bookingChannelUUID in script src"
+                "[Bokun Init] Could not find bookingChannelUUID in script src",
               );
             }
             return false;
@@ -125,7 +125,7 @@ export function useBokunInit() {
           if (process.env.NODE_ENV === "development") {
             console.error(
               "[Bokun Init] Error initializing Bokun widgets:",
-              error
+              error,
             );
           }
           return false;
@@ -137,16 +137,14 @@ export function useBokunInit() {
       if (initAttempts.current < maxAttempts) {
         if (process.env.NODE_ENV === "development") {
           console.log(
-            `[Bokun Init] BokunWidgets not ready yet, attempt ${initAttempts.current}/${maxAttempts}`
+            `[Bokun Init] BokunWidgets not ready yet, attempt ${initAttempts.current}/${maxAttempts}`,
           );
         }
         setTimeout(initializeBokun, retryDelay);
-      } else {
-        if (process.env.NODE_ENV === "development") {
-          console.warn(
-            "[Bokun Init] Max attempts reached, Bokun widgets may not be available"
-          );
-        }
+      } else if (process.env.NODE_ENV === "development") {
+        console.warn(
+          "[Bokun Init] Max attempts reached, Bokun widgets may not be available",
+        );
       }
 
       return false;

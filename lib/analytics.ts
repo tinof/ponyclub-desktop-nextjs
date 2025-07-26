@@ -20,17 +20,19 @@ type ConsentStatus = {
  * Integrates with the existing consent management system
  */
 function hasAnalyticsConsent(): boolean {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") {
+    return false;
+  }
 
   // Check for consent cookie from the existing consent system
   try {
     const consentCookie = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("consent="));
+      .find(row => row.startsWith("consent="));
 
     if (consentCookie) {
       const consent = JSON.parse(
-        decodeURIComponent(consentCookie.split("=")[1])
+        decodeURIComponent(consentCookie.split("=")[1]),
       ) as ConsentStatus;
       return consent.analytics;
     }
@@ -48,7 +50,9 @@ function hasAnalyticsConsent(): boolean {
  * Pushes events to the dataLayer via sendGTMEvent
  */
 export const trackGTMEvent = (eventData: Record<string, unknown>) => {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") {
+    return;
+  }
 
   // Check consent first
   if (!hasAnalyticsConsent()) {
@@ -124,7 +128,9 @@ export const trackAdsConversion = ({
   currency = "EUR",
   transactionId = "",
 }: AdsConversionProps) => {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") {
+    return;
+  }
 
   // Check consent first
   if (!hasAnalyticsConsent()) {
@@ -234,7 +240,7 @@ if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
     "\nTry: analyticsDebug.checkEnvironment()",
     "\nTry: analyticsDebug.testBooking()",
     "\nTry: analyticsDebug.testPhoneClick()",
-    "\nTry: analyticsDebug.testAdsConversion()"
+    "\nTry: analyticsDebug.testAdsConversion()",
   );
 }
 

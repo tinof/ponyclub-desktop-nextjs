@@ -85,7 +85,7 @@ export default function ForSchoolsPage() {
               <OptimizedImage
                 src="/images/ponyclub_logo.png"
                 alt="Pony Club Logo"
-                fill
+                fill={true}
                 sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px"
                 className="object-contain p-1"
                 imageType="logo"
@@ -135,12 +135,12 @@ export default function ForSchoolsPage() {
             <OptimizedImage
               src="/images/Children_In_Lifejackets_Colorful_OutdoorScene_Riverside.jpg"
               alt="Παιδιά σε σχολική εκδρομή στον Αχέροντα"
-              fill
+              fill={true}
               className={`
                 object-cover object-center transition-transform duration-700
                 hover:scale-105
               `}
-              priority
+              priority={true}
               imageType="hero"
             />
             <div
@@ -448,7 +448,7 @@ export default function ForSchoolsPage() {
                     <OptimizedImage
                       src="/images/children_rafting_activity_bright_outdoors.jpg"
                       alt="Σχολική εκδρομή στον Αχέροντα"
-                      fill
+                      fill={true}
                       imageType="content"
                       className={`
                         object-cover transition-transform duration-700
@@ -535,7 +535,7 @@ export default function ForSchoolsPage() {
                     <OptimizedImage
                       src="/images/Rafting_Group_YellowHelmets_OutdoorRiver.jpg"
                       alt="Παιδιά σε δραστηριότητες"
-                      fill
+                      fill={true}
                       className={`
                         object-cover transition-transform duration-700
                         group-hover:scale-110
@@ -701,7 +701,7 @@ export default function ForSchoolsPage() {
                             "Τοξοβολία",
                             "Πεζοπορία",
                             "Εξοπλισμός",
-                          ].map((item) => (
+                          ].map(item => (
                             <span
                               key={item}
                               className={`
@@ -887,7 +887,7 @@ export default function ForSchoolsPage() {
                         <OptimizedImage
                           src={image.src}
                           alt={image.alt}
-                          fill
+                          fill={true}
                           className={`
                             object-cover transition-transform duration-700
                             group-hover:scale-110
