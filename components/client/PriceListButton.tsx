@@ -5,31 +5,31 @@ import { useState } from "react";
 
 // Dynamic import for the popup to reduce initial bundle size
 const DynamicVintagePriceListPopup = dynamic(
-	() =>
-		import(
-			/* webpackChunkName: "price-list-popup" */ "@/components/ui/VintagePriceListPopup"
-		).then((mod) => ({
-			default: mod.VintagePriceListPopup,
-		})),
-	{
-		ssr: false,
-		loading: () => null, // No loading state needed for popup - it opens instantly
-	},
+  () =>
+    import(
+      /* webpackChunkName: "price-list-popup" */ "@/components/ui/VintagePriceListPopup"
+    ).then(mod => ({
+      default: mod.VintagePriceListPopup,
+    })),
+  {
+    ssr: false,
+    loading: () => null, // No loading state needed for popup - it opens instantly
+  },
 );
 
 interface PriceListButtonProps {
-	text: string;
+  text: string;
 }
 
 export default function PriceListButton({ text }: PriceListButtonProps) {
-	const [isPriceListOpen, setIsPriceListOpen] = useState(false);
+  const [isPriceListOpen, setIsPriceListOpen] = useState(false);
 
-	return (
-		<>
-			<button
-				type="button"
-				onClick={() => setIsPriceListOpen(true)}
-				className={`
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setIsPriceListOpen(true)}
+        className={`
           mt-4 mb-8 rounded-lg px-8 py-3 text-lg font-bold
           text-white shadow-lg transition-all duration-300
           hover:shadow-xl hover:scale-105
@@ -40,17 +40,17 @@ export default function PriceListButton({ text }: PriceListButtonProps) {
           font-serif tracking-wider uppercase
           transform
         `}
-				aria-label="Open price list"
-			>
-				{text}
-			</button>
+        aria-label="Open price list"
+      >
+        {text}
+      </button>
 
-			{isPriceListOpen && (
-				<DynamicVintagePriceListPopup
-					isOpen={isPriceListOpen}
-					onClose={() => setIsPriceListOpen(false)}
-				/>
-			)}
-		</>
-	);
+      {isPriceListOpen && (
+        <DynamicVintagePriceListPopup
+          isOpen={isPriceListOpen}
+          onClose={() => setIsPriceListOpen(false)}
+        />
+      )}
+    </>
+  );
 }

@@ -6,68 +6,68 @@ import type React from "react";
 import { useLanguage } from "@/contexts/language-context";
 
 interface VintagePriceListPopupProps {
-	isOpen: boolean;
-	onClose: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export const VintagePriceListPopup: React.FC<VintagePriceListPopupProps> = ({
-	isOpen,
-	onClose,
+  isOpen,
+  onClose,
 }) => {
-	const { t } = useLanguage();
+  const { t } = useLanguage();
 
-	// Activity icons matching VintagePackageCard
-	const getActivityIcon = (activity: string) => {
-		if (
-			activity.toLowerCase().includes("riding") ||
-			activity.toLowerCase().includes("ιππασια")
-		) {
-			return "🐎"; // Horse emoji for riding
-		}
-		if (activity.toLowerCase().includes("rafting")) {
-			return "🌊"; // Water wave emoji for rafting
-		}
-		if (
-			activity.toLowerCase().includes("kayak") ||
-			activity.toLowerCase().includes("καγιακ")
-		) {
-			return "🚣"; // Rowing emoji for kayaking
-		}
-		return "•"; // Default bullet point
-	};
+  // Activity icons matching VintagePackageCard
+  const getActivityIcon = (activity: string) => {
+    if (
+      activity.toLowerCase().includes("riding") ||
+      activity.toLowerCase().includes("ιππασια")
+    ) {
+      return "🐎"; // Horse emoji for riding
+    }
+    if (activity.toLowerCase().includes("rafting")) {
+      return "🌊"; // Water wave emoji for rafting
+    }
+    if (
+      activity.toLowerCase().includes("kayak") ||
+      activity.toLowerCase().includes("καγιακ")
+    ) {
+      return "🚣"; // Rowing emoji for kayaking
+    }
+    return "•"; // Default bullet point
+  };
 
-	if (!isOpen) {
-		return null;
-	}
+  if (!isOpen) {
+    return null;
+  }
 
-	return (
-		<AnimatePresence>
-			{isOpen && (
-				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					className={`
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className={`
             fixed inset-0 z-50 flex items-center justify-center bg-white/85 p-4
             backdrop-blur-sm
           `}
-					onClick={onClose}
-				>
-					<motion.div
-						initial={{ scale: 0.9, y: 20 }}
-						animate={{ scale: 1, y: 0 }}
-						exit={{ scale: 0.9, y: 20, opacity: 0 }}
-						transition={{ type: "spring", stiffness: 300, damping: 30 }}
-						className={`
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className={`
               relative max-h-[90vh] w-full max-w-2xl overflow-y-auto
               shadow-2xl
             `}
-						onClick={(e) => e.stopPropagation()}
-					>
-						{/* Vintage Card Container */}
-						<div className="relative">
-							{/* Vintage styling with CSS-in-JS */}
-							<style jsx={true}>{`
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Vintage Card Container */}
+            <div className="relative">
+              {/* Vintage styling with CSS-in-JS */}
+              <style jsx={true}>{`
                 .vintage-modal {
                   background: linear-gradient(135deg, #faf9f6 0%, #f5f2eb 100%);
                   border: 6px solid #2d5a3d;
@@ -278,116 +278,116 @@ export const VintagePriceListPopup: React.FC<VintagePriceListPopupProps> = ({
                 }
               `}</style>
 
-							<div className="vintage-modal">
-								{/* Corner Flourishes */}
-								<div className="corner-flourish top-left" />
-								<div className="corner-flourish top-right" />
-								<div className="corner-flourish bottom-left" />
-								<div className="corner-flourish bottom-right" />
+              <div className="vintage-modal">
+                {/* Corner Flourishes */}
+                <div className="corner-flourish top-left" />
+                <div className="corner-flourish top-right" />
+                <div className="corner-flourish bottom-left" />
+                <div className="corner-flourish bottom-right" />
 
-								{/* Close Button */}
-								<button
-									type="button"
-									onClick={onClose}
-									className={`
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className={`
                     absolute top-4 right-4 rounded-full p-2 text-emerald-800
                     transition-all duration-200 z-10 bg-white/90 hover:bg-white
                     border-2 border-emerald-800 hover:border-emerald-900
                     hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-600
                   `}
-									aria-label="Close"
-								>
-									<X size={22} />
-								</button>
+                  aria-label="Close"
+                >
+                  <X size={22} />
+                </button>
 
-								{/* Title */}
-								<h2 className="vintage-title">{t.priceListPopup.title}</h2>
+                {/* Title */}
+                <h2 className="vintage-title">{t.priceListPopup.title}</h2>
 
-								{/* Activity Sections */}
-								<div className="space-y-6">
-									{/* Riding Section */}
-									<div className="activity-section">
-										<h3 className="activity-title">
-											<span className="activity-icon">
-												{getActivityIcon("riding")}
-											</span>
-											{t.priceListPopup.ridingTitle}
-										</h3>
-										<div className="price-item">
-											{t.priceListPopup.riding_10_15_min}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.riding_30_min}
-										</div>
-									</div>
+                {/* Activity Sections */}
+                <div className="space-y-6">
+                  {/* Riding Section */}
+                  <div className="activity-section">
+                    <h3 className="activity-title">
+                      <span className="activity-icon">
+                        {getActivityIcon("riding")}
+                      </span>
+                      {t.priceListPopup.ridingTitle}
+                    </h3>
+                    <div className="price-item">
+                      {t.priceListPopup.riding_10_15_min}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.riding_30_min}
+                    </div>
+                  </div>
 
-									{/* Rafting Section */}
-									<div className="activity-section">
-										<h3 className="activity-title">
-											<span className="activity-icon">
-												{getActivityIcon("rafting")}
-											</span>
-											{t.priceListPopup.raftingTitle}
-										</h3>
-										<div className="includes-note">
-											{t.priceListPopup.raftingIncludes}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.raftingAdults}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.raftingChildren}
-										</div>
-									</div>
+                  {/* Rafting Section */}
+                  <div className="activity-section">
+                    <h3 className="activity-title">
+                      <span className="activity-icon">
+                        {getActivityIcon("rafting")}
+                      </span>
+                      {t.priceListPopup.raftingTitle}
+                    </h3>
+                    <div className="includes-note">
+                      {t.priceListPopup.raftingIncludes}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.raftingAdults}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.raftingChildren}
+                    </div>
+                  </div>
 
-									{/* Kayak Section */}
-									<div className="activity-section">
-										<h3 className="activity-title">
-											<span className="activity-icon">
-												{getActivityIcon("kayak")}
-											</span>
-											{t.priceListPopup.kayakTitle}
-										</h3>
-										<div className="includes-note">
-											{t.priceListPopup.kayakIncludes}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.kayakSingle}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.kayakDual}
-										</div>
-									</div>
+                  {/* Kayak Section */}
+                  <div className="activity-section">
+                    <h3 className="activity-title">
+                      <span className="activity-icon">
+                        {getActivityIcon("kayak")}
+                      </span>
+                      {t.priceListPopup.kayakTitle}
+                    </h3>
+                    <div className="includes-note">
+                      {t.priceListPopup.kayakIncludes}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.kayakSingle}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.kayakDual}
+                    </div>
+                  </div>
 
-									{/* Extras Section */}
-									<div className="activity-section">
-										<h3 className="activity-title">
-											<span className="activity-icon">🥾</span>
-											{t.priceListPopup.extrasTitle}
-										</h3>
-										<div className="price-item">
-											{t.priceListPopup.extrasShoes}
-										</div>
-										<div className="price-item">
-											{t.priceListPopup.extrasPhoneCase}
-										</div>
-									</div>
-								</div>
+                  {/* Extras Section */}
+                  <div className="activity-section">
+                    <h3 className="activity-title">
+                      <span className="activity-icon">🥾</span>
+                      {t.priceListPopup.extrasTitle}
+                    </h3>
+                    <div className="price-item">
+                      {t.priceListPopup.extrasShoes}
+                    </div>
+                    <div className="price-item">
+                      {t.priceListPopup.extrasPhoneCase}
+                    </div>
+                  </div>
+                </div>
 
-								{/* Close Button */}
-								<button
-									type="button"
-									onClick={onClose}
-									className="close-button"
-									aria-label="Close price list"
-								>
-									{t.priceListPopup.close}
-								</button>
-							</div>
-						</div>
-					</motion.div>
-				</motion.div>
-			)}
-		</AnimatePresence>
-	);
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="close-button"
+                  aria-label="Close price list"
+                >
+                  {t.priceListPopup.close}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 };
