@@ -32,31 +32,10 @@ export default function BookingButton({
   sourcePage = "unknown",
   packageType,
 }: BookingButtonProps) {
-  // Helper function to determine the correct Google Ads conversion label
+  // Use the new, single conversion label for all website bookings
   const getConversionLabel = useCallback(() => {
-    if (conversionLabel) {
-      return conversionLabel;
-    }
-
-    // Map package type and source page to conversion labels from Google Ads
-    const conversionMap = {
-      package1: {
-        homepage: "w73CCPf9-e8aEMz6q8gp", // Package 1 Booking - Homepage (€18)
-        "package-page": "5A7RCLybo_gaEMz6q8gp", // Package 1 Booking - Package Page (€25)
-      },
-      package2: {
-        homepage: "yTUXCPr9-e8aEMz6q8gp", // Package 2 Booking - Homepage (€20)
-        "package-page": "z5nWCLmbo_gaEMz6q8gp", // Package 2 Booking - Package Page (€30)
-      },
-    };
-
-    return (
-      packageType &&
-      conversionMap[packageType]?.[
-        sourcePage as keyof typeof conversionMap.package1
-      ]
-    );
-  }, [conversionLabel, packageType, sourcePage]);
+    return "FfUNCNSDovkaEMz6q8gp";
+  }, []);
 
   // Get conversion value based on package and source
   const getConversionValue = useCallback(() => {
@@ -86,15 +65,13 @@ export default function BookingButton({
       sourcePage: sourcePage || "unknown",
     });
 
-    // Track Google Ads conversion if we have a conversion label
+    // Track Google Ads conversion with the new dynamic value system
     const adsConversionLabel = getConversionLabel();
-    if (adsConversionLabel) {
-      trackAdsConversion({
-        conversionLabel: adsConversionLabel,
-        value: getConversionValue(),
-        currency: "EUR",
-      });
-    }
+    trackAdsConversion({
+      conversionLabel: adsConversionLabel,
+      value: getConversionValue(),
+      currency: "EUR",
+    });
 
     if (process.env.NODE_ENV === "development") {
       console.log(
