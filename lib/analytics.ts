@@ -176,8 +176,4 @@ export const trackAdsConversion = ({
   }
 };
 
-
-
-
-
 // Note: This file now uses Google Tag Manager (GTM) instead of direct gtag calls

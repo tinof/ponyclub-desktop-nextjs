@@ -52,7 +52,6 @@ export default function ClientLayout({
           {isBokunEnabled && (
             <div className="bokunWidget" style={{ display: "none" }} />
           )}
-
         </ThemeProvider>
       </ConsentWrapper>
     </LanguageProvider>
