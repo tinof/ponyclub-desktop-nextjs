@@ -3,7 +3,7 @@
 import type React from "react";
 import ConsentProvider from "@/components/client/ConsentProvider";
 import CookieConsentBanner from "@/components/client/CookieConsentBanner";
-import AnalyticsStatus from "@/components/dev/AnalyticsStatus";
+
 import PageLayout from "@/components/PageLayout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/contexts/language-context";
@@ -52,7 +52,7 @@ export default function ClientLayout({
           {isBokunEnabled && (
             <div className="bokunWidget" style={{ display: "none" }} />
           )}
-          <AnalyticsStatus />
+
         </ThemeProvider>
       </ConsentWrapper>
     </LanguageProvider>

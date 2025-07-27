@@ -40,6 +40,7 @@ interface VintagePackageCardProps {
   packageType?: "package1" | "package2";
   sourcePage?: string;
   showLearnMoreLink?: boolean;
+  isAboveFold?: boolean;
 }
 
 export default function VintagePackageCard({
@@ -58,6 +59,7 @@ export default function VintagePackageCard({
   packageType,
   sourcePage,
   showLearnMoreLink = true,
+  isAboveFold = false,
 }: VintagePackageCardProps) {
   const [nonce, setNonce] = useState("");
   const { language } = useLanguage();
@@ -172,31 +174,34 @@ export default function VintagePackageCard({
           <div className="vintage-main relative">
             <OptimizedImage
               src={images.main}
-              alt={`${title} main activity`}
+              alt={`${title} - Main adventure activity featuring outdoor river activities`}
               fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
+              isAboveFold={isAboveFold}
             />
           </div>
           <div className="vintage-top relative">
             <OptimizedImage
               src={images.top}
-              alt={`${title} activity 2`}
+              alt={`${title} - Horse riding adventure activity`}
               fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
+              isAboveFold={isAboveFold}
             />
           </div>
           <div className="vintage-bottom relative">
             <OptimizedImage
               src={images.bottom}
-              alt={`${title} activity 3`}
+              alt={`${title} - River adventure and outdoor activities`}
               fill={true}
               sizes="(max-width: 512px) 45vw, 240px"
               className="h-full w-full object-cover sepia-[0.3] contrast-[1.1]"
               imageType="default"
+              isAboveFold={isAboveFold}
             />
           </div>
         </div>

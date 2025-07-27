@@ -1,15 +1,15 @@
-# Biome v2.0 Configuration Guide
+# Biome v2.1 Configuration Guide
 
-This document explains how to install, configure, and use Biome v2.0 as the unified linter and formatter in this Next.js 15 project. This guide reflects our optimized production configuration and best practices.
+This document explains how to install, configure, and use Biome v2.1 as the unified linter and formatter in this Next.js 15 project. This guide reflects our optimized production configuration and best practices for VSCode integration.
 
 ---
 
 ## 1. Installation
 
-Add Biome v2.0 as a dev dependency:
+Add Biome v2.1 as a dev dependency:
 
 ```bash
-pnpm add -D @biomejs/biome@^2.0.6
+pnpm add -D @biomejs/biome@^2.1.2
 ```
 
 Update your `package.json` scripts:
@@ -34,53 +34,88 @@ Our production-ready configuration for Next.js 15 with TypeScript:
 
 ```json
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
   "files": {
-    "ignoreUnknown": false,
     "includes": [
       "**",
-      "!.next/**",
       "!node_modules/**",
-      "!dist/**",
+      "!.next/**",
+      "!out/**",
       "!build/**",
-      "!coverage/**",
+      "!dist/**",
+      "!.vercel/**",
       "!.turbo/**",
-      "!tsconfig.tsbuildinfo",
-      "!pnpm-lock.yaml",
-      "!package-lock.json",
-      "!yarn.lock",
       "!public/~partytown/**",
-      "!data/**/*.js",
-      "!**/*.min.js",
-      "!**/*.generated.*"
-    ]
+      "!critical-css/**",
+      "!bundle-analysis/**",
+      "!.biome-cache/**",
+      "!google-ads-data/**",
+      "!.augment/**",
+      "!.clinerules/**",
+      "!docs/**",
+      "!specs/**",
+      "!.ai/**",
+      "!.github/**",
+      "!.husky/**",
+      "!public/images/**",
+      "!public/favicon_io/**",
+      "!*.tsbuildinfo",
+      "!next-env.d.ts",
+      "!biome-report.txt",
+      "!tracing.json",
+      "!*.tmp",
+      "!*.temp",
+      "!*.log",
+      "!*.md",
+      "!*.yml",
+      "!*.yaml",
+      "!*.png",
+      "!*.jpg",
+      "!*.jpeg",
+      "!*.gif",
+      "!*.svg",
+      "!*.ico",
+      "!*.webp",
+      "!*.txt",
+      "!.npmrc",
+      "!.browserslistrc",
+      "!.aidigestignore",
+      "!pnpm-lock.yaml",
+      "!pnpm-workspace.yaml"
+    ],
+    "ignoreUnknown": true
   },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": true
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
   },
   "linter": {
     "enabled": true,
-    "domains": {
-      "next": "recommended",
-      "react": "recommended"
-    },
     "rules": {
+      "recommended": true,
+      "style": "warn",
+      "a11y": "warn",
       "complexity": {
-        "noUselessFragments": "warn"
+        "recommended": true,
+        "noUselessFragments": "off"
       },
-      "suspicious": {
-        "noExplicitAny": "warn"
-      },
-      "security": {
-        "noDangerouslySetInnerHtml": "warn"
-      },
-      "style": {
-        "useImportType": "error"
+      "nursery": {
+        "recommended": true
       },
       "correctness": {
+        "recommended": true,
         "useExhaustiveDependencies": "warn"
+      },
+      "security": {
+        "recommended": true,
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "performance": "warn",
+      "suspicious": {
+        "recommended": true,
+        "noExplicitAny": "warn"
       }
     }
   },
@@ -94,8 +129,9 @@ Our production-ready configuration for Next.js 15 with TypeScript:
     "formatter": {
       "quoteStyle": "double",
       "jsxQuoteStyle": "double",
-      "trailingCommas": "es5",
-      "semicolons": "always"
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "asNeeded"
     }
   },
   "json": {
@@ -104,69 +140,244 @@ Our production-ready configuration for Next.js 15 with TypeScript:
       "indentWidth": 2
     }
   },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
   "assist": {
     "enabled": true
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "scripts/**",
+        "next.config.js",
+        "middleware.ts",
+        "postcss.config.mjs",
+        "tailwind.config.js",
+        "knip.json",
+        "lefthook.yml"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noNodejsModules": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "app/**/privacy-settings/**",
+        "components/**/Consent*.tsx",
+        "components/**/c15t*.tsx",
+        "components/**/ConsentBridge.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noDocumentCookie": "off",
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["types/**/*.d.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useExportType": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "app/**/page.tsx",
+        "app/**/layout.tsx",
+        "app/**/not-found.tsx",
+        "app/**/error.tsx",
+        "app/**/loading.tsx",
+        "app/**/global-error.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off",
+            "useComponentExportOnlyModules": "off",
+            "noProcessEnv": "off"
+          }
+        }
+      }
+    }
+  ]
 }
 ```
 
 ### 2.1 Key Configuration Features
 
 #### Schema Reference
-- `$schema`: Provides IDE autocomplete and validation for Biome v2.0.6
+- `$schema`: Provides IDE autocomplete and validation for Biome v2.1.2
 
-#### Global File Inclusion
-- Uses global `files.includes` with negation patterns instead of tool-specific includes
-- More efficient and maintainable than duplicating patterns across tools
+#### File Inclusion Strategy
+- Uses `files.includes` with negated patterns (`!pattern/**`) for precise control
+- Starts with `**` to include all files, then excludes unwanted directories and file types
+- Uses `ignoreUnknown: true` to suppress warnings for unsupported file types
+- Optimized for VSCode extension performance
 
 #### Next.js 15 Optimized Exclusions
 - `.next/**`: Build output directory
 - `.turbo/**`: Turbopack cache
 - `public/~partytown/**`: Partytown worker files
-- `data/**/*.js`: Generated Bokun widget files
-- `**/*.generated.*`: Any generated files
+- `public/images/**`: Image assets
+- `google-ads-data/**`: Analytics data files
+- Build artifacts: `dist/**`, `build/**`, `.vercel/**`
+- Configuration and lock files: `*.md`, `*.yml`, `pnpm-lock.yaml`
 
 #### Enhanced Linting Rules
-- `useImportType`: Enforces proper TypeScript import types
+- **Style rules enabled**: `style: "warn"` for consistent coding patterns
+- **Accessibility rules enabled**: `a11y: "warn"` for better accessibility
+- **Nursery rules enabled**: `nursery.recommended: true` for latest improvements
+- **Security rules enabled**: `security.recommended: true` with selective overrides
 - `useExhaustiveDependencies`: Warns about missing React hook dependencies
-- `noUselessFragments`: Warns about unnecessary React fragments
 - `noExplicitAny`: Warns about explicit `any` types
 
 #### Language-Specific Settings
-- **JavaScript/TypeScript**: Consistent double quotes, semicolons, ES5 trailing commas
+- **JavaScript/TypeScript**: Double quotes, semicolons, modern trailing commas (`"all"`), cleaner arrow functions (`"asNeeded"`)
 - **JSON**: Proper indentation and formatting enabled
+- **CSS**: Formatting support enabled
+
+#### Override Configurations
+- **Next.js App Router files**: Allows default exports and mixed exports for `page.tsx`, `layout.tsx`, etc.
+- **Configuration files**: Permits Node.js modules in `next.config.js`, `middleware.ts`, etc.
+- **Type definition files**: Relaxed rules for `.d.ts` files
+- **Privacy/consent components**: Special handling for GDPR compliance components
 
 ---
 
-## 3. Next.js 15 Specific Considerations
+## 3. VSCode Extension Setup & Performance
 
-### 3.1 Turbopack Integration
+### 3.1 Installing the Extension
+
+Install the official Biome extension from the VS Code Marketplace:
+
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
+3. Search for "Biome" 
+4. Install the official extension by "biomejs"
+
+### 3.2 Recommended VSCode Settings
+
+Add these settings to your VS Code `settings.json` for optimal performance:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "biome.enabled": true,
+  "biome.requireConfiguration": true
+}
+```
+
+#### Setting Explanations:
+
+- **`editor.formatOnSave`**: Automatically formats files when saving
+- **`editor.defaultFormatter`**: Uses Biome as the default formatter
+- **`source.fixAll.biome`**: Applies safe auto-fixes on save
+- **`source.organizeImports.biome`**: Sorts imports on save
+- **`biome.requireConfiguration`**: Only activates Biome when `biome.json` is present
+
+### 3.3 Performance Optimization
+
+#### Why Our Configuration Prevents High CPU Usage
+
+1. **Optimized File Inclusion**: We use `files.includes` with negated patterns instead of experimental features like `experimentalScannerIgnores` which can cause performance issues with the VSCode extension.
+
+2. **Comprehensive Exclusion Patterns**: Our configuration excludes:
+   - Large directories (`node_modules`, `.next`, `.turbo`)
+   - Image files (`*.png`, `*.jpg`, `*.svg`, etc.)
+   - Build artifacts and dependencies (`dist`, `build`, `.vercel`)
+   - Configuration and lock files (`*.md`, `*.yml`, `pnpm-lock.yaml`)
+   - Project-specific directories (`.ai`, `.github`, `.husky`, `docs`, `specs`)
+
+3. **VCS Integration**: `useIgnoreFile: true` leverages your `.gitignore` for additional exclusions.
+
+4. **Unknown File Handling**: `ignoreUnknown: true` prevents warnings for unsupported file types.
+
+#### Additional Performance Settings
+
+For workspace-specific optimization, add to your `.vscode/settings.json`:
+
+```json
+{
+  "biome.lsp.trace.server": "off",
+  "biome.runFromTemporaryLocation": false
+}
+```
+
+### 3.4 Troubleshooting High CPU Usage
+
+If you experience high CPU usage:
+
+1. **Check Configuration**: Ensure you're using `files.includes` with negated patterns (not experimental features)
+2. **Restart Extension**: Disable and re-enable the Biome extension
+3. **Clear Cache**: Close VS Code completely, kill any `biome` processes, then restart
+4. **Check File Count**: Run `pnpm biome check --max-diagnostics=0` to see how many files are processed
+
+#### Debugging Commands
+
+```bash
+# Test configuration without processing
+pnpm biome check --max-diagnostics=0 --no-errors-on-unmatched
+
+# Check which files Biome processes
+pnpm biome lint --reporter=json | jq '.diagnostics[].location.path' | sort | uniq
+
+# Performance timing
+time pnpm biome check --max-diagnostics=0
+```
+
+---
+
+## 4. Next.js 15 Specific Considerations
+
+### 4.1 Turbopack Integration
 Our configuration properly excludes Turbopack cache files (`.turbo/**`) for optimal performance.
 
-### 3.2 Tailwind v4 CSS Handling
-Note: Biome v2.0 may have parsing issues with Tailwind v4's `@theme` syntax. Consider:
-- Excluding problematic CSS files if needed: `"!app/globals.css"`
+### 4.2 Tailwind v4 CSS Handling
+Note: Biome v2.1 may have parsing issues with Tailwind v4's `@theme` syntax. Consider:
+- Excluding problematic CSS files if needed: add `"app/globals.css"` to ignore list
 - Using PostCSS for CSS processing instead
 
-### 3.3 Partytown Integration
+### 4.3 Partytown Integration
 Excludes Partytown worker files (`public/~partytown/**`) to prevent unnecessary processing.
 
-### 3.4 Performance Optimization
-- Uses global file inclusion patterns for efficiency
+### 4.4 Performance Optimization
+- Uses stable file exclusion patterns for efficiency
 - Excludes build artifacts and dependencies
 - Processes ~110 files in typical runs (vs 1000+ without proper exclusions)
 
 ---
 
-## 4. CLI Flags & Commands
+## 5. CLI Flags & Commands
 
-### 4.1 Essential Flags
+### 5.1 Essential Flags
 - `--max-diagnostics=N`: Raise diagnostic limit (default: 20, we use 2000)
 - `--write`: Apply safe fixes automatically
 - `--unsafe`: Also apply fixes flagged as unsafe
 - `--no-errors-on-unmatched`: Don't error when no files match patterns
 
-### 4.2 Common Commands
+### 5.2 Common Commands
 ```bash
 # Check and fix with high diagnostic limit
 pnpm biome check --write --max-diagnostics=2000
@@ -183,21 +394,22 @@ pnpm biome check --write app/**/*.tsx
 
 ---
 
-## 5. Best Practices
+## 6. Best Practices
 
-### 5.1 Configuration Best Practices
-1. **Use Global File Inclusion**: Prefer `files.includes` over tool-specific includes
-2. **Leverage Negation Patterns**: Use `!pattern` to exclude files efficiently
+### 6.1 Configuration Best Practices
+1. **Use Stable Features**: Prefer `files.includes` with negated patterns over experimental features
+2. **Leverage Glob Patterns**: Use efficient glob patterns for exclusions starting with `**` then negating unwanted paths
 3. **Enable Schema Validation**: Always include `$schema` for IDE support
-4. **Optimize for Performance**: Exclude build artifacts and large generated files
+4. **Optimize for Performance**: Exclude build artifacts, images, and large generated files
+5. **Use Overrides**: Configure specific rules for different file types (App Router, config files, type definitions)
 
-### 5.2 Development Workflow
+### 6.2 Development Workflow
 1. **Pre-commit Integration**: Run `pnpm check` before commits
 2. **IDE Integration**: Configure your editor to use Biome for formatting
 3. **Gradual Adoption**: Start with warnings, then promote to errors
 4. **Document Exceptions**: Use `// biome-ignore ruleName: reason` for intentional violations
 
-### 5.3 Team Collaboration
+### 6.3 Team Collaboration
 1. **Consistent Configuration**: Share the same `biome.json` across team
 2. **Version Pinning**: Pin Biome version in `package.json` for consistency
 3. **CI Integration**: Run checks in CI/CD pipeline
@@ -205,15 +417,21 @@ pnpm biome check --write app/**/*.tsx
 
 ---
 
-## 6. Troubleshooting
+## 7. Troubleshooting
 
-### 6.1 Common Issues
+### 7.1 Common Issues
+
+#### VSCode Extension High CPU Usage
+```
+Issue: Biome extension consuming 100% CPU
+```
+**Solution**: Ensure you're using `files.includes` with negated patterns instead of experimental features. Restart VS Code and kill any lingering `biome` processes.
 
 #### Configuration Validation Errors
 ```bash
-# Error: Found an unknown key `ignore`
+# Error: Found an unknown key `experimentalScannerIgnores`
 ```
-**Solution**: Use negation patterns in `files.includes` instead of separate `ignore` field.
+**Solution**: Use `files.includes` with negated patterns instead of experimental scanner ignores.
 
 #### CSS Parsing Errors
 ```bash
@@ -225,15 +443,18 @@ pnpm biome check --write app/**/*.tsx
 ```bash
 # Biome is slow or processing too many files
 ```
-**Solution**: Review and optimize `files.includes` patterns, exclude build artifacts.
+**Solution**: Review and optimize `files.includes` patterns, ensure proper exclusion of build artifacts and large directories.
 
-### 6.2 File Inclusion Debugging
+### 7.2 File Inclusion Debugging
 ```bash
 # Test which files Biome will process
 pnpm biome check --max-diagnostics=0 --no-errors-on-unmatched
+
+# Count processed files
+pnpm biome lint --reporter=summary
 ```
 
-### 6.3 Rule-Specific Issues
+### 7.3 Rule-Specific Issues
 ```bash
 # Disable specific rules temporarily
 // biome-ignore lint/suspicious/noExplicitAny: Legacy code needs refactoring
@@ -242,9 +463,9 @@ const data: any = legacyFunction();
 
 ---
 
-## 7. Migration from ESLint/Prettier
+## 8. Migration from ESLint/Prettier
 
-### 7.1 Removing Old Tools
+### 8.1 Removing Old Tools
 ```bash
 # Remove old dependencies
 pnpm remove eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
@@ -253,7 +474,7 @@ pnpm remove eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-
 rm .eslintrc.json .prettierrc .prettierignore
 ```
 
-### 7.2 Package.json Updates
+### 8.2 Package.json Updates
 ```json
 {
   "scripts": {
@@ -266,21 +487,64 @@ rm .eslintrc.json .prettierrc .prettierignore
 
 ---
 
-## 8. AI Agent Instructions
+## 9. VSCode Extension Settings Reference
+
+### 9.1 Available Settings
+
+#### `biome.enabled`
+- **Default**: `true`
+- **Scopes**: global, workspace, workspace folder
+- Controls whether the extension creates LSP sessions
+
+#### `biome.requireConfiguration`
+- **Default**: `false` (recommended: `true`)
+- **Scopes**: global, workspace, workspace folder
+- Only activates when `biome.json` is present
+
+#### `biome.lsp.bin`
+- **Default**: `undefined`
+- **Scopes**: global, workspace, workspace folder
+- Override path to biome binary
+
+#### `biome.lsp.trace.server`
+- **Default**: `off`
+- **Scopes**: global
+- Logging level: `off`, `messages`, `verbose`
+
+### 9.2 Workspace Configuration Example
+
+`.vscode/settings.json`:
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "biome.enabled": true,
+  "biome.requireConfiguration": true,
+  "biome.lsp.trace.server": "off"
+}
+```
+
+---
+
+## 10. AI Agent Instructions
 
 When automating Biome configuration tasks:
 
-### 8.1 Configuration Analysis
+### 10.1 Configuration Analysis
 1. **Parse `biome.json`**: Read schema, files, linter, formatter sections
 2. **Validate Patterns**: Ensure glob patterns match actual project structure
 3. **Check Performance**: Verify exclusion patterns for build artifacts
 
-### 8.2 Automated Updates
+### 10.2 Automated Updates
 1. **Schema Updates**: Keep `$schema` URL current with Biome version
 2. **Rule Adjustments**: Modify rules based on project needs and error patterns
-3. **File Pattern Updates**: Adjust includes/excludes as project structure evolves
+3. **File Pattern Updates**: Adjust ignores as project structure evolves
 
-### 8.3 Testing Configuration
+### 10.3 Testing Configuration
 ```bash
 # Validate configuration
 pnpm biome check --max-diagnostics=10 --no-errors-on-unmatched
@@ -289,7 +553,7 @@ pnpm biome check --max-diagnostics=10 --no-errors-on-unmatched
 time pnpm biome check --max-diagnostics=0
 ```
 
-### 8.4 Integration Commands
+### 10.4 Integration Commands
 ```bash
 # CI/CD integration
 pnpm exec biome check --max-diagnostics=2000 .
@@ -298,150 +562,6 @@ pnpm exec biome check --max-diagnostics=2000 .
 pnpm biome check --write --max-diagnostics=50 --staged
 ```
 
-This guide reflects our production-tested Biome v2.0 configuration optimized for Next.js 15 with TypeScript, ensuring consistent code quality and formatting across the entire codebase.
+---
 
-'''
-
-useSortedClasses
-JavaScript (and super languages)
-Summary
-Rule available since: v1.6.0
-Diagnostic Category: lint/nursery/useSortedClasses
-This rule has an unsafe fix.
-The default severity of this rule is information.
-Caution
-
-This rule is part of the nursery group.
-
-Description
-Enforce the sorting of CSS utility classes.
-
-This rule implements the same sorting algorithm as Tailwind CSS, but supports any utility class framework including UnoCSS.
-
-It is analogous to prettier-plugin-tailwindcss.
-
-Caution
-
-Important notes
-This rule is a work in progress, and is only partially implemented. Progress is being tracked in the following GitHub issue: https://github.com/biomejs/biome/issues/1274
-
-Currently, utility class sorting is not part of the formatter, and is implemented as a linter rule instead, with an automatic fix. The fix is, at this stage, classified as unsafe. This means that it won’t be applied automatically as part of IDE actions such as “fix on save”.
-
-We appreciate any feedback on this rule, and encourage you to try it out and report any issues you find.
-
-Please read this entire documentation page before reporting an issue.
-
-Notably, keep in mind that the following features are not supported yet:
-
-Screen variant sorting (e.g. md:, max-lg:). Only static, dynamic and arbitrary variants are supported.
-Custom utilitites and variants (such as ones introduced by Tailwind CSS plugins). Only the default Tailwind CSS configuration is supported.
-Options such as prefix and separator.
-Object properties (e.g. in clsx calls).
-Please don’t report issues about these features.
-
-Examples
-Invalid
-<div class="px-2 foo p-4 bar" />;
-
-code-block.jsx:1:12 lint/nursery/useSortedClasses  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  ℹ These CSS classes should be sorted.
-  
-  > 1 │ <div class=“px-2 foo p-4 bar” />;
-      │            ^^^^^^^^^^^^^^^^^^
-    2 │ 
-  
-  ℹ Unsafe fix: Sort the classes.
-  
-    1   │ - <div·class=“px-2·foo·p-4·bar”·/>;
-      1 │ + <div·class=“foo·bar·p-4·px-2”·/>;
-    2 2 │   
-  
-<div class="hover:focus:m-2 foo hover:px-2 p-4">
-
-code-block.jsx:2:1 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  ✖ expected &lt; but instead the file ends
-  
-    1 │ <div class=“hover:focus:m-2 foo hover:px-2 p-4”>
-  > 2 │ 
-      │ 
-  
-  ℹ the file ends here
-  
-    1 │ <div class=“hover:focus:m-2 foo hover:px-2 p-4”>
-  > 2 │ 
-      │ 
-  
-Options
-Code-related
-{
-    "options": {
-        "attributes": ["classList"],
-        "functions": ["clsx", "cva", "tw", "tw.*"]
-    }
-}
-
-attributes
-Classes in the class and className JSX attributes are always sorted. Use this option to add more attributes that should be sorted.
-
-functions
-If specified, strings in the indicated functions will be sorted. This is useful when working with libraries like clsx or cva.
-
-clsx("px-2 foo p-4 bar", {
-    "some-css-class": condition,
-});
-
-clsx("some-css-class", {
-    "block mx-4": condition,
-});
-
-Tagged template literals are also supported, for example:
-
-tw`px-2`;
-tw.div`px-2`;
-
-tw`px-2 foo p-4 bar`;
-
-tw.div`px-2 foo p-4 bar`;
-
-Sort-related
-Caution
-
-At the moment, this rule does not support customizing the sort options. Instead, the default Tailwind CSS configuration is hard-coded.
-
-Differences with Prettier
-The main key difference is that Tailwind CSS and its Prettier plugin read and execute the tailwind.config.js JavaScript file, which Biome can’t do. Instead, Biome implements a simpler version of the configuration. The trade-offs are explained below.
-
-Values are not known
-The rule has no knowledge of values such as colors, font sizes, or spacing values, which are normally defined in a configuration file like tailwind.config.js. Instead, the rule matches utilities that support values in a simpler way: if they start with a known utility prefix, such as px- or text-, they’re considered valid.
-
-This has two implications:
-
-False positives: classes can be wrongly recognized as utilities even though their values are incorrect. For example, if there’s a px- utility defined in the configuration, it will match all of the following classes: px-2, px-1337, px-[not-actually-valid], px-literally-anything.
-
-No distinction between different utilities that share the same prefix: for example, text-red-500 and text-lg are both interpreted as the same type of utility by this rule, even though the former refers to a color and the latter to a font size. This results in all utilities that share the same prefix being sorted together, regardless of their actual values.
-
-Custom additions must be specified
-The built-in Tailwind CSS preset (enabled by default) contains the set of utilities and variants that are available with the default configuration. More utilities and variants can be added through Tailwind CSS plugins. In Biome, these need to be manually specified in the Biome configuration file in order to “extend” the preset.
-
-Presets can’t be modified
-In Tailwind CSS, core plugins (which provide the default utilities and variants) can be disabled. In Biome, however, there is no way to disable parts of a preset: it’s all or nothing. A work-around is to, instead of using a preset, manually specify all utilities and variants in the Biome configuration file.
-
-Whitespace is collapsed
-The Tailwind CSS Prettier plugin preserves all original whitespace. This rule, however, collapses all whitespace (including newlines) into single spaces.
-
-This is a deliberate decision. We’re unsure about this behavior, and would appreciate feedback on it. If this is a problem for you, please share a detailed explanation of your use case in the GitHub issue.
-
-How to configure
-biome.json
-{
-  "linter": {
-    "rules": {
-      "nursery": {
-        "useSortedClasses": "error"
-      }
-    }
-  }
-}
-
+This guide reflects our production-tested Biome v2.1 configuration optimized for Next.js 15 with TypeScript, ensuring consistent code quality, formatting, and optimal VSCode extension performance across the entire codebase.

@@ -3,7 +3,6 @@
  * Ensures GDPR compliance and consistent tracking across the application
  *
  * Debug Mode: Set NODE_ENV=development to enable console logging
- * Test Mode: Use window.analyticsDebug = true for verbose logging
  */
 
 "use client";
@@ -177,85 +176,8 @@ export const trackAdsConversion = ({
   }
 };
 
-// Type definition for analytics debug utilities
-interface AnalyticsDebug {
-  trackGTMEvent: typeof trackGTMEvent;
-  trackBookingClick: typeof trackBookingClick;
-  trackPhoneClick: typeof trackPhoneClick;
-  trackAdsConversion: typeof trackAdsConversion;
-  hasConsent: typeof hasAnalyticsConsent;
-  testBooking: () => void;
-  testPhoneClick: () => void;
-  testPhoneClickDesktop: () => void;
-  testAdsConversion: () => void;
-  checkEnvironment: () => void;
-}
 
-// Extend Window interface to include analyticsDebug
-declare global {
-  interface Window {
-    analyticsDebug?: AnalyticsDebug;
-  }
-}
 
-/**
- * Development debugging utilities for GTM
- * Available in browser console for testing
- */
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  // Expose GTM analytics functions for manual testing
-  const analyticsDebug: AnalyticsDebug = {
-    trackGTMEvent,
-    trackBookingClick,
-    trackPhoneClick,
-    trackAdsConversion,
-    hasConsent: hasAnalyticsConsent,
-    testBooking: () => {
-      trackBookingClick({
-        packageName: "Test Package",
-        packagePrice: 100,
-        sourcePage: "debug-test",
-      });
-    },
-    testPhoneClick: () => {
-      trackPhoneClick({
-        phoneNumber: "+30 26650 61314",
-        device: "mobile",
-      });
-      console.log("Phone click test (mobile) fired");
-    },
-    testPhoneClickDesktop: () => {
-      trackPhoneClick({
-        phoneNumber: "+30 26650 61314",
-        device: "desktop",
-      });
-      console.log("Phone click test (desktop) fired");
-    },
-    testAdsConversion: () => {
-      trackAdsConversion({
-        conversionLabel: "w73CCPf9-e8aEMz6q8gp",
-        value: 18,
-        currency: "EUR",
-      });
-      console.log("Google Ads conversion test fired");
-    },
-    checkEnvironment: () => {
-      console.log("GTM Analytics Environment Check:", {
-        GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
-        hasConsent: hasAnalyticsConsent(),
-      });
-    },
-  };
 
-  window.analyticsDebug = analyticsDebug;
-
-  console.log(
-    "[GTM] Debug utilities available at window.analyticsDebug",
-    "\nTry: analyticsDebug.checkEnvironment()",
-    "\nTry: analyticsDebug.testBooking()",
-    "\nTry: analyticsDebug.testPhoneClick()",
-    "\nTry: analyticsDebug.testAdsConversion()",
-  );
-}
 
 // Note: This file now uses Google Tag Manager (GTM) instead of direct gtag calls

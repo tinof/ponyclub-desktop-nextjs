@@ -81,9 +81,9 @@ export default function PackagesPageContent({
                     children: "10 €",
                   }}
                   images={{
-                    main: "/images/Rafting_Group_Blue_Adventure_River.jpg",
-                    top: "/images/round2.jpg",
-                    bottom: "/images/round1.jpg",
+                    main: "/images/packages/optimized/package1-main.jpg",
+                    top: "/images/packages/optimized/package1-top.jpg",
+                    bottom: "/images/packages/optimized/package1-bottom.jpg",
                   }}
                   bookingId="bokun_5b20d531_ca57_4550_94c0_0511c35077a0"
                   dataSrc="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020598?partialView=1"
@@ -117,9 +117,9 @@ export default function PackagesPageContent({
                     children: "15 €",
                   }}
                   images={{
-                    main: "/images/Kayaker_Red_Adventurous_River.jpg",
-                    top: "/images/round3.jpg",
-                    bottom: "/images/round1.jpg",
+                    main: "/images/packages/optimized/package2-main.jpg",
+                    top: "/images/packages/optimized/package2-top.jpg",
+                    bottom: "/images/packages/optimized/package2-bottom.jpg",
                   }}
                   bookingId="bokun_cfffa70c_61e3_4f58_91f4_e2f6cb562f53"
                   dataSrc="https://widgets.bokun.io/online-sales/c078b762-6f7f-474f-8edb-bdd1bdb7d12a/experience/1020569?partialView=1"
