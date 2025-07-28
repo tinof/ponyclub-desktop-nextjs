@@ -11,7 +11,6 @@ interface GoogleAnalyticsProps {
  *
  * This component loads Google Analytics using @next/third-parties for optimal performance.
  * It automatically runs in a web worker via Partytown when available.
- * It should be wrapped with ConsentGate in the layout to ensure consent-based loading.
  */
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
   if (process.env.NODE_ENV === "development") {

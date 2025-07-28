@@ -1,8 +1,6 @@
 "use client";
 
 import type React from "react";
-import ConsentProvider from "@/components/client/ConsentProvider";
-import CookieConsentBanner from "@/components/client/CookieConsentBanner";
 
 import PageLayout from "@/components/PageLayout";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -25,35 +23,22 @@ export default function ClientLayout({
   initialLocale,
 }: ClientLayoutProps) {
   const isBokunEnabled = process.env.NEXT_PUBLIC_ENABLE_BOKUN !== "false";
-  const isC15tEnabled = process.env.NEXT_PUBLIC_ENABLE_C15T !== "false";
-
-  // Conditional wrapper for c15t consent provider
-  const ConsentWrapper = ({ children }: { children: React.ReactNode }) => {
-    if (isC15tEnabled) {
-      return <ConsentProvider>{children}</ConsentProvider>;
-    }
-    return <>{children}</>;
-  };
 
   return (
     <LanguageProvider initialLang={initialLocale}>
-      <ConsentWrapper>
-        <BokunInitializer />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={true}
-          disableTransitionOnChange={true}
-        >
-          <PageLayout>{children}</PageLayout>
-          {/* Show c15t banner only if enabled */}
-          {isC15tEnabled && <CookieConsentBanner />}
-          {/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
-          {isBokunEnabled && (
-            <div className="bokunWidget" style={{ display: "none" }} />
-          )}
-        </ThemeProvider>
-      </ConsentWrapper>
+      <BokunInitializer />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        enableSystem={true}
+        disableTransitionOnChange={true}
+      >
+        <PageLayout>{children}</PageLayout>
+        {/* Hidden Bokun widget container to ensure script initialization - only if Bokun is enabled */}
+        {isBokunEnabled && (
+          <div className="bokunWidget" style={{ display: "none" }} />
+        )}
+      </ThemeProvider>
     </LanguageProvider>
   );
 }

@@ -15,7 +15,6 @@ interface BookingButtonProps {
   trackingLabel?: string; // For identifying which button was clicked
   packageName?: string; // For enhanced ecommerce tracking
   packagePrice?: string; // For conversion value tracking
-  conversionLabel?: string; // Google Ads conversion label
   sourcePage?: string; // Source page context (homepage, package-page, etc.)
   packageType?: "package1" | "package2"; // Package type for specific conversion labels
 }
@@ -28,7 +27,6 @@ export default function BookingButton({
   trackingLabel = "Unknown",
   packageName = "Unknown Package",
   packagePrice = "0",
-  conversionLabel,
   sourcePage = "unknown",
   packageType,
 }: BookingButtonProps) {

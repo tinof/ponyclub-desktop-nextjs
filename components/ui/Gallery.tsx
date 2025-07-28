@@ -45,13 +45,12 @@ export function Gallery({
         />
       </h2>
 
-      <div
+      <section
         className={`
           grid grid-cols-1 gap-4
           sm:grid-cols-2
           lg:grid-cols-3
         `}
-        role="region"
         aria-label={ariaLabel}
       >
         {images.map((image, index) => (
@@ -82,7 +81,7 @@ export function Gallery({
             />
           </button>
         ))}
-      </div>
+      </section>
 
       <div
         className={`

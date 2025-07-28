@@ -1,80 +1,53 @@
 "use client";
 
-import { ConsentManagerDialog, useConsentManager } from "@c15t/nextjs";
 import { useEffect, useState } from "react";
-import { checkConsentStatus } from "@/components/client/ConsentBridge";
-
-// Note: Using 'as any' for consent categories due to c15t library type constraints
 
 interface PrivacySettingsClientProps {
   locale: string;
 }
 
-// Component to handle c15t dialog with proper hooks
-function _C15tPrivacyDialog({ locale }: { locale: string }) {
-  const consentManager = useConsentManager();
+// Helper function to get current consent status from cookies
+function getConsentStatus() {
+  if (typeof window === "undefined") {
+    return { analytics: false, marketing: false };
+  }
 
-  // Monitor consent changes and sync to legacy format
-  useEffect(() => {
-    // Get current consent state from c15t
-    // Map analytics to marketing since c15t only has 'necessary' and 'marketing'
-    const marketing = consentManager.hasConsentFor("marketing" as any);
-    const analytics = marketing; // Analytics follows marketing in c15t
+  try {
+    const consentCookie = document.cookie
+      .split("; ")
+      .find(row => row.startsWith("consent="));
 
-    // Update the legacy cookie format for backward compatibility
-    const legacyConsent = { analytics, marketing };
-    const cookieValue = encodeURIComponent(JSON.stringify(legacyConsent));
-    const expires = new Date();
-    expires.setFullYear(expires.getFullYear() + 1);
-
-    document.cookie = `consent=${cookieValue}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
-
-    // Trigger storage event for other components
-    window.dispatchEvent(new Event("storage"));
-
-    if (process.env.NODE_ENV === "development") {
-      console.log("[PrivacySettings] Updated consent:", legacyConsent);
+    if (consentCookie) {
+      const consent = JSON.parse(
+        decodeURIComponent(consentCookie.split("=")[1]),
+      );
+      return {
+        analytics: consent.analytics || false,
+        marketing: consent.marketing || false,
+      };
     }
-  }, [consentManager]);
+  } catch (error) {
+    console.warn("Error reading consent cookie:", error);
+  }
 
-  // Open the privacy dialog automatically when this component mounts
-  useEffect(() => {
-    consentManager.setIsPrivacyDialogOpen(true);
-  }, [consentManager]);
-
-  return (
-    <div>
-      <ConsentManagerDialog />
-      <div className="mt-4 text-sm text-gray-600">
-        <p>
-          {locale === "el"
-            ? "Χρησιμοποιήστε τις ρυθμίσεις παραπάνω για να διαχειριστείτε τις προτιμήσεις cookies σας."
-            : "Use the settings above to manage your cookie preferences."}
-        </p>
-      </div>
-    </div>
-  );
+  return { analytics: false, marketing: false };
 }
 
 export default function PrivacySettingsClient({
   locale,
 }: PrivacySettingsClientProps) {
-  const [isC15tEnabled, setIsC15tEnabled] = useState(false);
   const [currentConsent, setCurrentConsent] = useState({
     analytics: false,
     marketing: false,
   });
 
   useEffect(() => {
-    // Check if c15t is enabled
-    setIsC15tEnabled(process.env.NEXT_PUBLIC_ENABLE_C15T !== "false");
-
     // Get current consent status
-    setCurrentConsent(checkConsentStatus());
+    setCurrentConsent(getConsentStatus());
   }, []);
 
   const handleConsentChange = (analytics: boolean, marketing: boolean) => {
-    // Update the legacy cookie format
+    // Update the cookie format
     const consent = { analytics, marketing };
     const cookieValue = encodeURIComponent(JSON.stringify(consent));
     const expires = new Date();
@@ -96,12 +69,6 @@ export default function PrivacySettingsClient({
     );
   };
 
-  if (isC15tEnabled) {
-    // Use c15t privacy dialog
-    return <_C15tPrivacyDialog locale={locale} />;
-  }
-
-  // Fallback manual consent management if c15t is disabled
   return (
     <div className="space-y-6">
       <div className="border border-gray-200 rounded-lg p-6">

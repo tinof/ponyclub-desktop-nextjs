@@ -1,6 +1,6 @@
 /**
  * Centralized analytics helper for Google Tag Manager (GTM) tracking
- * Ensures GDPR compliance and consistent tracking across the application
+ * Consistent tracking across the application
  *
  * Debug Mode: Set NODE_ENV=development to enable console logging
  */
@@ -9,55 +9,12 @@
 
 import { sendGTMEvent } from "@next/third-parties/google";
 
-type ConsentStatus = {
-  analytics: boolean;
-  marketing: boolean;
-};
-
-/**
- * Check if user has given consent for analytics tracking
- * Integrates with the existing consent management system
- */
-function hasAnalyticsConsent(): boolean {
-  if (typeof window === "undefined") {
-    return false;
-  }
-
-  // Check for consent cookie from the existing consent system
-  try {
-    const consentCookie = document.cookie
-      .split("; ")
-      .find(row => row.startsWith("consent="));
-
-    if (consentCookie) {
-      const consent = JSON.parse(
-        decodeURIComponent(consentCookie.split("=")[1]),
-      ) as ConsentStatus;
-      return consent.analytics;
-    }
-  } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("[Analytics] Error reading consent:", error);
-    }
-  }
-
-  return false;
-}
-
 /**
  * Generic GTM Event Function
  * Pushes events to the dataLayer via sendGTMEvent
  */
 export const trackGTMEvent = (eventData: Record<string, unknown>) => {
   if (typeof window === "undefined") {
-    return;
-  }
-
-  // Check consent first
-  if (!hasAnalyticsConsent()) {
-    if (process.env.NODE_ENV === "development") {
-      console.debug("[GTM] Event blocked - no analytics consent:", eventData);
-    }
     return;
   }
 
@@ -142,18 +99,6 @@ export const trackAdsConversion = ({
   transactionId = "",
 }: AdsConversionProps) => {
   if (typeof window === "undefined") {
-    return;
-  }
-
-  // Check consent first
-  if (!hasAnalyticsConsent()) {
-    if (process.env.NODE_ENV === "development") {
-      console.debug("[GTM] Ads conversion blocked - no analytics consent:", {
-        conversionLabel,
-        value,
-        currency,
-      });
-    }
     return;
   }
 

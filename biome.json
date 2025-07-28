@@ -61,7 +61,11 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": "warn",
+      "style": {
+        "recommended": true,
+        "noDefaultExport": "off",
+        "noProcessEnv": "off"
+      },
       "a11y": "warn",
       "complexity": {
         "recommended": true,
@@ -135,17 +139,11 @@
       }
     },
     {
-      "includes": [
-        "app/**/privacy-settings/**",
-        "components/**/Consent*.tsx",
-        "components/**/c15t*.tsx",
-        "components/**/ConsentBridge.tsx"
-      ],
+      "includes": ["app/**/privacy-settings/**"],
       "linter": {
         "rules": {
           "suspicious": {
-            "noDocumentCookie": "off",
-            "noExplicitAny": "off"
+            "noDocumentCookie": "off"
           }
         }
       }
